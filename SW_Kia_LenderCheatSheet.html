@@ -1,0 +1,1110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SW Kia Dallas — Lender Cheat Sheet</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:#eef0f6; --surface:#fff; --surface2:#f4f6fb; --surface3:#edf0f8;
+  --border:#e0e5f0; --border-strong:#c6cfe0;
+  --text:#111827; --muted:#7a87a3; --muted2:#b0bcd4;
+  --green:#15622b; --green-bg:#dcfce7; --green-b:#86efac;
+  --blue:#1d4ed8;  --blue-bg:#dbeafe;  --blue-b:#93c5fd;
+  --orange:#92400e;--orange-bg:#ffedd5;--orange-b:#fdba74;
+  --red:#991b1b;   --red-bg:#fee2e2;   --red-b:#fca5a5;
+  --purple:#5b21b6;--purple-bg:#ede9fe;--purple-b:#c4b5fd;
+  --teal:#0e7490;  --teal-bg:#cffafe;  --teal-b:#67e8f9;
+  --accent:#1d4ed8;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;font-size:13px;min-height:100vh;}
+
+/* TOP BAR */
+.topbar{background:var(--text);padding:0 24px;display:flex;align-items:center;justify-content:space-between;height:52px;position:sticky;top:0;z-index:60;gap:12px;flex-wrap:wrap;}
+.topbar-brand{display:flex;align-items:center;gap:14px;}
+.topbar h1{font-family:'Bebas Neue',sans-serif;font-size:24px;letter-spacing:2px;color:#fff;line-height:1;}
+.topbar-sub{font-family:'DM Mono',monospace;font-size:9px;color:rgba(255,255,255,.38);letter-spacing:1px;text-transform:uppercase;}
+.topbar-right{display:flex;gap:8px;align-items:center;}
+
+/* BUTTONS */
+.btn{display:inline-flex;align-items:center;gap:5px;padding:7px 13px;border-radius:5px;border:none;cursor:pointer;font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.7px;text-transform:uppercase;font-weight:500;transition:all .12s;white-space:nowrap;}
+.btn-white{background:#fff;color:var(--text);}
+.btn-white:hover{background:#e8ecf5;}
+.btn-ghost{background:rgba(255,255,255,.1);color:#fff;border:1px solid rgba(255,255,255,.18);}
+.btn-ghost:hover{background:rgba(255,255,255,.2);}
+.btn-primary{background:var(--accent);color:#fff;}
+.btn-primary:hover{background:#1740b0;}
+.btn-outline{background:var(--surface);color:var(--text);border:1px solid var(--border-strong);}
+.btn-outline:hover{border-color:var(--text);}
+.btn-danger{background:var(--red-bg);color:var(--red);border:1px solid var(--red-b);}
+.btn-danger:hover{background:#fecaca;}
+
+/* MAIN */
+.main{padding:20px 24px 60px;}
+
+/* TOOLBAR */
+.toolbar{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px;flex-wrap:wrap;gap:10px;}
+.search-wrap{position:relative;}
+.search-wrap input{background:var(--surface);border:1px solid var(--border-strong);border-radius:5px;padding:7px 12px 7px 32px;font-family:'DM Mono',monospace;font-size:11px;color:var(--text);outline:none;width:210px;transition:border-color .13s;}
+.search-wrap input:focus{border-color:var(--accent);}
+.search-icon{position:absolute;left:10px;top:50%;transform:translateY(-50%);color:var(--muted);font-size:14px;pointer-events:none;}
+.legend{display:flex;gap:8px;flex-wrap:wrap;align-items:center;}
+.chip{display:inline-flex;align-items:center;gap:4px;padding:3px 9px;border-radius:20px;font-family:'DM Mono',monospace;font-size:9px;font-weight:500;border:1px solid;}
+.chip-green{background:var(--green-bg);color:var(--green);border-color:var(--green-b);}
+.chip-blue{background:var(--blue-bg);color:var(--blue);border-color:var(--blue-b);}
+.chip-orange{background:var(--orange-bg);color:var(--orange);border-color:var(--orange-b);}
+.chip-red{background:var(--red-bg);color:var(--red);border-color:var(--red-b);}
+.dot{width:6px;height:6px;border-radius:50%;}
+
+/* GROUP TABS */
+.group-tabs{display:flex;gap:4px;margin-bottom:20px;flex-wrap:wrap;}
+.group-tab{padding:7px 16px;border-radius:6px;border:1px solid var(--border-strong);background:var(--surface);font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.8px;text-transform:uppercase;cursor:pointer;transition:all .13s;color:var(--muted);}
+.group-tab:hover{border-color:var(--text);color:var(--text);}
+.group-tab.active{background:var(--text);color:#fff;border-color:var(--text);}
+.group-tab.prime-tab.active{background:var(--blue);border-color:var(--blue);}
+.group-tab.all-tab.active{background:var(--green);border-color:var(--green);}
+.group-tab.sub-tab.active{background:var(--orange);border-color:var(--orange);}
+
+/* SECTION */
+.sec-label{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin:22px 0 10px;display:flex;align-items:center;gap:10px;}
+.sec-label::after{content:'';flex:1;height:1px;background:var(--border);}
+
+/* CARDS */
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(460px,1fr));gap:16px;}
+
+.card{background:var(--surface);border:1px solid var(--border);border-radius:12px;overflow:hidden;box-shadow:0 1px 6px rgba(0,0,0,.05);transition:box-shadow .15s;}
+.card:hover{box-shadow:0 4px 18px rgba(0,0,0,.09);}
+
+/* group accent left border */
+.card.g-prime  {border-left:3px solid var(--blue);}
+.card.g-all    {border-left:3px solid var(--green);}
+.card.g-sub    {border-left:3px solid var(--orange);}
+
+/* CARD HEADER */
+.card-head{padding:14px 16px 12px;display:flex;align-items:flex-start;justify-content:space-between;border-bottom:1px solid var(--border);gap:10px;}
+.card-name{font-family:'Bebas Neue',sans-serif;font-size:26px;letter-spacing:1px;line-height:1;}
+.card-sub{font-family:'DM Mono',monospace;font-size:10px;color:var(--muted);margin-top:2px;}
+.lender-tag{display:inline-block;padding:2px 8px;border-radius:20px;font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.7px;text-transform:uppercase;font-weight:500;margin-top:5px;border:1px solid;}
+.tag-prime    {background:var(--blue-bg);  color:var(--blue);  border-color:var(--blue-b);}
+.tag-all      {background:var(--green-bg); color:var(--green); border-color:var(--green-b);}
+.tag-subprime {background:var(--orange-bg);color:var(--orange);border-color:var(--orange-b);}
+.tag-captive  {background:var(--teal-bg);  color:var(--teal);  border-color:var(--teal-b);}
+
+.card-hactions{display:flex;gap:6px;flex-shrink:0;}
+.icon-btn{background:none;border:1px solid var(--border);border-radius:5px;cursor:pointer;padding:5px 9px;font-family:'DM Mono',monospace;font-size:10px;color:var(--muted);transition:all .12s;}
+.icon-btn:hover{background:var(--surface2);border-color:var(--border-strong);color:var(--text);}
+.icon-btn.del:hover{background:var(--red-bg);border-color:var(--red-b);color:var(--red);}
+
+/* CARD SECTIONS */
+.csec{border-bottom:1px solid var(--border);}
+.csec:last-child{border-bottom:none;}
+.csec-head{display:flex;align-items:center;justify-content:space-between;padding:10px 16px;cursor:pointer;user-select:none;transition:background .1s;}
+.csec-head:hover{background:var(--surface2);}
+.csec-title{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:1.4px;text-transform:uppercase;font-weight:500;display:flex;align-items:center;gap:7px;}
+.csec-sub{color:var(--muted2);font-size:9px;letter-spacing:0;text-transform:none;font-weight:400;}
+.csec-arrow{font-size:10px;color:var(--muted);transition:transform .18s;}
+.csec-arrow.open{transform:rotate(180deg);}
+.csec-body{display:none;padding:0 16px 14px;}
+.csec-body.open{display:block;}
+
+.stag-advance{color:var(--blue);}
+.stag-rate   {color:var(--green);}
+.stag-backend{color:var(--orange);}
+.stag-qualify{color:var(--purple);}
+
+/* ── ADVANCE GRID ── */
+.advance-table{width:100%;border-collapse:collapse;margin-top:8px;font-size:12px;}
+.advance-table th{background:var(--surface3);font-family:'DM Mono',monospace;font-size:8px;letter-spacing:1px;text-transform:uppercase;color:var(--muted);padding:6px 8px;border:1px solid var(--border);text-align:center;}
+.advance-table th:first-child{text-align:left;min-width:110px;}
+.advance-table td{padding:5px 6px;border:1px solid var(--border);text-align:center;vertical-align:middle;}
+.advance-table td:first-child{font-family:'DM Mono',monospace;font-size:10px;color:var(--muted);text-align:left;background:var(--surface2);padding:5px 8px;}
+.advance-table input{width:100%;border:none;background:transparent;text-align:center;font-family:'DM Mono',monospace;font-size:12px;color:var(--text);outline:none;padding:2px 0;}
+.advance-table input:focus{background:var(--blue-bg);border-radius:3px;}
+.tier-lbl{width:100%;border:none;background:transparent;font-family:'DM Mono',monospace;font-size:10px;color:var(--muted);outline:none;padding:2px 0;}
+.tier-lbl:focus{color:var(--text);}
+.add-row-btn{margin-top:6px;display:inline-flex;align-items:center;gap:4px;font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.8px;text-transform:uppercase;cursor:pointer;padding:4px 0;background:none;border:none;}
+.add-row-btn.blue{color:var(--accent);}
+.add-row-btn.orange{color:var(--orange);}
+.add-row-btn:hover{opacity:.7;}
+.del-row-btn{background:none;border:none;cursor:pointer;color:var(--muted2);font-size:12px;padding:0 3px;transition:color .12s;line-height:1;}
+.del-row-btn:hover{color:var(--red);}
+
+/* ── RATE & RESERVE ── */
+.rate-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px;}
+.rate-field{display:flex;flex-direction:column;gap:3px;}
+.rate-label{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:1px;text-transform:uppercase;color:var(--muted);}
+.rate-input{background:var(--surface2);border:1px solid var(--border);border-radius:4px;padding:6px 8px;font-family:'DM Mono',monospace;font-size:12px;color:var(--text);outline:none;transition:border-color .12s;width:100%;}
+.rate-input:focus{border-color:var(--green);}
+.span2{grid-column:span 2;}
+
+/* ── BACKEND ── */
+.be-table{width:100%;border-collapse:collapse;margin-top:8px;}
+.be-table th{background:var(--surface3);font-family:'DM Mono',monospace;font-size:8px;letter-spacing:1px;text-transform:uppercase;color:var(--muted);padding:6px 8px;border:1px solid var(--border);text-align:left;}
+.be-table td{padding:5px 7px;border:1px solid var(--border);vertical-align:middle;}
+.be-table td:first-child{font-family:'DM Mono',monospace;font-size:10px;background:var(--surface2);}
+.be-input{width:100%;border:none;background:transparent;font-family:'DM Mono',monospace;font-size:11px;color:var(--text);outline:none;padding:2px 0;}
+.be-input:focus{background:var(--orange-bg);border-radius:3px;padding:2px 4px;}
+
+/* ── QUALIFYING ── */
+.qual-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px;}
+.qual-field{display:flex;flex-direction:column;gap:3px;}
+.qual-label{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:1px;text-transform:uppercase;color:var(--muted);}
+.qual-input{background:var(--surface2);border:1px solid var(--border);border-radius:4px;padding:6px 8px;font-family:'DM Mono',monospace;font-size:12px;color:var(--text);outline:none;transition:border-color .12s;width:100%;}
+.qual-input:focus{border-color:var(--purple);}
+.qual-full{grid-column:span 2;}
+.fico-display{font-family:'Bebas Neue',sans-serif;font-size:22px;}
+
+/* ── MODAL ── */
+.overlay{display:none;position:fixed;inset:0;background:rgba(10,15,30,.48);backdrop-filter:blur(3px);z-index:100;align-items:center;justify-content:center;padding:20px;}
+.overlay.open{display:flex;}
+.modal{background:var(--surface);border:1px solid var(--border-strong);border-radius:12px;width:100%;max-width:500px;max-height:90vh;overflow-y:auto;box-shadow:0 20px 60px rgba(0,0,0,.18);animation:up .18s ease;}
+@keyframes up{from{transform:translateY(14px);opacity:0}to{transform:translateY(0);opacity:1}}
+.modal-head{display:flex;align-items:center;justify-content:space-between;padding:16px 20px 12px;border-bottom:1px solid var(--border);position:sticky;top:0;background:var(--surface);z-index:1;}
+.modal-title{font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:1px;}
+.modal-x{background:none;border:none;cursor:pointer;color:var(--muted);font-size:18px;padding:3px 7px;border-radius:4px;}
+.modal-x:hover{background:var(--surface2);color:var(--text);}
+.modal-body{padding:18px 20px;display:flex;flex-direction:column;gap:12px;}
+.modal-foot{padding:12px 20px 16px;display:flex;gap:8px;justify-content:flex-end;border-top:1px solid var(--border);position:sticky;bottom:0;background:var(--surface);}
+.mrow2{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+.mfield{display:flex;flex-direction:column;gap:4px;}
+.mfield label{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:1px;text-transform:uppercase;color:var(--muted);}
+.mfield input,.mfield select{background:var(--surface2);border:1px solid var(--border-strong);color:var(--text);border-radius:4px;padding:7px 9px;font-family:'DM Mono',monospace;font-size:12px;outline:none;width:100%;transition:border-color .12s;}
+.mfield input:focus,.mfield select:focus{border-color:var(--accent);}
+
+/* CONFIRM */
+.confirm-body{padding:18px 20px 8px;font-family:'DM Mono',monospace;font-size:12px;color:var(--muted);line-height:1.8;}
+.confirm-body strong{color:var(--text);}
+
+/* TOAST */
+.toast{position:fixed;bottom:20px;right:20px;background:var(--text);color:#fff;padding:8px 14px;border-radius:5px;font-family:'DM Mono',monospace;font-size:11px;opacity:0;transform:translateY(6px);transition:all .18s;pointer-events:none;z-index:300;}
+.toast.show{opacity:1;transform:translateY(0);}
+
+.empty-state{text-align:center;padding:50px 20px;color:var(--muted);font-family:'DM Mono',monospace;font-size:12px;}
+
+/* EDIT MODE */
+.edit-only { display:none !important; }
+body.edit-mode .edit-only { display:inline-flex !important; }
+body.edit-mode #editToggleBtn { background:rgba(245,158,11,0.25); border-color:rgba(245,158,11,0.6); color:#fcd34d; }
+body.edit-mode .card { border-top: 2px dashed rgba(245,158,11,0.4); }
+/* ── INCOME CALCULATOR ── */
+.calc-method-row{display:flex;gap:6px;background:var(--surface2);padding:5px;border-radius:8px;border:1px solid var(--border);}
+.calc-tab{flex:1;padding:7px 10px;border:none;border-radius:5px;cursor:pointer;font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.8px;text-transform:uppercase;background:transparent;color:var(--muted);transition:all .13s;font-weight:500;}
+.calc-tab:hover{color:var(--text);}
+.calc-tab.active{background:var(--surface);color:var(--text);box-shadow:0 1px 4px rgba(0,0,0,.1);}
+
+.calc-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+.calc-field{display:flex;flex-direction:column;gap:4px;}
+.calc-label{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:1px;text-transform:uppercase;color:var(--muted);}
+.calc-input-wrap{position:relative;}
+.calc-prefix{position:absolute;left:9px;top:50%;transform:translateY(-50%);font-family:'DM Mono',monospace;font-size:12px;color:var(--muted);pointer-events:none;}
+.calc-input{width:100%;background:var(--surface2);border:1px solid var(--border-strong);border-radius:5px;padding:8px 10px;font-family:'DM Mono',monospace;font-size:12px;color:var(--text);outline:none;transition:border-color .12s;}
+.calc-input-wrap .calc-input{padding-left:22px;}
+.calc-input:focus{border-color:var(--accent);}
+
+.calc-results{background:var(--text);border-radius:10px;padding:18px;margin-top:4px;}
+.calc-results-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+.calc-result-item{display:flex;flex-direction:column;gap:3px;}
+.calc-result-item.primary{grid-column:span 2;padding-bottom:12px;border-bottom:1px solid rgba(255,255,255,.12);margin-bottom:2px;}
+.calc-result-label{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:1.2px;text-transform:uppercase;color:rgba(255,255,255,.45);}
+.calc-result-val{font-family:'Bebas Neue',sans-serif;font-size:42px;letter-spacing:1px;line-height:1;color:#fff;}
+.calc-result-val.sm{font-size:26px;color:rgba(255,255,255,.8);}
+.calc-note{font-family:'DM Mono',monospace;font-size:10px;color:rgba(255,255,255,.4);margin-top:12px;line-height:1.6;}
+.calc-error{background:var(--red-bg);border:1px solid var(--red-b);border-radius:6px;padding:10px 12px;font-family:'DM Mono',monospace;font-size:11px;color:var(--red);}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="topbar-brand">
+    <h1>Lender Cheat Sheet</h1>
+    <span class="topbar-sub">SW Kia Dallas · F&amp;I · 15 Banks</span>
+  </div>
+  <div class="topbar-right">
+    <button class="btn btn-ghost" onclick="exportData()">⬇ Export</button>
+    <label class="btn btn-ghost" style="cursor:pointer">⬆ Import<input type="file" accept=".json" onchange="importData(event)" style="display:none"></label>
+    <button class="btn btn-ghost" onclick="openCalc()" title="Income Calculator">
+      💰 Income Calc
+    </button>
+    <button id="editToggleBtn" class="btn btn-ghost" onclick="toggleEditMode()" title="Toggle edit mode to show/hide delete buttons">
+      <span id="editToggleIcon">🔒</span> <span id="editToggleLabel">Edit Mode: Off</span>
+    </button>
+    <button class="btn btn-white edit-only" onclick="openAdd()" style="display:none">+ Add Bank</button>
+  </div>
+</div>
+
+<div class="main">
+  <div class="toolbar">
+    <div class="legend">
+      <span class="chip chip-green"><span class="dot" style="background:var(--green)"></span>≥700</span>
+      <span class="chip chip-blue"><span class="dot" style="background:var(--blue)"></span>660–699</span>
+      <span class="chip chip-orange"><span class="dot" style="background:var(--orange)"></span>620–659</span>
+      <span class="chip chip-red"><span class="dot" style="background:var(--red)"></span>&lt;620</span>
+    </div>
+    <div class="search-wrap">
+      <span class="search-icon">⌕</span>
+      <input type="text" id="searchInput" placeholder="Search lenders..." oninput="render()">
+    </div>
+  </div>
+
+  <!-- GROUP TABS -->
+  <div class="group-tabs">
+    <button class="group-tab active" data-group="all" onclick="setTab(this)">All Banks (15)</button>
+    <button class="group-tab prime-tab" data-group="Prime" onclick="setTab(this)">Prime (5)</button>
+    <button class="group-tab all-tab" data-group="All Tiers" onclick="setTab(this)">All Tiers (5)</button>
+    <button class="group-tab sub-tab" data-group="Subprime" onclick="setTab(this)">Subprime (5)</button>
+  </div>
+
+  <div id="cardContainer"></div>
+</div>
+
+<!-- ADD MODAL -->
+<div class="overlay" id="addOverlay" onclick="backdropClose(event,'addOverlay')">
+  <div class="modal">
+    <div class="modal-head">
+      <div class="modal-title">Add Bank</div>
+      <button class="modal-x" onclick="closeOverlay('addOverlay')">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="mrow2">
+        <div class="mfield"><label>Lender Name *</label><input id="a_name" placeholder="e.g. Chase"></div>
+        <div class="mfield"><label>Full Name</label><input id="a_sub" placeholder="e.g. Chase Auto Finance"></div>
+      </div>
+      <div class="mrow2">
+        <div class="mfield"><label>Tier Group</label>
+          <select id="a_group">
+            <option value="Prime">Prime</option>
+            <option value="All Tiers">All Tiers</option>
+            <option value="Subprime">Subprime</option>
+          </select>
+        </div>
+        <div class="mfield"><label>Tag</label>
+          <select id="a_type">
+            <option value="prime">Prime</option>
+            <option value="all">All Tiers</option>
+            <option value="subprime">Subprime</option>
+            <option value="captive">Captive</option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <div class="modal-foot">
+      <button class="btn btn-outline" onclick="closeOverlay('addOverlay')">Cancel</button>
+      <button class="btn btn-primary" onclick="addBank()">Add Bank</button>
+    </div>
+  </div>
+</div>
+
+<!-- DELETE CONFIRM -->
+<div class="overlay" id="delOverlay" onclick="backdropClose(event,'delOverlay')">
+  <div class="modal" style="max-width:360px">
+    <div class="modal-head">
+      <div class="modal-title" style="color:var(--red)">Remove Bank</div>
+      <button class="modal-x" onclick="closeOverlay('delOverlay')">✕</button>
+    </div>
+    <div class="confirm-body">Remove <strong id="delName"></strong>?<br>This cannot be undone.</div>
+    <div class="modal-foot">
+      <button class="btn btn-outline" onclick="closeOverlay('delOverlay')">Cancel</button>
+      <button class="btn btn-danger" onclick="confirmDelete()">Delete</button>
+    </div>
+  </div>
+</div>
+
+<!-- INCOME CALCULATOR MODAL -->
+<div class="overlay" id="calcOverlay" onclick="backdropClose(event,'calcOverlay')">
+  <div class="modal" style="max-width:520px">
+    <div class="modal-head">
+      <div class="modal-title">💰 Income Calculator</div>
+      <button class="modal-x" onclick="closeOverlay('calcOverlay')">✕</button>
+    </div>
+    <div class="modal-body" style="gap:16px">
+
+      <!-- METHOD TOGGLE -->
+      <div class="calc-method-row">
+        <button class="calc-tab active" id="tab_ytd"    onclick="setCalcTab('ytd')">YTD Gross</button>
+        <button class="calc-tab"        id="tab_hourly" onclick="setCalcTab('hourly')">Hourly</button>
+        <button class="calc-tab"        id="tab_salary" onclick="setCalcTab('salary')">Salary</button>
+      </div>
+
+      <!-- YTD METHOD -->
+      <div id="method_ytd">
+        <div class="calc-grid">
+          <div class="calc-field">
+            <div class="calc-label">YTD Gross Amount</div>
+            <div class="calc-input-wrap"><span class="calc-prefix">$</span><input class="calc-input" id="c_ytd_gross" type="number" placeholder="e.g. 24500" oninput="calcIncome()"></div>
+          </div>
+          <div class="calc-field">
+            <div class="calc-label">Pay Period Start Date</div>
+            <input class="calc-input" id="c_ytd_start" type="date" oninput="calcIncome()">
+          </div>
+          <div class="calc-field">
+            <div class="calc-label">Pay Period End Date (Last Check)</div>
+            <input class="calc-input" id="c_ytd_end" type="date" oninput="calcIncome()">
+          </div>
+          <div class="calc-field">
+            <div class="calc-label">Pay Frequency</div>
+            <select class="calc-input" id="c_ytd_freq" onchange="calcIncome()">
+              <option value="weekly">Weekly (52x/yr)</option>
+              <option value="biweekly" selected>Bi-Weekly (26x/yr)</option>
+              <option value="semimonthly">Semi-Monthly (24x/yr)</option>
+              <option value="monthly">Monthly (12x/yr)</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <!-- HOURLY METHOD -->
+      <div id="method_hourly" style="display:none">
+        <div class="calc-grid">
+          <div class="calc-field">
+            <div class="calc-label">Hourly Rate</div>
+            <div class="calc-input-wrap"><span class="calc-prefix">$</span><input class="calc-input" id="c_hourly_rate" type="number" step="0.01" placeholder="e.g. 22.50" oninput="calcIncome()"></div>
+          </div>
+          <div class="calc-field">
+            <div class="calc-label">Hours Per Week</div>
+            <input class="calc-input" id="c_hourly_hrs" type="number" step="0.5" placeholder="e.g. 40" oninput="calcIncome()">
+          </div>
+          <div class="calc-field" style="grid-column:span 2">
+            <div class="calc-label">Overtime Hours / Week (optional)</div>
+            <input class="calc-input" id="c_hourly_ot" type="number" step="0.5" placeholder="e.g. 5" oninput="calcIncome()">
+          </div>
+        </div>
+      </div>
+
+      <!-- SALARY METHOD -->
+      <div id="method_salary" style="display:none">
+        <div class="calc-grid">
+          <div class="calc-field">
+            <div class="calc-label">Annual Salary</div>
+            <div class="calc-input-wrap"><span class="calc-prefix">$</span><input class="calc-input" id="c_salary" type="number" placeholder="e.g. 65000" oninput="calcIncome()"></div>
+          </div>
+          <div class="calc-field">
+            <div class="calc-label">Pay Frequency</div>
+            <select class="calc-input" id="c_salary_freq" onchange="calcIncome()">
+              <option value="weekly">Weekly (52x/yr)</option>
+              <option value="biweekly" selected>Bi-Weekly (26x/yr)</option>
+              <option value="semimonthly">Semi-Monthly (24x/yr)</option>
+              <option value="monthly">Monthly (12x/yr)</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <!-- RESULTS -->
+      <div class="calc-results" id="calcResults" style="display:none">
+        <div class="calc-results-grid">
+          <div class="calc-result-item primary">
+            <div class="calc-result-label">Monthly Gross</div>
+            <div class="calc-result-val" id="res_monthly">—</div>
+          </div>
+          <div class="calc-result-item">
+            <div class="calc-result-label">Annual Gross</div>
+            <div class="calc-result-val sm" id="res_annual">—</div>
+          </div>
+          <div class="calc-result-item">
+            <div class="calc-result-label">Per Paycheck</div>
+            <div class="calc-result-val sm" id="res_percheck">—</div>
+          </div>
+          <div class="calc-result-item">
+            <div class="calc-result-label">Weekly Gross</div>
+            <div class="calc-result-val sm" id="res_weekly">—</div>
+          </div>
+        </div>
+        <div class="calc-note" id="calcNote"></div>
+      </div>
+
+      <div class="calc-error" id="calcError" style="display:none"></div>
+
+    </div>
+    <div class="modal-foot">
+      <button class="btn btn-outline" onclick="clearCalc()">Clear</button>
+      <button class="btn btn-outline" onclick="closeOverlay('calcOverlay')">Close</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+const GROUPS = ["Prime","All Tiers","Subprime"];
+let activeTab = "all";
+
+function emptyLender(id, name, sub, type, group) {
+  return {
+    id, name, sub, type, group,
+    tiers: [
+      {label:'740+',    nfe:'',nmax:'',ufe:'',umax:''},
+      {label:'700-739', nfe:'',nmax:'',ufe:'',umax:''},
+      {label:'660-699', nfe:'',nmax:'',ufe:'',umax:''},
+      {label:'620-659', nfe:'',nmax:'',ufe:'',umax:''},
+      {label:'580-619', nfe:'',nmax:'',ufe:'',umax:''},
+      {label:'<580',    nfe:'',nmax:'',ufe:'',umax:''},
+    ],
+    rate: {
+      markup_standard:'', markup_36_60:'', markup_61_75:'', markup_76plus:'',
+      flat_fee:'', reserve_split:'', buy_rate_note:'', reserve_note:''
+    },
+    backend: [
+      {product:'GAP',            max_amount:'',notes:''},
+      {product:'VSC',            max_amount:'',notes:''},
+      {product:'Tire & Wheel',   max_amount:'',notes:''},
+      {product:'Paint/Interior', max_amount:'',notes:''},
+      {product:'Key Replacement',max_amount:'',notes:''},
+    ],
+    qual: {
+      min_fico:'', bureau:'', bureau_note:'',
+      id_accepted:'', itin:'',
+      min_income:'', min_job_time:'', min_residence_time:'',
+      pti:'', dti:'', max_age:'', max_miles:'',
+      stips:'', notes:''
+    }
+  };
+}
+
+// ── 15 BANKS ─────────────────────────────────────────────────
+const DEFAULTS = [
+  // PRIME
+  emptyLender(1,  'Fifth Third', 'Fifth Third Bank — TX',     'prime',   'Prime'),
+  emptyLender(2,  'PNC',         'PNC Bank Auto Finance',      'prime',   'Prime'),
+  emptyLender(3,  'TD Bank',     'TD Auto Finance',            'prime',   'Prime'),
+  emptyLender(4,  'Truist',      'Truist Auto Finance',        'prime',   'Prime'),
+  emptyLender(5,  'Wells Fargo', 'Wells Fargo Auto',           'prime',   'Prime'),
+  // ALL TIERS
+  emptyLender(6,  'AmeriCredit', 'GM Financial',               'all',     'All Tiers'),
+  emptyLender(7,  'Ally',        'Ally Financial',             'all',     'All Tiers'),
+  emptyLender(8,  'Capital One', 'Capital One Auto Finance',   'all',     'All Tiers'),
+  emptyLender(9,  'Driveway',    'Driveway Finance Corp (DFC)','all',     'All Tiers'),
+  emptyLender(10, 'Kia',         'Kia Finance America (KFA)',  'captive', 'All Tiers'),
+  // SUBPRIME
+  emptyLender(11, 'Exeter',      'Exeter Finance',             'subprime','Subprime'),
+  emptyLender(12, 'Global',      'Global Lending Services',    'subprime','Subprime'),
+  emptyLender(13, 'Regional',    'Regional Acceptance Corp',   'subprime','Subprime'),
+  emptyLender(14, 'Santander',   'Santander Consumer USA',     'subprime','Subprime'),
+  emptyLender(15, 'Westlake',    'Westlake Financial',         'subprime','Subprime'),
+];
+
+let lenders = [], nextId = 100, delId = null;
+
+function load() {
+  try {
+    const s = localStorage.getItem('swkia_v5');
+    if (s) { const p = JSON.parse(s); lenders = p.lenders; nextId = p.nextId || 100; }
+    else { lenders = JSON.parse(JSON.stringify(DEFAULTS)); }
+  } catch(e) { lenders = JSON.parse(JSON.stringify(DEFAULTS)); }
+}
+
+function save() {
+  harvestAll();
+  localStorage.setItem('swkia_v5', JSON.stringify({lenders, nextId}));
+}
+
+function harvestAll() { lenders.forEach(l => harvestLender(l.id)); }
+
+function harvestLender(id) {
+  const l = lenders.find(x => x.id === id); if (!l) return;
+  const card = document.getElementById('card_' + id); if (!card) return;
+
+  // Tiers
+  l.tiers = [];
+  card.querySelectorAll('.tier-row').forEach(row => {
+    l.tiers.push({
+      label: row.querySelector('.tier-lbl').value,
+      nfe:   row.querySelector('[data-col="nfe"]').value,
+      nmax:  row.querySelector('[data-col="nmax"]').value,
+      ufe:   row.querySelector('[data-col="ufe"]').value,
+      umax:  row.querySelector('[data-col="umax"]').value,
+    });
+  });
+
+  // Rate
+  ['markup_standard','markup_36_60','markup_61_75','markup_76plus',
+   'flat_fee','reserve_split','buy_rate_note','reserve_note'].forEach(k => {
+    const el = card.querySelector('[data-rate="'+k+'"]');
+    if (el) l.rate[k] = el.value;
+  });
+
+  // Backend
+  l.backend = [];
+  card.querySelectorAll('.be-row').forEach(row => {
+    l.backend.push({
+      product:    row.querySelector('[data-be="product"]').value,
+      max_amount: row.querySelector('[data-be="max"]').value,
+      notes:      row.querySelector('[data-be="notes"]').value,
+    });
+  });
+
+  // Qual
+  Object.keys(l.qual).forEach(k => {
+    const el = card.querySelector('[data-qual="'+k+'"]');
+    if (el) l.qual[k] = el.value;
+  });
+}
+
+// ── RENDER ───────────────────────────────────────────────────
+function setTab(btn) {
+  document.querySelectorAll('.group-tab').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  activeTab = btn.dataset.group;
+  render();
+}
+
+function render() {
+  const q = (document.getElementById('searchInput').value || '').toLowerCase();
+  const container = document.getElementById('cardContainer');
+  container.innerHTML = '';
+
+  const showGroups = activeTab === 'all' ? GROUPS : [activeTab];
+  let any = false;
+
+  showGroups.forEach(grp => {
+    let rows = lenders.filter(l => l.group === grp);
+    if (q) rows = rows.filter(l =>
+      l.name.toLowerCase().includes(q) || (l.sub||'').toLowerCase().includes(q)
+    );
+    if (!rows.length) return;
+    any = true;
+
+    const sl = document.createElement('div');
+    sl.className = 'sec-label';
+    sl.textContent = grp === 'All Tiers' ? 'All Tiers (Prime → Subprime)' : grp;
+    container.appendChild(sl);
+
+    const grid = document.createElement('div');
+    grid.className = 'cards';
+    rows.forEach(l => grid.appendChild(buildCard(l)));
+    container.appendChild(grid);
+  });
+
+  if (!any) container.innerHTML = '<div class="empty-state">No lenders match your search.</div>';
+}
+
+function ficoColor(n) {
+  if (n >= 700) return 'var(--green)';
+  if (n >= 660) return 'var(--blue)';
+  if (n >= 620) return 'var(--orange)';
+  return 'var(--red)';
+}
+
+function gClass(g) {
+  if (g === 'Prime') return 'g-prime';
+  if (g === 'All Tiers') return 'g-all';
+  return 'g-sub';
+}
+
+function tagClass(t) {
+  return {prime:'tag-prime', all:'tag-all', subprime:'tag-subprime', captive:'tag-captive'}[t] || 'tag-prime';
+}
+function tagLabel(t) {
+  return {prime:'Prime', all:'All Tiers', subprime:'Subprime', captive:'Captive'}[t] || t;
+}
+
+function buildCard(l) {
+  const div = document.createElement('div');
+  div.className = 'card ' + gClass(l.group);
+  div.id = 'card_' + l.id;
+
+  const tiersHtml = l.tiers.map(t => `
+    <tr class="tier-row">
+      <td><input class="tier-lbl" value="${esc(t.label)}" placeholder="Score range" onchange="autosave(${l.id})"></td>
+      <td><input data-col="nfe"  value="${esc(t.nfe)}"  placeholder="—" onchange="autosave(${l.id})"></td>
+      <td><input data-col="nmax" value="${esc(t.nmax)}" placeholder="—" onchange="autosave(${l.id})"></td>
+      <td><input data-col="ufe"  value="${esc(t.ufe)}"  placeholder="—" onchange="autosave(${l.id})"></td>
+      <td><input data-col="umax" value="${esc(t.umax)}" placeholder="—" onchange="autosave(${l.id})"></td>
+      <td style="border:1px solid var(--border);text-align:center;background:var(--surface2)">
+        <button class="del-row-btn edit-only" onclick="delTier(this,${l.id})">✕</button>
+      </td>
+    </tr>`).join('');
+
+  const beHtml = (l.backend||[]).map(b => `
+    <tr class="be-row">
+      <td><input class="be-input" data-be="product" value="${esc(b.product)}" placeholder="Product" onchange="autosave(${l.id})"></td>
+      <td><input class="be-input" data-be="max" value="${esc(b.max_amount)}" placeholder="e.g. $1,500" onchange="autosave(${l.id})"></td>
+      <td><input class="be-input" data-be="notes" value="${esc(b.notes)}" placeholder="Restrictions, conditions..." onchange="autosave(${l.id})"></td>
+      <td style="text-align:center;border:1px solid var(--border)">
+        <button class="del-row-btn edit-only" onclick="delBeRow(this,${l.id})">✕</button>
+      </td>
+    </tr>`).join('');
+
+  const q = l.qual;
+  const ficoNum = parseInt(q.min_fico);
+  const ficoStyle = q.min_fico ? `color:${ficoColor(ficoNum)};` : '';
+
+  div.innerHTML = `
+  <div class="card-head">
+    <div>
+      <div class="card-name">${esc(l.name)}</div>
+      <div class="card-sub">${esc(l.sub||'')}</div>
+      <span class="lender-tag ${tagClass(l.type)}">${tagLabel(l.type)}</span>
+    </div>
+    <div class="card-hactions">
+      <button class="icon-btn del edit-only" onclick="openDel(${l.id})">✕ Remove</button>
+    </div>
+  </div>
+
+  <div class="card-sections">
+
+    <!-- ① ADVANCE GRID -->
+    <div class="csec">
+      <div class="csec-head" onclick="toggleSec(this)">
+        <div class="csec-title">
+          <span class="stag-advance">▦</span> Advance Grid
+          <span class="csec-sub">· FE &amp; Max by Score Tier</span>
+        </div>
+        <span class="csec-arrow open">▾</span>
+      </div>
+      <div class="csec-body open">
+        <table class="advance-table">
+          <thead>
+            <tr>
+              <th>Score Tier</th>
+              <th>New FE</th>
+              <th>New Max</th>
+              <th>Used FE</th>
+              <th>Used Max</th>
+              <th style="width:26px;background:var(--surface3);border:1px solid var(--border)"></th>
+            </tr>
+          </thead>
+          <tbody id="tiers_${l.id}">${tiersHtml}</tbody>
+        </table>
+        <button class="add-row-btn blue edit-only" onclick="addTier(${l.id})">+ Add Tier</button>
+      </div>
+    </div>
+
+    <!-- ② RATE & RESERVE -->
+    <div class="csec">
+      <div class="csec-head" onclick="toggleSec(this)">
+        <div class="csec-title">
+          <span class="stag-rate">$</span> Rate, Reserve &amp; Flat
+        </div>
+        <span class="csec-arrow">▾</span>
+      </div>
+      <div class="csec-body">
+        <div class="rate-grid">
+          <div class="rate-field">
+            <div class="rate-label">Max Markup — Standard</div>
+            <input class="rate-input" data-rate="markup_standard" value="${esc(l.rate.markup_standard)}" placeholder="e.g. 2 pts" onchange="autosave(${l.id})">
+          </div>
+          <div class="rate-field">
+            <div class="rate-label">Max Markup — 36–60 Mo</div>
+            <input class="rate-input" data-rate="markup_36_60" value="${esc(l.rate.markup_36_60)}" placeholder="e.g. 2 pts" onchange="autosave(${l.id})">
+          </div>
+          <div class="rate-field">
+            <div class="rate-label">Max Markup — 61–75 Mo</div>
+            <input class="rate-input" data-rate="markup_61_75" value="${esc(l.rate.markup_61_75)}" placeholder="e.g. 2 pts" onchange="autosave(${l.id})">
+          </div>
+          <div class="rate-field">
+            <div class="rate-label">Max Markup — 76+ Mo</div>
+            <input class="rate-input" data-rate="markup_76plus" value="${esc(l.rate.markup_76plus)}" placeholder="e.g. 1 pt" onchange="autosave(${l.id})">
+          </div>
+          <div class="rate-field">
+            <div class="rate-label">Flat Fee / Program</div>
+            <input class="rate-input" data-rate="flat_fee" value="${esc(l.rate.flat_fee)}" placeholder="e.g. 1.5% flat" onchange="autosave(${l.id})">
+          </div>
+          <div class="rate-field">
+            <div class="rate-label">Reserve Split</div>
+            <input class="rate-input" data-rate="reserve_split" value="${esc(l.rate.reserve_split)}" placeholder="e.g. 85/15" onchange="autosave(${l.id})">
+          </div>
+          <div class="rate-field">
+            <div class="rate-label">Buy Rate Note</div>
+            <input class="rate-input" data-rate="buy_rate_note" value="${esc(l.rate.buy_rate_note)}" placeholder="Buy rate conditions..." onchange="autosave(${l.id})">
+          </div>
+          <div class="rate-field">
+            <div class="rate-label">Reserve / Flat Note</div>
+            <input class="rate-input" data-rate="reserve_note" value="${esc(l.rate.reserve_note)}" placeholder="e.g. No reserve >$75K" onchange="autosave(${l.id})">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ③ BACKEND -->
+    <div class="csec">
+      <div class="csec-head" onclick="toggleSec(this)">
+        <div class="csec-title">
+          <span class="stag-backend">◈</span> Backend Products &amp; Limits
+        </div>
+        <span class="csec-arrow">▾</span>
+      </div>
+      <div class="csec-body">
+        <table class="be-table">
+          <thead>
+            <tr>
+              <th style="min-width:130px">Product</th>
+              <th style="min-width:110px">Max Amount</th>
+              <th>Restrictions / Notes</th>
+              <th style="width:26px"></th>
+            </tr>
+          </thead>
+          <tbody id="be_${l.id}">${beHtml}</tbody>
+        </table>
+        <button class="add-row-btn orange edit-only" onclick="addBeRow(${l.id})">+ Add Product</button>
+      </div>
+    </div>
+
+    <!-- ④ QUALIFYING -->
+    <div class="csec">
+      <div class="csec-head" onclick="toggleSec(this)">
+        <div class="csec-title">
+          <span class="stag-qualify">✓</span> Qualifying Guidelines
+        </div>
+        <span class="csec-arrow">▾</span>
+      </div>
+      <div class="csec-body">
+        <div class="qual-grid">
+
+          <div class="qual-field">
+            <div class="qual-label">Min FICO</div>
+            <input class="qual-input fico-display" data-qual="min_fico"
+              value="${esc(q.min_fico)}" placeholder="e.g. 620"
+              style="font-family:'Bebas Neue',sans-serif;font-size:22px;${ficoStyle}"
+              oninput="updateFicoColor(this)"
+              onchange="autosave(${l.id})">
+          </div>
+
+          <div class="qual-field">
+            <div class="qual-label">Primary Bureau</div>
+            <input class="qual-input" data-qual="bureau" value="${esc(q.bureau)}" placeholder="e.g. Experian" onchange="autosave(${l.id})">
+          </div>
+
+          <div class="qual-field">
+            <div class="qual-label">Bureau Note</div>
+            <input class="qual-input" data-qual="bureau_note" value="${esc(q.bureau_note)}" placeholder="e.g. FICO Auto 8" onchange="autosave(${l.id})">
+          </div>
+
+          <div class="qual-field">
+            <div class="qual-label">ID Accepted</div>
+            <input class="qual-input" data-qual="id_accepted" value="${esc(q.id_accepted)}" placeholder="e.g. DL / Passport" onchange="autosave(${l.id})">
+          </div>
+
+          <div class="qual-field">
+            <div class="qual-label">ITIN Accepted?</div>
+            <input class="qual-input" data-qual="itin" value="${esc(q.itin)}" placeholder="Yes / No / Conditions" onchange="autosave(${l.id})">
+          </div>
+
+          <div class="qual-field">
+            <div class="qual-label">Min Monthly Income</div>
+            <input class="qual-input" data-qual="min_income" value="${esc(q.min_income)}" placeholder="e.g. $2,200/mo" onchange="autosave(${l.id})">
+          </div>
+
+          <div class="qual-field">
+            <div class="qual-label">Min Time on Job</div>
+            <input class="qual-input" data-qual="min_job_time" value="${esc(q.min_job_time)}" placeholder="e.g. 6 months" onchange="autosave(${l.id})">
+          </div>
+
+          <div class="qual-field">
+            <div class="qual-label">Min Time at Residence</div>
+            <input class="qual-input" data-qual="min_residence_time" value="${esc(q.min_residence_time)}" placeholder="e.g. 1 year" onchange="autosave(${l.id})">
+          </div>
+
+          <div class="qual-field">
+            <div class="qual-label">Max PTI</div>
+            <input class="qual-input" data-qual="pti" value="${esc(q.pti)}" placeholder="e.g. 20%" onchange="autosave(${l.id})">
+          </div>
+
+          <div class="qual-field">
+            <div class="qual-label">Max DTI</div>
+            <input class="qual-input" data-qual="dti" value="${esc(q.dti)}" placeholder="e.g. 50%" onchange="autosave(${l.id})">
+          </div>
+
+          <div class="qual-field">
+            <div class="qual-label">Max Vehicle Age</div>
+            <input class="qual-input" data-qual="max_age" value="${esc(q.max_age)}" placeholder="e.g. 10 yrs" onchange="autosave(${l.id})">
+          </div>
+
+          <div class="qual-field">
+            <div class="qual-label">Max Mileage</div>
+            <input class="qual-input" data-qual="max_miles" value="${esc(q.max_miles)}" placeholder="e.g. 100K mi" onchange="autosave(${l.id})">
+          </div>
+
+          <div class="qual-field qual-full">
+            <div class="qual-label">Typical Stips Required</div>
+            <input class="qual-input" data-qual="stips" value="${esc(q.stips)}" placeholder="e.g. Paystub ≤30 days · POR ≤30 days · Full coverage ins." onchange="autosave(${l.id})">
+          </div>
+
+          <div class="qual-field qual-full">
+            <div class="qual-label">Hard Stops / Additional Notes</div>
+            <input class="qual-input" data-qual="notes" value="${esc(q.notes)}" placeholder="Auto-declines, special conditions, restrictions..." onchange="autosave(${l.id})">
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+  </div>`;
+  return div;
+}
+
+// ── FICO LIVE COLOR ──────────────────────────────────────────
+function updateFicoColor(el) {
+  const n = parseInt(el.value);
+  el.style.color = el.value ? ficoColor(n) : 'var(--muted)';
+}
+
+// ── TIER MANAGEMENT ──────────────────────────────────────────
+function addTier(id) {
+  const tbody = document.getElementById('tiers_' + id);
+  const tr = document.createElement('tr'); tr.className = 'tier-row';
+  tr.innerHTML = `
+    <td><input class="tier-lbl" value="" placeholder="Score range" onchange="autosave(${id})"></td>
+    <td><input data-col="nfe"  value="" placeholder="—" onchange="autosave(${id})"></td>
+    <td><input data-col="nmax" value="" placeholder="—" onchange="autosave(${id})"></td>
+    <td><input data-col="ufe"  value="" placeholder="—" onchange="autosave(${id})"></td>
+    <td><input data-col="umax" value="" placeholder="—" onchange="autosave(${id})"></td>
+    <td style="border:1px solid var(--border);text-align:center;background:var(--surface2)">
+      <button class="del-row-btn edit-only" onclick="delTier(this,${id})">✕</button>
+    </td>`;
+  tbody.appendChild(tr);
+}
+function delTier(btn, id) { btn.closest('tr').remove(); autosave(id); }
+
+// ── BACKEND MANAGEMENT ────────────────────────────────────────
+function addBeRow(id) {
+  const tbody = document.getElementById('be_' + id);
+  const tr = document.createElement('tr'); tr.className = 'be-row';
+  tr.innerHTML = `
+    <td><input class="be-input" data-be="product" value="" placeholder="Product name" onchange="autosave(${id})"></td>
+    <td><input class="be-input" data-be="max" value="" placeholder="e.g. $1,500" onchange="autosave(${id})"></td>
+    <td><input class="be-input" data-be="notes" value="" placeholder="Conditions..." onchange="autosave(${id})"></td>
+    <td style="text-align:center;border:1px solid var(--border)">
+      <button class="del-row-btn edit-only" onclick="delBeRow(this,${id})">✕</button>
+    </td>`;
+  tbody.appendChild(tr);
+}
+function delBeRow(btn, id) { btn.closest('tr').remove(); autosave(id); }
+
+// ── SECTION TOGGLE ────────────────────────────────────────────
+function toggleSec(head) {
+  const body = head.nextElementSibling;
+  const arrow = head.querySelector('.csec-arrow');
+  body.classList.toggle('open');
+  arrow.classList.toggle('open');
+}
+
+// ── AUTOSAVE ──────────────────────────────────────────────────
+const saveTimers = {};
+function autosave(id) {
+  clearTimeout(saveTimers[id]);
+  saveTimers[id] = setTimeout(() => {
+    harvestLender(id);
+    localStorage.setItem('swkia_v5', JSON.stringify({lenders, nextId}));
+    toast('✓ Saved');
+  }, 700);
+}
+
+// ── ADD / DELETE ──────────────────────────────────────────────
+function openAdd() {
+  document.getElementById('a_name').value = '';
+  document.getElementById('a_sub').value = '';
+  document.getElementById('a_group').value = 'Prime';
+  document.getElementById('a_type').value = 'prime';
+  document.getElementById('addOverlay').classList.add('open');
+  setTimeout(() => document.getElementById('a_name').focus(), 80);
+}
+function addBank() {
+  const name = document.getElementById('a_name').value.trim();
+  if (!name) { toast('Name required'); return; }
+  const l = emptyLender(
+    nextId++, name,
+    document.getElementById('a_sub').value.trim(),
+    document.getElementById('a_type').value,
+    document.getElementById('a_group').value
+  );
+  lenders.push(l);
+  save(); render(); closeOverlay('addOverlay');
+  toast('✓ ' + name + ' added');
+}
+
+function openDel(id) {
+  delId = id;
+  const l = lenders.find(x => x.id === id);
+  document.getElementById('delName').textContent = l ? l.name : 'this bank';
+  document.getElementById('delOverlay').classList.add('open');
+}
+function confirmDelete() {
+  const l = lenders.find(x => x.id === delId);
+  lenders = lenders.filter(x => x.id !== delId);
+  save(); render(); closeOverlay('delOverlay');
+  toast((l ? l.name : 'Bank') + ' removed');
+  delId = null;
+}
+
+// ── OVERLAYS ──────────────────────────────────────────────────
+function closeOverlay(id) { document.getElementById(id).classList.remove('open'); }
+function backdropClose(e, id) { if (e.target === document.getElementById(id)) closeOverlay(id); }
+
+// ── EXPORT / IMPORT ───────────────────────────────────────────
+function exportData() {
+  harvestAll();
+  const b = new Blob([JSON.stringify({lenders, nextId}, null, 2)], {type:'application/json'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(b);
+  a.download = 'SWKia_Lenders_' + new Date().toISOString().slice(0,10) + '.json';
+  a.click(); toast('Exported');
+}
+function importData(e) {
+  const f = e.target.files[0]; if (!f) return;
+  const r = new FileReader();
+  r.onload = ev => {
+    try {
+      const p = JSON.parse(ev.target.result);
+      lenders = p.lenders || []; nextId = p.nextId || 100;
+      save(); render(); toast(lenders.length + ' lenders imported');
+    } catch { toast('Invalid file'); }
+  };
+  r.readAsText(f); e.target.value = '';
+}
+
+// ── TOAST ─────────────────────────────────────────────────────
+let toastT;
+function toast(msg) {
+  const el = document.getElementById('toast');
+  el.textContent = msg; el.classList.add('show');
+  clearTimeout(toastT); toastT = setTimeout(() => el.classList.remove('show'), 2000);
+}
+
+// ── UTILS ─────────────────────────────────────────────────────
+function esc(s) { return (s||'').replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+// ── EDIT MODE ─────────────────────────────────────────────────
+let editMode = false;
+function toggleEditMode() {
+  editMode = !editMode;
+  document.body.classList.toggle('edit-mode', editMode);
+  document.getElementById('editToggleIcon').textContent  = editMode ? '🔓' : '🔒';
+  document.getElementById('editToggleLabel').textContent = editMode ? 'Edit Mode: On' : 'Edit Mode: Off';
+  toast(editMode ? '🔓 Edit mode on — delete buttons visible' : '🔒 Edit mode off — protected');
+}
+
+// ── KEYBOARD ──────────────────────────────────────────────────
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') { closeOverlay('addOverlay'); closeOverlay('delOverlay'); }
+  if ((e.ctrlKey||e.metaKey) && e.key === 'k') { e.preventDefault(); openAdd(); }
+  if ((e.ctrlKey||e.metaKey) && e.key === 's') { e.preventDefault(); save(); toast('✓ Saved'); }
+});
+
+// ── INCOME CALCULATOR ─────────────────────────────────────────
+let calcTab = 'ytd';
+
+function openCalc() {
+  document.getElementById('calcOverlay').classList.add('open');
+}
+
+function setCalcTab(tab) {
+  calcTab = tab;
+  ['ytd','hourly','salary'].forEach(t => {
+    document.getElementById('tab_' + t).classList.toggle('active', t === tab);
+    document.getElementById('method_' + t).style.display = t === tab ? '' : 'none';
+  });
+  document.getElementById('calcResults').style.display = 'none';
+  document.getElementById('calcError').style.display = 'none';
+}
+
+function fmt(n) {
+  return '$' + n.toLocaleString('en-US', {minimumFractionDigits:2, maximumFractionDigits:2});
+}
+
+const FREQ_PER_YEAR = { weekly:52, biweekly:26, semimonthly:24, monthly:12 };
+
+function calcIncome() {
+  const resEl   = document.getElementById('calcResults');
+  const errEl   = document.getElementById('calcError');
+  const noteEl  = document.getElementById('calcNote');
+  errEl.style.display = 'none';
+  resEl.style.display = 'none';
+
+  let annualGross = null;
+  let perCheck    = null;
+  let note        = '';
+
+  try {
+    if (calcTab === 'ytd') {
+      const grossRaw  = document.getElementById('c_ytd_gross').value;
+      const startRaw  = document.getElementById('c_ytd_start').value;
+      const endRaw    = document.getElementById('c_ytd_end').value;
+      const freq      = document.getElementById('c_ytd_freq').value;
+      if (!grossRaw || !startRaw || !endRaw) return;
+
+      const gross     = parseFloat(grossRaw);
+      const startDate = new Date(startRaw + 'T00:00:00');
+      const endDate   = new Date(endRaw   + 'T00:00:00');
+      if (isNaN(gross) || gross <= 0)        { showErr('Enter a valid YTD gross amount.'); return; }
+      if (endDate <= startDate)              { showErr('End date must be after start date.'); return; }
+
+      // Days elapsed from Jan 1 of start year through end date
+      const jan1      = new Date(startDate.getFullYear(), 0, 1);
+      const daysElapsed = Math.round((endDate - jan1) / 86400000) + 1;
+      const daysInYear  = ((startDate.getFullYear() % 4 === 0) ? 366 : 365);
+
+      annualGross = (gross / daysElapsed) * daysInYear;
+      perCheck    = annualGross / FREQ_PER_YEAR[freq];
+
+      const paychecksElapsed = Math.round(daysElapsed / (daysInYear / FREQ_PER_YEAR[freq]));
+      note = `${paychecksElapsed} pay periods elapsed · ${daysElapsed} days YTD of ${daysInYear} · Annualized from ${fmt(gross)} YTD`;
+
+    } else if (calcTab === 'hourly') {
+      const rateRaw = document.getElementById('c_hourly_rate').value;
+      const hrsRaw  = document.getElementById('c_hourly_hrs').value;
+      const otRaw   = document.getElementById('c_hourly_ot').value;
+      if (!rateRaw || !hrsRaw) return;
+
+      const rate   = parseFloat(rateRaw);
+      const hrs    = parseFloat(hrsRaw);
+      const otHrs  = otRaw ? parseFloat(otRaw) : 0;
+      if (isNaN(rate) || rate <= 0) { showErr('Enter a valid hourly rate.'); return; }
+      if (isNaN(hrs)  || hrs  <= 0) { showErr('Enter valid hours per week.'); return; }
+
+      const regWeekly = rate * hrs;
+      const otWeekly  = otHrs * (rate * 1.5);
+      const weeklyGross = regWeekly + otWeekly;
+      annualGross = weeklyGross * 52;
+      perCheck    = annualGross / 26; // bi-weekly default for display
+      if (otHrs > 0) note = `Regular: ${fmt(regWeekly)}/wk · OT (1.5x): ${fmt(otWeekly)}/wk · Total: ${fmt(weeklyGross)}/wk`;
+      else note = `${hrs} hrs/wk × $${rate}/hr = ${fmt(weeklyGross)}/wk`;
+
+    } else if (calcTab === 'salary') {
+      const salRaw = document.getElementById('c_salary').value;
+      const freq   = document.getElementById('c_salary_freq').value;
+      if (!salRaw) return;
+      const sal = parseFloat(salRaw);
+      if (isNaN(sal) || sal <= 0) { showErr('Enter a valid annual salary.'); return; }
+      annualGross = sal;
+      perCheck    = sal / FREQ_PER_YEAR[freq];
+      note = `${FREQ_PER_YEAR[freq]} pay periods/year`;
+    }
+
+    if (annualGross === null) return;
+
+    const monthly = annualGross / 12;
+    const weekly  = annualGross / 52;
+
+    document.getElementById('res_monthly').textContent  = fmt(monthly);
+    document.getElementById('res_annual').textContent   = fmt(annualGross);
+    document.getElementById('res_percheck').textContent = fmt(perCheck);
+    document.getElementById('res_weekly').textContent   = fmt(weekly);
+    noteEl.textContent = note;
+    resEl.style.display = '';
+
+  } catch(e) {
+    showErr('Something went wrong. Check your inputs.');
+  }
+}
+
+function showErr(msg) {
+  const el = document.getElementById('calcError');
+  el.textContent = msg;
+  el.style.display = '';
+}
+
+function clearCalc() {
+  ['c_ytd_gross','c_ytd_start','c_ytd_end',
+   'c_hourly_rate','c_hourly_hrs','c_hourly_ot','c_salary']
+    .forEach(id => { const el = document.getElementById(id); if(el) el.value = ''; });
+  document.getElementById('calcResults').style.display = 'none';
+  document.getElementById('calcError').style.display   = 'none';
+}
+
+// ── INIT ──────────────────────────────────────────────────────
+load(); render();
+</script>
+</body>
+</html>
