@@ -834,27 +834,48 @@ const LENDERS = [
           <div class="info-grid">
             <div class="info-row"><span class="info-key">Retail Min FICO</span><span class="info-val">520 (all tiers)</span></div>
             <div class="info-row"><span class="info-key">Lease Min FICO</span><span class="info-val">550 (all tiers)</span></div>
-            <div class="info-row"><span class="info-key">Tiers (Prime)</span><span class="info-val">S, A, B, C</span></div>
-            <div class="info-row"><span class="info-key">Tiers (Non-Prime)</span><span class="info-val">S, A, B, C, D, E</span></div>
+            <div class="info-row"><span class="info-key">Tiers (Prime)</span><span class="info-val">S, A, B, C (FICO ≥620)</span></div>
+            <div class="info-row"><span class="info-key">Tiers (Non-Prime)</span><span class="info-val">S, A, B, C, D, E (FICO &lt;620)</span></div>
             <div class="info-row"><span class="info-key">Max Rate (New)</span><span class="info-val">24.00% or state cap</span></div>
             <div class="info-row"><span class="info-key">Max Rate (Used)</span><span class="info-val">25.00% or state cap</span></div>
           </div>
-          <h4 style="margin:var(--space-3) 0 var(--space-2);font-size:.8rem;text-transform:uppercase;letter-spacing:.05em;opacity:.6">Consumer Max All-In Advance — Prime (FICO ≥620)</h4>
+
+          <h4 style="margin:var(--space-3) 0 var(--space-2);font-size:.8rem;text-transform:uppercase;letter-spacing:.05em;opacity:.6">Prime Retail Max Advance — Standard (EDC/AWV &lt;$100K, FICO ≥620)</h4>
           <table class="tier-table">
-            <thead><tr><th>Term Band</th><th>Tier S</th><th>Tier A</th><th>Tier B New</th><th>Tier B Used</th><th>Tier C New</th><th>Tier C Used</th></tr></thead>
+            <thead>
+              <tr><th>Term Band</th><th>Tier S</th><th>Tier A</th><th>Tier B New</th><th>Tier B Used</th><th>Tier C New</th><th>Tier C Used</th></tr>
+            </thead>
             <tbody>
               <tr><td>≤63 mo</td><td>140%</td><td>135%</td><td>130%</td><td>135%</td><td>125%</td><td>130%</td></tr>
               <tr><td>64–75 mo</td><td>135%</td><td>130%</td><td>125%</td><td>130%</td><td>120%</td><td>125%</td></tr>
-              <tr><td>76–84 mo</td><td>135%/130%</td><td>125%/120%</td><td colspan="2" style="text-align:center">115%</td><td colspan="2" style="text-align:center">N/A (used)</td></tr>
+              <tr><td>76–84 mo</td><td>135% New / 130% Used</td><td>125% New / 120% Used</td><td colspan="2" style="text-align:center">115% (New &amp; Used)</td><td>N/A</td><td>N/A</td></tr>
             </tbody>
           </table>
-          <h4 style="margin:var(--space-3) 0 var(--space-2);font-size:.8rem;text-transform:uppercase;letter-spacing:.05em;opacity:.6">Consumer Max All-In Advance — Non-Prime (FICO &lt;620)</h4>
+
+          <h4 style="margin:var(--space-3) 0 var(--space-2);font-size:.8rem;text-transform:uppercase;letter-spacing:.05em;opacity:.6">Prime Retail Max Advance — HVC (EDC/AWV ≥$100K, FICO ≥620)</h4>
+          <div class="note-box warn" style="margin-bottom:var(--space-2)"><span class="note-icon">💎</span><span>High Value Collateral: applies when EDC or AWV is <strong>$100,000 or more</strong>. Tier C &amp; below not available.</span></div>
           <table class="tier-table">
-            <thead><tr><th>Term Band</th><th>Tier S</th><th>Tier A</th><th>Tier B</th><th>Tier C</th><th>Tier D</th><th>Tier E</th></tr></thead>
+            <thead>
+              <tr><th>Term Band</th><th>Tier S</th><th>Tier A</th><th>Tier B</th></tr>
+            </thead>
             <tbody>
-              <tr><td>≤72 mo</td><td>135%</td><td>130%</td><td>125%</td><td>120%</td><td>115%</td><td>115%</td></tr>
-              <tr><td>73–75 mo</td><td>130%</td><td>125%</td><td>120%</td><td>115%</td><td>120%</td><td>—</td></tr>
-              <tr><td>76–84 mo ⚠️</td><td>125%</td><td>120%</td><td>115%</td><td>115%</td><td colspan="2" style="text-align:center">—</td></tr>
+              <tr><td>≤75 mo — New</td><td>120%</td><td>115%</td><td>115%</td></tr>
+              <tr><td>≤75 mo — Used</td><td>110%</td><td>105%</td><td>105%</td></tr>
+              <tr><td>76–84 mo — New</td><td>115%</td><td>115%</td><td>115%</td></tr>
+              <tr><td>76–84 mo — Used</td><td>105%</td><td>105%</td><td>105%</td></tr>
+            </tbody>
+          </table>
+
+          <h4 style="margin:var(--space-3) 0 var(--space-2);font-size:.8rem;text-transform:uppercase;letter-spacing:.05em;opacity:.6">Non-Prime Retail Max Advance (FICO &lt;620)</h4>
+          <div class="note-box warn" style="margin-bottom:var(--space-2)"><span class="note-icon">⚠️</span><span>76–84 mo highlighted red in program guide — use with caution. Tiers D &amp; E not available beyond 75 mo.</span></div>
+          <table class="tier-table">
+            <thead>
+              <tr><th>Term Band</th><th>Tier S</th><th>Tier A</th><th>Tier B New</th><th>Tier B Used</th><th>Tier C New</th><th>Tier C Used</th><th>Tier D</th><th>Tier E</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>≤72 mo</td><td>135%</td><td>130%</td><td>125%</td><td>130%</td><td>120%</td><td>125%</td><td>115%</td><td>115%</td></tr>
+              <tr><td>73–75 mo</td><td>130%</td><td>125%</td><td>120%</td><td>125%</td><td>115%</td><td>120%</td><td>—</td><td>—</td></tr>
+              <tr><td>76–84 mo ⚠️</td><td>125%</td><td>120%</td><td>115%</td><td>115%</td><td colspan="2" style="text-align:center">N/A</td><td colspan="2" style="text-align:center">N/A</td></tr>
             </tbody>
           </table>
         `
@@ -893,8 +914,8 @@ const LENDERS = [
             <div class="info-row"><span class="info-key">Min for 76–84 mo</span><span class="info-val">$20,000</span></div>
             <div class="info-row"><span class="info-key">Max Mileage</span><span class="info-val">150,000 miles (by vehicle segment)</span></div>
             <div class="info-row"><span class="info-key">New / CSU-2020</span><span class="info-val">Max 84 months</span></div>
-            <div class="info-row"><span class="info-key">Used 2019–2015</span><span class="info-val">Max 75 months*</span></div>
-            <div class="info-row"><span class="info-key">Used 2014–2013</span><span class="info-val">Max 63 months**</span></div>
+            <div class="info-row"><span class="info-key">Used 2019–2015</span><span class="info-val">Max 75 months <em>(*FICO ≥620, AMF &gt;$5K, Mileage &lt;100K)</em></span></div>
+            <div class="info-row"><span class="info-key">Used 2014–2013</span><span class="info-val">Max 63 months <em>(**Tiers S–B only)</em></span></div>
             <div class="info-row"><span class="info-key">Approval Expiry</span><span class="info-val">30 days</span></div>
             <div class="info-row"><span class="info-key">Submission Window</span><span class="info-val">Contracts not received within 15 days of contract date may be ineligible; complete within 20 days or subject to payoff</span></div>
             <div class="info-row"><span class="info-key">Auction Price (SmartAuction)</span><span class="info-val">Good for 120 days</span></div>
@@ -907,44 +928,60 @@ const LENDERS = [
         icon: '🏷️',
         label: 'Backend Products',
         content: `
-          <div class="info-grid">
-            <div class="info-row"><span class="info-key">Total Aftermarket (&lt;$80K)</span><span class="info-val">Greater of $5,000 or 30% of EDC/AWV; max $10,000</span></div>
-            <div class="info-row"><span class="info-key">Total Aftermarket (&gt;$80K)</span><span class="info-val">Greater of $5,000 or 30% of EDC/AWV; max $15,000</span></div>
-            <div class="info-row"><span class="info-key">GAP (&lt;$80K)</span><span class="info-val">$1,500; min 70% LTV (80% for commercial/ComTRAC)</span></div>
-            <div class="info-row"><span class="info-key">GAP (&gt;$80K)</span><span class="info-val">$2,000; not allowed in NY, DC</span></div>
-            <div class="info-row"><span class="info-key">GAP Plus</span><span class="info-val">Available — all states except AK, DC, NE, NY, TX</span></div>
-            <div class="info-row"><span class="info-key">Mechanical Service</span><span class="info-val">Greater of $5,000 or 15% of EDC/AWV</span></div>
-            <div class="info-row"><span class="info-key">Maintenance</span><span class="info-val">Greater of $2,000 or 15%</span></div>
-            <div class="info-row"><span class="info-key">Tire & Wheel</span><span class="info-val">Greater of $1,500 or 7%</span></div>
-            <div class="info-row"><span class="info-key">Battery Protection (EV)</span><span class="info-val">Greater of $3,000 or 10% of EDC/AWV</span></div>
-            <div class="info-row"><span class="info-key">Etch (&lt;$80K)</span><span class="info-val">$1,200</span></div>
-            <div class="info-row"><span class="info-key">DAF</span><span class="info-val">$0–$795 (non-Champions Club); $0 or $500 (Champions Club)</span></div>
-          </div>
+          <div class="note-box info" style="margin-bottom:var(--space-3)"><span class="note-icon">ℹ️</span><span>All backend product caps are based on <strong>EDC/AWV</strong> (Estimated Dealer Cost / Adjusted Wholesale Value). Max aftermarket applies to individual product and aggregate caps.</span></div>
+          <table class="tier-table">
+            <thead>
+              <tr><th>Product</th><th>EDC/AWV &lt;$80K</th><th>EDC/AWV ≥$80K</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><strong>Total Aftermarket Cap</strong></td><td>Greater of $5,000 or 30%; max $10,000</td><td>Greater of $5,000 or 30%; max $15,000</td></tr>
+              <tr><td><strong>GAP</strong></td><td>$1,500; min 60% LTV (non-commercial); not in NY, DC</td><td>$2,000; min 60% LTV (non-commercial); not in NY, DC</td></tr>
+              <tr><td><strong>GAP — ComTRAC</strong></td><td colspan="2" style="text-align:center">Min 80% LTV required for commercial/ComTRAC advance eligibility</td></tr>
+              <tr><td><strong>GAP Plus</strong></td><td colspan="2" style="text-align:center">Available — all states except AK, DC, NE, NY, TX</td></tr>
+              <tr><td><strong>Mechanical Service (VSC)</strong></td><td colspan="2" style="text-align:center">Greater of $5,000 or 15% of EDC/AWV</td></tr>
+              <tr><td><strong>Maintenance</strong></td><td colspan="2" style="text-align:center">Greater of $2,000 or 15% EDC/AWV (underwriting guide) / 10% EDC/AWV (product sheet) — use higher of the two or confirm with Ally rep</td></tr>
+              <tr><td><strong>Tire &amp; Wheel</strong></td><td colspan="2" style="text-align:center">Greater of $1,500 or 7% of EDC/AWV</td></tr>
+              <tr><td><strong>Battery Protection (EV)</strong></td><td colspan="2" style="text-align:center">Greater of $3,000 or 10% of EDC/AWV</td></tr>
+              <tr><td><strong>Etch</strong></td><td>$1,200</td><td>$1,500</td></tr>
+              <tr><td><strong>Windshield Protection</strong></td><td>Greater of $1,200 or 4% of EDC/AWV</td><td>Greater of $1,500 or 4% of EDC/AWV</td></tr>
+              <tr><td><strong>DAF</strong></td><td colspan="2" style="text-align:center">$0–$795 (non-Champions Club) · $0 or $500 (Champions Club)</td></tr>
+            </tbody>
+          </table>
+          <div class="note-box warn" style="margin-top:var(--space-3)"><span class="note-icon">⚠️</span><span><strong>GAP LTV Note:</strong> Non-commercial GAP requires min <strong>60%</strong> LTV; ComTRAC/commercial GAP requires min <strong>80%</strong> LTV. GAP not allowed in NY or DC.</span></div>
         `
       },
       reserve: { icon: '💵', label: 'Reserve & Compensation', content: `
           <div class="note-box success" style="margin-bottom:var(--space-3)"><span class="note-icon">✅</span><span>Effective Feb 1, 2026: all prime &amp; non-prime contracts with DAF are eligible for the <strong>ADR Retail Bonus Reward</strong>. Rates returned electronically on the callback sheet.</span></div>
 
-          <h4 style="margin:0 0 var(--space-2);font-size:.75rem;text-transform:uppercase;letter-spacing:.06em;opacity:.7">Retail Dealer Participation — Prime &amp; Non-Prime (DFI by Amount Financed)</h4>
+          <h4 style="margin:0 0 var(--space-2);font-size:.75rem;text-transform:uppercase;letter-spacing:.06em;opacity:.7">Flat Payout by Amount Financed</h4>
           <table class="tier-table">
             <thead>
-              <tr><th>Min DFI &amp; Amt Financed</th><th>$150 flat<br><span style="font-weight:400;font-size:.7rem">$5K–$24,999</span></th><th>$250 flat<br><span style="font-weight:400;font-size:.7rem">$25K–$34,999</span></th><th>$350 flat<br><span style="font-weight:400;font-size:.7rem">$35K–$44,999</span></th><th>$450 flat<br><span style="font-weight:400;font-size:.7rem">$45K–$74,999</span></th><th>$500 flat<br><span style="font-weight:400;font-size:.7rem">$75K–$149,999</span></th></tr>
+              <tr>
+                <th>Amount Financed</th>
+                <th>Flat Payout</th>
+                <th>Max DFI ≤60 mo</th>
+                <th>Max DFI 61–75 mo</th>
+                <th>Max DFI 76–84 mo</th>
+              </tr>
             </thead>
             <tbody>
-              <tr><td><strong>Max DFI — ≤60 mo</strong></td><td colspan="5" style="text-align:center">2.50%</td></tr>
-              <tr><td><strong>Max DFI — 61–75 mo</strong></td><td colspan="5" style="text-align:center">2.00%</td></tr>
-              <tr><td><strong>Max DFI — 76–84 mo</strong></td><td colspan="4" style="text-align:center">1.50%</td><td style="text-align:center">2.00% (D &amp; E tiers)</td></tr>
+              <tr><td>$5,000 – $24,999</td><td><strong>$150</strong></td><td>2.50%</td><td>2.00%</td><td>1.50%</td></tr>
+              <tr><td>$25,000 – $34,999</td><td><strong>$250</strong></td><td>2.50%</td><td>2.00%</td><td>1.50%</td></tr>
+              <tr><td>$35,000 – $44,999</td><td><strong>$350</strong></td><td>2.50%</td><td>2.00%</td><td>1.50%</td></tr>
+              <tr><td>$45,000 – $74,999</td><td><strong>$450</strong></td><td>2.50%</td><td>2.00%</td><td>1.50%</td></tr>
+              <tr><td>$75,000 – $149,999</td><td><strong>$500</strong></td><td>2.50%</td><td>2.00%</td><td>2.00% <span style="font-size:.7rem;opacity:.7">(D &amp; E tiers)</span></td></tr>
             </tbody>
           </table>
 
+          <div class="note-box info" style="margin-top:var(--space-3)"><span class="note-icon">ℹ️</span><span><strong>How it works:</strong> Ally pays a <em>flat dollar</em> minimum based on the amount financed bracket, <em>plus</em> a max DFI % (dealer finance income) over the buy rate. You receive whichever is greater. D &amp; E tiers earn 2.00% max on all terms. Max advance = % of balance financed <em>after</em> cash down, rebates, trade equity, aftermarket, TT&amp;L, and fees.</span></div>
+
           <div class="info-grid" style="margin-top:var(--space-3)">
             <div class="info-row"><span class="info-key">Min Amount Financed</span><span class="info-val">$5,000</span></div>
-            <div class="info-row"><span class="info-key">D &amp; E Tiers — All Terms</span><span class="info-val">2.00% Max DFI on all terms; flat scale applies</span></div>
-            <div class="info-row"><span class="info-key">Dealer Acq. Fee (DAF)</span><span class="info-val">Up to $795</span></div>
-            <div class="info-row"><span class="info-key">Chargeback Window</span><span class="info-val">See callback; contracts not received within 15 days may be ineligible</span></div>
-            <div class="info-row"><span class="info-key">Rates subject to</span><span class="info-val">State statutory limits — refer to Program Notes</span></div>
+            <div class="info-row"><span class="info-key">D &amp; E Tiers</span><span class="info-val">2.00% max DFI on <em>all</em> terms; flat scale above still applies</span></div>
+            <div class="info-row"><span class="info-key">Dealer Acq. Fee (DAF)</span><span class="info-val">Up to $795 (non-Champions Club) · $0 or $500 (Champions Club)</span></div>
+            <div class="info-row"><span class="info-key">Chargeback Window</span><span class="info-val">Contracts not received within 15 days of contract date may be ineligible</span></div>
+            <div class="info-row"><span class="info-key">State Limits</span><span class="info-val">All rates subject to state statutory caps — refer to Program Notes</span></div>
           </div>
-          <div class="note-box info" style="margin-top:var(--space-3)"><span class="note-icon">ℹ️</span><span>Maximum advance = % of balance financed <em>after</em> all cash down, rebates, trade equity, aftermarket products, TT&amp;L and fees. Flat schedule: $150 (5K–25K) · $250 (25K–35K) · $350 (35K–45K) · $450 (45K–75K) · $500 (75K–150K).</span></div>
         ` },
       vehicles: { icon: '🚗', label: 'Vehicle Eligibility', content: `<div class="note-box danger"><span class="note-icon">🚫</span><span><strong>Ineligible:</strong> Salvage titles, totaled vehicles, water/flood damaged, frame damaged, odometer rollback.</span></div>` }
     }
