@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <!--
+     ______                            __
+    / ____/___  ____ ___  ____  __  __/ /____  _____
+   / /   / __ \/ __ `__ \/ __ \/ / / / __/ _ \/ ___/
+  / /___/ /_/ / / / / / / /_/ / /_/ / /_/  __/ /
+  \____/\____/_/ /_/ /_/ .___/\__,_/\__/\___/_/
+                      /_/
+          Created with Perplexity Computer
+          https://www.perplexity.ai/computer
+  -->
+  <!-- Perplexity Computer Attribution — SEO Meta Tags -->
+  <meta name="generator" content="Perplexity Computer">
+  <meta name="author" content="Perplexity Computer">
+  <meta property="og:see_also" content="https://www.perplexity.ai/computer">
+  <link rel="author" href="https://www.perplexity.ai/computer">
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lender Hub — Dealership Finance Programs</title>
+  <meta name="description" content="Internal dealership lender hub — program guidelines, FICO requirements, backend products, and reserve structures for all finance partners.">
+
+  <!-- Inter from Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Favicon inline -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%23222840'/><text y='22' x='5' font-size='18' font-family='sans-serif' font-weight='900' fill='%23f0b429'>F</text></svg>">
+
+  <link rel="stylesheet" href="base.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="app">
+
+  <!-- ===================== HEADER ===================== -->
+  <header id="header" role="banner">
+    <button id="menu-toggle" aria-label="Open navigation menu" title="Toggle sidebar">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    </button>
+
+    <div class="header-logo">
+      <!-- SVG Logo: stylized "F&I" shield mark -->
+      <svg aria-label="Lender Hub" width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect width="32" height="32" rx="8" fill="var(--color-surface)"/>
+        <rect x="1" y="1" width="30" height="30" rx="7" stroke="var(--color-accent)" stroke-width="1.5" opacity="0.4"/>
+        <!-- Dollar mark -->
+        <path d="M16 7v2M16 23v2M12 10.5a2 2 0 0 1 4 0c0 1.5-4 2-4 4a2 2 0 0 0 4 0" stroke="var(--color-accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <div>
+        <div class="logo-text">Lender Hub</div>
+        <div class="logo-sub">F&amp;I Program Reference</div>
+      </div>
+    </div>
+
+    <div class="header-search">
+      <svg class="search-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <input type="search" id="search-input" placeholder="Search lenders…" aria-label="Search lenders">
+    </div>
+
+    <div class="header-actions">
+      <!-- Income Calculator button -->
+      <button id="income-calc-btn" class="btn-tool" aria-label="Income Calculator" title="Income Calculator">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="18" rx="2"/><line x1="8" y1="10" x2="16" y2="10"/><line x1="8" y1="14" x2="16" y2="14"/><line x1="8" y1="18" x2="12" y2="18"/><line x1="2" y1="7" x2="22" y2="7"/></svg>
+        <span class="btn-tool-label">Income</span>
+      </button>
+      <!-- Bureau Search button -->
+      <button id="bureau-search-btn" class="btn-tool" aria-label="Bureau Search" title="Bureau Score Search">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><path d="M11 8v6M8 11h6"/></svg>
+        <span class="btn-tool-label">Bureau</span>
+      </button>
+      <!-- LTV Calculator button -->
+      <button id="ltv-calc-btn" class="btn-tool" aria-label="LTV Calculator" title="LTV Calculator">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+        <span class="btn-tool-label">LTV</span>
+      </button>
+      <!-- Deal Structurer button -->
+      <button id="deal-struct-btn" class="btn-tool" aria-label="Deal Structurer" title="Deal Structurer">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/><path d="M7 8h10M7 12h6"/></svg>
+        <span class="btn-tool-label">Deal</span>
+      </button>
+      <!-- Side-by-Side Compare button -->
+      <button id="compare-tool-btn" class="btn-tool" aria-label="Compare Lenders" title="Side-by-Side Lender Compare">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="9" height="18" rx="1"/><rect x="13" y="3" width="9" height="18" rx="1"/></svg>
+        <span class="btn-tool-label">Compare</span>
+      </button>
+      <!-- 20-Day Calculator button -->
+      <button id="date-calc-btn" class="btn-tool" aria-label="20-Day Date Calculator" title="20-Day Date Calculator">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/><text x="12" y="19" text-anchor="middle" font-size="7" font-weight="700" fill="currentColor" stroke="none">20</text></svg>
+        <span class="btn-tool-label">20-Day</span>
+      </button>
+      <button id="theme-toggle" class="btn-icon" aria-label="Toggle color theme" title="Toggle dark/light mode">
+        <!-- Sun/moon icon -->
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="4"/>
+          <line x1="12" y1="2" x2="12" y2="4"/>
+          <line x1="12" y1="20" x2="12" y2="22"/>
+          <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+          <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+          <line x1="2" y1="12" x2="4" y2="12"/>
+          <line x1="20" y1="12" x2="22" y2="12"/>
+          <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+          <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+        </svg>
+      </button>
+    </div>
+  </header>
+
+  <!-- ===================== SIDEBAR ===================== -->
+  <nav id="sidebar" aria-label="Lender navigation">
+    <div class="sidebar-section">
+      <div class="sidebar-label">Overview</div>
+      <div class="sidebar-item active" id="sidebar-compare" role="button" tabindex="0" aria-label="View all lenders comparison table" style="white-space:nowrap">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="flex-shrink:0"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+        <span style="flex:1">Compare All</span>
+        <span class="lender-badge badge-all">18</span>
+      </div>
+    </div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-label">All Lenders</div>
+      <div id="sidebar-lenders"></div>
+    </div>
+
+    <div class="sidebar-section" style="padding-top:0">
+      <div class="sidebar-label">Legend</div>
+      <div style="padding:var(--space-2) var(--space-2);display:flex;flex-direction:column;gap:6px">
+        <div style="display:flex;align-items:center;gap:6px;font-size:var(--text-xs);color:var(--color-text-3)">
+          <span style="width:8px;height:8px;border-radius:50%;background:var(--color-green);flex-shrink:0"></span> Prime
+        </div>
+        <div style="display:flex;align-items:center;gap:6px;font-size:var(--text-xs);color:var(--color-text-3)">
+          <span style="width:8px;height:8px;border-radius:50%;background:var(--color-blue);flex-shrink:0"></span> Near-Prime
+        </div>
+        <div style="display:flex;align-items:center;gap:6px;font-size:var(--text-xs);color:var(--color-text-3)">
+          <span style="width:8px;height:8px;border-radius:50%;background:var(--color-accent);flex-shrink:0"></span> Sub-Prime
+        </div>
+        <div style="display:flex;align-items:center;gap:6px;font-size:var(--text-xs);color:var(--color-text-3)">
+          <span style="width:8px;height:8px;border-radius:50%;background:var(--color-red);flex-shrink:0"></span> Deep Sub-Prime
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Mobile sidebar overlay -->
+  <div id="sidebar-overlay" aria-hidden="true"></div>
+
+  <!-- ===================== MAIN ===================== -->
+  <main id="main" role="main">
+
+    <!-- COMPARE VIEW -->
+    <section class="view active" id="view-compare" aria-label="Lender comparison table">
+      <div class="page-header">
+        <h1 class="page-title">Lender Quick Compare</h1>
+        <p class="page-subtitle">Overview of all 18 finance partners. Click any row to view full program details.</p>
+        <p class="page-date">Programs current as of Q1 2026 — verify with each lender before submitting deals</p>
+      </div>
+
+      <div class="compare-wrap">
+        <table class="compare-table" role="grid" aria-label="Lender comparison">
+          <thead>
+            <tr>
+              <th scope="col">Lender</th>
+              <th scope="col">Min FICO</th>
+              <th scope="col">Segment</th>
+              <th scope="col">Max Term</th>
+              <th scope="col">Max Miles</th>
+              <th scope="col">Max LTV</th>
+              <th scope="col">GAP Cap</th>
+              <th scope="col">Reserve / Flat</th>
+              <th scope="col">Chargeback</th>
+            </tr>
+          </thead>
+          <tbody id="compare-tbody"></tbody>
+        </table>
+      </div>
+
+      <!-- Quick summary cards below table -->
+      <div style="margin-top:var(--space-8)">
+        <h2 style="font-size:var(--text-xl);font-weight:700;margin-bottom:var(--space-5);letter-spacing:-0.02em">Key Differentiators</h2>
+        <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:var(--space-4)">
+          <div class="stat-card">
+            <div class="stat-label">Lowest FICO Accepted</div>
+            <div class="stat-value green">400+</div>
+            <div class="stat-sub">Exeter Standard; GLS — zero FICO also considered by both</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">Widest Mileage Acceptance</div>
+            <div class="stat-value blue">200,000 mi</div>
+            <div class="stat-sub">Exeter Finance (13-year-old vehicles) &amp; Capital One</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">Highest Backend Cap</div>
+            <div class="stat-value accent">$12,500+</div>
+            <div class="stat-sub">Wells Fargo ($12,500); Truist ($10,000); Ally up to $15,000</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">No Chargebacks</div>
+            <div class="stat-value green">GLS &amp; WLF</div>
+            <div class="stat-sub">GLS: no chargebacks at all. Westlake: no chargebacks on rate markup</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">Longest Chargeback Protection</div>
+            <div class="stat-value blue">6 Payments</div>
+            <div class="stat-sub">TD Auto Finance — protected after 6th scheduled payment due date</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">Open Bankruptcies</div>
+            <div class="stat-value accent">WLF Only</div>
+            <div class="stat-sub">Westlake Financial accepts open Ch. 7 &amp; Ch. 13 with proper stipulations</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">Cash / Foreign Income</div>
+            <div class="stat-value accent">WLF Only</div>
+            <div class="stat-sub">Westlake accepts cash income, foreign IDs (matriculas), TurboPass verification</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">Best Backend (Prime)</div>
+            <div class="stat-value green">Truist / WF</div>
+            <div class="stat-sub">Truist: up to $10K backend. Wells Fargo: $12,500 backend cap</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">Fastest Approvals</div>
+            <div class="stat-value blue">15 sec</div>
+            <div class="stat-sub">GLS — approvals in as fast as 15 seconds, available 24/7/365</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- LENDER DETAIL VIEW -->
+    <section class="view" id="view-lender" aria-label="Lender program details">
+      <!-- Dynamically populated by JS -->
+    </section>
+
+  </main>
+
+  <!-- ===================== FOOTER ===================== -->
+  <footer role="contentinfo">
+    <span>Lender Hub &copy; 2026 — Internal F&amp;I Reference Tool</span>
+    <span style="color:var(--color-text-3)">Data sourced from official lender program PDFs. Always verify terms with lender prior to deal submission.</span>
+    <a href="https://www.perplexity.ai/computer" target="_blank" rel="noopener noreferrer">Created with Perplexity Computer</a>
+  </footer>
+
+  <!-- ===================== INCOME CALCULATOR MODAL ===================== -->
+  <div id="modal-income" class="tool-modal" role="dialog" aria-modal="true" aria-labelledby="income-modal-title" hidden>
+    <div class="tool-modal-backdrop"></div>
+    <div class="tool-modal-panel">
+      <div class="tool-modal-header">
+        <h2 id="income-modal-title">Income Calculator</h2>
+        <button class="tool-modal-close" aria-label="Close" id="income-modal-close">&times;</button>
+      </div>
+      <div class="tool-modal-body">
+        <div class="calc-row">
+          <label class="calc-label" for="income-type">Pay Type</label>
+          <select id="income-type" class="calc-input">
+            <option value="hourly">Hourly</option>
+            <option value="weekly">Weekly</option>
+            <option value="biweekly" selected>Bi-Weekly (every 2 weeks)</option>
+            <option value="semimonthly">Semi-Monthly (2× per month)</option>
+            <option value="monthly">Monthly</option>
+            <option value="annual">Annual Salary</option>
+            <option value="paystub">Pay Stub (Period Start &amp; End)</option>
+          </select>
+        </div>
+        <div class="calc-row" id="income-hours-row">
+          <label class="calc-label" for="income-hours">Hours per Week</label>
+          <input type="number" id="income-hours" class="calc-input" value="40" min="1" max="168" placeholder="40">
+        </div>
+        <!-- Pay stub date range row -->
+        <div id="income-paystub-row" style="display:none;flex-direction:column;gap:var(--space-3)">
+          <div class="calc-row">
+            <label class="calc-label" for="income-period-start">Period Start</label>
+            <input type="date" id="income-period-start" class="calc-input">
+          </div>
+          <div class="calc-row">
+            <label class="calc-label" for="income-period-end">Period End</label>
+            <input type="date" id="income-period-end" class="calc-input">
+          </div>
+        </div>
+        <div class="calc-row">
+          <label class="calc-label" for="income-amount" id="income-amount-label">Gross Amount ($)</label>
+          <input type="number" id="income-amount" class="calc-input" placeholder="e.g. 2500" min="0" step="0.01">
+        </div>
+        <button id="income-calc-run" class="calc-btn">Calculate</button>
+        <div id="income-results" class="calc-results" hidden>
+          <div class="calc-result-grid">
+            <div class="calc-result-item">
+              <div class="calc-result-label">Annual Gross</div>
+              <div class="calc-result-val" id="res-annual">—</div>
+            </div>
+            <div class="calc-result-item highlight">
+              <div class="calc-result-label">Monthly Gross</div>
+              <div class="calc-result-val" id="res-monthly">—</div>
+            </div>
+            <div class="calc-result-item">
+              <div class="calc-result-label">Bi-Weekly</div>
+              <div class="calc-result-val" id="res-biweekly">—</div>
+            </div>
+            <div class="calc-result-item">
+              <div class="calc-result-label">Weekly</div>
+              <div class="calc-result-val" id="res-weekly">—</div>
+            </div>
+          </div>
+          <div class="calc-note" id="income-note"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== BUREAU SEARCH MODAL ===================== -->
+  <div id="modal-bureau" class="tool-modal" role="dialog" aria-modal="true" aria-labelledby="bureau-modal-title" hidden>
+    <div class="tool-modal-backdrop"></div>
+    <div class="tool-modal-panel" style="max-width:560px">
+      <div class="tool-modal-header">
+        <h2 id="bureau-modal-title">Bureau Score Search</h2>
+        <button class="tool-modal-close" aria-label="Close" id="bureau-modal-close">&times;</button>
+      </div>
+      <div class="tool-modal-body">
+        <p class="calc-desc">Enter your customer's scores for each bureau. Leave blank if unknown. Results show which lenders will use a qualifying score.</p>
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:var(--space-3)">
+          <div class="calc-row">
+            <label class="calc-label" for="bureau-eq">Equifax</label>
+            <input type="number" id="bureau-eq" class="calc-input" placeholder="e.g. 550" min="300" max="850">
+          </div>
+          <div class="calc-row">
+            <label class="calc-label" for="bureau-tu">TransUnion</label>
+            <input type="number" id="bureau-tu" class="calc-input" placeholder="e.g. 625" min="300" max="850">
+          </div>
+          <div class="calc-row">
+            <label class="calc-label" for="bureau-ex">Experian</label>
+            <input type="number" id="bureau-ex" class="calc-input" placeholder="e.g. 600" min="300" max="850">
+          </div>
+        </div>
+        <button id="bureau-search-run" class="calc-btn">Find Matching Lenders</button>
+        <div id="bureau-results" hidden>
+          <div id="bureau-results-list" style="display:flex;flex-direction:column;gap:var(--space-3)"></div>
+          <div class="calc-note" id="bureau-note"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== 20-DAY DATE MODAL ===================== -->
+  <div id="modal-date" class="tool-modal" role="dialog" aria-modal="true" aria-labelledby="date-modal-title" hidden>
+    <div class="tool-modal-backdrop"></div>
+    <div class="tool-modal-panel">
+      <div class="tool-modal-header">
+        <h2 id="date-modal-title">20-Day Calculator</h2>
+        <button class="tool-modal-close" aria-label="Close" id="date-modal-close">&times;</button>
+      </div>
+      <div class="tool-modal-body">
+        <p class="calc-desc">Enter any contract or deal date to calculate the 20-day funding deadline.</p>
+        <div class="calc-row">
+          <label class="calc-label" for="date-start">Start Date</label>
+          <input type="date" id="date-start" class="calc-input">
+        </div>
+        <button id="date-calc-run" class="calc-btn">Calculate</button>
+        <div id="date-results" class="calc-results" hidden>
+          <div class="calc-result-grid" style="grid-template-columns:1fr 1fr">
+            <div class="calc-result-item">
+              <div class="calc-result-label">Start Date</div>
+              <div class="calc-result-val" id="res-start-date">—</div>
+            </div>
+            <div class="calc-result-item highlight">
+              <div class="calc-result-label">20-Day Deadline</div>
+              <div class="calc-result-val" id="res-20day">—</div>
+            </div>
+          </div>
+          <div class="calc-result-grid" style="grid-template-columns:1fr 1fr;margin-top:var(--space-3)">
+            <div class="calc-result-item">
+              <div class="calc-result-label">Days Remaining</div>
+              <div class="calc-result-val" id="res-days-left">—</div>
+            </div>
+            <div class="calc-result-item">
+              <div class="calc-result-label">Day of Week</div>
+              <div class="calc-result-val" id="res-day-of-week">—</div>
+            </div>
+          </div>
+          <div class="calc-note" id="date-note"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== LTV CALCULATOR MODAL ===================== -->
+  <div id="modal-ltv" class="tool-modal" role="dialog" aria-modal="true" aria-labelledby="ltv-modal-title" hidden>
+    <div class="tool-modal-backdrop"></div>
+    <div class="tool-modal-panel" style="max-width:500px">
+      <div class="tool-modal-header">
+        <h2 id="ltv-modal-title">LTV Calculator</h2>
+        <button class="tool-modal-close" aria-label="Close" id="ltv-modal-close">&times;</button>
+      </div>
+      <div class="tool-modal-body">
+        <p class="calc-desc">Enter vehicle value and amount financed to see which lenders' LTV caps are met.</p>
+        <div class="calc-row">
+          <label class="calc-label" for="ltv-book">Book / MSRP Value ($)</label>
+          <input type="number" id="ltv-book" class="calc-input" placeholder="e.g. 25000" min="0">
+        </div>
+        <div class="calc-row">
+          <label class="calc-label" for="ltv-financed">Amount Financed ($)<span class="calc-sublabel">Include backend products</span></label>
+          <input type="number" id="ltv-financed" class="calc-input" placeholder="e.g. 31000" min="0">
+        </div>
+        <div class="calc-row">
+          <label class="calc-label" for="ltv-type">Vehicle Type</label>
+          <select id="ltv-type" class="calc-input">
+            <option value="used">Used</option>
+            <option value="new">New</option>
+          </select>
+        </div>
+        <button id="ltv-calc-run" class="calc-btn">Check LTV</button>
+        <div id="ltv-results" hidden>
+          <div class="ltv-summary" id="ltv-summary"></div>
+          <div id="ltv-lender-results" class="ltv-lender-list"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== DEAL STRUCTURER MODAL ===================== -->
+  <div id="modal-deal" class="tool-modal" role="dialog" aria-modal="true" aria-labelledby="deal-modal-title" hidden>
+    <div class="tool-modal-backdrop"></div>
+    <div class="tool-modal-panel" style="max-width:560px">
+      <div class="tool-modal-header">
+        <h2 id="deal-modal-title">Deal Structurer</h2>
+        <button class="tool-modal-close" aria-label="Close" id="deal-modal-close">&times;</button>
+      </div>
+      <div class="tool-modal-body">
+        <p class="calc-desc">Enter deal details to find which lenders can hit your target payment.</p>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:var(--space-3)">
+          <div class="calc-row" style="margin:0">
+            <label class="calc-label" for="ds-price">Vehicle Price ($)</label>
+            <input type="number" id="ds-price" class="calc-input" placeholder="e.g. 28000" min="0">
+          </div>
+          <div class="calc-row" style="margin:0">
+            <label class="calc-label" for="ds-trade">Trade Equity ($)<span class="calc-sublabel">Negative = payoff owed</span></label>
+            <input type="number" id="ds-trade" class="calc-input" placeholder="e.g. 3000">
+          </div>
+          <div class="calc-row" style="margin:0">
+            <label class="calc-label" for="ds-down">Cash Down ($)</label>
+            <input type="number" id="ds-down" class="calc-input" placeholder="e.g. 1000" min="0">
+          </div>
+          <div class="calc-row" style="margin:0">
+            <label class="calc-label" for="ds-backend">Backend Products ($)</label>
+            <input type="number" id="ds-backend" class="calc-input" placeholder="e.g. 2500" min="0">
+          </div>
+          <div class="calc-row" style="margin:0">
+            <label class="calc-label" for="ds-target">Target Payment ($/mo)<span class="calc-sublabel">Leave blank to see all</span></label>
+            <input type="number" id="ds-target" class="calc-input" placeholder="e.g. 450" min="0">
+          </div>
+          <div class="calc-row" style="margin:0">
+            <label class="calc-label" for="ds-term">Preferred Term (mo)</label>
+            <select id="ds-term" class="calc-input">
+              <option value="0">Best available</option>
+              <option value="60">60 months</option>
+              <option value="72">72 months</option>
+              <option value="84">84 months</option>
+            </select>
+          </div>
+          <div class="calc-row" style="margin:0">
+            <label class="calc-label" for="ds-fico">Customer FICO</label>
+            <input type="number" id="ds-fico" class="calc-input" placeholder="e.g. 620" min="300" max="850">
+          </div>
+          <div class="calc-row" style="margin:0">
+            <label class="calc-label" for="ds-vtype">Vehicle Type</label>
+            <select id="ds-vtype" class="calc-input">
+              <option value="used">Used</option>
+              <option value="new">New</option>
+            </select>
+          </div>
+        </div>
+        <button id="deal-struct-run" class="calc-btn" style="margin-top:var(--space-4)">Structure Deal</button>
+        <div id="deal-results" hidden>
+          <div class="deal-summary" id="deal-summary"></div>
+          <div id="deal-lender-results" class="ltv-lender-list"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== SIDE-BY-SIDE COMPARE MODAL ===================== -->
+  <div id="modal-compare-tool" class="tool-modal" role="dialog" aria-modal="true" aria-labelledby="compare-tool-modal-title" hidden>
+    <div class="tool-modal-backdrop"></div>
+    <div class="tool-modal-panel" style="max-width:860px;width:95vw">
+      <div class="tool-modal-header">
+        <h2 id="compare-tool-modal-title">Side-by-Side Lender Compare</h2>
+        <button class="tool-modal-close" aria-label="Close" id="compare-tool-modal-close">&times;</button>
+      </div>
+      <div class="tool-modal-body">
+        <p class="calc-desc">Select up to 3 lenders to compare their key program details side by side.</p>
+        <div class="sbs-picker" id="sbs-picker">
+          <div class="sbs-slot" data-slot="0">
+            <label class="calc-label">Lender 1</label>
+            <select class="calc-input sbs-select" data-slot="0" id="sbs-sel-0"><option value="">— Select —</option></select>
+          </div>
+          <div class="sbs-slot" data-slot="1">
+            <label class="calc-label">Lender 2</label>
+            <select class="calc-input sbs-select" data-slot="1" id="sbs-sel-1"><option value="">— Select —</option></select>
+          </div>
+          <div class="sbs-slot" data-slot="2">
+            <label class="calc-label">Lender 3 <span style="opacity:.5;font-weight:400">(optional)</span></label>
+            <select class="calc-input sbs-select" data-slot="2" id="sbs-sel-2"><option value="">— Select —</option></select>
+          </div>
+        </div>
+        <button id="sbs-run" class="calc-btn">Compare</button>
+        <div id="sbs-results" hidden>
+          <div class="sbs-table-wrap">
+            <table class="sbs-table" id="sbs-table"></table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /#app -->
+<script src="app.js"></script>
+</body>
+</html>
