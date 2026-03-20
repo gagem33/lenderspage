@@ -1,520 +1,1615 @@
 <!DOCTYPE html>
 <html lang="en" data-theme="dark">
 <head>
-  <!--
-     ______                            __
-    / ____/___  ____ ___  ____  __  __/ /____  _____
-   / /   / __ \/ __ `__ \/ __ \/ / / / __/ _ \/ ___/
-  / /___/ /_/ / / / / / / /_/ / /_/ / /_/  __/ /
-  \____/\____/_/ /_/ /_/ .___/\__,_/\__/\___/_/
-                      /_/
-          Created with Perplexity Computer
-          https://www.perplexity.ai/computer
-  -->
-  <!-- Perplexity Computer Attribution — SEO Meta Tags -->
-  <meta name="generator" content="Perplexity Computer">
-  <meta name="author" content="Perplexity Computer">
-  <meta property="og:see_also" content="https://www.perplexity.ai/computer">
-  <link rel="author" href="https://www.perplexity.ai/computer">
-
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Lender Hub — Dealership Finance Programs</title>
-  <meta name="description" content="Internal dealership lender hub — program guidelines, FICO requirements, backend products, and reserve structures for all finance partners.">
-
-  <!-- Inter from Google Fonts -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+  <title>Lender Hub — Southwest Kia Dallas</title>
+  <meta name="description" content="Internal dealership lender hub — program guidelines for all finance partners.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%23111827'/><text y='22' x='5' font-size='18' font-family='sans-serif' font-weight='900' fill='%23f59e0b'>F</text></svg>">
+<style>
+/* ═══════════════════════════════════════════════
+   DESIGN TOKENS
+═══════════════════════════════════════════════ */
+:root {
+  --bg:        #0d1117;
+  --bg2:       #161b27;
+  --bg3:       #1c2235;
+  --surface:   #212840;
+  --surface2:  #2a3354;
+  --border:    rgba(255,255,255,0.07);
+  --border2:   rgba(255,255,255,0.13);
 
-  <!-- Favicon inline -->
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%23222840'/><text y='22' x='5' font-size='18' font-family='sans-serif' font-weight='900' fill='%23f0b429'>F</text></svg>">
+  --text:      #e2e8f7;
+  --text2:     #94a3c8;
+  --text3:     #5a6a8a;
 
-  <link rel="stylesheet" href="base.css">
-  <link rel="stylesheet" href="style.css">
+  --gold:      #f59e0b;
+  --gold2:     #d97706;
+  --golddim:   rgba(245,158,11,0.12);
+  --golddim2:  rgba(245,158,11,0.22);
+
+  --green:     #10b981;
+  --greendim:  rgba(16,185,129,0.12);
+  --red:       #ef4444;
+  --reddim:    rgba(239,68,68,0.12);
+  --blue:      #60a5fa;
+  --bluedim:   rgba(96,165,250,0.12);
+
+  --font: 'DM Sans', system-ui, sans-serif;
+  --mono: 'DM Mono', monospace;
+
+  --r-sm:   4px;
+  --r-md:   8px;
+  --r-lg:   12px;
+  --r-xl:   16px;
+  --r-full: 9999px;
+
+  --sidebar: 244px;
+  --header:  56px;
+
+  --shadow-md: 0 4px 16px rgba(0,0,0,.5);
+  --shadow-lg: 0 12px 40px rgba(0,0,0,.65);
+}
+[data-theme="light"] {
+  --bg:       #f1f4fb;
+  --bg2:      #e8edf8;
+  --bg3:      #dde4f2;
+  --surface:  #ffffff;
+  --surface2: #f5f7ff;
+  --border:   rgba(0,0,0,0.07);
+  --border2:  rgba(0,0,0,0.13);
+  --text:     #0f172a;
+  --text2:    #3b4f7a;
+  --text3:    #6b7fa8;
+  --golddim:  rgba(217,119,6,0.10);
+  --golddim2: rgba(217,119,6,0.18);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { font-size: 15px; scroll-behavior: smooth; }
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+  font-size: 0.9375rem;
+  line-height: 1.6;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+a { color: var(--gold); text-decoration: none; }
+button, input, select { font: inherit; }
+button { cursor: pointer; border: none; background: none; }
+table { border-collapse: collapse; width: 100%; }
+ul, ol { list-style: none; }
+
+/* ═══════════════════════════════════════════════
+   LAYOUT
+═══════════════════════════════════════════════ */
+#app { display: flex; flex-direction: column; min-height: 100vh; }
+
+/* HEADER */
+#header {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  height: var(--header);
+  background: var(--bg2);
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  padding: 0 16px;
+  gap: 12px;
+  z-index: 100;
+  backdrop-filter: blur(10px);
+}
+.logo-wrap { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
+.logo-mark {
+  width: 32px; height: 32px;
+  background: linear-gradient(135deg, #f59e0b, #d97706);
+  border-radius: var(--r-md);
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 900; font-size: 1rem; color: #000; letter-spacing: -.03em;
+}
+.logo-text { font-size: 1rem; font-weight: 800; letter-spacing: -.03em; line-height: 1; }
+.logo-sub { font-size: .65rem; color: var(--text3); text-transform: uppercase; letter-spacing: .08em; }
+
+.header-search {
+  flex: 1; max-width: 380px; margin: 0 auto; position: relative;
+}
+.header-search input {
+  width: 100%; height: 34px;
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius: var(--r-full);
+  padding: 0 14px 0 34px;
+  color: var(--text);
+  font-size: .825rem;
+  transition: border-color .15s, box-shadow .15s;
+}
+.header-search input::placeholder { color: var(--text3); }
+.header-search input:focus { outline: none; border-color: var(--gold); box-shadow: 0 0 0 3px var(--golddim); }
+.search-icon { position: absolute; left: 10px; top: 50%; transform: translateY(-50%); color: var(--text3); pointer-events: none; }
+
+.header-actions { display: flex; align-items: center; gap: 6px; margin-left: auto; flex-shrink: 0; }
+
+.btn-tool {
+  display: inline-flex; align-items: center; gap: 4px;
+  padding: 5px 9px;
+  border-radius: var(--r-md);
+  border: 1px solid var(--border);
+  background: var(--bg3);
+  color: var(--text2);
+  font-size: .72rem; font-weight: 600;
+  transition: all .15s; white-space: nowrap;
+}
+.btn-tool:hover { background: var(--gold); color: #000; border-color: var(--gold); }
+.btn-tool svg { flex-shrink: 0; }
+@media (max-width: 540px) { .btn-tool-label { display: none; } }
+
+.btn-icon {
+  width: 32px; height: 32px;
+  border-radius: var(--r-md);
+  display: flex; align-items: center; justify-content: center;
+  color: var(--text2);
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  transition: all .15s;
+}
+.btn-icon:hover { color: var(--text); border-color: var(--border2); }
+
+/* SIDEBAR */
+#sidebar {
+  position: fixed;
+  top: var(--header); left: 0; bottom: 0;
+  width: var(--sidebar);
+  background: var(--bg2);
+  border-right: 1px solid var(--border);
+  overflow-y: auto;
+  z-index: 50;
+  scrollbar-width: thin;
+  scrollbar-color: var(--border2) transparent;
+  transition: transform .25s ease;
+}
+#sidebar::-webkit-scrollbar { width: 4px; }
+#sidebar::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 4px; }
+
+.sidebar-section { padding: 14px 10px 8px; }
+.sidebar-label {
+  font-size: .65rem; font-weight: 700; color: var(--text3);
+  letter-spacing: .09em; text-transform: uppercase;
+  padding: 0 8px 8px;
+}
+.sidebar-item {
+  display: flex; align-items: center; gap: 8px;
+  padding: 7px 10px;
+  border-radius: var(--r-md);
+  color: var(--text2);
+  font-size: .825rem; font-weight: 500;
+  cursor: pointer; user-select: none;
+  border: 1px solid transparent;
+  transition: all .15s;
+}
+.sidebar-item:hover { background: var(--bg3); color: var(--text); }
+.sidebar-item.active { background: var(--golddim2); color: var(--gold); border-color: rgba(245,158,11,.25); }
+.tier-dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+.lender-badge {
+  margin-left: auto; font-size: .6rem; font-weight: 700;
+  padding: 1px 6px; border-radius: var(--r-full);
+  letter-spacing: .04em; text-transform: uppercase;
+}
+.badge-prime { background: var(--greendim); color: var(--green); }
+.badge-near  { background: var(--bluedim);  color: var(--blue); }
+.badge-sub   { background: var(--golddim);  color: var(--gold); }
+.badge-deep  { background: var(--reddim);   color: var(--red); }
+.badge-all   { background: var(--bluedim);  color: var(--blue); }
+
+/* MAIN */
+#main {
+  margin-left: var(--sidebar);
+  margin-top: var(--header);
+  min-height: calc(100vh - var(--header));
+  padding: 28px 28px 80px;
+}
+
+/* FOOTER */
+footer {
+  margin-left: var(--sidebar);
+  padding: 16px 28px;
+  border-top: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: space-between;
+  font-size: .75rem; color: var(--text3);
+  background: var(--bg2); flex-wrap: wrap; gap: 8px;
+}
+
+/* VIEWS */
+.view { display: none; }
+.view.active { display: block; }
+
+/* ═══════════════════════════════════════════════
+   OVERVIEW / COMPARE TABLE
+═══════════════════════════════════════════════ */
+.page-header { margin-bottom: 28px; }
+.page-title { font-size: 1.75rem; font-weight: 800; letter-spacing: -.04em; line-height: 1.1; }
+.page-subtitle { font-size: .9rem; color: var(--text2); margin-top: 6px; }
+.page-date { font-size: .72rem; color: var(--text3); margin-top: 3px; }
+
+.compare-wrap {
+  overflow-x: auto;
+  border-radius: var(--r-lg);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-md);
+}
+.compare-table { min-width: 860px; }
+.compare-table thead tr { background: var(--surface); border-bottom: 2px solid var(--border); }
+.compare-table th {
+  font-size: .65rem; font-weight: 700; color: var(--text3);
+  text-transform: uppercase; letter-spacing: .08em;
+  padding: 10px 14px; text-align: left; white-space: nowrap;
+}
+.compare-table th:first-child { min-width: 175px; }
+.compare-table td {
+  padding: 10px 14px; font-size: .825rem; color: var(--text);
+  border-bottom: 1px solid var(--border); vertical-align: middle;
+}
+.compare-table tr:last-child td { border-bottom: none; }
+.compare-table tbody tr { background: var(--bg2); transition: background .12s; cursor: pointer; }
+.compare-table tbody tr:hover { background: var(--surface); }
+.compare-table tbody tr:nth-child(even) { background: var(--bg3); }
+.compare-table tbody tr:nth-child(even):hover { background: var(--surface); }
+
+.lender-name-cell { font-weight: 700; }
+.lender-name-cell small { display: block; font-weight: 400; color: var(--text3); font-size: .72rem; margin-top: 1px; }
+
+.fico-chip {
+  display: inline-flex; align-items: center;
+  background: var(--surface2); border: 1px solid var(--border);
+  border-radius: var(--r-sm); padding: 2px 8px;
+  font-size: .72rem; font-weight: 700; white-space: nowrap;
+}
+.fico-chip.green { color: var(--green); border-color: rgba(16,185,129,.25); background: var(--greendim); }
+.fico-chip.blue  { color: var(--blue);  border-color: rgba(96,165,250,.25);  background: var(--bluedim); }
+.fico-chip.amber { color: var(--gold);  border-color: rgba(245,158,11,.25);  background: var(--golddim); }
+.fico-chip.red   { color: var(--red);   border-color: rgba(239,68,68,.25);   background: var(--reddim); }
+
+.chip {
+  display: inline-flex; align-items: center;
+  padding: 3px 9px; border-radius: var(--r-full);
+  font-size: .7rem; font-weight: 600;
+  border: 1px solid var(--border); background: var(--bg3); color: var(--text2);
+}
+.chip.green { background: var(--greendim); border-color: rgba(16,185,129,.3); color: var(--green); }
+.chip.blue  { background: var(--bluedim);  border-color: rgba(96,165,250,.3); color: var(--blue); }
+.chip.amber { background: var(--golddim);  border-color: rgba(245,158,11,.3); color: var(--gold); }
+.chip.red   { background: var(--reddim);   border-color: rgba(239,68,68,.3);  color: var(--red); }
+
+.cb-badge {
+  display: inline-flex; align-items: center; gap: 4px;
+  padding: 3px 10px; border-radius: var(--r-full);
+  font-size: .7rem; font-weight: 700;
+  background: var(--reddim); border: 1px solid rgba(239,68,68,.3); color: var(--red);
+}
+.cb-badge.none { background: var(--greendim); border-color: rgba(16,185,129,.3); color: var(--green); }
+
+/* Key Differentiator cards */
+.diff-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 14px;
+  margin-top: 32px;
+}
+.diff-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  padding: 16px 18px;
+  transition: border-color .15s, box-shadow .15s;
+}
+.diff-card:hover { border-color: var(--border2); box-shadow: var(--shadow-md); }
+.diff-label { font-size: .65rem; font-weight: 700; color: var(--text3); text-transform: uppercase; letter-spacing: .08em; margin-bottom: 4px; }
+.diff-value { font-size: 1.1rem; font-weight: 800; letter-spacing: -.03em; line-height: 1.2; }
+.diff-sub { font-size: .72rem; color: var(--text3); margin-top: 3px; }
+
+/* ═══════════════════════════════════════════════
+   LENDER DETAIL
+═══════════════════════════════════════════════ */
+.lender-hero {
+  display: flex; align-items: flex-start; gap: 20px;
+  padding: 22px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--r-xl);
+  margin-bottom: 20px;
+  box-shadow: var(--shadow-md);
+}
+.lender-icon {
+  width: 52px; height: 52px;
+  border-radius: var(--r-lg);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1rem; font-weight: 900; flex-shrink: 0;
+  color: #fff; letter-spacing: -.03em;
+}
+.lender-hero-info { flex: 1; min-width: 0; }
+.lender-hero-info h1 { font-size: 1.5rem; font-weight: 800; letter-spacing: -.04em; margin-bottom: 4px; }
+.doc-meta { font-size: .72rem; color: var(--text3); }
+.hero-chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+
+.stat-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 10px; margin-bottom: 20px;
+}
+.stat-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  padding: 14px 16px;
+  transition: border-color .15s;
+}
+.stat-card:hover { border-color: var(--border2); }
+.stat-label { font-size: .65rem; font-weight: 700; color: var(--text3); text-transform: uppercase; letter-spacing: .08em; margin-bottom: 4px; }
+.stat-value { font-size: 1.1rem; font-weight: 800; color: var(--text); letter-spacing: -.03em; line-height: 1.1; }
+.stat-value.gold  { color: var(--gold); }
+.stat-value.green { color: var(--green); }
+.stat-value.blue  { color: var(--blue); }
+.stat-sub { font-size: .65rem; color: var(--text3); margin-top: 2px; }
+
+.detail-section {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  margin-bottom: 10px;
+  overflow: hidden;
+}
+.detail-section-header {
+  display: flex; align-items: center; gap: 10px;
+  padding: 14px 18px;
+  border-bottom: 1px solid var(--border);
+  cursor: pointer; user-select: none;
+  transition: background .12s;
+}
+.detail-section-header:hover { background: var(--bg3); }
+.detail-section-header h3 { font-size: .9rem; font-weight: 700; flex: 1; }
+.section-icon {
+  width: 28px; height: 28px;
+  border-radius: var(--r-sm);
+  background: var(--bg3);
+  display: flex; align-items: center; justify-content: center;
+  color: var(--gold); flex-shrink: 0; font-size: .9rem;
+}
+.chevron { color: var(--text3); transition: transform .15s; }
+.detail-section.collapsed .detail-section-body { display: none; }
+.detail-section.collapsed .chevron { transform: rotate(-90deg); }
+.detail-section-body { padding: 18px 20px; }
+
+.info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px 22px; }
+.info-row { display: flex; flex-direction: column; gap: 2px; padding: 7px 0; border-bottom: 1px solid var(--border); }
+.info-row:last-child { border-bottom: none; }
+.info-key { font-size: .65rem; font-weight: 700; color: var(--text3); text-transform: uppercase; letter-spacing: .06em; }
+.info-val { font-size: .825rem; color: var(--text); font-weight: 500; }
+
+.note-box {
+  padding: 10px 14px; border-radius: var(--r-md);
+  font-size: .825rem;
+  display: flex; gap: 10px; align-items: flex-start;
+  margin-top: 10px;
+}
+.note-box.info  { background: var(--bluedim);  border: 1px solid rgba(96,165,250,.2); }
+.note-box.warn  { background: var(--golddim);  border: 1px solid rgba(245,158,11,.2); }
+.note-box.danger{ background: var(--reddim);   border: 1px solid rgba(239,68,68,.2);  }
+.note-box.success{background: var(--greendim); border: 1px solid rgba(16,185,129,.2); }
+.note-icon { flex-shrink: 0; margin-top: 1px; }
+
+.tier-table { width: 100%; border-radius: var(--r-md); overflow: hidden; margin-top: 10px; font-size: .78rem; }
+.tier-table th { background: var(--bg3); padding: 7px 10px; font-size: .65rem; font-weight: 700; color: var(--text3); text-transform: uppercase; letter-spacing: .06em; text-align: left; }
+.tier-table td { padding: 7px 10px; border-top: 1px solid var(--border); color: var(--text2); }
+.tier-table tr:hover td { background: var(--bg3); }
+
+.mini-table { width: 100%; border-collapse: collapse; font-size: .75rem; margin-bottom: 6px; }
+.mini-table th, .mini-table td { border: 1px solid var(--border); padding: 4px 7px; text-align: center; }
+.mini-table th { background: var(--surface2); font-weight: 600; }
+.mini-table td { background: var(--surface); }
+
+mark { background: var(--golddim2); color: var(--gold); border-radius: 2px; padding: 0 1px; }
+
+/* ═══════════════════════════════════════════════
+   TOOL MODALS
+═══════════════════════════════════════════════ */
+.tool-modal {
+  position: fixed; inset: 0; z-index: 1000;
+  display: flex; align-items: center; justify-content: center;
+}
+.tool-modal[hidden] { display: none; }
+.tool-modal-backdrop {
+  position: absolute; inset: 0;
+  background: rgba(0,0,0,.65); backdrop-filter: blur(3px);
+}
+.tool-modal-panel {
+  position: relative;
+  background: var(--bg2);
+  border: 1px solid var(--border2);
+  border-radius: var(--r-lg);
+  width: 100%; max-width: 480px;
+  margin: 16px;
+  box-shadow: var(--shadow-lg);
+  overflow: hidden;
+  animation: modalIn .16s ease;
+}
+@keyframes modalIn { from { opacity:0; transform:translateY(10px) scale(.97); } to { opacity:1; transform:none; } }
+.tool-modal-header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 14px 18px;
+  border-bottom: 1px solid var(--border2);
+  background: var(--bg3);
+}
+.tool-modal-header h2 { font-size: .9rem; font-weight: 700; letter-spacing: -.02em; }
+.tool-modal-close {
+  background: none; border: none; color: var(--text3);
+  font-size: 1.4rem; line-height: 1; cursor: pointer;
+  padding: 2px 6px; border-radius: var(--r-sm);
+  transition: color .12s;
+}
+.tool-modal-close:hover { color: var(--text); }
+.tool-modal-body {
+  padding: 18px;
+  display: flex; flex-direction: column; gap: 14px;
+  max-height: calc(100vh - 130px); overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
+.calc-desc { font-size: .825rem; color: var(--text3); line-height: 1.5; }
+.calc-row { display: flex; flex-direction: column; gap: 5px; }
+.calc-label { font-size: .65rem; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; color: var(--text3); }
+.calc-sublabel { display: block; font-size: .65rem; color: var(--text3); font-weight: 400; margin-top: 1px; }
+.calc-input {
+  background: var(--bg);
+  border: 1px solid var(--border2);
+  border-radius: var(--r-md);
+  color: var(--text);
+  font-size: .825rem; padding: 8px 11px;
+  outline: none; width: 100%;
+  transition: border-color .15s, box-shadow .15s;
+  -webkit-appearance: none; appearance: none;
+}
+.calc-input:focus { border-color: var(--gold); box-shadow: 0 0 0 3px var(--golddim); }
+.calc-btn {
+  background: var(--gold); color: #000;
+  font-weight: 700; font-size: .825rem;
+  border: none; border-radius: var(--r-md);
+  padding: 10px 20px; cursor: pointer;
+  transition: opacity .15s; align-self: flex-start;
+}
+.calc-btn:hover { opacity: .85; }
+
+.calc-results { display: flex; flex-direction: column; gap: 10px; }
+.calc-result-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 10px; }
+.calc-result-item {
+  background: var(--bg3);
+  border: 1px solid var(--border2);
+  border-radius: var(--r-md);
+  padding: 10px 14px;
+}
+.calc-result-item.highlight { border-color: var(--gold); background: var(--golddim); }
+.calc-result-label { font-size: .65rem; color: var(--text3); font-weight: 600; text-transform: uppercase; letter-spacing: .05em; margin-bottom: 3px; }
+.calc-result-val { font-size: 1.15rem; font-weight: 800; letter-spacing: -.03em; color: var(--text); }
+.calc-result-item.highlight .calc-result-val { color: var(--gold); }
+.calc-note {
+  font-size: .72rem; color: var(--text2); line-height: 1.5;
+  padding: 8px 12px; border-radius: var(--r-sm);
+  background: var(--bg3); border-left: 3px solid var(--gold);
+}
+.calc-note:empty { display: none; }
+
+.ltv-summary-box {
+  display: flex; flex-wrap: wrap; gap: 10px;
+  background: var(--bg3); border: 2px solid var(--gold);
+  border-radius: var(--r-md); padding: 14px;
+  margin-bottom: 14px;
+}
+.ltv-summary-stat { display: flex; flex-direction: column; gap: 2px; flex: 1; min-width: 90px; }
+.ltv-summary-label { font-size: .65rem; color: var(--text3); text-transform: uppercase; letter-spacing: .05em; font-weight: 600; }
+.ltv-summary-val { font-size: 1rem; font-weight: 700; color: var(--text); }
+.ltv-lender-list { display: flex; flex-direction: column; gap: 7px; margin-top: 7px; }
+
+.bureau-section-label {
+  font-size: .65rem; font-weight: 700; text-transform: uppercase;
+  letter-spacing: .07em; padding: 4px 0;
+}
+.bureau-section-label.pass { color: var(--green); }
+.bureau-section-label.fail { color: var(--red); }
+.bureau-section-label.warn { color: var(--gold); }
+
+.sbs-picker { display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; margin-bottom: 14px; }
+@media (max-width: 540px) { .sbs-picker { grid-template-columns: 1fr; } }
+.sbs-slot { display: flex; flex-direction: column; gap: 4px; }
+.sbs-table-wrap { overflow-x: auto; margin-top: 14px; border-radius: var(--r-md); border: 1px solid var(--border2); }
+.sbs-table { width: 100%; border-collapse: collapse; font-size: .825rem; }
+.sbs-table thead th {
+  background: var(--bg3); padding: 10px;
+  text-align: center; border-bottom: 2px solid var(--border2);
+  vertical-align: bottom;
+}
+.sbs-row-label {
+  background: var(--bg3); font-size: .65rem;
+  text-transform: uppercase; letter-spacing: .05em; font-weight: 700;
+  color: var(--text3); padding: 8px 10px; white-space: nowrap;
+  border-right: 1px solid var(--border2); width: 120px;
+}
+.sbs-cell {
+  padding: 8px 10px; text-align: center;
+  vertical-align: top; line-height: 1.5;
+  border-right: 1px solid var(--border2); color: var(--text2);
+}
+.sbs-cell:last-child, .sbs-table th:last-child { border-right: none; }
+.sbs-row-even td { background: var(--bg2); }
+.sbs-table tbody tr:hover td { background: var(--bg3); }
+.sbs-lender-pill {
+  display: inline-block; color: #fff; font-weight: 800;
+  font-size: .65rem; letter-spacing: .06em; text-transform: uppercase;
+  border-radius: var(--r-sm); padding: 2px 9px; margin-bottom: 4px;
+}
+.sbs-lender-name { font-size: .72rem; font-weight: 600; color: var(--text2); white-space: nowrap; }
+
+/* KFA */
+.kfa-header {
+  display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
+  margin-bottom: 14px; padding: 10px 14px;
+  background: var(--bg3); border-radius: var(--r-md);
+  border-left: 3px solid var(--gold);
+}
+.kfa-header-pill { background: var(--gold); color: #000; font-size: .65rem; font-weight: 800; letter-spacing: .05em; text-transform: uppercase; border-radius: var(--r-sm); padding: 2px 9px; }
+.kfa-header-dates { font-size: .72rem; color: var(--text3); }
+.kfa-flat-key { background: var(--bg3); border: 1px solid var(--border2); border-radius: var(--r-md); padding: 10px 14px; margin-bottom: 14px; }
+.kfa-flat-key-title { font-size: .65rem; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; color: var(--text3); margin-bottom: 7px; }
+.kfa-flat-key-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(190px,1fr)); gap: 4px 16px; font-size: .72rem; color: var(--text2); }
+.kfa-tab-bar { display: flex; flex-wrap: wrap; gap: 4px; margin-bottom: 10px; padding-bottom: 10px; border-bottom: 1px solid var(--border2); }
+.kfa-tab { background: var(--bg3); border: 1px solid var(--border2); border-radius: var(--r-sm); color: var(--text2); font-size: .72rem; font-weight: 600; padding: 4px 11px; cursor: pointer; transition: all .15s; white-space: nowrap; }
+.kfa-tab:hover { border-color: var(--gold); color: var(--text); }
+.kfa-tab.active { background: var(--gold); border-color: var(--gold); color: #000; font-weight: 700; }
+.kfa-model-panel { display: none; }
+.kfa-model-panel.active { display: block; }
+.kfa-program-toggle { display: flex; gap: 4px; margin-bottom: 10px; }
+.kfa-prog-btn { background: var(--bg3); border: 1px solid var(--border2); border-radius: var(--r-sm); color: var(--text2); font-size: .72rem; font-weight: 600; padding: 3px 11px; cursor: pointer; transition: all .15s; }
+.kfa-prog-btn.active { background: var(--bg2); border-color: var(--gold); color: var(--gold); }
+.kfa-prog-panel { display: none; }
+.kfa-prog-panel.active { display: block; }
+.kfa-prog-section { margin-bottom: 14px; background: var(--bg3); border: 1px solid var(--border2); border-radius: var(--r-md); padding: 10px 14px; }
+.kfa-prog-label { font-size: .72rem; font-weight: 700; color: var(--text); margin-bottom: 5px; display: flex; align-items: center; flex-wrap: wrap; gap: 5px; }
+.kfa-prog-note { font-size: .72rem; color: var(--text3); margin-bottom: 7px; }
+.kfa-badge { font-size: .6rem; font-weight: 800; text-transform: uppercase; letter-spacing: .05em; border-radius: 4px; padding: 1px 7px; }
+.kfa-badge.k500 { background: rgba(96,165,250,.12); color: #60a5fa; border: 1px solid rgba(96,165,250,.3); }
+.kfa-badge.k506 { background: var(--golddim); color: var(--gold); border: 1px solid var(--gold); }
+.kfa-badge.k502 { background: var(--greendim); color: var(--green); border: 1px solid rgba(16,185,129,.3); }
+.kfa-my { font-size: .6rem; font-weight: 700; color: var(--text3); background: var(--bg2); border-radius: 4px; padding: 1px 7px; }
+
+/* MOBILE MENU */
+#menu-toggle {
+  display: none; align-items: center; justify-content: center;
+  width: 32px; height: 32px;
+  border-radius: var(--r-md);
+  border: 1px solid var(--border);
+  background: var(--bg3); color: var(--text2);
+}
+#sidebar-overlay {
+  display: none; position: fixed; inset: 0;
+  background: rgba(0,0,0,.6); z-index: 150;
+  backdrop-filter: blur(2px);
+}
+#sidebar-overlay.active { display: block; }
+
+/* PROG TABS */
+.prog-tabs { display: flex; gap: 4px; background: var(--bg3); padding: 4px; border-radius: var(--r-md); margin-bottom: 16px; width: fit-content; }
+.prog-tab { padding: 5px 13px; border-radius: calc(var(--r-md) - 2px); font-size: .72rem; font-weight: 600; color: var(--text3); cursor: pointer; transition: all .15s; }
+.prog-tab.active { background: var(--surface); color: var(--gold); box-shadow: var(--shadow-md); }
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+  :root { --sidebar: 0px; }
+  #sidebar { transform: translateX(-100%); width: 260px; z-index: 200; box-shadow: var(--shadow-lg); }
+  #sidebar.open { transform: translateX(0); }
+  #main { margin-left: 0; padding: 18px 14px 80px; }
+  footer { margin-left: 0; }
+  #menu-toggle { display: flex; }
+  .stat-grid { grid-template-columns: repeat(2,1fr); }
+  .info-grid  { grid-template-columns: 1fr; }
+  .lender-hero { flex-direction: column; gap: 14px; }
+  .compare-wrap { border-radius: var(--r-md); }
+  .diff-grid { grid-template-columns: repeat(2,1fr); }
+}
+@media (max-width: 480px) {
+  .stat-grid { grid-template-columns: repeat(2,1fr); }
+  .header-search { max-width: 160px; }
+  .page-title { font-size: 1.4rem; }
+  .diff-grid { grid-template-columns: 1fr; }
+  .header-search { display: none; }
+}
+
+/* LENDER COLOR ICONS */
+.lc-amcredit  { background: linear-gradient(135deg,#0047ab,#1565c0); }
+.lc-exeter    { background: linear-gradient(135deg,#7c1c3f,#a0274f); }
+.lc-regional  { background: linear-gradient(135deg,#1a5276,#1a7fba); }
+.lc-truist    { background: linear-gradient(135deg,#5a2d82,#7b3fa8); }
+.lc-td        { background: linear-gradient(135deg,#00a850,#007a3d); }
+.lc-wells     { background: linear-gradient(135deg,#c8102e,#e81c31); }
+.lc-ally      { background: linear-gradient(135deg,#7a2182,#9b27af); }
+.lc-fifth     { background: linear-gradient(135deg,#004899,#005ec2); }
+.lc-gls       { background: linear-gradient(135deg,#b45309,#d97706); }
+.lc-capone    { background: linear-gradient(135deg,#004578,#005fa3); }
+.lc-westlake  { background: linear-gradient(135deg,#0a5c36,#0f7a4a); }
+.lc-kia       { background: linear-gradient(135deg,#c00000,#e30613); }
+.lc-bofa      { background: linear-gradient(135deg,#c0392b,#e74c3c); }
+.lc-chase     { background: linear-gradient(135deg,#003087,#0052cc); }
+.lc-pnc       { background: linear-gradient(135deg,#f26522,#e05a1a); }
+.lc-dfc       { background: linear-gradient(135deg,#1a6b3c,#22915a); }
+.lc-flagship  { background: linear-gradient(135deg,#1a2e5a,#2e4a8f); }
+</style>
 </head>
 <body>
 <div id="app">
 
-  <!-- ===================== HEADER ===================== -->
-  <header id="header" role="banner">
-    <button id="menu-toggle" aria-label="Open navigation menu" title="Toggle sidebar">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+<!-- HEADER -->
+<header id="header" role="banner">
+  <button id="menu-toggle" aria-label="Open navigation">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+  </button>
+  <div class="logo-wrap">
+    <div class="logo-mark">F</div>
+    <div>
+      <div class="logo-text">Lender Hub</div>
+      <div class="logo-sub">F&amp;I Program Reference</div>
+    </div>
+  </div>
+  <div class="header-search">
+    <svg class="search-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    <input type="search" id="search-input" placeholder="Search lenders…" aria-label="Search lenders">
+  </div>
+  <div class="header-actions">
+    <button id="income-calc-btn" class="btn-tool" title="Income Calculator">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="18" rx="2"/><line x1="8" y1="10" x2="16" y2="10"/><line x1="8" y1="14" x2="16" y2="14"/><line x1="2" y1="7" x2="22" y2="7"/></svg>
+      <span class="btn-tool-label">Income</span>
     </button>
+    <button id="bureau-search-btn" class="btn-tool" title="Bureau Score Search">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <span class="btn-tool-label">Bureau</span>
+    </button>
+    <button id="ltv-calc-btn" class="btn-tool" title="LTV Calculator">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+      <span class="btn-tool-label">LTV</span>
+    </button>
+    <button id="deal-struct-btn" class="btn-tool" title="Deal Structurer">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4M7 8h10M7 12h6"/></svg>
+      <span class="btn-tool-label">Deal</span>
+    </button>
+    <button id="compare-tool-btn" class="btn-tool" title="Compare Lenders">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="9" height="18" rx="1"/><rect x="13" y="3" width="9" height="18" rx="1"/></svg>
+      <span class="btn-tool-label">Compare</span>
+    </button>
+    <button id="date-calc-btn" class="btn-tool" title="20-Day Calculator">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+      <span class="btn-tool-label">20-Day</span>
+    </button>
+    <button id="theme-toggle" class="btn-icon" title="Toggle theme">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><line x1="12" y1="2" x2="12" y2="4"/><line x1="12" y1="20" x2="12" y2="22"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="2" y1="12" x2="4" y2="12"/><line x1="20" y1="12" x2="22" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+    </button>
+  </div>
+</header>
 
-    <div class="header-logo">
-      <!-- SVG Logo: stylized "F&I" shield mark -->
-      <svg aria-label="Lender Hub" width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <rect width="32" height="32" rx="8" fill="var(--color-surface)"/>
-        <rect x="1" y="1" width="30" height="30" rx="7" stroke="var(--color-accent)" stroke-width="1.5" opacity="0.4"/>
-        <!-- Dollar mark -->
-        <path d="M16 7v2M16 23v2M12 10.5a2 2 0 0 1 4 0c0 1.5-4 2-4 4a2 2 0 0 0 4 0" stroke="var(--color-accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-      </svg>
-      <div>
-        <div class="logo-text">Lender Hub</div>
-        <div class="logo-sub">F&amp;I Program Reference</div>
-      </div>
+<!-- SIDEBAR -->
+<nav id="sidebar" aria-label="Lender navigation">
+  <div class="sidebar-section">
+    <div class="sidebar-label">Overview</div>
+    <div class="sidebar-item active" id="sidebar-compare" role="button" tabindex="0">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="flex-shrink:0"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+      <span style="flex:1">Compare All</span>
+      <span class="lender-badge badge-all">18</span>
     </div>
-
-    <div class="header-search">
-      <svg class="search-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-      <input type="search" id="search-input" placeholder="Search lenders…" aria-label="Search lenders">
+  </div>
+  <div class="sidebar-section">
+    <div class="sidebar-label">All Lenders</div>
+    <div id="sidebar-lenders"></div>
+  </div>
+  <div class="sidebar-section" style="padding-top:0">
+    <div class="sidebar-label">Legend</div>
+    <div style="padding:4px 8px;display:flex;flex-direction:column;gap:5px">
+      <div style="display:flex;align-items:center;gap:6px;font-size:.72rem;color:var(--text3)"><span style="width:7px;height:7px;border-radius:50%;background:var(--green);flex-shrink:0"></span>Prime</div>
+      <div style="display:flex;align-items:center;gap:6px;font-size:.72rem;color:var(--text3)"><span style="width:7px;height:7px;border-radius:50%;background:var(--blue);flex-shrink:0"></span>Near-Prime</div>
+      <div style="display:flex;align-items:center;gap:6px;font-size:.72rem;color:var(--text3)"><span style="width:7px;height:7px;border-radius:50%;background:var(--gold);flex-shrink:0"></span>Sub-Prime</div>
+      <div style="display:flex;align-items:center;gap:6px;font-size:.72rem;color:var(--text3)"><span style="width:7px;height:7px;border-radius:50%;background:var(--red);flex-shrink:0"></span>Deep Sub-Prime</div>
     </div>
+  </div>
+</nav>
+<div id="sidebar-overlay" aria-hidden="true"></div>
 
-    <div class="header-actions">
-      <!-- Income Calculator button -->
-      <button id="income-calc-btn" class="btn-tool" aria-label="Income Calculator" title="Income Calculator">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="18" rx="2"/><line x1="8" y1="10" x2="16" y2="10"/><line x1="8" y1="14" x2="16" y2="14"/><line x1="8" y1="18" x2="12" y2="18"/><line x1="2" y1="7" x2="22" y2="7"/></svg>
-        <span class="btn-tool-label">Income</span>
-      </button>
-      <!-- Bureau Search button -->
-      <button id="bureau-search-btn" class="btn-tool" aria-label="Bureau Search" title="Bureau Score Search">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><path d="M11 8v6M8 11h6"/></svg>
-        <span class="btn-tool-label">Bureau</span>
-      </button>
-      <!-- LTV Calculator button -->
-      <button id="ltv-calc-btn" class="btn-tool" aria-label="LTV Calculator" title="LTV Calculator">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
-        <span class="btn-tool-label">LTV</span>
-      </button>
-      <!-- Deal Structurer button -->
-      <button id="deal-struct-btn" class="btn-tool" aria-label="Deal Structurer" title="Deal Structurer">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/><path d="M7 8h10M7 12h6"/></svg>
-        <span class="btn-tool-label">Deal</span>
-      </button>
-      <!-- Side-by-Side Compare button -->
-      <button id="compare-tool-btn" class="btn-tool" aria-label="Compare Lenders" title="Side-by-Side Lender Compare">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="9" height="18" rx="1"/><rect x="13" y="3" width="9" height="18" rx="1"/></svg>
-        <span class="btn-tool-label">Compare</span>
-      </button>
-      <!-- 20-Day Calculator button -->
-      <button id="date-calc-btn" class="btn-tool" aria-label="20-Day Date Calculator" title="20-Day Date Calculator">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/><text x="12" y="19" text-anchor="middle" font-size="7" font-weight="700" fill="currentColor" stroke="none">20</text></svg>
-        <span class="btn-tool-label">20-Day</span>
-      </button>
-      <button id="theme-toggle" class="btn-icon" aria-label="Toggle color theme" title="Toggle dark/light mode">
-        <!-- Sun/moon icon -->
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <circle cx="12" cy="12" r="4"/>
-          <line x1="12" y1="2" x2="12" y2="4"/>
-          <line x1="12" y1="20" x2="12" y2="22"/>
-          <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
-          <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
-          <line x1="2" y1="12" x2="4" y2="12"/>
-          <line x1="20" y1="12" x2="22" y2="12"/>
-          <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
-          <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
-        </svg>
-      </button>
+<!-- MAIN -->
+<main id="main" role="main">
+  <!-- COMPARE VIEW -->
+  <section class="view active" id="view-compare">
+    <div class="page-header">
+      <h1 class="page-title">Lender Quick Compare</h1>
+      <p class="page-subtitle">All 18 finance partners. Click any row to view full program details.</p>
+      <p class="page-date">Programs current as of Q1 2026 — verify with each lender before submitting deals</p>
     </div>
-  </header>
-
-  <!-- ===================== SIDEBAR ===================== -->
-  <nav id="sidebar" aria-label="Lender navigation">
-    <div class="sidebar-section">
-      <div class="sidebar-label">Overview</div>
-      <div class="sidebar-item active" id="sidebar-compare" role="button" tabindex="0" aria-label="View all lenders comparison table" style="white-space:nowrap">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="flex-shrink:0"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
-        <span style="flex:1">Compare All</span>
-        <span class="lender-badge badge-all">18</span>
-      </div>
+    <div class="compare-wrap">
+      <table class="compare-table" role="grid">
+        <thead>
+          <tr>
+            <th>Lender</th><th>Min FICO</th><th>Segment</th><th>Max Term</th>
+            <th>Max Miles</th><th>Max LTV</th><th>GAP Cap</th><th>Reserve / Flat</th><th>Chargeback</th>
+          </tr>
+        </thead>
+        <tbody id="compare-tbody"></tbody>
+      </table>
     </div>
-
-    <div class="sidebar-section">
-      <div class="sidebar-label">All Lenders</div>
-      <div id="sidebar-lenders"></div>
+    <h2 style="font-size:1.25rem;font-weight:800;margin:28px 0 16px;letter-spacing:-.03em">Key Differentiators</h2>
+    <div class="diff-grid">
+      <div class="diff-card"><div class="diff-label">Lowest FICO Accepted</div><div class="diff-value" style="color:var(--green)">400+</div><div class="diff-sub">Exeter Standard; GLS — zero FICO also considered by both</div></div>
+      <div class="diff-card"><div class="diff-label">Widest Mileage Acceptance</div><div class="diff-value" style="color:var(--blue)">200,000 mi</div><div class="diff-sub">Exeter Finance (13-year vehicles) &amp; Capital One</div></div>
+      <div class="diff-card"><div class="diff-label">Highest Backend Cap</div><div class="diff-value" style="color:var(--gold)">$12,500+</div><div class="diff-sub">Wells Fargo ($12,500); Truist ($10,000); Ally up to $15,000</div></div>
+      <div class="diff-card"><div class="diff-label">No Chargebacks</div><div class="diff-value" style="color:var(--green)">GLS &amp; WLF</div><div class="diff-sub">GLS: no chargebacks at all. Westlake: no chargebacks on rate markup</div></div>
+      <div class="diff-card"><div class="diff-label">Longest Chargeback Protection</div><div class="diff-value" style="color:var(--blue)">6 Payments</div><div class="diff-sub">TD Auto Finance — protected after 6th scheduled payment due date</div></div>
+      <div class="diff-card"><div class="diff-label">Open Bankruptcies</div><div class="diff-value" style="color:var(--gold)">WLF Only</div><div class="diff-sub">Westlake Financial accepts open Ch. 7 &amp; Ch. 13 with proper stipulations</div></div>
+      <div class="diff-card"><div class="diff-label">Cash / Foreign Income</div><div class="diff-value" style="color:var(--gold)">WLF Only</div><div class="diff-sub">Westlake accepts cash income, foreign IDs, TurboPass verification</div></div>
+      <div class="diff-card"><div class="diff-label">Best Backend (Prime)</div><div class="diff-value" style="color:var(--green)">Truist / WF</div><div class="diff-sub">Truist: up to $10K backend. Wells Fargo: $12,500 backend cap</div></div>
+      <div class="diff-card"><div class="diff-label">Fastest Approvals</div><div class="diff-value" style="color:var(--blue)">15 sec</div><div class="diff-sub">GLS — approvals as fast as 15 seconds, available 24/7/365</div></div>
     </div>
+  </section>
 
-    <div class="sidebar-section" style="padding-top:0">
-      <div class="sidebar-label">Legend</div>
-      <div style="padding:var(--space-2) var(--space-2);display:flex;flex-direction:column;gap:6px">
-        <div style="display:flex;align-items:center;gap:6px;font-size:var(--text-xs);color:var(--color-text-3)">
-          <span style="width:8px;height:8px;border-radius:50%;background:var(--color-green);flex-shrink:0"></span> Prime
-        </div>
-        <div style="display:flex;align-items:center;gap:6px;font-size:var(--text-xs);color:var(--color-text-3)">
-          <span style="width:8px;height:8px;border-radius:50%;background:var(--color-blue);flex-shrink:0"></span> Near-Prime
-        </div>
-        <div style="display:flex;align-items:center;gap:6px;font-size:var(--text-xs);color:var(--color-text-3)">
-          <span style="width:8px;height:8px;border-radius:50%;background:var(--color-accent);flex-shrink:0"></span> Sub-Prime
-        </div>
-        <div style="display:flex;align-items:center;gap:6px;font-size:var(--text-xs);color:var(--color-text-3)">
-          <span style="width:8px;height:8px;border-radius:50%;background:var(--color-red);flex-shrink:0"></span> Deep Sub-Prime
-        </div>
-      </div>
+  <!-- LENDER DETAIL VIEW -->
+  <section class="view" id="view-lender"></section>
+</main>
+
+<footer role="contentinfo">
+  <span>Lender Hub &copy; 2026 — Southwest Kia Dallas Internal F&amp;I Reference</span>
+  <span style="color:var(--text3)">Data sourced from official lender program PDFs. Always verify terms with lender prior to deal submission.</span>
+</footer>
+
+<!-- INCOME CALCULATOR MODAL -->
+<div id="modal-income" class="tool-modal" role="dialog" aria-modal="true" hidden>
+  <div class="tool-modal-backdrop"></div>
+  <div class="tool-modal-panel">
+    <div class="tool-modal-header">
+      <h2>Income Calculator</h2>
+      <button class="tool-modal-close" id="income-modal-close">&times;</button>
     </div>
-  </nav>
-
-  <!-- Mobile sidebar overlay -->
-  <div id="sidebar-overlay" aria-hidden="true"></div>
-
-  <!-- ===================== MAIN ===================== -->
-  <main id="main" role="main">
-
-    <!-- COMPARE VIEW -->
-    <section class="view active" id="view-compare" aria-label="Lender comparison table">
-      <div class="page-header">
-        <h1 class="page-title">Lender Quick Compare</h1>
-        <p class="page-subtitle">Overview of all 18 finance partners. Click any row to view full program details.</p>
-        <p class="page-date">Programs current as of Q1 2026 — verify with each lender before submitting deals</p>
+    <div class="tool-modal-body">
+      <div class="calc-row">
+        <label class="calc-label" for="income-type">Pay Type</label>
+        <select id="income-type" class="calc-input">
+          <option value="hourly">Hourly</option>
+          <option value="weekly">Weekly</option>
+          <option value="biweekly" selected>Bi-Weekly (every 2 weeks)</option>
+          <option value="semimonthly">Semi-Monthly (2× per month)</option>
+          <option value="monthly">Monthly</option>
+          <option value="annual">Annual Salary</option>
+          <option value="paystub">Pay Stub (Period Start &amp; End)</option>
+        </select>
       </div>
-
-      <div class="compare-wrap">
-        <table class="compare-table" role="grid" aria-label="Lender comparison">
-          <thead>
-            <tr>
-              <th scope="col">Lender</th>
-              <th scope="col">Min FICO</th>
-              <th scope="col">Segment</th>
-              <th scope="col">Max Term</th>
-              <th scope="col">Max Miles</th>
-              <th scope="col">Max LTV</th>
-              <th scope="col">GAP Cap</th>
-              <th scope="col">Reserve / Flat</th>
-              <th scope="col">Chargeback</th>
-            </tr>
-          </thead>
-          <tbody id="compare-tbody"></tbody>
-        </table>
+      <div class="calc-row" id="income-hours-row" style="display:none">
+        <label class="calc-label" for="income-hours">Hours per Week</label>
+        <input type="number" id="income-hours" class="calc-input" value="40" min="1" max="168">
       </div>
-
-      <!-- Quick summary cards below table -->
-      <div style="margin-top:var(--space-8)">
-        <h2 style="font-size:var(--text-xl);font-weight:700;margin-bottom:var(--space-5);letter-spacing:-0.02em">Key Differentiators</h2>
-        <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:var(--space-4)">
-          <div class="stat-card">
-            <div class="stat-label">Lowest FICO Accepted</div>
-            <div class="stat-value green">400+</div>
-            <div class="stat-sub">Exeter Standard; GLS — zero FICO also considered by both</div>
-          </div>
-          <div class="stat-card">
-            <div class="stat-label">Widest Mileage Acceptance</div>
-            <div class="stat-value blue">200,000 mi</div>
-            <div class="stat-sub">Exeter Finance (13-year-old vehicles) &amp; Capital One</div>
-          </div>
-          <div class="stat-card">
-            <div class="stat-label">Highest Backend Cap</div>
-            <div class="stat-value accent">$12,500+</div>
-            <div class="stat-sub">Wells Fargo ($12,500); Truist ($10,000); Ally up to $15,000</div>
-          </div>
-          <div class="stat-card">
-            <div class="stat-label">No Chargebacks</div>
-            <div class="stat-value green">GLS &amp; WLF</div>
-            <div class="stat-sub">GLS: no chargebacks at all. Westlake: no chargebacks on rate markup</div>
-          </div>
-          <div class="stat-card">
-            <div class="stat-label">Longest Chargeback Protection</div>
-            <div class="stat-value blue">6 Payments</div>
-            <div class="stat-sub">TD Auto Finance — protected after 6th scheduled payment due date</div>
-          </div>
-          <div class="stat-card">
-            <div class="stat-label">Open Bankruptcies</div>
-            <div class="stat-value accent">WLF Only</div>
-            <div class="stat-sub">Westlake Financial accepts open Ch. 7 &amp; Ch. 13 with proper stipulations</div>
-          </div>
-          <div class="stat-card">
-            <div class="stat-label">Cash / Foreign Income</div>
-            <div class="stat-value accent">WLF Only</div>
-            <div class="stat-sub">Westlake accepts cash income, foreign IDs (matriculas), TurboPass verification</div>
-          </div>
-          <div class="stat-card">
-            <div class="stat-label">Best Backend (Prime)</div>
-            <div class="stat-value green">Truist / WF</div>
-            <div class="stat-sub">Truist: up to $10K backend. Wells Fargo: $12,500 backend cap</div>
-          </div>
-          <div class="stat-card">
-            <div class="stat-label">Fastest Approvals</div>
-            <div class="stat-value blue">15 sec</div>
-            <div class="stat-sub">GLS — approvals in as fast as 15 seconds, available 24/7/365</div>
-          </div>
-        </div>
+      <div id="income-paystub-row" style="display:none;flex-direction:column;gap:10px">
+        <div class="calc-row"><label class="calc-label" for="income-period-start">Period Start</label><input type="date" id="income-period-start" class="calc-input"></div>
+        <div class="calc-row"><label class="calc-label" for="income-period-end">Period End</label><input type="date" id="income-period-end" class="calc-input"></div>
       </div>
-    </section>
-
-    <!-- LENDER DETAIL VIEW -->
-    <section class="view" id="view-lender" aria-label="Lender program details">
-      <!-- Dynamically populated by JS -->
-    </section>
-
-  </main>
-
-  <!-- ===================== FOOTER ===================== -->
-  <footer role="contentinfo">
-    <span>Lender Hub &copy; 2026 — Internal F&amp;I Reference Tool</span>
-    <span style="color:var(--color-text-3)">Data sourced from official lender program PDFs. Always verify terms with lender prior to deal submission.</span>
-    <a href="https://www.perplexity.ai/computer" target="_blank" rel="noopener noreferrer">Created with Perplexity Computer</a>
-  </footer>
-
-  <!-- ===================== INCOME CALCULATOR MODAL ===================== -->
-  <div id="modal-income" class="tool-modal" role="dialog" aria-modal="true" aria-labelledby="income-modal-title" hidden>
-    <div class="tool-modal-backdrop"></div>
-    <div class="tool-modal-panel">
-      <div class="tool-modal-header">
-        <h2 id="income-modal-title">Income Calculator</h2>
-        <button class="tool-modal-close" aria-label="Close" id="income-modal-close">&times;</button>
+      <div class="calc-row">
+        <label class="calc-label" for="income-amount" id="income-amount-label">Gross Amount ($)</label>
+        <input type="number" id="income-amount" class="calc-input" placeholder="e.g. 2500" min="0" step="0.01">
       </div>
-      <div class="tool-modal-body">
-        <div class="calc-row">
-          <label class="calc-label" for="income-type">Pay Type</label>
-          <select id="income-type" class="calc-input">
-            <option value="hourly">Hourly</option>
-            <option value="weekly">Weekly</option>
-            <option value="biweekly" selected>Bi-Weekly (every 2 weeks)</option>
-            <option value="semimonthly">Semi-Monthly (2× per month)</option>
-            <option value="monthly">Monthly</option>
-            <option value="annual">Annual Salary</option>
-            <option value="paystub">Pay Stub (Period Start &amp; End)</option>
-          </select>
+      <button id="income-calc-run" class="calc-btn">Calculate</button>
+      <div id="income-results" class="calc-results" hidden>
+        <div class="calc-result-grid">
+          <div class="calc-result-item"><div class="calc-result-label">Annual Gross</div><div class="calc-result-val" id="res-annual">—</div></div>
+          <div class="calc-result-item highlight"><div class="calc-result-label">Monthly Gross</div><div class="calc-result-val" id="res-monthly">—</div></div>
+          <div class="calc-result-item"><div class="calc-result-label">Bi-Weekly</div><div class="calc-result-val" id="res-biweekly">—</div></div>
+          <div class="calc-result-item"><div class="calc-result-label">Weekly</div><div class="calc-result-val" id="res-weekly">—</div></div>
         </div>
-        <div class="calc-row" id="income-hours-row">
-          <label class="calc-label" for="income-hours">Hours per Week</label>
-          <input type="number" id="income-hours" class="calc-input" value="40" min="1" max="168" placeholder="40">
-        </div>
-        <!-- Pay stub date range row -->
-        <div id="income-paystub-row" style="display:none;flex-direction:column;gap:var(--space-3)">
-          <div class="calc-row">
-            <label class="calc-label" for="income-period-start">Period Start</label>
-            <input type="date" id="income-period-start" class="calc-input">
-          </div>
-          <div class="calc-row">
-            <label class="calc-label" for="income-period-end">Period End</label>
-            <input type="date" id="income-period-end" class="calc-input">
-          </div>
-        </div>
-        <div class="calc-row">
-          <label class="calc-label" for="income-amount" id="income-amount-label">Gross Amount ($)</label>
-          <input type="number" id="income-amount" class="calc-input" placeholder="e.g. 2500" min="0" step="0.01">
-        </div>
-        <button id="income-calc-run" class="calc-btn">Calculate</button>
-        <div id="income-results" class="calc-results" hidden>
-          <div class="calc-result-grid">
-            <div class="calc-result-item">
-              <div class="calc-result-label">Annual Gross</div>
-              <div class="calc-result-val" id="res-annual">—</div>
-            </div>
-            <div class="calc-result-item highlight">
-              <div class="calc-result-label">Monthly Gross</div>
-              <div class="calc-result-val" id="res-monthly">—</div>
-            </div>
-            <div class="calc-result-item">
-              <div class="calc-result-label">Bi-Weekly</div>
-              <div class="calc-result-val" id="res-biweekly">—</div>
-            </div>
-            <div class="calc-result-item">
-              <div class="calc-result-label">Weekly</div>
-              <div class="calc-result-val" id="res-weekly">—</div>
-            </div>
-          </div>
-          <div class="calc-note" id="income-note"></div>
-        </div>
+        <div class="calc-note" id="income-note"></div>
       </div>
     </div>
   </div>
+</div>
 
-  <!-- ===================== BUREAU SEARCH MODAL ===================== -->
-  <div id="modal-bureau" class="tool-modal" role="dialog" aria-modal="true" aria-labelledby="bureau-modal-title" hidden>
-    <div class="tool-modal-backdrop"></div>
-    <div class="tool-modal-panel" style="max-width:560px">
-      <div class="tool-modal-header">
-        <h2 id="bureau-modal-title">Bureau Score Search</h2>
-        <button class="tool-modal-close" aria-label="Close" id="bureau-modal-close">&times;</button>
+<!-- BUREAU SEARCH MODAL -->
+<div id="modal-bureau" class="tool-modal" role="dialog" aria-modal="true" hidden>
+  <div class="tool-modal-backdrop"></div>
+  <div class="tool-modal-panel" style="max-width:540px">
+    <div class="tool-modal-header"><h2>Bureau Score Search</h2><button class="tool-modal-close" id="bureau-modal-close">&times;</button></div>
+    <div class="tool-modal-body">
+      <p class="calc-desc">Enter your customer's scores. Results show which lenders will use a qualifying score.</p>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px">
+        <div class="calc-row"><label class="calc-label" for="bureau-eq">Equifax</label><input type="number" id="bureau-eq" class="calc-input" placeholder="e.g. 550" min="300" max="850"></div>
+        <div class="calc-row"><label class="calc-label" for="bureau-tu">TransUnion</label><input type="number" id="bureau-tu" class="calc-input" placeholder="e.g. 625" min="300" max="850"></div>
+        <div class="calc-row"><label class="calc-label" for="bureau-ex">Experian</label><input type="number" id="bureau-ex" class="calc-input" placeholder="e.g. 600" min="300" max="850"></div>
       </div>
-      <div class="tool-modal-body">
-        <p class="calc-desc">Enter your customer's scores for each bureau. Leave blank if unknown. Results show which lenders will use a qualifying score.</p>
-        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:var(--space-3)">
-          <div class="calc-row">
-            <label class="calc-label" for="bureau-eq">Equifax</label>
-            <input type="number" id="bureau-eq" class="calc-input" placeholder="e.g. 550" min="300" max="850">
-          </div>
-          <div class="calc-row">
-            <label class="calc-label" for="bureau-tu">TransUnion</label>
-            <input type="number" id="bureau-tu" class="calc-input" placeholder="e.g. 625" min="300" max="850">
-          </div>
-          <div class="calc-row">
-            <label class="calc-label" for="bureau-ex">Experian</label>
-            <input type="number" id="bureau-ex" class="calc-input" placeholder="e.g. 600" min="300" max="850">
-          </div>
-        </div>
-        <button id="bureau-search-run" class="calc-btn">Find Matching Lenders</button>
-        <div id="bureau-results" hidden>
-          <div id="bureau-results-list" style="display:flex;flex-direction:column;gap:var(--space-3)"></div>
-          <div class="calc-note" id="bureau-note"></div>
-        </div>
+      <button id="bureau-search-run" class="calc-btn">Find Matching Lenders</button>
+      <div id="bureau-results" hidden>
+        <div id="bureau-results-list" style="display:flex;flex-direction:column;gap:10px"></div>
+        <div class="calc-note" id="bureau-note"></div>
       </div>
     </div>
   </div>
+</div>
 
-  <!-- ===================== 20-DAY DATE MODAL ===================== -->
-  <div id="modal-date" class="tool-modal" role="dialog" aria-modal="true" aria-labelledby="date-modal-title" hidden>
-    <div class="tool-modal-backdrop"></div>
-    <div class="tool-modal-panel">
-      <div class="tool-modal-header">
-        <h2 id="date-modal-title">20-Day Calculator</h2>
-        <button class="tool-modal-close" aria-label="Close" id="date-modal-close">&times;</button>
-      </div>
-      <div class="tool-modal-body">
-        <p class="calc-desc">Enter any contract or deal date to calculate the 20-day funding deadline.</p>
-        <div class="calc-row">
-          <label class="calc-label" for="date-start">Start Date</label>
-          <input type="date" id="date-start" class="calc-input">
+<!-- 20-DAY DATE MODAL -->
+<div id="modal-date" class="tool-modal" role="dialog" aria-modal="true" hidden>
+  <div class="tool-modal-backdrop"></div>
+  <div class="tool-modal-panel">
+    <div class="tool-modal-header"><h2>20-Day Calculator</h2><button class="tool-modal-close" id="date-modal-close">&times;</button></div>
+    <div class="tool-modal-body">
+      <p class="calc-desc">Enter contract date to calculate the 20-day funding deadline.</p>
+      <div class="calc-row"><label class="calc-label" for="date-start">Contract / Start Date</label><input type="date" id="date-start" class="calc-input"></div>
+      <button id="date-calc-run" class="calc-btn">Calculate</button>
+      <div id="date-results" class="calc-results" hidden>
+        <div class="calc-result-grid" style="grid-template-columns:1fr 1fr">
+          <div class="calc-result-item"><div class="calc-result-label">Start Date</div><div class="calc-result-val" id="res-start-date">—</div></div>
+          <div class="calc-result-item highlight"><div class="calc-result-label">20-Day Deadline</div><div class="calc-result-val" id="res-20day">—</div></div>
         </div>
-        <button id="date-calc-run" class="calc-btn">Calculate</button>
-        <div id="date-results" class="calc-results" hidden>
-          <div class="calc-result-grid" style="grid-template-columns:1fr 1fr">
-            <div class="calc-result-item">
-              <div class="calc-result-label">Start Date</div>
-              <div class="calc-result-val" id="res-start-date">—</div>
-            </div>
-            <div class="calc-result-item highlight">
-              <div class="calc-result-label">20-Day Deadline</div>
-              <div class="calc-result-val" id="res-20day">—</div>
-            </div>
-          </div>
-          <div class="calc-result-grid" style="grid-template-columns:1fr 1fr;margin-top:var(--space-3)">
-            <div class="calc-result-item">
-              <div class="calc-result-label">Days Remaining</div>
-              <div class="calc-result-val" id="res-days-left">—</div>
-            </div>
-            <div class="calc-result-item">
-              <div class="calc-result-label">Day of Week</div>
-              <div class="calc-result-val" id="res-day-of-week">—</div>
-            </div>
-          </div>
-          <div class="calc-note" id="date-note"></div>
+        <div class="calc-result-grid" style="grid-template-columns:1fr 1fr;margin-top:10px">
+          <div class="calc-result-item"><div class="calc-result-label">Days Remaining</div><div class="calc-result-val" id="res-days-left">—</div></div>
+          <div class="calc-result-item"><div class="calc-result-label">Day of Week</div><div class="calc-result-val" id="res-day-of-week">—</div></div>
         </div>
+        <div class="calc-note" id="date-note"></div>
       </div>
     </div>
   </div>
+</div>
 
-  <!-- ===================== LTV CALCULATOR MODAL ===================== -->
-  <div id="modal-ltv" class="tool-modal" role="dialog" aria-modal="true" aria-labelledby="ltv-modal-title" hidden>
-    <div class="tool-modal-backdrop"></div>
-    <div class="tool-modal-panel" style="max-width:500px">
-      <div class="tool-modal-header">
-        <h2 id="ltv-modal-title">LTV Calculator</h2>
-        <button class="tool-modal-close" aria-label="Close" id="ltv-modal-close">&times;</button>
-      </div>
-      <div class="tool-modal-body">
-        <p class="calc-desc">Enter vehicle value and amount financed to see which lenders' LTV caps are met.</p>
-        <div class="calc-row">
-          <label class="calc-label" for="ltv-book">Book / MSRP Value ($)</label>
-          <input type="number" id="ltv-book" class="calc-input" placeholder="e.g. 25000" min="0">
-        </div>
-        <div class="calc-row">
-          <label class="calc-label" for="ltv-financed">Amount Financed ($)<span class="calc-sublabel">Include backend products</span></label>
-          <input type="number" id="ltv-financed" class="calc-input" placeholder="e.g. 31000" min="0">
-        </div>
-        <div class="calc-row">
-          <label class="calc-label" for="ltv-type">Vehicle Type</label>
-          <select id="ltv-type" class="calc-input">
-            <option value="used">Used</option>
-            <option value="new">New</option>
-          </select>
-        </div>
-        <button id="ltv-calc-run" class="calc-btn">Check LTV</button>
-        <div id="ltv-results" hidden>
-          <div class="ltv-summary" id="ltv-summary"></div>
-          <div id="ltv-lender-results" class="ltv-lender-list"></div>
-        </div>
+<!-- LTV CALCULATOR MODAL -->
+<div id="modal-ltv" class="tool-modal" role="dialog" aria-modal="true" hidden>
+  <div class="tool-modal-backdrop"></div>
+  <div class="tool-modal-panel" style="max-width:500px">
+    <div class="tool-modal-header"><h2>LTV Calculator</h2><button class="tool-modal-close" id="ltv-modal-close">&times;</button></div>
+    <div class="tool-modal-body">
+      <p class="calc-desc">Enter vehicle value and amount financed to see which lenders' LTV caps are met.</p>
+      <div class="calc-row"><label class="calc-label" for="ltv-book">Book / MSRP Value ($)</label><input type="number" id="ltv-book" class="calc-input" placeholder="e.g. 25000" min="0"></div>
+      <div class="calc-row"><label class="calc-label" for="ltv-financed">Amount Financed ($)<span class="calc-sublabel">Include backend products</span></label><input type="number" id="ltv-financed" class="calc-input" placeholder="e.g. 31000" min="0"></div>
+      <div class="calc-row"><label class="calc-label" for="ltv-type">Vehicle Type</label><select id="ltv-type" class="calc-input"><option value="used">Used</option><option value="new">New</option></select></div>
+      <button id="ltv-calc-run" class="calc-btn">Check LTV</button>
+      <div id="ltv-results" hidden>
+        <div class="ltv-summary" id="ltv-summary"></div>
+        <div id="ltv-lender-results" class="ltv-lender-list"></div>
       </div>
     </div>
   </div>
+</div>
 
-  <!-- ===================== DEAL STRUCTURER MODAL ===================== -->
-  <div id="modal-deal" class="tool-modal" role="dialog" aria-modal="true" aria-labelledby="deal-modal-title" hidden>
-    <div class="tool-modal-backdrop"></div>
-    <div class="tool-modal-panel" style="max-width:560px">
-      <div class="tool-modal-header">
-        <h2 id="deal-modal-title">Deal Structurer</h2>
-        <button class="tool-modal-close" aria-label="Close" id="deal-modal-close">&times;</button>
+<!-- DEAL STRUCTURER MODAL -->
+<div id="modal-deal" class="tool-modal" role="dialog" aria-modal="true" hidden>
+  <div class="tool-modal-backdrop"></div>
+  <div class="tool-modal-panel" style="max-width:560px">
+    <div class="tool-modal-header"><h2>Deal Structurer</h2><button class="tool-modal-close" id="deal-modal-close">&times;</button></div>
+    <div class="tool-modal-body">
+      <p class="calc-desc">Enter deal details to find which lenders can hit your target payment.</p>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+        <div class="calc-row" style="margin:0"><label class="calc-label" for="ds-price">Vehicle Price ($)</label><input type="number" id="ds-price" class="calc-input" placeholder="e.g. 28000"></div>
+        <div class="calc-row" style="margin:0"><label class="calc-label" for="ds-trade">Trade Equity ($)<span class="calc-sublabel">Negative = payoff owed</span></label><input type="number" id="ds-trade" class="calc-input" placeholder="e.g. 3000"></div>
+        <div class="calc-row" style="margin:0"><label class="calc-label" for="ds-down">Cash Down ($)</label><input type="number" id="ds-down" class="calc-input" placeholder="e.g. 1000"></div>
+        <div class="calc-row" style="margin:0"><label class="calc-label" for="ds-backend">Backend Products ($)</label><input type="number" id="ds-backend" class="calc-input" placeholder="e.g. 2500"></div>
+        <div class="calc-row" style="margin:0"><label class="calc-label" for="ds-target">Target Payment ($/mo)<span class="calc-sublabel">Leave blank to see all</span></label><input type="number" id="ds-target" class="calc-input" placeholder="e.g. 450"></div>
+        <div class="calc-row" style="margin:0"><label class="calc-label" for="ds-term">Preferred Term</label><select id="ds-term" class="calc-input"><option value="0">Best available</option><option value="60">60 months</option><option value="72">72 months</option><option value="84">84 months</option></select></div>
+        <div class="calc-row" style="margin:0"><label class="calc-label" for="ds-fico">Customer FICO</label><input type="number" id="ds-fico" class="calc-input" placeholder="e.g. 620" min="300" max="850"></div>
+        <div class="calc-row" style="margin:0"><label class="calc-label" for="ds-vtype">Vehicle Type</label><select id="ds-vtype" class="calc-input"><option value="used">Used</option><option value="new">New</option></select></div>
       </div>
-      <div class="tool-modal-body">
-        <p class="calc-desc">Enter deal details to find which lenders can hit your target payment.</p>
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:var(--space-3)">
-          <div class="calc-row" style="margin:0">
-            <label class="calc-label" for="ds-price">Vehicle Price ($)</label>
-            <input type="number" id="ds-price" class="calc-input" placeholder="e.g. 28000" min="0">
-          </div>
-          <div class="calc-row" style="margin:0">
-            <label class="calc-label" for="ds-trade">Trade Equity ($)<span class="calc-sublabel">Negative = payoff owed</span></label>
-            <input type="number" id="ds-trade" class="calc-input" placeholder="e.g. 3000">
-          </div>
-          <div class="calc-row" style="margin:0">
-            <label class="calc-label" for="ds-down">Cash Down ($)</label>
-            <input type="number" id="ds-down" class="calc-input" placeholder="e.g. 1000" min="0">
-          </div>
-          <div class="calc-row" style="margin:0">
-            <label class="calc-label" for="ds-backend">Backend Products ($)</label>
-            <input type="number" id="ds-backend" class="calc-input" placeholder="e.g. 2500" min="0">
-          </div>
-          <div class="calc-row" style="margin:0">
-            <label class="calc-label" for="ds-target">Target Payment ($/mo)<span class="calc-sublabel">Leave blank to see all</span></label>
-            <input type="number" id="ds-target" class="calc-input" placeholder="e.g. 450" min="0">
-          </div>
-          <div class="calc-row" style="margin:0">
-            <label class="calc-label" for="ds-term">Preferred Term (mo)</label>
-            <select id="ds-term" class="calc-input">
-              <option value="0">Best available</option>
-              <option value="60">60 months</option>
-              <option value="72">72 months</option>
-              <option value="84">84 months</option>
-            </select>
-          </div>
-          <div class="calc-row" style="margin:0">
-            <label class="calc-label" for="ds-fico">Customer FICO</label>
-            <input type="number" id="ds-fico" class="calc-input" placeholder="e.g. 620" min="300" max="850">
-          </div>
-          <div class="calc-row" style="margin:0">
-            <label class="calc-label" for="ds-vtype">Vehicle Type</label>
-            <select id="ds-vtype" class="calc-input">
-              <option value="used">Used</option>
-              <option value="new">New</option>
-            </select>
-          </div>
-        </div>
-        <button id="deal-struct-run" class="calc-btn" style="margin-top:var(--space-4)">Structure Deal</button>
-        <div id="deal-results" hidden>
-          <div class="deal-summary" id="deal-summary"></div>
-          <div id="deal-lender-results" class="ltv-lender-list"></div>
-        </div>
+      <button id="deal-struct-run" class="calc-btn" style="margin-top:14px">Structure Deal</button>
+      <div id="deal-results" hidden>
+        <div class="deal-summary" id="deal-summary"></div>
+        <div id="deal-lender-results" class="ltv-lender-list"></div>
       </div>
     </div>
   </div>
+</div>
 
-  <!-- ===================== SIDE-BY-SIDE COMPARE MODAL ===================== -->
-  <div id="modal-compare-tool" class="tool-modal" role="dialog" aria-modal="true" aria-labelledby="compare-tool-modal-title" hidden>
-    <div class="tool-modal-backdrop"></div>
-    <div class="tool-modal-panel" style="max-width:860px;width:95vw">
-      <div class="tool-modal-header">
-        <h2 id="compare-tool-modal-title">Side-by-Side Lender Compare</h2>
-        <button class="tool-modal-close" aria-label="Close" id="compare-tool-modal-close">&times;</button>
+<!-- SIDE-BY-SIDE COMPARE MODAL -->
+<div id="modal-compare-tool" class="tool-modal" role="dialog" aria-modal="true" hidden>
+  <div class="tool-modal-backdrop"></div>
+  <div class="tool-modal-panel" style="max-width:860px;width:95vw">
+    <div class="tool-modal-header"><h2>Side-by-Side Lender Compare</h2><button class="tool-modal-close" id="compare-tool-modal-close">&times;</button></div>
+    <div class="tool-modal-body">
+      <p class="calc-desc">Select up to 3 lenders to compare key program details side by side.</p>
+      <div class="sbs-picker" id="sbs-picker">
+        <div class="sbs-slot"><label class="calc-label">Lender 1</label><select class="calc-input sbs-select" id="sbs-sel-0"><option value="">— Select —</option></select></div>
+        <div class="sbs-slot"><label class="calc-label">Lender 2</label><select class="calc-input sbs-select" id="sbs-sel-1"><option value="">— Select —</option></select></div>
+        <div class="sbs-slot"><label class="calc-label">Lender 3 <span style="opacity:.5;font-weight:400">(optional)</span></label><select class="calc-input sbs-select" id="sbs-sel-2"><option value="">— Select —</option></select></div>
       </div>
-      <div class="tool-modal-body">
-        <p class="calc-desc">Select up to 3 lenders to compare their key program details side by side.</p>
-        <div class="sbs-picker" id="sbs-picker">
-          <div class="sbs-slot" data-slot="0">
-            <label class="calc-label">Lender 1</label>
-            <select class="calc-input sbs-select" data-slot="0" id="sbs-sel-0"><option value="">— Select —</option></select>
-          </div>
-          <div class="sbs-slot" data-slot="1">
-            <label class="calc-label">Lender 2</label>
-            <select class="calc-input sbs-select" data-slot="1" id="sbs-sel-1"><option value="">— Select —</option></select>
-          </div>
-          <div class="sbs-slot" data-slot="2">
-            <label class="calc-label">Lender 3 <span style="opacity:.5;font-weight:400">(optional)</span></label>
-            <select class="calc-input sbs-select" data-slot="2" id="sbs-sel-2"><option value="">— Select —</option></select>
-          </div>
-        </div>
-        <button id="sbs-run" class="calc-btn">Compare</button>
-        <div id="sbs-results" hidden>
-          <div class="sbs-table-wrap">
-            <table class="sbs-table" id="sbs-table"></table>
-          </div>
-        </div>
-      </div>
+      <button id="sbs-run" class="calc-btn">Compare</button>
+      <div id="sbs-results" hidden><div class="sbs-table-wrap"><table class="sbs-table" id="sbs-table"></table></div></div>
     </div>
   </div>
+</div>
 
 </div><!-- /#app -->
-<script src="app.js?v=1773861525"></script>
+
+<script>
+'use strict';
+
+// ─── LENDER DATA ─────────────────────────────────────────────
+const LENDERS = [
+  {
+    id:'amcredit', name:'AmeriCredit', fullName:'AmeriCredit (GM Financial)', abbr:'GMF', colorClass:'lc-amcredit',
+    docTitle:'Retail Underwriting Guidelines', effectiveDate:'January 8, 2026',
+    segment:'near', segmentLabel:'Near-Prime', ficoMin:500,
+    ficoNotes:'Bureau varies by state. No score below 500.',
+    maxTerm:84, maxMileage:'100,000 mi', maxLTV:'135%', gapMax:'$1,500',
+    reserveStructure:'Up to 2% / $200 flat @ buy rate', chargebackWindow:'3 payments / 3 cycles',
+    uniqueFeature:'ITIN accepted; 70/30 split; state-specific bureau',
+    bureaus:{primary:['equifax','transunion','experian'],note:'State-specific. EQ: CA NV OR WA ID MT WY UT CO NM AZ HI AK. EX: NC SC GA FL AL MS. TU: all other states.',stateMap:{equifax:'CA, NV, OR, WA, ID, MT, WY, UT, CO, NM, AZ, HI, AK',experian:'NC, SC, GA, FL, AL, MS',transunion:'All other states'}},
+    sections:{
+      fico:{icon:'📊',label:'FICO & Credit',content:`<div class="info-grid"><div class="info-row"><span class="info-key">Minimum Score</span><span class="info-val">500</span></div><div class="info-row"><span class="info-key">Bureau</span><span class="info-val">State-specific (EQ/TU/EX)</span></div><div class="info-row"><span class="info-key">Min Income A+/A2</span><span class="info-val">$2,200 gross/mo</span></div><div class="info-row"><span class="info-key">Min Income A3/B3</span><span class="info-val">$2,400 gross/mo</span></div><div class="info-row"><span class="info-key">Bankruptcy</span><span class="info-val">Ch. 7 & 13 must be discharged</span></div><div class="info-row"><span class="info-key">ITIN</span><span class="info-val">✓ Accepted</span></div></div><div class="note-box info"><span class="note-icon">ℹ️</span><span>EQ states: CA,NV,OR,WA,ID,MT,WY,UT,CO,NM,AZ,HI,AK · EX states: NC,SC,GA,FL,AL,MS · TU: all remaining</span></div>`},
+      income:{icon:'💰',label:'Income Verification',content:`<div class="info-grid"><div class="info-row"><span class="info-key">Paystub Age</span><span class="info-val">≤45 days from contract date</span></div><div class="info-row"><span class="info-key">Self-Employed</span><span class="info-val">3 consecutive personal bank stmts ≤45 days; no NSF</span></div><div class="info-row"><span class="info-key">Non-Taxable Gross-Up</span><span class="info-val">+25%</span></div></div>`},
+      ltv:{icon:'📐',label:'LTV & Terms',content:`<div class="info-grid"><div class="info-row"><span class="info-key">New Vehicles</span><span class="info-val">Up to 125% LTV</span></div><div class="info-row"><span class="info-key">Used &lt;50K miles</span><span class="info-val">Up to 135% LTV</span></div><div class="info-row"><span class="info-key">Max Term</span><span class="info-val">84 months</span></div><div class="info-row"><span class="info-key">Max Vehicle Age</span><span class="info-val">9 years</span></div><div class="info-row"><span class="info-key">Min Amount ≤72mo</span><span class="info-val">$7,500</span></div><div class="info-row"><span class="info-key">Min Amount 75–84mo</span><span class="info-val">$15,000</span></div></div>`},
+      reserve:{icon:'💵',label:'Reserve & Compensation',content:`<div class="info-grid"><div class="info-row"><span class="info-key">Participation</span><span class="info-val">Up to 2%</span></div><div class="info-row"><span class="info-key">Flat @ Buy Rate</span><span class="info-val">$200</span></div><div class="info-row"><span class="info-key">Split</span><span class="info-val">70/30</span></div><div class="info-row"><span class="info-key">Chargeback Window</span><span class="info-val">3 payments and 3 payment cycles</span></div><div class="info-row"><span class="info-key">Assignment Fee</span><span class="info-val">$150 nonrefundable (cannot charge customer)</span></div></div>`}
+    }
+  },
+  {
+    id:'exeter', name:'Exeter Finance', fullName:'Exeter Finance', abbr:'EXF', colorClass:'lc-exeter',
+    docTitle:'Program Guidelines / Rate Sheet', effectiveDate:'January 9, 2026',
+    segment:'sub', segmentLabel:'Sub-Prime', ficoMin:400,
+    ficoNotes:'Standard: 400+; Zero FICO considered. ExeterPLUS: 620+.',
+    maxTerm:78, maxMileage:'200,000 mi', maxLTV:'150%', gapMax:'$1,200',
+    reserveStructure:'Up to 2% power flat (varies by tier)',
+    chargebackWindow:'3 payments (first 3 must be made in full)',
+    uniqueFeature:'Zero FICO accepted; ExeterPLUS at 620+; 200K mile limit',
+    bureaus:{primary:['equifax','transunion','experian'],note:'Pulls all three bureaus. Uses middle score.',stateMap:{}},
+    sections:{
+      fico:{icon:'📊',label:'FICO & Credit',content:`<div class="info-grid"><div class="info-row"><span class="info-key">Standard Min FICO</span><span class="info-val">400 (zero FICO considered)</span></div><div class="info-row"><span class="info-key">ExeterPLUS Min FICO</span><span class="info-val">620</span></div><div class="info-row"><span class="info-key">Standard Rate As Low As</span><span class="info-val">10.95%</span></div><div class="info-row"><span class="info-key">BK — Chapter 7</span><span class="info-val">Will consider</span></div><div class="info-row"><span class="info-key">BK — Chapter 13</span><span class="info-val">Must be discharged</span></div><div class="info-row"><span class="info-key">Dismissed BK</span><span class="info-val">Must be 12+ months old</span></div></div>`},
+      income:{icon:'💰',label:'Income Verification',content:`<div class="info-grid"><div class="info-row"><span class="info-key">W2 Paystub Age</span><span class="info-val">Within 30 days of contract date</span></div><div class="info-row"><span class="info-key">Self-Employed</span><span class="info-val">Last year's tax return OR 3 months personal bank stmts</span></div><div class="info-row"><span class="info-key">Min Income (Single)</span><span class="info-val">$1,700/month</span></div><div class="info-row"><span class="info-key">Min Income (Joint)</span><span class="info-val">$2,500/month</span></div><div class="info-row"><span class="info-key">Non-Taxable Gross-Up</span><span class="info-val">+25%</span></div></div>`},
+      ltv:{icon:'📐',label:'LTV & Terms',content:`<div class="info-grid"><div class="info-row"><span class="info-key">Front-End LTV</span><span class="info-val">Up to 135%</span></div><div class="info-row"><span class="info-key">Total LTV</span><span class="info-val">Up to 150%</span></div><div class="info-row"><span class="info-key">Max Term</span><span class="info-val">78 months</span></div><div class="info-row"><span class="info-key">Max Mileage</span><span class="info-val">200,000 miles</span></div><div class="info-row"><span class="info-key">Vehicle Age Limit</span><span class="info-val">13 years</span></div><div class="info-row"><span class="info-key">Min Amount Financed</span><span class="info-val">$6,000</span></div></div><div class="note-box warn"><span class="note-icon">⚠️</span><span>Non-PLUS approvals: contracts received after 20 days from initial submission NOT eligible for participation.</span></div>`},
+      reserve:{icon:'💵',label:'Reserve & Compensation',content:`<div class="info-grid"><div class="info-row"><span class="info-key">Standard Participation</span><span class="info-val">Up to 2% (power flat; varies by tier)</span></div><div class="info-row"><span class="info-key">Rate Markup</span><span class="info-val">Not permissible — dealer does NOT mark up rate</span></div><div class="info-row"><span class="info-key">Chargeback</span><span class="info-val">First 3 payments must be made in full</span></div></div>`}
+    }
+  },
+  {
+    id:'regional', name:'Regional Acceptance', fullName:'Regional Finance / Regional Acceptance Corp.', abbr:'RAC', colorClass:'lc-regional',
+    docTitle:'Consumer Rates — Indirect Auto Finance', effectiveDate:'January 1, 2026',
+    segment:'sub', segmentLabel:'Sub-Prime', ficoMin:null, stateRestriction:'Texas Only',
+    ficoNotes:'Tier-based (T1–T7); no explicit FICO minimum.',
+    maxTerm:84, maxMileage:'130,000 mi', maxLTV:'125%', gapMax:'$1,000',
+    reserveStructure:'Flat (T1–4) / Discount (T5–7); up to 3% flat / 6.5% discount',
+    chargebackWindow:'N/A', uniqueFeature:'TX only; T1–4 flat pay, T5–7 dealer discount; 84mo on T1–4 with ≤20K miles',
+    bureaus:{primary:['transunion'],note:'Primarily TransUnion.',stateMap:{}},
+    sections:{
+      fico:{icon:'📊',label:'Tiers & Credit',content:`<div class="note-box info"><span class="note-icon">ℹ️</span><span>No explicit FICO minimums. Tier assignment (T1–T7) determines rates, LTV, and max terms.</span></div><table class="tier-table" style="margin-top:14px"><thead><tr><th>Tier</th><th>Type</th><th>Max LTV</th><th>Max Term</th></tr></thead><tbody><tr><td>T1</td><td>Flat</td><td>125%</td><td>84mo (≤20K mi)</td></tr><tr><td>T2</td><td>Flat</td><td>125%</td><td>84mo</td></tr><tr><td>T3</td><td>Flat</td><td>125%</td><td>84mo</td></tr><tr><td>T4</td><td>Flat</td><td>125%</td><td>84mo</td></tr><tr><td>T5</td><td>Discount</td><td>120%</td><td>75mo</td></tr><tr><td>T6</td><td>Discount</td><td>115%</td><td>75mo</td></tr><tr><td>T7</td><td>Discount</td><td>110%</td><td>72mo</td></tr></tbody></table><div class="note-box warn" style="margin-top:10px"><span class="note-icon">🏴</span><span><strong>Texas Only.</strong> ELT Code: 56124067800</span></div>`},
+      reserve:{icon:'💵',label:'Reserve & Compensation',content:`<table class="tier-table"><thead><tr><th>LTV Band</th><th>T1</th><th>T2</th><th>T3</th><th>T4</th><th>T5</th><th>T6</th><th>T7</th></tr></thead><tbody><tr><td>0–90%</td><td>3%/$1,200</td><td>2.5%/$1,000</td><td>2%/$800</td><td>1.5%/$600</td><td>0%</td><td>−1.5%</td><td>−3.5%</td></tr><tr><td>90–100%</td><td>2.5%/$1,000</td><td>2%/$800</td><td>1.5%/$600</td><td>1%/$400</td><td>−0.5%</td><td>−2.5%</td><td>−4.5%</td></tr><tr><td>100–115%</td><td>2%/$800</td><td>1.5%/$600</td><td>1%/$400</td><td>0.5%/$200</td><td>−1%</td><td>−4.5%</td><td>−6.5%</td></tr><tr><td>115%+</td><td>1.5%/$600</td><td>1%/$400</td><td>0.5%/$200</td><td>0%</td><td>−1.5%</td><td>−4.5%</td><td>−6.5%</td></tr></tbody></table><div class="note-box warn" style="margin-top:10px"><span class="note-icon">⚠️</span><span>T1–T4: flat pay (positive %). T5–T7: dealer discount (negative %).</span></div>`}
+    }
+  },
+  {
+    id:'truist', name:'Truist', fullName:'Truist Dealer Financial Services', abbr:'TRU', colorClass:'lc-truist',
+    docTitle:'Program Guide Reference Sheet', effectiveDate:'February 5, 2026',
+    segment:'prime', segmentLabel:'Prime', ficoMin:640,
+    ficoNotes:'Min 640; both applicants must score 640+. 680+ for 76–84 month terms.',
+    maxTerm:84, maxMileage:'120,000 mi (50K for 76–84mo)', maxLTV:'155%', gapMax:'See callback',
+    reserveStructure:'Up to 2% (≤75mo) / 1.5% (76–84mo); max $8,000; flat guide $150–$2,600',
+    chargebackWindow:'Flat cancel: charged if no payment within 20 days',
+    uniqueFeature:'Backend up to $10K; CPO bonus $750–$1,500; 6 tiers Super Prime → Subprime',
+    bureaus:{primary:['transunion','equifax'],note:'Primary: TU FICO Auto 9. EQ used for FL, GA, NC, SC, TX, VA.',stateMap:{transunion:'Most states',equifax:'FL, GA, NC, SC, TX, VA'}},
+    sections:{
+      fico:{icon:'📊',label:'FICO & Tiers',content:`<div class="info-grid"><div class="info-row"><span class="info-key">Bureau</span><span class="info-val">TransUnion FICO Auto 9 (EQ for FL,GA,NC,SC,TX,VA)</span></div><div class="info-row"><span class="info-key">Minimum Score</span><span class="info-val">640 (all applicants)</span></div><div class="info-row"><span class="info-key">76–84mo Min FICO</span><span class="info-val">680</span></div><div class="info-row"><span class="info-key">Max DTI</span><span class="info-val">65%</span></div></div><table class="tier-table" style="margin-top:14px"><thead><tr><th>Tier</th><th>Label</th><th>FE LTV ≤75mo</th><th>Total LTV ≤75mo</th><th>FE LTV 76–84mo</th></tr></thead><tbody><tr><td>T1/A1</td><td>Super Prime</td><td>130%</td><td>155%</td><td>120%</td></tr><tr><td>T2/A2</td><td>Prime</td><td>130%</td><td>155%</td><td>120%</td></tr><tr><td>T3/B1</td><td>Near Prime</td><td>125%</td><td>145%</td><td>115%</td></tr><tr><td>T4/B2</td><td>Standard</td><td>120%</td><td>140%</td><td>115%</td></tr><tr><td>T5/B3</td><td>Below Std</td><td>120%</td><td>135%</td><td>115%</td></tr><tr><td>T6/C1</td><td>Subprime</td><td>120%</td><td>130%</td><td>115%</td></tr></tbody></table>`},
+      reserve:{icon:'💵',label:'Reserve & Compensation',content:`<div class="info-grid"><div class="info-row"><span class="info-key">Max Reserve (≤75mo)</span><span class="info-val">2.00%</span></div><div class="info-row"><span class="info-key">Max Reserve (76–84mo)</span><span class="info-val">1.50%</span></div><div class="info-row"><span class="info-key">Max Dealer Reserve</span><span class="info-val">$8,000</span></div><div class="info-row"><span class="info-key">Flat Cancel Fee</span><span class="info-val">$150 if no payment within 20 days of funding</span></div></div>`,},
+      backend:{icon:'🏷️',label:'Backend Products',content:`<div class="info-grid"><div class="info-row"><span class="info-key">Backend Max Rule</span><span class="info-val">Greater of $4,200 or 20% of collateral; absolute max $10,000</span></div><div class="info-row"><span class="info-key">CPO Bonus (Standard)</span><span class="info-val">+$750 advance</span></div><div class="info-row"><span class="info-key">CPO Bonus (Luxury)</span><span class="info-val">+$1,500 advance (≤5yrs, ≤50K mi)</span></div><div class="info-row"><span class="info-key">NOT Accepted</span><span class="info-val">Credit Life, Accident & Health</span></div></div>`}
+    }
+  },
+  {
+    id:'td', name:'TD Auto Finance', fullName:'TD Auto Finance (TDAF)', abbr:'TDA', colorClass:'lc-td',
+    docTitle:'TDAF Retail Program Guide', effectiveDate:'January 1, 2026',
+    segment:'near', segmentLabel:'Near-Prime', ficoMin:null,
+    ficoNotes:'Automated 9-tier system. No BK or repo within 36 months.',
+    maxTerm:84, maxMileage:'120,000 mi', maxLTV:'150%', gapMax:'$1,300',
+    reserveStructure:'80/20 split; TDAF pays greater of reserve, flat fee, or enhanced flat automatically',
+    chargebackWindow:'6 scheduled payments',
+    uniqueFeature:'BPS-based flat fee enhancement; 9 tiers; open 7 days/week; medium-duty truck program',
+    bureaus:{primary:['transunion'],note:'TransUnion Auto FICO 08 via RouteOne & Dealertrack.',stateMap:{}},
+    sections:{
+      fico:{icon:'📊',label:'Tiers & Credit',content:`<div class="info-grid"><div class="info-row"><span class="info-key">Bureau</span><span class="info-val">TransUnion Auto FICO 08</span></div><div class="info-row"><span class="info-key">Scoring</span><span class="info-val">Automated — 9 tiers (T1–T9)</span></div><div class="info-row"><span class="info-key">BK Restriction</span><span class="info-val">Ineligible if bankruptcy within 36 months</span></div><div class="info-row"><span class="info-key">Repo Restriction</span><span class="info-val">Ineligible if repossession within 36 months</span></div></div>`},
+      reserve:{icon:'💵',label:'Reserve & Compensation',content:`<div class="info-grid"><div class="info-row"><span class="info-key">Standard Reserve</span><span class="info-val">80/20 split</span></div><div class="info-row"><span class="info-key">Max Markup 24–72mo</span><span class="info-val">2.00%</span></div><div class="info-row"><span class="info-key">Max Markup 73–84mo</span><span class="info-val">1.75%</span></div><div class="info-row"><span class="info-key">Chargeback</span><span class="info-val">Protected after 6 scheduled payments</span></div></div><table class="tier-table" style="margin-top:14px"><thead><tr><th>BPS Add</th><th>48–63mo</th><th>64–72mo</th><th>73–84mo</th></tr></thead><tbody><tr><td>Buy Rate</td><td>1%/$500</td><td>—</td><td>—</td></tr><tr><td>+100 BPS</td><td>3%/$1,500</td><td>2%/$3,000</td><td>—</td></tr><tr><td>+150 BPS</td><td>4%/$2,000</td><td>3%/$4,500</td><td>3%/$4,500</td></tr><tr><td>+200 BPS</td><td>5%/$2,500</td><td>4%/$6,000</td><td>4%/$6,000</td></tr></tbody></table>`}
+    }
+  },
+  {
+    id:'wellsfargo', name:'Wells Fargo', fullName:'Wells Fargo Auto', abbr:'WFA', colorClass:'lc-wells',
+    docTitle:'Dealer Program Reference Guide', effectiveDate:'October 14, 2025',
+    segment:'prime', segmentLabel:'Prime', ficoMin:null,
+    ficoNotes:'6 tiers (Super Prime → Regular); DACA/NPRA eligible; 150K mile limit.',
+    maxTerm:84, maxMileage:'150,000 mi', maxLTV:'135%', gapMax:'$1,200',
+    reserveStructure:'Max $5,000 per deal', chargebackWindow:'See callback',
+    uniqueFeature:'DACA/NPRA eligible; 150K mile limit; broadest backend matrix',
+    bureaus:{primary:['equifax','transunion','experian'],note:'Pulls all three, uses middle score.',stateMap:{}},
+    sections:{
+      fico:{icon:'📊',label:'FICO & Tiers',content:`<div class="info-grid"><div class="info-row"><span class="info-key">Tiers</span><span class="info-val">T1 Super Prime → T6 Regular (FICO cutoffs via callback)</span></div><div class="info-row"><span class="info-key">DACA / NPRA</span><span class="info-val">✓ Eligible — valid SSN or ITIN required</span></div><div class="info-row"><span class="info-key">84-Month Restriction</span><span class="info-val">No thin file or first-time buyers</span></div></div>`},
+      backend:{icon:'🏷️',label:'Backend Products',content:`<div class="info-grid"><div class="info-row"><span class="info-key">Total Backend</span><span class="info-val">Greater of $6,000 or 20%; max $12,500</span></div><div class="info-row"><span class="info-key">GAP</span><span class="info-val">$1,200; min 70% LTV</span></div><div class="info-row"><span class="info-key">VSC</span><span class="info-val">Greater of $4,350 or 18%</span></div><div class="info-row"><span class="info-key">Tire & Wheel</span><span class="info-val">Greater of $1,550 or 7%</span></div><div class="info-row"><span class="info-key">Maintenance</span><span class="info-val">Greater of $2,350 or 15%</span></div></div>`},
+      reserve:{icon:'💵',label:'Reserve & Compensation',content:`<div class="info-grid"><div class="info-row"><span class="info-key">Max Compensation</span><span class="info-val">$5,000 per funded contract</span></div><div class="info-row"><span class="info-key">Structure</span><span class="info-val">Communicated via callbacks</span></div></div>`}
+    }
+  },
+  {
+    id:'ally', name:'Ally Financial', fullName:'Ally Financial', abbr:'ALY', colorClass:'lc-ally',
+    docTitle:'Underwriting Policies & Provisions', effectiveDate:'February 1, 2026',
+    segment:'prime', segmentLabel:'Prime+', ficoMin:520,
+    ficoNotes:'Retail min 520; Lease min 550. Tiers S,A,B,C,D,E. CC down up to $5K.',
+    maxTerm:84, maxMileage:'150,000 mi', maxLTV:'140%', gapMax:'$1,500 (<$80K) / $2,000 (>$80K)',
+    reserveStructure:'ADR Retail Bonus Reward (Feb 1, 2026); flat $150–$500 per bracket',
+    chargebackWindow:'See callback', uniqueFeature:'SmartLease; CC down up to $5K; auction CPO $1K bonus; GAP Plus available',
+    bureaus:{primary:['equifax','transunion','experian'],note:'All three bureaus; uses middle score.',stateMap:{}},
+    sections:{
+      fico:{icon:'📊',label:'FICO & Tiers',content:`<div class="info-grid"><div class="info-row"><span class="info-key">Retail Min FICO</span><span class="info-val">520</span></div><div class="info-row"><span class="info-key">Lease Min FICO</span><span class="info-val">550</span></div><div class="info-row"><span class="info-key">Tiers (Prime)</span><span class="info-val">S, A, B, C (FICO ≥620)</span></div><div class="info-row"><span class="info-key">Tiers (Non-Prime)</span><span class="info-val">S, A, B, C, D, E (FICO &lt;620)</span></div><div class="info-row"><span class="info-key">Max Rate (New)</span><span class="info-val">24.00% or state cap</span></div><div class="info-row"><span class="info-key">Max Rate (Used)</span><span class="info-val">25.00% or state cap</span></div></div>`},
+      reserve:{icon:'💵',label:'Reserve & Compensation',content:`<table class="tier-table"><thead><tr><th>Amount Financed</th><th>Flat Payout</th><th>Max DFI ≤60mo</th><th>Max DFI 61–75mo</th><th>Max DFI 76–84mo</th></tr></thead><tbody><tr><td>$5K–$24,999</td><td>$150</td><td>2.50%</td><td>2.00%</td><td>1.50%</td></tr><tr><td>$25K–$34,999</td><td>$250</td><td>2.50%</td><td>2.00%</td><td>1.50%</td></tr><tr><td>$35K–$44,999</td><td>$350</td><td>2.50%</td><td>2.00%</td><td>1.50%</td></tr><tr><td>$45K–$74,999</td><td>$450</td><td>2.50%</td><td>2.00%</td><td>1.50%</td></tr><tr><td>$75K–$149,999</td><td>$500</td><td>2.50%</td><td>2.00%</td><td>2.00% (D/E)</td></tr></tbody></table>`}
+    }
+  },
+  {
+    id:'fifththird', name:'Fifth Third Bank', fullName:'Fifth Third Bank — Auto', abbr:'5/3', colorClass:'lc-fifth',
+    docTitle:'Consumer Auto Program Guide — Texas', effectiveDate:'November 12, 2025',
+    segment:'near', segmentLabel:'Near-Prime', ficoMin:650, stateRestriction:'Texas Only',
+    ficoNotes:'Min 650 for 2013+ units. TX only.',
+    maxTerm:84, maxMileage:'140,000 mi', maxLTV:'140%', gapMax:'$1,850 or 5% of amt financed',
+    reserveStructure:'3% at buy rate; 100% flat (no cap); Elite bonus up to +0.75%',
+    chargebackWindow:'3 payments or 120 days',
+    uniqueFeature:'Elite points program; guaranteed $4K backend; TX only; MSRP/JD Power Retail',
+    bureaus:{primary:['equifax','transunion','experian'],note:'All three bureaus.',stateMap:{}},
+    sections:{
+      fico:{icon:'📊',label:'FICO & Elite Program',content:`<div class="info-grid"><div class="info-row"><span class="info-key">Minimum FICO</span><span class="info-val">650 (for 2013+ units)</span></div></div><div class="note-box info" style="margin-top:10px"><span class="note-icon">⭐</span><span><strong>Elite Program:</strong> Earn points per booked contract. Elite (30–64 pts): +0.25%. Gold Elite (65–94): +0.50%. Platinum Elite (95+): +0.75% flat.</span></div>`},
+      reserve:{icon:'💵',label:'Reserve & Compensation',content:`<div class="info-grid"><div class="info-row"><span class="info-key">Buy Rate Flat</span><span class="info-val">3% — 100% to dealer (no cap, no split)</span></div><div class="info-row"><span class="info-key">Chargeback</span><span class="info-val">Reserve charged if paid off before 3 payments or 120 days</span></div></div>`}
+    }
+  },
+  {
+    id:'gls', name:'GLS / Global Lending', fullName:'GLS (Global Lending Services)', abbr:'GLS', colorClass:'lc-gls',
+    docTitle:'Buying Guidelines / Program Guidelines', effectiveDate:'2025 (v49)',
+    segment:'sub', segmentLabel:'Sub-Prime', ficoMin:400,
+    ficoNotes:'400–700 range; zero FICO considered. Self-employed/1099 NOT accepted. Min $1,800/mo.',
+    maxTerm:78, maxMileage:'180,000 mi', maxLTV:'135%', gapMax:'$1,100',
+    reserveStructure:'T1–T2: up to 3% flat; T3–T4: up to 2%; Select: up to 4% — NO CHARGEBACKS',
+    chargebackWindow:'NO CHARGEBACKS',
+    uniqueFeature:'15-second approvals 24/7/365; no chargebacks; self-employed NOT accepted; 180K mile limit',
+    bureaus:{primary:['equifax'],note:'Primarily Equifax.',stateMap:{}},
+    sections:{
+      fico:{icon:'📊',label:'FICO & Credit',content:`<div class="info-grid"><div class="info-row"><span class="info-key">Score Range</span><span class="info-val">400–700 (zero FICO also considered)</span></div><div class="info-row"><span class="info-key">Self-Employed / 1099</span><span class="info-val" style="color:var(--red)">✗ NOT ACCEPTED</span></div><div class="info-row"><span class="info-key">Max PTI</span><span class="info-val">24%</span></div><div class="info-row"><span class="info-key">Min Income</span><span class="info-val">$1,800/month</span></div></div><div class="note-box success" style="margin-top:10px"><span class="note-icon">⚡</span><span><strong>Approvals as fast as 15 seconds, 24/7/365.</strong> Clean deals fund in 48 hours.</span></div>`},
+      reserve:{icon:'💵',label:'Reserve & Compensation',content:`<div class="info-grid"><div class="info-row"><span class="info-key">T1–T2 Flat</span><span class="info-val">Up to 3% of front-end</span></div><div class="info-row"><span class="info-key">T3–T4 Flat</span><span class="info-val">Up to 2% of front-end</span></div><div class="info-row"><span class="info-key">Select Tier Flat</span><span class="info-val">Up to 4% of front-end</span></div><div class="info-row"><span class="info-key">Chargebacks</span><span class="info-val" style="color:var(--green);font-weight:700">✓ NO CHARGEBACKS</span></div></div>`}
+    }
+  },
+  {
+    id:'capitalone', name:'Capital One', fullName:'Capital One Auto Finance', abbr:'CAP', colorClass:'lc-capone',
+    docTitle:'Executive Diamond Partner Program Guidelines', effectiveDate:'January 2026',
+    segment:'all', segmentLabel:'All Tiers (0–9)', ficoMin:null,
+    ficoNotes:'Tiers 0–9; no published FICO minimums — all deals via Dealer Navigator.',
+    maxTerm:84, maxMileage:'200,000 mi', maxLTV:'175%', gapMax:'$1,200',
+    reserveStructure:'Up to 2.5% (≤60mo) / 2% (≤75mo) / 1.5% (76+mo); flat $100–$300 at buy rate',
+    chargebackWindow:'See Dealer Navigator callback',
+    uniqueFeature:'Auto Navigator pre-qualified leads; 200K miles; lowest min financed ($2K); 15-yr vehicle age',
+    bureaus:{primary:['equifax','transunion','experian'],note:'All three bureaus; uses middle score.',stateMap:{}},
+    sections:{
+      fico:{icon:'📊',label:'Tiers & Credit',content:`<div class="info-grid"><div class="info-row"><span class="info-key">Tier System</span><span class="info-val">Tiers 0 through 9 (expanded access)</span></div><div class="info-row"><span class="info-key">How to Submit</span><span class="info-val">Capital One Dealer Navigator</span></div><div class="info-row"><span class="info-key">Min Income</span><span class="info-val">$1,500/month</span></div><div class="info-row"><span class="info-key">NDI Requirement</span><span class="info-val">Income − debts must be ≥$50</span></div></div>`},
+      ltv:{icon:'📐',label:'LTV & Terms',content:`<div class="info-grid"><div class="info-row"><span class="info-key">Total LTV (Book ≥$10K)</span><span class="info-val">Up to 150%</span></div><div class="info-row"><span class="info-key">Total LTV (Book &lt;$10K)</span><span class="info-val">Up to 175%</span></div><div class="info-row"><span class="info-key">Max Mileage</span><span class="info-val">200,000 miles</span></div><div class="info-row"><span class="info-key">Max Vehicle Age</span><span class="info-val">15 years</span></div><div class="info-row"><span class="info-key">Min Amount Financed</span><span class="info-val">$2,000</span></div></div>`},
+      reserve:{icon:'💵',label:'Reserve & Compensation',content:`<div class="info-grid"><div class="info-row"><span class="info-key">Participation ≤60mo</span><span class="info-val">Up to 2.5%</span></div><div class="info-row"><span class="info-key">Participation ≤75mo</span><span class="info-val">Up to 2.0%</span></div><div class="info-row"><span class="info-key">Participation 76+mo</span><span class="info-val">Up to 1.5%</span></div></div>`}
+    }
+  },
+  {
+    id:'westlake', name:'Westlake Financial', fullName:'WLF (Westlake Financial)', abbr:'WLF', colorClass:'lc-westlake',
+    docTitle:'Program Guidelines v.120925_2', effectiveDate:'January 2026',
+    segment:'deep', segmentLabel:'Deep Sub-Prime', ficoMin:null,
+    ficoNotes:'Determined by Buy Program. Rate markup for 600+. Accepts open BKs with stips.',
+    maxTerm:null, maxMileage:'150,000 mi', maxLTV:'Per Buy Program', gapMax:'Per Buy Program',
+    reserveStructure:'Up to 2% markup (600+ FICO); 65/35 split; no chargebacks on markup',
+    chargebackWindow:'No chargebacks on rate markup',
+    uniqueFeature:'TurboPass income; cash income; open BKs with stips; foreign ID/matriculas; branded/salvage vehicles eligible',
+    bureaus:{primary:['equifax','transunion','experian'],note:'All three bureaus; uses middle score.',stateMap:{}},
+    sections:{
+      fico:{icon:'📊',label:'Credit Flexibility',content:`<div class="info-grid"><div class="info-row"><span class="info-key">Rate Markup Eligibility</span><span class="info-val">Credit score 600+ (up to 2%)</span></div><div class="info-row"><span class="info-key">Open BK Ch. 7</span><span class="info-val">✓ Requires proof '341 Meeting' completed</span></div><div class="info-row"><span class="info-key">Open BK Ch. 13</span><span class="info-val">✓ Requires signed trustee letter</span></div><div class="info-row"><span class="info-key">Cash Income</span><span class="info-val">✓ Job letter + front-back check images</span></div><div class="info-row"><span class="info-key">Foreign IDs</span><span class="info-val">✓ Passport, matricula consular accepted</span></div></div>`},
+      reserve:{icon:'💵',label:'Reserve & Compensation',content:`<div class="info-grid"><div class="info-row"><span class="info-key">Rate Markup</span><span class="info-val">Up to 2% for FICO 600+</span></div><div class="info-row"><span class="info-key">Chargebacks on Markup</span><span class="info-val" style="color:var(--green);font-weight:700">✓ NO CHARGEBACKS on markup</span></div><div class="info-row"><span class="info-key">Split Structure</span><span class="info-val">65/35 for ≤60 months</span></div></div>`}
+    }
+  },
+  {
+    id:'kia', name:'Kia Finance', fullName:'Kia Finance America', abbr:'KFA', colorClass:'lc-kia',
+    docTitle:'LTV Advance & Backend Guidelines', effectiveDate:'Q1 2026',
+    segment:'near', segmentLabel:'Near-Prime', ficoMin:580,
+    ficoNotes:'Tiered LTV by FICO band. Loyalty program upgrades tier. Separate grids 12–75mo vs 76+mo.',
+    maxTerm:84, maxMileage:'N/A', maxLTV:'150%', gapMax:'$1,500',
+    reserveStructure:'Tiered — 680+ gets 20% or $5K; <680 gets 16% or $4K',
+    chargebackWindow:'N/A', uniqueFeature:'Loyalty tier upgrades (up to +1 tier); KFA bulletin APR/Lease programs',
+    bureaus:{primary:['equifax','transunion','experian'],note:'Confirm bureau with Kia Finance rep.',stateMap:{}},
+    sections:{
+      fico:{icon:'📊',label:'FICO & Tiers',content:`<table class="tier-table"><thead><tr><th>FICO Range</th><th>12–75mo LTV</th><th>76+mo LTV</th></tr></thead><tbody><tr><td>&lt;580</td><td>90%</td><td>90%</td></tr><tr><td>580–599</td><td>95%</td><td>95%</td></tr><tr><td>600–619</td><td>100%</td><td>—</td></tr><tr><td>620–639</td><td>105%</td><td>—</td></tr><tr><td>640–659</td><td>115%</td><td>105%</td></tr><tr><td>660–679</td><td>125%</td><td>115%</td></tr><tr><td>680–739</td><td>135%</td><td>120%</td></tr><tr><td>740+</td><td>150%</td><td>120%</td></tr></tbody></table><div class="note-box info" style="margin-top:10px"><span class="note-icon">ℹ️</span><span>Loyalty upgrades apply to rate pricing. LTV always based on <strong>initial credit score</strong>, not upgraded tier.</span></div>`},
+      backend:{icon:'🏷️',label:'Backend Products',content:`<div class="info-grid"><div class="info-row"><span class="info-key">Max Backend (680+)</span><span class="info-val">20% of amount financed or $5,000 (lesser)</span></div><div class="info-row"><span class="info-key">Max Backend (&lt;680)</span><span class="info-val">16% of amount financed or $4,000 (lesser)</span></div><div class="info-row"><span class="info-key">Max GAP</span><span class="info-val">$1,500 (all tiers)</span></div></div>`}
+    }
+  },
+  {
+    id:'bofa', name:'Bank of America', fullName:'Bank of America Auto (Access Lending)', abbr:'BOA', colorClass:'lc-bofa',
+    docTitle:'Access Lending Retail Program Sheet', effectiveDate:'February 2, 2026',
+    segment:'prime', segmentLabel:'Prime', ficoMin:640,
+    ficoNotes:'Min 640 FICO. 720+ for >75mo. Min 4yrs in file, 4 satisfactory trade lines.',
+    maxTerm:84, maxMileage:'125,000 mi', maxLTV:'145%', gapMax:'$1,200',
+    reserveStructure:'No cap on flat payouts; buy rate = 1%, up to 225bps = 5% flat',
+    chargebackWindow:'N/A (flat fee model)',
+    uniqueFeature:'No cap on flat payouts; EV charging station eligible ($800); Experian FICO Auto 8.0',
+    bureaus:{primary:['experian'],note:'Experian FICO Auto Industry Adjusted Model v8.0.',stateMap:{}},
+    sections:{
+      reserve:{icon:'💵',label:'Reserve & Compensation',content:`<table class="tier-table"><thead><tr><th>Markup</th><th>Flat</th></tr></thead><tbody><tr><td>Buy Rate</td><td>1.00%</td></tr><tr><td>+50bps</td><td>1.50%</td></tr><tr><td>+75bps</td><td>2.00%</td></tr><tr><td>+100bps</td><td>2.50%</td></tr><tr><td>+125bps</td><td>3.00%</td></tr><tr><td>+150bps</td><td>3.50%</td></tr><tr><td>+175bps (48–75mo)</td><td>4.00%</td></tr><tr><td>+200bps (48–75mo)</td><td>4.50%</td></tr><tr><td>+225bps (48–60mo)</td><td>5.00%</td></tr></tbody></table><div class="note-box success" style="margin-top:10px"><span class="note-icon">✅</span><span><strong>No cap on flat payout.</strong> Dealer paid the greater of eligible flat or reserve. Min $10K financed, 48mo+ term.</span></div>`}
+    }
+  },
+  {
+    id:'chase', name:'Chase Auto', fullName:'JPMorgan Chase Auto', abbr:'JPM', colorClass:'lc-chase',
+    docTitle:'Chase Auto Product Reference Sheet', effectiveDate:'November 20, 2025',
+    segment:'prime', segmentLabel:'Prime', ficoMin:620,
+    ficoNotes:'Stable credit history required. No open BKs. All BKs must be discharged.',
+    maxTerm:84, maxMileage:'120,000 mi', maxLTV:'150%', gapMax:'State-specific',
+    reserveStructure:'Standard FF: 1% at buy rate. Enhanced FF: 2% at +0.75bps (max $3,000)',
+    chargebackWindow:'N/A (flat fee model)',
+    uniqueFeature:'Standard + Enhanced Flat Fee programs; 150% max LTV; CPO auto-value adjustment',
+    bureaus:{primary:['equifax','transunion','experian'],note:'All three bureaus; uses middle score.',stateMap:{}},
+    sections:{
+      reserve:{icon:'💵',label:'Reserve & Compensation',content:`<div class="info-grid"><div class="info-row"><span class="info-key">Standard Flat Fee</span><span class="info-val">1% of Total Amount Financed at buy rate; min $10K financed</span></div><div class="info-row"><span class="info-key">Enhanced Flat Fee</span><span class="info-val">2% at buy rate +0.75bps; max $3,000; min $12K financed</span></div><div class="info-row"><span class="info-key">Markup Cap ≤60mo</span><span class="info-val">Buy rate + 2.50% max</span></div><div class="info-row"><span class="info-key">Markup Cap 61–75mo</span><span class="info-val">Buy rate + 2.00% max</span></div><div class="info-row"><span class="info-key">Markup Cap 76+mo</span><span class="info-val">Buy rate + 1.50% max</span></div></div>`}
+    }
+  },
+  {
+    id:'pnc', name:'PNC Bank', fullName:'PNC Dealer Finance', abbr:'PNC', colorClass:'lc-pnc',
+    docTitle:'PNC Dealer Finance Program Guidelines', effectiveDate:'January 1, 2026',
+    segment:'prime', segmentLabel:'Prime', ficoMin:680,
+    ficoNotes:'Tier 0 (800+) to Tier 4 (680–699). PNC Custom Score + Experian FICO 09 Auto Enhanced.',
+    maxTerm:84, maxMileage:'125,000 mi', maxLTV:'140%', gapMax:'Included in backend cap',
+    reserveStructure:'Buy Rate = 1%; +0.50% = 2%; +1.00% = 3%. Max flat $3,000.',
+    chargebackWindow:'N/A (flat fee model)',
+    uniqueFeature:'PNC Custom Score + Experian dual scoring; tiered LTV T0–T4; BuyDown program; 60-day approval',
+    bureaus:{primary:['experian'],note:'Experian FICO 09 Auto Enhanced + PNC Custom Score.',stateMap:{}},
+    sections:{
+      reserve:{icon:'💵',label:'Reserve & Compensation',content:`<div class="info-grid"><div class="info-row"><span class="info-key">Buy Rate</span><span class="info-val">1% of amount financed</span></div><div class="info-row"><span class="info-key">+0.50%</span><span class="info-val">2% of amount financed</span></div><div class="info-row"><span class="info-key">+1.00%</span><span class="info-val">3% of amount financed</span></div><div class="info-row"><span class="info-key">Max Flat</span><span class="info-val">$3,000 per contract</span></div><div class="info-row"><span class="info-key">Min for Flat</span><span class="info-val">Terms ≥48mo and ≥$10K financed</span></div></div>`}
+    }
+  },
+  {
+    id:'dfc', name:'Driveway Finance', fullName:'Driveway Finance Corporation (DFC)', abbr:'DFC', colorClass:'lc-dfc',
+    docTitle:'Lending Program Reference + Funding Guidelines', effectiveDate:'August 13, 2025',
+    segment:'sub', segmentLabel:'Sub-Prime', ficoMin:580,
+    ficoNotes:'Tiers P0–P11 plus P10 No-Hit. Equifax FICO Version 8. FICO 580+ for flat fee.',
+    maxTerm:84, maxMileage:'175,000 mi', maxLTV:'135%', gapMax:'$1,200',
+    reserveStructure:'85/15 split. Flat: 1.5% at buy rate + 0.5% with AutoPay form.',
+    chargebackWindow:'N/A', uniqueFeature:'P10 No-Hit accepted; 14-yr vehicle age; 175K miles; 85/15 reserve; AutoPay flat bonus',
+    bureaus:{primary:['equifax'],note:'Equifax FICO Version 8.',stateMap:{}},
+    sections:{
+      reserve:{icon:'💵',label:'Reserve & Compensation',content:`<div class="info-grid"><div class="info-row"><span class="info-key">Reserve Split</span><span class="info-val">85/15 split</span></div><div class="info-row"><span class="info-key">Flat — Buy Rate</span><span class="info-val">1.5% of amount financed (FICO 580+; 36mo+; &lt;$75K OTD)</span></div><div class="info-row"><span class="info-key">AutoPay Bonus</span><span class="info-val">Additional 0.50% with completed AutoPay form</span></div><div class="info-row"><span class="info-key">Max Markup</span><span class="info-val">2pts (36–75mo); 1pt (76+mo)</span></div><div class="info-row"><span class="info-key">No Flat/Reserve</span><span class="info-val">Loans $75,000+</span></div></div>`}
+    }
+  },
+  {
+    id:'flagship', name:'Flagship Credit', fullName:'Flagship Credit Acceptance', abbr:'FCA', colorClass:'lc-flagship',
+    docTitle:'National Program Guidelines v1.1', effectiveDate:'January 2026',
+    segment:'sub', segmentLabel:'Sub-Prime', ficoMin:'Tier-based',
+    ficoNotes:'Tier-based. 7 days/week live analyst decisions plus automation.',
+    maxTerm:72, maxMileage:'140,000 mi (≤60mo) / 120,000 mi (≤72mo)', maxLTV:'150%', gapMax:'$1,200 or state max',
+    reserveStructure:'70/30 split. Up to 2% per callback. Chargeback if loan closed before 3 payments or 90 days.',
+    chargebackWindow:'3 payments / 90 days',
+    uniqueFeature:'Live analysts 7 days/week; CPO +5% auto-applied; income gross-up 25%; $4,500 max back-end',
+    bureaus:{primary:['equifax','transunion','experian'],note:'All three bureaus.',stateMap:{}},
+    sections:{
+      fico:{icon:'📊',label:'FICO & Tiers',content:`<div class="info-grid"><div class="info-row"><span class="info-key">Decisions</span><span class="info-val">Automated + Live Analysts, 7 days a week</span></div><div class="info-row"><span class="info-key">Approval Validity</span><span class="info-val">30 days</span></div><div class="info-row"><span class="info-key">Down Payment</span><span class="info-val">As low as $0 (varies by tier)</span></div><div class="info-row"><span class="info-key">Amount Financed</span><span class="info-val">$7,500 – $50,000</span></div></div><div class="note-box success" style="margin-top:10px"><span class="note-icon">✅</span><span><strong>CPO Program:</strong> Approval pricing automatically reflects 5% increase to vehicle value.</span></div>`},
+      reserve:{icon:'💵',label:'Reserve & Compensation',content:`<div class="info-grid"><div class="info-row"><span class="info-key">Participation</span><span class="info-val">Up to 2% — see callback</span></div><div class="info-row"><span class="info-key">Reserve Split</span><span class="info-val">70/30 dealer/lender</span></div><div class="info-row"><span class="info-key">Chargeback</span><span class="info-val">Before 3 payments OR within 90 days</span></div><div class="info-row"><span class="info-key">Max Back-End</span><span class="info-val">$4,500 total</span></div></div>`}
+    }
+  }
+];
+
+// ─── UTILITIES ───────────────────────────────────────────────
+const $ = (s, c) => (c||document).querySelector(s);
+const $$ = (s, c) => [...(c||document).querySelectorAll(s)];
+const fmt = n => n.toLocaleString('en-US', {minimumFractionDigits:2, maximumFractionDigits:2});
+
+function segClass(seg) { return {prime:'green',near:'blue',sub:'amber',deep:'red',all:'blue'}[seg]||'blue'; }
+function segBadge(seg) { return {prime:'badge-prime',near:'badge-near',sub:'badge-sub',deep:'badge-deep',all:'badge-all'}[seg]||''; }
+function dotColor(seg) { return {prime:'var(--green)',near:'var(--blue)',sub:'var(--gold)',deep:'var(--red)',all:'var(--blue)'}[seg]||'var(--blue)'; }
+
+// ─── THEME ───────────────────────────────────────────────────
+let theme = window.matchMedia('(prefers-color-scheme:light)').matches ? 'light' : 'dark';
+function applyTheme() { document.documentElement.setAttribute('data-theme', theme); }
+function toggleTheme() { theme = theme==='dark'?'light':'dark'; applyTheme(); }
+applyTheme();
+
+// ─── SIDEBAR ─────────────────────────────────────────────────
+function buildSidebar() {
+  const c = $('#sidebar-lenders');
+  if (!c) return;
+  c.innerHTML = LENDERS.map(l => `
+    <div class="sidebar-item" data-id="${l.id}" role="button" tabindex="0">
+      <span class="tier-dot" style="background:${dotColor(l.segment)}"></span>
+      <span style="flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${l.name}</span>
+      <span class="lender-badge ${segBadge(l.segment)}">${l.segmentLabel.split('-')[0]}</span>
+    </div>`).join('');
+}
+
+// ─── COMPARE TABLE ───────────────────────────────────────────
+function buildCompareTable() {
+  const tbody = $('#compare-tbody');
+  if (!tbody) return;
+  tbody.innerHTML = LENDERS.map(l => `
+    <tr data-id="${l.id}">
+      <td><div class="lender-name-cell">${l.name}<small>${l.fullName}${l.stateRestriction?` · <span style="color:var(--red)">${l.stateRestriction}</span>`:''}</small></div></td>
+      <td><span class="fico-chip ${segClass(l.segment)}">${l.ficoMin?l.ficoMin+'+':'Tier-Based'}</span></td>
+      <td><span class="chip ${segClass(l.segment)}">${l.segmentLabel}</span></td>
+      <td>${l.maxTerm?l.maxTerm+' mo':'Per Program'}</td>
+      <td>${l.maxMileage}</td>
+      <td>${l.maxLTV}</td>
+      <td>${l.gapMax}</td>
+      <td style="max-width:190px;font-size:.72rem;color:var(--text2)">${l.reserveStructure}</td>
+      <td><span class="cb-badge${l.chargebackWindow==='NO CHARGEBACKS'?' none':''}">${l.chargebackWindow}</span></td>
+    </tr>`).join('');
+}
+
+// ─── LENDER DETAIL ───────────────────────────────────────────
+function buildLenderDetail(lender) {
+  const view = $('#view-lender');
+  if (!view) return;
+  const chips = [
+    lender.maxTerm?`<span class="chip">${lender.maxTerm} mo max</span>`:`<span class="chip">Term per Buy Program</span>`,
+    `<span class="chip">${lender.maxMileage}</span>`,
+    `<span class="chip ${segClass(lender.segment)}">${lender.segmentLabel}</span>`,
+    lender.ficoMin&&typeof lender.ficoMin==='number'?`<span class="chip green">FICO ${lender.ficoMin}+</span>`:`<span class="chip">FICO Tier-Based</span>`,
+    lender.stateRestriction?`<span class="chip red">${lender.stateRestriction}</span>`:''
+  ].filter(Boolean).join('');
+
+  const stats = [
+    {label:'Min FICO',val:lender.ficoMin?String(lender.ficoMin):'N/A',cls:'green'},
+    {label:'Max Term',val:lender.maxTerm?lender.maxTerm+' mo':'Per Prog.',cls:''},
+    {label:'Max Mileage',val:lender.maxMileage,cls:'blue'},
+    {label:'Max LTV',val:lender.maxLTV,cls:'gold'},
+    {label:'GAP Max',val:lender.gapMax,cls:''},
+    {label:'Chargeback',val:lender.chargebackWindow==='NO CHARGEBACKS'?'✓ None':lender.chargebackWindow.substring(0,16),cls:lender.chargebackWindow==='NO CHARGEBACKS'?'green':''}
+  ];
+
+  const sectionsHTML = Object.values(lender.sections).map(s => `
+    <div class="detail-section">
+      <div class="detail-section-header">
+        <div class="section-icon">${s.icon}</div>
+        <h3>${s.label}</h3>
+        <svg class="chevron" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
+      <div class="detail-section-body">${s.content}</div>
+    </div>`).join('');
+
+  view.innerHTML = `
+    <div class="lender-hero">
+      <div class="lender-icon ${lender.colorClass}">${lender.abbr}</div>
+      <div class="lender-hero-info">
+        <h1>${lender.fullName}</h1>
+        <div class="doc-meta">${lender.docTitle} &nbsp;·&nbsp; Effective ${lender.effectiveDate}</div>
+        <div class="hero-chips">${chips}</div>
+        <div class="note-box info" style="margin-top:10px;font-size:.72rem"><span class="note-icon">ℹ️</span><span>${lender.ficoNotes}</span></div>
+        ${lender.uniqueFeature?`<div class="note-box success" style="margin-top:6px;font-size:.72rem"><span class="note-icon">⭐</span><span><strong>Notable:</strong> ${lender.uniqueFeature}</span></div>`:''}
+      </div>
+    </div>
+    <div class="stat-grid">
+      ${stats.map(s=>`<div class="stat-card"><div class="stat-label">${s.label}</div><div class="stat-value ${s.cls}">${s.val}</div></div>`).join('')}
+    </div>
+    ${sectionsHTML}`;
+
+  $$('.detail-section-header', view).forEach(h => {
+    h.addEventListener('click', () => h.closest('.detail-section').classList.toggle('collapsed'));
+  });
+}
+
+// ─── NAVIGATION ──────────────────────────────────────────────
+let currentLender = null;
+function showView(name, lenderId) {
+  $$('.view').forEach(v => v.classList.remove('active'));
+  $$('.sidebar-item').forEach(s => s.classList.remove('active'));
+  if (name === 'compare') {
+    $('#view-compare').classList.add('active');
+    $('#sidebar-compare').classList.add('active');
+    currentLender = null;
+  } else if (name === 'lender' && lenderId) {
+    const lender = LENDERS.find(l => l.id === lenderId);
+    if (!lender) return;
+    buildLenderDetail(lender);
+    $('#view-lender').classList.add('active');
+    currentLender = lenderId;
+    const si = $(`.sidebar-item[data-id="${lenderId}"]`);
+    if (si) si.classList.add('active');
+    $('#main').scrollTop = 0; window.scrollTo(0, 0);
+  }
+  closeMobileSidebar();
+}
+
+// ─── SEARCH ──────────────────────────────────────────────────
+function handleSearch(q) {
+  q = q.toLowerCase().trim();
+  $$('.sidebar-item[data-id]').forEach(item => {
+    if (!q) { item.style.display=''; return; }
+    const l = LENDERS.find(x => x.id === item.getAttribute('data-id'));
+    const text = (l.name+' '+l.fullName+' '+l.ficoNotes).toLowerCase();
+    item.style.display = text.includes(q) ? '' : 'none';
+  });
+}
+
+// ─── MOBILE SIDEBAR ──────────────────────────────────────────
+function openMobileSidebar() { $('#sidebar').classList.add('open'); $('#sidebar-overlay').classList.add('active'); document.body.style.overflow='hidden'; }
+function closeMobileSidebar() { $('#sidebar').classList.remove('open'); $('#sidebar-overlay').classList.remove('active'); document.body.style.overflow=''; }
+
+// ─── INIT ────────────────────────────────────────────────────
+function init() {
+  buildSidebar();
+  buildCompareTable();
+
+  $('#theme-toggle')?.addEventListener('click', toggleTheme);
+  $('#menu-toggle')?.addEventListener('click', openMobileSidebar);
+  $('#sidebar-overlay')?.addEventListener('click', closeMobileSidebar);
+
+  const sc = $('#sidebar-compare');
+  sc?.addEventListener('click', () => showView('compare'));
+  sc?.addEventListener('keydown', e => { if (e.key==='Enter'||e.key===' ') showView('compare'); });
+
+  $$('.sidebar-item[data-id]').forEach(item => {
+    item.addEventListener('click', () => showView('lender', item.getAttribute('data-id')));
+    item.addEventListener('keydown', e => { if (e.key==='Enter'||e.key===' ') item.click(); });
+  });
+
+  $$('#compare-tbody tr').forEach(row => {
+    row.addEventListener('click', () => showView('lender', row.getAttribute('data-id')));
+  });
+
+  const si = $('#search-input');
+  si?.addEventListener('input', e => handleSearch(e.target.value));
+  si?.addEventListener('keydown', e => { if (e.key==='Escape') { si.value=''; handleSearch(''); } });
+
+  showView('compare');
+  initIncomeCalc();
+  initDateCalc();
+  initBureauSearch();
+  initLTVCalc();
+  initDealStructurer();
+  initSBSCompare();
+}
+
+// ─── MODAL HELPERS ───────────────────────────────────────────
+function closeAllModals() {
+  ['modal-income','modal-bureau','modal-date','modal-ltv','modal-deal','modal-compare-tool']
+    .forEach(id => { const m = $(`#${id}`); if (m) { m.hidden=true; m.setAttribute('hidden',''); } });
+}
+function makeModal(openId, modalId, closeId) {
+  const btn = $(`#${openId}`), modal = $(`#${modalId}`), closeBtn = $(`#${closeId}`);
+  if (!btn || !modal) return;
+  const open = () => { closeAllModals(); modal.hidden=false; modal.removeAttribute('hidden'); };
+  const close = () => { modal.hidden=true; modal.setAttribute('hidden',''); };
+  btn.addEventListener('click', open);
+  closeBtn?.addEventListener('click', close);
+  modal.querySelector('.tool-modal-backdrop')?.addEventListener('click', close);
+  document.addEventListener('keydown', e => { if (e.key==='Escape' && !modal.hidden) close(); });
+  return { open, close };
+}
+
+// ─── INCOME CALCULATOR ───────────────────────────────────────
+function initIncomeCalc() {
+  const { open } = makeModal('income-calc-btn','modal-income','income-modal-close') || {};
+  const typeEl = $('#income-type');
+  const hoursRow = $('#income-hours-row');
+  const psRow = $('#income-paystub-row');
+  const amtLabel = $('#income-amount-label');
+
+  function updateFields() {
+    const t = typeEl?.value;
+    if (hoursRow) hoursRow.style.display = t==='hourly' ? 'flex' : 'none';
+    if (psRow)   psRow.style.display    = t==='paystub' ? 'flex' : 'none';
+    if (amtLabel) amtLabel.textContent  = t==='paystub' ? 'Period Gross Amount ($)' : 'Gross Amount ($)';
+  }
+  typeEl?.addEventListener('change', updateFields);
+  updateFields();
+
+  $('#income-calc-run')?.addEventListener('click', () => {
+    const type = typeEl?.value;
+    const amount = parseFloat($('#income-amount')?.value);
+    const hours = parseFloat($('#income-hours')?.value) || 40;
+    if (!amount || isNaN(amount) || amount <= 0) { alert('Please enter a valid amount.'); return; }
+
+    let annual = 0, noteText = '';
+    switch (type) {
+      case 'hourly':    annual = amount * hours * 52; noteText = `$${amount.toFixed(2)}/hr × ${hours} hrs/wk × 52 weeks.`; break;
+      case 'weekly':    annual = amount * 52;   noteText = `$${fmt(amount)} weekly × 52 periods.`; break;
+      case 'biweekly':  annual = amount * 26;   noteText = `$${fmt(amount)} bi-weekly × 26 periods.`; break;
+      case 'semimonthly':annual = amount * 24;  noteText = `$${fmt(amount)} semi-monthly × 24 periods.`; break;
+      case 'monthly':   annual = amount * 12;   noteText = `$${fmt(amount)} monthly × 12 months.`; break;
+      case 'annual':    annual = amount;         noteText = 'Annual salary entered directly.'; break;
+      case 'paystub': {
+        const s = $('#income-period-start')?.value, e = $('#income-period-end')?.value;
+        if (!s || !e) { alert('Enter both period dates.'); return; }
+        const [sy,sm,sd] = s.split('-').map(Number), [ey,em,ed] = e.split('-').map(Number);
+        const days = Math.round((new Date(ey,em-1,ed) - new Date(sy,sm-1,sd)) / 86400000) + 1;
+        if (days <= 0) { alert('End date must be after start date.'); return; }
+        annual = (amount / days) * 365;
+        noteText = `${days} day period · Daily: $${fmt(amount/days)} · Annualized ×365.`;
+        break;
+      }
+    }
+    $('#res-annual').textContent   = '$'+fmt(annual);
+    $('#res-monthly').textContent  = '$'+fmt(annual/12);
+    $('#res-biweekly').textContent = '$'+fmt(annual/26);
+    $('#res-weekly').textContent   = '$'+fmt(annual/52);
+    $('#income-note').textContent  = noteText;
+    const r = $('#income-results'); r.hidden=false; r.removeAttribute('hidden');
+  });
+  $('#income-amount')?.addEventListener('keydown', e => { if(e.key==='Enter') $('#income-calc-run')?.click(); });
+}
+
+// ─── 20-DAY CALCULATOR ───────────────────────────────────────
+function initDateCalc() {
+  makeModal('date-calc-btn','modal-date','date-modal-close');
+  const DAYS = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+  const MONTHS = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  const di = $('#date-start');
+  if (di) { const t = new Date(); di.value = `${t.getFullYear()}-${String(t.getMonth()+1).padStart(2,'0')}-${String(t.getDate()).padStart(2,'0')}`; }
+
+  $('#date-calc-run')?.addEventListener('click', () => {
+    const val = di?.value;
+    if (!val) { alert('Select a start date.'); return; }
+    const [y,m,d] = val.split('-').map(Number);
+    const start = new Date(y,m-1,d), deadline = new Date(y,m-1,d+20);
+    const today = new Date(); today.setHours(0,0,0,0);
+    const daysLeft = Math.ceil((deadline - today) / 86400000);
+    const fmtD = x => `${MONTHS[x.getMonth()]} ${x.getDate()}, ${x.getFullYear()}`;
+    $('#res-start-date').textContent = fmtD(start);
+    $('#res-20day').textContent = fmtD(deadline);
+    $('#res-day-of-week').textContent = DAYS[deadline.getDay()];
+    const dl = $('#res-days-left');
+    if (daysLeft < 0) { dl.textContent='Expired'; dl.style.color='var(--red)'; }
+    else if (daysLeft === 0) { dl.textContent='TODAY'; dl.style.color='var(--gold)'; }
+    else { dl.textContent=daysLeft+(daysLeft===1?' day':' days'); dl.style.color=daysLeft<=3?'var(--red)':daysLeft<=7?'var(--gold)':''; }
+    const isWknd = deadline.getDay()===0||deadline.getDay()===6;
+    $('#date-note').textContent = '20 calendar days from contract date.' + (isWknd?' ⚠️ Deadline falls on a '+DAYS[deadline.getDay()]+' — confirm with lender.':'');
+    const r = $('#date-results'); r.hidden=false; r.removeAttribute('hidden');
+  });
+  di?.addEventListener('keydown', e => { if(e.key==='Enter') $('#date-calc-run')?.click(); });
+}
+
+// ─── BUREAU SEARCH ───────────────────────────────────────────
+function initBureauSearch() {
+  makeModal('bureau-search-btn','modal-bureau','bureau-modal-close');
+  const BL = {equifax:'Equifax',transunion:'TransUnion',experian:'Experian'};
+  const BC = {equifax:'#e74c3c',transunion:'#3498db',experian:'#8e44ad'};
+
+  $('#bureau-search-run')?.addEventListener('click', () => {
+    const scores = { equifax: parseInt($('#bureau-eq')?.value)||null, transunion: parseInt($('#bureau-tu')?.value)||null, experian: parseInt($('#bureau-ex')?.value)||null };
+    if (!scores.equifax && !scores.transunion && !scores.experian) { alert('Enter at least one score.'); return; }
+
+    const results = LENDERS.map(l => {
+      let best=null, bestB=null;
+      l.bureaus?.primary.forEach(b => { const s=scores[b]; if(s!==null && (best===null||s>best)){best=s;bestB=b;} });
+      const ficoOk = typeof l.ficoMin==='number' ? (best!==null && best>=l.ficoMin) : best!==null;
+      return {l, best, bestB, ficoOk};
+    });
+
+    const list = $('#bureau-results-list');
+    list.innerHTML = `<div style="font-size:.825rem;font-weight:700;margin-bottom:4px">Scores: ${Object.entries(scores).filter(([,v])=>v).map(([b,s])=>`<span style="background:${BC[b]}22;border:1px solid ${BC[b]}66;color:${BC[b]};border-radius:20px;padding:1px 9px;font-size:.7rem;font-weight:700">${BL[b]}: ${s}</span>`).join(' ')}</div>`;
+
+    const passing=results.filter(r=>r.ficoOk), failing=results.filter(r=>!r.ficoOk);
+
+    if (passing.length) {
+      const h=document.createElement('div'); h.className='bureau-section-label pass'; h.textContent=`✓ ${passing.length} Lender${passing.length!==1?'s':''} Can Work`; list.appendChild(h);
+      passing.forEach(r => list.appendChild(buildBureauCard(r, scores, BL, BC, true)));
+    }
+    if (failing.length) {
+      const h=document.createElement('div'); h.className='bureau-section-label fail'; h.style.marginTop='12px'; h.textContent=`✗ ${failing.length} Lender${failing.length!==1?'s':''} Below Minimum`; list.appendChild(h);
+      failing.forEach(r => list.appendChild(buildBureauCard(r, scores, BL, BC, false)));
+    }
+
+    $('#bureau-note').textContent='Results based on program guidelines. Always verify bureau usage with lender prior to submitting.';
+    const res=$('#bureau-results'); res.hidden=false; res.removeAttribute('hidden');
+  });
+  ['bureau-eq','bureau-tu','bureau-ex'].forEach(id => $(`#${id}`)?.addEventListener('keydown', e=>{ if(e.key==='Enter') $('#bureau-search-run')?.click(); }));
+}
+
+function buildBureauCard(r, scores, BL, BC, ok) {
+  const card=document.createElement('div');
+  card.style.cssText=`background:var(--bg3);border:1px solid ${ok?'var(--green)':'var(--border2)'};border-radius:var(--r-md);padding:10px 14px;display:flex;flex-direction:column;gap:5px;cursor:pointer;`;
+  card.innerHTML=`<div style="display:flex;align-items:center;gap:7px;flex-wrap:wrap"><span class="lender-badge ${segBadge(r.l.segment)}" style="font-size:.6rem">${r.l.segmentLabel}</span><span style="font-weight:700;font-size:.825rem">${r.l.name}</span><span style="margin-left:auto;font-size:.72rem;color:var(--text3)">Min FICO: <strong style="color:var(--text)">${r.l.ficoMin||'Tier'}</strong></span></div><div style="display:flex;gap:5px;flex-wrap:wrap">${r.l.bureaus.primary.map(b=>{const s=scores[b],isBest=b===r.bestB;return`<span style="background:${BC[b]}22;border:1.5px solid ${isBest&&ok?BC[b]:BC[b]+'44'};color:${s?BC[b]:'var(--text3)'};border-radius:20px;padding:1px 9px;font-size:.7rem;font-weight:700">${BL[b]}: ${s||'N/A'}</span>`;}).join('')}</div>${r.l.bureaus.note?`<div style="font-size:.7rem;color:var(--text3)">${r.l.bureaus.note}</div>`:''}`;
+  card.addEventListener('click', ()=>{ closeAllModals(); showView('lender',r.l.id); });
+  return card;
+}
+
+// ─── LTV CALCULATOR ──────────────────────────────────────────
+function initLTVCalc() {
+  makeModal('ltv-calc-btn','modal-ltv','ltv-modal-close');
+  $('#ltv-calc-run')?.addEventListener('click', () => {
+    const book=parseFloat($('#ltv-book').value)||0, fin=parseFloat($('#ltv-financed').value)||0;
+    if (!book||!fin) { alert('Enter both book value and amount financed.'); return; }
+    const ltv=(fin/book)*100;
+    const ltvColor=ltv<=110?'var(--green)':ltv<=130?'var(--gold)':ltv<=150?'#f97316':'var(--red)';
+    $('#ltv-summary').innerHTML=`<div class="ltv-summary-box" style="border-color:${ltvColor}"><div class="ltv-summary-stat"><div class="ltv-summary-label">Book Value</div><div class="ltv-summary-val">$${book.toLocaleString()}</div></div><div class="ltv-summary-stat"><div class="ltv-summary-label">Amt Financed</div><div class="ltv-summary-val">$${fin.toLocaleString()}</div></div><div class="ltv-summary-stat"><div class="ltv-summary-label">Actual LTV</div><div class="ltv-summary-val" style="color:${ltvColor}">${ltv.toFixed(1)}%</div></div></div>`;
+    const list=$('#ltv-lender-results'); list.innerHTML='';
+    const pass=[],fail=[];
+    LENDERS.forEach(l => {
+      const cap=parseFloat((l.maxLTV||'').replace('%',''));
+      if (isNaN(cap)) return;
+      (ltv<=cap?pass:fail).push({l,cap});
+    });
+    if (pass.length){const h=document.createElement('div');h.className='bureau-section-label pass';h.textContent=`✅ Eligible (${pass.length} lenders)`;list.appendChild(h);pass.forEach(({l,cap})=>list.appendChild(buildLTVCard(l,ltv,cap,true)));}
+    if (fail.length){const h=document.createElement('div');h.className='bureau-section-label fail';h.style.marginTop='12px';h.textContent=`❌ Over LTV Cap (${fail.length} lenders)`;list.appendChild(h);fail.forEach(({l,cap})=>list.appendChild(buildLTVCard(l,ltv,cap,false)));}
+    const r=$('#ltv-results'); r.hidden=false; r.removeAttribute('hidden');
+  });
+  ['ltv-book','ltv-financed'].forEach(id=>$(`#${id}`)?.addEventListener('keydown',e=>{if(e.key==='Enter')$('#ltv-calc-run')?.click();}));
+}
+
+function buildLTVCard(l,ltv,cap,ok) {
+  const card=document.createElement('div');
+  const headroom=cap-ltv, barW=Math.min(100,(ltv/cap)*100), barC=ok?(headroom>20?'var(--green)':'var(--gold)'):'var(--red)';
+  card.style.cssText=`background:var(--bg3);border:1px solid ${ok?'var(--green)':'var(--border2)'};border-radius:var(--r-md);padding:10px 14px;cursor:pointer;`;
+  card.innerHTML=`<div style="display:flex;align-items:center;gap:7px;margin-bottom:5px;flex-wrap:wrap"><span class="lender-badge ${segBadge(l.segment)}" style="font-size:.6rem">${l.segmentLabel}</span><span style="font-weight:700;font-size:.825rem">${l.name}</span><span style="margin-left:auto;font-size:.72rem;color:var(--text3)">Cap: <strong style="color:var(--text)">${cap}%</strong></span></div><div style="background:var(--bg2);border-radius:4px;height:5px;overflow:hidden"><div style="height:100%;width:${barW}%;background:${barC};border-radius:4px"></div></div><div style="display:flex;justify-content:space-between;margin-top:4px;font-size:.7rem;color:var(--text3)"><span>Your LTV: <strong style="color:${barC}">${ltv.toFixed(1)}%</strong></span><span>${ok?`<span style="color:var(--green)">+${headroom.toFixed(1)}% headroom</span>`:`<span style="color:var(--red)">${Math.abs(headroom).toFixed(1)}% over cap</span>`}</span></div>`;
+  card.addEventListener('click',()=>{closeAllModals();showView('lender',l.id);});
+  return card;
+}
+
+// ─── DEAL STRUCTURER ─────────────────────────────────────────
+function initDealStructurer() {
+  makeModal('deal-struct-btn','modal-deal','deal-modal-close');
+  $('#deal-struct-run')?.addEventListener('click', () => {
+    const price=parseFloat($('#ds-price').value)||0, trade=parseFloat($('#ds-trade').value)||0,
+          down=parseFloat($('#ds-down').value)||0, backend=parseFloat($('#ds-backend').value)||0,
+          target=parseFloat($('#ds-target').value)||0, prefTerm=parseInt($('#ds-term').value)||0,
+          fico=parseInt($('#ds-fico').value)||0;
+    if (!price){alert('Enter a vehicle price.');return;}
+    const af=price-trade-down+backend, ltv=price>0?(af/price)*100:0;
+    if (af<=0){alert('Amount financed is zero or negative.');return;}
+    $('#deal-summary').innerHTML=`<div class="ltv-summary-box" style="border-color:var(--gold)"><div class="ltv-summary-stat"><div class="ltv-summary-label">Price</div><div class="ltv-summary-val">$${price.toLocaleString()}</div></div><div class="ltv-summary-stat"><div class="ltv-summary-label">Trade</div><div class="ltv-summary-val" style="color:${trade>=0?'var(--green)':'var(--red)'}">${trade>=0?'+':''}$${trade.toLocaleString()}</div></div><div class="ltv-summary-stat"><div class="ltv-summary-label">Down</div><div class="ltv-summary-val">$${down.toLocaleString()}</div></div><div class="ltv-summary-stat highlight"><div class="ltv-summary-label">Amt Financed</div><div class="ltv-summary-val" style="color:var(--gold)">$${af.toLocaleString()}</div></div><div class="ltv-summary-stat highlight"><div class="ltv-summary-label">LTV</div><div class="ltv-summary-val" style="color:var(--gold)">${ltv.toFixed(1)}%</div></div></div>`;
+    const list=$('#deal-lender-results'); list.innerHTML='';
+    const segRates={prime:.06,near:.09,sub:.14,deep:.20,all:.10};
+    const results=LENDERS.map(l=>{
+      const issues=[];
+      if(fico&&typeof l.ficoMin==='number'&&fico<l.ficoMin) issues.push(`FICO ${fico} below min ${l.ficoMin}`);
+      const cap=parseFloat((l.maxLTV||'').replace('%',''));
+      if(!isNaN(cap)&&ltv>cap) issues.push(`LTV ${ltv.toFixed(0)}% > ${cap}% cap`);
+      const apr=segRates[l.segment]||.09, mr=apr/12;
+      const maxT=l.maxTerm||84;
+      const terms=[84,72,60,48,36].filter(t=>t<=maxT);
+      const pmts=terms.map(t=>({t,pmt:af*(mr*Math.pow(1+mr,t))/(Math.pow(1+mr,t)-1)}));
+      const best=prefTerm&&terms.includes(prefTerm)?pmts.find(p=>p.t===prefTerm):pmts[0];
+      const meetsTarget=!target||(best&&best.pmt<=target);
+      return{l,issues,pmts,best,meetsTarget,apr,ok:issues.length===0};
+    });
+    results.sort((a,b)=>{if(a.ok&&a.meetsTarget&&!(b.ok&&b.meetsTarget))return -1;if(!(a.ok&&a.meetsTarget)&&b.ok&&b.meetsTarget)return 1;if(a.ok&&!b.ok)return -1;if(!a.ok&&b.ok)return 1;return(a.best?.pmt||9999)-(b.best?.pmt||9999);});
+    const good=results.filter(r=>r.ok&&r.meetsTarget), close=results.filter(r=>r.ok&&!r.meetsTarget), nogo=results.filter(r=>!r.ok);
+    function addSection(arr,cls,label){if(!arr.length)return;const h=document.createElement('div');h.className='bureau-section-label '+cls;h.textContent=label;list.appendChild(h);arr.forEach(r=>list.appendChild(buildDealCard(r,target)));}
+    addSection(good,'pass',`✅ Can Structure (${good.length})`);
+    addSection(close,'warn',`⚠️ Eligible But Over Target (${close.length})`);
+    addSection(nogo,'fail',`❌ Ineligible (${nogo.length})`);
+    const r=$('#deal-results'); r.hidden=false; r.removeAttribute('hidden');
+  });
+}
+
+function buildDealCard(r,target){
+  const card=document.createElement('div');
+  const bc=r.ok&&(!target||r.meetsTarget)?'var(--green)':r.ok?'var(--gold)':'var(--border2)';
+  const chips=r.pmts.map(p=>{const hit=target&&p.pmt<=target,isBest=p.t===(r.best?.t);return`<span style="background:${hit?'var(--greendim)':'var(--bg2)'};border:1px solid ${hit?'var(--green)':isBest?'var(--gold)':'var(--border)'};border-radius:6px;padding:3px 9px;display:inline-flex;flex-direction:column;align-items:center;cursor:default"><span style="font-size:.6rem;opacity:.7">${p.t}mo</span><span style="font-weight:700;color:${hit?'var(--green)':'var(--text)'};font-size:.825rem">$${Math.round(p.pmt).toLocaleString()}</span></span>`;}).join('');
+  card.style.cssText=`background:var(--bg3);border:1px solid ${bc};border-radius:var(--r-md);padding:10px 14px;cursor:pointer;`;
+  card.innerHTML=`<div style="display:flex;align-items:center;gap:7px;margin-bottom:8px;flex-wrap:wrap"><span class="lender-badge ${segBadge(r.l.segment)}" style="font-size:.6rem">${r.l.segmentLabel}</span><span style="font-weight:700">${r.l.name}</span><span style="margin-left:auto;font-size:.7rem;color:var(--text3)">Est. ~${(r.apr*100).toFixed(0)}% APR</span></div><div style="display:flex;flex-wrap:wrap;gap:5px">${chips}</div>${r.issues.length?`<div style="margin-top:7px;display:flex;flex-wrap:wrap;gap:4px">${r.issues.map(i=>`<span style="font-size:.7rem;color:var(--red);background:var(--reddim);border-radius:4px;padding:1px 7px">${i}</span>`).join('')}</div>`:''}<div style="margin-top:5px;font-size:.7rem;color:var(--text3)">⚠️ Payments are estimates. Verify actual rate on callback.</div>`;
+  card.addEventListener('click',()=>{closeAllModals();showView('lender',r.l.id);});
+  return card;
+}
+
+// ─── SIDE-BY-SIDE COMPARE ────────────────────────────────────
+function initSBSCompare() {
+  makeModal('compare-tool-btn','modal-compare-tool','compare-tool-modal-close');
+  function populate(){[0,1,2].forEach(i=>{const sel=$(`#sbs-sel-${i}`);if(!sel)return;sel.innerHTML='<option value="">— Select —</option>';LENDERS.forEach(l=>{const o=document.createElement('option');o.value=l.id;o.textContent=l.name;sel.appendChild(o);});});}
+  $('#compare-tool-btn')?.addEventListener('click', populate);
+
+  $('#sbs-run')?.addEventListener('click', ()=>{
+    const ids=[0,1,2].map(i=>$(`#sbs-sel-${i}`)?.value).filter(Boolean);
+    if(ids.length<2){alert('Select at least 2 lenders.');return;}
+    const sel=ids.map(id=>LENDERS.find(l=>l.id===id)).filter(Boolean);
+    const rows=[
+      ['Segment',l=>l.segmentLabel],['Min FICO',l=>typeof l.ficoMin==='number'?l.ficoMin:l.ficoMin||'—'],
+      ['Max Term',l=>l.maxTerm?`${l.maxTerm} mo`:'—'],['Max LTV',l=>l.maxLTV||'—'],
+      ['Max Mileage',l=>l.maxMileage||'—'],['Bureau',l=>l.bureaus?.primary?.map(b=>b.charAt(0).toUpperCase()+b.slice(1)).join(', ')||'—'],
+      ['GAP Max',l=>l.gapMax||'—'],['Reserve/Flat',l=>l.reserveStructure||'—'],
+      ['Chargeback',l=>l.chargebackWindow||'—'],['Effective',l=>l.effectiveDate||'—'],
+      ['Key Feature',l=>l.uniqueFeature||'—']
+    ];
+    const table=$('#sbs-table');
+    const thead=document.createElement('thead');
+    thead.innerHTML='<tr><th class="sbs-row-label"></th>'+sel.map(l=>`<th><div class="sbs-lender-pill ${l.colorClass}">${l.abbr||l.name}</div><div class="sbs-lender-name">${l.name}</div></th>`).join('')+'</tr>';
+    const tbody=document.createElement('tbody');
+    rows.forEach(([label,fn],i)=>{const tr=document.createElement('tr');tr.className=i%2===0?'sbs-row-even':'';tr.innerHTML=`<td class="sbs-row-label">${label}</td>`+sel.map(l=>`<td class="sbs-cell">${fn(l)}</td>`).join('');tbody.appendChild(tr);});
+    table.innerHTML=''; table.appendChild(thead); table.appendChild(tbody);
+    const r=$('#sbs-results'); r.hidden=false; r.removeAttribute('hidden');
+  });
+}
+
+// ─── KFA TAB DELEGATION ──────────────────────────────────────
+document.addEventListener('click', e => {
+  const tab=e.target.closest('.kfa-tab');
+  if(tab){const bar=tab.closest('.kfa-tab-bar'),cont=bar?.parentElement;if(!bar||!cont)return;bar.querySelectorAll('.kfa-tab').forEach(t=>t.classList.remove('active'));tab.classList.add('active');cont.querySelectorAll('.kfa-model-panel').forEach(p=>p.classList.remove('active'));const panel=cont.querySelector(`.kfa-model-panel[data-panel="${tab.dataset.model}"]`);if(panel)panel.classList.add('active');return;}
+  const pb=e.target.closest('.kfa-prog-btn');
+  if(pb){const mp=pb.closest('.kfa-model-panel');if(!mp)return;pb.closest('.kfa-program-toggle').querySelectorAll('.kfa-prog-btn').forEach(b=>b.classList.remove('active'));pb.classList.add('active');mp.querySelectorAll('.kfa-prog-panel').forEach(p=>p.classList.remove('active'));const pp=mp.querySelector(`.kfa-prog-panel[data-progpanel="${pb.dataset.prog}"]`);if(pp)pp.classList.add('active');}
+});
+
+// Kick off
+document.addEventListener('DOMContentLoaded', init);
+</script>
 </body>
 </html>
