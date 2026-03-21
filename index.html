@@ -193,7 +193,60 @@ ul, ol { list-style: none; }
 }
 .sidebar-item:hover { background: var(--bg3); color: var(--text); }
 .sidebar-item.active { background: var(--golddim2); color: var(--gold); border-color: rgba(245,158,11,.25); }
+.sidebar-item.hidden { display: none; }
+.sidebar-item mark { background: rgba(245,158,11,.3); color: var(--gold); border-radius: 2px; padding: 0 1px; }
 .tier-dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+
+/* ── Search bar ───────────────────────────── */
+.sidebar-search-wrap {
+  display: flex; align-items: center; gap: 6px;
+  background: var(--bg3); border: 1px solid var(--border2);
+  border-radius: var(--r-md); padding: 6px 10px;
+  margin: 0 2px 8px;
+  transition: border-color .15s;
+}
+.sidebar-search-wrap:focus-within { border-color: var(--gold); }
+.sidebar-search-icon { color: var(--text3); flex-shrink: 0; }
+#sidebar-search {
+  flex: 1; background: none; border: none; outline: none;
+  font: 500 .8rem var(--font); color: var(--text);
+  min-width: 0;
+}
+#sidebar-search::placeholder { color: var(--text3); }
+#sidebar-search-clear {
+  background: none; border: none; cursor: pointer;
+  color: var(--text3); font-size: .7rem; padding: 0;
+  display: none; line-height: 1;
+}
+#sidebar-search-clear:hover { color: var(--text); }
+#sidebar-search-clear.visible { display: block; }
+
+/* ── Segment filter chips ─────────────────── */
+#sidebar-filter-chips {
+  display: flex; flex-wrap: wrap; gap: 4px;
+  padding: 0 2px 4px;
+}
+.seg-chip {
+  font: 600 .6rem var(--font); letter-spacing: .05em;
+  text-transform: uppercase; padding: 3px 8px;
+  border-radius: var(--r-full); border: 1px solid var(--border2);
+  background: var(--bg3); color: var(--text3);
+  cursor: pointer; transition: all .15s;
+}
+.seg-chip:hover { color: var(--text); border-color: var(--border2); }
+.seg-chip-all.active  { background: var(--golddim2); color: var(--gold); border-color: rgba(245,158,11,.3); }
+.seg-chip-prime.active  { background: var(--greendim); color: var(--green); border-color: rgba(16,185,129,.3); }
+.seg-chip-near.active   { background: var(--bluedim);  color: var(--blue);  border-color: rgba(96,165,250,.3); }
+.seg-chip-sub.active    { background: rgba(245,158,11,.12); color: var(--gold);  border-color: rgba(245,158,11,.3); }
+.seg-chip-deep.active   { background: var(--reddim);   color: var(--red);   border-color: rgba(239,68,68,.3); }
+
+/* ── No results message ───────────────────── */
+#sidebar-no-results {
+  display: none; text-align: center;
+  font-size: .75rem; color: var(--text3);
+  padding: 12px 8px;
+}
+#sidebar-no-results.visible { display: block; }
 .lender-badge {
   margin-left: auto; font-size: .6rem; font-weight: 700;
   padding: 1px 6px; border-radius: var(--r-full);
@@ -705,8 +758,23 @@ mark { background: var(--golddim2); color: var(--gold); border-radius: 2px; padd
       <span class="lender-badge badge-all">18</span>
     </div>
   </div>
-  <div class="sidebar-section">
-    <div class="sidebar-label">All Lenders</div>
+  <div class="sidebar-section" style="padding-bottom:6px">
+    <div class="sidebar-search-wrap">
+      <svg class="sidebar-search-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+      <input id="sidebar-search" type="search" placeholder="Search lenders…" autocomplete="off" spellcheck="false">
+      <button id="sidebar-search-clear" title="Clear">✕</button>
+    </div>
+    <div id="sidebar-filter-chips">
+      <button class="seg-chip seg-chip-all active" data-seg="all">All</button>
+      <button class="seg-chip seg-chip-prime" data-seg="prime">Prime</button>
+      <button class="seg-chip seg-chip-near" data-seg="near">Near</button>
+      <button class="seg-chip seg-chip-sub" data-seg="sub">Sub</button>
+      <button class="seg-chip seg-chip-deep" data-seg="deep">Deep</button>
+    </div>
+    <div id="sidebar-no-results">No matches</div>
+  </div>
+  <div class="sidebar-section" style="padding-top:0">
+    <div class="sidebar-label" id="sidebar-lenders-label">All Lenders</div>
     <div id="sidebar-lenders"></div>
   </div>
   <div class="sidebar-section" style="padding-top:0">
@@ -1391,6 +1459,68 @@ function handleSearch(q) {
 function openMobileSidebar() { $('#sidebar').classList.add('open'); $('#sidebar-overlay').classList.add('active'); document.body.style.overflow='hidden'; }
 function closeMobileSidebar() { $('#sidebar').classList.remove('open'); $('#sidebar-overlay').classList.remove('active'); document.body.style.overflow=''; }
 
+// ─── SIDEBAR SEARCH & FILTER ─────────────────────────────────
+let activeSegFilter = 'all';
+
+function filterSidebar() {
+  const q = ($('#sidebar-search')?.value || '').trim().toLowerCase();
+  const items = $$('.sidebar-item[data-id]');
+  let visible = 0;
+
+  items.forEach(item => {
+    const id = item.getAttribute('data-id');
+    const lender = LENDERS.find(l => l.id === id);
+    if (!lender) return;
+
+    // Segment filter
+    const segMatch = activeSegFilter === 'all' || lender.segment === activeSegFilter;
+
+    // Text search: check name, fullName, uniqueFeature, ficoNotes, and all section content
+    let textMatch = true;
+    if (q) {
+      const searchable = [
+        lender.name, lender.fullName, lender.ficoNotes,
+        lender.uniqueFeature || '', lender.segmentLabel,
+        lender.reserveStructure, lender.chargebackWindow,
+        lender.stateRestriction || '',
+        ...Object.values(lender.sections).map(s => s.label + ' ' + s.content.replace(/<[^>]+>/g,''))
+      ].join(' ').toLowerCase();
+      textMatch = searchable.includes(q);
+    }
+
+    const show = segMatch && textMatch;
+    item.classList.toggle('hidden', !show);
+
+    // Highlight match in name
+    const nameEl = item.querySelector('span:nth-child(2)');
+    if (nameEl) {
+      if (q && textMatch) {
+        const raw = lender.name;
+        const idx = raw.toLowerCase().indexOf(q);
+        if (idx >= 0) {
+          nameEl.innerHTML = raw.slice(0,idx) + '<mark>' + raw.slice(idx, idx+q.length) + '</mark>' + raw.slice(idx+q.length);
+        } else {
+          nameEl.textContent = raw;
+        }
+      } else {
+        nameEl.textContent = lender.name;
+      }
+    }
+
+    if (show) visible++;
+  });
+
+  // Update count label
+  const label = $('#sidebar-lenders-label');
+  if (label) label.textContent = q || activeSegFilter !== 'all' ? `${visible} Lender${visible!==1?'s':''}` : 'All Lenders';
+
+  // No results message
+  $('#sidebar-no-results')?.classList.toggle('visible', visible === 0);
+
+  // Clear button visibility
+  $('#sidebar-search-clear')?.classList.toggle('visible', q.length > 0);
+}
+
 // ─── INIT ────────────────────────────────────────────────────
 function init() {
   buildSidebar();
@@ -1407,6 +1537,28 @@ function init() {
   $$('.sidebar-item[data-id]').forEach(item => {
     item.addEventListener('click', () => showView('lender', item.getAttribute('data-id')));
     item.addEventListener('keydown', e => { if (e.key==='Enter'||e.key===' ') item.click(); });
+  });
+
+  // Sidebar search
+  const searchInput = $('#sidebar-search');
+  searchInput?.addEventListener('input', filterSidebar);
+  searchInput?.addEventListener('keydown', e => {
+    if (e.key === 'Escape') { searchInput.value = ''; filterSidebar(); searchInput.blur(); }
+    if (e.key === 'Enter') {
+      const first = $$('.sidebar-item[data-id]').find(i => !i.classList.contains('hidden'));
+      if (first) { first.click(); searchInput.blur(); }
+    }
+  });
+  $('#sidebar-search-clear')?.addEventListener('click', () => { searchInput.value = ''; filterSidebar(); searchInput.focus(); });
+
+  // Segment filter chips
+  $$('.seg-chip').forEach(chip => {
+    chip.addEventListener('click', () => {
+      $$('.seg-chip').forEach(c => c.classList.remove('active'));
+      chip.classList.add('active');
+      activeSegFilter = chip.getAttribute('data-seg');
+      filterSidebar();
+    });
   });
 
   $$('#compare-tbody tr').forEach(row => {
