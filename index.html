@@ -960,8 +960,12 @@ mark { background: var(--golddim2); color: var(--gold); border-radius: 2px; padd
           <div class="sp-panel-h">Pace &amp; Projection</div>
           <div class="sp-rowline"><span>Selling days</span><span><b id="sp-sd-elapsed">0</b> of <b id="sp-sd-total">0</b> elapsed &middot; <b id="sp-sd-remaining">0</b> left</span></div>
           <div class="sp-rowline"><span>Run rate</span><span><b id="sp-perday">&mdash;</b> units/day</span></div>
-          <div class="sp-rowline sp-rowbig"><span>Projected units</span><span class="sp-projv" id="sp-proj-units">&mdash;</span></div>
-          <div class="sp-rowline"><span>vs unit goal</span><span id="sp-vs-units"><span class="sp-muted">no goal set</span></span></div>
+          <div class="sp-rowline sp-rowbig"><span>Projected new</span><span class="sp-projv" id="sp-proj-new">&mdash;</span></div>
+          <div class="sp-rowline"><span>vs new goal</span><span id="sp-vs-new"><span class="sp-muted">no goal set</span></span></div>
+          <div class="sp-rowline sp-rowbig"><span>Projected used</span><span class="sp-projv" id="sp-proj-used">&mdash;</span></div>
+          <div class="sp-rowline"><span>vs used goal</span><span id="sp-vs-used"><span class="sp-muted">no goal set</span></span></div>
+          <div class="sp-rowline sp-rowbig"><span>Projected total</span><span class="sp-projv" id="sp-proj-units">&mdash;</span></div>
+          <div class="sp-rowline"><span>vs total goal</span><span id="sp-vs-units"><span class="sp-muted">no goal set</span></span></div>
           <div class="sp-rowline sp-rowbig"><span>Projected gross</span><span class="sp-projv" id="sp-proj-gross">&mdash;</span></div>
           <div class="sp-rowline"><span>vs gross goal</span><span id="sp-vs-gross"><span class="sp-muted">no goal set</span></span></div>
           <div class="sp-rowline"><span>Need / day to hit units</span><span id="sp-need-units" class="sp-need">set goal</span></div>
@@ -970,7 +974,11 @@ mark { background: var(--golddim2); color: var(--gold); border-radius: 2px; padd
 
         <div class="sp-panel">
           <div class="sp-panel-h">Monthly Goal</div>
-          <label class="sp-fld"><span>Unit goal</span><input id="sp-goal-units" type="number" min="0" inputmode="numeric" placeholder="0"></label>
+          <div style="display:flex;gap:10px">
+            <label class="sp-fld" style="flex:1"><span>New goal</span><input id="sp-goal-new" type="number" min="0" inputmode="numeric" placeholder="0"></label>
+            <label class="sp-fld" style="flex:1"><span>Used goal</span><input id="sp-goal-used" type="number" min="0" inputmode="numeric" placeholder="0"></label>
+          </div>
+          <div class="sp-rowline" style="padding:2px 0 10px"><span>Total unit goal</span><b id="sp-goal-total">0</b></div>
           <label class="sp-fld"><span>Gross goal ($)</span><input id="sp-goal-gross" type="number" min="0" inputmode="decimal" placeholder="0"></label>
           <button id="sp-goal-save" class="sp-btn sp-btn-gold" style="width:100%">Save goal</button>
 
@@ -2112,6 +2120,8 @@ function spBindGate(){
   $('#sp-refresh').addEventListener('click',()=> spLoad());
   $('#sp-goal-save').addEventListener('click', spSaveGoal);
   $('#sp-sim-input').addEventListener('input', spRenderPaceCalc);
+  $('#sp-goal-new').addEventListener('input', spRenderPaceCalc);
+  $('#sp-goal-used').addEventListener('input', spRenderPaceCalc);
 }
 
 async function spLoad(silent){
@@ -2133,7 +2143,8 @@ function spDayMap(){ const m={}; spData.days.forEach(r=> m[r.sale_date]=r); retu
 function spRender(){
   $('#sp-month-label').textContent=spMonthLabel(spMonth);
   $('#sp-month-label2').textContent=spMonthLabel(spMonth);
-  $('#sp-goal-units').value=spData.goal? spData.goal.unit_goal : '';
+  $('#sp-goal-new').value=spData.goal&&spData.goal.new_goal? spData.goal.new_goal : '';
+  $('#sp-goal-used').value=spData.goal&&spData.goal.used_goal? spData.goal.used_goal : '';
   $('#sp-goal-gross').value=spData.goal? spData.goal.gross_goal : '';
   const days=spSellingDays(spMonth.getFullYear(),spMonth.getMonth());
   const map=spDayMap(), today=spToday();
@@ -2189,16 +2200,25 @@ function spRenderStats(){
 
 function spRenderPaceCalc(){
   const s=spCollect(), {total,elapsed,remaining}=spSellingCounts();
-  const goalU=Number($('#sp-goal-units').value)||0, goalG=Number($('#sp-goal-gross').value)||0;
-  const perU=elapsed>0? s.mtdUnits/elapsed : 0, perG=elapsed>0? s.mtdGross/elapsed : 0;
-  const projU=elapsed>0? Math.round(perU*total) : s.mtdUnits;
+  const goalNew=Number($('#sp-goal-new').value)||0, goalUsed=Number($('#sp-goal-used').value)||0, goalG=Number($('#sp-goal-gross').value)||0;
+  const goalU=goalNew+goalUsed;
+  $('#sp-goal-total').textContent=goalU;
+  const perN=elapsed>0? s.mtdNew/elapsed:0, perUu=elapsed>0? s.mtdUsed/elapsed:0, perG=elapsed>0? s.mtdGross/elapsed:0;
+  const projN=elapsed>0? Math.round(perN*total): s.mtdNew;
+  const projUu=elapsed>0? Math.round(perUu*total): s.mtdUsed;
+  const projU=projN+projUu;
   const projG=elapsed>0? perG*total : s.mtdGross;
+  const perU=elapsed>0? s.mtdUnits/elapsed:0;
   $('#sp-sd-total').textContent=total;
   $('#sp-sd-elapsed').textContent=elapsed;
   $('#sp-sd-remaining').textContent=remaining;
   $('#sp-perday').textContent=elapsed>0? perU.toFixed(1):'—';
+  $('#sp-proj-new').textContent=elapsed>0? projN:'—';
+  $('#sp-proj-used').textContent=elapsed>0? projUu:'—';
   $('#sp-proj-units').textContent=elapsed>0? projU:'—';
   $('#sp-proj-gross').textContent=elapsed>0? spFmt$(projG):'—';
+  spGoalLine('#sp-vs-new', projN, goalNew, false);
+  spGoalLine('#sp-vs-used', projUu, goalUsed, false);
   spGoalLine('#sp-vs-units', projU, goalU, false);
   spGoalLine('#sp-vs-gross', projG, goalG, true);
   const needU=remaining>0? Math.max(0,(goalU-s.mtdUnits))/remaining : null;
@@ -2225,8 +2245,8 @@ async function spSaveDay(tr){
 
 async function spSaveGoal(){
   const c=spGetClient(); if(!c) return;
-  const gu=Number($('#sp-goal-units').value)||0, gg=Number($('#sp-goal-gross').value)||0;
-  const { error } = await c.rpc('sp_set_goal',{ p_pin:spPin(), p_month:spMonthKey(spMonth), p_unit_goal:gu, p_gross_goal:gg });
+  const gn=Number($('#sp-goal-new').value)||0, gu=Number($('#sp-goal-used').value)||0, gg=Number($('#sp-goal-gross').value)||0;
+  const { error } = await c.rpc('sp_set_goal',{ p_pin:spPin(), p_month:spMonthKey(spMonth), p_new_goal:gn, p_used_goal:gu, p_gross_goal:gg });
   if(error){ if(/invalid pin/i.test(error.message||'')){ sessionStorage.removeItem('sp_pin'); renderPace(); return;} spStatus('goal failed',true); return; }
   spStatus('goal saved ✓'); setTimeout(()=> spStatus('synced • 45s'),1200);
   spRenderPaceCalc();
