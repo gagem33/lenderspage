@@ -1913,9 +1913,13 @@ function init() {
   sp?.addEventListener('click', () => showView('pace'));
   sp?.addEventListener('keydown', e => { if (e.key==='Enter'||e.key===' ') showView('pace'); });
 
-  $$('.sidebar-item[data-id]').forEach(item => {
-    item.addEventListener('click', () => showView('lender', item.getAttribute('data-id')));
-    item.addEventListener('keydown', e => { if (e.key==='Enter'||e.key===' ') item.click(); });
+  $('#sidebar-lenders')?.addEventListener('click', e => {
+    const item = e.target.closest('.sidebar-item[data-id]');
+    if (item) showView('lender', item.getAttribute('data-id'));
+  });
+  $('#sidebar-lenders')?.addEventListener('keydown', e => {
+    const item = e.target.closest('.sidebar-item[data-id]');
+    if (item && (e.key==='Enter'||e.key===' ')) { e.preventDefault(); showView('lender', item.getAttribute('data-id')); }
   });
 
   // Sidebar search
@@ -1940,8 +1944,9 @@ function init() {
     });
   });
 
-  $$('#compare-tbody tr').forEach(row => {
-    row.addEventListener('click', () => showView('lender', row.getAttribute('data-id')));
+  $('#compare-tbody')?.addEventListener('click', e => {
+    const row = e.target.closest('tr[data-id]');
+    if (row) showView('lender', row.getAttribute('data-id'));
   });
 
   const si = $('#search-input');
