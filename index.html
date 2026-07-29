@@ -805,6 +805,7 @@ mark { background: var(--golddim2); color: var(--gold); border-radius: 2px; padd
 .lc-flagship  { background: linear-gradient(135deg,#1a2e5a,#2e4a8f); }
 .lc-cps       { background: linear-gradient(135deg,#0f766e,#14b8a6); }
 .lc-usbank    { background: linear-gradient(135deg,#1d3a8a,#2854c5); }
+.lc-santander { background: linear-gradient(135deg,#ec0000,#b30000); }
 
 /* ─── SALES PACE TRACKER ─────────────────────────────────── */
 #view-pace .page-header{margin-bottom:8px}
@@ -943,7 +944,7 @@ mark { background: var(--golddim2); color: var(--gold); border-radius: 2px; padd
     <div class="sidebar-item active" id="sidebar-compare" role="button" tabindex="0">
       <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="flex-shrink:0"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
       <span style="flex:1">Compare All</span>
-      <span class="lender-badge badge-all">19</span>
+      <span class="lender-badge badge-all">20</span>
     </div>
     <div class="sidebar-item" id="sidebar-pace" role="button" tabindex="0">
       <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="flex-shrink:0"><path d="M3 3v18h18"/><path d="m7 14 4-4 3 3 5-6"/></svg>
@@ -987,7 +988,7 @@ mark { background: var(--golddim2); color: var(--gold); border-radius: 2px; padd
   <section class="view active" id="view-compare">
     <div class="page-header">
       <h1 class="page-title">Lender Quick Compare</h1>
-      <p class="page-subtitle">All 19 finance partners. Click any row to view full program details.</p>
+      <p class="page-subtitle">All 20 finance partners. Click any row to view full program details.</p>
       <p class="page-date">Programs current as of Q1 2026 — verify with each lender before submitting deals</p>
     </div>
     <div class="compare-wrap">
@@ -1287,12 +1288,15 @@ mark { background: var(--golddim2); color: var(--gold); border-radius: 2px; padd
 const LENDERS = [
   {
     id:'amcredit', name:'AmeriCredit', fullName:'AmeriCredit (GM Financial)', abbr:'GMF', colorClass:'lc-amcredit',
-    docTitle:'Retail Underwriting Guidelines', effectiveDate:'January 8, 2026',
+    docTitle:'Retail Underwriting Guidelines', effectiveDate:'June 12, 2026',
     segment:'near', segmentLabel:'Near-Prime', ficoMin:500,
     ficoNotes:'Bureau varies by state. No score below 500.',
     maxTerm:84, maxMileage:'100,000 mi', maxLTV:'135%', gapMax:'$1,500',
     reserveStructure:'Up to 2% / $200 flat @ buy rate', chargebackWindow:'3 payments / 3 cycles',
     uniqueFeature:'ITIN accepted; 70/30 split; state-specific bureau',
+    idReq:'Standard identity verification — no specific ID type required on sheet',
+    por:'Deal-by-deal: utility bill ≤45 days and/or paystub ≤45 days; prefers 1 yr residence history',
+    poi:'Paystub ≤45 days. Min $2,200/mo (A+–A2) / $2,400 (A3–B3). Self-employed: 3 consecutive bank statements. ITIN deals: bank statements required regardless of tier',
     bureaus:{primary:['equifax','transunion','experian'],note:'State-specific. EQ: CA NV OR WA ID MT WY UT CO NM AZ HI AK. EX: NC SC GA FL AL MS. TU: all other states.',stateMap:{equifax:'CA, NV, OR, WA, ID, MT, WY, UT, CO, NM, AZ, HI, AK',experian:'NC, SC, GA, FL, AL, MS',transunion:'All other states'}},
     sections:{
       fico:{icon:'📊',label:'FICO & Credit',content:`<div class="info-grid"><div class="info-row"><span class="info-key">Minimum Score</span><span class="info-val">500</span></div><div class="info-row"><span class="info-key">Bureau</span><span class="info-val">State-specific (Equifax, TransUnion, Experian)</span></div><div class="info-row"><span class="info-key">Min Income A+/A2</span><span class="info-val">$2,200 gross/mo</span></div><div class="info-row"><span class="info-key">Min Income A3/B3</span><span class="info-val">$2,400 gross/mo</span></div><div class="info-row"><span class="info-key">File Depth</span><span class="info-val">3+ yrs, 5 trade lines (3 active/current)</span></div><div class="info-row"><span class="info-key">Bankruptcy</span><span class="info-val">Ch. 7 & 13 must be discharged</span></div><div class="info-row"><span class="info-key">ITIN</span><span class="info-val">✓ Accepted — IRS assignment letter + bank statements</span></div><div class="info-row"><span class="info-key">Minimum Age</span><span class="info-val">18</span></div></div><div class="note-box info"><span class="note-icon">ℹ️</span><span>Equifax states: CA, NV, OR, WA, ID, MT, WY, UT, CO, NM, AZ, HI, AK. Experian: NC, SC, GA, FL, AL, MS. TransUnion: all remaining states.</span></div>`},
@@ -1306,13 +1310,16 @@ const LENDERS = [
   },
   {
     id:'exeter', name:'Exeter Finance', fullName:'Exeter Finance', abbr:'EXF', colorClass:'lc-exeter',
-    docTitle:'Program Guidelines / Rate Sheet', effectiveDate:'January 9, 2026',
+    docTitle:'Program Guidelines / Rate Sheet', effectiveDate:'June 12, 2026',
     segment:'sub', segmentLabel:'Sub-Prime', ficoMin:400,
     ficoNotes:'Standard: 400+; Zero FICO considered. ExeterPLUS: 620+.',
-    maxTerm:78, maxMileage:'200,000 mi', maxLTV:'150%', gapMax:'$1,200',
+    maxTerm:84, maxMileage:'200,000 mi', maxLTV:'150%', gapMax:'$1,200',
     reserveStructure:'Up to 2% power flat (varies by tier)',
     chargebackWindow:'3 payments (first 3 must be made in full)',
     uniqueFeature:'Zero FICO accepted; ExeterPLUS at 620+; 200K mile limit',
+    idReq:'Valid government-issued ID at contracting (DL not required as ID; title names must match a valid DL)',
+    por:'If stipped, ≤30 days: DL, utility bill, paystub or bank statement; active phone + physical address required',
+    poi:'Paystub ≤30 days + VOE. Min $1,700/mo single / $2,500 joint. Self-employed: tax return or 3 mo bank statements. Rideshare/delivery income ineligible',
     bureaus:{primary:['equifax','transunion','experian'],note:'Pulls all three bureaus. Uses middle score.',stateMap:{}},
     sections:{
       fico:{icon:'📊',label:'FICO & Credit',content:`<div class="info-grid"><div class="info-row"><span class="info-key">Standard Min FICO</span><span class="info-val">400 (zero FICO considered)</span></div><div class="info-row"><span class="info-key">ExeterPLUS Min FICO</span><span class="info-val">620</span></div><div class="info-row"><span class="info-key">Standard Rate As Low As</span><span class="info-val">10.95%</span></div><div class="info-row"><span class="info-key">BK — Chapter 7</span><span class="info-val">Will consider</span></div><div class="info-row"><span class="info-key">BK — Chapter 13</span><span class="info-val">Must be discharged</span></div><div class="info-row"><span class="info-key">Dismissed BK</span><span class="info-val">Must be 12+ months old</span></div></div>`},
@@ -1326,12 +1333,15 @@ const LENDERS = [
   },
   {
     id:'regional', name:'Regional Acceptance', fullName:'Regional Finance / Regional Acceptance Corp.', abbr:'RAC', colorClass:'lc-regional',
-    docTitle:'Consumer Rates — Indirect Auto Finance', effectiveDate:'January 1, 2026',
+    docTitle:'Consumer Rates — Indirect Auto Finance', effectiveDate:'May 27, 2026',
     segment:'sub', segmentLabel:'Sub-Prime', ficoMin:null, stateRestriction:'Texas Only',
     ficoNotes:'Tier-based (T1–T7); no explicit FICO minimum.',
     maxTerm:84, maxMileage:'130,000 mi', maxLTV:'125%', gapMax:'$1,000',
-    reserveStructure:'Flat (T1–4) / Discount (T5–7); up to 3% flat / 6.5% discount',
+    reserveStructure:'Flat (T1–4) up to 2.75% / $1,100; discount (T5–7) up to 5.75%, min $1,500',
     chargebackWindow:'N/A', uniqueFeature:'TX only; T1–4 flat pay, T5–7 dealer discount; 84mo on T1–4 with ≤20K miles',
+    idReq:'Valid government-issued photo ID — any state ID acceptable',
+    por:'Required: utility, phone/cell, bank or credit card statement ≤60 days matching app + contract address; no prepaid phones',
+    poi:'Proof of ALL income. Paystub w/ YTD ≤60 days; self-employed: 2 yrs tax returns + 4506-C. Min $1,900 individual / $2,200 joint. No gross-up',
     bureaus:{primary:['transunion'],note:'Primarily TransUnion.',stateMap:{}},
     sections:{
       fico:{icon:'📊',label:'Tiers & Credit',content:`<div class="note-box info"><span class="note-icon">ℹ️</span><span>No explicit FICO minimums. Tier assignment (T1–T7) determines rates, LTV, and max terms. Contact RAC for tier qualification guidelines.</span></div><table class="tier-table" style="margin-top:14px"><thead><tr><th>Tier</th><th>Type</th><th>Max LTV</th><th>Max Term</th></tr></thead><tbody><tr><td>T1</td><td>Flat</td><td>125%</td><td>84mo (≤20K mi)</td></tr><tr><td>T2</td><td>Flat</td><td>125%</td><td>84mo (≤20K mi)</td></tr><tr><td>T3</td><td>Flat</td><td>125%</td><td>84mo (≤20K mi)</td></tr><tr><td>T4</td><td>Flat</td><td>125%</td><td>84mo (≤20K mi)</td></tr><tr><td>T5</td><td>Discount</td><td>120%</td><td>75mo (≤70K mi)</td></tr><tr><td>T6</td><td>Discount</td><td>115%</td><td>75mo (≤50K mi)</td></tr><tr><td>T7</td><td>Discount</td><td>110%</td><td>72mo (≤60K mi)</td></tr></tbody></table><div class="note-box warn" style="margin-top:10px"><span class="note-icon">🏴</span><span><strong>Texas Only.</strong> ELT Code: 56124067800</span></div>`},
@@ -1342,13 +1352,16 @@ const LENDERS = [
   },
   {
     id:'truist', name:'Truist', fullName:'Truist Dealer Financial Services', abbr:'TRU', colorClass:'lc-truist',
-    docTitle:'Program Guide Reference Sheet', effectiveDate:'February 5, 2026',
+    docTitle:'Program Guide Reference Sheet', effectiveDate:'July 20, 2026',
     segment:'prime', segmentLabel:'Prime', ficoMin:640,
     ficoNotes:'Min 640; both applicants must score 640+. 680+ for 76–84 month terms.',
-    maxTerm:84, maxMileage:'120,000 mi (50K for 76–84mo)', maxLTV:'155%', gapMax:'See callback',
+    maxTerm:84, maxMileage:'120,000 mi (50K for 76–84mo)', maxLTV:'155%', gapMax:'$1,200 (state caps vary)',
     reserveStructure:'Up to 2% (≤75mo) / 1.5% (76–84mo); max $8,000; flat guide $150–$2,600',
     chargebackWindow:'Flat cancel: charged if no payment within 20 days',
     uniqueFeature:'Backend up to $10K; CPO bonus $750–$1,500; 6 tiers Super Prime → Subprime',
+    idReq:'Not specified on program sheet',
+    por:'If stipped (<1.5 yrs at address): CC/bank stmt <3 mo, utility <3 mo, mortgage/tax docs, DL, insurance renewal <6 mo, voter reg, LES',
+    poi:'Not specified on program sheet',
     bureaus:{primary:['transunion','equifax'],note:'Primary: TU FICO Auto 9. EQ used for FL, GA, NC, SC, TX, VA.',stateMap:{transunion:'Most states',equifax:'FL, GA, NC, SC, TX, VA'}},
     sections:{
       fico:{icon:'📊',label:'FICO & Tiers',content:`<div class="info-grid"><div class="info-row"><span class="info-key">Bureau</span><span class="info-val">TransUnion FICO Auto 9 (Equifax for FL, GA, NC, SC, TX, VA)</span></div><div class="info-row"><span class="info-key">Minimum Score</span><span class="info-val">640 (all applicants)</span></div><div class="info-row"><span class="info-key">76–84mo Min FICO</span><span class="info-val">680</span></div><div class="info-row"><span class="info-key">Max DTI</span><span class="info-val">65% (all tiers)</span></div><div class="info-row"><span class="info-key">Max PTI (≤75mo)</span><span class="info-val">20%</span></div><div class="info-row"><span class="info-key">Max PTI (76–84mo)</span><span class="info-val">18%</span></div></div><table class="tier-table" style="margin-top:14px"><thead><tr><th>Tier</th><th>Label</th><th>FE LTV ≤75mo</th><th>Total LTV ≤75mo</th><th>FE LTV 76–84mo</th></tr></thead><tbody><tr><td>T1/A1</td><td>Super Prime</td><td>130%</td><td>155%</td><td>120%</td></tr><tr><td>T2/A2</td><td>Prime</td><td>130%</td><td>155%</td><td>120%</td></tr><tr><td>T3/B1</td><td>Near Prime</td><td>125%</td><td>145%</td><td>115%</td></tr><tr><td>T4/B2</td><td>Standard</td><td>120%</td><td>140%</td><td>115%</td></tr><tr><td>T5/B3</td><td>Below Standard</td><td>120%</td><td>135%</td><td>115%</td></tr><tr><td>T6/C1</td><td>Subprime</td><td>120%</td><td>130%</td><td>115%</td></tr></tbody></table>`},
@@ -1361,13 +1374,16 @@ const LENDERS = [
   },
   {
     id:'td', name:'TD Auto Finance', fullName:'TD Auto Finance (TDAF)', abbr:'TDA', colorClass:'lc-td',
-    docTitle:'TDAF Retail Program Guide', effectiveDate:'January 1, 2026',
+    docTitle:'TDAF Retail Program Guide', effectiveDate:'June 30, 2026',
     segment:'near', segmentLabel:'Near-Prime', ficoMin:null,
     ficoNotes:'Automated 9-tier system. No BK or repo within 36 months.',
-    maxTerm:84, maxMileage:'120,000 mi', maxLTV:'150%', gapMax:'$1,300',
+    maxTerm:84, maxMileage:'120,000 mi', maxLTV:'150%', gapMax:'$1,500',
     reserveStructure:'80/20 split; TDAF pays greater of reserve, flat fee, or enhanced flat automatically',
     chargebackWindow:'6 scheduled payments',
     uniqueFeature:'BPS-based flat fee enhancement; 9 tiers; open 7 days/week; medium-duty truck program',
+    idReq:'No DL requirement — SSN or ITIN only; do NOT include ID copies in funding package',
+    por:'If stipped: utility/phone bill ≤60 days, paystub ≤30, bank stmt ≤30, or tribal chapter letter',
+    poi:'If stipped: paystub ≤30 days or prior-yr W-2; self-employed: tax return, 1099 + 3 mo bank statements',
     bureaus:{primary:['transunion'],note:'TransUnion Auto FICO 08 via RouteOne & Dealertrack.',stateMap:{}},
     sections:{
       fico:{icon:'📊',label:'Tiers & Credit',content:`<div class="info-grid"><div class="info-row"><span class="info-key">Bureau</span><span class="info-val">TransUnion Auto FICO 08 (RouteOne & Dealertrack)</span></div><div class="info-row"><span class="info-key">Scoring</span><span class="info-val">Automated — 9 tiers (T1–T9)</span></div><div class="info-row"><span class="info-key">BK Restriction</span><span class="info-val">Ineligible if bankruptcy within 36 months</span></div><div class="info-row"><span class="info-key">Repo Restriction</span><span class="info-val">Ineligible if repossession within 36 months</span></div><div class="info-row"><span class="info-key">Cannabis Business</span><span class="info-val">Generally ineligible (exceptions with prior written notice)</span></div></div>`},
@@ -1381,12 +1397,15 @@ const LENDERS = [
   },
   {
     id:'wellsfargo', name:'Wells Fargo', fullName:'Wells Fargo Auto', abbr:'WFA', colorClass:'lc-wells',
-    docTitle:'Dealer Program Reference Guide', effectiveDate:'October 14, 2025',
+    docTitle:'Dealer Program Reference Guide', effectiveDate:'June 16, 2026',
     segment:'prime', segmentLabel:'Prime', ficoMin:null,
     ficoNotes:'6 tiers (Super Prime → Regular); DACA/NPRA eligible; 150K mile limit.',
-    maxTerm:84, maxMileage:'150,000 mi', maxLTV:'135%', gapMax:'$1,200',
+    maxTerm:84, maxMileage:'150,000 mi', maxLTV:'135%', gapMax:'$1,500',
     reserveStructure:'Max $5,000 per deal', chargebackWindow:'See callback',
     uniqueFeature:'DACA/NPRA eligible; 150K mile limit; broadest backend matrix',
+    idReq:'Gov ID (DL, state or tribal) appears as POR doc; DACA: EAD I-766 (C-33/36/18); NPRA: I-94 or green card',
+    por:'If stipped, ≤60 days: utility, mortgage/bank docs, employment letter, 911 letter, tribal POR; lease/insurance/gov ID exempt from 60-day rule',
+    poi:'Paystub ≤30 days; W-2 accepted through Feb 28; self-employed: full signed tax return (bank stmts NOT accepted); non-taxable grossed up',
     bureaus:{primary:['equifax','transunion','experian'],note:'Pulls all three, uses middle score.',stateMap:{}},
     sections:{
       fico:{icon:'📊',label:'FICO & Tiers',content:`<div class="info-grid"><div class="info-row"><span class="info-key">Tiers</span><span class="info-val">T1 Super Prime → T6 Regular (FICO cutoffs via callback)</span></div><div class="info-row"><span class="info-key">84-Month Restriction</span><span class="info-val">No thin file or first-time buyers</span></div><div class="info-row"><span class="info-key">DACA / NPRA</span><span class="info-val">✓ Eligible — valid SSN or ITIN; Form I-766/EAD (DACA); Form I-94 (NPRA)</span></div><div class="info-row"><span class="info-key">ITIN Note</span><span class="info-val">ITIN assignment letter does NOT satisfy Proof of Legal Residency Status</span></div></div>`},
@@ -1400,12 +1419,15 @@ const LENDERS = [
   },
   {
     id:'ally', name:'Ally Financial', fullName:'Ally Financial', abbr:'ALY', colorClass:'lc-ally',
-    docTitle:'Underwriting Policies & Provisions', effectiveDate:'February 1, 2026',
+    docTitle:'Underwriting Policies & Provisions', effectiveDate:'April 1, 2026',
     segment:'prime', segmentLabel:'Prime+', ficoMin:520,
     ficoNotes:'Retail min 520; Lease min 550. Tiers S,A,B,C,D,E. CC down up to $5K.',
     maxTerm:84, maxMileage:'150,000 mi', maxLTV:'140%', gapMax:'$1,500 (<$80K) / $2,000 (>$80K)',
-    reserveStructure:'ADR Retail Bonus Reward (Feb 1, 2026); flat $150–$500 per bracket',
+    reserveStructure:'Rate spread up to 2.5% (≤60mo) / 2% (61–75) / 1.5% (76–84); min DFI flats $150–$500 by amount',
     chargebackWindow:'See callback', uniqueFeature:'SmartLease; CC down up to $5K; auction CPO $1K bonus; GAP Plus available',
+    idReq:'DL not required; when stipped, proof of name via marriage cert, SS card, DL; DOB via DL, birth cert or passport',
+    por:'If stipped: current billing stmt (utility, cell non-prepaid, cable, bank, CC), paystub, mortgage, DL, or fixed-income award letter',
+    poi:'If stipped: paystub ≤60 days w/ YTD; handwritten checks need 4 stubs + bank stmts; self-employed: signed tax return (Sch C); no stated min income',
     bureaus:{primary:['equifax','transunion','experian'],note:'All three bureaus; uses middle score.',stateMap:{}},
     sections:{
       fico:{icon:'📊',label:'FICO & Tiers',content:`<div class="info-grid"><div class="info-row"><span class="info-key">Retail Min FICO</span><span class="info-val">520 (all tiers)</span></div><div class="info-row"><span class="info-key">Lease Min FICO</span><span class="info-val">550 (all tiers)</span></div><div class="info-row"><span class="info-key">Tiers (Prime)</span><span class="info-val">S, A, B, C (FICO ≥620)</span></div><div class="info-row"><span class="info-key">Tiers (Non-Prime)</span><span class="info-val">S, A, B, C, D, E (FICO &lt;620)</span></div><div class="info-row"><span class="info-key">Max Rate (New)</span><span class="info-val">24.00% or state cap</span></div><div class="info-row"><span class="info-key">Max Rate (Used)</span><span class="info-val">25.00% or state cap</span></div></div><h4 style="margin:12px 0 6px;font-size:.75rem;text-transform:uppercase;letter-spacing:.06em;opacity:.7">Prime Max Advance — Standard (FICO ≥620, EDC/AWV &lt;$100K)</h4><table class="tier-table"><thead><tr><th>Term Band</th><th>Tier S</th><th>Tier A</th><th>Tier B New</th><th>Tier B Used</th><th>Tier C New</th><th>Tier C Used</th></tr></thead><tbody><tr><td>≤63mo</td><td>140%</td><td>135%</td><td>130%</td><td>135%</td><td>125%</td><td>130%</td></tr><tr><td>64–75mo</td><td>135%</td><td>130%</td><td>125%</td><td>130%</td><td>120%</td><td>125%</td></tr><tr><td>76–84mo</td><td>135%N/130%U</td><td>125%N/120%U</td><td colspan="2" style="text-align:center">115%</td><td>N/A</td><td>N/A</td></tr></tbody></table>`},
@@ -1419,13 +1441,16 @@ const LENDERS = [
   },
   {
     id:'fifththird', name:'Fifth Third Bank', fullName:'Fifth Third Bank — Auto', abbr:'5/3', colorClass:'lc-fifth',
-    docTitle:'Consumer Auto Program Guide — Texas', effectiveDate:'November 12, 2025',
+    docTitle:'Consumer Auto Program Guide — Texas', effectiveDate:'July 23, 2026',
     segment:'near', segmentLabel:'Near-Prime', ficoMin:650, stateRestriction:'Texas Only',
     ficoNotes:'Min 650 for 2013+ units. TX only.',
     maxTerm:84, maxMileage:'140,000 mi', maxLTV:'140%', gapMax:'$1,850 or 5% of amt financed',
     reserveStructure:'3% at buy rate; 100% flat (no cap); Elite bonus up to +0.75%',
     chargebackWindow:'3 payments or 120 days',
     uniqueFeature:'Elite points program; guaranteed $4K backend; TX only; MSRP/JD Power Retail',
+    idReq:'Valid driver\'s license AND SSN or ITIN required for all signers',
+    por:'Not a standard stip — verifiable physical address required',
+    poi:'Docs not specified; only applicant income counted; no marijuana-business income',
     bureaus:{primary:['equifax','transunion','experian'],note:'All three bureaus.',stateMap:{}},
     sections:{
       fico:{icon:'📊',label:'FICO & Elite Program',content:`<div class="info-grid"><div class="info-row"><span class="info-key">Minimum FICO</span><span class="info-val">650 (for 2013+ units)</span></div></div><div class="note-box info" style="margin-top:10px"><span class="note-icon">⭐</span><span><strong>Elite Program:</strong> Earn points per booked contract (1pt base, +1 for 2020 or older, +1 for 75+mo, +1 for under 750 FICO). Elite (30–64pts): +0.25% flat. Gold Elite (65–94pts): +0.50% flat. Platinum Elite (95+pts): +0.75% flat.</span></div>`},
@@ -1438,13 +1463,16 @@ const LENDERS = [
   },
   {
     id:'gls', name:'GLS / Global Lending', fullName:'GLS (Global Lending Services)', abbr:'GLS', colorClass:'lc-gls',
-    docTitle:'Buying Guidelines / Program Guidelines', effectiveDate:'2025 (v49)',
+    docTitle:'Buying Guidelines / Program Guidelines', effectiveDate:'2026 (v53)',
     segment:'sub', segmentLabel:'Sub-Prime', ficoMin:400,
     ficoNotes:'400–700 range; zero FICO considered. Self-employed/1099 NOT accepted. Min $1,800/mo.',
-    maxTerm:78, maxMileage:'180,000 mi', maxLTV:'135%', gapMax:'$1,100',
-    reserveStructure:'T1–T2: up to 3% flat; T3–T4: up to 2%; Select: up to 4% — NO CHARGEBACKS',
+    maxTerm:78, maxMileage:'180,000 mi', maxLTV:'140%', gapMax:'$1,200 Select / $1,100 others',
+    reserveStructure:'Flats: Select up to 4%; T1–2 3%; T3–4 2%; Advantage 2% — no chargebacks',
     chargebackWindow:'NO CHARGEBACKS',
     uniqueFeature:'15-second approvals 24/7/365; no chargebacks; self-employed NOT accepted; 180K mile limit',
+    idReq:'Photocopy of valid U.S. driver\'s license required for all signers',
+    por:'Required ≤30 days: ONE utility bill (electric/gas/water/cable/internet/garbage) OR TWO of: bank stmt, cell bill (no prepaid), CC stmt, DL, paystub',
+    poi:'Required ≤30 days. Min $1,800/mo, PTI ≤24%. Paystub ≤30 days; fixed income: award letter + 3 mo bank stmts; self-employed/1099 NOT accepted',
     bureaus:{primary:['equifax'],note:'Primarily Equifax.',stateMap:{}},
     sections:{
       fico:{icon:'📊',label:'FICO & Credit',content:`<div class="info-grid"><div class="info-row"><span class="info-key">Score Range</span><span class="info-val">400–700 (zero FICO also considered)</span></div><div class="info-row"><span class="info-key">Self-Employed / 1099</span><span class="info-val" style="color:var(--red)">✗ NOT ACCEPTED</span></div><div class="info-row"><span class="info-key">Max PTI</span><span class="info-val">24%</span></div><div class="info-row"><span class="info-key">Min Income</span><span class="info-val">$1,800/month</span></div><div class="info-row"><span class="info-key">Dealership Employees</span><span class="info-val">GLS does not accept sales, management, or F&I personnel</span></div></div><div class="note-box success" style="margin-top:10px"><span class="note-icon">⚡</span><span><strong>Approvals as fast as 15 seconds, 24/7/365.</strong> Clean deals fund in 48 hours. No book-to-look requirements.</span></div>`},
@@ -1461,10 +1489,13 @@ const LENDERS = [
     docTitle:'Executive Diamond Partner Program Guidelines', effectiveDate:'January 2026',
     segment:'all', segmentLabel:'All Tiers (0–9)', ficoMin:null,
     ficoNotes:'Tiers 0–9; no published FICO minimums — all deals via Dealer Navigator.',
-    maxTerm:84, maxMileage:'200,000 mi', maxLTV:'175%', gapMax:'$1,200',
+    maxTerm:84, maxMileage:'200,000 mi', maxLTV:'150–175%', gapMax:'$1,200',
     reserveStructure:'Up to 2.5% (≤60mo) / 2% (≤75mo) / 1.5% (76+mo); flat $100–$300 at buy rate',
     chargebackWindow:'See Dealer Navigator callback',
     uniqueFeature:'Auto Navigator pre-qualified leads; 200K miles; lowest min financed ($2K); 15-yr vehicle age',
+    idReq:'Not specified (DL / ID card appear only as POR options)',
+    por:'If stipped, ≤60 days: 911 letter, bureau report, DL/ID card, financial mail, insurance, lease, mortgage, paystub, tribal letter, utility, W-2 (≤Apr 15)',
+    poi:'If stipped per callback. Min $1,500/mo; min $50 net disposable income',
     bureaus:{primary:['equifax','transunion','experian'],note:'All three bureaus; uses middle score.',stateMap:{}},
     sections:{
       fico:{icon:'📊',label:'Tiers & Credit',content:`<div class="info-grid"><div class="info-row"><span class="info-key">Tier System</span><span class="info-val">Tiers 0 through 9 (expanded access)</span></div><div class="info-row"><span class="info-key">How to Submit</span><span class="info-val">Capital One Dealer Navigator — all deals checked for best callback</span></div><div class="info-row"><span class="info-key">Min Income</span><span class="info-val">$1,500/month</span></div><div class="info-row"><span class="info-key">Thin File</span><span class="info-val">$1,000 min income for &lt;2yrs on file or &lt;3 trade lines</span></div><div class="info-row"><span class="info-key">NDI Requirement</span><span class="info-val">Income − (rent/mortgage + auto payment + living expenses + debt) must be ≥$50</span></div></div>`},
@@ -1476,13 +1507,16 @@ const LENDERS = [
   },
   {
     id:'westlake', name:'Westlake Financial', fullName:'WLF (Westlake Financial)', abbr:'WLF', colorClass:'lc-westlake',
-    docTitle:'Program Guidelines v.120925_2', effectiveDate:'January 2026',
+    docTitle:'Program Guidelines v.120925_2', effectiveDate:'July 2026',
     segment:'deep', segmentLabel:'Deep Sub-Prime', ficoMin:null,
     ficoNotes:'Determined by Buy Program. Rate markup for 600+. Accepts open BKs with stips.',
-    maxTerm:null, maxMileage:'150,000 mi', maxLTV:'Per Buy Program', gapMax:'Per Buy Program',
+    maxTerm:null, maxMileage:'No max (Prime 150K)', maxLTV:'140–150% incl. backend', gapMax:'Per Buy Program',
     reserveStructure:'Up to 2% markup (600+ FICO); 65/35 split; no chargebacks on markup',
     chargebackWindow:'No chargebacks on rate markup',
     uniqueFeature:'TurboPass income; cash income; open BKs with stips; foreign ID/matriculas; branded/salvage vehicles eligible',
+    idReq:'DL or state ID card; foreign IDs OK (passport, matrícula, consular ID), Green Card, DHS docs; suspended/revoked DL not financed',
+    por:'Required ≤45 days: pre-existing utility/phone bill, bank stmt, CC stmt, or TurboPass (90-day history); no PO Box, no hotels/temporary residences',
+    poi:'No min income. Paystub w/ YTD; self-employed: 3 bank stmts; cash income: job letter or check images; fixed income: award letters — all ≤45 days',
     bureaus:{primary:['equifax','transunion','experian'],note:'All three bureaus; uses middle score.',stateMap:{}},
     sections:{
       fico:{icon:'📊',label:'Credit Flexibility',content:`<div class="info-grid"><div class="info-row"><span class="info-key">Rate Markup Eligibility</span><span class="info-val">Credit score 600+ (up to 2% markup)</span></div><div class="info-row"><span class="info-key">Open BK (Chapter 7)</span><span class="info-val">✓ Accepted — requires proof '341 Meeting of Creditors' completed</span></div><div class="info-row"><span class="info-key">Open BK (Chapter 13)</span><span class="info-val">✓ Accepted — requires signed letter from Ch. 13 trustee authorizing more debt</span></div><div class="info-row"><span class="info-key">Discharged / Dismissed BK</span><span class="info-val">✓ Acceptable</span></div><div class="info-row"><span class="info-key">Cash Income</span><span class="info-val">✓ Accepted — job letter + front-and-back images of cashed check + proof of business. Tipping/service industries accepted.</span></div><div class="info-row"><span class="info-key">Foreign IDs</span><span class="info-val">✓ Passport, matricula consular, consular ID accepted</span></div><div class="info-row"><span class="info-key">Ineligible Customers</span><span class="info-val">Prior Westlake/Wilshire/Western Funding repo (unless Buy Program approves); temporary residence (hotel/motel); Washington D.C. residents</span></div></div><div class="note-box warn" style="margin-top:10px"><span class="note-icon">⚠️</span><span>Suspended or revoked driver's license is NOT accepted. No customers at temporary residences (hotels, motels, group homes, campgrounds).</span></div>`},
@@ -1496,12 +1530,15 @@ const LENDERS = [
   },
   {
     id:'kia', name:'Kia Finance', fullName:'Kia Finance America', abbr:'KFA', colorClass:'lc-kia',
-    docTitle:'LTV Advance & Backend Guidelines', effectiveDate:'Q1 2026',
+    docTitle:'LTV Advance & Backend Guidelines', effectiveDate:'Jan 6, 2026 · K500/K506 July 7, 2026',
     segment:'near', segmentLabel:'Near-Prime', ficoMin:580,
     ficoNotes:'Tiered LTV by FICO band. Loyalty program upgrades tier. Separate grids 12–75mo vs 76+mo.',
     maxTerm:84, maxMileage:'N/A', maxLTV:'150%', gapMax:'$1,500',
-    reserveStructure:'Tiered — 680+ gets 20% or $5K; <680 gets 16% or $4K',
+    reserveStructure:'Up to 2.5% (24–60mo, 620+) / 2% (61–75) / 1.5% (76–84), or flat $75–$1,100 by amount & dealer level',
     chargebackWindow:'N/A', uniqueFeature:'Loyalty tier upgrades (up to +1 tier); KFA bulletin APR/Lease programs',
+    idReq:'Not on rate sheets — see KFA Standard Retail Program Guidelines',
+    por:'Not on rate sheets — see KFA Standard Retail Program Guidelines',
+    poi:'Not on rate sheets — see KFA Standard Retail Program Guidelines',
     bureaus:{primary:['equifax','transunion','experian'],note:'Confirm bureau with Kia Finance rep.',stateMap:{}},
     sections:{
       fico:{icon:'📊',label:'FICO & LTV Grids',content:`<div class="info-grid"><div class="info-row"><span class="info-key">Minimum Score</span><span class="info-val">Below 580 accepted (at 90% LTV)</span></div><div class="info-row"><span class="info-key">LTV & PTI Basis</span><span class="info-val">Always based on initial credit score, NOT upgraded loyalty tier</span></div></div><h4 style="margin:12px 0 6px;font-size:.75rem;text-transform:uppercase;letter-spacing:.06em;opacity:.7">LTV Grid — 12 to 75 Months</h4><table class="mini-table"><thead><tr><th>&lt;580</th><th>580–599</th><th>600–619</th><th>620–639</th><th>640–659</th><th>660–679</th><th>680–739</th><th>740+</th></tr></thead><tbody><tr><td>90%</td><td>95%</td><td>100%</td><td>105%</td><td>115%</td><td>125%</td><td>135%</td><td>150%</td></tr></tbody></table><h4 style="margin:12px 0 6px;font-size:.75rem;text-transform:uppercase;letter-spacing:.06em;opacity:.7">LTV Grid — 76+ Months</h4><table class="mini-table"><thead><tr><th>&lt;580</th><th>580–639</th><th>640–659</th><th>660–679</th><th>680+</th></tr></thead><tbody><tr><td>90%</td><td>95%</td><td>105%</td><td>115%</td><td>120%</td></tr></tbody></table><div class="note-box info" style="margin-top:10px"><span class="note-icon">ℹ️</span><span><strong>Loyalty Upgrades:</strong> T2/T3→T1 | T4→T2 | T5→T3 | T6–T8→T4. Requires 12 months, max 1×30-day late, no 60-day late.</span></div>`},
@@ -1520,13 +1557,16 @@ const LENDERS = [
   },
   {
     id:'bofa', name:'Bank of America', fullName:'Bank of America Auto (Access Lending)', abbr:'BOA', colorClass:'lc-bofa',
-    docTitle:'Access Lending Retail Program Sheet', effectiveDate:'February 2, 2026',
+    docTitle:'Access Lending Retail Program Sheet', effectiveDate:'June 18, 2026',
     segment:'prime', segmentLabel:'Prime', ficoMin:640,
     ficoNotes:'Min 640 FICO. 720+ for >75mo. Min 4yrs in file, 4 satisfactory trade lines.',
-    maxTerm:84, maxMileage:'125,000 mi', maxLTV:'145%', gapMax:'$1,200',
+    maxTerm:84, maxMileage:'125,000 mi', maxLTV:'145%', gapMax:'$1,500 (CA/CO/IN/NY/TX vary)',
     reserveStructure:'No cap on flat payouts; buy rate = 1%, up to 225bps = 5% flat',
     chargebackWindow:'N/A (flat fee model)',
     uniqueFeature:'No cap on flat payouts; EV charging station eligible ($800); Experian FICO Auto 8.0',
+    idReq:'Valid U.S. driver\'s license required (do not send copy unless requested)',
+    por:'If stipped, ≤60 days: utility (not cell-only), mortgage/tax docs, paystub, bank stmt; insurance dec page, signed lease or military orders; no redacted docs',
+    poi:'Income must be verifiable; no doc list published; only signer income counted',
     bureaus:{primary:['experian'],note:'Experian FICO Auto Industry Adjusted Model v8.0.',stateMap:{}},
     sections:{
       fico:{icon:'📊',label:'FICO & Credit',content:`<div class="info-grid"><div class="info-row"><span class="info-key">Minimum FICO</span><span class="info-val">640 (all applicants)</span></div><div class="info-row"><span class="info-key">FICO for 76–84mo</span><span class="info-val">720+ required; max advance 110%; PTI &lt;10%; vehicle ≤3yrs old; min $25K financed</span></div><div class="info-row"><span class="info-key">Bureau</span><span class="info-val">Experian FICO Auto Industry Adjusted Model v8.0</span></div><div class="info-row"><span class="info-key">File Depth</span><span class="info-val">Min 4 years in file; 4 satisfactory trade lines; limited recent delinquency</span></div><div class="info-row"><span class="info-key">Bankruptcy</span><span class="info-val">Prior BK, charge-off, repo, or foreclosure may be ineligible</span></div></div>`},
@@ -1540,13 +1580,16 @@ const LENDERS = [
   },
   {
     id:'chase', name:'Chase Auto', fullName:'JPMorgan Chase Auto', abbr:'JPM', colorClass:'lc-chase',
-    docTitle:'Chase Auto Product Reference Sheet', effectiveDate:'November 20, 2025',
+    docTitle:'Chase Auto Product Reference Sheet', effectiveDate:'May 10, 2026',
     segment:'prime', segmentLabel:'Prime', ficoMin:620,
     ficoNotes:'Stable credit history required. No open BKs. All BKs must be discharged.',
     maxTerm:84, maxMileage:'120,000 mi', maxLTV:'150%', gapMax:'State-specific',
     reserveStructure:'Standard FF: 1% at buy rate. Enhanced FF: 2% at +0.75bps (max $3,000)',
     chargebackWindow:'N/A (flat fee model)',
     uniqueFeature:'Standard + Enhanced Flat Fee programs; 150% max LTV; CPO auto-value adjustment',
+    idReq:'Current valid government ID may be required per transaction',
+    por:'Not specified on sheet — stips vary by transaction',
+    poi:'Not specified on sheet — stable income required',
     bureaus:{primary:['equifax','transunion','experian'],note:'All three bureaus; uses middle score.',stateMap:{}},
     sections:{
       fico:{icon:'📊',label:'FICO & Credit',content:`<div class="info-grid"><div class="info-row"><span class="info-key">Credit Standard</span><span class="info-val">Stable income source and credit history showing ability and willingness to pay</span></div><div class="info-row"><span class="info-key">Bankruptcy</span><span class="info-val">No open bankruptcies; all must be discharged. No unpaid Chase charge-offs.</span></div><div class="info-row"><span class="info-key">Approvals Valid</span><span class="info-val">30 days</span></div><div class="info-row"><span class="info-key">Applications</span><span class="info-val">Dealertrack® or RouteOne® only</span></div></div><div class="note-box info"><span class="note-icon">ℹ️</span><span>Available in: AL, AR, CT, DC, DE, FL, GA, IA, IL, KS, KY, LA, MA, MD, ME, MI, MN, MO, MS, NC, ND, NE, NH, NJ, NY, OH, OK, PA, RI, SC, SD, TN, TX, VA, VT, WI, WV</span></div>`},
@@ -1558,13 +1601,16 @@ const LENDERS = [
   },
   {
     id:'pnc', name:'PNC Bank', fullName:'PNC Dealer Finance', abbr:'PNC', colorClass:'lc-pnc',
-    docTitle:'PNC Dealer Finance Program Guidelines', effectiveDate:'January 1, 2026',
+    docTitle:'PNC Dealer Finance Program Guidelines', effectiveDate:'March 16, 2026',
     segment:'prime', segmentLabel:'Prime', ficoMin:680,
     ficoNotes:'Tier 0 (800+) to Tier 4 (680–699). PNC Custom Score + Experian FICO 09 Auto Enhanced.',
-    maxTerm:84, maxMileage:'125,000 mi', maxLTV:'140%', gapMax:'Included in backend cap',
+    maxTerm:84, maxMileage:'125,000 mi', maxLTV:'140%', gapMax:'$1,200 + backend cap',
     reserveStructure:'Buy Rate = 1%; +0.50% = 2%; +1.00% = 3%. Max flat $3,000.',
     chargebackWindow:'N/A (flat fee model)',
     uniqueFeature:'PNC Custom Score + Experian dual scoring; tiered LTV T0–T4; BuyDown program; 60-day approval',
+    idReq:'DL copy on funding checklist. POR-usable IDs: DL, state ID, passport; Green Card / EAD I-766 / Consular ID for ITIN-only applicants; no TVDL',
+    por:'If stipped, one doc ≤30 days: voter ID, mortgage stmt, insurance billing (existing policy), utility, cell, CC, bank stmt, or gov photo ID w/ address; no insurance cards, binders, leases or handwritten docs',
+    poi:'Not specified in documents',
     bureaus:{primary:['experian'],note:'Experian FICO 09 Auto Enhanced + PNC Custom Score.',stateMap:{}},
     sections:{
       fico:{icon:'📊',label:'FICO & Tiers',content:`<div class="info-grid"><div class="info-row"><span class="info-key">Bureau</span><span class="info-val">Experian FICO 09 Auto Enhanced + PNC Custom Score</span></div><div class="info-row"><span class="info-key">Tier 0</span><span class="info-val">800+</span></div><div class="info-row"><span class="info-key">Tier 1</span><span class="info-val">760–799</span></div><div class="info-row"><span class="info-key">Tier 2</span><span class="info-val">725–759</span></div><div class="info-row"><span class="info-key">Tier 3</span><span class="info-val">700–724</span></div><div class="info-row"><span class="info-key">Tier 4</span><span class="info-val">680–699</span></div><div class="info-row"><span class="info-key">Approvals Valid</span><span class="info-val">60 days</span></div></div>`},
@@ -1579,10 +1625,13 @@ const LENDERS = [
     docTitle:'Lending Program Reference + Funding Guidelines', effectiveDate:'August 13, 2025',
     segment:'prime', segmentLabel:'Prime', ficoMin:580,
     ficoNotes:'Tiers P0–P11 plus P10 No-Hit. Equifax FICO Version 8. FICO 580+ for flat fee.',
-    maxTerm:84, maxMileage:'175,000 mi', maxLTV:'135%', gapMax:'$1,200',
+    maxTerm:84, maxMileage:'175,000 mi', maxLTV:'135%', gapMax:'$1,500',
     reserveStructure:'85/15 split. Flat: 1.5% at buy rate + 0.5% with AutoPay form.',
     chargebackWindow:'N/A',
     uniqueFeature:'P10 No-Hit accepted; 14-yr vehicle age; 175K miles; 85/15 reserve; AutoPay flat bonus',
+    idReq:'Any valid government-issued ID',
+    por:'Required ≤30 days: DL, mortgage stmt, utility, pre-printed paystub, lease, CC/bank stmt, medical bill, benefits stmt, property tax, insurance dec, or passport',
+    poi:'Paystub ≤30 days w/ YTD + employer name (no internet-generated); self-employed: bank statements up to 6 mo; non-taxable grossed up 20%',
     bureaus:{primary:['equifax'],note:'Equifax FICO Version 8.',stateMap:{}},
     sections:{
       fico:{icon:'📊',label:'FICO & Tiers',content:`<div class="info-grid"><div class="info-row"><span class="info-key">Bureau</span><span class="info-val">Equifax FICO Version 8</span></div><div class="info-row"><span class="info-key">No-Hit / No Score</span><span class="info-val">P10 No-Hit tier accepted at reduced LTV</span></div></div><table class="tier-table" style="margin-top:14px"><thead><tr><th>Tier</th><th>New Term</th><th>New FE LTV</th><th>New Total</th><th>Used Term</th><th>Used FE LTV</th><th>Used Total</th></tr></thead><tbody><tr><td>P0–P4</td><td>84mo</td><td>120%</td><td>135%</td><td>84mo</td><td>120%</td><td>135%</td></tr><tr><td>P5</td><td>72mo</td><td>120%</td><td>135%</td><td>72mo</td><td>110%</td><td>125%</td></tr><tr><td>P6–P8</td><td>72mo</td><td>120%</td><td>130%</td><td>72mo</td><td>110%</td><td>120%</td></tr><tr><td>P9–P10</td><td>60mo</td><td>100%</td><td>110%</td><td>60mo</td><td>100%</td><td>110%</td></tr><tr><td>P11</td><td>72mo</td><td>110%</td><td>120%</td><td>72mo</td><td>100%</td><td>110%</td></tr><tr><td>No-Hit</td><td>60mo</td><td>90%</td><td>100%</td><td>60mo</td><td>80%</td><td>90%</td></tr></tbody></table>`},
@@ -1599,10 +1648,13 @@ const LENDERS = [
     docTitle:'Non-Franchised Program Guidelines — Exhibit A', effectiveDate:'January 1, 2026',
     segment:'sub', segmentLabel:'Sub-Prime', ficoMin:null,
     ficoNotes:'No minimum credit score; no-score applicants eligible. Tiers: ICON+, Meta/Pref/SUAL, ALPL/Alpha, STD/Delta/FTB. ICON PLUS calls on Vantage ≥660.',
-    maxTerm:84, maxMileage:'200,000 mi (24mo)', maxLTV:'140%', gapMax:'$1,200 (or state max)',
+    maxTerm:84, maxMileage:'200,000 mi (24mo)', maxLTV:'130% (140% ICON+)', gapMax:'$1,200 ICON+ / $1,000 std',
     reserveStructure:'70/30 split. Up to 2% flat (ICON+) / 2.5 pts (mid) / 2 pts (lower). Max 2 pts on 72mo+.',
     chargebackWindow:'N/A',
     uniqueFeature:'No min score / no-score OK; open & discharged BK; Hot Vehicle program; CPS pays credit fees; ITIN & passport accepted',
+    idReq:'ITIN deals: ITIN card/letter, passport, or foreign DL; ICON PLUS: valid US DL or SS card',
+    por:'Utility bill/statement ≤30 days (no internet print-screens); ICON PLUS: not required',
+    poi:'Computer-generated paystub w/ YTD ≤30 days; no cash income or job letters; min $1,400–$2,500/mo by tier ($8K ICON+); ICON PLUS: generally waived',
     bureaus:{primary:['experian','equifax','transunion'],note:'Vantage used for ICON PLUS (≥660). Confirm bureau with CPS rep.',stateMap:{}},
     sections:{
       fico:{icon:'📊',label:'FICO & Tiers',content:`<div class="info-grid"><div class="info-row"><span class="info-key">Min Credit Score</span><span class="info-val">None — no-score applicants eligible</span></div><div class="info-row"><span class="info-key">Buy Rate / APR</span><span class="info-val">As low as 6% (ICON+) up to 14.55% by credit profile</span></div><div class="info-row"><span class="info-key">Tiers</span><span class="info-val">ICON+ · Meta / Pref / SUAL · ALPL / Alpha · STD / Delta / FTB</span></div><div class="info-row"><span class="info-key">Bankruptcy</span><span class="info-val">Open &amp; discharged Ch 7 / 13 OK. Ch 13 open ≥12mo + Trustee auth letter. Pro se Ch 7 needs 341 complete.</span></div><div class="info-row"><span class="info-key">Repossessions</span><span class="info-val">Generally 1 yr from app date unless part of a BK</span></div><div class="info-row"><span class="info-key">Open Auto Loans</span><span class="info-val">Only 1 open auto loan per applicant</span></div></div><div class="note-box info" style="margin-top:10px"><span class="note-icon">ℹ️</span><span><strong>ICON PLUS</strong> calls based on Vantage ≥660. Student loans not counted in profile. Dealership employees generally not eligible.</span></div>`},
@@ -1620,9 +1672,12 @@ const LENDERS = [
     segment:'prime', segmentLabel:'Prime', ficoMin:675,
     ficoNotes:'Min FICO 675 (individual). Joint: at least one ≥675 and none below 650, else system decline. Dealer Flex Rate Program.',
     maxTerm:84, maxMileage:'125,000 mi', maxLTV:'145% total', gapMax:'$1,500 (or state max)',
-    reserveStructure:'Dealer Flex Rate Program — contact underwriter. Participation & fees per U.S. Bank Program Rules.',
-    chargebackWindow:'N/A',
+    reserveStructure:'Greater of reserve or flat, auto-paid; flat 1–4.5% of amt; markup ≤2% (37–72mo) / 1.75% (73+); max $10,000',
+    chargebackWindow:'None after 120 days',
     uniqueFeature:'Prime only (675+); MY-based terms to 84mo; CPO value bump +$500/+$1,000; no co-signers (joint only); no prior BK',
+    idReq:'Valid U.S. driver\'s license required for all applicants',
+    por:'Physical address required (no PO-box-only, hotels, mail-forwarding); POR docs not a standard stip',
+    poi:'Docs not specified; ability-to-repay (DTI/PTI) for >72 mo terms; >$100K advance needs PTI ≤13% + $5K down',
     bureaus:{primary:['experian','equifax','transunion'],note:'FICO-based decisioning. Minimum 675.',stateMap:{}},
     sections:{
       fico:{icon:'📊',label:'FICO & Tiers',content:`<div class="info-grid"><div class="info-row"><span class="info-key">Min FICO</span><span class="info-val">675 (individual). Joint: at least one ≥675 and none below 650 — else system decline.</span></div><div class="info-row"><span class="info-key">Term &gt; 66mo</span><span class="info-val">Requires FICO &gt; 750</span></div><div class="info-row"><span class="info-key">Term &gt; 72mo</span><span class="info-val">Ability-to-repay (DTI &amp; PTI) computed at 72mo amortization</span></div><div class="info-row"><span class="info-key">100K–125K Mileage</span><span class="info-val">Min FICO 675; max term 48mo (≤7yr) / 36mo (8–9yr)</span></div><div class="info-row"><span class="info-key">Bankruptcy</span><span class="info-val">❌ No new credit extended to applicants with a prior bankruptcy</span></div></div><div class="note-box info" style="margin-top:10px"><span class="note-icon">ℹ️</span><span><strong>No co-signers.</strong> Multiple applicants are underwritten as a joint credit application. Dealer Flex Rate Program available — contact underwriter.</span></div>`},
@@ -1636,13 +1691,16 @@ const LENDERS = [
   },
   {
     id:'flagship', name:'Flagship Credit', fullName:'Flagship Credit Acceptance', abbr:'FCA', colorClass:'lc-flagship',
-    docTitle:'National Program Guidelines v1.1', effectiveDate:'January 2026',
+    docTitle:'National Program Guidelines v1.1', effectiveDate:'July 2026',
     segment:'sub', segmentLabel:'Sub-Prime', ficoMin:null,
     ficoNotes:'Tier-based. 7 days/week live analyst decisions plus automation.',
-    maxTerm:72, maxMileage:'140,000 mi (≤60mo) / 120,000 mi (≤72mo)', maxLTV:'150%', gapMax:'$1,200 or state max',
+    maxTerm:78, maxMileage:'160,000 mi (≤60mo)', maxLTV:'150%', gapMax:'$1,200 or state max',
     reserveStructure:'70/30 split. Up to 2% per callback. Chargeback if loan closed before 3 payments or 90 days.',
     chargebackWindow:'3 payments / 90 days',
     uniqueFeature:'Live analysts 7 days/week; CPO +5% auto-applied; income gross-up 25%; $4,500 max back-end',
+    idReq:'Valid driver\'s license required for each applicant',
+    por:'Per callback, ≤30 days: DL, utility, phone or cell bill; POR required if DL address not current',
+    poi:'Min $2,000/mo per app. W-2: 2 mo on job, stub ≤30 days; 1099/self-employed: 12 mo job + 3 mo bank stmts; protected income grossed up 25%',
     bureaus:{primary:['equifax','transunion','experian'],note:'All three bureaus.',stateMap:{}},
     sections:{
       fico:{icon:'📊',label:'FICO & Tiers',content:`<div class="info-grid"><div class="info-row"><span class="info-key">Decisions</span><span class="info-val">Automated + Live Analysts, 7 days a week</span></div><div class="info-row"><span class="info-key">Approval Validity</span><span class="info-val">30 days</span></div><div class="info-row"><span class="info-key">Amount Financed</span><span class="info-val">$7,500 – $50,000</span></div></div><div class="note-box success" style="margin-top:10px"><span class="note-icon">✅</span><span><strong>CPO Program:</strong> Approval pricing automatically reflects a 5% increase to vehicle value.</span></div>`},
@@ -1652,6 +1710,26 @@ const LENDERS = [
       backend:{icon:'🏷️',label:'Backend Products',content:`<div class="info-grid"><div class="info-row"><span class="info-key">Max Back-End</span><span class="info-val">$4,500 total</span></div><div class="info-row"><span class="info-key">GAP</span><span class="info-val">$1,200 or state max</span></div><div class="info-row"><span class="info-key">VSC</span><span class="info-val">$3,500 max — 24mo/24K mi min; must cover seals & gaskets</span></div><div class="info-row"><span class="info-key">Tire & Wheel</span><span class="info-val">$1,500 max</span></div><div class="info-row"><span class="info-key">Maintenance</span><span class="info-val">$1,500 max</span></div></div>`},
       reserve:{icon:'💵',label:'Reserve & Compensation',content:`<div class="info-grid"><div class="info-row"><span class="info-key">Participation</span><span class="info-val">Up to 2% — see callback</span></div><div class="info-row"><span class="info-key">Reserve Split</span><span class="info-val">70/30 dealer/lender</span></div><div class="info-row"><span class="info-key">Chargeback</span><span class="info-val">Before 3 payments OR within 90 days</span></div><div class="info-row"><span class="info-key">Max Back-End</span><span class="info-val">$4,500 total</span></div><div class="info-row"><span class="info-key">Processing Fee</span><span class="info-val">As low as $99</span></div></div>`},
       vehicles:{icon:'🚗',label:'Vehicle Eligibility',content:`<div class="note-box danger"><span class="note-icon">❌</span><span><strong>Ineligible:</strong> Branded/salvaged titles, TMU, lemon law, hail damaged, reconditioned, grey market, rideshare/delivery/rental use, commercial use.</span></div>`}
+    }
+  },
+  {
+    id:'santander', name:'Santander', fullName:'Santander Consumer USA', abbr:'SC', colorClass:'lc-santander',
+    docTitle:'Dealer Program Sheet', effectiveDate:'June 1, 2026',
+    segment:'sub', segmentLabel:'Full-Spectrum', ficoMin:null,
+    ficoNotes:'Full-spectrum credit — deep subprime through prime. 84-month terms reserved for well-qualified buyers.',
+    maxTerm:84, maxMileage:'150,000 mi', maxLTV:'145%', gapMax:'$1,200',
+    reserveStructure:'Rate participation 75/25 split, up to 2.5% (\u226460mo) / 2% (61\u201375) / 1.5% (76\u201384); or flat up to $350 at buy rate',
+    chargebackWindow:'See callback',
+    uniqueFeature:'Any government-issued ID accepted (no DL required); full-spectrum credit; approvals expire 30 days ($495 re-approval fee after)',
+    idReq:'Any valid government-issued ID \u2014 driver\u2019s license NOT required (state ID, passport, matr\u00edcula OK per sheet)',
+    por:'If stipped, \u226430 days: utility bill, bank statement, paystub w/ address, mortgage statement, or lease',
+    poi:'Min $1,750/mo gross. Paystub \u226430 days w/ YTD; self-employed: 3 mo bank statements; PTI \u226422% (20% at 76\u201384mo)',
+    bureaus:{primary:['equifax','transunion','experian'],note:'Bureau pull not stated on program sheet \u2014 verify with your Santander rep.'},
+    sections:{
+      fico:{icon:'\ud83d\udcca',label:'Credit & Tiers',content:`<div class="info-grid"><div class="info-row"><span class="info-key">Credit Spectrum</span><span class="info-val">Full-spectrum \u2014 deep subprime through prime, tiered pricing</span></div><div class="info-row"><span class="info-key">Min Income</span><span class="info-val">$1,750 gross/mo</span></div><div class="info-row"><span class="info-key">PTI</span><span class="info-val">\u226422% (\u226420% on 76\u201384 mo terms)</span></div><div class="info-row"><span class="info-key">84-Month Eligibility</span><span class="info-val">Well-qualified buyers only</span></div></div>`},
+      id:{icon:'\ud83e\udea3',label:'ID & Residency',content:`<div class="info-grid"><div class="info-row"><span class="info-key">ID Required</span><span class="info-val">Any valid government-issued ID \u2014 DL not required</span></div><div class="info-row"><span class="info-key">POR (if stipped)</span><span class="info-val">\u226430 days: utility, bank stmt, paystub w/ address, mortgage stmt, or lease</span></div></div>`},
+      income:{icon:'\ud83d\udcb0',label:'Income Verification',content:`<div class="info-grid"><div class="info-row"><span class="info-key">Paystub</span><span class="info-val">\u226430 days with YTD</span></div><div class="info-row"><span class="info-key">Self-Employed</span><span class="info-val">3 months bank statements</span></div><div class="info-row"><span class="info-key">Minimum</span><span class="info-val">$1,750 gross/mo</span></div></div>`},
+      program:{icon:'\u2699\ufe0f',label:'Program Notes',content:`<div class="info-grid"><div class="info-row"><span class="info-key">Approval Window</span><span class="info-val">30 days \u2014 $495 fee to re-approve expired deals</span></div><div class="info-row"><span class="info-key">Reserve</span><span class="info-val">75/25 participation split; flat option up to $350 at buy rate</span></div><div class="info-row"><span class="info-key">GAP</span><span class="info-val">$1,200 max</span></div></div><div class="note-box warn"><span class="note-icon">\u26a0\ufe0f</span><span>New lender on the hub \u2014 numbers from the June 2026 program sheet; verify chargeback window and bureau pull with your rep before first deals.</span></div>`}
     }
   }
 ];
@@ -1716,11 +1794,11 @@ const QUICK_LISTS = [
     test: l => miNum(l.maxMileage) >= 150000,
     sort:(a,b)=>miNum(b.maxMileage)-miNum(a.maxMileage) },
   { title:'ID Card OK — No DL Required', icon:'🪪',
-    ids:['amcredit','exeter','westlake','cps'],
-    note:'Westlake also takes foreign IDs (passport, matrícula, consular). Fifth Third, BofA, US Bank & Flagship explicitly require a valid driver\'s license.' },
+    ids:['amcredit','exeter','td','westlake','cps','capitalone','santander','dfc'],
+    note:'Westlake & Santander also take foreign IDs (passport, matrícula, consular). DL explicitly REQUIRED at: Fifth Third, BofA, US Bank, Flagship & GLS.' },
   { title:'ITIN Accepted', icon:'🌐',
-    ids:['amcredit','exeter','td','fifththird','gls','cps','wellsfargo'],
-    note:'Fifth Third requires a valid DL alongside the ITIN. Wells Fargo: ITIN letter does not satisfy proof of legal residency.' },
+    ids:['amcredit','exeter','td','fifththird','cps','wellsfargo','pnc'],
+    note:'Fifth Third requires a valid DL alongside the ITIN. Wells Fargo: ITIN letter ≠ proof of legal residency. PNC takes Green Card / EAD / Consular ID for ITIN-only. GLS removed — their guidelines require a US DL.' },
   { title:'Open Bankruptcy OK', icon:'⚖️',
     ids:['westlake','cps'],
     note:'CPS: open Ch. 13 needs 12+ months in plan + trustee authorization letter. Everyone else requires BK discharged.' },
@@ -1771,7 +1849,15 @@ function buildLenderDetail(lender) {
     {label:'Chargeback',val:lender.chargebackWindow==='NO CHARGEBACKS'?'✓ None':lender.chargebackWindow.substring(0,16),cls:lender.chargebackWindow==='NO CHARGEBACKS'?'green':''}
   ];
 
-  const sectionsHTML = Object.values(lender.sections).map(s => `
+  const allSections = Object.values(lender.sections).slice();
+  if (lender.idReq || lender.por || lender.poi) {
+    allSections.push({icon:'📋', label:'Docs & Stips (ID / POR / POI)', content:`<div class="info-grid">
+      ${lender.idReq?`<div class="info-row"><span class="info-key">ID Requirements</span><span class="info-val">${lender.idReq}</span></div>`:''}
+      ${lender.por?`<div class="info-row"><span class="info-key">Proof of Residency</span><span class="info-val">${lender.por}</span></div>`:''}
+      ${lender.poi?`<div class="info-row"><span class="info-key">Proof of Income</span><span class="info-val">${lender.poi}</span></div>`:''}
+    </div><div class="note-box info"><span class="note-icon">ℹ️</span><span>Pulled from the lender's current program sheet / funding guidelines — always confirm stips on the approval.</span></div>`});
+  }
+  const sectionsHTML = allSections.map(s => `
     <div class="detail-section">
       <div class="detail-section-header">
         <div class="section-icon">${s.icon}</div>
