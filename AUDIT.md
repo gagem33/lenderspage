@@ -1364,3 +1364,81 @@ to five references with three at separate addresses, and the welcome call requir
 revision date. `SOURCES.md` should be corrected to 2025-08-13 and its "app is probably
 stale" note removed. The underlying concern stands on its own merits: this is the oldest
 document in the folder by five months.
+
+---
+
+## 17. cps — Consumer Portfolio Services
+
+Source: Program Sheet `1QkqPCEMlfOvTf2ExbxfNVYMQVEHmAmVq` — "Non-Franchised Program Guidelines Exhibit 'A'", **1/1/26**. Single sheet; positions given as `~1`.
+
+One of the more accurate entries. Every LTV, term, mileage, backend and reserve figure
+checks out.
+
+### WRONG
+
+| Field | App value | PDF value | Page |
+|---|---|---|---|
+| `sections.fico` → Buy Rate / APR | `As low as 6% (ICON+) **up to 14.55%** by credit profile` | The sheet gives two **floors**, not a range: ICON+ "**As low as 6%** based on credit profile"; lower tiers "**As low as 14.55%** based on credit profile." 14.55% is where the lower tiers *start*, not where pricing tops out. As written the app understates the rate on every sub-prime deal. | ~1 |
+
+### MISSING
+
+| What the PDF says | Page |
+|---|---|
+| **The entire Debt / Budget section.** Minimum housing expense **$600/month** (per applicant where residences are separate); splitting rent or mortgage may require additional review; **paystub garnishments are treated as debt**; **auto insurance budgeted at a minimum $100/month per open auto**; **revolving debt budgeted at 3% of the outstanding balance** or the actual payment. All of this drives the DTI the desk has to hit. | ~1 |
+| **Self-employed disqualifiers**: more than **3 NSF/overdrafts in one month** or **5 in three months**; any **negative or zero month-end balance**; any monthly deposit total **below 50% of the 3-month average**. Also, self-employed applicants are eligible in all programs **except FTB** (except FTB ITIN applicants). | ~1 |
+| **First-time buyers are ineligible if they "live with family."** | ~1 |
+| **Handwritten paystubs** require copies of cancelled cheques or supporting digital bank statements — **minimum 8 consecutive stubs**. | ~1 |
+| Paystubs are dated within 30 days of the **package received date** (not the contract date). **Bonus and other non-quarterly pay is generally excluded from the YTD total.** | ~1 |
+| Unearned income must be **consistent, verifiable and received for the term of the loan**, with **3 months proof**; **do not gross it up — CPS does that automatically**. | ~1 |
+| **Automatic stip waivers** for applicants who score well, detailed on the CPS approval. **Quick Stips — Meta, Preferred and Super Alpha need only a paystub and 1 reference.** ICON PLUS may need a valid driver's licence or Social Security card. | ~1 |
+| **Dealer stips list**: full contract with all signatures and dates, odometer statement, buyer's order, signed title application, **bookout for the month contracted**, signed credit application, **proof of vehicle ownership (copy of title or auction receipt)**, and back-end product documents. | ~1 |
+| **Return package and expired contract fees apply** (the app has the $100 program fee and $200 assignment fee but not these). | ~1 |
+| Vehicle type affects overall advance and pricing, and **term/mileage/LTV maximums**. | ~1 |
+
+### OCR caveat (EXTRACTION_GUIDE §6)
+
+This is a dense multi-column sheet and the **tier columns interleave badly** in the text
+layer. The **values** for max DTI (50% / 80% / 50% / 45%) and max PTI (20% / 18% / 15%)
+are all present in the document and the app reproduces them, but **which tier each belongs
+to cannot be confirmed** from the text. Read the tier assignment visually before relying
+on it. The same caveat applies to the minimum-income ladder, though the app's
+$8,000 / $2,500 / $2,000 / $1,600 / $1,400 sequence matches the document's order exactly.
+
+### UNVERIFIABLE
+
+| App value | Why |
+|---|---|
+| `chargebackWindow` = "N/A" | No chargeback rule appears on the sheet. Per `DATA.md` this should be null rather than the string "N/A". |
+
+### Verified correct (no action)
+
+**No minimum credit score and no-score applicants eligible**, the tier names (ICON+;
+Meta/Pref/SUAL; ALPL/Alpha; STD/Delta/FTB), **ICON PLUS calls on Vantage ≥660**, open and
+discharged Chapter 7 and 13, pro se Chapter 7 needing a completed 341 meeting, Chapter 13
+open at least 12 months with a trustee authorisation letter, **student loans excluded from
+the credit profile**, repossessions generally 1 year from application unless part of a BK,
+**only 1 open auto loan per applicant**, dealership employees generally ineligible,
+advance up to 125% KBB Retail/MSRP for ICON+ and the 115% basic formula with the **Triple
+Play** valuation (JD Power Clean Trade, KBB Lender Value, Black Book Clean Wholesale) plus
+tax, licence, $200 doc, service contract and GAP, max LTV 140% ICON+ / 130% regular term /
+115% extended term, minimum amount financed $5,000 and $7,500 ICON+, the complete
+max-amount-financed ladder ($75K down to $30K), **both term/mileage tables in full** — all
+programs (78/60K through 24/200K) and ICON PLUS (84/80K through 72/100K) — and both
+footnotes, down payment as low as zero with trade equity permitted and manufacturer
+rebates excluded from minimum down, **GAP $1,200 ICON+ and $1,000 other tiers**, total
+backend 10% of KBB Retail/MSRP up to $10,000 for ICON+ and lesser of 50% of book or $4,400
+elsewhere, max service contract $3,400, service contract term minimums (new 48/48,000;
+used 24/24,000 or 12/12,000 at $1,200), **70/30 participation split**, up to 2% flat
+(ICON+), 2.5 points and 2 points reserve, **max 2 points on 72 months or more**, $100
+program fee, $200 assignment fee, the **Flex Pricing** rules (+1 point = −$100 fee and
+participation; −1 point = +$300 fee), **credit fees paid to the dealer**, the ITIN
+requirements for both standard and ICON PLUS, POR (utility bill or statement within 30
+days, no internet print-screens), the phone requirements, references, job/residence rules,
+the minimum-income ladder, GIG workers as self-employed with LTV restrictions, eligible
+vehicles (15 years or newer ICE, ≤4 years EV, light commercial 3500 series and lower, CPO
+and new at lower rates), the **Hot Vehicle program**, and the full ineligible-vehicle list
+including the possession-to-fund requirement.
+
+### STALE
+
+None. App `effectiveDate` "January 1, 2026" matches the sheet's "Exhibit 'A' 1/1/26".
