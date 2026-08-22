@@ -276,3 +276,102 @@ individual / $2,200 joint, no gross-up, W2 paystub with YTD ≤60 days, self-emp
 App `effectiveDate` "May 27, 2026" matches the Program Sheet. The Underwriting
 Guidelines are older (Revised 02/2026) — not a staleness error in the app, but the
 two sources are four months apart and `SOURCES.md` dates them both 05-27.
+
+---
+
+## 4. truist — Truist Dealer Financial Services
+
+Source: Program Sheet `1dwSi3YQ1N7TnbXrQADGRMkaPpWnUMnxz` — "Program Guide Reference Sheet", **Effective July 20, 2026**. Four pages, explicitly numbered.
+
+Note: parts of this PDF's text layer are character-corrupted (the GAP paragraph and
+several headings render as mojibake). The tables extracted cleanly; findings below
+are drawn only from legible text.
+
+### WRONG
+
+**a) `sections.reserve` — the flat pay scale. 25 of 28 rows are wrong**, both in
+band boundaries and in amount. The app's bands are coarser than the PDF's and every
+overlapping amount is inflated.
+
+| Amount financed | App flat | PDF flat (p3) |
+|---|---|---|
+| $20,000–$24,999 | $275 | **$250** |
+| $25,000–$29,999 | $350 | **$300** |
+| $30,000–$34,999 | $450 | **$350** |
+| $35,000–$39,999 | $525 | **$400** |
+| $40,000–$44,999 | $600 | **$450** |
+| $45,000–$49,999 | $650 | **$500** |
+| $50,000–$54,999 | $725 | band is **$50,000–$59,999 → $600** |
+| $55,000–$59,999 | $800 | same band → **$600** |
+| $60,000–$69,999 | $900 | **$700** |
+| $70,000–$79,999 | $1,050 | **$800** |
+| $80,000–$99,999 | $1,200 | splits: $80–89,999 **$900** · $90–99,999 **$1,000** |
+| $100,000–$119,999 | $1,500 | splits: $100–109,999 **$1,100** · $110–119,999 **$1,200** |
+| $120,000–$149,999 | $1,800 | splits into three: **$1,300 / $1,400 / $1,500** |
+| $150,000–$199,999 | $2,100 | splits into five: **$1,600 / $1,700 / $1,800 / $1,900 / $2,000** |
+| $200,000–$239,999 | $2,400 | splits into four: **$2,100 / $2,200 / $2,300 / $2,400** |
+
+Only $10,000–$14,999 ($150), $15,000–$19,999 ($200) and $240,000–$400,000 ($2,600)
+are correct. On a typical $35,000 deal the app over-states the flat by **$125**.
+
+**b) DTI and PTI are not uniform across tiers.**
+
+| Field | App value | PDF value | Page |
+|---|---|---|---|
+| `sections.fico` → Max DTI | `65% (all tiers)` | 65% for T1–T4; **60% for T5 (B3) and T6 (C1)** | 1 |
+| `sections.fico` → Max PTI (≤75mo) | `20%` | 20% for T1–T4; **15% for T5 and T6** | 1 |
+| `sections.fico` → Max PTI (76–84mo) | `18%` | 18% for T1–T4; **15% for T5 and T6** | 1 |
+
+**c) CPO age/mileage condition attached to the wrong row.**
+
+| Field | App value | PDF value | Page |
+|---|---|---|---|
+| `sections.backend` → CPO Bonus | "+$750 advance" (Standard, no condition) / "+$1,500 advance (**up to 5 yrs old, ≤50K miles**)" (Luxury) | The 5-year (2021 and newer) / 50,000-mile condition governs **both** programs — "Manufacturer certified pre-owned vehicles that are up to five (5) years old (2021 and newer) and have 50,000 miles or less are eligible: $750 additional add for Standard Program makes. $1500 additional add for Luxury Program makes." | 4 |
+
+**d) Flat-cancel rule is garbled.**
+
+| Field | App value | PDF value | Page |
+|---|---|---|---|
+| `chargebackWindow` | `Flat cancel: charged if no payment within 20 days` | Flat cancels must be **completed** within 20 days of funding **and no payment may have been made**. "No payment made" is an eligibility condition for cancelling, not a chargeback trigger. | 1 |
+| `sections.reserve` → Flat Cancel Fee | `$150 debited if not received within 20 days of funding` | "$150 flat cancel fee applies **only if the original contract is not being replaced**; if the fee is not submitted, $150 will be deducted from dealer reserve." The trigger is non-replacement, not lateness. | 1 |
+
+### MISSING
+
+| What the PDF says | Page |
+|---|---|
+| **The entire maximum-term-by-model-year matrix.** 2026/2027, 2025, 2024, 2023 → 84 months (T1–T4); 2022 → 75; 2021 and 2020 → 72; 2019 and older → 72 (T1–T3) and **60 (T4)**. T5 column: 84/84/84/75/75/72/72/60. T6 column: 84/84/84/72/72/60/60/60. The app carries a flat `maxTerm: 84` with no age gradation at all. | 1 |
+| **GAP state rules — including Texas.** "Oregon and Texas: maximum amount financed for GAP should not exceed $1,200 or **5% of amount financed**, whichever is less." Also: New York — GAP cannot be financed; California — premium ≤$1,200 or 4% of amount financed, LTV must exceed 70% (total financed ÷ MSRP/KBB Retail); South Carolina and Indiana — LTV must be greater than **80%** (front-end ÷ MSRP/JD Power Retail); Colorado — greater of $800 or a stated percentage. The app has no GAP state rules. **This store is in Texas; the 5% test applies to every Truist deal it writes.** | 1 |
+| **GAP LTV floor:** not eligible if LTV is ≤70% (front-end advance ÷ invoice or JD Power Clean Trade). | 1 |
+| **Total LTV for 76–84-month terms:** 140% (T1/T2), 135% (T3/T4/T5), 130% (T6). App records front-end only for that term band. | 1 |
+| **Collateral value basis:** Invoice for new 2026/2027; **JD Power Clean Trade-In** for all other models new and used over 6,000 miles; **KBB Lending** required in AZ, CA, CO, IA, ID, NE, NM, NV, OR, UT, WA, WY. | 1 |
+| **Due dates must be set between the 2nd and the 25th** of the month. | 2 |
+| Truist does **not** finance contracts with deferred down payments. | 1 |
+| 90-day first payment is unavailable over 75 months and only available on **700+** credit scores; **max 45 days to first payment in PA**. | 1 |
+| The $25 loan processing fee **cannot be passed to the consumer**. | 1 |
+| New-vehicle definition: current model year and newer, **untitled**, under 6,000 miles. | 1 |
+| Exotic vehicles absent from the clean trade-in guide are valued at **Manheim Adjusted Value**; upfits and dealer-installed options may be added but **do not increase value for advance purposes**. | 1 |
+| **CPO make lists** — Standard ($750): Chevrolet, Chrysler, Dodge, Fiat, Ford, GMC, Honda, Hyundai, **Kia**, Jeep, Mazda, Mitsubishi, Nissan, Ram, Subaru, Toyota, VW. Luxury ($1,500): Acura, Alfa Romeo, Audi, BMW, Buick, Cadillac, Genesis, Infiniti, Jaguar, Land Rover, Lexus, Lincoln, Mercedes-Benz, Mini, Porsche, Volvo. | 4 |
+| **Ford Blue Certified and CarBravo Certified** non-Ford/non-GM vehicles, 2021 or newer with ≤50,000 miles, get the $750 add regardless of make; the luxury add does not apply. | 4 |
+| Three POR documents the `sections.id` list omits: **online property verification**, **automobile insurance renewal bill <6 months** (cards and policies not accepted), **unexpired trade-in registration**. The app's top-level `por` does mention the insurance renewal, so the two fields disagree with each other. | 2 |
+
+### UNVERIFIABLE
+
+None. Every value the app carries for Truist is addressed by the source document.
+
+### Verified correct (no action)
+
+Bureau split (TransUnion FICO Auto 9, Equifax for FL/GA/NC/SC/TX/VA), both
+applicants 640+, 680+ for 76–84 months, front-end and total LTV by tier for
+<75-month terms (130/155, 130/155, 125/145, 120/140, 120/135, 120/130), front-end
+LTV for 76–84 months (120/120/115/115/115/115), max mileage 120,000 and 50,000,
+minimum collateral $20,000 and $12,000, first payment 15–60 days with 61–90 by
+underwriter approval ≤75 months, approvals good 30 days, contracts presented within
+7 days, $25 processing fee, no cash out, no credit card down payments, backend
+approved product list, Credit Life and A&H excluded, backend cap (greater of $4,200
+or 20% of collateral, absolute max $10,000), max rate spread 2.00%/1.50%, max
+dealer reserve $8,000, ineligible collateral list, client-residence/titling rule,
+address verification trigger at <1.5 years.
+
+### STALE
+
+None. App `effectiveDate` "July 20, 2026" matches the PDF's "Effective July 20, 2026".
