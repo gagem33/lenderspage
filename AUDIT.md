@@ -480,3 +480,74 @@ Remote eSign and Dealertrack Remote Signing, medium-duty credit guidelines
 **No.** App `effectiveDate` "June 30, 2026" matches both source documents.
 `SOURCES.md` §2 lists this lender as a mismatch (`≠`, file 07-01 vs app 06-30) — that
 flag is incorrect and the manifest row should be corrected to 2026-06-30.
+
+---
+
+## 6. wellsfargo — Wells Fargo Auto
+
+Source: Program Sheet `1dXg8-YyViTdr9mbWuTlYRjiluVvcXRbo` — "Dealer program reference guide", OF-742 (06/16/26), **Effective June 16, 2026**, 18 numbered pages.
+
+### WRONG
+
+| Field | App value | PDF value | Page |
+|---|---|---|---|
+| `sections.backend` → GAP | `$1,200` | **$1,500** for both waiver and insurance products, subject to state requirements. The app's own top-level `gapMax` says $1,500 — the two fields contradict each other. | 3 |
+| `sections.backend` → Windshield | `Greater of $2,000 or 3% (not financeable in **KY, FL, SC**)` | Greater of $2,000 or 3% of adjusted collateral value; footnote 4: "May not be financed for consumers residing in **FL**." Kentucky and South Carolina are not named. | 3 |
+| `sections.ltv` → 84-Mo LTV Restriction | `120% for T1/T2 only (PTI ≤**13%**)` | "84 months (payment to income) **<=15%**; up to 120%". Tiers 1 and 2 only is correct; the PTI threshold is 15%, not 13%. | 2 |
+
+The GAP figure is the consequential one — the desk is leaving $300 of GAP coverage
+unsold on every Wells Fargo deal it structures from the detail page.
+
+### MISSING
+
+| What the PDF says | Page |
+|---|---|
+| **Aftermarket advance ceiling: 50% of adjusted collateral value**, covering back-end and front-end products combined. The app lists individual product caps but not the overall advance limit. | 3 |
+| Front-end product allowances the app omits: **Surface protection $2,000**, **Paintless dent repair $1,500**, **Etch $700**, and combo products = sum of standalone allowances. | 3 |
+| **Minimum term to finance: 12 months.** | 2 |
+| **New-vehicle definition**: current, future, or one-year-prior model with **10,000 miles or less**. | 2, 9 |
+| **Vehicle valuation** — new = invoice cost or book value minus any manufacturer rebate to the extent it exceeds **$5,000**; used = book value. Primary book by state: **KBB** for AK, CA, CO, HI, ID, MT, NV, OR, UT, WA; **J.D. Power/NADA** everywhere else. Supplemental invoices are not part of collateral value. | 9 |
+| Full alternate-valuation cascade: auction receipt, Manheim Market Report, NADA low retail, NADA classic car prices, prior model year within a 5,000-mile tolerance, secondary book, 85% of invoice (current/future/one-prior year over 10,000 miles), 50% of invoice (older). | 9 |
+| **Excluded collateral categories** — all-terrain vehicles, cab & chassis, commercial vehicles class 4 and above, branded/salvaged titles, motorcycles, gray market, lemon law, livery, manufacturer buybacks, discontinued U.S. makes, water/flood damage, neighborhood electric vehicles, **unrepaired hail damage**, **upfits**. The app carries only the excluded-makes list. | 8 |
+| **Nine excluded makes the app omits**: Chevrolet 4500/5500/6500, Coda, Cross Lander, DaimlerChrysler, Freightliner, GEM, International, Peterbilt. | 8 |
+| Simple-interest contracts only; no precomputed interest. | 7 |
+| Acquisition fees may not be passed to the customer and cannot affect the customer's APR. | 7 |
+| Third-party brokering is prohibited. | 7 |
+| Contracts with a balloon payment, or the balloon box checked, **won't be funded**. | 7 |
+| Spousal income counts **only** if the spouse is a listed co-applicant. | 7 |
+| All Wells Fargo customers are co-buyers with equal responsibility; **co-sign loans are not accepted**. | 4 |
+| Contracts received with the **first payment already past due won't be funded**. | 4 |
+| Business applications may not use income from federally illegal activity (e.g. cannabis) even where state-legal. | 7 |
+| POR: **valid proof of income** (paystubs, bank statements, W-2) is itself an acceptable POR document in the ≤60-day bucket; tribal POR letters need letterhead, issue date within 60 days, authorized signature, and may show a PO Box. Personal correspondence, ads and envelopes are **not** acceptable POR. | 5 |
+| POI: from **Jan 1 – Apr 15** the prior year's return isn't required if unfiled — the last signed 1040 from the past two years suffices. A W-2 showing fewer than 90 days of income requires a current paystub. After 90 days of pay, **only bonus income** is annualized. Employment letters must be dated within 30 days and carry employer contact, hire date, position, compensation and average hours. | 6 |
+| Title must be perfected within **30 days** of contract date; **Texas ELT code 58250788800**. | 15 |
+| Aftermarket cancellation debits must be disputed within **60 days** of appearing on the reserve statement. | 10 |
+
+### UNVERIFIABLE
+
+| App value | Why |
+|---|---|
+| `bureaus.primary` — all three; note "Pulls all three, uses middle score" | The guide never names a credit bureau or a scoring method. `EXTRACTION_GUIDE.md` §5 repeats the "middle score" claim; it is not supported by this document either. |
+| `ficoNotes` / `sections.fico` → "6 tiers (Super Prime → Regular)", "T1 Super Prime → T6 Regular" | The guide references "Tiers 1 and 2" for 84-month eligibility but never enumerates six tiers or names them. |
+| `chargebackWindow` = "See callback" | The guide describes aftermarket cancellation debits but states no reserve chargeback window. "See callback" is consistent with the document's general language ("communicated to dealers via callbacks and/or funding notifications") but is not a stated chargeback rule. |
+
+### Verified correct (no action)
+
+Max LTV 135% new and used, the full vehicle-age × mileage term matrix (all 24 cells),
+84-month restriction to tiers 1–2 with no thin file or first-time buyers, minimum
+amount financed $5,000.01 (≤63 mo) and $7,500.01 (>63 mo), max mileage 150,000,
+first payment 19–45 days, approvals valid 30 days, VSC (greater of $4,350 or 18%),
+tire and wheel (greater of $1,550 or 7%), maintenance (greater of $2,350 or 15%),
+total back-end (greater of $6,000 or 20%, max $12,500), anti-theft $1,500, key
+replacement $1,000, GAP front-end LTV floors (70%, 80% in SC and IN, 70% in CA),
+dealer compensation maximum $5,000, compensation communicated via callbacks, the
+complete DACA/NPRA rule set including the ITIN-assignment-letter exclusion, both POR
+buckets and their document lists, POI rules for paystub age, W-2 through Feb 28,
+annualization, overtime 90-day rule, self-employed full signed return with bank
+statements excluded, military LES ≤30 days, retirement income and 1099-R through
+Feb 28, no deferred or credit-card down payments, no cryptocurrency down payments,
+prohibited-financing list (refinance, lease buyout, cash-out, commercial, Uber/Lyft).
+
+### STALE
+
+None. App `effectiveDate` "June 16, 2026" matches the document's "Effective June 16, 2026".
