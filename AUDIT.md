@@ -1202,3 +1202,83 @@ None. App `effectiveDate` "May 10, 2026" matches the sheet.
 > **Note for the v2 migration.** `DATA.md` §4 nominates `chase` as one of the first two
 > lenders to migrate by hand. Resolve `ficoMin` to **null** as part of that work — it is
 > exactly the kind of invented scalar the typed schema is meant to eliminate.
+
+---
+
+## 15. pnc — PNC Dealer Finance
+
+Sources: Program Sheet `1bWKDBW9sVot4RWU_Shlyxk_w1CWb7Lgw` — "PNC Dealer Finance Program Guidelines", **Effective 3/16/2026**, supersedes 1/9/2026. Marked "***Applies to dealers in the following state: Texas***".
+Proof of Residence `113xcnne99r6y1pRwU0koYmk1IKedJbq0` — "Proof of Residence Guidelines", **Effective 5/1/2026**, supersedes 5/1/2024. Cited as **POR**.
+
+### WRONG
+
+| Field | App value | PDF value | Page |
+|---|---|---|---|
+| `sections.backend` → "GAP (LTV ≤95%): Greater of $3,500 or **16%**" | 16%, labelled GAP | **18%** — and this is the cap for **all back-end products combined EXCEPT GAP**, not GAP itself: "For all Back End Products Combined **EXCEPT GAP**: LTV 95% or lower — greater of $3,500 or **18%** of the New Car Invoice or Used Vehicle Value Source, **plus GAP**." | 1 |
+| `sections.backend` → "GAP (LTV >95%): Greater of $3,500 or 15%" | labelled GAP | 15% is correct, but again it is the **combined backend cap excluding GAP**, not GAP. | 1 |
+| `sections.ltv` → Used Model Years | `2019–2026` | The standard-terms table runs down to **2016–2018** (60-month max). Used eligibility is **2016–2026**, not 2019–2026. | 1 |
+| `sections.backend` → Aftermarket Products | "must be **cancelable**" | The sheet says nothing about cancelability. It says the vehicle must be **untitled at time of sale**, that **75% of dealer cost** for the customized option and parts is added to invoice value, and that **installation charges are excluded**. | 1 |
+
+**The GAP rule itself is absent.** The sheet states it plainly: "**GAP can be added up to
+the lesser of $1,200 or state legal limit. GAP is ineligible for financing if LTV (front
+end plus tax, tag, and doc fees) is less than 70%** of Invoice/Used Vehicle Value Source…
+Front end (ONLY) LTV must exceed 70% for GAP to be sold." The app's top-level `gapMax`
+carries the $1,200; the detail page — the thing the desk actually reads — does not, and
+shows a different number under the GAP heading.
+
+### MISSING
+
+| What the PDF says | Page |
+|---|---|
+| **The entire Maximum Front End Advance table.** New up to 72 months: T0 **125%**, T1 115%, T2/T3/T4 **110%**. New 73–84, and Used at every term band: T0 115%, T1 115%, T2/T3/T4 110%. The app carries only the 140% *total* advance — front-end is capped 15 to 30 points lower and that ceiling is nowhere on the page. | 1 |
+| **The entire Standard Terms by Model Year table.** New 2025–2027: up to $100K loan with $20K+ vehicle value → 84 months; $10K–$20K → 75; $5K–$10K → 60; $100K–$150K → 84 (tiers 0–3); $150K–$200K → 72 (tiers 0–3). Used: 2023–2026 → 84; 2021–2022 → 75; 2020 → 72; **2019 → 66**; **2016–2018 → 60**; $5K–$10K → 60; $100K–$150K 2023–2026 → 84 and 2022 → 75; $150K–$200K 2022–2026 → 72. | 1 |
+| **Business applications are not eligible for financing.** | 1 |
+| **If the Used Vehicle Value Source is unavailable you must call underwriting (800-752-2561 option 1) to establish value — "No 'like-invoice' or other values accepted."** | 1 |
+| **The full BuyDown calculation**: A = total amount financed, B = total interest at buy rate, C = total interest at contract rate, D = B − C, E = (A ÷ $1,000) × 1%, F = D − E. Negative F is debited via ACH or paid by check; positive F is credited to the reserve account. The app records only "Available — see approval callback". | 1 |
+| Max advance **includes** selling price, all taxes (front and back end), title, license, "hard adds", dealer fees and **all back-end products**, divided by invoice or used value source. | 1 |
+| **Front-end advance discounts** apply at amounts greater than **$10,000, $15,000 and $25,000**. | 1 |
+| Flat payouts **round up to the nearest dollar**. | 1 |
+| KBB is specifically **"Typical List Price"** (the app records the state list and J.D. Power Clean Retail correctly but not the KBB variant). | 1 |
+| Max mileage 125,000 is **"based on Tier and Term conditions"** — not an unconditional cap. | 1 |
+| Ineligible vehicles the app omits: **law enforcement, municipal, manufacturer's buy back, trailers, cab chassis, cutaway van chassis, commercial passenger vans**, and vehicles for **lease**. | 1 |
+| POR: **temporary** driver's licences and **temporary** state IDs are acceptable; an insurance declarations page **may not be for the vehicle being purchased**. | POR |
+
+### UNVERIFIABLE
+
+| App value | Why |
+|---|---|
+| `por` — "one doc **≤30 days**" | The POR guidelines say "**Only requires a single month / document**". That is a statement about how many documents are needed, not a 30-day recency rule. No age limit appears in the document. |
+| `por` — "no … **leases**" | Insurance cards, binders, photos of envelopes, TVDLs and handwritten documents are the stated exclusions. Leases are not named. |
+| `chargebackWindow` = "N/A (flat fee model)" | No chargeback rule appears in either document. |
+| `poi` = "Not specified in documents" | Accurate — a correct statement of absence. |
+
+### Note: the document is state-scoped
+
+The Program Guidelines are headed "**Applies to dealers in the following state: Texas**".
+The app records no `stateRestriction` for PNC. That is harmless for this store, but the
+record should note that the sourced sheet is the Texas edition rather than a national one.
+
+### Verified correct (no action)
+
+Tier structure T0 800+ / T1 760–799 / T2 725–759 / T3 700–724 / T4 680–699, minimum FICO
+680, **PNC Custom Score plus Experian FICO 09 Auto Enhanced**, approvals valid 60 days,
+maximum total advance 140% against factory invoice (new) or used vehicle value source,
+maximum mileage 125,000, new model years 2025–2027, first payment up to 60 days with a
+**45-day Pennsylvania maximum**, minimum front-end amount $5,000, the complete flat
+program (1% at buy rate, 2% at +0.50%, 3% at +1.00%, maximum $3,000, none on terms under
+48 months or amounts under $10,000), all five rate caps (new 2.50/2.00/1.75, used
+2.00/1.75), Credit Life/Disability/A&H not accepted, only physically-added customizations
+considered, the KBB state list (AZ, CA, CO, ID, NV, NM, OR, UT, WA) with J.D. Power Clean
+Retail elsewhere, the ineligible-vehicle list as far as it goes, and the full POR
+document set including the **SSN-holder restriction** (driver's licence, state ID or
+passport only), the **ITIN-only** documents (Green Card, EAD Form I-766, Consular ID), the
+requirement that an ID show the address, and the exclusions for insurance cards, binders
+and TVDLs.
+
+### STALE
+
+**Yes.** App `effectiveDate` is "March 16, 2026", which matches the Program Guidelines.
+But the **Proof of Residence Guidelines are effective 5/1/2026** — six weeks newer. Per
+`DATA.md` §3.3 the record's effective date should be the newest component (**2026-05-01**)
+with the Program Guidelines date in `source.notes`. `SOURCES.md` dates the POR document
+2026-03-16; it says May 1.
