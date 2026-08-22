@@ -631,3 +631,88 @@ the Underwriting Policies & Provisions were **revised April 7, 2026**, and the
 Aftermarket Product Matrix is stamped **July 7, 2026**. Per `DATA.md` §3.3 the
 effective date should be the newest of the set — July 7, 2026 — with the others
 recorded in `source.notes`.
+
+---
+
+## 8. fifththird — Fifth Third Bank (Texas only)
+
+Source: Program Sheet `1M5cikg9r9KADCNhRNQQF4w9hzGnc_FoJ` — "Consumer Auto Program Guide — TEXAS", **July 23, 2026**, 2 numbered pages.
+
+### WRONG
+
+**a) The model-year term table is wrong in every row.** The app's year bands are all
+shifted later than the PDF's, and one term value and one whole row are invented.
+
+| App row | App terms / min value | PDF row | PDF terms / min value |
+|---|---|---|---|
+| 2024–2026 | 24–84, $20K for 76+ | **2023 & newer** | 24–84, $20,000 for 76+ |
+| 2021–2023 | 24–75, $12.5K for 67+ | **2019–2022** | 24–75, $12,500 for 67+ |
+| 2018–2020 | 24–**72**, $10K for 61+ | **2017–2018** | 24–**66**, $10,000 for 61+ |
+| 2016–2017 | 24–63 | **2014–2016** | 24–63 |
+| 2013–2015 | 24–60 | *(no such row)* | the PDF's oldest band is 2014–2016 |
+
+A 2019 unit is shown in the app as capped at 75 months when the sheet allows 75; a
+2018 unit shows 72 when the sheet allows 66; a 2017 unit shows 63 when the sheet
+allows 66. Every model-year lookup on this lender's page returns the wrong term.
+
+**b) Other wrong values.**
+
+| Field | App value | PDF value | Page |
+|---|---|---|---|
+| `ficoMin` / `ficoNotes` / `sections.fico` | `650 for **2013+** units` | "Minimum 650 FICO on units **2014** and newer." | 1 |
+| `sections.ltv` → Max Amount Funded | `$100,000 (plus allowable backend)` | "Maximum amount funded **$125,000** plus allowable backend." | 2 |
+| `sections.fico` → Elite bonus point | `+1 for **2020 or older**` | "**2021** or Older Unit — 1 Bonus Point" | 1 |
+| `sections.fico` → Elite bonus point | `+1 for **75+mo**` | "**76-84 month** contracts — 1 Bonus Point" | 1 |
+
+### MISSING
+
+| What the PDF says | Page |
+|---|---|
+| **76+ month terms are capped at 45,000 miles.** The app's 140,000-mile figure is the program maximum, but long terms carry a far tighter cap. | 1 |
+| **GAP Administration Fee — $50** on every contract including GAP, charged to the monthly reserve statement. A direct per-deal cost the app doesn't show. | 1 |
+| **Small-deal flat rules**: contracts 48+ months need a total amount financed of **$10,000 or more** to earn the percentage flat. Contracts **24–47 months at $7,500+** and contracts **48+ months between $7,500 and $9,999.99** receive a **$100 flat** instead. The app's reserve table implies the percentage applies to every deal. | 1 |
+| The flat table applies to **48–84 month** terms only. | 1 |
+| Chargeback also triggers on a **balance reduction of more than 25%** of the original loan balance before 3 payments or 120 days; product refunds to borrowers are charged back; payoffs are excluded from the 3-payment requirement. | 1 |
+| **Unrepaired hail damage up to $3,000 is financeable** if the approved vehicle value is reduced by the damage amount. This is a deal-enabling rule the app omits entirely. | 2 |
+| **Maximum MSRP/JD Power Retail value of $150,000.** | 2 |
+| **Minimum term is 24 months.** | 2 |
+| Doc fee over **$225.00** requires the dealer to comply with specific Texas regulations and show proof on request. The app has the $399 cap but not the $225 trigger. | 2 |
+| **Model year flip**: effective April 1st, all previous-year models are valued as "Used" on the approved guide. | 2 |
+| For used current-model vehicles not yet in JD Power, use **KBB**; if still unavailable, book the JD Power previous-year model with the same trim/options. | 2 |
+| **EV charging stations are not eligible for financing.** | 2 |
+| Only vehicles from **mainstream manufacturers** are financed. | 2 |
+| Manufacturer CPO can be included in Retail value for recognized JD Power units. | 1 |
+| All other products and their sales tax apply to the **front-end advance**, which may raise the buy rate. | 1 |
+| Signed Title Guarantees required for all out-of-state customers. | 2 |
+| Reserve discrepancies must be raised within **4 months** of statement date. | 2 |
+| Flat-cancelled contracts require a new application and a new credit decision. | 2 |
+| Elite status earns for the remainder of the current quarter **plus the full following quarter**; Elite dealers also receive the enhanced backend policy. | 1 |
+| Loans **titled to a business** are excluded (app lists trust/POA/straw/brokered but not this). | 2 |
+| **TX ELT code 31067686500.** | 2 |
+
+### UNVERIFIABLE
+
+| App value | Why |
+|---|---|
+| `bureaus.primary` — all three; note "All three bureaus" | The guide never names a credit bureau. |
+
+### Verified correct (no action)
+
+Texas-only restriction, front-end advance 115% including doc fees and TT&L and
+excluding qualified backend, total LTV cap 140%, MSRP/JD Power Retail valuation,
+Black Book not accepted, max mileage 140,000, minimum amount financed $6,000
+excluding backend, maximum 45 days to first payment, approvals valid 30 days, the
+complete rate-adjustment flat table (5.00% at +1.00 down to 0.00% at −1.25), buy
+rate pays 3% with flats at 100% and no cap or split, Elite tier thresholds and
+payouts (30–64 → 0.25%, 65–94 → 0.50%, 95+ → 0.75%), standard backend 20% up to
+$7,500, Elite backend 25% up to $10,000, guaranteed $4,000 minimum backend, VSC
+greater of $3,500 or 15% with 24-month minimum, maintenance greater of $1,500 or
+10% and prepaid-scheduled-only, GAP lesser of $1,850 or 5% of amount financed with
+a 70% front-end advance minimum, CLAH no longer accepted, doc fee cap $399, cash or
+cash-equivalent down payments, no trust accounts, no power of attorney, no straw
+purchases, no brokered contracts, verifiable physical address, applicant-only
+income, no marijuana-related income, and the ineligible-vehicle list.
+
+### STALE
+
+None. App `effectiveDate` "July 23, 2026" matches the sheet's own date on both pages.
