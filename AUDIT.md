@@ -716,3 +716,77 @@ income, no marijuana-related income, and the ineligible-vehicle list.
 ### STALE
 
 None. App `effectiveDate` "July 23, 2026" matches the sheet's own date on both pages.
+
+---
+
+## 9. gls — GLS / Global Lending Services
+
+Sources: Program Sheet `1FosJDBLX8H9vjNf-ZO3jdQAG1ecWBggs` — "Program Guidelines", doc code **GLS_PG_V53_2026**, 2 numbered pages.
+Funding Guidelines `1zmQry9GwX75muumyEBX5jP8qmglbTKzq` — "Dealer Funding Checklist", cited as **FC**.
+
+### WRONG
+
+| Field | App value | PDF value | Page |
+|---|---|---|---|
+| `sections.ltv` → Front-End LTV | `Up to **125%**` | **130%** ("Front-End (as high as) 130%") | 1 |
+| `sections.ltv` → Total LTV | `Up to **135%**` | **140%** ("Loan to Value (as high as) 140%"). The app's own top-level `maxLTV` says 140% — the two contradict each other. | 1 |
+| `sections.backend` → Select Program Backend | `Up to **4%**` | Select back-end is **$5,200** (warranty up to $4,000, GAP $1,200). The 4% figure is Select's **dealer flat**, not a backend cap — the app has merged dealer compensation into the backend table. | 1 |
+| `sections.ltv` term table, 20,001–120,000 mi | single row, `72 months` | Two separate bands: **20,001–80,000** → Select **75**, T1–T4 72; **80,001–120,000** → Select 72, T1–T4 72. The app collapses them and loses Select's 75-month band. | 1 |
+
+Front-end and total LTV are both understated by five points. On a $25,000 book that
+is $1,250 of advance the desk is not asking for.
+
+### MISSING
+
+| What the PDF says | Page |
+|---|---|
+| **Select-tier backend figures**: warranty up to **$4,000** and total back-end up to **$5,200** (the app shows only the T1–T4 figures of $3,500 and $4,600). | 1 |
+| **Advantage tier** flat of 2% is absent from `sections.reserve` (the top-level `reserveStructure` does mention it). | 1 |
+| Term footnotes: **66 months for book values under $10,000**; **66 months for vehicles over 10 years old**; **T3–T4 max term 72** (the app shows 75 for all of T1–T4 at 0–20,000 miles). | 1 |
+| **Vehicle valuation rules** — new: manufacturer's invoice for untitled units under 3,000 miles. Used: JD Power clean trade or **KBB wholesale**, KBB in AZ, CA, CO, ID, NM, NV, OR, UT, WA, WY. Prior-year new: invoice January–March, guide April–December. **Current-year used: invoice required, valued at 90% of invoice less $0.25 per mile, less all rebates and incentives.** | 2 |
+| Rates as low as **9.95%**; down payment as low as **$0**; acquisition fee as low as **$0**. | 1 |
+| Acquisition and contract fees **may not be passed on to the customer**. | 2 |
+| **Child support / alimony** income is accepted — state agency or court order covering the loan term plus 3 months of bank statements. The app's income section omits it. | 2, FC |
+| Ineligible vehicles the app omits: **heavy duty**, **manufacturer buybacks**, and **any vehicle not listed in JD Power/KBB**. | 2 |
+| "What to avoid": **open bankruptcies**, **repossessions in the past 4 months**. | 1 |
+| Contracts must be **simple interest**; most Bankers System and LAW contracts accepted. | 2 |
+| Payment calls — final vehicle structure must be submitted and approved before funding. | 2 |
+| Loan-to-value is calculated as amount financed ÷ approved book; minimum and maximum amount financed **may vary by dealer status**; front-end includes TT&L and max sales-price limits apply. | 2 |
+| Expedited funding: current paystub + current utility bill + **3 references** funds the deal. | 1 |
+| Funding package requires **minimum 6 months of insurance**, a **minimum of 3 personal references**, and a separate odometer statement where the title application lacks the field. Packages incomplete after **5 days** are returned to the dealer. | FC |
+
+### UNVERIFIABLE
+
+| App value | Why |
+|---|---|
+| `sections.id` → ITIN "✓ Accepted" | Neither document mentions ITIN. GLS is also absent from the app's own ITIN quick list, so the detail page and the quick list disagree. |
+
+### Verified correct (no action)
+
+FICO range 400–700 with zero FICO considered, minimum income $1,800/month, max PTI
+24%, self-employed and 1099 not accepted, dealership sales/management/F&I personnel
+not accepted, 15-second approvals 24/7/365, no book-to-look, clean deals fund in 48
+hours, loan amount $7,000–$55,000, contract fee $199, max term 78 months, max
+vehicle age 12 years, max mileage 180,000, EV eligibility (max 6 years / 75,000
+miles) and the exact EV model list, dealer flats by tier (Select 4%, T1–T2 3%,
+T3–T4 2%, Advantage 2%) paid as a percentage of front-end, **NO CHARGEBACKS**,
+flats paid on contracts received within 20 days of initial application receipt,
+approvals valid 30 days, GAP $1,200 Select / $1,100 others with a **greater-than-80%
+front-end LTV** requirement and MA/NY exclusion, warranty 24 months/24,000 miles
+covering seals and gaskets, T1–T4 warranty $3,500 and backend $4,600, down payment
+must be cash or actual cash value of trade with no hold checks/borrowed funds/credit
+cards, **photocopy of a valid U.S. driver's licence for all signers** (confirmed in
+the Funding Checklist), the full POR one-doc/two-doc structure, W-2 paystub ≤30
+days, part-time/temp W-2 with 6 months on job, SSI/disability/pension award letter
+plus 3 months of statements, SSI and disability grossed up 115% with pension treated
+as net, and the ineligible-vehicle list as far as it goes.
+
+### STALE
+
+**Not resolvable from the source.** The document carries **no effective date** — only
+the version stamp "Program Guidelines v53 2026" / `GLS_PG_V53_2026`. The app's
+"2026 (v53)" is therefore a faithful transcription of what the document says.
+`SOURCES.md` flags this lender as a mismatch (`≠`) against a 2026-07-27 filename
+date, but that date exists only in the filename, not in the document. Per `DATA.md`
+§3.3 an ISO date is required; **only the filename can supply one**, and that should
+be recorded as a filename-derived date rather than a document date.
