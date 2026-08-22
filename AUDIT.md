@@ -19,6 +19,120 @@ Page numbers come from the running footer in each PDF (e.g. "AmeriCredit | Retai
 Underwriting Guidelines 3"). Where a PDF has no footer, page is given as the
 ordinal position of the text in the document and marked `~`.
 
+
+---
+
+## Summary
+
+**20 of 20 lenders audited against 38 source PDFs.** One lender (`westlake`) had no wrong
+values. Two source files could not be read (see Unreadable sources below).
+
+| Category | Count |
+|---|---|
+| **WRONG** — individual values that don't match the PDF | **149** across 19 lenders |
+| **MISSING** — material facts in the PDF the app doesn't carry | **316** |
+| **STALE** — app `effectiveDate` older than the newest source | **2** (`ally`, `pnc`) + `kia`, below |
+| **UNVERIFIABLE** — app values no source supports | **39** |
+
+Wrong values by lender, highest first:
+
+`regional` 36 · `truist` 28 · `td` 17 · `fifththird` 12 · `flagship` 8 · `bofa` 6 ·
+`exeter` 5 · `ally` 5 · `chase` 5 · `kia` 4 · `gls` 4 · `pnc` 4 · `santander` 3 ·
+`wellsfargo` 3 · `dfc` 3 · `amcredit` 2 · `capitalone` 2 · `cps` 1 · `usbank` 1 ·
+**`westlake` 0**
+
+### The five most consequential wrong values
+
+Ranked by effect on a live deal — LTV, term, FICO floor, GAP cap.
+
+1. **`fifththird` — the model-year term table is shifted in every row.** A 2018 unit shows
+   72 months when the sheet allows 66; a 2017 unit shows 63 when the sheet allows 66; the
+   oldest band (2013–2015) doesn't exist in the source at all. Every model-year term
+   lookup on this lender returns a wrong answer.
+2. **`flagship` — three deal-killers on one page.** Vehicle age shows **10 model years**
+   when the guide allows **13**; max term shows **72 months** when the guide allows **78**;
+   amount financed shows a **$50,000** ceiling when the guide allows **$60,000**. Each one
+   causes the desk to turn away business Flagship would buy.
+3. **GAP maximum understated on four lenders.** `wellsfargo` $1,200 → **$1,500**;
+   `td` $1,300 → **$1,500**; `bofa` $1,200 → **$1,500**; `dfc` $1,200 → **$1,500**. Roughly
+   $300 of GAP left unsold on every deal placed with those four. `amcredit` and `ally`
+   have the same problem on the LTV floor rather than the cap (65% vs **70%**, and 60% vs
+   **70%**).
+4. **`chase` — `ficoMin: 620` is invented.** The Chase sheet publishes **no FICO minimum**;
+   it asks only for "a credit history that shows the ability and willingness to pay". The
+   app's own `ficoNotes` states this correctly, but the numeric floor overrides it in the
+   compare table and the deal structurer — turning away Chase-eligible customers on a
+   threshold Chase never set.
+5. **`gls` — both LTV figures are five points low.** Front-end shows **125%** against a
+   published **130%**; total shows **135%** against a published **140%**. On a $25,000 book
+   that is $1,250 of advance the desk isn't asking for.
+
+Two more that affect dealer compensation rather than deal structure, and are larger in
+scope than any of the above:
+
+- **`regional` — the entire flat/discount matrix is wrong in all 28 cells**, and the
+  flat-vs-discount flag is presented as a property of the tier when the rate sheet makes it
+  a property of the **LTV band**. T5 is a flat at 0–90% and T4 becomes a discount above 115%.
+- **`truist` — 25 of 28 rows of the flat pay scale are wrong**, both in band boundaries and
+  amount. A $35,000 deal over-states the flat by $125.
+
+### A pattern worth fixing structurally
+
+**On eight lenders the top-level field is correct and the `sections` HTML contradicts it** —
+`td`, `wellsfargo`, `bofa`, `dfc`, `chase`, `gls`, `pnc` and `flagship`. In every case the
+detail page, which is what the desk actually reads, carries the wrong number while the
+compare-table field carries the right one. This is exactly the failure mode `DATA.md` §1.3
+predicts from storing the same concept twice — once as a typed summary field and once
+inside an HTML blob — and it is the strongest argument in this audit for the v2 migration.
+
+### The four `SOURCES.md` date flags all resolve in the app's favour
+
+`SOURCES.md` §2 flags `td`, `gls`, `kia` and `dfc` as effective-date mismatches. **In all
+four cases the app matches the document and the filename is what's wrong:**
+
+| Lender | App | Document says | Filename says |
+|---|---|---|---|
+| `td` | June 30, 2026 | **06/30/2026** (both TD documents) | 07-01-26 |
+| `kia` | K500/K506 July 7, 2026 | **contracts dated July 7, 2026** | 07-01-26 |
+| `dfc` | August 13, 2025 | **Revision Date: 8/13/2025** | 01-01-26 |
+| `gls` | "2026 (v53)" | **no date at all** — only version v53 2026 | 07-27-26 |
+
+The manifest's note on `dfc` ("the app is probably stale, not the file") is backwards.
+
+### Genuine staleness
+
+- **`ally`** — stored April 1, 2026; the Underwriting Policies & Provisions were revised
+  **April 7** and the Aftermarket Product Matrix is stamped **July 7, 2026**.
+- **`pnc`** — stored March 16, 2026; the Proof of Residence Guidelines are effective
+  **May 1, 2026**.
+- **`kia`** — a different and worse problem. The app's incentive tables cite **bulletins
+  2026-036 and 037**; the folder holds **2026-091**; and 2026-091 covers contracts dated
+  **July 7 – August 3, 2026**, so it **expired 19 days ago**. No current Kia bulletin is in
+  the folder. This is the store's own captive.
+
+### Unreadable sources (EXTRACTION_GUIDE §6)
+
+- **`ally` 84-month Program Sheet** (`1R-6gins9tE5wyy3dqNRUJv6FcaOyXo0Y`) — image-only PDF,
+  no text layer. Returns nothing but bullet and checkmark glyphs.
+- **`kia` LTV grid** — the app's advance grid is keyed to FICO bands (<580 / 580–639 /
+  640–659 / 660–679 / 680+) that appear in **no document in the folder**. The K504 sheet
+  defers front-end and backend advance limits to the "KFA Standard Retail Program
+  Guidelines", which is **not in the Drive set**.
+
+Several PDFs are PowerPoint or spreadsheet exports whose **tier columns interleave in the
+text layer** — `td` Program Sheet2, `capitalone`, `cps`, and parts of `truist`. Row values
+are legible and reliable in each; per-tier attribution is not. Those sections carry an
+explicit OCR caveat and should be read visually before any value is changed.
+
+### Manifest corrections needed in `SOURCES.md`
+
+Beyond the four date flags above: `exeter` Funding Checklist is stamped **10.01.2025** (not
+2026-06-12); `regional` Underwriting Guidelines say **Revised 02/2026** (not 2026-05-27);
+`capitalone` both funding documents are **March 2025** (not January 2026); `bofa` Funding
+Checklist is **February 2, 2026** (not 2026-06-17); `pnc` Proof of Residence is **5/1/2026**
+(not 2026-03-16). `ally`'s "Funding Guidelines" is actually the **Underwriting Policies &
+Provisions**.
+
 ---
 
 ## 1. amcredit — AmeriCredit (GM Financial)
