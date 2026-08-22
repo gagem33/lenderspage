@@ -551,3 +551,83 @@ prohibited-financing list (refinance, lease buyout, cash-out, commercial, Uber/L
 ### STALE
 
 None. App `effectiveDate` "June 16, 2026" matches the document's "Effective June 16, 2026".
+
+---
+
+## 7. ally — Ally Financial
+
+Sources: Program Sheet `1rm-zFIrAzSg4cLZ_z-GB4Y5r0fcZoZuE` — "Ally Consumer Retail Product", **Effective April 1, 2026**, 7 numbered pages; page 7 is the Aftermarket Product Matrix stamped **July 7, 2026**.
+"Funding Guidelines" `1Oej_ktEK5rLMxX8GXiUhzTF2wWelSYHm` — this file is actually the **Underwriting Policies & Provisions, Revised April 7, 2026** (10 numbered pages). Cited as **P&P**. `SOURCES.md` mislabels its doc type.
+84-month Program Sheet `1R-6gins9tE5wyy3dqNRUJv6FcaOyXo0Y` — **unreadable, see below**.
+
+### WRONG
+
+| Field | App value | PDF value | Page |
+|---|---|---|---|
+| `sections.backend` → GAP min LTV | `min 60% LTV` | **70%** for non-commercial retail. 60%/80% applies to commercial and ComTRAC, not retail. IN and SC require **80%** on all DCA transactions (70% for GAP Insurance in IN only); CA is 70% on all DCA. | 7, P&P 4 |
+| `sections.backend` → Maintenance | `Greater of $2,000 or **15%** of EDC/AWV` | Greater of $2,000 or **10%** of EDC/AWV. The 15% belongs to Mechanical Service (greater of $5,000 or 15%), which the app has right. | P&P 4 |
+| `sections.ltv` → Used 2019–2015 | `Max 75 months (FICO ≥620, AMF >$5K, Mileage <100K)` | The model-year bands are **New/CSU–2021 → 84**, **2020–2016 → 75**, **2015–2014 → 63 (S–B tiers only)**. The app's year range is off by one on both ends and the 63-month band is missing entirely. | 1 |
+| `sections.reserve` → $75K–$149,999 row, 76–84 mo column | `2.00% (D/E)` | Max DFI for 76–84 months is **1.50%** at every amount band. "All D & E Tiers → 2.00%" is a separate rule spanning all terms, which the app also states correctly on its own line — putting it in this cell reads as if $75K+ deals get 2.00% at 84 months. | 1 |
+| `uniqueFeature` | `auction CPO $1K bonus` | The **$1,000 add is for OEM or approved non-OEM Certified Pre-Owned** certification, with a signed CPOV Acknowledgement Form. Auction pricing is a separate valuation method (SmartAuction price good 120 days, other auctions 90 days). The app merges two unrelated rules. | P&P 3, 5 |
+
+### MISSING
+
+| What the PDF says | Page |
+|---|---|
+| **The entire Non-Prime max advance grid** (FICO <620), tiers S–E: New ≤72 mo 135/130/125/120/115/115 · Used ≤72 135/130/130/125/115/115 · New and Used 73–75 130/125/120/115 · New and Used 76–84 125/120/115. The app names the non-prime tiers but carries no advance figures for them. | 1, P&P 1 |
+| **$795 Dealer Acquisition Usury Fee** — assessed on standard-rate retail where the buy rate meets or exceeds the state statutory limit (or Ally's internal ceiling). **Not waived for Champions Club dealers.** Where both fees qualify, only the higher is assessed. Neither fee may be passed to the customer or shown on the contract. | P&P 2 |
+| Contracts not received within **15 days** of contract date may be ineligible for purchase; contracts not complete within **20 days** are subject to payoff. | P&P 1 |
+| Title documents must be submitted **no more than 30 days** from date of sale. | P&P 9 |
+| Used-vehicle valuation: JD Power Clean Trade-In, or **KBB Lending Value** for dealers in AZ, CA, CO, HI, ID, NM, NV, OR, UT, WA, WY, **or auction purchase price** (SmartAuction good 120 days; all other purchases 90 days). | P&P 3, 5 |
+| **Dealer-installed option maximums**: XM/CD $500 · chrome wheels $1,000 · power sunroof $500 · rear spoiler $250 · audio/video $500 · leather upgrade $500 · trucks only: running boards $250, bed liner $250. | P&P 5 |
+| Nine aftermarket products the app omits: **Key Fob Replacement** $1,000/$1,500 · **Windshield Protection** greater of $1,200 (or $1,500) or 4% · **Paint, Fabric & Leather** $1,500/$2,000 · **Paintless Dent Repair** $1,200/$1,500 · **Theft/catalytic converter** $1,500/$2,000 · **Bundled Products** $2,500/$3,000 · **Cleaning Treatment** $500 · **Nitrogen Tire Fill** $200 · **Pulsating Third Brake Light** $800 · **Battery Performance Protection** (non-EV $1,000; EV greater of $3,000 or 10%) · **Vehicle Value Protection** $1,500. | 7, P&P 4 |
+| Ally **will not accept contracts that include joint disability coverage**. | P&P 4 |
+| Hail-damaged, Lemon Law and OEM buyback vehicles require the Acquisitions Analyst for eligibility. | P&P 1 |
+| POI documents the app omits: military **LES (Base Pay + BAS + BAH only)**; child support/alimony (court award letter + last 4 consecutive payments, or Child Support Payment Center history); disability (short-term needs an award letter **plus** verification of continued income; long-term needs an award letter or 4 recent statements); unemployment; **seasonal income — prior 2 years' 1040**; rental income — 1040 with Schedule E. Also: if a paystub lacks YTD figures, the previous year's W-2 is required, and stated income must match Schedule C line 31 plus depreciation. | P&P 10 |
+| POR documents the app omits: land-line phone bill, Ally account statement, real-estate/escrow tax bill, HUD/mortgage closing statement, SSN documentation. Proof of Name also accepts a **divorce decree**. | P&P 10 |
+
+### UNVERIFIABLE
+
+| App value | Why |
+|---|---|
+| `bureaus` — all three, "uses middle score" | Neither document names a bureau or a scoring method. `EXTRACTION_GUIDE.md` §5 does not claim middle score for Ally, but the app does. |
+| `sections.fico` → "Tiers (Prime) S, A, B, C" / "(Non-Prime) S, A, B, C, D, E" | The tier letters are confirmed, but the split — C being the last prime tier and D/E non-prime only — is not stated. P&P shows CB score minimums of 520 for **all six** tiers S–E. |
+
+### Unreadable source (EXTRACTION_GUIDE §6)
+
+**`ally 84 month Program Sheet` (`1R-6gins9tE5wyy3dqNRUJv6FcaOyXo0Y`) has no extractable text.** The
+entire file returns only bullet and checkmark glyphs. It is an image-only PDF. Any
+84-month-specific terms it carries could not be checked against the app. This file
+needs to be re-exported with a text layer, or read visually.
+
+### Cross-document conflict (store neither)
+
+**GAP advance-rate floor for commercial / ComTRAC.** The Aftermarket Product Matrix on
+Program Sheet page 7 says **60%**; the same matrix in the P&P (page 4) says **80%**.
+Retail non-commercial is 70% in both, so the app's retail figure is unaffected — but the
+two Ally documents disagree on the commercial number.
+
+### Verified correct (no action)
+
+Retail minimum CB score **520** and lease **550** (P&P p1 — both confirmed), the complete
+prime max-advance grid for EDC/AWV <$100K across all three term bands, max rate 24.00%
+new / 25.00% used, minimum all-in amount financed $5,000, **minimum $20,000 for 76–84
+month terms** (P&P p1), **maximum mileage on used 150,000** (P&P p1), approvals valid 30
+days, total aftermarket cap (greater of $5,000 or 30%, max $10,000 under $80K and $15,000
+at or above), GAP $1,500/$2,000, GAP excluded in NY and DC, GAP Plus available except AK,
+DC, NE, NY, TX, Mechanical Service greater of $5,000 or 15%, Tire & Wheel greater of
+$1,500 or 7%, Etch $1,200/$1,500, the full retail dealer participation table (flats
+$150/$250/$350/$450/$500 by amount band; max DFI 2.50% ≤60, 2.00% 61–75, 1.50% 76–84, and
+2.00% for all D & E tiers), Dealer Acquisition Fee up to $795 non-Champions Club and
+$0/$500 Champions Club, the Feb 1 2026 ADR Retail Bonus Reward note, credit-card down
+payment up to $5,000 with name matching, ineligible vehicles (salvage, totaled,
+water/flood, frame damage, odometer rollback), SmartLease and ComTRAC availability, and
+all POI/POR/ID items the app does carry.
+
+### STALE
+
+**Yes.** App `effectiveDate` is "April 1, 2026". Two source components are newer:
+the Underwriting Policies & Provisions were **revised April 7, 2026**, and the
+Aftermarket Product Matrix is stamped **July 7, 2026**. Per `DATA.md` §3.3 the
+effective date should be the newest of the set — July 7, 2026 — with the others
+recorded in `source.notes`.
