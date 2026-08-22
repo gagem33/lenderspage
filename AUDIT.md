@@ -790,3 +790,80 @@ the version stamp "Program Guidelines v53 2026" / `GLS_PG_V53_2026`. The app's
 date, but that date exists only in the filename, not in the document. Per `DATA.md`
 §3.3 an ISO date is required; **only the filename can supply one**, and that should
 be recorded as a filename-derived date rather than a document date.
+
+---
+
+## 10. capitalone — Capital One Auto Finance
+
+Sources: Program Sheet `1iU_bLQVWiuaSeoTZKtUljRYia_9I0Nkl` — "Executive Diamond Partner / Program guidelines", **Issue date January 2026**, 2 numbered pages.
+Funding Guidelines `1GPPmk175O3xIiJDdnX2EEs2DKDqL2Vnu` — "Funding Checklist", **Issue date March 2025**.
+Funding Guidelines2 `1Lkf6Duc11I-Vi3jRiaL6PCgu44Xu6D33` — "Funding Guidelines", **Effective date March 2025**. Cited as **FG2**.
+
+> **`SOURCES.md` dates both funding documents to January 2026. Both are stamped March 2025.**
+
+### WRONG
+
+| Field | App value | PDF value | Page |
+|---|---|---|---|
+| `sections.ltv` → "Low-Book Advance (Book ≥$10K) 150% / (Book <$10K) 175%" | labelled **Low Book Advance** | These are the **Loan to Value** limits ("Loan to Value — Up to 150% for book value ≥ $10K, up to 175% for book value < $10K"). **Low Book Advance is a different thing entirely**: "Greater of {(Book value + $2,000) / Book value} or FE limit." The app has the right numbers under the wrong name and omits the actual low-book formula. | 1, 2 |
+| `sections.fico` → Thin File | `$1,000 min **income** for <2yrs on file or <3 trade lines` | The "<2 years on file or <3 trade lines" condition governs **Minimum Down of $1,000**, not minimum income. Minimum income is a flat $1,500/month. | 1 |
+
+### MISSING
+
+| What the PDF says | Page |
+|---|---|
+| **All-in Back End Limit** — None / up to **$1,200** / up to **$900** by tier group. The app has per-tier VSC caps and a GAP cap but no all-in backend ceiling. | 1 |
+| **Monthly payment cap** — up to **$1,000** / up to **$800** by tier. Absent from the app entirely. | 1 |
+| **Other Back End** — greater of $2,000 or up to **15% of book value** (a category separate from VSC and GAP). | 1 |
+| **Dealer participation or flat cannot exceed the finance charge** from Capital One, and a flat must be contracted at buy rate. | 2, FG2 |
+| **Vehicle restrictions — the app has no vehicle section for Capital One at all.** FG2: does not finance **Daewoo, Isuzu, Saab, Suzuki, Oldsmobile, Fisker, VinFast, Smart Cars older than 2008**; no commercial-use vehicles; no vehicle without the **original factory odometer**; no vehicle not originally manufactured for US sale. | FG2 |
+| **Down payment sources**: cash, certified funds (cashier's check or money order), personal check, or debit card. **No deferred down payments outside California and Nevada.** | FG2 |
+| Pre-qualified leads get tiers 0–9 with **84-month max term for 0–50K miles on tiers 0–5**, and up to **150K miles on all tiers**. The app's Auto Navigator note has the tier access but not these limits. | 2 |
+| Definitions the app omits: Front End Advance = (sales price + doc fees + approved front-end products − down payment − net trade − manufacturer rebate) ÷ book value; Loan to Value = total amount financed ÷ book value; Minimum Down may be cash, positive trade **or manufacturer's rebate**. | 2 |
+| "Maximum term limits may vary by **mileage, make/model, and book value**." | 2 |
+| POR: **concealed carry license** is an accepted document; with two applicants, POR must be dated **prior to the approval date**. | FG2 |
+| GAP: refer to state guidelines for specific policy limits. | 2 |
+
+### Ambiguity (EXTRACTION_GUIDE §6 — two values, store neither)
+
+- **Minimum amount financed.** Page 1 says "**Minimum $2,000 FE**"; page 2 says "Amount Financed — **From minimum of $4,000**". Same document, two figures. The app carries $2,000.
+- **Maximum vehicle age.** Program Sheet (Jan 2026): "vehicle age **≤ 15 years**". FG2 (Mar 2025): does not finance "any vehicles **older than 12 model years**". The app carries 15. The newer document supports 15, but the two sources conflict and FG2 has not been superseded on its face.
+
+### OCR caveat (EXTRACTION_GUIDE §6)
+
+The Program Sheet is a single-page grid whose **tier columns interleave in the text
+layer**. Row values (VSC $7,000/$8K/$6K/$5K/$4K/$3K, minimum-down conditions, all-in
+backend None/$1,200/$900, monthly payment $1,000/$800) are legible; **which tier each
+belongs to is not reliably recoverable**. The app's tier attribution for the VSC ladder
+(T0 through T5) is plausible but could not be confirmed — read it visually before
+changing anything.
+
+### UNVERIFIABLE
+
+| App value | Why |
+|---|---|
+| `bureaus` — all three, "uses middle score" | Neither document names a bureau or scoring method. `EXTRACTION_GUIDE.md` §5 says Capital One publishes no FICO minimums, which the app reflects correctly, but the bureau claim is unsupported. |
+| `chargebackWindow` = "See Dealer Navigator callback" | No chargeback rule appears in either document. Consistent with the sheet's "See callback for details" language but not a stated rule. |
+| `idReq` = "Not specified (DL / ID card appear only as POR options)" | Accurate as written — this is a correct statement of absence, not an unsupported claim. |
+
+### Verified correct (no action)
+
+Tiers 0–9, no published FICO minimums, all deals via Dealer Navigator, max amount
+financed $75,000 prime / $55,000 subprime, front-end advance 120% (book ≥$25K
+non-prime or all book values prime) and 130% (book <$25K non-prime), payment-to-income
+up to 20%, minimum income $1,500/month, NDI minimum $50 and its full formula, the
+sales-price-to-book rule, max vehicle age 15 years and mileage 200,000, the complete
+mileage × tier term matrix (84/75/72/48 for tiers 0–5 and 75/75/72/48 for tiers 6–9),
+the 84-month condition (age ≤5 years and amount financed >$20K), the 48-month cap for
+vehicles 13 years and older, GAP up to $1,200 or state maximum, VSC minimum 2
+years/24,000 miles to count as backend, participation 2.5% (≤60 mo) / 2.0% (≤75 mo) /
+1.5% (76+ mo), the full flat schedule ($100/$150/$200/$250/$300) contracted at buy
+rate, the POR document list and 60-day window, and Auto Navigator pre-qualified leads.
+
+### STALE
+
+App `effectiveDate` "January 2026" matches the Program Sheet's issue date. Per
+`DATA.md` §3.3 a month-only date should be normalised to 2026-01-01 with a note. The
+two funding documents are **ten months older** than the manifest claims (March 2025,
+not January 2026) — worth re-pulling from the portal, since FG2 carries the vehicle
+restrictions and its 12-model-year limit conflicts with the current sheet.
