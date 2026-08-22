@@ -375,3 +375,108 @@ address verification trigger at <1.5 years.
 ### STALE
 
 None. App `effectiveDate` "July 20, 2026" matches the PDF's "Effective July 20, 2026".
+
+---
+
+## 5. td — TD Auto Finance
+
+Sources: Program Sheet `1O9q8uW2FdCawn6uauNxv9xYGPZ8fIEvO` — "TDAF Retail Program Guide", doc 84-291-8462, **Effective 06/30/2026**, 7 numbered pages.
+Program Sheet2 `1X57L74CerUi8vHJ37BujDe00ZhrxEL_D` — "TDAF Retail Program Overview", doc PROD-9034, **Effective 06.30.2026**, 4 numbered pages. Cited below as **PO**.
+
+**The `SOURCES.md` date flag for `td` resolves in the app's favour.** Both documents
+state 06/30/2026 in their own footers. The app's "June 30, 2026" is correct; the
+manifest's 2026-07-01, derived from the filename, is the value that is wrong.
+
+### WRONG
+
+| Field | App value | PDF value | Page |
+|---|---|---|---|
+| `sections.backend` → GAP Maximum | `$1,300 (state law may reduce)` | **$1,500** (unless otherwise limited by state law). The app's own top-level `gapMax` says $1,500 — the two fields contradict each other. | 1 |
+| `sections.ltv` → Max Mileage (gas, T1–6) | `120,000 (under 72mo); 100,000 (73mo+)` | "Tiers 1–6 **≤ 72 months** = 120,000 miles; Tiers 1–6 **≥ 73 months** = 100,000". At exactly 72 months the app applies the 100,000 cap; the PDF allows 120,000. | 1 |
+
+**Enhanced flat-fee / BPS table.** The app's BPS labels do not line up with the
+payouts. The PDF's ladder is +50 or +75 BPS → 2%, +100 → 3%, +150 → 4%, +200 → 5%;
+the app has each payout attached to the BPS step above it.
+
+| Term band | BPS step | App | PDF (PO p1) |
+|---|---|---|---|
+| 64–72 mo | +100 BPS | 2% / $3,000 | **3% / $4,500** |
+| 64–72 mo | +150 BPS | 3% / $4,500 | **4% / $6,000** |
+| 64–72 mo | +200 BPS | 4% / $6,000 | **5% / $7,500** |
+| 73–84 mo | +150 BPS | 3% / $4,500 | **4% / $6,000** |
+| 73–84 mo | +200 BPS | 4% / $6,000 | **no +200 step exists** — 73–84 tops out at +150 |
+| 64–72 mo | app row "Max (64–72mo) 5% / $7,500" | unlabelled | that is the **+200 BPS** row |
+| 48–63 mo | **+75 BPS → 2% / $1,000** | row absent | present |
+| 64–72 / 73–84 | **+50 BPS → 2% / $3,000** | row absent | present |
+| Buy rate | shown only under 48–63 | applies to **24–84** months, 1% / $500 | PO p1 |
+
+**Maximum age / term.** The app's model-year term grid does not match the PDF's.
+
+| Model year | App (T1–T2 / T3–T8) | PDF (PO p2) |
+|---|---|---|
+| 2023–2021 | 84 / 75 | **75** |
+| 2019–2018 | 72 or 66 / 66 or 60 | **60** |
+| 2017 | 60 / 60 | **48** |
+| 2020 | 72 | 72 if amount financed is below the threshold, **66** at or above it |
+
+> **OCR caveat, per EXTRACTION_GUIDE §6.** `Program Sheet2` is a PowerPoint export
+> and its tier columns interleave in the text layer. The **row values above are
+> legible and reliable**; the **per-tier attribution is not** — I cannot confirm from
+> the text which tier column each figure sits in. Treat the row values as findings
+> and re-read the tier split from the PDF visually before changing anything.
+> The same caveat applies to the front-end and total LTV grids on PO pages 1–2.
+
+### MISSING
+
+| What the PDF says | Page |
+|---|---|
+| **Maximum backend by invoice/book value** — ≤$10,000 → $2,000 · $10,000.01–$15,000 → $3,000 · $15,000.01–$20,000 → $4,500 · $20,000.01–$25,000 → $5,000 · >$25,000 → 15%/18%/20% of invoice or book, or $3,500/$5,000, whichever is greater, not to exceed max total LTV. The app records only the service-contract cap. | PO p1 |
+| **CPO program: TDAF adds 5% to the book-out value** for certified pre-owned. The app has no CPO field for TD. | PO p2 |
+| **Booking policy** — J.D. Power Gold Book monthly "Clean Trade" in all states except AZ, CA, CO, HI, ID, MT, NV, NM, OR, UT, WA, WY, where KBB weekly "Lending Value" applies. Plus the full fallback cascade: auction price if purchased at auction within 90 days; the other book; 85% of like factory invoice less $0.15/mile over 15,000 miles; 100% of prior year's book; exotics at 85% of NADA Average Retail with a <90-day auction receipt. **Black Book is not accepted.** | 7 |
+| New-vs-used valuation: ≤1 year old, **unregistered**, ≤8,000 miles is valued as **new**; 2 years and older is valued as used. | 1 |
+| Maximum amount financed **per customer $300,000** (app has the $250,000 per-transaction figure only). | 1 |
+| Maximum mileage — **diesel 120,000**; and no tier or term limits for gas vehicles under 100,000 miles. | 1 |
+| **New Jersey**: unpaid cash balance ≤$10,000 cannot exceed 48-month terms. | PO p2 |
+| Liens must be perfected within **21 days**; titles received within **90 days** of contract date. | 2, PO p3 |
+| TDAF does **not** offer vehicle refinancing. | 1 |
+| Contracts or titles in the name of a **trust** are not eligible. | 2 |
+| Business applications require an individual co-applicant; pricing based on the individual's credit. | 1, PO p2 |
+| **Two references** with verifiable address and phone are required on the application. | 2, 3 |
+| **Notice to Cosigner** required in all states for any buyer/cobuyer not on the title; **Texas** is one of eight states with its own accepted NTC form list. | 4 |
+| Buy-down: any rate may be bought down by dealer payment of a non-refundable acquisition fee, which **cannot be passed to the customer**. | 5 |
+| Irregular payment plans are not available. | 5 |
+| Flat cancels require TDAF review case-by-case via a two-step process (message Retail Credit, then call 800-200-1513). | 6 |
+| Time at present address under **2 years** → both present and previous addresses required. | 2 |
+| Chargeback protection requires six scheduled payments received **and the sixth payment due date reached**. The app omits the second condition. | 6 |
+| Ineligible collateral the app omits: vehicles **over one ton**, commercial vans (Sprinter, Ram ProMaster), cab-and-chassis and flatbeds, commercial up-fits, boats, **Reconditioned and Bonded titles**, and the luxury-brand lists — Bugatti, Pagani, Koenigsegg (new and used); McLaren, Aston Martin, Bentley, Rolls Royce, Ferrari, Lamborghini (used only). | 5 |
+| Medium Duty: 1500/2500/3500 series require an **upfit** (4500/5500 with or without); LTV valuation 2025+ = 100% of invoice + 100% of upfit, new 2024 = 85% of invoice + 100% of upfit; upfit must be permanently affixed and cannot exceed 40% of combined value, labor excluded. Ineligible: Ram C/V Tradesman, ProMaster, Sprinter, Chevy Low Cab, used vehicles, passenger/livery, van conversions, waste/toxic haulers, tow trucks, car haulers, used upfits, cherry pickers. | PO p2 |
+| Non-major OEMs are named: **Rivian, Fisker, Lucid, VinFast**. The app renders this as "non-major OEM EVs", which is an interpretation of the category rather than the PDF's wording. | 5 |
+
+### Ambiguity (EXTRACTION_GUIDE §6 — two values, store neither)
+
+- **2020 model-year term threshold.** The overview shows both "72 if amount financed is <$50,000 / 66 if ≥$50,000" and "72 if amount financed is <$75,000 / 66 if ≥$75,000". Both appear on PO p2. These are probably per-tier variants, but the column scrambling makes it impossible to say which threshold belongs to which tier. Do not store either until read visually.
+
+### Verified correct (no action)
+
+TransUnion Auto FICO 08 as primary bureau via RouteOne and Dealertrack, BK and repo
+36-month ineligibility, cannabis-activity exclusion, SSN-or-ITIN application
+requirement, no PO box without physical address, "do not include ID copies in the
+funding package", POR list and ages (utility/phone ≤60 days, paystub ≤30, bank
+statement ≤30, tribal chapter letter), POI list (paystub ≤30 days with start/end
+date, prior-year W-2, self-employed tax return + 1099 + 3 months statements,
+1-800-200-1513 for other income), $250,000 per-transaction maximum, minimum amount
+financed $7,500 (24–75 mo) and $15,000 (76–84 mo), first payment 22–45 days,
+approvals valid 30 days, max total LTV 150%, GAP ineligible below 70% front-end
+LTV, dealer self-funded warranty ineligible, tire & wheel and maintenance eligible,
+80/20 reserve split, TDAF pays the greater of reserve or enhanced flat
+automatically, max markup 2.00% (24–72) and 1.75% (73–84), six-payment chargeback
+protection, service contract cap (15% of invoice/book or $4,000, greater, and the
+$7,000 ceiling for tiers 3–8 under $70,000 book), open 7 days a week, RouteOne
+Remote eSign and Dealertrack Remote Signing, medium-duty credit guidelines
+(tiers 1–7, 72-month max, 120% LTV tiers 1–5 / 115% tiers 6–7, 33,000 lb GVWR).
+
+### STALE
+
+**No.** App `effectiveDate` "June 30, 2026" matches both source documents.
+`SOURCES.md` §2 lists this lender as a mismatch (`≠`, file 07-01 vs app 06-30) — that
+flag is incorrect and the manifest row should be corrected to 2026-06-30.
