@@ -1,0 +1,278 @@
+# Lender data accuracy audit — 2026-08-22
+
+App data: `LENDERS` in `index.html` at commit `3e60889`.
+Sources: PDFs in `LENDERHUB/LENDERHUBSOURCES`, read by Drive file ID per `SOURCES.md` §2.
+Method: `EXTRACTION_GUIDE.md` §6 confidence rules. Program Sheet / Guidelines are primary;
+Funding Guidelines used for POI / POR / ID only, per `SOURCES.md` §1.
+
+**No lender data was changed. No deployment was made.** This is a read-only comparison.
+
+## Categories
+
+- **WRONG** — value in app ≠ value in PDF. App value, PDF value, page.
+- **MISSING** — PDF states something material the app doesn't carry.
+- **STALE** — app `effectiveDate` ≠ newest PDF date.
+- **UNVERIFIABLE** — app has a value the PDF doesn't contain. Not guessed at, not assumed wrong.
+- **OK** — nothing found.
+
+Page numbers come from the running footer in each PDF (e.g. "AmeriCredit | Retail
+Underwriting Guidelines 3"). Where a PDF has no footer, page is given as the
+ordinal position of the text in the document and marked `~`.
+
+---
+
+## 1. amcredit — AmeriCredit (GM Financial)
+
+Source: Program Sheet `1BcVmDpbQotQpB93acjWvX2uH3BRcjP37` — "Retail Underwriting Guidelines", What's New as of June 12, 2026.
+
+### WRONG
+
+| Field | App value | PDF value | Page |
+|---|---|---|---|
+| `sections.backend` → GAP Min LTV | `65% (80% IN / 70% CA)` | **70%** — "does not purchase … contracts that include a GAP product if the advance rate is less than 70%". Indiana is 80%. There is no 70% California rule; CA's rule is that GAP and CL&D cannot be included for covered service members. | 3 |
+| `sections.backend` → GAP — Not Allowed | `advances <65%` | advances **<70%** | 3 |
+
+The June 12, 2026 cover page lists its only change as "1. Updated GAP LTV
+restrictions — See page 3 for details". The app's 65% is almost certainly the
+superseded figure. This is the single most consequential finding for this lender:
+it under-states the advance floor at which GAP can be sold by 5 points.
+
+### MISSING
+
+| What the PDF says | Page |
+|---|---|
+| Ohio ZIP exception — consumers in ZIPs 43400–43699 and 44000–44999 pull **TransUnion** as primary bureau, against the state map. | 10 |
+| "New" also covers **previous**-year vehicles ≤7,500 mi (non-GM ≤5,000) through **March 31** of the current year. App only has current/future year. | 7 |
+| Minimum term is **12 months**. | 3 |
+| Current model-year vehicles over **5,000 miles** require a value adjustment (Triton dealerships: 6,500). | 2 |
+| Vehicles sold as-is without repair are valued at **80% of invoice/book** + TT&L + L/A&H + service contract + GAP, and must be disclosed. | 7 |
+| Insurance: full coverage, max **$1,000** collision and **$1,000** comprehensive deductible; no 30-day binders including spot-delivery insurance. | 6 |
+| A nonrefundable **acquisition fee** (separate from the $150 assignment fee) may be assessed based on credit risk; cannot be charged to the customer. | 1 |
+| Simple-interest contracts only. | 1 |
+| PTI and DTI percentages are set by credit risk; all pay-stub debt deductions count, including 401(k) loans, child support and garnishments. | 6 |
+
+### UNVERIFIABLE
+
+| App value | Why |
+|---|---|
+| `bureaus.stateMap` — EQ: CA NV OR WA ID MT WY UT CO NM AZ HI AK · EX: NC SC GA FL AL MS · TU: all others | Page 10 is a **map graphic**. Extracted text lists state abbreviations and a three-way legend but carries no state→bureau assignment. Cannot confirm or refute from this PDF. The Ohio ZIP exception above is the only state-level bureau rule the text does state. |
+| `sections.vehicles` → Book Value Guide — KBB for AZ,CA,CO,HI,ID,MT,NM,NV,OR,UT,WA,WY; JD Power elsewhere | Page 11 is also a **map graphic**. Text confirms only that KBB and J.D. Power are the two guides and that the guide is state-specific. |
+| `sections.ltv` note — "**Updated Jan 8, 2026:** Max term by age & mileage above." | This PDF is the June 12, 2026 edition and contains no reference to January 8, 2026. The term matrix itself matches the PDF exactly. The date attribution is unsupported by this source. |
+| `sections.id` → ID Required — "**Government-issued**; standard identity verification" | Page 6 says only "All applicants must pass standard identity verification checks." No document type is specified. Note the app's own top-level `idReq` gets this right ("no specific ID type required on sheet") — the two fields contradict each other. |
+| `sections.income` → VA/Pension — "Paystub or bank statement ≤45 days specifying depositor" | Correct for pension/retirement. For **veteran affairs** the PDF requires a **case number** for verbal verification with the VA, not a paystub or bank statement. The app merges two different requirements into one row. |
+
+### Verified correct (no action)
+
+Term matrix (all 30 cells), 84-month rule (B2+, ≤4-year vehicle), FICO floor 500,
+max mileage 100,000, max age 9 years, LTV 125/125/135 by mileage band, Canadian
+125%/115%, min amount financed $7,500 / $15,000, approval expiry 30 days, first
+payment 19–47 days, participation 2%, $200 flat at buy rate, 70/30 split,
+chargeback 3 payments and 3 cycles, assignment fee $150, min income $2,200 /
+$2,400 by tier, gross-up 25%, file depth 3 years / 5 trade lines, BK Ch7 & Ch13
+discharged, ITIN, min age 18, ineligible-vehicle list, GAP $1,500 or state max,
+NY indirect GAP prohibition, CA covered-service-member prohibition.
+
+### STALE
+
+None. App `effectiveDate` "June 12, 2026" matches the PDF's stated date.
+
+---
+
+## 2. exeter — Exeter Finance
+
+Sources: Program Sheet `1fE1EdXQaWcqwyc_HGpYQs8UrUu0cVJpS` — rate sheet + program guidelines, both "Updated 6.12.26".
+Funding Guidelines `15kVW67-Yhae_s6QvJ7TzmZH_1mq-tGe5` — "Funding Checklist", used for POI/POR/ID only.
+No page numbers in either PDF; `~` positions are ordinal.
+
+### WRONG
+
+| Field | App value | PDF value | Page |
+|---|---|---|---|
+| `sections.ltv` → Standard Max Term | `78 months` | **Up to 84 months.** The program table reads "Term … Up to 84 months" for both Exeter and ExeterPLUS, with "75 to 84 month terms available for qualified customers/vehicles". The age × mileage table caps at 72 for <9 yr / <100k. **78 appears nowhere in the document.** | ~2 |
+| `sections.ltv` → Max Amount Financed | `$50,000` | **Up to $57,500** (both Exeter and ExeterPLUS) | ~2 |
+| `sections.reserve` → Standard Participation | `Up to 2% (power flat; varies by tier)` | The 2% power flat is the **ExeterPLUS** figure. Standard Exeter participation is **"See callback"**. Program Details: "Up to 2% of amount financed paid as a power flat **for ExeterPLUS approvals**". | ~2, ~3 |
+| `reserveStructure` (top level) | `Up to 2% power flat (varies by tier)` | Same mis-attribution — reads as the standard program's rate. | ~2, ~3 |
+| `bureaus.note` | `Uses middle score` | "Minimum 400 **average** credit score." The PDF says average, not middle. (`EXTRACTION_GUIDE.md` §5 repeats "uses middle score" — that quirk entry is also wrong and should be corrected.) | ~3 |
+
+Term and max-amount-financed are both deal-limiting. A desk working from 78 months
+would leave four months of term on the table; a $50,000 cap would turn away deals
+Exeter would buy up to $57,500.
+
+### MISSING
+
+| What the PDF says | Page |
+|---|---|
+| **Max DTI 77–87%** (Standard) / up to 87% (PLUS). App carries PTI but no DTI at all. | ~2 |
+| **NJ**: if cash price <$10,000, max term must be 48 months or less. | ~2 |
+| Mileage above **160,000** is subject to the applicable program tier. | ~2, ~4 |
+| Approvals expire **30 days** from original submission date. | ~3 |
+| Self-employed and contract workers need **2+ years** of employment. | ~1 |
+| Military personnel must provide a current **Leave and Earnings Statement**. | ~1 |
+| Proof of insurance: **6-month** comprehensive/collision, $1,000 max deductible; no month-to-month, business/commercial, or 30-day drive-away policies. | ~1 |
+| Book value: **J.D. Power clean trade** in all states except AZ, CA, CO, HI, ID, MT, NM, NV, OR, UT, WA, WY, where **KBB** applies. App has no book-value field for Exeter. | ~4 |
+| New vehicle definition: current model year, **not titled**, **<6,000 miles**, valued at invoice. Previous-year new vehicles use invoice Jan–Mar and the value guide Apr–Dec. | ~4 |
+| "Like invoice" allowance chart for vehicles absent from J.D. Power/KBB: 0–6,000 mi 90% · 6,001–12,000 85% · 12,001–18,000 80% · 18,001–25,000 75% · 25,000+ 60%. | ~4 |
+| Credit: **no repossessions in the last 2 months** (unless part of a bankruptcy). ExeterPLUS: no repos in 12 months, no multiple repos, **two or more tradelines**. No straw purchases. No multiple discharged bankruptcies. | ~3 |
+| Employees of the submitting dealership are **ineligible**. | ~3 |
+| First payment must be submitted if the contract is received within **5 days** of the first payment due date. | ~3 |
+| Maintenance / tire & wheel capped at **$1,500** (app lists GAP, VSC and total but omits this line). | ~2, ~3 |
+| ExeterPLUS Bronze/Silver VSC **$4,000**; PLUS total backend is lesser of **$4,500** (Bronze/Silver) or **$5,000** (Gold) and 25% of book. App carries only the Gold VSC figure. | ~2, ~3 |
+| Acquisition fee "as low as $0", assessed on credit risk; contract assignment fee non-refundable. Neither may be charged to the applicant. | ~2, ~3 |
+| Minimum amount financed must be satisfied on the **front-end** loan amount, excluding back-end products. | ~2 |
+
+### UNVERIFIABLE
+
+| App value | Why |
+|---|---|
+| `bureaus.primary` — equifax, transunion, experian; note "Pulls all three bureaus" | Neither PDF names a bureau anywhere. The scoring basis is stated ("average credit score") but not which bureaus feed it. |
+
+### Cross-document ambiguity (EXTRACTION_GUIDE §6 — two values, store neither)
+
+- **KBB state list.** Program Guidelines: AZ, CA, CO, HI, ID, MT, NM, NV, OR, UT, WA, WY (12 states). Funding Checklist: **AK**/AZ/CA/CO/HI/ID/MT/NM/NV/OR/UT/WA/WY (13 — adds Alaska). The app carries neither, so nothing is wrong today, but the two source documents disagree.
+- **Guide name.** Program Guidelines say "J.D. Power"; Funding Checklist says "NADA". These are the same publication post-rebrand, but the docs are inconsistent.
+- **Funding Checklist date.** The document is stamped "Revised 10.01.2025" and its filename in `SOURCES.md` carries 2026-06-12. The manifest date does not match the document's own revision date.
+
+### Verified correct (no action)
+
+FICO 400 / zero considered, ExeterPLUS 620, rate as low as 10.95%, front-end 135%,
+total LTV 150%, max mileage 200,000, age limit 13 years, <$10,000 book → 66-month
+cap, PTI 15–21%, min amount financed $6,000, CPO +$1,000 book, GAP $1,200 or state
+max, GAP min 70% front-end LTV, GAP barred in MA and NY, VSC $3,500 full / $2,500
+powertrain over 90k mi or 9 yrs, PLUS Gold VSC $4,500, total backend lesser of
+$4,000 and 25% of book, VSC minimum 24 months/24,000 miles, rate markup not
+permissible, chargeback if first 3 payments not made in full, non-PLUS
+participation window 20 days, PLUS 30 days, down payment in full with CA/NV
+exception, hail damage repaired before contracting, ineligible-vehicle list, all
+POI thresholds ($1,700 single / $2,500 joint), 25% gross-up, temp workers 6+
+months, rideshare ineligible, ITIN letter, government-issued ID at contracting,
+POR within 30 days, prefunding confirmation call, BK Ch7 considered / Ch13
+discharged / dismissed 12+ months.
+
+### STALE
+
+None. App `effectiveDate` "June 12, 2026" matches both "Updated 6.12.26" stamps.
+
+---
+
+## 3. regional — Regional Acceptance (Texas only)
+
+Sources: Program Sheet `13dk1uBsz8kLhtDIsoRLD-v62w9eMOu04` — "Consumer Rates / Indirect Auto Finance Program TX", **Effective: 05/27/2026** (p1).
+Underwriting Guidelines `1ILGWQes91nVYi89dVD2rjhEmA5OoPeLs` — "General Dealer Underwriting Guidelines", **Revised 02/2026**, pages numbered 1–2.
+
+This lender has the largest error count in the audit. The dealer-compensation
+matrix does not match the rate sheet in any cell.
+
+### WRONG
+
+**a) `sections.reserve` — the entire flat/discount matrix.** Every one of the 28
+cells differs from the rate sheet. App values run roughly +0.25 pt / +$100 above
+the PDF on the flat tiers, and the discount tiers do not correspond at all.
+
+| LTV band | Tier | App | PDF (p1) |
+|---|---|---|---|
+| 0–90% | T1 | 3% / $1,200 | **2.75% / $1,100** |
+| 0–90% | T2 | 2.5% / $1,000 | **2.25% / $900** |
+| 0–90% | T3 | 2% / $800 | **1.75% / $700** |
+| 0–90% | T4 | 1.5% / $600 | **1.25% / $500** |
+| 0–90% | T5 | 0% | **0.25% / $100 (flat)** |
+| 0–90% | T6 | −1.5% | **1.25% / $500 discount (min)** |
+| 0–90% | T7 | −3.5% | **3.25% / $900 discount (min)** |
+| >90–100% | T1 | 2.5% / $1,000 | **2.25% / $900** |
+| >90–100% | T4 | 1% / $400 | **0.75% / $300** |
+| >90–100% | T5 | −0.5% | **0.00% / $0** |
+| >90–100% | T6 | −2.5% | **2.00% / $800** |
+| >90–100% | T7 | −4.5% | **4.00% / $1,200** |
+| >100–115% | T1 | 2% / $800 | **1.75% / $700** |
+| >100–115% | T4 | 0.5% / $200 | **0.25% / $100** |
+| >100–115% | T6 | −4.5% | **3.75% / $1,100** |
+| >100–115% | T7 | −6.5% | **5.75% / $1,500** |
+| >115% | T1 | 1.5% / $600 | **1.25% / $500** |
+| >115% | T4 | 0% | **0.25% / $100 (discount)** |
+| >115% | T6 | −4.5% | **3.75% / $1,100** |
+| >115% | T7 | −6.5% | **5.75% / $1,500** |
+
+Remaining cells (T2/T3 in the lower bands, T5 at >100%) differ on the same
+pattern. Note the app's own top-level `reserveStructure` — "Flat (T1–4) up to
+2.75% / $1,100; discount (T5–7) up to 5.75%, min $1,500" — **matches the PDF
+correctly**. The summary field and the detail table contradict each other.
+
+**b) Flat vs discount is a function of LTV band, not tier.** The app's note reads
+"T1–T4: flat pay (positive %). T5–T7: dealer discount (negative %)." The rate
+sheet sets the flat/discount flag per band:
+
+| Band | Flat tiers | Discount tiers |
+|---|---|---|
+| 0–90% | T1–**T5** | T6, T7 |
+| >90–100% | T1–T4 | T5–T7 |
+| >100–115% | T1–T4 | T5–T7 |
+| >115% | T1–**T3** | **T4**–T7 |
+
+So T5 is a flat at 0–90%, and T4 becomes a discount above 115%. Both are the
+opposite of what the app tells the desk.
+
+**c) Term / mileage allowances.**
+
+| Field | App value | PDF value (p1) |
+|---|---|---|
+| 84-month mileage cap, T1–T4 | `20,000` | **30,000** |
+| 78-month mileage cap, T1–T4 | `30,000` | **40,000** |
+| `uniqueFeature` | `84mo on T1–4 with ≤20K miles` | ≤**30K** miles |
+| `sections.fico` tier table, T1–T4 max term | `84mo (≤20K mi)` | 84mo (≤**30K** mi) |
+
+**d) Valuation basis.**
+
+| Field | App value | PDF value |
+|---|---|---|
+| `sections.ltv` → Valuation Basis | `NADA Trade-In` | **NADA Clean Trade**, or **KBB Wholesale in approved markets**. Current-year new is up to 125% of **manufacturer's invoice including destination** (previous-year new on invoice through June). | UW p1 |
+
+"Trade-In" and "Clean Trade" are different book values; the app also omits the
+invoice basis for new units and the KBB Wholesale alternative entirely.
+
+### MISSING
+
+| What the PDF says | Page |
+|---|---|
+| **Maximum amount financed: 160% "out the door" LTV.** The app carries only the 125% front-end advance. This is the total-LTV ceiling and it is absent. | UW p1 |
+| **Ineligible collateral by brand:** Isuzu, Jaguar, Land Rover, Porsche, Saab, Suzuki; >3/4-ton trucks; commercial-use (ride-hailing, food/package delivery, unfinished work vans); salvage/flood/branded title/grey market; **vehicles without air conditioning**. The app has no vehicle section for Regional at all. | UW p1 |
+| **Capacity ratios** — Debt-to-gross-income 50% (T6–7) / 55% (T1–5); payment-to-gross-income 18% (T4–7) / 20% (T1–3). | UW p1 |
+| **54-month row** of the term/mileage table: 125,000 mi (T1–T5), 115,000 mi (T6–T7). The app's table jumps 60 → 48. | p1 |
+| Rate participation is **not allowed**; RAC pays flats only in certain tiers. | UW p1 |
+| Bankruptcy: no multiple or open BKs; dismissed >3 years considered case-by-case; **no time limit on discharge**. | UW p1 |
+| No auto repossessions or trade lines reporting I-5/I-8/I-9 in the past **6 months**. | UW p1 |
+| At least **one redeeming trade line** must report on the bureau. | UW p1 |
+| No delinquent child support. | UW p1 |
+| **$725 rent factor** applied when no rent or mortgage payment is provided; rent must be current at funding. | UW p1 |
+| Invoice allowance for units over 3,000 miles with no book value: <6,000 mi up to 90% · <12,000 85% · <18,000 80% · <25,000 75% · >25,000 call RAC. Like invoice matches first 8 VIN characters. | p1 |
+| Generally **one vehicle financed per licensed applicant**; concurrent financing elsewhere must be disclosed before decision. | UW p2 |
+| Minimum of **3 references**; book-out sheet and deal structure required for payment calls. | UW p2 |
+| Military POI is a current **LES ≤60 days**; ratios based on YTD entitlements. | UW p2 |
+| Front-end advance and total-amount-financed definitions (front-end = base sales price incl. non-backend products − down payment/trade/rebate; total = front-end + TT&L + doc fee + warranty + GAP). | p1 |
+| Oldest model-year band on the rate sheet is **2016–2021**, implying a model-year floor the app does not record. | p1 |
+
+### UNVERIFIABLE
+
+| App value | Why |
+|---|---|
+| `bureaus.primary` = transunion; note "Primarily TransUnion" | Neither document names a credit bureau anywhere. |
+| `chargebackWindow` = `N/A` | Neither document mentions chargebacks. "N/A" asserts a fact the sources do not state; per DATA.md this should be null/not-published rather than N/A. |
+| `idReq` — "any state ID acceptable" | UW p2 requires "valid government-issued photo ID (e.g. resident state driver license)". It gives an example, not a permission for any state's ID. |
+
+### Cross-document ambiguity
+
+- **Effective date.** Program Sheet states "Effective: 05/27/2026". Underwriting Guidelines state "Revised 02/2026" but are filed in `SOURCES.md` under 2026-05-27. The two documents carry different dates; the manifest lists one.
+
+### Verified correct (no action)
+
+Texas-only restriction, tier-based with no FICO floor, ELT 56124067800, max front-end
+advance by tier (125/125/125/125/120/115/110), 75/72/66/60/48-month mileage rows,
+T5–T7 max terms, max mileage 130,000, GAP $1,000 or state max at ≥70% LTV,
+warranty $3,000 / $4,000 by collateral value, 24-month/24,000-mile minimum warranty
+term, $100 processing fee and $100 returned-contract fee, min income $1,900
+individual / $2,200 joint, no gross-up, W2 paystub with YTD ≤60 days, self-employed
+2 years returns + 4506-C, POR document list and 60-day/no-prepaid-phone rules.
+
+### STALE
+
+App `effectiveDate` "May 27, 2026" matches the Program Sheet. The Underwriting
+Guidelines are older (Revised 02/2026) — not a staleness error in the app, but the
+two sources are four months apart and `SOURCES.md` dates them both 05-27.
