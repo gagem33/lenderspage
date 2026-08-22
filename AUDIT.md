@@ -1133,3 +1133,72 @@ ineligible-vehicle list as far as it goes.
 None on the app's side. App `effectiveDate` "June 18, 2026" matches the Program Sheet.
 Note the Funding Checklist is stamped **February 2, 2026**, four months older than
 `SOURCES.md` records.
+
+---
+
+## 14. chase — JPMorgan Chase Auto
+
+Source: Program Sheet `1UZCajZt9a2pvWahnBzcs4K5WraU4IX8m` — "Chase Auto Product Reference Sheet", **Effective May 10, 2026**. Single sheet, no page numbers; positions given as `~1`.
+
+### WRONG
+
+| Field | App value | PDF value | Page |
+|---|---|---|---|
+| `sections.reserve` → Enhanced Flat Fee | `2% at buy rate +0.75bps; max **$3,000**` | "pays 2% of the Total Amount Financed … marked-up exactly .75bps over the Buy Rate and there is a **max of $5000**." | ~1 |
+| `reserveStructure` (top level) | `Enhanced FF: 2% at +0.75bps (max **$3,000**)` | same — **$5,000** | ~1 |
+| `sections.reserve` flat table, $150,000 row | `$3,000 (**cap**)` | 2% of $150,000 is $3,000, which is **below** the real $5,000 cap — nothing is capped at that amount. The cap does not bite until $250,000. | ~1 |
+| `ficoMin` = **620** | a published FICO floor | **The sheet publishes no FICO minimum.** It says only: "Customers should have a stable source of income and a credit history that shows the ability and willingness to pay." Per `EXTRACTION_GUIDE.md` §6 this is a "varies / contact rep" case and should be **null with a note** — the app's own `ficoNotes` gets it right ("Stable credit history required"), but `ficoMin: 620` asserts a number no source supports. | ~1 |
+| `sections.backend` → "GAP — New (MSRP >$12K): Greater of $4,500 or 20% of MSRP" and "GAP — Used (CSP >$12K)…" | labelled **GAP** | These are the **Aftermarket / Voluntary Protection total LTV advance** figures, not GAP. The sheet says of GAP only: "**GAP - New & Used: Please refer to the Chase Toolkit for state specific guidelines.**" The app's top-level `gapMax` ("State-specific") is right; the backend section contradicts it. | ~1 |
+
+The Enhanced Flat Fee error understates dealer comp by up to **$2,000** on a large
+contract. The `ficoMin` of 620 is the more dangerous one — it will cause the desk to
+turn away Chase-eligible customers on a floor Chase never published.
+
+### MISSING
+
+| What the PDF says | Page |
+|---|---|
+| **Low-value aftermarket tier**: when MSRP (new) or Cash Selling Price (used) is **≤$12,000**, the aftermarket advance is **35%** of that value — not the greater-of-$4,500-or-20% figure the app shows. | ~1 |
+| **MBP cap for low-value collateral**: where MSRP/CSP is under $12,000, Mechanical Breakdown Protection is capped at **$3,500**. | ~1 |
+| **Notarized and DocuSign contracts will NOT be accepted for funding.** eContracting is the preferred method. | ~1 |
+| **Marijuana-related businesses and marijuana-related business indirect participants are prohibited.** | ~1 |
+| **Down payment must be paid at or prior to delivery, except in California.** | ~1 |
+| **Dealer Discount Fees** may be assessed on the transaction and **may not be passed to the customer**. | ~1 |
+| **Vehicle valuation fallback cascade**: if no J.D. Power value, use KBB; if no KBB, use Black Book; if no Black Book, use **110% of the JDP value for the same make/model from the prior year**; if there is no prior-year JDP valuation, use **75% of JDPower Base MSRP for prior year** and **85% of JDPower MSRP for current/future year**. | ~1 |
+| **All previously titled vehicles and any vehicle over 6,000 miles book out as Used.** | ~1 |
+| **Dealer book-out is required** in the funding package on used vehicles. | ~1 |
+| Standard Flat Fee has **no minimum term** (the app notes no maximum amount but not this). | ~1 |
+| Proof of insurance may be required depending on transaction characteristics. | ~1 |
+| Advance may be further limited by Chase at its sole discretion; actual advance varies by tier, term, collateral and structure. | ~1 |
+| Buydown Program guidelines are in the Chase Toolkit. | ~1 |
+
+### UNVERIFIABLE
+
+| App value | Why |
+|---|---|
+| `bureaus` — all three, "uses middle score" | The sheet never names a bureau or scoring method. `EXTRACTION_GUIDE.md` §5 repeats the middle-score claim; it is unsupported by this document. |
+| `chargebackWindow` = "N/A (flat fee model)" | No chargeback rule appears on the sheet. |
+
+### Verified correct (no action)
+
+Total max LTV 150% including TT&L and all aftermarket products, maximum term by vehicle
+age (new and ≤4-year used 84 months, ≤6-year used 75, ≤10-year used 72), minimum
+collateral value $25,000 above 75 months, maximum vehicle age 10 years, maximum mileage
+120,000, minimum amount financed $4,000 excluding aftermarket, Standard Flat Fee minimum
+$10,000 and Enhanced $12,000, first payment not to exceed 45 days, maximum rate 24.99% or
+state maximum, approvals good 30 days, no open bankruptcies and all discharged, no unpaid
+Chase charge-offs, applications via Dealertrack or RouteOne only, **the complete
+37-state availability list**, participation caps 2.50% (≤60 months) / 2.00% (61–75) /
+1.50% (76+), Standard Flat Fee 1% at buy rate with no maximum, subvented contracts
+ineligible for flat fee, pre-paid maintenance greater of $2,400 or 7%, tire and wheel
+greater of $1,200 or 7%, MBP greater of $4,000 or 12%, CPO automatic wholesale value
+adjustment, J.D. Power Clean Trade-in by Region for used and invoice for new, the
+ineligible-vehicle list, and the government-ID stipulation.
+
+### STALE
+
+None. App `effectiveDate` "May 10, 2026" matches the sheet.
+
+> **Note for the v2 migration.** `DATA.md` §4 nominates `chase` as one of the first two
+> lenders to migrate by hand. Resolve `ficoMin` to **null** as part of that work — it is
+> exactly the kind of invented scalar the typed schema is meant to eliminate.
