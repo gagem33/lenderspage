@@ -525,9 +525,10 @@ footer {
   padding: 14px 18px;
   border-bottom: 1px solid var(--border);
   cursor: pointer; user-select: none;
-  transition: background .12s;
+  transition: background .12s, border-color .18s;
 }
 .detail-section-header:hover { background: var(--bg3); }
+.detail-section-header:focus-visible { outline: 2px solid var(--gold); outline-offset: -2px; }
 .detail-section-header h3 { font-size: .9rem; font-weight: 700; flex: 1; }
 .section-icon {
   width: 30px; height: 30px;
@@ -537,10 +538,20 @@ footer {
   display: flex; align-items: center; justify-content: center;
   color: var(--gold); flex-shrink: 0; font-size: .9rem;
 }
-.chevron { color: var(--text3); transition: transform .15s; }
-.detail-section.collapsed .detail-section-body { display: none; }
+.chevron { color: var(--text3); transition: transform .18s; }
+.detail-section.collapsed .detail-section-header { border-bottom-color: transparent; }
 .detail-section.collapsed .chevron { transform: rotate(-90deg); }
+.detail-section-wrap { display: grid; grid-template-rows: 1fr; transition: grid-template-rows .2s ease; }
+.detail-section.collapsed .detail-section-wrap { grid-template-rows: 0fr; }
+.detail-section-clip { overflow: hidden; min-height: 0; }
 .detail-section-body { padding: 18px 20px; }
+@media (prefers-reduced-motion: reduce) { .detail-section-wrap { transition: none; } }
+
+.section-toolbar { display: flex; align-items: center; gap: 8px; margin: 2px 0 12px; }
+.section-toolbar .sec-count {
+  font-size: .68rem; font-weight: 700; color: var(--text3);
+  text-transform: uppercase; letter-spacing: .07em; margin-left: auto;
+}
 
 .info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px 22px; }
 .info-row { display: flex; flex-direction: column; gap: 2px; padding: 7px 0; border-bottom: 1px solid var(--border); }
@@ -1829,6 +1840,22 @@ function buildQuickLists() {
 }
 
 // ─── LENDER DETAIL ───────────────────────────────────────────
+// Which sections the user has opened, per lender. Section labels are not consistent
+// between lenders, so this is keyed by lender id rather than shared. Surviving a
+// re-render matters: Mark Verified and Add Note both rebuild the whole detail view.
+const detailOpenSections = {};
+const openSetFor = id => (detailOpenSections[id] ||= new Set());
+
+function setSectionOpen(sec, open) {
+  sec.classList.toggle('collapsed', !open);
+  const header = $('.detail-section-header', sec);
+  if (!header) return;
+  header.setAttribute('aria-expanded', String(open));
+  const set = openSetFor(sec.dataset.lender);
+  const label = $('h3', header).textContent;
+  if (open) set.add(label); else set.delete(label);
+}
+
 function buildLenderDetail(lender) {
   const view = $('#view-lender');
   if (!view) return;
@@ -1857,15 +1884,25 @@ function buildLenderDetail(lender) {
       ${lender.poi?`<div class="info-row"><span class="info-key">Proof of Income</span><span class="info-val">${lender.poi}</span></div>`:''}
     </div><div class="note-box info"><span class="note-icon">ℹ️</span><span>Pulled from the lender's current program sheet / funding guidelines — always confirm stips on the approval.</span></div>`});
   }
-  const sectionsHTML = allSections.map(s => `
-    <div class="detail-section">
-      <div class="detail-section-header">
+  const openSet = openSetFor(lender.id);
+  const sectionsHTML = allSections.map((s, i) => {
+    const open = openSet.has(s.label);
+    return `
+    <div class="detail-section${open ? '' : ' collapsed'}" data-lender="${lender.id}">
+      <div class="detail-section-header" role="button" tabindex="0" aria-expanded="${open}" aria-controls="dsec-${i}">
         <div class="section-icon">${s.icon}</div>
         <h3>${s.label}</h3>
         <svg class="chevron" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
       </div>
-      <div class="detail-section-body">${s.content}</div>
-    </div>`).join('');
+      <div class="detail-section-wrap"><div class="detail-section-clip"><div class="detail-section-body" id="dsec-${i}">${s.content}</div></div></div>
+    </div>`;
+  }).join('');
+
+  const sectionToolbar = `<div class="section-toolbar">
+      <button class="lu-btn" data-sec-all="open">Expand all</button>
+      <button class="lu-btn" data-sec-all="close">Collapse all</button>
+      <span class="sec-count">${allSections.length} sections</span>
+    </div>`;
 
   view.innerHTML = `
     <div class="lender-hero">
@@ -1882,10 +1919,22 @@ function buildLenderDetail(lender) {
     <div class="stat-grid">
       ${stats.map(s=>`<div class="stat-card"><div class="stat-label">${s.label}</div><div class="stat-value ${s.cls}">${s.val}</div></div>`).join('')}
     </div>
+    ${sectionToolbar}
     ${sectionsHTML}`;
 
   $$('.detail-section-header', view).forEach(h => {
-    h.addEventListener('click', () => h.closest('.detail-section').classList.toggle('collapsed'));
+    const sec = h.closest('.detail-section');
+    const toggle = () => setSectionOpen(sec, sec.classList.contains('collapsed'));
+    h.addEventListener('click', toggle);
+    h.addEventListener('keydown', e => {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggle(); }
+    });
+  });
+  $$('[data-sec-all]', view).forEach(b => {
+    b.addEventListener('click', () => {
+      const open = b.dataset.secAll === 'open';
+      $$('.detail-section', view).forEach(sec => setSectionOpen(sec, open));
+    });
   });
 
   luBindPanel(lender.id);
