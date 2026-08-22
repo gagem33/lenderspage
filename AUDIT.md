@@ -1527,3 +1527,149 @@ after 120 days**.
 ### STALE
 
 None. App `effectiveDate` "April 1, 2026" matches both documents' "Rev. 4.01.26".
+
+---
+
+## 19. flagship — Flagship Credit Acceptance
+
+Source: Program Sheet `1yqZG4W6_8CAThHGoJw3_6LfkQyZJUtO5` — "National Program Guidelines", Form 2395 (CR-FM-2008), **Version 1.3**, **Rev. 7/2026**, 2 numbered pages.
+Funding Guidelines `10xRDbQvNebRF7J4dMec46kWf1DrCo7wN` — not read; the Program Guidelines carry a full POI/POR/stipulation section and are the higher authority.
+
+A recurring pattern here: **the app's top-level fields are right and its `sections` are
+wrong.** Three separate values contradict each other within the same lender record, and in
+each case the detail page — the thing the desk actually reads — carries the wrong one.
+
+### WRONG
+
+| Field | App value | PDF value | Page |
+|---|---|---|---|
+| `sections.ltv` → Max Term | `**72** months` | **Up to 78 months.** The app's own top-level `maxTerm` says 78. | 1 |
+| `sections.ltv` → Max Mileage (≤60mo) | `**140,000** miles` | **160,000 miles** — and **170,000** for Toyota, Lexus, Acura and Honda. The app's own top-level `maxMileage` says 160,000. | 1 |
+| `sections.income` → Minimum Income | `$**3,000** per application` | **$2,000 per application.** The app's own top-level `poi` says $2,000. | 2 |
+| `sections.income` → W2 Employment | `Minimum **3 months**` | **Minimum 2 months** employment, and the applicant must be a **permanent employee**. | 2 |
+| `sections.fico` → Amount Financed | `$7,500 – $**50,000**` | **$7,500 – $60,000** | 1 |
+| `sections.ltv` → Vehicle Age | `**10** model years or newer` | **13 years or newer** | 1, 2 |
+| `sections.ltv` → Valuation | `JD Power Clean Trade (**CA**: KBB Lending Value Good)` | KBB Lending Value Good applies in **ten states — AK, AZ, CA, CO, HI, ID, NV, OR, UT, WA** — not California alone. | 2 |
+| `docTitle` | `National Program Guidelines **v1.1**` | **Version 1.3** | 1 |
+
+Three of these cost the store deals outright: a 13-year-old car reads as ineligible, a
+78-month term reads as unavailable, and a $58,000 deal reads as over the cap.
+
+### MISSING
+
+| What the PDF says | Page |
+|---|---|
+| **Flagship only finances GAP on accounts with an LTV greater than or equal to 80%.** | 2 |
+| **Max allowable ancillary products cannot exceed $7,500 or 30% of vehicle value, whichever is less** — a second, separate ceiling above the $4,500 max back-end the app records. | 2 |
+| **Two more term/mileage rows: 75 months / 75,000 miles and 78 months / 50,000 miles**, both with "additional requirements apply". | 1 |
+| **Bundled products up to $2,000** where they include either Maintenance or Tire & Wheel. | 1 |
+| **Returned contracts are charged $195 per occurrence.** | 2 |
+| **Contracts must fund at least 5 business days before the contracted first payment due date.** | 2 |
+| **Post-dated cheques, borrowed funds and credit card charges are not accepted for down payment.** | 2 |
+| **Flagship does not accept buy rate requests** — buy-rate data entered into Dealertrack or RouteOne is ignored. | 2 |
+| **New vehicles with 6,000+ miles are considered used**; new vehicle value is based on invoice and "new" means current year model. | 2 |
+| **Multiple vehicle transactions must be disclosed up front; the vehicle must be for the applicant — no third-party purchases.** | 2 |
+| Excluded units also include **flood damage** and **frame/unibody damage**; "excluded makes and models may apply". | 2 |
+| **Minimum down as low as $0**; **discount fee as low as $0**; contract and discount fees **may not be charged to the applicant**. | 1 |
+| **CPO supporting documents are required to fund.** | 1 |
+| **SSI documentation** — most recent complete bank statement showing deposits, **plus** either a current-year award letter or a social security cheque (pay date within 60 days, or 90 days if the award letter amount matches). **Pension income** — current-year pension statement, previous year W2, or 3 most recent bank statements showing net deposits. | 2 |
+| **The protected-income type list**: workers compensation, foster care payments, welfare, compensatory damages for personal injury/sickness/emotional distress, court-ordered child support, **Medicaid Waiver / IHSS payments**, Roth IRA qualified distributions, survivor benefits of a public safety officer killed in the line of duty, disaster relief payments. | 2 |
+| 1099 applicants must also provide a **copy of a recent 1099**. | 2 |
+| Full stipulation list, including an **odometer statement required for all model years**. | 2 |
+
+### UNVERIFIABLE
+
+| App value | Why |
+|---|---|
+| `sections.vehicles` → "**hail damaged, reconditioned**" as ineligible | Neither appears in the document's excluded-units list (branded/salvaged, TMU, lemon law, flood, frame/unibody, gray market). |
+| `bureaus.primary` — all three; note "All three bureaus" | The document never names a bureau. |
+
+### Verified correct (no action)
+
+Front-end advance up to 125%, total LTV up to 150%, max back-end $4,500, participation up
+to 2% per callback, **70/30 split with chargeback if the loan closes before 3 payments or
+within 90 days**, loan processing fee as low as $99, approvals expire at day 30, **CPO
+pricing automatically reflecting a 5% increase to vehicle value**, automated plus live
+analyst decisions, GAP up to $1,200 or state max, VSC $3,500 with a 24-month/24,000-mile
+minimum covering seals and gaskets, tire and wheel $1,500, maintenance $1,500, the
+72-month/120,000-mile row, 1099 and self-employed minimum 12-month job length with 3
+months of bank statements and business verification, second job minimum 12 months,
+**protected income grossed up 25% by the dealer at submission**, POR documents (driver's
+licence, utility, phone or cell bill within 30 days), valid driver's licence required, and
+**employees of the submitting dealership ineligible**.
+
+### STALE
+
+None. App `effectiveDate` "July 2026" matches "Rev. 7/2026". Per `DATA.md` §3.3 the
+month-only value should normalise to 2026-07-01 with a note. The **version string in
+`docTitle` is a version behind** (v1.1 vs the document's v1.3).
+
+---
+
+## 20. santander — Santander Consumer USA
+
+Source: Program Sheet `1sIz87MWE15FzQSQPM4N3h8R_h4yxSl2G` — "Retail Program Guide", **Last Updated: June 2026**, doc SC-1865920-DLR_061026. No page numbers; positions given as `~`.
+
+### WRONG
+
+| Field | App value | PDF value | Page |
+|---|---|---|---|
+| `idReq` | `Any valid government-issued ID — driver's license NOT required (state ID, passport, **matrícula** OK per sheet)` | "**A valid U.S. government or state-issued ID card is required for all applicants.**" The accepted list is: state or U.S. government-issued ID, driver's licence, learner's/instructional permit, DMV non-driving ID, **U.S. military ID**, employee authorization card, **green card / permanent resident card**, gun permit or licence to carry, passport or passport card, **tribal ID card**. A **matrícula consular is a foreign document and does not appear** anywhere in the guide. | ~4 |
+| `uniqueFeature` | "**Any** government-issued ID accepted (no DL required)" | Same problem — the qualifier "**U.S.**" is load-bearing and the app drops it. | ~4 |
+| `por` / `sections.id` → POR | "**≤30 days**: utility bill, **bank statement**, **paystub w/ address**, mortgage statement, or lease" | **Monthly billing statements are dated within 60 days**, not 30 — mortgage, electric, gas, cable, phone, credit card, utility service or auto insurance. Only the **lease** carries a 30-day window. **Bank statements and paystubs are not on Santander's POR list at all**; the "other acceptable documents" set is auto insurance document, home purchase disclosure, **W-2 and 1099 statement**, award or benefit letter, state-issued stub or invoice, U.S. Treasury cheque, child support registry, Direct Express statement. | ~4 |
+
+The ID error is the one that matters here. Santander is the app's designated
+"any ID, no DL required" lender — that is its stated `uniqueFeature` and the reason the
+desk would reach for it. The guide requires a **U.S.** government or state-issued
+document, so the deal type the app is steering toward this lender is the one it cannot do.
+
+### MISSING
+
+| What the PDF says | Page |
+|---|---|
+| **The entire 84-month column.** Alongside the standard program (75 months, 145% LTV, 22% PTI, new up to 12 years, 150,000 miles, $5,000 minimum line 3 advance) the guide publishes an 84-month program: **115% front / 120% back LTV**, **20% PTI**, **new up to 5 years**, **max mileage 60,000**, **minimum line 3 frontend advance $15,000**. The app records only "well-qualified buyers only". | ~1 |
+| **Max amount financed $100,000**; **minimum line 3 frontend advance $5,000**; **eligible vehicles new up to 12 years**. | ~1 |
+| **The flat schedule**: $10,000–$14,999 → $100 · $15,000–$19,999 → $150 · $20,000–$24,999 → $200 · $25,000–$29,999 → $250 · $30,000–$34,999 → $300 · **$35,000–$75,999 → $350**. The app records only the $350 ceiling. | ~1 |
+| **GAP requires a minimum line 3 LTV of 70%** (or the state-mandated minimum), based on **JDP trade value**; **Indiana and South Carolina require 80%** based on JDP adjusted value. | ~3 |
+| **Vehicle service contracts up to $6,500.** | ~1 |
+| **Rate buydown — the dealer may buy down up to three points, but not below the base rate.** | ~1 |
+| **Dealer fees as low as $0** (a contract assignment fee may apply). | ~1 |
+| Participation is calculated by the **ratio method**: ([dealer part ÷ contract rate] × total finance charge × split). Not every term or transaction type qualifies for the maximum. | ~1 |
+| **The entire ineligible-vehicle list** — the app has no vehicle section for Santander. Recreational vehicles, exotics, motorcycles, boats, ATVs, van conversions, trailers, right-hand drive, **hail damage**, **vehicles by defunct manufacturers**, gray market, frame damage, **salvaged or reconditioned titles**, and commercial including livery and delivery (taxis, ride-share, for-hire). Note: these **may be eligible through the Small Business Auto channel**. | ~2 |
+| **Valuation rules** — current-year new or newer with ≤6,000 miles = **invoice**, over 6,000 = **like invoice**; previous-year new through **April 30** on the same split; the **Like Invoice Grid** (0–6,000 mi 95% · 6,001–12,000 90% · 12,001–18,000 85% · 18,001–99,999 75%); **regional J.D. Power monthly bookouts** in non-KBB states with the bookout month matching the RIC, and **KBB weekly bookouts in AZ, CA, CO, HI, MT, ID, NM, NV, OR, UT, WA, WY** with the week correlating to the RIC date. | ~1, ~3 |
+| **Notice to Cosigner — a state-specific form is required in CA, CO, IA, NY, PA, SC and TX**, and WI. The federal form covers other states; Illinois requires all applicants on both the federal NTC and the title application. **Texas is on the state-specific list.** | ~3 |
+| **A buyer's order copy is required in CO, IL, IA, MO and NH.** | ~3 |
+| **Non-taxable income is grossed up ×1.25 (25%).** The app records no gross-up for Santander at all. | ~8 |
+| **Employment verification is required whenever POI is stipulated** — employer name, **landline phone (mobile not accepted)**, email and hire date. | ~5 |
+| **Proof of phone** requirements: bill within 60 days matching the contracted address and the stated number; company-paid, family-share and pre-paid bills each have their own rules; SC will call the applicant to verify. | ~4 |
+| **Proof of insurance is required for all applicants** (ATPI form, binder, declaration page or policy card). | ~4 |
+| **SSN documentation** when name/DOB/SSN do not validate — Social Security card or SSA replacement letter; cards marked **"Not Valid for Employment" are not acceptable**. | ~4 |
+| **Pre-funding customer interview** may be required. | ~5 |
+| POR: **no APO or FPO addresses, no post office boxes**; POR is **required for both applicants if they reside at separate addresses**; **past-due bills may be acceptable for a fee**. | ~4 |
+| Ancillary products are classified **frontend (non-cancellable)** vs **backend (cancellable)**, and **taxes for all backend products must be calculated into the frontend advance**. Texas-only **Depreciation Protection** is a listed product. | ~3 |
+| Total frontend and total amount financed **calculations**. | ~1 |
+| The full income-calculation methodology — base pay vs YTD, letters of employment, W-2 windows, LES, teacher and union worker rules, TALX, 1099 documents, rental income, and the tax-return matrix by entity type. | ~5–8 |
+
+### UNVERIFIABLE
+
+| App value | Why |
+|---|---|
+| `chargebackWindow` = "See callback" | No chargeback rule appears in the guide. The app's own program note already flags this for verification — which is the right call. |
+| `bureaus.primary` — all three | The app's note says "Bureau pull not stated on program sheet — verify with your Santander rep." **That is accurate and honestly stated.** |
+
+### Verified correct (no action)
+
+Full-spectrum credit range, minimum monthly income **$1,750**, PTI **≤22%** standard and
+**≤20%** on 76–84 month terms, max term 84 months for well-qualified buyers only, max LTV
+145% (standard program), max mileage 150,000 (standard program), GAP **$1,200 or the state
+maximum if less**, participation **up to 2.5 points on a 75/25 split** with the full term
+ladder (2.5% for 12–60 months, 2% for 61–75, 1.5% for 76–84), flat payable to dealer up to
+**$350** referred to callback and payable only when written at buy rate, approvals valid
+**30 days** with an **expired application fee of $495**, computer-generated paystub within
+30 days with YTD, and three months of bank statements for self-employed applicants.
+
+### STALE
+
+None. App `effectiveDate` "June 1, 2026" matches "Last Updated: June 2026". Per
+`DATA.md` §3.3 a month-only source date normalises to the first of the month, which is
+what the app has done.
