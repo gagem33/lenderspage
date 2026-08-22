@@ -1442,3 +1442,88 @@ including the possession-to-fund requirement.
 ### STALE
 
 None. App `effectiveDate` "January 1, 2026" matches the sheet's "Exhibit 'A' 1/1/26".
+
+---
+
+## 18. usbank — U.S. Bank N.A.
+
+Sources: Program Sheet `1ffhHRvMuvYytMXS_Rh6gpDr3_gFiRYTY` — "National Installment Auto Finance Reference Guide", **Rev. 4.01.26**, 4 numbered pages.
+Program Rules `1GVzTsNCRy1Dm7gdHEIfzZ3DoYS31EumL` — "National Installment Auto Finance Program Rules", **Rev. 4.01.26**, 3 numbered pages. Higher authority per `SOURCES.md` §1. Cited as **PR**.
+Program Highlights `1NzDLy0bGvZEFVsw1BCUbHlmlXB6MLG69` — not read; lowest authority and fully superseded by the two above.
+
+**No wrong values found.** Every figure the app carries is confirmed — including the ones
+that go beyond the Reference Guide and turn out to live in the Program Rules (chargeback,
+flat range, markup caps, $10,000 participation cap).
+
+### WRONG
+
+| Field | App value | PDF value | Page |
+|---|---|---|---|
+| `sections.fico` → Term > 66mo | presented as a **general rule**: "Requires FICO > 750" | Footnote 3 is **attached to the 2021–2020 model-year row only**. It is a condition on that row, not a blanket rule for every term over 66 months. | 2, PR 2 |
+
+### MISSING
+
+| What the PDF says | Page |
+|---|---|
+| **The entire flat fee table.** Flat paid as a % of amount financed against buy-rate markup: **1.00%** (0.00–0.49%), **1.50%** (0.50–0.74%), **2.00%** (0.75–0.99%), **2.50%** (1.00–1.24%), **3.00%** (1.25–1.49%), **3.50%** (1.50–1.74%), **4.00%** (1.75–1.99%), **4.50%** (2.00%). The app's reserve section says only "Per U.S. Bank Program Rules" — the table exists and is two pages away. | PR 1 |
+| **Flat fee qualifiers** — eligibility is minimum term **plus** minimum amount financed: **37 months + $15,000**, or **60 months + $7,500**. | PR 1 |
+| **No reserve or flat fee is paid on terms of 00–36 months.** | PR 1 |
+| Reserve requires **≥37 months and a minimum $7,500 amount financed** (the app has the term but not the dollar floor). | PR 1 |
+| **Loan processing fees: $195 in Indiana and Ohio, $0 in all other states.** | PR 1 |
+| **FICO version is Auto 09** (the app's bureau note says only "FICO-based decisioning"). | PR 3 |
+| **Footnote 6 — terms greater than 48 months on 2019 and 2018–2017 model years require FICO > 750.** Absent entirely. | 2, PR 2 |
+| **Footnote 4 — 7-year-old vehicles at 49–60 months are capped at 115% LTV.** In 2026 that is model year 2019, which the app's advance table shows at 135% front-end and up to 145% total. The condition materially reduces advance on those units. | 2, PR 2 |
+| **Footnote 5 — 8–9 year old vehicles capped at 115% LTV** (partly covered by the app's 2018–2017 row, but not stated as an age rule). | 2, PR 2 |
+| **California GAP** must comply with **CA AB 2311** or the deal is returned for re-contracting; per **CA SB 1311** U.S. Bank will not fund deals involving "covered" service members in California that include credit insurance or GAP. **Colorado GAP** must comply with **CO HB 23-1181**. | 3, PR 3 |
+| **GAP funding requirement — U.S. Bank requires all copies of the GAP agreement.** | 3, PR 3 |
+| Indiana GAP LTV is calculated on **MSRP for new and clean retail value for used** (the app has "MSRP basis" only). | 3, PR 3 |
+| **Overseas delivery programs** are not financed — no delivery outside the U.S., no temporary possession abroad, no loan documents executed before delivery. | 4 |
+| **Other Owner / 3rd Party Owner: populate with NA.** Only approved applicants may appear on the contract, and title owners must match the contract. | 4 |
+| **Only U.S. Bank approved contracts and ancillary documents are acceptable.** | 3 |
+| **California deferred down payments** — see approval or counteroffer for restrictions. | 4, PR 3 |
+| **Applicant Address Confidentiality Program (ACP)** — contact Dealer Support. | 4 |
+| New-vehicle definition also covers **demonstrator and dealer loaner units** (current model year, under 5,000 miles, not previously titled, or previously titled where a state requires it). | 1 |
+| Used valuation: **Black Book (Clean) is the secondary source in the KBB states too**, not just the J.D. Power states. | 2, PR 2 |
+| Front-end advance and total LTV **definitions** — front-end includes TT&L but excludes back-end products; total includes both. | 2, PR 2 |
+| Contracts submitted for funding **after 30 days must be re-approved**. Terms 12–84 months are available and **may be adjusted for remaining useful life** where mileage is excessive for the model year. **Rural Routes** are acceptable addresses. Current odometer mileage must appear on all credit applications. | 1, 4 |
+
+### UNVERIFIABLE
+
+| App value | Why |
+|---|---|
+| `bureaus.primary` — experian, equifax, transunion | Neither document names which bureau is pulled. The **FICO version (Auto 09)** is stated; the bureau is not. |
+
+### Verified correct (no action)
+
+Minimum FICO **675** individual, joint requiring at least one at 675 with none below 650
+and a **system decline** otherwise, **no co-signers** with multiple applicants underwritten
+jointly, no new credit to anyone with a prior bankruptcy, trust accounts not permitted,
+business purchases requiring a personal applicant tiered and reported on the personal
+score, valid U.S. driver's licence for all applicants, the complete acceptable and
+unacceptable address lists including APO/FPO, **30-day approval and rate protection**,
+comprehensive and collision insurance with a **$500 maximum deductible**, first payment
+minimum 30 and maximum 45 days with over 45 not permitted, minimum amount financed
+$5,000 and **$10,000 cash selling price in New Jersey**, **the complete max-term-by-model-
+year table** (84 / 75 / 72 / 72 / 60 / 60), the ability-to-repay requirement at 72-month
+amortisation for terms over 72 months, **the full front-end advance and total LTV grid**
+(2027–2019 at 135/145, 135/140, 135/135 by FICO band; 2018–2017 at 115/115), the
+**Hawaii 10% reduction**, the 120% total LTV ceiling above 72 months, **the entire
+>$100,000 advance block** (105/115, 100/115, 90/115 by FICO, 72-month max, PTI ≤13%,
+$5,000 minimum cash down or positive trade), maximum mileage 125,000 with the
+100,001–125,000 band requiring FICO 675 and capping terms at 48 or 36 months by age,
+vehicle age eligibility including the **April 1, 2026 shift from 2016 to 2017**, new and
+used vehicle definitions, book-out sheet requirement, **CPO enhancement of +$500 under
+$40,000 and +$1,000 over**, applied systemically with no dealer action, the valuation
+sources and their state split, total backend of the greater of $5,500 or 20%, ESC at the
+greater of $4,500 or 15%, Credit Life/A&H and Car Care/Tire & Wheel counted in total LTV,
+GAP up to $1,500 or state maximum with the **60% front-end floor** and **80% in Indiana**,
+**New York GAP not eligible for sale**, **EV charging packages and subscriptions not
+financeable**, the excluded-vehicle list, the **West Virginia used-vehicle rule** (≤6 years
+and under 100,000 miles), Dealer Flex Rate Program, buy rate communicated systemically,
+**the greater of reserve or flat paid automatically**, markup caps of **2.00% (37–72
+months) and 1.75% (73+)**, **maximum dealer participation $10,000**, and **no chargeback
+after 120 days**.
+
+### STALE
+
+None. App `effectiveDate` "April 1, 2026" matches both documents' "Rev. 4.01.26".
