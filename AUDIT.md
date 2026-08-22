@@ -950,3 +950,112 @@ which is the rate sheet's V-07.26. A third component, the Prime Program Sheet, i
 **V-04.26**. Per `DATA.md` §3.3 the effective date should be the newest — July 2026,
 which the app has — but the `docTitle` should then name the rate sheet, or the other two
 dates should be recorded in `source.notes`.
+
+---
+
+## 12. kia — Kia Finance America
+
+Sources: Standard New - National `1w-r5QJqPQDMFZT1rBrfAVfSL2qxTosc9` — "Standard New Vehicle Rates", code **K504**, **Effective January 06, 2026**, bulletin 2026-001.
+K500&K506 `1IyXoIz8Pia7vRv4o9I6k44e4D-njRDV8` — "APR Programs - National", **KFA Bulletin 2026-091**, effective with contracts dated **July 7 – August 3, 2026**.
+
+> **This is the store's own captive. Two findings here need attention today.**
+
+### 🔴 The Kia bulletin in the folder has expired
+
+Bulletin 2026-091 covers **contracts dated July 7 through August 3, 2026**, with packages
+received and funded by **August 17, 2026**. Today is **August 22, 2026**. Every APR and
+bonus-cash figure sourced from it is out of force, and no replacement bulletin is in the
+Drive folder. Kia publishes these monthly; the folder needs the current one.
+
+### 🔴 The app's incentive tables are two bulletin generations old
+
+The app's incentives section is titled "**KFA Incentives — Bulletins 2026-036 & 037**".
+The folder's bulletin is **2026-091**. The rates do not match:
+
+| K500 Low APR, Tier 1/2 (720+) | App (bulletins 036/037) | PDF (bulletin 2026-091, K5 MY2026) |
+|---|---|---|
+| 24–48 mo | 1.90% | 1.90% |
+| 49–60 mo | **2.49%** | **2.99%** |
+| 61–66 mo | **3.99%** | **3.49%** |
+| 67–72 mo | **4.49%** | **3.99%** |
+| 73–84 mo | **6.25%** | **5.99%** |
+
+The app also shows **one generic K500 table**. Bulletin 2026-091 publishes **separate
+rate tables per model** — Carnival, Carnival Hybrid, K5, Niro, Seltos, Sorento, Sorento
+Hybrid, Sportage Hybrid, Telluride, Telluride Hybrid — each with different rates and
+different bonus cash. A single blended table cannot be right for any of them.
+
+### WRONG
+
+| Field | App value | PDF value | Page |
+|---|---|---|---|
+| K500 flat fee column | `Up to $200` (T1–3) / `Up to $150` (T4–8) | These are the **Premier** dealer figures only. The bulletin publishes three levels: **T1~3 — Premier $200, VIP $150, Partner $100; T4~8 — Premier $150, VIP $100, Partner $50.** | bulletin |
+| K500 flat, Tier 8 (580–619) | `Up to $150` | **"No flat fees for FICO <620."** Tier 8 earns no flat at all. The Standard sheet repeats this: "No Flat Fee for FICO < 620". | bulletin, 1 |
+| K506 bonus cash | `$1,500` (LX/LXS/EX) and `$2,000` (SX/SX-Prestige) | Bonus cash in 2026-091 is **per model, not per trim**: Carnival and Sportage Hybrid (MY2027) **$750**; K5 and Niro (MY2026) **$1,500**; Sorento and Sorento Hybrid (MY2026) **$3,000**. **$2,000 does not appear anywhere** in the current bulletin. | bulletin |
+| `ficoMin` = 580 vs `sections.fico` "Below 580 accepted (at 90% LTV)" | the two contradict each other | The Standard sheet's lowest band is **"<620 → Custom advance"**; the bulletin's lowest tier is **T8 = 580–619**. Neither document supports a sub-580 tier at 90% LTV. | 1, bulletin |
+
+### The LTV grid cannot be reconciled with any document in the folder
+
+The app's advance grids are keyed to FICO bands **<580 / 580–639 / 640–659 / 660–679 /
+680+**. The K504 Standard sheet uses **entirely different bands**:
+
+| Term band | PDF tiers and advances (K504, p1) |
+|---|---|
+| 24–60 and 61–72 mo | T8 <620 **Custom** · T7 620–639 **105%** · T6 640–659 **115%** · T5 660–679 **125%** · T4 680–699 **135%** · T3–T1 700+ **150%** |
+| 73–75 mo | T7 620–639 **105%** · T6 **115%** · T5 **125%** · T4 **135%** · T3–T1 **150%** (no T8) |
+| 76–84 mo | T7 620–639 **95%** · T6 **105%** · T5 **115%** · T4–T1 680+ **120%** — **no tier below 620 exists** |
+
+The app's 76+ grid shows **<580 → 90%** and **580–639 → 95%**. The sheet's 76–84 grid
+starts at 620. The app's `docTitle` names an "**LTV Advance & Backend Guidelines**"
+document, and the K504 sheet repeatedly defers to the "**KFA Standard Retail Program
+Guidelines**" for front-end and backend advance limits, minimum amount financed and
+maximum mileage. **Neither document is in the Drive folder.** Until one is added, the
+app's LTV grid, backend caps and loyalty rules cannot be verified or corrected.
+
+### MISSING
+
+| What the PDF says | Page |
+|---|---|
+| **Minimum amount financed $7,500.** | 1 |
+| **KFA does not finance branded or impaired titles.** The app has no vehicle section for Kia. | 1 |
+| **Approval is good for 30 days**; **first payment cannot exceed 45 days** from contract date. | 1 |
+| **New vehicle advances include TT&L.** | 1 |
+| Reserve for **FICO <620**: 2.00% on 24–60 and 61–72 months, **N/A on 73–75 and 76–84**. The app shows only the 620+ column. | 1 |
+| **2.00% maximum participation on all cosigned loans regardless of FICO.** | 1 |
+| The full **flat-fee table by dealer level** — Partner / VIP / Premier × floorplan and non-floorplan, twelve amount bands from $75 to $1,100. The app states the range but not the table. | 1 |
+| Program vehicles (demos, service loaners, test drive, service shuttle, aged inventory) must be entered in DealerTrack as **"used"** but qualify for **new vehicle rates**; available for new **2025 or newer** Kia vehicles; **only KFA floorplan dealers may submit non-Kia makes**. | 1 |
+| Customer APR may not exceed the state maximum. | 1 |
+| Submitting a **test drive vehicle** under an APR program means subvention, bonus cash and/or lease cash are **charged back** to the dealer. | bulletin |
+| Bulletin packages must be **received and funded by August 17, 2026**. | bulletin |
+
+### UNVERIFIABLE
+
+| App value | Why |
+|---|---|
+| `sections.backend` — Max backend 20% or $5,000 (680+), 16% or $4,000 (<680); Max GAP $1,500 | Neither document states backend limits. K504 defers to the Standard Program Guidelines, which is not in the folder. |
+| `maxMileage` = "N/A" | K504 explicitly defers maximum mileage to the Standard Retail Program Guidelines. Per `DATA.md` this should be **null** ("not published here"), not the string "N/A". |
+| `chargebackWindow` = "N/A" | No chargeback rule appears in either document. |
+| `uniqueFeature` — "Loyalty tier upgrades (up to +1 tier)" and `ficoNotes` "Loyalty program upgrades tier" | No loyalty program appears in either document. `EXTRACTION_GUIDE.md` §5 repeats this claim; it is unsupported by the folder's sources. |
+| `sections.fico` — "LTV & PTI Basis: always based on initial credit score, NOT upgraded loyalty tier" | Same — depends on a loyalty program neither document describes. |
+| `bureaus` — all three, "Confirm bureau with Kia Finance rep" | Honest as written; neither document names a bureau. |
+| K502 Special Lease table (money factors, residuals, lease cash by model number) | No lease program appears in either Drive document. |
+
+### Verified correct (no action)
+
+Max LTV 150% (the K504 top-tier advance on 24–75 month terms), max term 84 months,
+GAP $1,500 as a figure, reserve 2.5% (24–60 months, 620+) / 2.0% (61–75) / 1.5%
+(76–84), flat range $75–$1,100, tier structure T1–T8 with FICO bands 740+ / 720–739 /
+700–719 / 680–699 / 660–679 / 640–659 / 620–639 / 580–619, K506 markup of 1% with a
+flat up to $450, and separate grids for 12–75 vs 76+ month terms.
+
+### STALE
+
+**The app's two stored dates are both correct — and `SOURCES.md` is wrong about one.**
+The base sheet says "Effective Date: January 06, 2026" and the bulletin says "effective
+with contracts dated **July 7, 2026**". `SOURCES.md` §2 flags the Kia bulletin as a
+mismatch (`≠`, "file says 07-01") — **that flag is incorrect**; the filename is what's
+off, not the app.
+
+The real staleness is different and worse: the incentive tables come from **bulletins
+2026-036 and 037**, the folder holds **2026-091**, and 2026-091 itself **expired on
+August 3, 2026**.
