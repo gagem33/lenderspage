@@ -867,3 +867,86 @@ App `effectiveDate` "January 2026" matches the Program Sheet's issue date. Per
 two funding documents are **ten months older** than the manifest claims (March 2025,
 not January 2026) — worth re-pulling from the portal, since FG2 carries the vehicle
 restrictions and its 12-model-year limit conflicts with the current sheet.
+
+---
+
+## 11. westlake — Westlake Financial
+
+Sources: Program Sheet `1KI4qsTOCXRm2tt4kJqOvTFDWKHcl-ESR` — "Independent Dealer Rate Sheet", **V-07.26**.
+Program Guidelines `1FHLl1NXqFdoIBTnwhWpfInJqUfIS610C` — "Program Guidelines", **January 2026**, **v.120925_2**, 6 pages. Higher authority per `SOURCES.md` §1. Cited as **PG**.
+Prime Program Sheet `1fwQ1YndmQi0zq9r5WTDTmAy9hhVje6VI` — "Think Prime. Think Westlake", **V-04.26**. Cited as **PP**.
+
+Westlake is the most accurate entry audited so far — no outright wrong values were
+found. The gaps are omissions, several of them costly.
+
+### WRONG
+
+None identified. Every value the app carries is supported by one of the three documents.
+
+### MISSING
+
+| What the PDF says | Page |
+|---|---|
+| **Self-employed surcharge.** If the average ending balance is below the car payment but above $0, a surcharge is added to the **dealer discount at funding**: **$350 on Standard deals, $250 on Gold and Platinum**. TurboPass income carries a **$250** surcharge on the same condition. Direct cost per deal, entirely absent. | PG 5, 6 |
+| **Minimum down payment by program: 10% / 7.5% / 5% / 5%** across the four rate-sheet columns. The app has no minimum-down figure at all. | 1 |
+| **Maximum warranty price $2,500**, with **$4,000 for Prime Program and Presidential dealers**. Warranty depends on book value and credit profile; **branded titles are not eligible for warranty**. | 1 |
+| **Short-term service contract premium limits — $1,000 for terms under 6 months, $1,500 for 6–11 months**; 12+ months set by the Buy Program. **Secure One and KMIS GAP are exempt** from the 30-day activation rule. | PG 3 |
+| **Book value basis** — **KBB Wholesale** in CA, OR, WA, NV, UT, AZ, NM, HI; **J.D. Power Clean Trade** in all other states; if no value exists the deal needs pre-check via the Account Manager. The app has no book-value field for Westlake. | PG 3 |
+| **New car valuation** — must be prior-year or current-year with **under 200 miles** to count as new; the Buy Program applies a percentage adjustment to invoice by make and year. | PG 4 |
+| **Due date blackout — payment due dates cannot fall between the 25th and month end.** | 1 |
+| **Residence stability and job time rules** — time tolls from age 18; **seasonal and union workers capped at 2 years** job time; temp agencies entered as **0.1 years** unless verified with the employer (not the agency); self-employed can exceed 2 years only with a business license or bank-account opening date; **tax returns are not accepted as evidence of job time**. | PG 5 |
+| **W2 overtime cannot be counted** on paystubs dated before **April 1st** or with under 3 months of employment history. | PG 2 |
+| **Insurance** — max comprehensive/collision deductible **$1,000**; the ATPI requirement is **waived when the amount financed is ≤$6,500**. | PG 4 |
+| **The entire Prime program.** 700+ FICO, minimum 1 paid auto or a good trade line ≥$1,000 and ≥1 year old, no repos in 4 years, max 7 inquiries in 2 weeks; **max 20 years / 150,000 miles**, **max $50,000 financed**, **max 15% PTI**, **max 100% DTI**, up to 72-month term, rates from 7.99%; POI and POR may be required and **all other stips are waived**; no branded/TMU/commercial/RV/powersports/classic. Excludes D and F grade dealers and income from job letters, home care, disability or student sources. | PP |
+| **Ineligible vehicles** (rate sheet): gray market, fire damage, recycled, strip, taxi. The app's vehicle section carries only the branded-title and powersports notes. | 1 |
+| **ALPS** is the fourth affiliate whose prior repossession makes a customer ineligible (app lists Westlake, Wilshire, Western Funding). | PG 4 |
+| **Multiple repossessions are acceptable** — a deal-enabling rule the app omits. | 1 |
+| "**No min job time**" and "**no min residence time**" (the app records no minimum income and no minimum credit score but not these). | 1 |
+| Phone-bill rules: any phone bill with the customer's name and number; **without the name a TurboPass report is required**; family plans need the customer's number listed plus a verification call; **past-due phone bills are not accepted**. | PG 4 |
+| Delinquent mortgage triggers an additional stip to confirm it was brought current. Open auto loans are approved deal-by-deal; a **non-reporting open auto requires pre-check**. Deals resubmitted more than once may be returned. | PG 3, 4, 5 |
+| Mileage must come from the **odometer statement**; TMU requires the customer's written acknowledgement. | PG 4 |
+| Waiving POI **does not waive verification of employment (VOE)**. | PG 5 |
+| Deferred down payment may be made by credit card **if approved to use the Westlake Black Visa**. | PG 4 |
+| U.S. Passport as sole ID alerts the analyst to a possibly suspended licence; Originations will attempt to verify. Foreign IDs are excluded **in states where law prohibits registering the vehicle with them**. | PG 4 |
+| Frontend (taxable, e.g. anti-theft) vs backend (non-taxable, requires a separate contract) product definitions. | PG 3 |
+
+### Cross-document conflicts (store neither)
+
+- **Gray market / fire damage / recycled / strip / taxi.** The rate sheet lists these as **ineligible vehicles**; the Program Guidelines say Westlake "may, with exception and in those states where allowed by law, purchase contracts that use police interceptors, limos, and taxis, vehicles with fire damage, grey market, recycled or stripped vehicles as collateral." Directly opposed.
+- **Prime maximum warranty.** Rate sheet footnote: Prime and Presidential dealers get **$4,000**. Prime Program Sheet footnote: "Max warranty ranges from **$1,500 and $2,000**."
+
+### UNVERIFIABLE
+
+| App value | Why |
+|---|---|
+| `bureaus` — all three, "uses middle score" | None of the three documents names a bureau or scoring method. |
+
+### Verified correct (no action)
+
+Max LTV 140–150% including backend, no maximum amount financed, no minimum income, no
+minimum credit score, term per Buy Program, no maximum vehicle age or mileage on the
+standard program with the **Prime cap of 150,000 miles** (confirmed on the Prime sheet),
+GAP and backend limits per Buy Program, anti-theft capped at $1,000, ancillary products
+activated within 30 days, rate markup up to 2% for credit scores 600+ with **no
+chargebacks**, up to 65/35 split for terms to 60 months varying by state, no
+participation on TMU, branded vehicles or units over 150,000 miles, open Chapter 7 with
+proof of a completed 341 Meeting of Creditors, open Chapter 13 with a signed trustee
+letter, discharged and dismissed BKs acceptable, the full accepted-ID list including
+foreign IDs and the International Driver's Licence exclusion, expired IDs at analyst
+discretion, suspended or revoked licences not financed, ineligible customers (prior
+affiliate repo, temporary residence, Washington D.C.), POR within 45 days and not past
+due with no PO boxes and the full five-document list including TurboPass 90-day history,
+the complete income-type list (W2, self-employed personal and business, cash income with
+job letter and cashed-check images, fixed income, military LES), excluded deposits
+(transfers and one-time deposits), deferred down maximum $500 with no credit card,
+recontract triggers, and branded/powersports vehicle eligibility with the MA/NY/PR
+exclusion.
+
+### STALE
+
+**Mixed, and the app's own fields disagree.** `docTitle` names "Program Guidelines
+v.120925_2", which is the **January 2026** document; `effectiveDate` says **July 2026**,
+which is the rate sheet's V-07.26. A third component, the Prime Program Sheet, is
+**V-04.26**. Per `DATA.md` §3.3 the effective date should be the newest — July 2026,
+which the app has — but the `docTitle` should then name the rate sheet, or the other two
+dates should be recorded in `source.notes`.
