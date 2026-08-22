@@ -1059,3 +1059,77 @@ off, not the app.
 The real staleness is different and worse: the incentive tables come from **bulletins
 2026-036 and 037**, the folder holds **2026-091**, and 2026-091 itself **expired on
 August 3, 2026**.
+
+---
+
+## 13. bofa — Bank of America
+
+Sources: Program Sheet `1xbiqM_pi-0XcddGDV5flk9FaSDbmnHYz` — "Retail Program Sheet (All States)", **June 18, 2026**, 3 numbered pages.
+Funding Guidelines `18W0arwbkG4U36_y0KBP6gCY7NFX8vdyU` — "Dealer Auto Funding Checklist – All States", **February 2, 2026**. Cited as **FC**. (`SOURCES.md` dates this 2026-06-17; the document says February 2.)
+
+### WRONG
+
+| Field | App value | PDF value | Page |
+|---|---|---|---|
+| `sections.backend` → GAP (Most States) | `$1,200` | **MAX $1,500** — "All States GAP (Except CA, CO, IN, NY, TX): MAX $1,500; no GAP on LTV < 70%". The app's own top-level `gapMax` says $1,500. | 3 |
+| `sections.fico` → FICO for 76–84mo | `PTI <**10%**` | **12%** — "FICO ≥ 720: **12%** (all applicants)" for 76–84 month terms. | 1 |
+| `sections.income` → Max PTI | `Up to 20% (**less than 10%** for 76–84mo)` | Same 12% error, and the app omits that PTI is **20% only for FICO ≥720; FICO <720 is capped at 17%**. | 1 |
+| `sections.fico` → FICO for 76–84mo | `vehicle ≤**3**yrs old` | **Collateral Age ≤ 4 years** | 1 |
+| `sections.ltv` → Vehicle Age | `≤10 model years (≤**3** years for 76–84mo)` | ≤10 model years, **≤4 years** for 76–84 months | 1 |
+| `sections.vehicles` → Max Vehicle Age | `≤10 model years (≤**3** for 76–84mo terms)` | same — **≤4 years** | 1 |
+
+The 3-vs-4-year error appears in three separate places and costs the store deals: a
+2022 model on an 84-month term reads as ineligible in the app but qualifies on the sheet.
+
+### MISSING
+
+| What the PDF says | Page |
+|---|---|
+| **Max LTV drops to 125% on 76–84 month terms** (the app carries the 145% general figure only). | 1 |
+| **Minimum collateral value $6,000.** | 1 |
+| **Four state GAP regimes the app omits.** **California**: no GAP below 70% of MSRP (new) / KBB Retail (used); no GAP if amount financed exceeds max coverage; charge cannot exceed **4% of total amount financed**; no GAP, A&H or Credit Life for MLA-covered applicants or dependents. **Colorado**: max **greater of $600 or 4%** of total amount financed. **Indiana**: max $1,500, **refundable GAP waiver products only**, no GAP on front-end advance <80% of MSRP/J.D. Power Retail when advance ≤$55,800. **New York**: also not allowed on contracts marked Business/Commercial. | 3 |
+| **The entire collateral valuation section.** New = manufacturer's invoice; new qualifies only if never registered, model year no older than the current calendar year, mileage ≤10,000. **Beginning July 1st all previous-year models are valued as "Used".** Used = ACV from **KBB "Good" Lending Value** in AZ, CA, CO, HI, ID, MT, NV, OR, UT, WA, WY, and **J.D. Power Clean Trade** everywhere else. Fallbacks in rank order: 90% of original invoice, then 90% of guidebook invoice value (current, newer, or up to two prior model years). Used exotics use **Black Book "Cars of Particular Interest"** or a dealer auction price-paid receipt **dated within 60 days**. CPO is manufacturer-certified only — **CarBravo Budget is excluded**. | 3 |
+| **Flat fees require marking up *exactly* per the table** — "Contracts must be marked up exactly per the flat fee table guidelines to be eligible". The app's table reads as if intermediate markups qualify. | 3 |
+| **Buy Rate Reduction Option: waive the flat for an additional 30bps off the buy rate.** | 3 |
+| **Contract flat cancellation: $100 fee** when no new contract replaces the cancelled one; requests more than 30 days from contract date are treated as a regular payoff. (The app's `chargebackWindow` reads "N/A (flat fee model)" — this is the nearest thing to a chargeback and it is absent.) | 3 |
+| **Van conversions**: max advance is 100% of manufacturer invoice plus 100% of conversion invoice. **Auto & truck conversion and suspension conversion package values are NOT included** in advance and LTV calculations. | 1 |
+| **Cab & Chassis** is on the ineligible list (app omits it). Commercial vehicles are ineligible **regardless of intended use**. | 1 |
+| Lease payments are not financeable unless the vehicle is being traded; the contract must disclose trade value, prior lease balance and net trade. | 3 |
+| The program cannot be used to advance money or pay off contracts unrelated to the vehicle sale. | 1 |
+| Applicants must be **contracted in the order approved**; **Notice to Cosigner** required for any signer not on the title, with state-specific forms in **CA, IA, NY, SC, WI**, dated on or before the contract date. | 1, FC |
+| Dealer may be responsible for repurchase of **straw and fraud** contracts, and of incorrect titles/registrations. | 1 |
+| Dealers must be licensed in the state where the customer contracts and the dealer delivers. | 3 |
+| Direct Approvals earn a **1% flat on amount financed**; contract rate cannot exceed the final approved buy rate. | 1 |
+| POR detail the app omits: **credit card statements are not acceptable** as bank statements; homeowner/rental property insurance declaration pages are acceptable; the **CIV form**; military orders must end **at least 60 days after** the application date; rental agreements need letterhead plus proof of rent payment. | FC |
+| **Proof of Name** (marriage licence, divorce decree, court order, adoption decree, birth certificate, CIV) and **Proof of Date of Birth** (birth certificate US or non-US, adoption decree, CIV) document lists. | FC |
+| State funding requirements: **Florida** documentary stamp tax on all contracts; **New York City** used vehicles need the Used Car Contract Cancellation Form and Used Car Financing Disclosure Form; **Pennsylvania** separate Optional Product Disclosure Form; **Vermont** Negative Equity Disclosure Form. Wet-ink signatures required on all paper RISCs. | FC |
+| The **Small Business Program** (page 2) is absent entirely: ≤5 model years, up to 75 months, 110% advance, 125% LTV, minimum FICO **730**, minimum amount financed and collateral value **$10,000**, max mileage **75,000**, 4 years in business, 6 years time in file and 6 trade lines, limited to 4 open BofA small business loans. | 2 |
+
+### UNVERIFIABLE
+
+None. Every value the app carries is addressed by one of the two documents.
+
+### Verified correct (no action)
+
+Minimum FICO 640 for all applicants, 720+ required for 76–84 months, Experian FICO Auto
+Industry Adjusted Model v8.0, 4 years time in file and 4 satisfactory trade lines, prior
+BK/charge-off/repo/foreclosure may be ineligible, valid U.S. driver's licence, U.S.
+physical address, POA and Trust ineligible, only signers on title, credit freeze must be
+lifted, income verifiable and signer-only with **$0 not $1/$5**, personal use only, max
+term 84 months, max advance 130% and 110% for 76–84 months, max LTV 145%, max mileage
+125,000, minimum amount financed $7,500 with **$8,000 in Minnesota** and **$25,000 for
+76–84 months**, contracts received within 30 days and funded within 45, first payment 30
+to 45 days, total backend greater of $5,000 or 25% of MSRP/collateral value, the approved
+backend product list, Texas GAP at **5% of total amount financed** with no GAP below 70%
+LTV, New York GAP $225 personal use with the Liability Notice, EV charging station up to
+$800, all three reserve caps (2.50% / 2.00% / 1.50%), **the complete flat fee table
+including its term limits**, paid the greater of flat or reserve, no dollar cap on flat
+payouts, minimum $10,000 financed and 48+ month term for a flat, no deferred down except
+California, exotic vehicle 90% advance and 10% down with the correct make list, and the
+ineligible-vehicle list as far as it goes.
+
+### STALE
+
+None on the app's side. App `effectiveDate` "June 18, 2026" matches the Program Sheet.
+Note the Funding Checklist is stamped **February 2, 2026**, four months older than
+`SOURCES.md` records.
