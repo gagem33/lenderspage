@@ -1282,3 +1282,85 @@ But the **Proof of Residence Guidelines are effective 5/1/2026** — six weeks n
 `DATA.md` §3.3 the record's effective date should be the newest component (**2026-05-01**)
 with the Program Guidelines date in `source.notes`. `SOURCES.md` dates the POR document
 2026-03-16; it says May 1.
+
+---
+
+## 16. dfc — Driveway Finance Corporation
+
+Sources: Program Sheet `1VJ5ltQPHIdsv62z8SYOP8C3NXCzNNrvJ` — "Lending Program Reference Sheet", **Revision Date: 8/13/2025**.
+Funding Guidelines `1tjEUJLshnxu5pCEc8RpAObDk7QHqEJuc` — "DFC Funding Guidelines" (undated, exported from Guru). Cited as **FG**.
+
+> **The `SOURCES.md` date flag for `dfc` resolves in the app's favour — and the manifest's
+> guess was backwards.** `SOURCES.md` §2 records this file as 2026-01-01 and comments "the
+> app is probably stale, not the file". **The document's own header reads "Revision Date:
+> 8/13/2025"**, exactly what the app stores. The filename is what's wrong.
+>
+> That said, this remains the **oldest source in the set** — a year old — and is worth
+> re-pulling from the portal regardless.
+
+### WRONG
+
+| Field | App value | PDF value | Page |
+|---|---|---|---|
+| `sections.backend` → GAP Max | `$1,200 or state cap` | **$1,500 or state cap, whichever is less.** Both documents agree: Reference Sheet — "Maximum price $1500 or state cap whichever is less"; FG — "GAP not to exceed $1500 or state cap". The app's own top-level `gapMax` says $1,500. | 1, FG 3 |
+| `sections.fico` tier table → **P9** row | collapsed into "P9–P10": New **60mo / 100% / 110%** | **P9 New is 60 months / 110% front / 120% total.** The app applies P10's New figures to P9. (P9 Used at 60/100/110 is correct.) | 1 |
+| `ficoMin` = **580** | presented as a credit floor | 580 is the **flat-fee eligibility threshold**, not a minimum score: "Flat of 1.5% if written at buy rate… **Fico 580+**, 36 mo. or greater, less than $75K OTD to qualify." DFC publishes **no FICO floor** — it accepts **P10 No-Hit**. Per `EXTRACTION_GUIDE.md` §6 this should be **null**, with the 580 recorded against the flat. The app's `ficoNotes` states it correctly ("FICO 580+ for flat fee"); the scalar contradicts it. | 1 |
+
+### Cross-document conflict (EXTRACTION_GUIDE §6 — store neither)
+
+**GAP front-end LTV floor.** Reference Sheet: "**Minimum 70% FELTV** or state cap."
+Funding Guidelines: "**60 months or greater** finance term – **80% FELTV and higher**.
+**Minimum $12K** amount finance." The app carries the FG version (80%, 60+ months, $12K),
+which is defensible — but the two documents disagree by 10 points and the app shows only
+one of them.
+
+### MISSING
+
+| What the PDF says | Page |
+|---|---|
+| **Vehicle valuation, new** — manufacturer's invoice showing VIN, MSRP and invoice value; to qualify as new the vehicle must be **unregistered and no older than the current model year as of March 31st**; **previous model year "new" vehicles are treated as used**, and where no used value exists, **80% of invoice** is used. | 1 |
+| **Vehicle valuation, used** — **KBB "Lending Value" or JD Power "Clean Trade"**, and **the dealership must use one source only and cannot vary back and forth**. Current-model-year used with no book uses **80% of "like invoice"** new value. **No value increase for Certified Pre-Owned.** | 1 |
+| Loans over **$75,000 require supervisor or above approval** and may take longer to process. | 1 |
+| Total APR must not exceed **state usury limits**. | 1 |
+| Vehicles over 14 model years or 175,000 miles are auto-declined — but **"Call for exception."** | 1 |
+| Allowable backend products: service contracts, **maintenance packages (lifetime oil)**, **cancelable bundles with refund**, and GAP. | 1 |
+| **NY GAP through TFS also requires a minimum 70% FELTV** (the app has the $190 cap but not the LTV floor). | 1 |
+| Ineligible collateral also includes **large work type trucks**. | 1 |
+| **Insurance**: collision and comprehensive required, **maximum $1,000 deductible**, and **all applicants must be covered drivers on the policy**. Loss payee is DFC, 150 N Bartlett St, Medford OR 97501. | FG 2 |
+| **Income rules the app omits**: combined income is summed for applicants at the **same address**, but applicants residing **separately must each qualify individually**; secondary-job **tip income counts only if consistent and the applicant has 6+ months on the job**; **up to 1 year of bank statements** may be required for **alimony and foster care**; **borrowers with seasonal, infrequent or temporary employment do not qualify for funding**; between **January 1 and April 1** DFC may request additional POI for an accurate YTD assessment; employment verifications are completed before funding. | FG 1, 2 |
+| POR: with **two applicants, proof of residence is required for each**. | FG 2 |
+| References must carry **full name and 10-digit phone**, may require a full physical address, handwritten references must be legible, and **incomplete references delay funding**. | FG 3 |
+| Vehicle must be for the **applicant's primary use**; no straw purchases. | FG 1 |
+| Required funding documents include **proof of full-coverage (non-temporary) insurance** and **both front and back of the contract**; a new complete document set must be scanned when resubmitting an app for the same applicant. | FG 3, 4 |
+| eContracting is available through RouteOne and Dealertrack. | 1 |
+
+### UNVERIFIABLE
+
+None. Every value the app carries is addressed by one of the two documents — including
+the 80% FELTV, $12K minimum, 60-month term and "service contract must cover half the term
+of the loan", all of which are confirmed in the Funding Guidelines.
+
+### Verified correct (no action)
+
+Equifax FICO Version 8, the P-tier structure including **P10 No-Hit**, the full tier grid
+for P0–P4, P5, P6–P8, P11 and No-Hit across new and used (front and total LTV and max
+term), maximum amount financed $100,000 with no exceptions, maximum vehicle age 14 model
+years, maximum mileage 175,000 with auto-decline above, 7,500-mile cap to qualify as new,
+reserve **85/15 split**, maximum markup 2 points on 36–75 months and 1 point over 75,
+flat of **1.5% at buy rate** plus **0.50% with a completed and current AutoPay form**,
+the flat qualifying conditions (FICO 580+, 36 months or greater, under $75K OTD), **no
+flat or reserve on loans of $75,000+**, backend allowance stated in dollars on the deal
+approval with all products cancelable, service contract covering half the loan term, NY
+GAP through TFS at $190, the ineligible-collateral list as far as it goes, valid
+government-issued ID, the complete POR document list dated within 30 days, paystub within
+30 days with employer name and YTD, **internet-generated paystubs and employment letters
+not accepted**, bank statements (all pages, up to 6 months) for self-employed only,
+SSI/SSD/VA by award letter or bank statements, **20% gross-up** on non-taxable income, up
+to five references with three at separate addresses, and the welcome call requirement.
+
+### STALE
+
+**No — the app is correct.** "August 13, 2025" matches the Reference Sheet's stated
+revision date. `SOURCES.md` should be corrected to 2025-08-13 and its "app is probably
+stale" note removed. The underlying concern stands on its own merits: this is the oldest
+document in the folder by five months.
