@@ -53,7 +53,6 @@ The repo holds a committed copy of the md files. Drive is the master; when they 
 
 **Known issues**
 - `app.js`, `base.css`, `style.css` are dead. None are referenced by `index.html`. Delete.
-- Sales Pace tracker references RPCs (`sp_get_month`, `sp_upsert_day`, `sp_set_goal`) that do not exist in the DB. **Decision: remove the feature entirely.**
 - Lender data is hardcoded JS. Summary fields are inconsistently formatted strings; all detailed program data is HTML blobs in `sections`. No schema, no per-field source, no verified date at the field level. See DATA.md §1.
 - LTV calc and deal structurer parse the `maxLTV` string directly — they break when the schema migrates. See ARCHITECTURE.md §3.4.
 - Four lenders have effective-date mismatches between the app and the Drive PDFs (td, gls, kia bulletin, dfc). See SOURCES.md §2.
@@ -64,7 +63,7 @@ The repo holds a committed copy of the md files. Drive is the master; when they 
 |---|---|---|
 | 2026-07 | Delegated listeners instead of re-binding on render | Re-render wiped handlers |
 | 2026-07 | Public read of verification status, PIN only for writes | Team sees freshness, only Gage edits |
-| 2026-08-22 | Remove Sales Pace | Not a lender tool; backend never existed |
+| 2026-08-22 | Remove Sales Pace | Not a lender tool. (The stated reason — "backend never existed" — was wrong; see 2026-08-24 below. The decision stands on the first reason.) |
 | 2026-08-22 | PDF → AI extract → diff → approve is the update model | Accuracy first; no silent writes |
 | 2026-08-22 | Audience is SW Kia Dallas desk only | Not building for resale |
 | 2026-08-22 | Typed v2 schema (DATA.md) replaces HTML `sections` | Can't diff or compare HTML strings |
@@ -72,6 +71,8 @@ The repo holds a committed copy of the md files. Drive is the master; when they 
 | 2026-08-22 | Drive folders consolidated under `LENDERHUB/` | One place for docs + sources |
 | 2026-08-24 | Lender PIN bcrypt-hashed; RLS on `lender_edit_pin` + `lender_updates`; anon grants revoked; `search_path` pinned on all lender RPCs | The PIN was plaintext and world-readable through PostgREST on a public repo. Copies the `sp_*` pattern that was already correct |
 | 2026-08-24 | PIN value kept, not changed, during the migration | Hashing in place avoids breaking the desk mid-shift. Rotation is a separate, still-outstanding step — `docs/supabase-contract.md` §8 |
+| 2026-08-24 | Sales Pace removed from `index.html`; its Supabase objects left alone | The UI is not a lender tool. But the `sp_*` RPCs and tables **do** exist and hold real sales data (11 days, a goal, config), so dropping them would destroy records. Frontend removal is reversible; a `DROP TABLE` is not |
+| 2026-08-24 | Shared Supabase client renamed `SP_*` → `SB_*` / `sbClient()` / `editPin()`, session key `sp_pin` → `lender_edit_pin` | The `sp` prefix referred to a feature that no longer exists. `ARCHITECTURE.md` §8 had flagged this rename as part of the removal |
 
 ## Open questions
 
@@ -86,7 +87,8 @@ The repo holds a committed copy of the md files. Drive is the master; when they 
 
 ## Roadmap (Now / Next / Later)
 
-- **Now:** remove Sales Pace; delete 3 dead files; resolve the 4 date mismatches
+- **Done:** Sales Pace removed; 3 dead files deleted; the 4 date mismatches resolved (all four favoured the app — see `AUDIT.md`); all 149 audit WRONG findings applied except Kia K506 bonus cash; lender PIN hashed and both tables closed
+- **Now:** rotate the lender PIN (`docs/supabase-contract.md` §8); get a current Kia bulletin; decide whether the `sp_*` database objects stay or go
 - **Next:** migrate 2 lenders (exeter, chase) to v2 by hand from their Drive PDFs using EXTRACTION_GUIDE; make the detail page and the two string-parsing tools render from v2; then do the other 18
 - **Later:** automate extraction + diff UI; UI pass; training view
 

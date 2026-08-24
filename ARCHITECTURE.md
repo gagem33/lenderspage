@@ -24,7 +24,7 @@ Browser ──► Vercel (static, lender-hub.vercel.app)
  ├──► cdn.jsdelivr.net @supabase/supabase-js@2 (loaded at runtime)
  │
  └──► Supabase llhxiyeqroetebsrjbos.supabase.co
- publishable key hardcoded in index.html (SP_KEY)
+ publishable key hardcoded in index.html (SB_KEY)
  auth: none (persistSession:false). All access via RPCs.
 ```
 
@@ -45,14 +45,15 @@ Approximate line map (drifts as the file changes — grep, don't trust line numb
 | Lender updates (`lu*`) | ~1898–2003 | Verified/notes panel, Supabase RPC calls, PIN handling |
 | `init()` | ~2108 | Boots everything, wires modals and tools |
 | Tools | ~2197–2440 | Income calc, date calc, bureau search, LTV calc, deal structurer, side-by-side compare |
-| Sales Pace (`sp*`) | ~2439–2630 | Supabase client setup + the broken tracker |
+| Supabase client | end of the script | `sbClient()` + `editPin()`. All that remains of the removed Sales Pace block |
 
 ### 3.1 Views
 
-Three `div.view` elements toggled by `showView(name, lenderId)`:
+Two `div.view` elements toggled by `showView(name, lenderId)`:
 - `view-compare` — default. Sidebar + compare table + quick lists.
 - `view-lender` — one lender's detail page, built by `buildLenderDetail(lender)`.
-- `view-pace` — Sales Pace tracker. **Slated for removal.**
+
+`view-pace` (Sales Pace) was removed 2026-08-24.
 
 ### 3.2 Render model
 
@@ -89,18 +90,26 @@ The LTV calc and deal structurer are the two places where moving to DATA.md v2 t
 | `lender_get_updates()` | `luLoad()` | yes |
 | `lender_mark_verified(lender_id, pin)` | `luBindPanel` | yes |
 | `lender_add_note(lender_id, pin, note)` | `luBindPanel` | yes |
-| `sp_get_month` | `spLoad()` | **no** |
-| `sp_upsert_day` | `spSaveDay()` | **no** |
-| `sp_set_goal` | `spSaveGoal()` | **no** |
+| `sp_get_month` | *(nothing — Sales Pace removed)* | yes, still in the DB |
+| `sp_upsert_day` | *(nothing)* | yes, still in the DB |
+| `sp_set_goal` | *(nothing)* | yes, still in the DB |
+
+⚠️ The "Exists?" column previously said **no** for the three `sp_*` RPCs. That was
+wrong — live inspection on 2026-08-22 found all three, plus `sp_pin_ok` and
+`sp_change_pin`, and the tables behind them hold real data. The client no longer
+calls them; the database objects are untouched. See `docs/supabase-contract.md` §4.
 
 Public can read `lender_updates` through the RPC. Writes require the PIN passed as an argument; the RPC checks it server-side. No Supabase auth is used anywhere.
 
 ### 4.3 Client
-One shared client, lazily created by `spGetClient()`. Despite the `sp` prefix it's used by the lender-update code too. When Sales Pace is removed, keep `spGetClient` (rename to something neutral) and `SP_URL`/`SP_KEY`.
+One shared client, lazily created by `sbClient()`, with `SB_URL` / `SB_KEY`.
+Named `spGetClient` / `SP_*` until 2026-08-24 — the prefix came from Sales Pace
+even though the lender-update code was the other caller. Renamed when that
+feature was removed, since the prefix no longer referred to anything.
 
 ## 5. Browser state
 
-- `sessionStorage['sp_pin']` — the PIN after first successful entry, per tab. Cleared on a wrong-PIN response.
+- `sessionStorage['lender_edit_pin']` — the PIN after first successful entry, per tab. Cleared on a wrong-PIN response. Was `sp_pin` until 2026-08-24; renamed with the client above, so anyone mid-session re-enters the PIN once.
 - Theme preference — in-memory `theme` variable + `data-theme` attribute. Not persisted.
 - No other persistence. No localStorage.
 
@@ -126,7 +135,7 @@ Program data and verification data are stored in two different places and joined
 
 ## 8. What this means for the next changes
 
-1. **Removing Sales Pace** = delete `view-pace` HTML, the `sp*` functions from `spSellingDays` through `spStopPoll`, the nav entry, and its CSS. Keep the Supabase client bootstrap.
-2. **Deleting dead files** = remove `app.js`, `base.css`, `style.css`. Zero runtime impact.
+1. ~~**Removing Sales Pace**~~ — done 2026-08-24. The Supabase client bootstrap was kept and renamed, as this section advised.
+2. ~~**Deleting dead files**~~ — done. `app.js`, `base.css`, `style.css` are gone.
 3. **Migrating to DATA.md v2** = extract `LENDERS` to `lenders.json`, fetch it on load, rewrite `buildLenderDetail` to render structured fields instead of HTML blobs, and fix the two tools that parse `maxLTV`. This is the big one and should be done per-lender behind a flag, not all at once.
 4. **Anything new that writes data** must go through a Supabase RPC that checks the PIN. Don't add table-level write policies.

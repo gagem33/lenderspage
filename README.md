@@ -3,7 +3,7 @@
 Internal dealership reference for finance partners. A single static page
 covering **20 lenders**: program guidelines, FICO and LTV limits, term and
 mileage caps, reserve structures, chargeback windows, and docs/stips — plus six
-desking tools and a monthly sales pace tracker.
+desking tools.
 
 Built for the desk and the sales floor, not for customers. Nothing here is
 public-facing.
@@ -18,7 +18,6 @@ public-facing.
 |---|---|
 | Compare | All 20 lenders in one table, plus 9 quick lists (84-month terms, 150K+ miles, ITIN accepted, open BK, DACA, first-time buyer, and more) |
 | Lender detail | Per-lender program sheet — FICO, LTV, reserve, backend, vehicle rules, docs & stips, plus a program-tracking panel |
-| Sales Pace | Month-to-date units and gross, run rate against selling days (Mon–Sat), goal tracking and projections. PIN-gated. |
 
 **Six tools**, in the header — Income Calculator, Bureau Score Search, LTV
 Calculator, Deal Structurer, Side-by-Side Compare, and a 20-Day Calculator.
@@ -107,15 +106,24 @@ commit if you need them back.
 
 ## Backend
 
-Six Supabase RPCs back program tracking and the Sales Pace Tracker. The
-server-side SQL is **not in this repository** — it lives only in the Supabase
-dashboard, with no migration history.
+Three Supabase RPCs back the program-tracking panel: `lender_get_updates`,
+`lender_mark_verified` and `lender_add_note`. All access is by RPC — the tables
+themselves are closed to anonymous callers.
+
+The SQL applied on 2026-08-24 is in [`supabase/migrations/`](supabase/migrations).
+Everything older still lives only in the Supabase dashboard.
+
+Another five `sp_*` RPCs and three `sp_*` tables remain in the database from the
+removed Sales Pace tracker. Nothing in this app calls them, and they still hold
+real sales data — see `docs/supabase-contract.md` §4 before dropping anything.
 
 See [`docs/supabase-contract.md`](docs/supabase-contract.md) for the full
 contract.
 
-> ⚠️ **That document records two unresolved critical security findings.** Read
-> its section 1 before working on anything that touches the backend.
+> The two critical security findings that document used to carry — a plaintext,
+> world-readable PIN and two anonymously writable tables — were **fixed on
+> 2026-08-24**. Section 1 has the detail. One item is still open there:
+> rotating the PIN, whose value was exposed for the life of the project.
 
 ---
 
