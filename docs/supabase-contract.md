@@ -2,12 +2,18 @@
 
 What the app expects from the backend, and what the backend actually does.
 
-Verified against the live project on **2026-08-22** via read-only inspection
-(`pg_get_functiondef`, `information_schema.role_table_grants`, Supabase security
-advisors). Nothing was modified.
+First verified against the live project on **2026-08-22** via read-only
+inspection (`pg_get_functiondef`, `information_schema.role_table_grants`,
+Supabase security advisors).
 
-The server-side SQL still lives **only in the Supabase dashboard** — there is no
-migration history and no copy in version control. See [§7](#7-remaining-open-questions) Q3.
+**Updated 2026-08-24**, when the two CRITICAL findings in §1 were fixed by
+migration. Re-verified after the change.
+
+Correction to the 2026-08-22 draft: it said there was "no migration history."
+There is — `supabase_migrations.schema_migrations` holds the `sp_*` and
+`lender_update_tracking` migrations, and now the three from 2026-08-24. What is
+still true is that **no copy of the SQL lives in this repo**; the bodies quoted
+below are the version of record here. See [§7](#7-remaining-open-questions) Q3.
 
 | | |
 |---|---|
@@ -18,96 +24,134 @@ migration history and no copy in version control. See [§7](#7-remaining-open-qu
 
 ---
 
-## 1. SECURITY FINDINGS — read first
+## 1. SECURITY FINDINGS — resolved 2026-08-24
 
-### 🔴 CRITICAL — the lender PIN is publicly readable in plaintext
+Both CRITICAL findings below were **fixed on 2026-08-24** by three migrations
+applied to the live project. The original findings are kept for the record;
+each now carries what was actually done.
 
-`public.lender_edit_pin` holds the lender-editing PIN as **plaintext**, has
-**RLS disabled**, and grants the `anon` role
+| Migration | What it did |
+|---|---|
+| `20260824223022_lender_pin_add_bcrypt_hash` | Added `pin_hash`, populated it from the plaintext PIN, aborted unless every row round-tripped |
+| `20260824223037_lender_rpcs_bcrypt_and_rls` | Added `lender_pin_ok()`, moved the three RPCs onto it, pinned `search_path`, enabled RLS, revoked the `anon` grants |
+| `20260824223205_lender_pin_drop_plaintext` | Dropped the plaintext `pin` column |
+
+**The PIN value did not change.** It was hashed in place, so the same PIN the
+desk already uses still works. It was never read out of the database or printed
+during the migration — verification was done in SQL with
+`crypt(pin, pin_hash) = pin_hash`.
+
+### ✅ FIXED — the lender PIN was publicly readable in plaintext
+
+`public.lender_edit_pin` held the lender-editing PIN as **plaintext**, had
+**RLS disabled**, and granted the `anon` role
 `SELECT, INSERT, UPDATE, DELETE, TRUNCATE`.
 
-The table is exposed through PostgREST, so anyone who reads the publishable key
-out of the page source — it is in plain sight at `index.html:2440` — can fetch
+The table was exposed through PostgREST, so anyone who read the publishable key
+out of the page source — it is in plain sight at `index.html:2489` — could fetch
 the PIN directly:
 
 ```
-GET /rest/v1/lender_edit_pin?select=pin
+GET /rest/v1/lender_edit_pin?select=pin     # 200 before, permission denied now
 ```
 
-The stored PIN is **4 characters**. It is also writable and truncatable by the
-same anonymous role.
+The stored PIN was **4 characters**, and was also writable and truncatable by
+the same anonymous role.
 
-> This answers the old open question #1 for the lender functions: they *do*
-> validate `p_pin` (see below), but validation is irrelevant when the secret it
-> checks against can simply be read.
+**Now:** the column is `pin_hash`, bcrypt (`$2…`, 60 chars), and the table has
+RLS on with no `anon` grants. `lender_pin_ok()` does the comparison, exactly as
+`sp_pin_ok()` already did for the sales side.
 
-### 🔴 CRITICAL — `lender_updates` is fully open to anonymous writes
+> ⚠️ **The PIN itself is still the compromised one.** Hashing protects it from
+> here on, but it was world-readable on a public repo for the life of the
+> project. See [§8](#8-rotate-the-lender-pin) — rotation is a separate step and
+> has not been done.
 
-`public.lender_updates` also has **RLS disabled** with the same full `anon`
-grants. The three lender RPCs are a front door on an unlocked building: a client
-can skip them entirely and read, rewrite, or `TRUNCATE` every lender's
-verification date and notes without a PIN.
+### ✅ FIXED — `lender_updates` was fully open to anonymous writes
 
-### ✅ The Sales Pace side is correctly locked down
+`public.lender_updates` had **RLS disabled** with the same full `anon` grants. A
+client could skip the RPCs entirely and read, rewrite, or `TRUNCATE` every
+lender's verification date and notes without a PIN.
 
-Different story, same database:
+**Now:** RLS on, no `anon`/`authenticated` grants. All access goes through the
+three `SECURITY DEFINER` RPCs, which is safe because the functions are owned by
+`postgres` — the table owner — so they bypass RLS while callers cannot.
+
+Verified safe to close: `index.html` reaches the backend **only** via `.rpc()`
+and never `.from()` (`grep -n '\.from(\|\.rpc(' index.html`).
+
+### ✅ FIXED — the three lender functions had a mutable `search_path`
+
+`lender_get_updates`, `lender_mark_verified` and `lender_add_note` were
+`SECURITY DEFINER` without `SET search_path`. All three now
+`SET search_path TO ''` with `public.`-qualified table names, matching `sp_*`.
+`lender_pin_ok` is `SET search_path TO ''` and is **not** granted to `anon` or
+`authenticated` — it is only callable from inside the definer functions, the
+same treatment `sp_pin_ok` gets.
+
+### ✅ The Sales Pace side was already locked down
+
+Different story, same database — this is the pattern the fix copied:
 
 - `sp_config`, `sp_daily_sales`, `sp_monthly_goals` all have **RLS enabled**
   with no policies, and **no grants to `anon` or `authenticated` at all**.
-  Direct PostgREST access is denied.
 - The sales PIN is **bcrypt-hashed** (`sp_config.pin_hash`, via
   `extensions.crypt` / `gen_salt('bf')`), never stored in plaintext.
-- All `sp_*` functions pin `SET search_path TO ''` and call a shared
-  `sp_pin_ok()` helper.
+- All `sp_*` functions pin `SET search_path TO ''` and call `sp_pin_ok()`.
 
-So the pattern to copy already exists in this project — the lender tables just
-never got it.
-
-### ⚠️ Two different PINs, one client-side slot
+### ⚠️ Two different PINs, one client-side slot — and they do NOT match
 
 There are **two independent PINs**:
 
 | Feature | Secret | Storage | Protected? |
 |---|---|---|---|
-| Lender update tracking | `lender_edit_pin.pin` | plaintext | ✗ world-readable |
+| Lender update tracking | `lender_edit_pin.pin_hash` | bcrypt | ✓ (since 2026-08-24) |
 | Sales Pace Tracker | `sp_config.pin_hash` | bcrypt | ✓ |
 
 The client stores only one value, `sessionStorage.sp_pin`, and sends it to both.
-They work as a single sign-in **only while the two PINs are kept identical by
-hand.** Rotating one silently breaks the other, and `sp_change_pin()` rotates
-only the sales one.
 
-### ⚠️ The three lender functions have a mutable `search_path`
+**Measured 2026-08-24: the two PINs are different.** Checked without reading
+either, via `crypt(lender_pin, sp_config.pin_hash) = sp_config.pin_hash`, which
+returned false. So a single typed PIN unlocks only one of the two features —
+whichever it belongs to. This was true before the migration too; hashing did not
+cause it. It stops mattering once Sales Pace is removed
+(`CLAUDE.md` decision, 2026-08-22 — still not done).
 
-`lender_get_updates`, `lender_mark_verified`, and `lender_add_note` are
-`SECURITY DEFINER` but do **not** `SET search_path`. The `sp_*` functions all do.
+### What the security advisor says now
 
-### Suggested remediation — review before running
+The two CRITICAL items are gone. What remains is by design:
 
-Not applied. Enabling RLS with no policies denies all direct access, which is
-the intent here since access should flow through the `SECURITY DEFINER`
-functions — but confirm nothing else reads these tables first.
+- `rls_enabled_no_policy` (INFO) on all five tables — intended. RLS with no
+  policy denies all direct access; the `SECURITY DEFINER` functions are the
+  only door. The `sp_*` tables have always looked like this.
+- `anon_security_definer_function_executable` (WARN) on the RPCs — intended.
+  The app has no auth; it calls them anonymously and passes a PIN. This warning
+  already applied to every `sp_*` function before the migration.
 
-```sql
--- 1. Close the two open tables (mirrors how sp_* is already configured)
-ALTER TABLE public.lender_edit_pin ENABLE ROW LEVEL SECURITY;
-ALTER TABLE public.lender_updates  ENABLE ROW LEVEL SECURITY;
-REVOKE ALL ON public.lender_edit_pin FROM anon, authenticated;
-REVOKE ALL ON public.lender_updates  FROM anon, authenticated;
+### Post-migration verification
 
--- 2. Pin search_path on the three lender functions
-ALTER FUNCTION public.lender_get_updates()                         SET search_path TO '';
-ALTER FUNCTION public.lender_mark_verified(text, text)             SET search_path TO '';
-ALTER FUNCTION public.lender_add_note(text, text, text)            SET search_path TO '';
--- (their bodies then need public.-qualified table names, as sp_* already uses)
-```
+Run as the `anon` role — the same role PostgREST uses — via `set local role anon`:
 
-**Rotate the lender PIN after this lands** — assume the current one is
-compromised. Hashing it like `sp_config` does is the durable fix; that requires
-editing `lender_mark_verified` and `lender_add_note` to call a `crypt()` check
-instead of `pin = p_pin`.
+| Check | Result |
+|---|---|
+| `lender_get_updates()` as anon | OK, returns rows |
+| `SELECT` on `lender_edit_pin` as anon | `permission denied for table lender_edit_pin` |
+| `SELECT` on `lender_updates` as anon | `permission denied for table lender_updates` |
+| `TRUNCATE lender_updates` as anon | `permission denied for table lender_updates` |
+| `lender_mark_verified` with a wrong PIN | raises `invalid pin`; client regex matches |
+| `lender_pin_ok` called by anon | `permission denied for function lender_pin_ok` |
+| `lender_mark_verified` with the real PIN | OK — wrote and read back `last_verified` |
+| `lender_add_note` with the real PIN | OK — note appended and read back |
 
----
+The write tests ran against a throwaway `__selftest__` row, which was deleted;
+`lender_updates` is back to its original 1 row.
+
+Not verified from here: the public HTTPS endpoint. This sandbox's proxy blocks
+`supabase.co`, so the checks above were run server-side as `anon` rather than
+over REST. PostgREST cannot exceed the privileges of the role it authenticates
+as, so the grant and RLS results carry over — but a browser smoke test of Mark
+Verified is still worth doing once.
+
 
 ## 2. Auth model
 
@@ -118,10 +162,12 @@ executable by `anon`.
 
 - `sp_*` → `if not public.sp_pin_ok(p_pin) then raise exception 'invalid pin'; end if;`
   where `sp_pin_ok` is a bcrypt comparison against `sp_config.pin_hash`.
-- `lender_*` writes → `if not exists (select 1 from lender_edit_pin where pin = p_pin)
-  then raise exception 'invalid pin'; end if;` — a plaintext equality check.
+- `lender_*` writes → `if not public.lender_pin_ok(p_pin) then raise exception
+  'invalid pin'; end if;` where `lender_pin_ok` is a bcrypt comparison against
+  `lender_edit_pin.pin_hash`. **Since 2026-08-24**; it was a plaintext equality
+  check (`where pin = p_pin`) before that.
 
-Validation is real; the lender secret protecting it is not (§1).
+Both sides now validate against a hash. See §1 for what changed.
 
 ### The `invalid pin` string coupling — confirmed live
 
@@ -131,8 +177,9 @@ The client detects a bad PIN by regex-matching the error message:
 if (/invalid pin/i.test(error.message || '')) { sessionStorage.removeItem('sp_pin'); /* re-prompt */ }
 ```
 
-All five functions raise exactly `'invalid pin'`, so this works today. **The
-server's error text is load-bearing API.** Change it to `'bad pin'` or
+All five functions raise exactly `'invalid pin'`, so this works today —
+re-confirmed after the 2026-08-24 migration, which deliberately preserved the
+string. **The server's error text is load-bearing API.** Change it to `'bad pin'` or
 `'unauthorized'` and the client stops clearing the stale PIN, degrading to a
 "Save failed — try again" loop that never recovers.
 
@@ -202,6 +249,34 @@ Appends `{date: current_date, text: p_note}` to `notes` — **and also sets
 > resetting the 90-day staleness clock.
 
 Both return `void`; the client inspects only `error` and refetches via `luLoad()`.
+
+### `lender_pin_ok(p_pin text) RETURNS boolean` — internal
+
+Added 2026-08-24. Not called by the client and not callable by it: `EXECUTE` is
+revoked from `PUBLIC`, `anon` and `authenticated`, so it is reachable only from
+inside the two `SECURITY DEFINER` writers above. Mirrors `sp_pin_ok`.
+
+```sql
+CREATE OR REPLACE FUNCTION public.lender_pin_ok(p_pin text)
+ RETURNS boolean
+ LANGUAGE sql
+ SECURITY DEFINER
+ SET search_path TO ''
+AS $function$
+  select coalesce(
+    (select extensions.crypt(p_pin, p.pin_hash) = p.pin_hash
+       from public.lender_edit_pin p
+      where p.pin_hash is not null
+      limit 1),
+    false);
+$function$
+```
+
+Returns `false` — never an error — for a wrong PIN, an empty string, `NULL`, or
+a missing/`NULL` hash. The *callers* turn that into `raise exception 'invalid pin'`.
+
+**Table `public.lender_edit_pin`** — single row, `id integer` + `pin_hash text`.
+The `pin text` column was dropped 2026-08-24.
 
 ### ⚠️ `current_date` is UTC
 
@@ -280,14 +355,15 @@ this repo. Worth dropping once confirmed unused.
 | RPC | PIN check | Returns | Client uses return? |
 |---|---|---|---|
 | `lender_get_updates` | none | `TABLE(text, date, jsonb)` | ✓ |
-| `lender_mark_verified` | plaintext `=` | `void` | ✗ error only |
-| `lender_add_note` | plaintext `=` | `void` | ✗ error only |
+| `lender_mark_verified` | bcrypt | `void` | ✗ error only |
+| `lender_add_note` | bcrypt | `void` | ✗ error only |
 | `sp_get_month` | bcrypt | `jsonb` | ✓ |
 | `sp_upsert_day` | bcrypt | `void` | ✗ error only |
 | `sp_set_goal` | bcrypt | `void` | ✗ error only |
 
-Plus `sp_pin_ok`, `sp_change_pin`, and a dead `sp_set_goal` overload — none
-called from `index.html`.
+Plus `lender_pin_ok`, `sp_pin_ok`, `sp_change_pin`, and a dead `sp_set_goal`
+overload — none called from `index.html`. The two `*_pin_ok` helpers are not
+callable by `anon` at all.
 
 ---
 
@@ -295,11 +371,11 @@ called from `index.html`.
 
 | # | Question | Answer |
 |---|---|---|
-| 1 | Do the functions validate `p_pin`? | **Yes, all five.** But the lender secret is world-readable — §1 |
-| 2 | Where does the PIN live? | Two of them: `lender_edit_pin.pin` (plaintext) and `sp_config.pin_hash` (bcrypt) |
-| 3 | Is RLS enabled? | **`sp_*` yes; `lender_updates` and `lender_edit_pin` NO** — §1 |
-| 4 | `SECURITY DEFINER`? `search_path` pinned? | All 9 are DEFINER. `sp_*` pin `search_path TO ''`; the 3 `lender_*` do not |
-| 6 | Is `lender_get_updates` intentionally open? | It takes no PIN by design — but the table beneath it is open too |
+| 1 | Do the functions validate `p_pin`? | **Yes, all five**, and since 2026-08-24 both sides check a bcrypt hash — §1 |
+| 2 | Where does the PIN live? | Two of them: `lender_edit_pin.pin_hash` and `sp_config.pin_hash`, both bcrypt. **They are different values** — §1 |
+| 3 | Is RLS enabled? | **Yes, on all five tables** since 2026-08-24 — §1 |
+| 4 | `SECURITY DEFINER`? `search_path` pinned? | All 10 are DEFINER, and all now pin `search_path TO ''` |
+| 6 | Is `lender_get_updates` intentionally open? | It takes no PIN by design. The table beneath it is now closed, so the RPC is the only way in — but it still returns everything to anyone with the key |
 | 7 | Exact invalid-PIN message? | Literally `invalid pin`, from all five |
 | 8 | Timezone for "today"? | **UTC.** Dallas evenings log as tomorrow — §3 |
 | 9 | Note `date` format? | `current_date` → `'YYYY-MM-DD'` |
@@ -309,7 +385,7 @@ called from `index.html`.
 | 13 | `gross` type? | `numeric` — cents survive |
 | 14 | Sundays / future dates? | No constraint; only `>= 0` checks |
 | 15 | Table names? | `lender_updates`, `lender_edit_pin`, `sp_daily_sales`, `sp_monthly_goals`, `sp_config` |
-| 17 | PIN rotation? | `sp_change_pin()` for sales; **nothing for the lender PIN** |
+| 17 | PIN rotation? | `sp_change_pin()` for sales; **still nothing for the lender PIN** — rotate by hand, §8 |
 
 ---
 
@@ -320,19 +396,61 @@ beyond the database.
 
 1. **Is there brute-force protection on the PIN?** No rate limiting exists in
    the SQL. Whether Supabase's platform-level API limits are configured, and
-   whether failed attempts are logged anywhere, is a dashboard question.
-   Currently moot for the lender PIN, which can just be read.
+   whether failed attempts are logged anywhere, is a dashboard question. This
+   matters more now: with the PIN hashed, guessing is the only attack left, and
+   a 4-character PIN is a small space.
 2. **Is `lender_get_updates` meant to be public?** It exposes verification dates
    and free-text notes to anyone with the key. Deliberate, or an oversight that
    the open table masked?
-3. **Where should this SQL live?** It exists only in the dashboard — no
-   migrations, no backup in version control, no review trail. Exporting it to
-   `supabase/migrations/` would make it reviewable and recoverable.
+3. **Where should this SQL live?** There *is* migration history in
+   `supabase_migrations.schema_migrations` (correcting the 2026-08-22 draft),
+   but no copy in this repo — no review trail on a PR. Exporting to
+   `supabase/migrations/` would fix that.
 4. **Who holds each PIN, and who rotates them?** Rotation invalidates every open
-   session, and the two PINs must be changed together to stay in sync.
-5. **Is point-in-time recovery enabled?** Relevant because `lender_updates` is
-   currently `TRUNCATE`-able by anonymous callers.
+   session. Note the two PINs are already out of sync (§1), so "changed together"
+   is not the current state.
+8. **Should a `lender_change_pin` RPC exist?** Rotation is a hand-run SQL
+   statement today (§8). Adding one is a new Supabase RPC, which `CLAUDE.md`
+   says to ask about first — so it has not been added.
+5. **Is point-in-time recovery enabled?** Less urgent now that `lender_updates`
+   is no longer `TRUNCATE`-able by anonymous callers, but still unanswered.
 6. **Should the dead `sp_set_goal` 4-arg overload be dropped?** Confirm nothing
    external calls it first.
 7. **Should adding a note also mark a lender verified?** Current behavior, §3 —
    intended or accidental?
+
+---
+
+## 8. Rotate the lender PIN
+
+**Not done. This is the remaining work from §1.**
+
+Hashing protects the PIN from here on, but the value itself was readable by
+anyone with the publishable key — which is in the page source of a public repo —
+for the life of the project. Treat it as compromised.
+
+There is no `lender_change_pin` RPC (`sp_change_pin` exists only for the sales
+side, and rotates only that PIN). Adding one would mean a new Supabase RPC,
+which `CLAUDE.md` says to ask about first. Until then, rotate from the Supabase
+dashboard SQL editor:
+
+```sql
+update public.lender_edit_pin
+   set pin_hash = extensions.crypt('NEW_PIN_HERE', extensions.gen_salt('bf'));
+```
+
+Then confirm before closing the editor — this returns `true` if it took:
+
+```sql
+select public.lender_pin_ok('NEW_PIN_HERE');
+```
+
+Notes:
+
+- Run it in the dashboard, not anywhere that logs the statement. The new PIN is
+  in plaintext in that query.
+- There is no recovery path. If the new PIN is lost, the only fix is to run this
+  statement again with another one.
+- This rotates the **lender** PIN only. The Sales Pace PIN is a different value
+  (§1) and rotates via `sp_change_pin`.
+
