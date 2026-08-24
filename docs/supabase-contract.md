@@ -106,16 +106,20 @@ There are **two independent PINs**:
 | Feature | Secret | Storage | Protected? |
 |---|---|---|---|
 | Lender update tracking | `lender_edit_pin.pin_hash` | bcrypt | ✓ (since 2026-08-24) |
-| Sales Pace Tracker | `sp_config.pin_hash` | bcrypt | ✓ |
+| Sales Pace Tracker *(no longer in the app)* | `sp_config.pin_hash` | bcrypt | ✓ |
 
-The client stores only one value, `sessionStorage.sp_pin`, and sends it to both.
+The client stored one value, `sessionStorage.sp_pin`, and sent it to both. Since
+2026-08-24 it stores `sessionStorage.lender_edit_pin` and sends it only to the
+lender RPCs.
 
 **Measured 2026-08-24: the two PINs are different.** Checked without reading
 either, via `crypt(lender_pin, sp_config.pin_hash) = sp_config.pin_hash`, which
 returned false. So a single typed PIN unlocks only one of the two features —
 whichever it belongs to. This was true before the migration too; hashing did not
-cause it. It stops mattering once Sales Pace is removed
-(`CLAUDE.md` decision, 2026-08-22 — still not done).
+cause it. **Resolved 2026-08-24** by removing the Sales Pace UI: the client now
+sends the PIN only to the `lender_*` RPCs, so there is one PIN in play. The
+session key was renamed `sp_pin` → `lender_edit_pin` to match. The sales PIN
+still exists in `sp_config` for the RPCs that nothing calls (§4).
 
 ### What the security advisor says now
 
@@ -155,10 +159,13 @@ Verified is still worth doing once.
 
 ## 2. Auth model
 
-Five of the six client-called RPCs take `p_pin`. All are `SECURITY DEFINER` and
-executable by `anon`.
+**As of 2026-08-24 the client calls only three RPCs**, all `lender_*`; two of
+them take `p_pin`. The three `sp_*` RPCs are still in the database but nothing
+in `index.html` calls them any more — see §4.
 
-**Every one does validate its PIN.** Confirmed in the function bodies:
+All nine remain `SECURITY DEFINER` and executable by `anon`.
+
+**Every PIN-taking function does validate it.** Confirmed in the function bodies:
 
 - `sp_*` → `if not public.sp_pin_ok(p_pin) then raise exception 'invalid pin'; end if;`
   where `sp_pin_ok` is a bcrypt comparison against `sp_config.pin_hash`.
@@ -174,7 +181,7 @@ Both sides now validate against a hash. See §1 for what changed.
 The client detects a bad PIN by regex-matching the error message:
 
 ```js
-if (/invalid pin/i.test(error.message || '')) { sessionStorage.removeItem('sp_pin'); /* re-prompt */ }
+if (/invalid pin/i.test(error.message || '')) { sessionStorage.removeItem('lender_edit_pin'); /* re-prompt */ }
 ```
 
 All five functions raise exactly `'invalid pin'`, so this works today —
@@ -287,11 +294,37 @@ in summer / 7:00 PM in winter** records **tomorrow's date**. This affects both
 
 ---
 
-## 4. Sales Pace Tracker
+## 4. Sales Pace Tracker — REMOVED from the app, still in the database
 
-`index.html:2438-2629`. PIN-gated on read and write; polls every 45s while
-`#view-pace` is active. Month keys are `'YYYY-MM-01'`, day keys `'YYYY-MM-DD'`,
-both built from **local browser time**.
+**The frontend was deleted on 2026-08-24** (`CLAUDE.md` decision, 2026-08-22).
+`index.html` no longer contains `view-pace`, the `sp*` functions, the nav entry
+or the CSS, and calls none of the RPCs below.
+
+**The database objects were deliberately left in place.** They are not orphans:
+
+| Object | State |
+|---|---|
+| `sp_daily_sales` | **11 rows of real sales data** |
+| `sp_monthly_goals` | 1 row |
+| `sp_config` | 1 row (the bcrypt sales PIN) |
+| `sp_get_month`, `sp_upsert_day`, `sp_set_goal`, `sp_pin_ok`, `sp_change_pin`, + a dead `sp_set_goal` overload | 6 functions, all present |
+
+Dropping them destroys records that a `git revert` cannot bring back, so that is
+a separate decision for Gage, not a consequence of removing the UI. All three
+tables already have RLS on with no `anon` grants, so leaving them costs nothing
+in exposure.
+
+> **Correction.** `CLAUDE.md` and `ARCHITECTURE.md` both claimed these RPCs "do
+> not exist in the DB" and that the backend "never existed". That was wrong —
+> live inspection on 2026-08-22 found all six functions and all three tables
+> populated. The decision to remove the feature still stands on its other
+> stated reason: it is not a lender tool. Both files are now corrected.
+
+The rest of this section documents the RPCs as they still exist server-side.
+
+Historically: `index.html:2438-2629`, PIN-gated on read and write, polled every
+45s while `#view-pace` was active. Month keys `'YYYY-MM-01'`, day keys
+`'YYYY-MM-DD'`, both built from **local browser time**.
 
 **Tables** (all RLS-enabled, no `anon` grants):
 
