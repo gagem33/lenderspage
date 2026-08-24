@@ -48,7 +48,7 @@ The repo holds a committed copy of the md files. Drive is the master; when they 
 **Working**
 - Sidebar + compare table + quick lists + lender detail pages, driven by the `LENDERS` object in `index.html` (20 lenders)
 - Six tool modals: income calc, date calc, bureau search, LTV calc, deal structurer, side-by-side compare
-- Lender update tracking: Mark Verified / Add Note per lender, PIN-gated. Tables `lender_edit_pin`, `lender_updates`; RPCs `lender_get_updates`, `lender_mark_verified`, `lender_add_note`
+- Lender update tracking: Mark Verified / Add Note per lender, PIN-gated. Tables `lender_edit_pin`, `lender_updates`; RPCs `lender_get_updates`, `lender_mark_verified`, `lender_add_note`. Since 2026-08-24 the PIN is bcrypt-hashed and both tables have RLS on with no anon grants — see `docs/supabase-contract.md` §1
 - Delegated event listeners on stable parent containers (fixed click-through bug after re-render)
 
 **Known issues**
@@ -70,8 +70,13 @@ The repo holds a committed copy of the md files. Drive is the master; when they 
 | 2026-08-22 | Typed v2 schema (DATA.md) replaces HTML `sections` | Can't diff or compare HTML strings |
 | 2026-08-22 | Agent reads PDFs by Drive file ID from SOURCES.md, not by folder scan | Names drift; IDs don't |
 | 2026-08-22 | Drive folders consolidated under `LENDERHUB/` | One place for docs + sources |
+| 2026-08-24 | Lender PIN bcrypt-hashed; RLS on `lender_edit_pin` + `lender_updates`; anon grants revoked; `search_path` pinned on all lender RPCs | The PIN was plaintext and world-readable through PostgREST on a public repo. Copies the `sp_*` pattern that was already correct |
+| 2026-08-24 | PIN value kept, not changed, during the migration | Hashing in place avoids breaking the desk mid-shift. Rotation is a separate, still-outstanding step — `docs/supabase-contract.md` §8 |
 
 ## Open questions
+
+- **Rotate the lender PIN.** It is hashed now but the value was readable for the life of the project — treat it as compromised. One SQL statement, `docs/supabase-contract.md` §8. Needs a new PIN chosen by Gage.
+- **Add a `lender_change_pin` RPC?** Would make rotation a UI action instead of hand-run SQL. Not added — adding an RPC needs Gage's sign-off per the working rules below.
 
 - `lenders.json` in repo vs Supabase JSONB for v2 data. DATA.md §5 recommends JSON-in-repo first.
 - Extraction tooling: manual "paste PDF → Claude → JSON → approve" first, or build a serverless function now? Recommend manual until the schema has survived ~5 lenders.
