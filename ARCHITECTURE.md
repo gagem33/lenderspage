@@ -90,14 +90,14 @@ The LTV calc and deal structurer are the two places where moving to DATA.md v2 t
 | `lender_get_updates()` | `luLoad()` | yes |
 | `lender_mark_verified(lender_id, pin)` | `luBindPanel` | yes |
 | `lender_add_note(lender_id, pin, note)` | `luBindPanel` | yes |
-| `sp_get_month` | *(nothing — Sales Pace removed)* | yes, still in the DB |
-| `sp_upsert_day` | *(nothing)* | yes, still in the DB |
-| `sp_set_goal` | *(nothing)* | yes, still in the DB |
+| `lender_pin_ok(pin)` | the two writers above | yes — internal, not callable by `anon` |
 
-⚠️ The "Exists?" column previously said **no** for the three `sp_*` RPCs. That was
-wrong — live inspection on 2026-08-22 found all three, plus `sp_pin_ok` and
-`sp_change_pin`, and the tables behind them hold real data. The client no longer
-calls them; the database objects are untouched. See `docs/supabase-contract.md` §4.
+The three `sp_*` RPCs were **dropped from the database on 2026-08-24**, along
+with their three tables. Nothing named `sp_*` remains.
+
+⚠️ This table used to mark those RPCs `Exists? no`. That was wrong — live
+inspection on 2026-08-22 found all six functions and all three tables populated.
+The data was exported to Gage before the drop. See `docs/supabase-contract.md` §4.
 
 Public can read `lender_updates` through the RPC. Writes require the PIN passed as an argument; the RPC checks it server-side. No Supabase auth is used anywhere.
 

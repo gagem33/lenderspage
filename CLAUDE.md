@@ -71,7 +71,8 @@ The repo holds a committed copy of the md files. Drive is the master; when they 
 | 2026-08-22 | Drive folders consolidated under `LENDERHUB/` | One place for docs + sources |
 | 2026-08-24 | Lender PIN bcrypt-hashed; RLS on `lender_edit_pin` + `lender_updates`; anon grants revoked; `search_path` pinned on all lender RPCs | The PIN was plaintext and world-readable through PostgREST on a public repo. Copies the `sp_*` pattern that was already correct |
 | 2026-08-24 | PIN value kept, not changed, during the migration | Hashing in place avoids breaking the desk mid-shift. Rotation is a separate, still-outstanding step — `docs/supabase-contract.md` §8 |
-| 2026-08-24 | Sales Pace removed from `index.html`; its Supabase objects left alone | The UI is not a lender tool. But the `sp_*` RPCs and tables **do** exist and hold real sales data (11 days, a goal, config), so dropping them would destroy records. Frontend removal is reversible; a `DROP TABLE` is not |
+| 2026-08-24 | Sales Pace removed from `index.html`; its Supabase objects left alone at first | The UI is not a lender tool. But the `sp_*` RPCs and tables **did** exist and held real sales data (11 days, a goal, config), so dropping them was held back as a separate call |
+| 2026-08-24 | `sp_*` tables and functions dropped on Gage's instruction | Data exported first — 11 rows of June 2026 sales + the goal row, sent to Gage as `.sql` and `.csv`, **not** committed since the repo is public. `sp_config` held only a bcrypt PIN hash and was not exported. That export is the only copy |
 | 2026-08-24 | Shared Supabase client renamed `SP_*` → `SB_*` / `sbClient()` / `editPin()`, session key `sp_pin` → `lender_edit_pin` | The `sp` prefix referred to a feature that no longer exists. `ARCHITECTURE.md` §8 had flagged this rename as part of the removal |
 
 ## Open questions
@@ -88,7 +89,7 @@ The repo holds a committed copy of the md files. Drive is the master; when they 
 ## Roadmap (Now / Next / Later)
 
 - **Done:** Sales Pace removed; 3 dead files deleted; the 4 date mismatches resolved (all four favoured the app — see `AUDIT.md`); all 149 audit WRONG findings applied except Kia K506 bonus cash; lender PIN hashed and both tables closed
-- **Now:** rotate the lender PIN (`docs/supabase-contract.md` §8); get a current Kia bulletin; decide whether the `sp_*` database objects stay or go
+- **Now:** rotate the lender PIN (`docs/supabase-contract.md` §8); get a current Kia bulletin
 - **Next:** migrate 2 lenders (exeter, chase) to v2 by hand from their Drive PDFs using EXTRACTION_GUIDE; make the detail page and the two string-parsing tools render from v2; then do the other 18
 - **Later:** automate extraction + diff UI; UI pass; training view
 

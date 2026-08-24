@@ -106,7 +106,7 @@ There are **two independent PINs**:
 | Feature | Secret | Storage | Protected? |
 |---|---|---|---|
 | Lender update tracking | `lender_edit_pin.pin_hash` | bcrypt | ✓ (since 2026-08-24) |
-| Sales Pace Tracker *(no longer in the app)* | `sp_config.pin_hash` | bcrypt | ✓ |
+| ~~Sales Pace Tracker~~ | ~~`sp_config.pin_hash`~~ | dropped 2026-08-24 | n/a |
 
 The client stored one value, `sessionStorage.sp_pin`, and sent it to both. Since
 2026-08-24 it stores `sessionStorage.lender_edit_pin` and sends it only to the
@@ -116,10 +116,10 @@ lender RPCs.
 either, via `crypt(lender_pin, sp_config.pin_hash) = sp_config.pin_hash`, which
 returned false. So a single typed PIN unlocks only one of the two features —
 whichever it belongs to. This was true before the migration too; hashing did not
-cause it. **Resolved 2026-08-24** by removing the Sales Pace UI: the client now
-sends the PIN only to the `lender_*` RPCs, so there is one PIN in play. The
-session key was renamed `sp_pin` → `lender_edit_pin` to match. The sales PIN
-still exists in `sp_config` for the RPCs that nothing calls (§4).
+cause it. **Resolved 2026-08-24.** The Sales Pace UI was removed, then
+`sp_config` was dropped with the rest of the `sp_*` objects (§4). There is now
+exactly one PIN — `lender_edit_pin.pin_hash` — and the session key was renamed
+`sp_pin` → `lender_edit_pin` to match.
 
 ### What the security advisor says now
 
@@ -159,11 +159,11 @@ Verified is still worth doing once.
 
 ## 2. Auth model
 
-**As of 2026-08-24 the client calls only three RPCs**, all `lender_*`; two of
-them take `p_pin`. The three `sp_*` RPCs are still in the database but nothing
-in `index.html` calls them any more — see §4.
+**As of 2026-08-24 there are only three RPCs**, all `lender_*`; two of them take
+`p_pin`. The `sp_*` functions were dropped along with their tables — see §4.
 
-All nine remain `SECURITY DEFINER` and executable by `anon`.
+All three remain `SECURITY DEFINER` and executable by `anon`, plus the internal
+`lender_pin_ok`, which is not.
 
 **Every PIN-taking function does validate it.** Confirmed in the function bodies:
 
@@ -294,37 +294,40 @@ in summer / 7:00 PM in winter** records **tomorrow's date**. This affects both
 
 ---
 
-## 4. Sales Pace Tracker — REMOVED from the app, still in the database
+## 4. Sales Pace Tracker — GONE
 
-**The frontend was deleted on 2026-08-24** (`CLAUDE.md` decision, 2026-08-22).
-`index.html` no longer contains `view-pace`, the `sp*` functions, the nav entry
-or the CSS, and calls none of the RPCs below.
+Fully removed on 2026-08-24, in two steps:
 
-**The database objects were deliberately left in place.** They are not orphans:
-
-| Object | State |
+| | |
 |---|---|
-| `sp_daily_sales` | **11 rows of real sales data** |
-| `sp_monthly_goals` | 1 row |
-| `sp_config` | 1 row (the bcrypt sales PIN) |
-| `sp_get_month`, `sp_upsert_day`, `sp_set_goal`, `sp_pin_ok`, `sp_change_pin`, + a dead `sp_set_goal` overload | 6 functions, all present |
+| UI | deleted from `index.html` — commit `5e92e47`, PR #4 |
+| Database | `20260824234700_drop_sales_pace_objects` — 3 tables + 6 functions dropped |
 
-Dropping them destroys records that a `git revert` cannot bring back, so that is
-a separate decision for Gage, not a consequence of removing the UI. All three
-tables already have RLS on with no `anon` grants, so leaving them costs nothing
-in exposure.
+Nothing named `sp_*` remains in the database. What is left in `public` is four
+objects, all lender: `lender_edit_pin`, `lender_updates`, and the RPCs
+`lender_get_updates`, `lender_mark_verified`, `lender_add_note`, plus the
+internal `lender_pin_ok`.
 
-> **Correction.** `CLAUDE.md` and `ARCHITECTURE.md` both claimed these RPCs "do
-> not exist in the DB" and that the backend "never existed". That was wrong —
-> live inspection on 2026-08-22 found all six functions and all three tables
-> populated. The decision to remove the feature still stands on its other
-> stated reason: it is not a lender tool. Both files are now corrected.
+**The data was exported before the drop and handed to Gage** — 11 rows of June
+2026 daily sales (59 new, 41 used, $86,722 gross) and one goal row, as `.sql`
+and `.csv`. It is deliberately **not** in this repository, which is public.
+`sp_config` held only a bcrypt PIN hash and was not exported: a bcrypt hash of a
+4-character PIN is trivially crackable and does not belong in an export.
 
-The rest of this section documents the RPCs as they still exist server-side.
+That export is the only copy. A `git revert` restores the UI but not the rows.
 
-Historically: `index.html:2438-2629`, PIN-gated on read and write, polled every
-45s while `#view-pace` was active. Month keys `'YYYY-MM-01'`, day keys
-`'YYYY-MM-DD'`, both built from **local browser time**.
+> **Correction, for the record.** `CLAUDE.md` and `ARCHITECTURE.md` claimed
+> these RPCs "do not exist in the DB" and that the backend "never existed".
+> That was wrong — live inspection on 2026-08-22 found all six functions and all
+> three tables populated, which is why the data was exported rather than assumed
+> absent. The removal decision stood on its other stated reason: not a lender
+> tool.
+
+Historical detail, kept because it explains the export's shape: the tracker was
+`index.html:2438-2629`, PIN-gated on read and write, polled every 45s while
+`#view-pace` was active. Month keys `'YYYY-MM-01'`, day keys `'YYYY-MM-DD'`,
+both built from **local browser time**. The RPC signatures documented below no
+longer exist.
 
 **Tables** (all RLS-enabled, no `anon` grants):
 
@@ -484,6 +487,6 @@ Notes:
   in plaintext in that query.
 - There is no recovery path. If the new PIN is lost, the only fix is to run this
   statement again with another one.
-- This rotates the **lender** PIN only. The Sales Pace PIN is a different value
-  (§1) and rotates via `sp_change_pin`.
+- This is now the **only** PIN in the project. The separate Sales Pace PIN and
+  its `sp_change_pin` rotation function were dropped on 2026-08-24 (§4).
 
