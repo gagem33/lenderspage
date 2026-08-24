@@ -113,10 +113,6 @@ themselves are closed to anonymous callers.
 The SQL applied on 2026-08-24 is in [`supabase/migrations/`](supabase/migrations).
 Everything older still lives only in the Supabase dashboard.
 
-Another five `sp_*` RPCs and three `sp_*` tables remain in the database from the
-removed Sales Pace tracker. Nothing in this app calls them, and they still hold
-real sales data — see `docs/supabase-contract.md` §4 before dropping anything.
-
 See [`docs/supabase-contract.md`](docs/supabase-contract.md) for the full
 contract.
 
