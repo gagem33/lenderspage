@@ -1,0 +1,980 @@
+[
+ {
+  "file": "5th3rd_-_Program_Sheet_-_072326",
+  "pages": 2,
+  "verdict": "TEXT_OK",
+  "per_page": [
+   {
+    "page": 1,
+    "verdict": "TEXT_OK",
+    "why": "27.1% common-word rate, 0 corrupt sequences"
+   },
+   {
+    "page": 2,
+    "verdict": "TEXT_OK",
+    "why": "20.5% common-word rate, 0 corrupt sequences"
+   }
+  ]
+ },
+ {
+  "file": "Ally_-_84_month_Program_Sheet_-_040126",
+  "pages": 1,
+  "verdict": "IMAGE_ONLY",
+  "per_page": [
+   {
+    "page": 1,
+    "verdict": "IMAGE_ONLY",
+    "why": "190 chars of text, 112 images -- content is graphical"
+   }
+  ]
+ },
+ {
+  "file": "Ally_-_Funding_Guidelines_-_040126",
+  "pages": 10,
+  "verdict": "TEXT_OK",
+  "per_page": [
+   {
+    "page": 1,
+    "verdict": "TEXT_OK",
+    "why": "27.2% common-word rate, 0 corrupt sequences"
+   },
+   {
+    "page": 2,
+    "verdict": "TEXT_OK",
+    "why": "31.5% common-word rate, 0 corrupt sequences"
+   },
+   {
+    "page": 3,
+    "verdict": "TEXT_OK",
+    "why": "27.8% common-word rate, 0 corrupt sequences"
+   },
+   {
+    "page": 4,
+    "verdict": "TEXT_OK",
+    "why": "26.8% common-word rate, 0 corrupt sequences"
+   },
+   {
+    "page": 5,
+    "verdict": "TEXT_OK",
+    "why": "34.8% common-word rate, 0 corrupt sequences"
+   },
+   {
+    "page": 6,
+    "verdict": "TEXT_OK",
+    "why": "31.9% common-word rate, 0 corrupt sequences"
+   },
+   {
+    "page": 7,
+    "verdict": "TEXT_OK",
+    "why": "22.3% common-word rate, 0 corrupt sequences"
+   },
+   {
+    "page": 8,
+    "verdict": "TEXT_OK",
+    "why": "26.7% common-word rate, 0 corrupt sequences"
+   },
+   {
+    "page": 9,
+    "verdict": "TEXT_OK",
+    "why": "26.5% common-word rate, 0 corrupt sequences"
+   },
+   {
+    "page": 10,
+    "verdict": "TEXT_OK",
+    "why": "23.6% common-word rate, 0 corrupt sequences"
+   }
+  ]
+ },
+ {
+  "file": "Ally_-_Program_Sheet_-_040126",
+  "pages": 7,
+  "verdict": "TEXT_OK",
+  "per_page": [
+   {
+    "page": 1,
+    "verdict": "TEXT_OK",
+    "why": "27.8% common-word rate, 0 corrupt sequences"
+   },
+   {
+    "page": 2,
+    "verdict": "TEXT_OK",
+    "why": "26.8% common-word rate, 0 corrupt sequences"
+   },
+   {
+    "page": 3,
+    "verdict": "TEXT_OK",
+    "why": "22.0% common-word rate, 0 corrupt sequences"
+   },
+   {
+    "page": 4,
+    "verdict": "TEXT_OK",
+    "why": "27.5% common-word rate, 0 corrupt sequences"
+   },
+   {
+    "page": 5,
+    "verdict": "TEXT_OK",
+    "why": "25.0% common-word rate, 0 corrupt sequences"
+   },
+   {
+    "page": 6,
+    "verdict": "TEXT_OK",
+    "why": "26.1% common-word rate, 0 corrupt sequences"
+   },
+   {
+    "page": 7,
+    "verdict": "TEXT_OK",
+    "why": "26.1% common-word rate, 0 corrupt sequences"
+   }
+  ]
+ },
+ {
+  "file": "AmeriCredit_-_Program_Sheet_-_061226",
+  "pages": 11,
+  "verdict": "IMAGE_ONLY",
+  "per_page": [
+   {
+    "page": 1,
+    "verdict": "TEXT_OK",
+    "why": "30.1% common-word rate, 0 corrupt sequences"
+   },
+   {
+    "page": 2,
+    "verdict": "TEXT_OK",
+    "why": "27.1% common-word rate, 0 corrupt sequences"
+   },
+   {
+    "page": 3,
+    "verdict": "TEXT_OK",
+    "why": "31.4% common-word rate, 0 corrupt sequences"
+   },
+   {
+    "page": 4,
+    "verdict": "TEXT_OK",
+    "why": "29.7% common-word rate, 0 corrupt sequences"
+   },
+   {
+    "page": 5,
+    "verdict": "TEXT_OK",
+    "why": "32.9% common-word rate, 0 corrupt sequences"
+   },
+   {
+    "page": 6,
+    "verdict": "TEXT_OK",
+    "why": "25.8% common-word rate, 0 corrupt sequences"
+   },
+   {
+    "page": 7,
+    "verdict": "TEXT_OK",
+    "why": "32.3% common-word rate, 0 corrupt sequences"
+   },
+   {
+    "page": 8,
+    "verdict": "TEXT_OK",
+    "why": "11.8% common-word rate, 0 corrupt sequences"
+   },
+   {
+    "page": 9,
+    "verdict": "TEXT_OK",
+    "why": "12.3% common-word rate, 0 corrupt sequences"
+   },
+   {
+    "page": 10,
+    "verdict": "TEXT_OK",
+    "why": "6.6% common-word rate, 0 corrupt sequences"
+   },
+   {
+    "page": 11,
+    "verdict": "IMAGE_ONLY",
+    "why": "278 chars of text, 0 images -- content is graphical"
+   }
+  ]
+ },
+ {
+  "file": "Bank_of_America_-_Funding_Guidelines_-_061726",
+  "pages": 2,
+  "verdict": "TEXT_OK",
+  "per_page": [
+   {
+    "page": 1,
+    "verdict": "TEXT_OK",
+    "why": "24.1% common-word rate, 0 corrupt sequences"
+   },
+   {
+    "page": 2,
+    "verdict": "TEXT_OK",
+    "why": "26.3% common-word rate, 0 corrupt sequences"
+   }
+  ]
+ },
+ {
+  "file": "Bank_of_America_-_Program_Sheet_-_061826",
+  "pages": 3,
+  "verdict": "TEXT_OK",
+  "per_page": [
+   {
+    "page": 1,
+    "verdict": "TEXT_OK",
+    "why": "27.3% common-word rate, 0 corrupt sequences"
+   },
+   {
+    "page": 2,
+    "verdict": "TEXT_OK",
+    "why": "26.5% common-word rate, 0 corrupt sequences"
+   },
+   {
+    "page": 3,
+    "verdict": "TEXT_OK",
+    "why": "27.6% common-word rate, 0 corrupt sequences"
+   }
+  ]
+ },
+ {
+  "file": "CPS_-_Program_Sheet_-_010126",
+  "pages": 2,
+  "verdict": "TEXT_OK",
+  "per_page": [
+   {
+    "page": 1,
+    "verdict": "TEXT_OK",
+    "why": "26.5% common-word rate, 0 corrupt sequences"
+   },
+   {
+    "page": 2,
+    "verdict": "TEXT_OK",
+    "why": "23.5% common-word rate, 0 corrupt sequences"
+   }
+  ]
+ },
+ {
+  "file": "CapOne_-_Funding_Guidelines2_-_010126",
+  "pages": 1,
+  "verdict": "TEXT_OK",
+  "per_page": [
+   {
+    "page": 1,
+    "verdict": "TEXT_OK",
+    "why": "25.0% common-word rate, 0 corrupt sequences"
+   }
+  ]
+ },
+ {
+  "file": "CapOne_-_Funding_Guidelines_-_012726",
+  "pages": 1,
+  "verdict": "TEXT_OK",
+  "per_page": [
+   {
+    "page": 1,
+    "verdict": "TEXT_OK",
+    "why": "20.0% common-word rate, 0 corrupt sequences"
+   }
+  ]
+ },
+ {
+  "file": "CapOne_-_Program_Sheet_-_010126",
+  "pages": 2,
+  "verdict": "TEXT_OK",
+  "per_page": [
+   {
+    "page": 1,
+    "verdict": "TEXT_OK",
+    "why": "35.6% common-word rate, 0 corrupt sequences"
+   },
+   {
+    "page": 2,
+    "verdict": "TEXT_OK",
+    "why": "30.0% common-word rate, 0 corrupt sequences"
+   }
+  ]
+ },
+ {
+  "file": "Chase_-_Program_Sheet_-_051026",
+  "pages": 1,
+  "verdict": "TEXT_OK",
+  "per_page": [
+   {
+    "page": 1,
+    "verdict": "TEXT_OK",
+    "why": "29.0% common-word rate, 0 corrupt sequences"
+   }
+  ]
+ },
+ {
+  "file": "DFC_-_Funding_Guidelines_-_010126",
+  "pages": 4,
+  "verdict": "TEXT_OK",
+  "per_page": [
+   {
+    "page": 1,
+    "verdict": "TEXT_OK",
+    "why": "30.1% common-word rate, 0 corrupt sequences"
+   },
+   {
+    "page": 2,
+    "verdict": "TEXT_OK",
+    "why": "28.7% common-word rate, 0 corrupt sequences"
+   },
+   {
+    "page": 3,
+    "verdict": "TEXT_OK",
+    "why": "27.3% common-word rate, 0 corrupt sequences"
+   },
+   {
+    "page": 4,
+    "verdict": "TEXT_OK",
+    "why": "15.8% common-word rate, 0 corrupt sequences"
+   }
+  ]
+ },
+ {
+  "file": "DFC_-_Program_Sheet_-_010126",
+  "pages": 1,
+  "verdict": "TEXT_OK",
+  "per_page": [
+   {
+    "page": 1,
+    "verdict": "TEXT_OK",
+    "why": "20.7% common-word rate, 0 corrupt sequences"
+   }
+  ]
+ },
+ {
+  "file": "Exeter_-_Funding_Guidelines_-_061226",
+  "pages": 1,
+  "verdict": "TEXT_OK",
+  "per_page": [
+   {
+    "page": 1,
+    "verdict": "TEXT_OK",
+    "why": "12.7% common-word rate, 0 corrupt sequences"
+   }
+  ]
+ },
+ {
+  "file": "Exeter_-_Program_Sheet_-_061226",
+  "pages": 2,
+  "verdict": "TEXT_OK",
+  "per_page": [
+   {
+    "page": 1,
+    "verdict": "TEXT_OK",
+    "why": "26.3% common-word rate, 0 corrupt sequences"
+   },
+   {
+    "page": 2,
+    "verdict": "TEXT_OK",
+    "why": "22.9% common-word rate, 0 corrupt sequences"
+   }
+  ]
+ },
+ {
+  "file": "Flagship_-_Funding_Guidelines_-_072926",
+  "pages": 1,
+  "verdict": "TEXT_OK",
+  "per_page": [
+   {
+    "page": 1,
+    "verdict": "TEXT_OK",
+    "why": "17.5% common-word rate, 0 corrupt sequences"
+   }
+  ]
+ },
+ {
+  "file": "Flagship_-_Program_Sheet_-_072926",
+  "pages": 2,
+  "verdict": "TEXT_OK",
+  "per_page": [
+   {
+    "page": 1,
+    "verdict": "TEXT_OK",
+    "why": "22.7% common-word rate, 0 corrupt sequences"
+   },
+   {
+    "page": 2,
+    "verdict": "TEXT_OK",
+    "why": "26.4% common-word rate, 0 corrupt sequences"
+   }
+  ]
+ },
+ {
+  "file": "Global_-_Funding_Guidelines_-_072726",
+  "pages": 1,
+  "verdict": "TEXT_OK",
+  "per_page": [
+   {
+    "page": 1,
+    "verdict": "TEXT_OK",
+    "why": "22.9% common-word rate, 0 corrupt sequences"
+   }
+  ]
+ },
+ {
+  "file": "Global_-_Program_Sheet_-_072726",
+  "pages": 2,
+  "verdict": "TEXT_OK",
+  "per_page": [
+   {
+    "page": 1,
+    "verdict": "TEXT_OK",
+    "why": "17.9% common-word rate, 1 corrupt sequences"
+   },
+   {
+    "page": 2,
+    "verdict": "TEXT_OK",
+    "why": "25.5% common-word rate, 0 corrupt sequences"
+   }
+  ]
+ },
+ {
+  "file": "KIA_-_K500_K506-2_-_070126",
+  "pages": 6,
+  "verdict": "TEXT_OK",
+  "per_page": [
+   {
+    "page": 1,
+    "verdict": "TEXT_OK",
+    "why": "31.3% common-word rate, 0 corrupt sequences"
+   },
+   {
+    "page": 2,
+    "verdict": "TEXT_OK",
+    "why": "31.4% common-word rate, 0 corrupt sequences"
+   },
+   {
+    "page": 3,
+    "verdict": "TEXT_OK",
+    "why": "30.9% common-word rate, 0 corrupt sequences"
+   },
+   {
+    "page": 4,
+    "verdict": "TEXT_OK",
+    "why": "31.4% common-word rate, 0 corrupt sequences"
+   },
+   {
+    "page": 5,
+    "verdict": "TEXT_OK",
+    "why": "31.4% common-word rate, 0 corrupt sequences"
+   },
+   {
+    "page": 6,
+    "verdict": "TEXT_OK",
+    "why": "31.8% common-word rate, 0 corrupt sequences"
+   }
+  ]
+ },
+ {
+  "file": "KIA_-_K500_K506_-_070126",
+  "pages": 10,
+  "verdict": "TEXT_OK",
+  "per_page": [
+   {
+    "page": 1,
+    "verdict": "TEXT_OK",
+    "why": "30.1% common-word rate, 0 corrupt sequences"
+   },
+   {
+    "page": 2,
+    "verdict": "TEXT_OK",
+    "why": "29.9% common-word rate, 0 corrupt sequences"
+   },
+   {
+    "page": 3,
+    "verdict": "TEXT_OK",
+    "why": "30.2% common-word rate, 0 corrupt sequences"
+   },
+   {
+    "page": 4,
+    "verdict": "TEXT_OK",
+    "why": "30.1% common-word rate, 0 corrupt sequences"
+   },
+   {
+    "page": 5,
+    "verdict": "TEXT_OK",
+    "why": "27.1% common-word rate, 0 corrupt sequences"
+   },
+   {
+    "page": 6,
+    "verdict": "TEXT_OK",
+    "why": "30.1% common-word rate, 0 corrupt sequences"
+   },
+   {
+    "page": 7,
+    "verdict": "TEXT_OK",
+    "why": "29.9% common-word rate, 0 corrupt sequences"
+   },
+   {
+    "page": 8,
+    "verdict": "TEXT_OK",
+    "why": "29.9% common-word rate, 0 corrupt sequences"
+   },
+   {
+    "page": 9,
+    "verdict": "TEXT_OK",
+    "why": "27.1% common-word rate, 0 corrupt sequences"
+   },
+   {
+    "page": 10,
+    "verdict": "TEXT_OK",
+    "why": "29.0% common-word rate, 0 corrupt sequences"
+   }
+  ]
+ },
+ {
+  "file": "Kia_-_Standard_New_-_National_-_010626",
+  "pages": 1,
+  "verdict": "TEXT_OK",
+  "per_page": [
+   {
+    "page": 1,
+    "verdict": "TEXT_OK",
+    "why": "24.3% common-word rate, 0 corrupt sequences"
+   }
+  ]
+ },
+ {
+  "file": "PNC_-_Funding_Guidelines_-_031626",
+  "pages": 1,
+  "verdict": "TEXT_OK",
+  "per_page": [
+   {
+    "page": 1,
+    "verdict": "TEXT_OK",
+    "why": "24.2% common-word rate, 0 corrupt sequences"
+   }
+  ]
+ },
+ {
+  "file": "PNC_-_Program_Sheet_-_031626",
+  "pages": 1,
+  "verdict": "TEXT_OK",
+  "per_page": [
+   {
+    "page": 1,
+    "verdict": "TEXT_OK",
+    "why": "31.8% common-word rate, 0 corrupt sequences"
+   }
+  ]
+ },
+ {
+  "file": "PNC_-_Proof_of_Residence_-_031626",
+  "pages": 1,
+  "verdict": "TEXT_OK",
+  "per_page": [
+   {
+    "page": 1,
+    "verdict": "TEXT_OK",
+    "why": "20.7% common-word rate, 0 corrupt sequences"
+   }
+  ]
+ },
+ {
+  "file": "Regional_-_Program_Sheet_-_052726",
+  "pages": 1,
+  "verdict": "TEXT_OK",
+  "per_page": [
+   {
+    "page": 1,
+    "verdict": "TEXT_OK",
+    "why": "23.4% common-word rate, 0 corrupt sequences"
+   }
+  ]
+ },
+ {
+  "file": "Regional_-_Underwriting_Guidelines_-_052726",
+  "pages": 2,
+  "verdict": "TEXT_OK",
+  "per_page": [
+   {
+    "page": 1,
+    "verdict": "TEXT_OK",
+    "why": "22.2% common-word rate, 0 corrupt sequences"
+   },
+   {
+    "page": 2,
+    "verdict": "TEXT_OK",
+    "why": "23.8% common-word rate, 0 corrupt sequences"
+   }
+  ]
+ },
+ {
+  "file": "Santander_-_Program_Sheet_-_060126",
+  "pages": 11,
+  "verdict": "TEXT_OK",
+  "per_page": [
+   {
+    "page": 1,
+    "verdict": "TEXT_OK",
+    "why": "27.8% common-word rate, 1 corrupt sequences"
+   },
+   {
+    "page": 2,
+    "verdict": "TEXT_OK",
+    "why": "19.3% common-word rate, 0 corrupt sequences"
+   },
+   {
+    "page": 3,
+    "verdict": "TEXT_OK",
+    "why": "29.0% common-word rate, 0 corrupt sequences"
+   },
+   {
+    "page": 4,
+    "verdict": "TEXT_OK",
+    "why": "30.3% common-word rate, 0 corrupt sequences"
+   },
+   {
+    "page": 5,
+    "verdict": "TEXT_OK",
+    "why": "27.3% common-word rate, 0 corrupt sequences"
+   },
+   {
+    "page": 6,
+    "verdict": "TEXT_OK",
+    "why": "27.8% common-word rate, 0 corrupt sequences"
+   },
+   {
+    "page": 7,
+    "verdict": "TEXT_OK",
+    "why": "24.1% common-word rate, 1 corrupt sequences"
+   },
+   {
+    "page": 8,
+    "verdict": "TEXT_OK",
+    "why": "24.6% common-word rate, 0 corrupt sequences"
+   },
+   {
+    "page": 9,
+    "verdict": "TEXT_OK",
+    "why": "25.5% common-word rate, 0 corrupt sequences"
+   },
+   {
+    "page": 10,
+    "verdict": "TEXT_OK",
+    "why": "26.0% common-word rate, 0 corrupt sequences"
+   },
+   {
+    "page": 11,
+    "verdict": "TEXT_OK",
+    "why": "29.2% common-word rate, 0 corrupt sequences"
+   }
+  ]
+ },
+ {
+  "file": "TD_-_Program_Sheet2_-_070126",
+  "pages": 4,
+  "verdict": "TEXT_OK",
+  "per_page": [
+   {
+    "page": 1,
+    "verdict": "TEXT_OK",
+    "why": "23.8% common-word rate, 0 corrupt sequences"
+   },
+   {
+    "page": 2,
+    "verdict": "TEXT_OK",
+    "why": "23.4% common-word rate, 0 corrupt sequences"
+   },
+   {
+    "page": 3,
+    "verdict": "TEXT_OK",
+    "why": "12.6% common-word rate, 0 corrupt sequences"
+   },
+   {
+    "page": 4,
+    "verdict": "TEXT_OK",
+    "why": "12.6% common-word rate, 0 corrupt sequences"
+   }
+  ]
+ },
+ {
+  "file": "TD_-_Program_Sheet_-_070126",
+  "pages": 8,
+  "verdict": "TEXT_OK",
+  "per_page": [
+   {
+    "page": 1,
+    "verdict": "TEXT_OK",
+    "why": "28.7% common-word rate, 0 corrupt sequences"
+   },
+   {
+    "page": 2,
+    "verdict": "TEXT_OK",
+    "why": "25.2% common-word rate, 0 corrupt sequences"
+   },
+   {
+    "page": 3,
+    "verdict": "TEXT_OK",
+    "why": "31.0% common-word rate, 0 corrupt sequences"
+   },
+   {
+    "page": 4,
+    "verdict": "TEXT_OK",
+    "why": "27.0% common-word rate, 0 corrupt sequences"
+   },
+   {
+    "page": 5,
+    "verdict": "TEXT_OK",
+    "why": "19.9% common-word rate, 0 corrupt sequences"
+   },
+   {
+    "page": 6,
+    "verdict": "TEXT_OK",
+    "why": "26.9% common-word rate, 0 corrupt sequences"
+   },
+   {
+    "page": 7,
+    "verdict": "TEXT_OK",
+    "why": "26.9% common-word rate, 0 corrupt sequences"
+   },
+   {
+    "page": 8,
+    "verdict": "TEXT_OK",
+    "why": "28.3% common-word rate, 0 corrupt sequences"
+   }
+  ]
+ },
+ {
+  "file": "Truist_-_Program_Sheet_-_072026",
+  "pages": 4,
+  "verdict": "PARTIAL",
+  "per_page": [
+   {
+    "page": 1,
+    "verdict": "PARTIAL",
+    "why": "25.4% common-word rate, 233 corrupt sequences -- parts of this page are mis-encoded"
+   },
+   {
+    "page": 2,
+    "verdict": "PARTIAL",
+    "why": "16.0% common-word rate, 114 corrupt sequences -- parts of this page are mis-encoded"
+   },
+   {
+    "page": 3,
+    "verdict": "TEXT_OK",
+    "why": "26.9% common-word rate, 1 corrupt sequences"
+   },
+   {
+    "page": 4,
+    "verdict": "PARTIAL",
+    "why": "23.6% common-word rate, 27 corrupt sequences -- parts of this page are mis-encoded"
+   }
+  ]
+ },
+ {
+  "file": "USBank_-_Program_Highlights_-_040126",
+  "pages": 1,
+  "verdict": "TEXT_OK",
+  "per_page": [
+   {
+    "page": 1,
+    "verdict": "TEXT_OK",
+    "why": "30.2% common-word rate, 0 corrupt sequences"
+   }
+  ]
+ },
+ {
+  "file": "USBank_-_Program_Rules_-_040126",
+  "pages": 3,
+  "verdict": "TEXT_OK",
+  "per_page": [
+   {
+    "page": 1,
+    "verdict": "TEXT_OK",
+    "why": "32.3% common-word rate, 0 corrupt sequences"
+   },
+   {
+    "page": 2,
+    "verdict": "TEXT_OK",
+    "why": "32.6% common-word rate, 0 corrupt sequences"
+   },
+   {
+    "page": 3,
+    "verdict": "TEXT_OK",
+    "why": "27.9% common-word rate, 0 corrupt sequences"
+   }
+  ]
+ },
+ {
+  "file": "USBank_-_Program_Sheet_-_040126",
+  "pages": 4,
+  "verdict": "TEXT_OK",
+  "per_page": [
+   {
+    "page": 1,
+    "verdict": "TEXT_OK",
+    "why": "29.3% common-word rate, 0 corrupt sequences"
+   },
+   {
+    "page": 2,
+    "verdict": "TEXT_OK",
+    "why": "33.2% common-word rate, 0 corrupt sequences"
+   },
+   {
+    "page": 3,
+    "verdict": "TEXT_OK",
+    "why": "29.2% common-word rate, 0 corrupt sequences"
+   },
+   {
+    "page": 4,
+    "verdict": "TEXT_OK",
+    "why": "29.2% common-word rate, 0 corrupt sequences"
+   }
+  ]
+ },
+ {
+  "file": "Wells_Fargo_-_Program_Sheet_-_061626",
+  "pages": 18,
+  "verdict": "TEXT_OK",
+  "per_page": [
+   {
+    "page": 1,
+    "verdict": "TEXT_OK",
+    "why": "19.6% common-word rate, 0 corrupt sequences"
+   },
+   {
+    "page": 2,
+    "verdict": "TEXT_OK",
+    "why": "31.7% common-word rate, 0 corrupt sequences"
+   },
+   {
+    "page": 3,
+    "verdict": "TEXT_OK",
+    "why": "25.0% common-word rate, 0 corrupt sequences"
+   },
+   {
+    "page": 4,
+    "verdict": "TEXT_OK",
+    "why": "31.8% common-word rate, 0 corrupt sequences"
+   },
+   {
+    "page": 5,
+    "verdict": "TEXT_OK",
+    "why": "21.7% common-word rate, 0 corrupt sequences"
+   },
+   {
+    "page": 6,
+    "verdict": "TEXT_OK",
+    "why": "25.1% common-word rate, 0 corrupt sequences"
+   },
+   {
+    "page": 7,
+    "verdict": "TEXT_OK",
+    "why": "21.7% common-word rate, 0 corrupt sequences"
+   },
+   {
+    "page": 8,
+    "verdict": "TEXT_OK",
+    "why": "14.5% common-word rate, 0 corrupt sequences"
+   },
+   {
+    "page": 9,
+    "verdict": "TEXT_OK",
+    "why": "29.1% common-word rate, 0 corrupt sequences"
+   },
+   {
+    "page": 10,
+    "verdict": "TEXT_OK",
+    "why": "31.3% common-word rate, 0 corrupt sequences"
+   },
+   {
+    "page": 11,
+    "verdict": "TEXT_OK",
+    "why": "22.7% common-word rate, 0 corrupt sequences"
+   },
+   {
+    "page": 12,
+    "verdict": "TEXT_OK",
+    "why": "31.0% common-word rate, 0 corrupt sequences"
+   },
+   {
+    "page": 13,
+    "verdict": "TEXT_OK",
+    "why": "26.8% common-word rate, 0 corrupt sequences"
+   },
+   {
+    "page": 14,
+    "verdict": "TEXT_OK",
+    "why": "23.4% common-word rate, 0 corrupt sequences"
+   },
+   {
+    "page": 15,
+    "verdict": "TEXT_OK",
+    "why": "20.3% common-word rate, 0 corrupt sequences"
+   },
+   {
+    "page": 16,
+    "verdict": "TEXT_OK",
+    "why": "22.1% common-word rate, 0 corrupt sequences"
+   },
+   {
+    "page": 17,
+    "verdict": "TEXT_OK",
+    "why": "12.9% common-word rate, 0 corrupt sequences"
+   },
+   {
+    "page": 18,
+    "verdict": "TEXT_OK",
+    "why": "27.3% common-word rate, 0 corrupt sequences"
+   }
+  ]
+ },
+ {
+  "file": "Westlake_-_Prime_Program_Sheet_-_070826",
+  "pages": 1,
+  "verdict": "TEXT_OK",
+  "per_page": [
+   {
+    "page": 1,
+    "verdict": "TEXT_OK",
+    "why": "27.3% common-word rate, 0 corrupt sequences"
+   }
+  ]
+ },
+ {
+  "file": "Westlake_-_Program_Guidelines_-_010126",
+  "pages": 6,
+  "verdict": "IMAGE_ONLY",
+  "per_page": [
+   {
+    "page": 1,
+    "verdict": "IMAGE_ONLY",
+    "why": "91 chars of text, 1 images -- content is graphical"
+   },
+   {
+    "page": 2,
+    "verdict": "TEXT_OK",
+    "why": "16.4% common-word rate, 0 corrupt sequences"
+   },
+   {
+    "page": 3,
+    "verdict": "TEXT_OK",
+    "why": "24.5% common-word rate, 2 corrupt sequences"
+   },
+   {
+    "page": 4,
+    "verdict": "TEXT_OK",
+    "why": "29.0% common-word rate, 0 corrupt sequences"
+   },
+   {
+    "page": 5,
+    "verdict": "TEXT_OK",
+    "why": "29.8% common-word rate, 2 corrupt sequences"
+   },
+   {
+    "page": 6,
+    "verdict": "TEXT_OK",
+    "why": "29.4% common-word rate, 0 corrupt sequences"
+   }
+  ]
+ },
+ {
+  "file": "Westlake_-_Program_Sheet_-_070826",
+  "pages": 1,
+  "verdict": "TEXT_OK",
+  "per_page": [
+   {
+    "page": 1,
+    "verdict": "TEXT_OK",
+    "why": "19.5% common-word rate, 0 corrupt sequences"
+   }
+  ]
+ }
+]

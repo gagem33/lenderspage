@@ -264,7 +264,8 @@ the text layer is lying.**
 ### What to do instead
 
 ```
-python3 tools/pdf_triage.py "FILE.pdf" --render
+python3 tools/pdf_triage.py "FILE.pdf" --render          # one file
+python3 tools/pdf_triage.py <folder> --json triage.json  # sweep the corpus
 ```
 
 Per page it reports `TEXT_OK`, `PARTIAL`, `MOJIBAKE` or `IMAGE_ONLY`, and writes
@@ -283,6 +284,23 @@ desk mid-deal.
 Truist is the case that shows why it is per page and not per file: pages 1, 2
 and 4 are corrupted, page 3 — the flat reserve scale — is clean. A per-file
 verdict would have thrown away a good page or trusted three bad ones.
+
+### What the sweep found — 2026-08-25
+
+Run over the whole folder: **39 files, 141 pages, 6 pages unreadable.** 35 files
+are clean end to end. Full table in `SOURCES.md` §3; the short version is that
+the corpus is in better shape than the two known failures suggested, and the
+sweep turned up a third gap nobody had noticed:
+
+**AmeriCredit page 11 is a US map** — "Monthly Value Guide by State". Kelley Blue
+Book for eleven western states, **J.D. Power everywhere else, including Texas.**
+It has 278 characters of text and **zero raster images**: it is vector art, so
+the image-count test does nothing and only the length rule catches it. That
+matters — it decides which book the advance is calculated from, and it is not in
+the app.
+
+The lesson for the classifier: an image-only page does not have to contain
+images. Length is the test that generalises.
 
 ### The extraction order, end to end
 

@@ -18,9 +18,14 @@ Why this exists: the 2026-08-22 audit trusted PDF text layers. Two of them lied.
 Rendering the page and reading it as an image solves both. This script decides
 which pages need that, and produces them.
 
-    python3 tools/pdf_triage.py FILE.pdf [--render] [--dpi 200] [--out DIR]
+    python3 tools/pdf_triage.py FILE.pdf  [--render] [--dpi 200] [--out DIR]
+    python3 tools/pdf_triage.py DIR/      [--json triage.json]
+
+Point it at a directory to sweep the whole corpus. Anything that is not
+TEXT_OK gets rendered automatically; the summary at the end lists the files
+and page numbers to go look at.
 """
-import sys, re, os, argparse
+import sys, re, os, glob, json, argparse
 
 try:
     import pymupdf
@@ -64,36 +69,84 @@ def classify(text, n_images):
         return 'PARTIAL', f'{rate:.1%} common-word rate, {weird} corrupt sequences -- parts of this page are mis-encoded'
     return 'TEXT_OK', f'{rate:.1%} common-word rate, {weird} corrupt sequences'
 
+def triage(path, out, dpi, render_all):
+    """Triage one PDF. Returns (stem, page_count, worst, per_page, rendered)."""
+    doc  = pymupdf.open(path)
+    stem = os.path.splitext(os.path.basename(path))[0]
+    per_page, rendered = [], []
+    for i, pg in enumerate(doc, 1):
+        v, why = classify(pg.get_text(), len(pg.get_images()))
+        per_page.append({'page': i, 'verdict': v, 'why': why})
+        if render_all or v != 'TEXT_OK':
+            os.makedirs(out, exist_ok=True)
+            p = f'{out}/{stem}_p{i}.png'
+            pg.get_pixmap(dpi=dpi).save(p)
+            rendered.append(p)
+    seen = [p['verdict'] for p in per_page]
+    worst = next((v for v in ('IMAGE_ONLY', 'MOJIBAKE', 'PARTIAL') if v in seen),
+                 'TEXT_OK')
+    return stem, doc.page_count, worst, per_page, rendered
+
+
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument('pdf')
+    ap.add_argument('pdf', help='a PDF, or a directory of PDFs to sweep')
     ap.add_argument('--render', action='store_true', help='write a PNG per page')
     ap.add_argument('--dpi', type=int, default=200)
     ap.add_argument('--out', default='pages')
+    ap.add_argument('--json', help='write the full result to this path')
     a = ap.parse_args()
 
-    doc = pymupdf.open(a.pdf)
-    stem = os.path.splitext(os.path.basename(a.pdf))[0]
-    verdicts = []
-    print(f'{stem}  --  {doc.page_count} page(s)')
-    for i, pg in enumerate(doc, 1):
-        text = pg.get_text()
-        v, why = classify(text, len(pg.get_images()))
-        verdicts.append(v)
-        print(f'  page {i}: {v:<10} {why}')
-        if a.render or v != 'TEXT_OK':
-            os.makedirs(a.out, exist_ok=True)
-            p = f'{a.out}/{stem}_p{i}.png'
-            pg.get_pixmap(dpi=a.dpi).save(p)
-            print(f'           rendered -> {p}')
+    if os.path.isdir(a.pdf):
+        # .PDF as well as .pdf -- AmeriCredit's export is uppercase, and a
+        # case-sensitive glob silently dropped it the first time this ran.
+        targets = sorted(f for f in glob.glob(os.path.join(a.pdf, '*'))
+                         if f.lower().endswith('.pdf'))
+        if not targets:
+            sys.exit(f'no PDFs in {a.pdf}')
+    else:
+        targets = [a.pdf]
 
-    worst = ('IMAGE_ONLY' if 'IMAGE_ONLY' in verdicts else
-             'MOJIBAKE'   if 'MOJIBAKE'   in verdicts else
-             'PARTIAL'    if 'PARTIAL'    in verdicts else 'TEXT_OK')
-    print(f'  VERDICT: {worst}')
-    if worst != 'TEXT_OK':
-        print('  -> Read the rendered images. Do NOT quote this text layer.')
+    results = []
+    for t in targets:
+        stem, pages, worst, per_page, rendered = triage(t, a.out, a.dpi, a.render)
+        results.append({'file': stem, 'pages': pages, 'verdict': worst,
+                        'per_page': per_page, 'rendered': rendered})
+        if len(targets) == 1:
+            print(f'{stem}  --  {pages} page(s)')
+            for p in per_page:
+                print(f"  page {p['page']}: {p['verdict']:<10} {p['why']}")
+            for r in rendered:
+                print(f'  rendered -> {r}')
+            print(f'  VERDICT: {worst}')
+            if worst != 'TEXT_OK':
+                print('  -> Read the rendered images. Do NOT quote this text layer.')
+
+    if len(targets) > 1:
+        bad = [r for r in results if r['verdict'] != 'TEXT_OK']
+        if bad:
+            print('FILES NEEDING A RENDER\n')
+            for r in bad:
+                pp = [p['page'] for p in r['per_page'] if p['verdict'] != 'TEXT_OK']
+                print(f"  {r['file'][:44]:<46}{r['verdict']:<12}"
+                      f"pages {pp} of {r['pages']}")
+            print()
+        npages = sum(r['pages'] for r in results)
+        nrend  = sum(len(r['rendered']) for r in results)
+        print(f'{len(results)} files triaged, {npages} pages')
+        for v in ('IMAGE_ONLY', 'MOJIBAKE', 'PARTIAL', 'TEXT_OK'):
+            n = sum(1 for r in results if r['verdict'] == v)
+            if n:
+                print(f'  {v:<12}{n} file(s)')
+        print(f'  pages needing a render: {nrend} of {npages} '
+              f'({nrend * 100 // max(npages, 1)}%)')
+
+    if a.json:
+        with open(a.json, 'w') as f:
+            json.dump(results, f, indent=1)
+        print(f'wrote {a.json}')
     return 0
+
 
 if __name__ == '__main__':
     sys.exit(main())
