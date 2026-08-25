@@ -19,18 +19,15 @@ Only `index.html` matters. The other three are leftovers from an earlier split a
 
 ```
 Browser ──► Vercel (static, lender-hub.vercel.app)
- │ serves index.html
+ │ serves index.html — one file, everything inline
  │
- ├──► cdn.jsdelivr.net @supabase/supabase-js@2 (loaded at runtime)
- │
- └──► Supabase llhxiyeqroetebsrjbos.supabase.co
- publishable key hardcoded in index.html (SB_KEY)
- auth: none (persistSession:false). All access via RPCs.
+ └──► fonts.googleapis.com  (the only other request the page makes)
 ```
 
 - No build step. Push to `main` → Vercel deploys.
-- No server code. Everything is client-side JS + Supabase RPCs.
-- Supabase free tier: project auto-pauses after inactivity. Restore in dashboard, wait ~60–90s, then SQL works.
+- **No backend.** No database, no auth, no API. Removed 2026-08-25; the Supabase
+  project is empty. Verify with `grep -c supabase index.html` → 0.
+- Nothing is stored anywhere. Everything the page shows is in `index.html`.
 
 ## 3. Inside `index.html`
 
@@ -42,10 +39,10 @@ Approximate line map (drifts as the file changes — grep, don't trust line numb
 | HTML shell | ~1280 | Sidebar, 3 views, 6 tool modals |
 | `LENDERS` | ~1288–1755 | The data. 20 objects. See DATA.md |
 | Render functions | ~1742–2040 | `buildSidebar`, `buildCompareTable`, `buildQuickLists`, `buildLenderDetail`, `showView`, `handleSearch`, `filterSidebar` |
-| Lender updates (`lu*`) | ~1898–2003 | Verified/notes panel, Supabase RPC calls, PIN handling |
+
 | `init()` | ~2108 | Boots everything, wires modals and tools |
 | Tools | ~2197–2440 | Income calc, date calc, bureau search, LTV calc, deal structurer, side-by-side compare |
-| Supabase client | end of the script | `sbClient()` + `editPin()`. All that remains of the removed Sales Pace block |
+
 
 ### 3.1 Views
 
@@ -78,40 +75,27 @@ Six modals wired by `makeModal(btnId, modalId, closeId)` in `init()`:
 
 The LTV calc and deal structurer are the two places where moving to DATA.md v2 typed fields will change behavior. Anything touching `maxLTV` string parsing needs to be updated when the schema migrates.
 
-## 4. Supabase
+## 4. Backend
 
-### 4.1 Tables (from July session — verify in dashboard)
-- `lender_edit_pin` — single row, the team PIN. Read only via RPC.
-- `lender_updates` — one row per lender: `lender_id`, `verified_at`, `note`, `updated_at`.
+There isn't one. Removed 2026-08-25.
 
-### 4.2 RPCs
-| RPC | Called from | Exists? |
-|---|---|---|
-| `lender_get_updates()` | `luLoad()` | yes |
-| `lender_mark_verified(lender_id, pin)` | `luBindPanel` | yes |
-| `lender_add_note(lender_id, pin, note)` | `luBindPanel` | yes |
-| `lender_pin_ok(pin)` | the two writers above | yes — internal, not callable by `anon` |
+Two features used Supabase and both are gone: the Sales Pace tracker
+(2026-08-24) and lender update tracking (2026-08-25). The database is empty —
+zero tables, zero functions, zero security-advisor findings. The applied
+migrations are in `supabase/migrations/`; the history is in
+`docs/supabase-contract.md`.
 
-The three `sp_*` RPCs were **dropped from the database on 2026-08-24**, along
-with their three tables. Nothing named `sp_*` remains.
-
-⚠️ This table used to mark those RPCs `Exists? no`. That was wrong — live
-inspection on 2026-08-22 found all six functions and all three tables populated.
-The data was exported to Gage before the drop. See `docs/supabase-contract.md` §4.
-
-Public can read `lender_updates` through the RPC. Writes require the PIN passed as an argument; the RPC checks it server-side. No Supabase auth is used anywhere.
-
-### 4.3 Client
-One shared client, lazily created by `sbClient()`, with `SB_URL` / `SB_KEY`.
-Named `spGetClient` / `SP_*` until 2026-08-24 — the prefix came from Sales Pace
-even though the lender-update code was the other caller. Renamed when that
-feature was removed, since the prefix no longer referred to anything.
+If a backend is ever needed again, read that file's closing section first — it
+records two real security findings that were fixed here, and both are easy to
+reintroduce.
 
 ## 5. Browser state
 
-- `sessionStorage['lender_edit_pin']` — the PIN after first successful entry, per tab. Cleared on a wrong-PIN response. Was `sp_pin` until 2026-08-24; renamed with the client above, so anyone mid-session re-enters the PIN once.
+- `detailOpenSections` — which detail sections are open, per lender, in memory
+  for the session. Survives the re-renders inside a session; not persisted.
 - Theme preference — in-memory `theme` variable + `data-theme` attribute. Not persisted.
-- No other persistence. No localStorage.
+- **Nothing else.** No localStorage, no sessionStorage, no cookies. The page
+  stopped using `sessionStorage` when the PIN was removed on 2026-08-25.
 
 ## 6. Data flow today
 
@@ -121,11 +105,10 @@ index.html LENDERS (hardcoded)
  ├─► compare table / sidebar / quick lists (render on load)
  ├─► lender detail (render on click)
  └─► tools (read a few top-level fields)
-
-Supabase lender_updates
- │
- └─► luLoad() on init ─► verified/notes badges on detail page
 ```
+
+One source, no fetches. Where that source should come from next — a sync from
+the Drive PDFs into `lenders.json` — is `CLAUDE.md`'s product spec, items 1–2.
 
 Program data and verification data are stored in two different places and joined only by `lender.id` in the browser. There is no way to update program values without editing `index.html` and redeploying.
 
@@ -138,4 +121,4 @@ Program data and verification data are stored in two different places and joined
 1. ~~**Removing Sales Pace**~~ — done 2026-08-24. The Supabase client bootstrap was kept and renamed, as this section advised.
 2. ~~**Deleting dead files**~~ — done. `app.js`, `base.css`, `style.css` are gone.
 3. **Migrating to DATA.md v2** = extract `LENDERS` to `lenders.json`, fetch it on load, rewrite `buildLenderDetail` to render structured fields instead of HTML blobs, and fix the two tools that parse `maxLTV`. This is the big one and should be done per-lender behind a flag, not all at once.
-4. **Anything new that writes data** must go through a Supabase RPC that checks the PIN. Don't add table-level write policies.
+4. **Anything new that writes data** needs a backend, and there isn't one any more. That is a design conversation before it is a commit — see `CLAUDE.md` working rules.

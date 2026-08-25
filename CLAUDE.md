@@ -7,7 +7,7 @@ Read `aboutme.md` first for how Gage works. This file is the project brain: visi
 | File | What it is |
 |---|---|
 | `aboutme.md` | How Gage works. Communication, decision, and build rules. |
-| `ARCHITECTURE.md` | How the app is wired today. Repo, Supabase, data flow, tools. |
+| `ARCHITECTURE.md` | How the app is wired today. Repo, data flow, tools. No backend since 2026-08-25. |
 | `DATA.md` | Lender record schema — current state audit + target v2 + migration. |
 | `SOURCES.md` | Manifest of bank PDFs in Drive, with file IDs per lender. |
 | `EXTRACTION_GUIDE.md` | How to read a bank PDF into the v2 schema. Glossary, quirks, confidence rules, approval process. |
@@ -27,10 +27,32 @@ A lender program reference for the desk/F&I at Southwest Kia Dallas. Gage uses i
 3. **Quick lookup mid-deal.**
 4. **Training reference** for new F&I/desk people (lowest priority).
 
+## What Gage wants this to be — answered 2026-08-25
+
+Ten questions, ten answers. This is the spec. When something here conflicts with
+an older note in this file or another doc, **this section wins.**
+
+| # | Question | Answer |
+|---|---|---|
+| 1 | How does Drive data reach the app? | **Claude syncs it.** Read the PDFs → extract → show a per-bank diff → Gage approves → deploy. Never a silent write |
+| 2 | How often | **Monthly**, plus on demand whenever Gage says so |
+| 3 | Rate sheets / buy rates | **In scope.** Rates belong next to LTV and term on the lender page — new; the app has never modelled them |
+| 4 | How to know data is current | **From the source PDF, automatically.** Show each lender's effective date + last sync; flag when the PDF is expired or missing. No buttons, nothing to maintain by hand |
+| 5 | What he does mid-deal | **All four:** which bank buys this deal · look up one bank's rule · compare two or three side by side · check stips before funding |
+| 6 | Who else uses it | **Just Gage.** Optimise for his speed; no hand-holding needed |
+| 7 | Phone or desktop | **Both, genuinely.** Desk for structuring, phone for lookups |
+| 8 | Compare table density | **Pick-your-columns, remembered.** Not a fixed curated set, not everything always |
+| 9 | Deal structurer | **Rank the lenders**, best first, and say why each ranked where it did — not just filter |
+| 10 | Design direction | **Faster to navigate.** Keyboard shortcuts, better search, jump-to-lender. Leave the visual style alone |
+
+Note on #4: this replaced the Mark Verified / Add Note panel, which Gage had
+deleted the same day. Freshness is a property of the source document, not
+something a person should have to remember to click.
+
 ## Stack
 
 - Frontend: single `index.html`, inline vanilla JS, CSS. Hosted on Vercel → `lender-hub.vercel.app`
-- Backend: Supabase project `llhxiyeqroetebsrjbos` (free tier — auto-pauses; restore before running SQL)
+- **Backend: none.** As of 2026-08-25 the app is a pure static page. It makes no network request except Google Fonts. The Supabase project is empty — every table and function was dropped
 - Repo: `github.com/gagem33/lenderspage`
 
 ## Google Drive layout
@@ -46,6 +68,7 @@ The repo holds a committed copy of the md files. Drive is the master; when they 
 ## Current state (as of 2026-08-22)
 
 **Working**
+- Pure static page — no backend, no auth, no network calls but fonts
 - Sidebar + compare table + quick lists + lender detail pages, driven by the `LENDERS` object in `index.html` (20 lenders)
 - Six tool modals: income calc, date calc, bureau search, LTV calc, deal structurer, side-by-side compare
 - Lender update tracking: Mark Verified / Add Note per lender, PIN-gated. Tables `lender_edit_pin`, `lender_updates`; RPCs `lender_get_updates`, `lender_mark_verified`, `lender_add_note`. Since 2026-08-24 the PIN is bcrypt-hashed and both tables have RLS on with no anon grants — see `docs/supabase-contract.md` §1
@@ -73,12 +96,15 @@ The repo holds a committed copy of the md files. Drive is the master; when they 
 | 2026-08-24 | PIN value kept, not changed, during the migration | Hashing in place avoids breaking the desk mid-shift. Rotation is a separate, still-outstanding step — `docs/supabase-contract.md` §8 |
 | 2026-08-24 | Sales Pace removed from `index.html`; its Supabase objects left alone at first | The UI is not a lender tool. But the `sp_*` RPCs and tables **did** exist and held real sales data (11 days, a goal, config), so dropping them was held back as a separate call |
 | 2026-08-24 | `sp_*` tables and functions dropped on Gage's instruction | Data exported first — 11 rows of June 2026 sales + the goal row, sent to Gage as `.sql` and `.csv`, **not** committed since the repo is public. `sp_config` held only a bcrypt PIN hash and was not exported. That export is the only copy |
+| 2026-08-25 | Lender update tracking removed entirely — panel, PIN, both tables, all four RPCs | Gage's call when asked whether to drop just the PIN or the whole feature. Freshness now comes from the source PDF's effective date (spec #4), which is better: it can't go stale through forgetfulness |
+| 2026-08-25 | **The app has no backend at all.** Supabase project emptied; supabase-js CDN tag removed | Nothing left needed it. Removes the PIN rotation item permanently, and the publishable key in the page source stops mattering |
+| 2026-08-25 | Ten-question product spec captured above | Gage: "I am so confused where we are at on this build." The spec is now written down instead of inferred |
 | 2026-08-24 | Shared Supabase client renamed `SP_*` → `SB_*` / `sbClient()` / `editPin()`, session key `sp_pin` → `lender_edit_pin` | The `sp` prefix referred to a feature that no longer exists. `ARCHITECTURE.md` §8 had flagged this rename as part of the removal |
 
 ## Open questions
 
-- **Rotate the lender PIN.** It is hashed now but the value was readable for the life of the project — treat it as compromised. One SQL statement, `docs/supabase-contract.md` §8. Needs a new PIN chosen by Gage.
-- **Add a `lender_change_pin` RPC?** Would make rotation a UI action instead of hand-run SQL. Not added — adding an RPC needs Gage's sign-off per the working rules below.
+- **~160 lender values changed on 2026-08-24 have been checked by nobody but Claude.** Each cites a Drive file ID and page in `AUDIT.md`. Spot-check before trusting them on a live deal.
+- **Kia has no current bulletin.** 2026-091 expired 2026-08-03. The store's own captive is running on expired incentive data. Needs a fresh PDF in Drive.
 
 - `lenders.json` in repo vs Supabase JSONB for v2 data. DATA.md §5 recommends JSON-in-repo first.
 - Extraction tooling: manual "paste PDF → Claude → JSON → approve" first, or build a serverless function now? Recommend manual until the schema has survived ~5 lenders.
@@ -89,14 +115,15 @@ The repo holds a committed copy of the md files. Drive is the master; when they 
 ## Roadmap (Now / Next / Later)
 
 - **Done:** Sales Pace removed; 3 dead files deleted; the 4 date mismatches resolved (all four favoured the app — see `AUDIT.md`); all 149 audit WRONG findings applied except Kia K506 bonus cash; lender PIN hashed and both tables closed
-- **Now:** rotate the lender PIN (`docs/supabase-contract.md` §8); get a current Kia bulletin
+- **Now:** build the Drive sync (spec #1, #2) — this is the whole point of the project. Move `LENDERS` out of `index.html` into `lenders.json` first, per `DATA.md` §5, so a sync is a data change and not a code edit
+- **Next:** rate sheets on the lender page (#3); source-date freshness display (#4); pick-your-columns compare (#8)
+- **Then:** ranking deal structurer (#9); navigation speed — keyboard, search, jump-to (#10)
 - **Next:** migrate 2 lenders (exeter, chase) to v2 by hand from their Drive PDFs using EXTRACTION_GUIDE; make the detail page and the two string-parsing tools render from v2; then do the other 18
 - **Later:** automate extraction + diff UI; UI pass; training view
 
 ## Working rules for this repo
 
-- Ask before changing the data model or adding a Supabase table/RPC.
+- Ask before changing the data model. There is no Supabase any more — if something needs a backend again, that is a conversation first, not a commit.
 - Any change to lender values must cite the source PDF (Drive file ID from SOURCES.md) and effective date.
 - Extraction follows EXTRACTION_GUIDE. No writes without Gage's approval of the diff.
-- Supabase free tier pauses; if a migration "succeeds" instantly after restore, wait 60s and re-run.
 - Keep this file's Current State / Decisions / Open Questions updated at the end of every session.

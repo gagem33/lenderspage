@@ -379,43 +379,6 @@ footer {
 }
 .cb-badge.none { background: var(--greendim); color: var(--green); }
 
-/* ─── LENDER UPDATE TRACKING ─────────────────────────────── */
-.lu-flag {
-  display: inline-flex; align-items: center; gap: 3px;
-  font-size: .6rem; font-weight: 800; letter-spacing: .04em; text-transform: uppercase;
-  padding: 1px 7px; border-radius: var(--r-full);
-  background: var(--reddim); color: var(--red); border: none;
-  margin-left: 6px; white-space: nowrap; cursor: help;
-}
-.lu-flag.lu-flag-sm { font-size: .55rem; padding: 0 5px; margin-left: 4px; }
-.lu-panel {
-  background: var(--surface); border: 1px solid var(--border);
-  border-radius: var(--r-lg); padding: 14px 18px; margin-bottom: 14px;
-}
-.lu-panel-top { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px; }
-.lu-status-line { font-size: .8rem; color: var(--text2); display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
-.lu-status-ok { color: var(--green); font-weight: 600; }
-.lu-status-stale { color: var(--red); font-weight: 600; }
-.lu-actions { display: flex; gap: 8px; flex-wrap: wrap; }
-.lu-btn {
-  font-size: .72rem; font-weight: 700; padding: 6px 12px;
-  border-radius: var(--r-md); border: 1px solid var(--border2);
-  background: var(--bg3); color: var(--text); cursor: pointer; transition: all .15s;
-}
-.lu-btn:hover { border-color: var(--gold); }
-.lu-btn.lu-btn-gold { background: var(--gold); border-color: transparent; color: var(--bg); }
-.lu-btn.lu-btn-gold:hover { background: var(--gold2); }
-.lu-note-row { display: flex; gap: 8px; margin-top: 10px; }
-.lu-note-row textarea {
-  flex: 1; background: var(--bg); border: 1px solid var(--border2); border-radius: var(--r-md);
-  color: var(--text); font: inherit; font-size: .8rem; padding: 8px 10px; resize: vertical; min-height: 36px;
-}
-.lu-note-row textarea:focus { outline: none; border-color: var(--gold); }
-.lu-history { margin-top: 10px; display: flex; flex-direction: column; gap: 6px; }
-.lu-history-item { font-size: .75rem; color: var(--text2); padding: 6px 10px; background: var(--bg3); border-radius: var(--r-sm); }
-.lu-history-item b { color: var(--text); font-family: var(--mono); font-weight: 700; margin-right: 6px; }
-.lu-history-empty { font-size: .75rem; color: var(--text3); font-style: italic; }
-
 /* Quick Lists */
 .ql-grid {
   display: grid;
@@ -1118,7 +1081,6 @@ mark { background: var(--golddim2); color: var(--gold); border-radius: 2px; padd
 
 </div><!-- /#app -->
 
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
 'use strict';
 
@@ -1595,7 +1557,6 @@ function buildSidebar() {
     <div class="sidebar-item" data-id="${l.id}" role="button" tabindex="0">
       <span class="tier-dot" style="background:${dotColor(l.segment)}"></span>
       <span style="flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${l.name}</span>
-      ${luStatus(l.id).flag?'<span class="lu-flag lu-flag-sm" title="'+luStatus(l.id).label+'">!</span>':''}
       <span class="lender-badge ${segBadge(l.segment)}">${l.segmentLabel.split('-')[0]}</span>
     </div>`).join('');
 }
@@ -1606,7 +1567,7 @@ function buildCompareTable() {
   if (!tbody) return;
   tbody.innerHTML = LENDERS.map(l => `
     <tr data-id="${l.id}">
-      <td><div class="lender-name-cell">${l.name}${luStatus(l.id).flag?'<span class="lu-flag" title="'+luStatus(l.id).label+'">⚠ Review</span>':''}<small>${l.fullName}${l.stateRestriction?` · <span style="color:var(--red)">${l.stateRestriction}</span>`:''}</small></div></td>
+      <td><div class="lender-name-cell">${l.name}<small>${l.fullName}${l.stateRestriction?` · <span style="color:var(--red)">${l.stateRestriction}</span>`:''}</small></div></td>
       <td><span class="fico-chip ${segClass(l.segment)}">${l.ficoMin?l.ficoMin+'+':'Tier-Based'}</span></td>
       <td><span class="chip ${segClass(l.segment)}">${l.segmentLabel}</span></td>
       <td>${l.maxTerm?l.maxTerm+' mo':'Per Program'}</td>
@@ -1742,7 +1703,6 @@ function buildLenderDetail(lender) {
         ${lender.uniqueFeature?`<div class="note-box success" style="margin-top:6px;font-size:.72rem"><span class="note-icon">⭐</span><span><strong>Notable:</strong> ${lender.uniqueFeature}</span></div>`:''}
       </div>
     </div>
-    ${luPanelHTML(lender.id)}
     <div class="stat-grid">
       ${stats.map(s=>`<div class="stat-card"><div class="stat-label">${s.label}</div><div class="stat-value ${s.cls}">${s.val}</div></div>`).join('')}
     </div>
@@ -1764,116 +1724,8 @@ function buildLenderDetail(lender) {
     });
   });
 
-  luBindPanel(lender.id);
 }
 
-// ─── LENDER UPDATE TRACKING ──────────────────────────────────
-const LU_STALE_DAYS = 90;
-let luData = {}; // { lender_id: { last_verified: 'YYYY-MM-DD'|null, notes: [{date,text}] } }
-
-function luDaysSince(dateStr) {
-  if (!dateStr) return null;
-  const d = new Date(dateStr + 'T00:00:00');
-  return Math.floor((Date.now() - d.getTime()) / 86400000);
-}
-
-function luStatus(id) {
-  const rec = luData[id];
-  const days = rec ? luDaysSince(rec.last_verified) : null;
-  if (days === null) return { flag: true, label: 'Never verified — click to log' };
-  if (days > LU_STALE_DAYS) return { flag: true, label: `${days} days since last verified` };
-  return { flag: false, label: `Verified ${days}d ago` };
-}
-
-async function luLoad() {
-  const c = sbClient();
-  if (!c) return;
-  const { data, error } = await c.rpc('lender_get_updates');
-  if (error) return; // fail quiet — badges just won't show until this succeeds
-  luData = {};
-  (data || []).forEach(r => { luData[r.lender_id] = { last_verified: r.last_verified, notes: r.notes || [] }; });
-  buildSidebar();
-  buildCompareTable();
-  buildQuickLists();
-  if (currentLender) {
-    const l = LENDERS.find(x => x.id === currentLender);
-    if (l) buildLenderDetail(l);
-  }
-}
-
-function luPanelHTML(id) {
-  const rec = luData[id];
-  const s = luStatus(id);
-  const unlocked = !!editPin();
-  const historyHTML = (rec && rec.notes && rec.notes.length)
-    ? rec.notes.slice().reverse().map(n => `<div class="lu-history-item"><b>${n.date}</b>${escapeHtml(n.text)}</div>`).join('')
-    : '<div class="lu-history-empty">No update notes logged yet.</div>';
-  return `
-    <div class="lu-panel" data-lender="${id}">
-      <div class="lu-panel-top">
-        <div class="lu-status-line">
-          <strong>Program tracking:</strong>
-          <span class="${s.flag?'lu-status-stale':'lu-status-ok'}">${rec && rec.last_verified ? 'Last verified ' + rec.last_verified : 'Never verified'}</span>
-          ${s.flag?'<span class="lu-flag" title="'+s.label+'">⚠ Needs Review</span>':''}
-        </div>
-        <div class="lu-actions">
-          ${unlocked
-            ? `<button class="lu-btn lu-btn-gold" data-lu-verify>Mark Verified Today</button>`
-            : `<button class="lu-btn" data-lu-unlock>🔒 Unlock to Log Updates</button>`}
-        </div>
-      </div>
-      ${unlocked ? `
-        <div class="lu-note-row">
-          <textarea placeholder="e.g. Max LTV increased to 140% per new rate sheet, effective 3/1" data-lu-note></textarea>
-          <button class="lu-btn" data-lu-addnote>Add Note</button>
-        </div>` : ''}
-      <div class="lu-history">${historyHTML}</div>
-    </div>`;
-}
-
-function escapeHtml(str) {
-  return String(str).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-}
-
-function luBindPanel(id) {
-  const panel = document.querySelector(`.lu-panel[data-lender="${id}"]`);
-  if (!panel) return;
-
-  const unlockBtn = panel.querySelector('[data-lu-unlock]');
-  unlockBtn?.addEventListener('click', () => {
-    const v = window.prompt('Enter team PIN to log lender updates:');
-    if (!v) return;
-    sessionStorage.setItem('lender_edit_pin', v.trim());
-    buildLenderDetail(LENDERS.find(l => l.id === id));
-  });
-
-  const verifyBtn = panel.querySelector('[data-lu-verify]');
-  verifyBtn?.addEventListener('click', async () => {
-    verifyBtn.disabled = true; verifyBtn.textContent = 'Saving…';
-    const c = sbClient();
-    const { error } = await c.rpc('lender_mark_verified', { p_pin: editPin(), p_lender_id: id });
-    if (error) {
-      if (/invalid pin/i.test(error.message || '')) { sessionStorage.removeItem('lender_edit_pin'); alert('Wrong PIN.'); buildLenderDetail(LENDERS.find(l => l.id === id)); return; }
-      alert('Save failed — try again.'); verifyBtn.disabled = false; verifyBtn.textContent = 'Mark Verified Today'; return;
-    }
-    await luLoad();
-  });
-
-  const addBtn = panel.querySelector('[data-lu-addnote]');
-  addBtn?.addEventListener('click', async () => {
-    const ta = panel.querySelector('[data-lu-note]');
-    const text = (ta?.value || '').trim();
-    if (!text) return;
-    addBtn.disabled = true; addBtn.textContent = 'Saving…';
-    const c = sbClient();
-    const { error } = await c.rpc('lender_add_note', { p_pin: editPin(), p_lender_id: id, p_note: text });
-    if (error) {
-      if (/invalid pin/i.test(error.message || '')) { sessionStorage.removeItem('lender_edit_pin'); alert('Wrong PIN.'); buildLenderDetail(LENDERS.find(l => l.id === id)); return; }
-      alert('Save failed — try again.'); addBtn.disabled = false; addBtn.textContent = 'Add Note'; return;
-    }
-    await luLoad();
-  });
-}
 
 // ─── NAVIGATION ──────────────────────────────────────────────
 let currentLender = null;
@@ -1979,7 +1831,6 @@ function init() {
   buildSidebar();
   buildCompareTable();
   buildQuickLists();
-  luLoad();
 
   $('#theme-toggle')?.addEventListener('click', toggleTheme);
   $('#menu-toggle')?.addEventListener('click', openMobileSidebar);
@@ -2301,24 +2152,7 @@ document.addEventListener('click', e => {
   if(pb){const mp=pb.closest('.kfa-model-panel');if(!mp)return;pb.closest('.kfa-program-toggle').querySelectorAll('.kfa-prog-btn').forEach(b=>b.classList.remove('active'));pb.classList.add('active');mp.querySelectorAll('.kfa-prog-panel').forEach(p=>p.classList.remove('active'));const pp=mp.querySelector(`.kfa-prog-panel[data-progpanel="${pb.dataset.prog}"]`);if(pp)pp.classList.add('active');}
 });
 
-// ─── SUPABASE CLIENT ─────────────────────────────────────────
-// Shared plumbing for the lender update tracking above. Kept when the Sales
-// Pace tracker was removed: the sp_* RPCs are gone from this file, but this
-// client and the PIN accessor are what the lender_* calls still run through.
-const SB_URL = 'https://llhxiyeqroetebsrjbos.supabase.co';
-const SB_KEY = 'sb_publishable_W5BceN0UQ33yn_Sr2oXF8Q_KkwDmnZj';
-let sbInstance = null;
 
-function sbClient(){
-  if(!sbInstance){
-    if(!window.supabase||!window.supabase.createClient) return null;
-    sbInstance = window.supabase.createClient(SB_URL,SB_KEY,{auth:{persistSession:false}});
-  }
-  return sbInstance;
-}
-
-// The lender edit PIN, held for this browser session only.
-const editPin = () => sessionStorage.getItem('lender_edit_pin') || '';
 
 
 // Kick off
