@@ -10,7 +10,7 @@ Read `aboutme.md` first for how Gage works. This file is the project brain: visi
 | `ARCHITECTURE.md` | How the app is wired today. Repo, data flow, tools. No backend since 2026-08-25. |
 | `DATA.md` | Lender record schema — current state audit + target v2 + migration. |
 | `SOURCES.md` | Manifest of bank PDFs in Drive, with file IDs per lender. |
-| `EXTRACTION_GUIDE.md` | How to read a bank PDF into the v2 schema. Glossary, quirks, confidence rules, approval process. |
+| `EXTRACTION_GUIDE.md` | How to read a bank PDF into the v2 schema. Glossary, quirks, confidence rules, approval process. **§9 is the one to read first** — render pages and read the images; text layers lie. |
 
 ---
 
@@ -103,6 +103,7 @@ The repo holds a committed copy of the md files. Drive is the master; when they 
 
 ## Open questions
 
+- **Truist's state-specific GAP rules and per-tier term table are missing from the app entirely** — its PDF text layer is a substitution cipher and the audit couldn't read it. Re-extract with the render-and-read method (`EXTRACTION_GUIDE.md` §9). Same for Ally's whole 84-month program, filed UNVERIFIABLE for the same reason.
 - **~160 lender values changed on 2026-08-24 have been checked by nobody but Claude.** Each cites a Drive file ID and page in `AUDIT.md`. Spot-check before trusting them on a live deal.
 - **Kia has no current bulletin.** 2026-091 expired 2026-08-03. The store's own captive is running on expired incentive data. Needs a fresh PDF in Drive.
 
@@ -115,7 +116,7 @@ The repo holds a committed copy of the md files. Drive is the master; when they 
 ## Roadmap (Now / Next / Later)
 
 - **Done:** Sales Pace removed; 3 dead files deleted; the 4 date mismatches resolved (all four favoured the app — see `AUDIT.md`); all 149 audit WRONG findings applied except Kia K506 bonus cash; lender PIN hashed and both tables closed
-- **Now:** build the Drive sync (spec #1, #2) — this is the whole point of the project. Move `LENDERS` out of `index.html` into `lenders.json` first, per `DATA.md` §5, so a sync is a data change and not a code edit
+- **Now:** re-extract the PDFs the audit couldn't read (`ally` 84-month, `truist`) using `tools/pdf_triage.py` + render-and-read; then build the Drive sync (spec #1, #2) — this is the whole point of the project. Move `LENDERS` out of `index.html` into `lenders.json` first, per `DATA.md` §5, so a sync is a data change and not a code edit
 - **Next:** rate sheets on the lender page (#3); source-date freshness display (#4); pick-your-columns compare (#8)
 - **Then:** ranking deal structurer (#9); navigation speed — keyboard, search, jump-to (#10)
 - **Next:** migrate 2 lenders (exeter, chase) to v2 by hand from their Drive PDFs using EXTRACTION_GUIDE; make the detail page and the two string-parsing tools render from v2; then do the other 18
