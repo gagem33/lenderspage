@@ -1,0 +1,75 @@
+{
+  "schema": "lenderhub.proposal.v1",
+  "lender_id": "truist",
+  "created": "2026-08-26",
+  "sources": [
+    {
+      "drive_file_id": "1dwSi3YQ1N7TnbXrQADGRMkaPpWnUMnxz",
+      "title": "Truist - Program Sheet - 072026.pdf",
+      "doc_type": "Program Sheet",
+      "effective_date": "2026-07-20",
+      "pages": 4,
+      "triage": {
+        "1": "PARTIAL",
+        "2": "PARTIAL",
+        "3": "TEXT_OK",
+        "4": "PARTIAL"
+      },
+      "read_as": "300 dpi render — mandatory here. Pages 1, 2 and 4 have mis-encoded text layers (233 / 114 / 27 corrupt sequences). Every value below was read from the image."
+    }
+  ],
+  "changes": [
+    {
+      "path": [
+        "sections",
+        "fico",
+        "content"
+      ],
+      "old": "<div class=\"info-grid\"><div class=\"info-row\"><span class=\"info-key\">Bureau</span><span class=\"info-val\">TransUnion FICO Auto 9 (Equifax for FL, GA, NC, SC, TX, VA)</span></div><div class=\"info-row\"><span class=\"info-key\">Minimum Score</span><span class=\"info-val\">640 (all applicants)</span></div><div class=\"info-row\"><span class=\"info-key\">76–84mo Min FICO</span><span class=\"info-val\">680</span></div><div class=\"info-row\"><span class=\"info-key\">Max DTI</span><span class=\"info-val\">65% for T1–T4; 60% for T5 (B3) and T6 (C1)</span></div><div class=\"info-row\"><span class=\"info-key\">Max PTI (≤75mo)</span><span class=\"info-val\">20% for T1–T4; 15% for T5 and T6</span></div><div class=\"info-row\"><span class=\"info-key\">Max PTI (76–84mo)</span><span class=\"info-val\">18% for T1–T4; 15% for T5 and T6</span></div></div><table class=\"tier-table\" style=\"margin-top:14px\"><thead><tr><th>Tier</th><th>Label</th><th>FE LTV ≤75mo</th><th>Total LTV ≤75mo</th><th>FE LTV 76–84mo</th></tr></thead><tbody><tr><td>T1/A1</td><td>Super Prime</td><td>130%</td><td>155%</td><td>120%</td></tr><tr><td>T2/A2</td><td>Prime</td><td>130%</td><td>155%</td><td>120%</td></tr><tr><td>T3/B1</td><td>Near Prime</td><td>125%</td><td>145%</td><td>115%</td></tr><tr><td>T4/B2</td><td>Standard</td><td>120%</td><td>140%</td><td>115%</td></tr><tr><td>T5/B3</td><td>Below Standard</td><td>120%</td><td>135%</td><td>115%</td></tr><tr><td>T6/C1</td><td>Subprime</td><td>120%</td><td>130%</td><td>115%</td></tr></tbody></table>",
+      "new": "<div class=\"info-grid\"><div class=\"info-row\"><span class=\"info-key\">Bureau</span><span class=\"info-val\">TransUnion FICO Auto 9 (Equifax for FL, GA, NC, SC, TX, VA)</span></div><div class=\"info-row\"><span class=\"info-key\">Minimum Score</span><span class=\"info-val\">640 (all applicants)</span></div><div class=\"info-row\"><span class=\"info-key\">76–84mo Min FICO</span><span class=\"info-val\">680</span></div><div class=\"info-row\"><span class=\"info-key\">Max DTI</span><span class=\"info-val\">65% for T1–T4; 60% for T5 (B3) and T6 (C1)</span></div><div class=\"info-row\"><span class=\"info-key\">Max PTI (≤75mo)</span><span class=\"info-val\">20% for T1–T4; 15% for T5 and T6</span></div><div class=\"info-row\"><span class=\"info-key\">Max PTI (76–84mo)</span><span class=\"info-val\">18% for T1–T4; 15% for T5 and T6</span></div></div><table class=\"tier-table\" style=\"margin-top:14px\"><thead><tr><th>Tier</th><th>Label</th><th>FE LTV ≤75mo</th><th>Total LTV ≤75mo</th><th>FE LTV 76–84mo</th><th>Total LTV 76–84mo</th></tr></thead><tbody><tr><td>T1/A1</td><td>Super Prime</td><td>130%</td><td>155%</td><td>120%</td><td>140%</td></tr><tr><td>T2/A2</td><td>Prime</td><td>130%</td><td>155%</td><td>120%</td><td>140%</td></tr><tr><td>T3/B1</td><td>Near Prime</td><td>125%</td><td>145%</td><td>115%</td><td>135%</td></tr><tr><td>T4/B2</td><td>Standard</td><td>120%</td><td>140%</td><td>115%</td><td>135%</td></tr><tr><td>T5/B3</td><td>Below Standard</td><td>120%</td><td>135%</td><td>115%</td><td>135%</td></tr><tr><td>T6/C1</td><td>Subprime</td><td>120%</td><td>130%</td><td>115%</td><td>130%</td></tr></tbody></table>",
+      "page": 1,
+      "quote": "76-84 months | Max total LTV | 140% 140% 135% 135% 135% 130%",
+      "note": "A whole column was missing. The sheet prints two LTV blocks — one for 76-84 months and one for 75 and under — each with front-end LTV, total LTV, DTI and PTI across six tiers. The record carried front-end LTV for both terms but total LTV only for the short term, so on a 76-84 month deal the page showed no total-LTV ceiling at all. Six cells, transcribed from the render (this page's text layer is mis-encoded — triage says PARTIAL, 233 corrupt sequences).",
+      "approved": null
+    },
+    {
+      "path": [
+        "sections",
+        "ltv",
+        "content"
+      ],
+      "old": "<div class=\"info-grid\"><div class=\"info-row\"><span class=\"info-key\">Max Mileage (≤75mo)</span><span class=\"info-val\">120,000 miles</span></div><div class=\"info-row\"><span class=\"info-key\">Max Mileage (76–84mo)</span><span class=\"info-val\">50,000 miles</span></div><div class=\"info-row\"><span class=\"info-key\">Min Collateral (76–84mo)</span><span class=\"info-val\">$20,000</span></div><div class=\"info-row\"><span class=\"info-key\">Min Collateral (73–75mo)</span><span class=\"info-val\">$12,000</span></div><div class=\"info-row\"><span class=\"info-key\">First Payment Window</span><span class=\"info-val\">15–60 days (61–90 days with UW approval ≤75mo)</span></div><div class=\"info-row\"><span class=\"info-key\">Approval Expiry</span><span class=\"info-val\">30 days</span></div><div class=\"info-row\"><span class=\"info-key\">Loan Processing Fee</span><span class=\"info-val\">$25 per loan</span></div><div class=\"info-row\"><span class=\"info-key\">Collateral Value (TX)</span><span class=\"info-val\"><strong>JD Power Clean Trade-In.</strong> KBB Lending is used only in AZ, CA, CO, IA, ID, NE, NM, NV, OR, UT, WA, WY</span></div><div class=\"info-row\"><span class=\"info-key\">Collateral Value (general)</span><span class=\"info-val\">Invoice for new 2026/2027; JD Power Clean Trade-In for all other models, new and used over 6,000 miles</span></div></div><div class=\"note-box warn\"><span class=\"note-icon\">⚠️</span><span>No cash-out. No credit card down payments. Contracts must be presented no later than 7 days after contract date.</span></div><h4 style=\"margin:14px 0 6px;font-size:.75rem;text-transform:uppercase;letter-spacing:.06em;opacity:.7\">Maximum Term by Model Year</h4><table class=\"tier-table\"><thead><tr><th>Model year</th><th>T1/A1</th><th>T2/A2</th><th>T3/B1</th><th>T4/B2</th><th>T5/B3</th><th>T6/C1</th></tr></thead><tbody><tr><td>2026/2027</td><td>84</td><td>84</td><td>84</td><td>84</td><td>84</td><td>84</td></tr><tr><td>2025</td><td>84</td><td>84</td><td>84</td><td>84</td><td>84</td><td>84</td></tr><tr><td>2024</td><td>84</td><td>84</td><td>84</td><td>84</td><td>84</td><td>84</td></tr><tr><td>2023</td><td>84</td><td>84</td><td>84</td><td>84</td><td>75</td><td>72</td></tr><tr><td>2022</td><td>75</td><td>75</td><td>75</td><td>75</td><td>75</td><td>72</td></tr><tr><td>2021</td><td>72</td><td>72</td><td>72</td><td>72</td><td>72</td><td>60</td></tr><tr><td>2020</td><td>72</td><td>72</td><td>72</td><td>72</td><td>72</td><td>60</td></tr><tr><td>2019 and older</td><td>72</td><td>72</td><td>72</td><td>60</td><td>60</td><td>60</td></tr></tbody></table><div class=\"note-box warn\" style=\"margin-top:10px\"><span class=\"note-icon\">⚠️</span><span>84 months is not universal — a 2019-or-older B2 deal caps at <strong>60</strong>.</span></div>",
+      "new": "<div class=\"info-grid\"><div class=\"info-row\"><span class=\"info-key\">Max Mileage (≤75mo)</span><span class=\"info-val\">120,000 miles</span></div><div class=\"info-row\"><span class=\"info-key\">Max Mileage (76–84mo)</span><span class=\"info-val\">50,000 miles</span></div><div class=\"info-row\"><span class=\"info-key\">Min Collateral (76–84mo)</span><span class=\"info-val\">$20,000</span></div><div class=\"info-row\"><span class=\"info-key\">Min Collateral (73–75mo)</span><span class=\"info-val\">$12,000</span></div><div class=\"info-row\"><span class=\"info-key\">First Payment Window</span><span class=\"info-val\">15–60 days (61–90 days with UW approval ≤75mo)</span></div><div class=\"info-row\"><span class=\"info-key\">Approval Expiry</span><span class=\"info-val\">30 days</span></div><div class=\"info-row\"><span class=\"info-key\">Funding Deadline</span><span class=\"info-val\">Contract must be presented no later than 7 days after the contract date</span></div><div class=\"info-row\"><span class=\"info-key\">90-Day First Payment</span><span class=\"info-val\">700+ score only, and never on terms over 75 months</span></div><div class=\"info-row\"><span class=\"info-key\">Deferred Down Payments</span><span class=\"info-val\">Not financed</span></div><div class=\"info-row\"><span class=\"info-key\">Front-End LTV</span><span class=\"info-val\">(Total amount financed &minus; back end) &divide; collateral value</span></div><div class=\"info-row\"><span class=\"info-key\">Total LTV</span><span class=\"info-val\">Total amount financed &divide; collateral value</span></div><div class=\"info-row\"><span class=\"info-key\">Due Dates</span><span class=\"info-val\">Must fall between the 2nd and the 25th of the month</span></div><div class=\"info-row\"><span class=\"info-key\">TX ELT Code</span><span class=\"info-val\">56107431300</span></div><div class=\"info-row\"><span class=\"info-key\">Loan Processing Fee</span><span class=\"info-val\">$25 per loan — cannot be passed to the consumer</span></div><div class=\"info-row\"><span class=\"info-key\">Collateral Value (TX)</span><span class=\"info-val\"><strong>JD Power Clean Trade-In.</strong> KBB Lending is used only in AZ, CA, CO, IA, ID, NE, NM, NV, OR, UT, WA, WY</span></div><div class=\"info-row\"><span class=\"info-key\">Collateral Value (general)</span><span class=\"info-val\">Invoice for new 2026/2027; JD Power Clean Trade-In for all other models, new and used over 6,000 miles</span></div></div><div class=\"note-box warn\"><span class=\"note-icon\">⚠️</span><span>No cash-out. No credit card down payments. Contracts must be presented no later than 7 days after contract date.</span></div><h4 style=\"margin:14px 0 6px;font-size:.75rem;text-transform:uppercase;letter-spacing:.06em;opacity:.7\">Maximum Term by Model Year</h4><table class=\"tier-table\"><thead><tr><th>Model year</th><th>T1/A1</th><th>T2/A2</th><th>T3/B1</th><th>T4/B2</th><th>T5/B3</th><th>T6/C1</th></tr></thead><tbody><tr><td>2026/2027</td><td>84</td><td>84</td><td>84</td><td>84</td><td>84</td><td>84</td></tr><tr><td>2025</td><td>84</td><td>84</td><td>84</td><td>84</td><td>84</td><td>84</td></tr><tr><td>2024</td><td>84</td><td>84</td><td>84</td><td>84</td><td>84</td><td>84</td></tr><tr><td>2023</td><td>84</td><td>84</td><td>84</td><td>84</td><td>75</td><td>72</td></tr><tr><td>2022</td><td>75</td><td>75</td><td>75</td><td>75</td><td>75</td><td>72</td></tr><tr><td>2021</td><td>72</td><td>72</td><td>72</td><td>72</td><td>72</td><td>60</td></tr><tr><td>2020</td><td>72</td><td>72</td><td>72</td><td>72</td><td>72</td><td>60</td></tr><tr><td>2019 and older</td><td>72</td><td>72</td><td>72</td><td>60</td><td>60</td><td>60</td></tr></tbody></table><div class=\"note-box warn\" style=\"margin-top:10px\"><span class=\"note-icon\">⚠️</span><span>84 months is not universal — a 2019-or-older B2 deal caps at <strong>60</strong>.</span></div>",
+      "page": 1,
+      "quote": "Contracts must be presented for funding no later than seven days after contract date.",
+      "note": "The seven-day funding deadline is the one that costs money — miss it and the contract is not fundable, and the record did not mention it. Also adds the 700+ gate on 90-day first payments, the refusal to finance deferred down payments, Truist's own definitions of front-end vs total LTV, the 2nd-to-25th due-date window and the Texas ELT code, all from pages 1 and 2.",
+      "approved": null
+    },
+    {
+      "path": [
+        "sections",
+        "vehicles",
+        "content"
+      ],
+      "old": "<div class=\"note-box danger\"><span class=\"note-icon\">🚫</span><span><strong>Ineligible:</strong> Branded title, grey market, rental, livery, public transportation, auto loan refinances, commercial vehicles.</span></div>",
+      "new": "<div class=\"info-grid\"><div class=\"info-row\"><span class=\"info-key\">New Definition</span><span class=\"info-val\">Current model year or newer, untitled, under 6,000 mi</span></div><div class=\"info-row\"><span class=\"info-key\">Exotics</span><span class=\"info-val\">Not in JD Power Clean Trade-In → valued at Manheim Adjusted Value</span></div><div class=\"info-row\"><span class=\"info-key\">Unpublished Current-Year Used</span><span class=\"info-val\">Collateral value set at 90% of like invoice</span></div><div class=\"info-row\"><span class=\"info-key\">Upfits</span><span class=\"info-val\">May be added but do not increase value for advance purposes</span></div><div class=\"info-row\"><span class=\"info-key\">Dealer-Installed Options</span><span class=\"info-val\">May be added but do not increase value</span></div></div><div class=\"note-box danger\"><span class=\"note-icon\">🚫</span><span><strong>Ineligible:</strong> Branded title, grey market, rental, livery, public transportation, auto loan refinances, commercial vehicles.</span></div>",
+      "page": 1,
+      "quote": "Exotic vehicles not in JD Power Clean Trade-In (or KBB Lending in AZ, CA, CO, IA, ID, NE, NM, NV, OR, UT, WA, and WY) guide will be valued using Manheim Adjusted Value.",
+      "note": "The vehicles section was one ineligible list with no data rows. Adds what happens when the book has no number: exotics fall to Manheim Adjusted Value, and an unpublished current-year used unit books at 90% of like invoice. Also the upfit rule — you can add them to the vehicle but they buy no advance, which is easy to assume the other way.",
+      "approved": null
+    }
+  ],
+  "not_in_source": [
+    "idReq",
+    "poi",
+    "maxTerm",
+    "maxLTV",
+    "gapMax"
+  ],
+  "ambiguities": [
+    {
+      "field": "VERIFIED CORRECT",
+      "note": "Spot-checked the work applied on 2026-08-26 and it holds up. The 48-cell maximum-term table (8 model-year rows x 6 tiers) matches the sheet cell for cell. The tier LTV/DTI/PTI values, the Texas GAP rule (lesser of $1,200 or 5%), the collateral-value split and the $8,000 reserve cap are all correct. The gaps below are additions, not corrections."
+    }
+  ]
+}
