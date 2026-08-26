@@ -1,2 +1,8 @@
 .vercel
 __pycache__/
+
+# Working files for the Drive sync. The PDFs are Gage's bank documents and the
+# renders are derived from them -- neither belongs in a public repo. SOURCES.md
+# carries the Drive file IDs; that is how they are found again.
+sync/pdfs/
+sync/pages/

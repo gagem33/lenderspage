@@ -11,6 +11,7 @@ Read `aboutme.md` first for how Gage works. This file is the project brain: visi
 | `DATA.md` | Lender record schema — current state audit + target v2 + migration. |
 | `SOURCES.md` | Manifest of bank PDFs in Drive, with file IDs per lender. |
 | `EXTRACTION_GUIDE.md` | How to read a bank PDF into the v2 schema. Glossary, quirks, confidence rules, approval process. **§9 is the one to read first** — render pages and read the images; text layers lie. |
+| `docs/SYNC.md` | How a new bank PDF becomes a live change. The sync's mechanics, its three refusals, and the proposal format. |
 
 ---
 
@@ -55,6 +56,7 @@ something a person should have to remember to click.
 - **Opening `index.html` from a `file://` path no longer works** — browsers block the fetch. Serve the folder (`python3 -m http.server`) and use `http://localhost:8000`. The page says so if you forget
 - **Backend: none.** As of 2026-08-25 the app is a pure static page. It makes no network request except Google Fonts. The Supabase project is empty — every table and function was dropped
 - Repo: `github.com/gagem33/lenderspage`
+- Sync tooling: `tools/sync.py` (scan / ingest / new / diff / approve / apply) + `tools/pdf_triage.py`. Python 3 + PyMuPDF, run by hand. No service, nothing scheduled
 
 ## Google Drive layout
 
@@ -74,6 +76,7 @@ The repo holds a committed copy of the md files. Drive is the master; when they 
 - Six tool modals: income calc, date calc, bureau search, LTV calc, deal structurer, side-by-side compare
 - Lender update tracking: Mark Verified / Add Note per lender, PIN-gated. Tables `lender_edit_pin`, `lender_updates`; RPCs `lender_get_updates`, `lender_mark_verified`, `lender_add_note`. Since 2026-08-24 the PIN is bcrypt-hashed and both tables have RLS on with no anon grants — see `docs/supabase-contract.md` §1
 - Delegated event listeners on stable parent containers (fixed click-through bug after re-render)
+- **Drive sync (built 2026-08-26).** `tools/sync.py` does everything around the extraction step: detects new and changed PDFs against a committed Drive snapshot, reports per-lender freshness, validates a proposal, renders it for approval, and writes only approved fields. The gate is enforced in code — `apply` refuses on any undecided field, on a `old` value that no longer matches `lenders.json`, and on any change lacking a page number and verbatim quote. See `docs/SYNC.md`
 
 **Known issues**
 - `app.js`, `base.css`, `style.css` are dead. None are referenced by `index.html`. Delete.
@@ -102,6 +105,11 @@ The repo holds a committed copy of the md files. Drive is the master; when they 
 | 2026-08-25 | Ten-question product spec captured above | Gage: "I am so confused where we are at on this build." The spec is now written down instead of inferred |
 | 2026-08-25 | Triage the whole corpus before building the sync | 35 of 39 files extract cleanly; the damage is 6 pages in 4 files. Cheap to know up front. It also flagged AmeriCredit's per-state valuation map, which on 2026-08-26 turned out to be in the app already — see that day's entry |
 | 2026-08-26 | `LENDERS` moved from `index.html` into `lenders.json`, fetched at boot | A Drive sync should be a data change, not a code edit. `DATA.md` §5 recommended it; the roadmap made it the prerequisite for the sync. Costs one same-origin fetch and breaks `file://` opening |
+| 2026-08-26 | Drive sync built as a **local tool, not a service** | The extraction step is an agent reading rendered pages (EXTRACTION_GUIDE §9). It cannot be a cron job, and the approval gate means it should not be one. Everything around it is deterministic and now automated |
+| 2026-08-26 | Approval enforced by three refusals in `apply`, not by convention | "No silent writes" is only true if something refuses. Undecided field, stale `old`, or a missing page/quote each stop the write |
+| 2026-08-26 | Provenance stays **beside** `lenders.json`, not inside it | Per-field source and verified-date would be a data model change, and the working rules say ask first. The proposal + `sync/applied.jsonl` + git history carry it meanwhile |
+| 2026-08-26 | Freshness compares the **authority document** only | Funding Guidelines and Proof of Residence are not authority for a program date (SOURCES.md §1). Counting them made capitalone, westlake and flagship look stale when they were not |
+| 2026-08-26 | `sync/acknowledged.json` hides settled divergences | td, gls, kia and dfc were adjudicated on 2026-08-26. A report that flags the same four every month stops being read |
 | 2026-08-24 | Shared Supabase client renamed `SP_*` → `SB_*` / `sbClient()` / `editPin()`, session key `sp_pin` → `lender_edit_pin` | The `sp` prefix referred to a feature that no longer exists. `ARCHITECTURE.md` §8 had flagged this rename as part of the removal |
 
 ## Open questions
@@ -114,7 +122,8 @@ The repo holds a committed copy of the md files. Drive is the master; when they 
 - **Kia has no current bulletin.** 2026-091 expired 2026-08-03. The store's own captive is running on expired incentive data. Needs a fresh PDF in Drive.
 
 - `lenders.json` in repo vs Supabase JSONB for v2 data. DATA.md §5 recommends JSON-in-repo first.
-- Extraction tooling: manual "paste PDF → Claude → JSON → approve" first, or build a serverless function now? Recommend manual until the schema has survived ~5 lenders.
+- ~~Extraction tooling: manual first or serverless now?~~ **Settled 2026-08-26: local tooling, no service.** `tools/sync.py` automates everything except reading the pages. A serverless extractor would need an API key and a backend, and would still stop at the same approval gate.
+- **Should provenance move into `lenders.json`?** Per-field `source_page` / `verified_date` would make freshness a property of each value rather than the record. It is a data model change, so it needs Gage's call. Today provenance lives in the proposal + `sync/applied.jsonl`.
 - Compare table with all v2 fields vs curated columns + "show all" toggle. Gage: "I use everything."
 - Rates / buy-rate sheets aren't modeled. Several PDFs are rate sheets. Decide if they belong in scope.
 - UI restyle: Gage likes it but thinks it can be better. Not before data work.
@@ -122,7 +131,7 @@ The repo holds a committed copy of the md files. Drive is the master; when they 
 ## Roadmap (Now / Next / Later)
 
 - **Done:** Sales Pace removed; 3 dead files deleted; the 4 date mismatches resolved (all four favoured the app — see `AUDIT.md`); all 149 audit WRONG findings applied except Kia K506 bonus cash; lender PIN hashed and both tables closed
-- **Now:** build the Drive sync (spec #1, #2) — this is the whole point of the project. `lenders.json` is in place as of 2026-08-26, so a sync writes data, not code
+- **Now:** run the sync across the corpus. The machinery is built (`tools/sync.py`, `docs/SYNC.md`); what remains is doing the 20 lenders, which is extraction work, not code
 - **Next:** rate sheets on the lender page (#3); source-date freshness display (#4); pick-your-columns compare (#8)
 - **Then:** ranking deal structurer (#9); navigation speed — keyboard, search, jump-to (#10)
 - **Next:** migrate 2 lenders (exeter, chase) to v2 by hand from their Drive PDFs using EXTRACTION_GUIDE; make the detail page and the two string-parsing tools render from v2; then do the other 18
