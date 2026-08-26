@@ -1,0 +1,94 @@
+{
+  "schema": "lenderhub.proposal.v1",
+  "lender_id": "westlake",
+  "created": "2026-08-26",
+  "sources": [
+    {
+      "drive_file_id": "1KI4qsTOCXRm2tt4kJqOvTFDWKHcl-ESR",
+      "title": "Westlake - Program Sheet - 070826.pdf",
+      "doc_type": "Program Sheet",
+      "effective_date": "2026-07-08",
+      "pages": 1,
+      "triage": {
+        "1": "TEXT_OK"
+      },
+      "read_as": "300 dpi render. Titled \"Independent Dealer Rate Sheet\", version V-07.26."
+    }
+  ],
+  "changes": [
+    {
+      "path": [
+        "sections",
+        "fico",
+        "content"
+      ],
+      "old": "<div class=\"info-grid\"><div class=\"info-row\"><span class=\"info-key\">Rate Markup Eligibility</span><span class=\"info-val\">Credit score 600+ (up to 2% markup)</span></div><div class=\"info-row\"><span class=\"info-key\">Open BK (Chapter 7)</span><span class=\"info-val\">✓ Accepted — requires proof '341 Meeting of Creditors' completed</span></div><div class=\"info-row\"><span class=\"info-key\">Open BK (Chapter 13)</span><span class=\"info-val\">✓ Accepted — requires signed letter from Ch. 13 trustee authorizing more debt</span></div><div class=\"info-row\"><span class=\"info-key\">Discharged / Dismissed BK</span><span class=\"info-val\">✓ Acceptable</span></div><div class=\"info-row\"><span class=\"info-key\">Cash Income</span><span class=\"info-val\">✓ Accepted — job letter + front-and-back images of cashed check + proof of business. Tipping/service industries accepted.</span></div><div class=\"info-row\"><span class=\"info-key\">Foreign IDs</span><span class=\"info-val\">✓ Passport, matricula consular, consular ID accepted</span></div><div class=\"info-row\"><span class=\"info-key\">Ineligible Customers</span><span class=\"info-val\">Prior Westlake/Wilshire/Western Funding repo (unless Buy Program approves); temporary residence (hotel/motel); Washington D.C. residents</span></div></div><div class=\"note-box warn\" style=\"margin-top:10px\"><span class=\"note-icon\">⚠️</span><span>Suspended or revoked driver's license is NOT accepted. No customers at temporary residences (hotels, motels, group homes, campgrounds).</span></div>",
+      "new": "<div class=\"info-grid\"><div class=\"info-row\"><span class=\"info-key\">Rate Markup Eligibility</span><span class=\"info-val\">Credit score 600+ (up to 2% markup)</span></div><div class=\"info-row\"><span class=\"info-key\">Open BK (Chapter 7)</span><span class=\"info-val\">✓ Accepted — requires proof '341 Meeting of Creditors' completed</span></div><div class=\"info-row\"><span class=\"info-key\">Open BK (Chapter 13)</span><span class=\"info-val\">✓ Accepted — requires signed letter from Ch. 13 trustee authorizing more debt</span></div><div class=\"info-row\"><span class=\"info-key\">Discharged / Dismissed BK</span><span class=\"info-val\">✓ Acceptable</span></div><div class=\"info-row\"><span class=\"info-key\">Cash Income</span><span class=\"info-val\">✓ Accepted — job letter + front-and-back images of cashed check + proof of business. Tipping/service industries accepted.</span></div><div class=\"info-row\"><span class=\"info-key\">Foreign IDs</span><span class=\"info-val\">✓ Passport, matricula consular, consular ID accepted</span></div><div class=\"info-row\"><span class=\"info-key\">Ineligible Customers</span><span class=\"info-val\">Prior Westlake/Wilshire/Western Funding repo (unless Buy Program approves); temporary residence (hotel/motel); Washington D.C. residents</span></div></div><div class=\"note-box warn\" style=\"margin-top:10px\"><span class=\"note-icon\">⚠️</span><span>Suspended or revoked driver's license is NOT accepted. No customers at temporary residences (hotels, motels, group homes, campgrounds).</span></div><h4 style=\"margin:14px 0 6px;font-size:.75rem;text-transform:uppercase;letter-spacing:.06em;opacity:.7\">Programs by credit score</h4><table class=\"mini-table\"><thead><tr><th></th><th>Standard 0–599</th><th>Gold 600–699</th><th>Platinum 700–749</th><th>Titanium 750+</th></tr></thead><tbody><tr><td>Min down</td><td>10%</td><td>7.5%</td><td>5%</td><td>5%</td></tr><tr><td>Max LTV incl. backend</td><td>140%</td><td>150%</td><td>150%</td><td>150%</td></tr><tr><td>Participation</td><td>N/A</td><td>Up to 2%</td><td>Up to 2%</td><td>Up to 2%</td></tr><tr><td>Rates</td><td>To usury</td><td>8.79–23.99%</td><td>7.99–19.90%</td><td>7.99–19.90%</td></tr><tr><td>Max amount financed</td><td>No cap</td><td>No cap</td><td>No cap</td><td>No cap</td></tr><tr><td>PTI / PDTI</td><td>No max</td><td>No max</td><td>No max</td><td>No max</td></tr><tr><td>Min income</td><td>None</td><td>None</td><td>None</td><td>None</td></tr><tr><td>Vehicle age / mileage</td><td>No max</td><td>No max</td><td>No max</td><td>No max</td></tr><tr><td>Min discount fee</td><td>$0</td><td>$0</td><td>$0</td><td>$0</td></tr><tr><td>Max warranty</td><td>$2,500</td><td>$2,500</td><td>$2,500</td><td>$2,500</td></tr></tbody></table>",
+      "page": 1,
+      "quote": "Min Down Payment: 10% · 7.5% · 5% · 5%",
+      "note": "The whole program table was missing — 10 rows x 4 credit-score bands, 40 cells, transcribed in full. The minimum down payment is the one that changes deals: 10% under 599, 7.5% at 600-699, then 5%. The record had no down-payment requirement anywhere, and no per-band max LTV, so the 140-vs-150% split was invisible.",
+      "approved": null
+    },
+    {
+      "path": [
+        "sections",
+        "ltv",
+        "content"
+      ],
+      "old": "<div class=\"note-box info\"><span class=\"note-icon\">ℹ️</span><span>All LTV limits, terms, and rates are determined by Westlake's proprietary <strong>Buy Program</strong> on a deal-by-deal basis.</span></div><div class=\"info-grid\" style=\"margin-top:10px\"><div class=\"info-row\"><span class=\"info-key\">Max Mileage (for participation)</span><span class=\"info-val\">150,000 miles (no participation above this)</span></div><div class=\"info-row\"><span class=\"info-key\">Deferred Down Max</span><span class=\"info-val\">$500 (no credit card; certified funds may be required)</span></div><div class=\"info-row\"><span class=\"info-key\">Recontract Trigger</span><span class=\"info-val\">Contract received by Westlake &gt;30 days after contract date OR within 5 days of first payment due date</span></div></div>",
+      "new": "<div class=\"note-box info\"><span class=\"note-icon\">ℹ️</span><span>All LTV limits, terms, and rates are determined by Westlake's proprietary <strong>Buy Program</strong> on a deal-by-deal basis.</span></div><div class=\"info-grid\" style=\"margin-top:10px\"><div class=\"info-row\"><span class=\"info-key\">Max Mileage (for participation)</span><span class=\"info-val\">150,000 miles (no participation above this)</span></div><div class=\"info-row\"><span class=\"info-key\">Deferred Down Max</span><span class=\"info-val\">$500 (no credit card; certified funds may be required)</span></div><div class=\"info-row\"><span class=\"info-key\">Due Date Blackout</span><span class=\"info-val\">Payment due dates cannot fall between the 25th and the end of the month</span></div><div class=\"info-row\"><span class=\"info-key\">Contracts</span><span class=\"info-val\">Simple interest, arbitration only</span></div><div class=\"info-row\"><span class=\"info-key\">Recontract Trigger</span><span class=\"info-val\">Contract received by Westlake &gt;30 days after contract date OR within 5 days of first payment due date</span></div></div>",
+      "page": 1,
+      "quote": "Customer payment due dates cannot be selected between the 25th and end of month.",
+      "note": "An operational rule that bounces contracts and was nowhere in the record: no due date between the 25th and month end. Also that Westlake takes simple-interest, arbitration-only contracts.",
+      "approved": null
+    },
+    {
+      "path": [
+        "sections",
+        "backend",
+        "content"
+      ],
+      "old": "<div class=\"info-grid\"><div class=\"info-row\"><span class=\"info-key\">Products Allowed</span><span class=\"info-val\">GAP Waivers, Extended Service Contracts, Prepaid Maintenance, Tire & Wheel, other ancillary products</span></div><div class=\"info-row\"><span class=\"info-key\">Activation Deadline</span><span class=\"info-val\">All products activated within 30 days of retail installment contract date</span></div><div class=\"info-row\"><span class=\"info-key\">Anti-Theft Max</span><span class=\"info-val\">$1,000</span></div><div class=\"info-row\"><span class=\"info-key\">Backend Limits</span><span class=\"info-val\">See specific Buy Program Approval for backend caps</span></div></div>",
+      "new": "<div class=\"info-grid\"><div class=\"info-row\"><span class=\"info-key\">Products Allowed</span><span class=\"info-val\">GAP Waivers, Extended Service Contracts, Prepaid Maintenance, Tire & Wheel, other ancillary products</span></div><div class=\"info-row\"><span class=\"info-key\">Activation Deadline</span><span class=\"info-val\">All products activated within 30 days of retail installment contract date</span></div><div class=\"info-row\"><span class=\"info-key\">Anti-Theft Max</span><span class=\"info-val\">$1,000</span></div><div class=\"info-row\"><span class=\"info-key\">Max Warranty</span><span class=\"info-val\">$2,500 — or $4,000 for Prime Program and Presidential dealers</span></div><div class=\"info-row\"><span class=\"info-key\">Warranty Basis</span><span class=\"info-val\">Depends on book value and credit profile</span></div><div class=\"info-row\"><span class=\"info-key\">Branded Titles</span><span class=\"info-val\">Not eligible for warranty at all</span></div><div class=\"info-row\"><span class=\"info-key\">GAP &amp; PTI</span><span class=\"info-val\">Subject to state maximums</span></div><div class=\"info-row\"><span class=\"info-key\">Backend Limits</span><span class=\"info-val\">See specific Buy Program Approval for backend caps</span></div></div>",
+      "page": 1,
+      "quote": "**Prime Program and Presidential Dealers are eligible for a max warranty of $4,000. Warranty depends on book value and credit profile. Branded titles not eligible for warranty.",
+      "note": "The record capped anti-theft at $1,000 but had no warranty ceiling at all, deferring entirely to the Buy Program. The sheet prints $2,500, rising to $4,000 for Prime and Presidential dealers. And branded titles — which Westlake will happily finance — cannot carry a warranty, which is an easy trap given the record advertises branded-title eligibility.",
+      "approved": null
+    },
+    {
+      "path": [
+        "sections",
+        "vehicles",
+        "content"
+      ],
+      "old": "<div class=\"note-box success\" style=\"margin-bottom:10px\"><span class=\"note-icon\">✅</span><span><strong>Branded/Salvage Vehicles:</strong> WLF may finance salvage, junk, rebuilt, water damaged, storm damaged, lemon, crash test vehicles IF approved by Buy Program. (Not in MA, NY, Puerto Rico.)</span></div><div class=\"note-box info\"><span class=\"note-icon\">🏍️</span><span><strong>Powersports:</strong> May approve motorcycles, ATVs, side-by-sides, personal watercraft (see Powersports Program).</span></div><div class=\"note-box warn\" style=\"margin-top:10px\"><span class=\"note-icon\">⚠️</span><span>No participation on TMU (True Mileage Unknown), branded titles, or vehicles over 150K miles.</span></div>",
+      "new": "<div class=\"info-grid\"><div class=\"info-row\"><span class=\"info-key\">Ineligible</span><span class=\"info-val\">Gray market · fire damage · recycled · strip · taxi</span></div><div class=\"info-row\"><span class=\"info-key\">Repossessions</span><span class=\"info-val\">Multiple repos OK — but not a customer who has repossessed with Westlake or Wilshire</span></div><div class=\"info-row\"><span class=\"info-key\">Bankruptcy</span><span class=\"info-val\">Dismissed and open both accepted; open must be pre-approved</span></div></div><div class=\"note-box success\" style=\"margin-bottom:10px\"><span class=\"note-icon\">✅</span><span><strong>Branded/Salvage Vehicles:</strong> WLF may finance salvage, junk, rebuilt, water damaged, storm damaged, lemon, crash test vehicles IF approved by Buy Program. (Not in MA, NY, Puerto Rico.)</span></div><div class=\"note-box info\"><span class=\"note-icon\">🏍️</span><span><strong>Powersports:</strong> May approve motorcycles, ATVs, side-by-sides, personal watercraft (see Powersports Program).</span></div><div class=\"note-box warn\" style=\"margin-top:10px\"><span class=\"note-icon\">⚠️</span><span>No participation on TMU (True Mileage Unknown), branded titles, or vehicles over 150K miles.</span></div>",
+      "page": 1,
+      "quote": "Ineligible Vehicles: \"Gray Market\", Fire Damage, Recycled, Strip, and Taxi.",
+      "note": "Westlake finances salvage, junk, rebuilt, water and storm damage, lemon and crash-test titles — the record says so — but it does not finance gray market, fire damage, recycled, strip or taxi units, and that list was absent. Given how permissive the rest of the page reads, the exclusions are the part worth having.",
+      "approved": null
+    }
+  ],
+  "not_in_source": [
+    "ficoMin",
+    "maxTerm",
+    "gapMax",
+    "poi",
+    "por",
+    "idReq"
+  ],
+  "ambiguities": [
+    {
+      "field": "DEALER TYPE — same question as cps",
+      "note": "This is the INDEPENDENT DEALER rate sheet. Southwest Kia Dallas is a franchise store. The down payments, rate bands and participation here may not be what the store is on. Westlake also has a Prime Program (a separate PDF is in Drive: Westlake - Prime Program Sheet - 070826, 1fwQ1YndmQi0zq9r5WTDTmAy9hhVje6VI) which is likely the franchise-relevant one. Worth asking the rep which sheet applies, and reading the Prime sheet next."
+    },
+    {
+      "field": "rates",
+      "note": "The table carries rate bands per program (8.79-23.99%, 7.99-19.90%). Not extracted — EXTRACTION_GUIDE section 8, the schema has nowhere for rates. Fifth lender where this has cost data."
+    },
+    {
+      "field": "maxTerm",
+      "note": "Record stores null. This sheet states no term limit anywhere; term comes from the Buy Program per deal. Correct as null."
+    }
+  ]
+}
