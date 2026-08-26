@@ -51,7 +51,8 @@ something a person should have to remember to click.
 
 ## Stack
 
-- Frontend: single `index.html`, inline vanilla JS, CSS. Hosted on Vercel → `lender-hub.vercel.app`
+- Frontend: `index.html` (inline vanilla JS + CSS) plus `lenders.json`, fetched at boot. Hosted on Vercel → `lender-hub.vercel.app`
+- **Opening `index.html` from a `file://` path no longer works** — browsers block the fetch. Serve the folder (`python3 -m http.server`) and use `http://localhost:8000`. The page says so if you forget
 - **Backend: none.** As of 2026-08-25 the app is a pure static page. It makes no network request except Google Fonts. The Supabase project is empty — every table and function was dropped
 - Repo: `github.com/gagem33/lenderspage`
 
@@ -76,7 +77,7 @@ The repo holds a committed copy of the md files. Drive is the master; when they 
 
 **Known issues**
 - `app.js`, `base.css`, `style.css` are dead. None are referenced by `index.html`. Delete.
-- Lender data is hardcoded JS. Summary fields are inconsistently formatted strings; all detailed program data is HTML blobs in `sections`. No schema, no per-field source, no verified date at the field level. See DATA.md §1.
+- Lender data now lives in `lenders.json` (moved 2026-08-26), but its *shape* is unchanged. Summary fields are inconsistently formatted strings; all detailed program data is HTML blobs in `sections`. No schema, no per-field source, no verified date at the field level. See DATA.md §1.
 - LTV calc and deal structurer parse the `maxLTV` string directly — they break when the schema migrates. See ARCHITECTURE.md §3.4.
 - Four lenders have effective-date mismatches between the app and the Drive PDFs (td, gls, kia bulletin, dfc). See SOURCES.md §2.
 
@@ -100,6 +101,7 @@ The repo holds a committed copy of the md files. Drive is the master; when they 
 | 2026-08-25 | **The app has no backend at all.** Supabase project emptied; supabase-js CDN tag removed | Nothing left needed it. Removes the PIN rotation item permanently, and the publishable key in the page source stops mattering |
 | 2026-08-25 | Ten-question product spec captured above | Gage: "I am so confused where we are at on this build." The spec is now written down instead of inferred |
 | 2026-08-25 | Triage the whole corpus before building the sync | 35 of 39 files extract cleanly; the damage is 6 pages in 4 files. Cheap to know up front. It also flagged AmeriCredit's per-state valuation map, which on 2026-08-26 turned out to be in the app already — see that day's entry |
+| 2026-08-26 | `LENDERS` moved from `index.html` into `lenders.json`, fetched at boot | A Drive sync should be a data change, not a code edit. `DATA.md` §5 recommended it; the roadmap made it the prerequisite for the sync. Costs one same-origin fetch and breaks `file://` opening |
 | 2026-08-24 | Shared Supabase client renamed `SP_*` → `SB_*` / `sbClient()` / `editPin()`, session key `sp_pin` → `lender_edit_pin` | The `sp` prefix referred to a feature that no longer exists. `ARCHITECTURE.md` §8 had flagged this rename as part of the removal |
 
 ## Open questions
@@ -120,7 +122,7 @@ The repo holds a committed copy of the md files. Drive is the master; when they 
 ## Roadmap (Now / Next / Later)
 
 - **Done:** Sales Pace removed; 3 dead files deleted; the 4 date mismatches resolved (all four favoured the app — see `AUDIT.md`); all 149 audit WRONG findings applied except Kia K506 bonus cash; lender PIN hashed and both tables closed
-- **Now:** build the Drive sync (spec #1, #2) — this is the whole point of the project. Move `LENDERS` out of `index.html` into `lenders.json` first, per `DATA.md` §5, so a sync is a data change and not a code edit
+- **Now:** build the Drive sync (spec #1, #2) — this is the whole point of the project. `lenders.json` is in place as of 2026-08-26, so a sync writes data, not code
 - **Next:** rate sheets on the lender page (#3); source-date freshness display (#4); pick-your-columns compare (#8)
 - **Then:** ranking deal structurer (#9); navigation speed — keyboard, search, jump-to (#10)
 - **Next:** migrate 2 lenders (exeter, chase) to v2 by hand from their Drive PDFs using EXTRACTION_GUIDE; make the detail page and the two string-parsing tools render from v2; then do the other 18

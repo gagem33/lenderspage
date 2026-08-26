@@ -231,4 +231,4 @@ Migration order: pick one sub-prime and one prime lender first (e.g. `exeter`, `
 
 - Does the compare table need every v2 field, or a curated column set with "show all" toggle? (Gage: "I use everything.")
 - `term_matrix` exists for AmeriCredit; how many other lenders publish one?
-- Store in Supabase JSONB or keep as a `lenders.json` in the repo? JSONB enables the approve-diff flow with history; JSON in repo is simpler and git is the history. **Recommendation: `lenders.json` in repo now, Supabase later if the approval UI needs it.**
+- ~~Store in Supabase JSONB or keep as a `lenders.json` in the repo?~~ **Settled 2026-08-26: `lenders.json` in the repo.** Git is the history and the diff. Supabase stays off the table unless an approval UI needs it — and there is no Supabase project any more, so that would be a fresh decision. The move was storage only: the v2 schema in §2 is still unbuilt, and `lenders.json` currently holds the v1 shape verbatim.
