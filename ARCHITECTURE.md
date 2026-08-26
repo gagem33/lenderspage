@@ -8,26 +8,36 @@ How the app is wired today. Factual, from `main` on 2026-08-22. Not a design doc
 
 | File | Size | Status |
 |---|---|---|
-| `index.html` | ~307 KB | **The entire app.** HTML + CSS + JS + lender data, all inline. |
-| `app.js` | — | Dead. Not referenced by `index.html`. |
-| `base.css`, `style.css` | — | Dead. Not linked from `index.html`. |
-| `.gitignore` | 8 B | — |
+| `index.html` | ~96 KB | **The app.** HTML + CSS + JS inline. No lender data. |
+| `lenders.json` | ~201 KB | **The data.** 20 lender records, fetched at boot. |
+| `tools/pdf_triage.py` | — | Classifies a source PDF's text layer and renders pages. |
+| `.gitignore` | — | — |
 
-Only `index.html` matters. The other three are leftovers from an earlier split and can be deleted once confirmed nothing external loads them.
+Two files matter. They split on 2026-08-26: the app is code, `lenders.json` is
+data, and a Drive sync touches only the second one.
+
+**`file://` no longer works.** Browsers block a `file://` page from fetching
+`lenders.json`, so opening `index.html` by double-clicking shows a load error
+with instructions. Serve the folder instead:
+
+```
+python3 -m http.server        # then http://localhost:8000
+```
 
 ## 2. Hosting and services
 
 ```
 Browser ──► Vercel (static, lender-hub.vercel.app)
- │ serves index.html — one file, everything inline
+ │ serves index.html, which fetches lenders.json (same origin)
  │
- └──► fonts.googleapis.com  (the only other request the page makes)
+ └──► fonts.googleapis.com  (the only off-origin request the page makes)
 ```
 
 - No build step. Push to `main` → Vercel deploys.
 - **No backend.** No database, no auth, no API. Removed 2026-08-25; the Supabase
   project is empty. Verify with `grep -c supabase index.html` → 0.
-- Nothing is stored anywhere. Everything the page shows is in `index.html`.
+- Nothing is stored anywhere. Everything the page shows ships in the repo —
+  chrome in `index.html`, program values in `lenders.json`.
 
 ## 3. Inside `index.html`
 
@@ -100,21 +110,25 @@ reintroduce.
 ## 6. Data flow today
 
 ```
-index.html LENDERS (hardcoded)
- │
- ├─► compare table / sidebar / quick lists (render on load)
- ├─► lender detail (render on click)
- └─► tools (read a few top-level fields)
+lenders.json ──fetch──► boot() ──► LENDERS ──► init()
+                                    │
+                                    ├─► compare table / sidebar / quick lists
+                                    ├─► lender detail (render on click)
+                                    └─► tools (read a few top-level fields)
 ```
 
-One source, no fetches. Where that source should come from next — a sync from
-the Drive PDFs into `lenders.json` — is `CLAUDE.md`'s product spec, items 1–2.
+`boot()` awaits the fetch before calling `init()`, so every render path can keep
+assuming `LENDERS` is populated. A failed fetch replaces the page with an error
+rather than rendering an empty app.
 
-Program data and verification data are stored in two different places and joined only by `lender.id` in the browser. There is no way to update program values without editing `index.html` and redeploying.
+Updating program values is now a `lenders.json` edit and a push — no code change.
+What should *produce* that edit is the Drive sync in `CLAUDE.md`'s spec, items
+1–2: Claude reads the PDFs, shows a per-bank diff, Gage approves, it deploys.
+The records still carry the v1 shape (`DATA.md` §1), not the typed v2 schema.
 
 ## 7. Google Drive (outside the app)
 
-~21 bank PDFs in Gage's WORK folder (`1VZpc9iLo4BqQIiR-Ju5s36mmaTQiKyiC`). The app has no link to them. `DATA.md` v2 adds `source.drive_file_id` per lender so each record points at its source document.
+39 bank PDFs in `LENDERHUB/LENDERHUBSOURCES` (`1kf_mJ09Sxfg--PQ-xqOXdkouYUJ8ryz9`), manifest in `SOURCES.md`. The app has no link to them — nothing in the browser reads Drive. `DATA.md` v2 adds `source.drive_file_id` per lender so each record points at its source document.
 
 ## 8. What this means for the next changes
 
