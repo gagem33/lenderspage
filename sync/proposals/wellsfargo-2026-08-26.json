@@ -27,7 +27,7 @@
       "page": 9,
       "quote": "J.D. Power/National Automobile Dealers Association (NADA) – trade-in or wholesale value: All other states use NADA as their primary collateral value source.",
       "note": "Wells Fargo had no valuation rows anywhere in the record — only an ineligible-makes list. Texas books on J.D. Power/NADA trade-in or wholesale; KBB applies in 10 named states. The rebate rule is the sharp one: new vehicle value is invoice or book MINUS any manufacturer rebate above $5,000, so a big rebate cuts the collateral value the advance is calculated on. Also the full alternate-valuation ladder for when the book has no number, which ends at 50% of invoice on older units.",
-      "approved": null
+      "approved": true
     },
     {
       "path": [
@@ -40,7 +40,7 @@
       "page": 2,
       "quote": "Minimum term to finance: 12 months.",
       "note": "Small but absent: the 12-month floor, and the warning that re-structuring a funded-shape deal can move the decision, stips, rate or term rather than just the payment.",
-      "approved": null
+      "approved": true
     }
   ],
   "not_in_source": [
@@ -57,5 +57,7 @@
       "field": "PARTIAL EXTRACTION",
       "note": "18 pages rendered; this proposal draws on pages 2 and 9. Pages 3-8 and 10-18 cover the aftermarket product matrix, funding checklist, POR/POI documents, additional programs, excluded collateral and the Dealer Desk — material the record's backend, id and income sections already cover in detail. The backend matrix in particular (total $6,000 or 20% to $12,500, VSC, GAP with its state LTV floors, tire & wheel, maintenance, windshield) is unusually complete. Say the word if you want those pages verified line by line."
     }
-  ]
+  ],
+  "approved_by": "gage",
+  "approved_at": "2026-08-26T20:26:11"
 }

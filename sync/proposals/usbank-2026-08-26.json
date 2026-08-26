@@ -30,7 +30,7 @@
       "page": 2,
       "quote": "2019 | Up To 60 Months 4, 6 · 6 To qualify for terms greater than 48 months, borrowers must have a minimum Credit Bureau Risk Score (FICO) > 750",
       "note": "The max-term-by-model-year table was missing. Six rows, transcribed with their footnote conditions. The one that matters and was nowhere in the record: on a 2019 or older unit, any term over 48 months requires FICO 750+. The record only carried the 750 rule for 2021-2020 over 66 months, so a 675-score customer on a 2019 car looked eligible for 60 months when the sheet caps them at 48. Also adds US Bank's own front-end vs total LTV definitions.",
-      "approved": null
+      "approved": true
     },
     {
       "path": [
@@ -43,7 +43,7 @@
       "page": 1,
       "quote": "Demonstrator or Dealer Loaner unit; current calendar model year with less than 5,000 miles; not previously titled; or, previously titled if state requirement",
       "note": "Demo and loaner units book as NEW at US Bank, which the record did not say. On a store that runs loaners that is a meaningful difference in collateral value.",
-      "approved": null
+      "approved": true
     }
   ],
   "not_in_source": [
@@ -60,5 +60,7 @@
       "field": "reserveStructure",
       "note": "Record describes flats of 1-4.5%, markup caps and a $10,000 maximum. This sheet says only \"Refer to the U.S. Bank National Installment Auto Finance Program Rules\" for both loan processing fees and dealer participation. The numbers must come from the separate Program Rules PDF (1GVzTsNCRy1Dm7gdHEIfzZ3DoYS31EumL), which I did not read here. Unverified."
     }
-  ]
+  ],
+  "approved_by": "gage",
+  "approved_at": "2026-08-26T20:26:11"
 }

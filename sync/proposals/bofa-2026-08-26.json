@@ -29,7 +29,7 @@
       "page": 3,
       "quote": "Primary Value Source is determined using Automated Collateral Valuation (ACV) from J.D. Power Valuation Services' (formerly NADA) Guide Clean Trade Value in all states EXCEPT AZ, CA, CO, HI, ID, MT, NV, OR, UT, WA, WY",
       "note": "Bank of America had no valuation rows anywhere in the record. Texas books on J.D. Power Clean Trade. Also adds the fallback chain when the guidebook has no number, the CPO mechanics (the adjustor is automatic if you select the right bookout option, and certification docs are required to fund), and the conversion-package rule — those values are excluded from advance and LTV entirely, which is easy to assume the other way on a converted van.",
-      "approved": null
+      "approved": true
     },
     {
       "path": [
@@ -42,7 +42,7 @@
       "page": 1,
       "quote": "Min Collateral Value $6,000",
       "note": "The $6,000 minimum collateral value is flagged NEW on the sheet and was not in the record at all — a cheap unit can now fail on collateral value alone. Also adds that deferred down payments are not financed outside California, and that lease payments are only financeable when the vehicle is traded.",
-      "approved": null
+      "approved": true
     },
     {
       "path": [
@@ -55,7 +55,7 @@
       "page": 3,
       "quote": "Buy Rate Reduction Option: Waive your flat for an additional 30bps off the buy rate",
       "note": "Three compensation rules that were missing. The buy-rate reduction is a live option on every deal — give up the flat, get 30 bps off the customer's rate. The exact-markup requirement matters because being off the table by a basis point forfeits the flat entirely. And flat cancellation costs $100 unless a replacement contract follows.",
-      "approved": null
+      "approved": true
     },
     {
       "path": [
@@ -71,7 +71,7 @@
       "page": 2,
       "quote": "Small Business Program Sheet (All States) · ≤ 5 model years · Up to 75mo · Up to 110% · Up to 125% · 730 · $10,000 · $10,000 · 75,000",
       "note": "Page 2 of this PDF is a SECOND PROGRAM the record never covered. Bank of America runs a separate Small Business sheet with its own everything: 730 FICO instead of 640, 75,000 miles instead of 125,000, 5 model years instead of 10, and 6 tradelines instead of 4. It also reverses the retail vehicle rules — cargo vans and medium-duty trucks are eligible here and are not on retail. Anyone quoting the retail page for a business deal would be wrong on every number.",
-      "approved": null
+      "approved": true
     }
   ],
   "not_in_source": [
@@ -90,5 +90,7 @@
       "field": "segment / segmentLabel",
       "note": "Record is \"prime\". With the Small Business program added the record now covers two programs with different credit floors (640 retail, 730 small business). The scalar fields (ficoMin 640, maxTerm 84, maxMileage 125,000) all describe retail only. Worth deciding whether they should."
     }
-  ]
+  ],
+  "approved_by": "gage",
+  "approved_at": "2026-08-26T20:26:10"
 }

@@ -29,7 +29,7 @@
       "page": 1,
       "quote": "*Max 45,000 miles 76+mos.",
       "note": "The record carried the model-year term table but not the mileage gate printed beside it. 2023-and-newer shows \"24-84 months\" with only a $20K value requirement noted, so a 2023 unit with 60,000 miles reads as 84-month eligible when the sheet caps it at 75. Also adds the $150,000 max MSRP/JD Power value, which the record had nowhere.",
-      "approved": null
+      "approved": true
     },
     {
       "path": [
@@ -42,7 +42,7 @@
       "page": 2,
       "quote": "Doc fee not to exceed $399.00. If over $225.00, dealer must comply with specific Texas regulations and show proof of compliance upon the Bank’s request.",
       "note": "The record had the $399 ceiling but not the $225 trigger, which is the number that actually creates work for the desk. Also adds the out-of-state title guarantee and the TX ELT number from the funding checklist.",
-      "approved": null
+      "approved": true
     },
     {
       "path": [
@@ -55,7 +55,7 @@
       "page": 1,
       "quote": "GAP Administration Fee - $50 on contracts that include GAP coverage; fee charged to monthly reserve statement.",
       "note": "A $50 charge against reserve on every GAP contract, which the record did not mention. The sales-tax line matters for the same reason — it lands on the front end and can move the buy rate.",
-      "approved": null
+      "approved": true
     },
     {
       "path": [
@@ -68,7 +68,7 @@
       "page": 1,
       "quote": "Contracts 24-47 months with a total amount financed of $7,500.00 or more will receive a $100 flat.",
       "note": "The record showed the rate-adjustment table as if it applied to everything. It only applies to 48+ month contracts at $10,000 or more; smaller and shorter deals get a flat $100. The chargeback rule was also only half in the record — the 25% balance-reduction trigger and the product-refund clawback were missing, and both bite after funding.",
-      "approved": null
+      "approved": true
     },
     {
       "path": [
@@ -81,7 +81,7 @@
       "page": 2,
       "quote": "We will finance vehicles with up to $3,000 of unrepaired hail damage as long as the approved vehicle value is lowered by the amount of the damage.",
       "note": "The vehicles section was a single ineligible list with no data rows at all. Adds the valuation fallback chain, the April 1 model-year flip, the hail-damage allowance (Fifth Third will take unrepaired hail up to $3,000 — most books will not), and the EV-charging-station exclusion.",
-      "approved": null
+      "approved": true
     }
   ],
   "not_in_source": [
@@ -102,5 +102,7 @@
       "field": "poi",
       "note": "Record says docs not specified. The sheet only says \"Only income earned by the applicant(s) will be considered\" — no document list. Left as is."
     }
-  ]
+  ],
+  "approved_by": "gage",
+  "approved_at": "2026-08-26T20:26:10"
 }

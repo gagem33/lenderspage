@@ -27,7 +27,7 @@
       "page": 1,
       "quote": "Min Down Payment: 10% · 7.5% · 5% · 5%",
       "note": "The whole program table was missing — 10 rows x 4 credit-score bands, 40 cells, transcribed in full. The minimum down payment is the one that changes deals: 10% under 599, 7.5% at 600-699, then 5%. The record had no down-payment requirement anywhere, and no per-band max LTV, so the 140-vs-150% split was invisible.",
-      "approved": null
+      "approved": true
     },
     {
       "path": [
@@ -40,7 +40,7 @@
       "page": 1,
       "quote": "Customer payment due dates cannot be selected between the 25th and end of month.",
       "note": "An operational rule that bounces contracts and was nowhere in the record: no due date between the 25th and month end. Also that Westlake takes simple-interest, arbitration-only contracts.",
-      "approved": null
+      "approved": true
     },
     {
       "path": [
@@ -53,7 +53,7 @@
       "page": 1,
       "quote": "**Prime Program and Presidential Dealers are eligible for a max warranty of $4,000. Warranty depends on book value and credit profile. Branded titles not eligible for warranty.",
       "note": "The record capped anti-theft at $1,000 but had no warranty ceiling at all, deferring entirely to the Buy Program. The sheet prints $2,500, rising to $4,000 for Prime and Presidential dealers. And branded titles — which Westlake will happily finance — cannot carry a warranty, which is an easy trap given the record advertises branded-title eligibility.",
-      "approved": null
+      "approved": true
     },
     {
       "path": [
@@ -66,7 +66,7 @@
       "page": 1,
       "quote": "Ineligible Vehicles: \"Gray Market\", Fire Damage, Recycled, Strip, and Taxi.",
       "note": "Westlake finances salvage, junk, rebuilt, water and storm damage, lemon and crash-test titles — the record says so — but it does not finance gray market, fire damage, recycled, strip or taxi units, and that list was absent. Given how permissive the rest of the page reads, the exclusions are the part worth having.",
-      "approved": null
+      "approved": true
     }
   ],
   "not_in_source": [
@@ -90,5 +90,7 @@
       "field": "maxTerm",
       "note": "Record stores null. This sheet states no term limit anywhere; term comes from the Buy Program per deal. Correct as null."
     }
-  ]
+  ],
+  "approved_by": "gage",
+  "approved_at": "2026-08-26T20:26:11"
 }

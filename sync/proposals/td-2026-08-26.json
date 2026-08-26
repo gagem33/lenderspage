@@ -27,7 +27,7 @@
       "page": 1,
       "quote": "Maximum amount financed per customer $300,000 · Maximum mileage – Diesel: 120,000",
       "note": "The record had the $250,000 per-transaction cap but not the $300,000 per-customer cap, which is the one that bites a repeat buyer. It also had no diesel mileage line at all — diesel runs 120,000 across every tier, where gas drops to 100,000 above 72 months. Also adds the 21-day lien perfection and 90-day title deadlines, and that TDAF does not refinance.",
-      "approved": null
+      "approved": true
     },
     {
       "path": [
@@ -40,7 +40,7 @@
       "page": 2,
       "quote": "Two references with verifiable address and phone number",
       "note": "Two references are a required credit-application field at TDAF and the record did not say so — a missing reference is a stip that holds the deal. Same for the two-year address history rule. Also adds that a POA must be approved before the decision, not after, and that trusts are ineligible outright.",
-      "approved": null
+      "approved": true
     },
     {
       "path": [
@@ -53,7 +53,7 @@
       "page": 1,
       "quote": "Vehicles less than or equal to 1 year old that have not been registered, and have 8,000 miles or less, will be valued as new vehicles",
       "note": "TDAF's new-vs-used line is 8,000 miles and one model year, which is looser than most of the book and was not recorded. It decides which value source applies.",
-      "approved": null
+      "approved": true
     }
   ],
   "not_in_source": [
@@ -72,5 +72,7 @@
       "field": "VERIFIED CORRECT",
       "note": "The gas mileage tiers (120,000 for T1-6 to 72 months, 100,000 above 73 months, 100,000 for T7-8), the model-year term table, the BPS flat enhancement grid, the 80/20 split, the 6-payment chargeback protection, GAP at $1,500 with a 70% front-end LTV floor and the dealer self-funded warranty exclusion all match the sheet."
     }
-  ]
+  ],
+  "approved_by": "gage",
+  "approved_at": "2026-08-26T20:26:11"
 }

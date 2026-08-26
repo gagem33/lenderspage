@@ -30,7 +30,7 @@
       "page": 3,
       "quote": "> 60-month term must have a minimum book value of $7,500 unless: Vehicle is 2-3 years old with 60,000-80,000 miles; must have minimum book value of $12,000",
       "note": "The minimum-book-value gates on terms over 60 months were missing entirely. A 2-3 year old unit with 60-80K miles, or a 3-7 year old with 80-100K, needs $12,000 of book to go past 60 months — otherwise the floor is $7,500. The record had the term table but not the book-value condition on it. Also adds the dealer advance formula and the 30-day unfunded return, which sends the contract back.",
-      "approved": null
+      "approved": true
     },
     {
       "path": [
@@ -43,7 +43,7 @@
       "page": 2,
       "quote": "Current model year vehicles with mileage in excess of 5,000 miles require a value adjustment. Triton dealerships: current model year vehicles with mileage in excess of 6,500 miles require a value adjustment",
       "note": "Adds the value-adjustment trigger on current-model-year units, the requirement that the vehicle appear in the monthly Value Guide at all, and that the restricted-vehicle list varies by make and model and lives on Dealertrack/RouteOne rather than on this sheet.",
-      "approved": null
+      "approved": true
     },
     {
       "path": [
@@ -56,7 +56,7 @@
       "page": 1,
       "quote": "A nonrefundable acquisition fee may be assessed for each contract based on the customer's credit risk. Acquisition fees cannot be charged to the customer.",
       "note": "The record had the $150 assignment fee. The sheet also describes a separate risk-based acquisition fee — two different charges, neither passable to the customer. Also that subvented contracts follow the manufacturer program rather than these guidelines.",
-      "approved": null
+      "approved": true
     }
   ],
   "not_in_source": [
@@ -75,5 +75,7 @@
       "field": "vehicles — new vehicle definition",
       "note": "Record says \"Current/future year, <=7,500 miles (non-GM <=5,000 mi)\". Page 2 speaks only of a value adjustment above 5,000 miles (6,500 for Triton) and does not define new vs used by mileage. The 7,500 figure may come from a page I did not read closely or another document. Left alone and added the value-adjustment rule as its own row rather than overwriting."
     }
-  ]
+  ],
+  "approved_by": "gage",
+  "approved_at": "2026-08-26T20:26:10"
 }

@@ -30,7 +30,7 @@
       "page": 1,
       "quote": "Max Term | Up to 75 Months | 84 Months · Max LTV | Up to 145% | 115% front, 120% back · Max Mileage | 150,000 | 60,000",
       "note": "Santander had no LTV section at all. The 84-month column is the point: it is not simply a longer version of the 75-month program. LTV drops from 145% to 115% front and 120% back, mileage from 150,000 to 60,000, vehicle age from 12 years to 5, and the minimum frontend advance triples from $5,000 to $15,000. The record advertised maxTerm 84 and maxMileage 150,000 side by side, which are the two columns that never apply together.",
-      "approved": null
+      "approved": true
     },
     {
       "path": [
@@ -46,7 +46,7 @@
       "page": 1,
       "quote": "Vehicle service contracts up to $6,500 · GAP $1,200 or max permitted by state law, if less",
       "note": "No backend section existed. The $6,500 VSC ceiling is high relative to the rest of the book and was recorded nowhere — the record only carried GAP at $1,200 as a scalar field.",
-      "approved": null
+      "approved": true
     },
     {
       "path": [
@@ -62,7 +62,7 @@
       "page": 1,
       "quote": "$10,000 - $14,999 | $100 · $35,000 - $75,999 | $350",
       "note": "No reserve section existed — compensation was one sentence in a scalar field saying \"flat option up to $350\". The actual scale is six brackets, and $350 only arrives at $35,000 financed. Also adds the rate buydown (up to 3 points, never below base) and the ratio-method participation formula.",
-      "approved": null
+      "approved": true
     },
     {
       "path": [
@@ -78,7 +78,7 @@
       "page": 2,
       "quote": "Ineligible vehicles include but are not limited to recreational vehicles, exotics, motorcycles, boats, all-terrain vehicles, van conversions, trailers, right-hand drive, hail damage",
       "note": "Santander had no vehicles section, so the page carried no ineligible list at all — the one thing a desk checks before wasting a submission. Note the exit at the end: commercial, livery and delivery units may still go through the Small Business Auto channel rather than being a flat decline.",
-      "approved": null
+      "approved": true
     }
   ],
   "not_in_source": [
@@ -94,5 +94,7 @@
       "field": "PARTIAL EXTRACTION",
       "note": "Pages 3-11 were rendered but not re-extracted line by line. They are the stipulation guidelines and the W-2 / self-employed / 1099 / other-taxable / non-taxable income document rules, which the record's id and income sections already cover in detail. If you want those verified rather than assumed, say so and I will do a second pass on this lender."
     }
-  ]
+  ],
+  "approved_by": "gage",
+  "approved_at": "2026-08-26T20:26:11"
 }

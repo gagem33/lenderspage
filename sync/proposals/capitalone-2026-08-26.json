@@ -28,7 +28,7 @@
       "page": 1,
       "quote": "Service Contract or Warranty: Greater of $2,000 or 15% of book value, up to a maximum of $7,000 · All-in Back End Limit: Greater of $2,000 or 25% of book value, up to: $8K $6K $5K $4K $3K",
       "note": "WRONG DATA REBUILT. The record listed six rows as \"VSC T0\" through \"VSC T5\" with descending caps. That merged two separate limits and shifted the tier numbers. The sheet has one service-contract cap that applies to every tier (greater of $2,000 or 15% of book, max $7,000), and a separate ALL-IN back-end ceiling that steps down by tier — $8K for Tiers 0-5, then $6K, $5K, $4K, $3K for Tiers 6, 7, 8, 9. So the record showed \"VSC T2 up to $6,000\" when $6,000 is actually the all-in ceiling for Tier 6 and the VSC cap there is $7,000. Every row in this section was mislabelled.",
-      "approved": null
+      "approved": true
     },
     {
       "path": [
@@ -41,7 +41,7 @@
       "page": 2,
       "quote": "Amount Financed: From minimum of $4,000",
       "note": "WRONG VALUE FIXED. The record said minimum amount financed $2,000 front-end. The sheet says $4,000. The $2,000 is a different thing — it is the low-book advance allowance, \"greater of (book value + $2,000) / book value or the FE limit\", which lets a cheap unit advance above book. The two got merged. uniqueFeature also still advertises \"lowest min financed ($2K)\", which is now wrong — see ambiguities. Adds the monthly payment caps by tier, which the record did not carry at all.",
-      "approved": null
+      "approved": true
     },
     {
       "path": [
@@ -54,7 +54,7 @@
       "page": 2,
       "quote": "Dealer participation or flat cannot exceed the finance charge from Capital One, and a flat must contract at buy rate.",
       "note": "Two rules that bound every deal and were nowhere on the page: participation can never exceed Capital One's own finance charge, and a flat only pays if the contract is written at buy rate. Also adds the separate 1-point cap for Tiers 8 and 9.",
-      "approved": null
+      "approved": true
     }
   ],
   "not_in_source": [
@@ -82,5 +82,7 @@
       "field": "bureaus.note",
       "note": "Record says \"All three bureaus; uses middle score.\" Neither page mentions bureaus. Same unsourced pattern as chase."
     }
-  ]
+  ],
+  "approved_by": "gage",
+  "approved_at": "2026-08-26T20:26:10"
 }

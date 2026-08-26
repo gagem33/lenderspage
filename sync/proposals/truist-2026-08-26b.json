@@ -30,7 +30,7 @@
       "page": 1,
       "quote": "76-84 months | Max total LTV | 140% 140% 135% 135% 135% 130%",
       "note": "A whole column was missing. The sheet prints two LTV blocks — one for 76-84 months and one for 75 and under — each with front-end LTV, total LTV, DTI and PTI across six tiers. The record carried front-end LTV for both terms but total LTV only for the short term, so on a 76-84 month deal the page showed no total-LTV ceiling at all. Six cells, transcribed from the render (this page's text layer is mis-encoded — triage says PARTIAL, 233 corrupt sequences).",
-      "approved": null
+      "approved": true
     },
     {
       "path": [
@@ -43,7 +43,7 @@
       "page": 1,
       "quote": "Contracts must be presented for funding no later than seven days after contract date.",
       "note": "The seven-day funding deadline is the one that costs money — miss it and the contract is not fundable, and the record did not mention it. Also adds the 700+ gate on 90-day first payments, the refusal to finance deferred down payments, Truist's own definitions of front-end vs total LTV, the 2nd-to-25th due-date window and the Texas ELT code, all from pages 1 and 2.",
-      "approved": null
+      "approved": true
     },
     {
       "path": [
@@ -56,7 +56,7 @@
       "page": 1,
       "quote": "Exotic vehicles not in JD Power Clean Trade-In (or KBB Lending in AZ, CA, CO, IA, ID, NE, NM, NV, OR, UT, WA, and WY) guide will be valued using Manheim Adjusted Value.",
       "note": "The vehicles section was one ineligible list with no data rows. Adds what happens when the book has no number: exotics fall to Manheim Adjusted Value, and an unpublished current-year used unit books at 90% of like invoice. Also the upfit rule — you can add them to the vehicle but they buy no advance, which is easy to assume the other way.",
-      "approved": null
+      "approved": true
     }
   ],
   "not_in_source": [
@@ -71,5 +71,7 @@
       "field": "VERIFIED CORRECT",
       "note": "Spot-checked the work applied on 2026-08-26 and it holds up. The 48-cell maximum-term table (8 model-year rows x 6 tiers) matches the sheet cell for cell. The tier LTV/DTI/PTI values, the Texas GAP rule (lesser of $1,200 or 5%), the collateral-value split and the $8,000 reserve cap are all correct. The gaps below are additions, not corrections."
     }
-  ]
+  ],
+  "approved_by": "gage",
+  "approved_at": "2026-08-26T20:26:11"
 }

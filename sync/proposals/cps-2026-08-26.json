@@ -29,7 +29,7 @@
       "page": 2,
       "quote": "Minimum housing expense of $600 per month (per applicant if separate residences). Paystub garnishments will be treated as debt.",
       "note": "The record had DTI and PTI ceilings but none of the inputs CPS uses to reach them. A $600 housing floor, $100/mo per open auto, and revolving debt at 3% of balance all get budgeted whether or not the customer actually pays that — which changes whether a deal fits before it is ever submitted. Also adds the self-employed bank-statement disqualifiers and the handwritten-paystub rule.",
-      "approved": null
+      "approved": true
     },
     {
       "path": [
@@ -42,7 +42,7 @@
       "page": 2,
       "quote": "Full Contract with all signatures/dates/accurate info., Odometer Statement, Buyers Order, Signed Title Application, Bookout for the month contracted, Signed Credit Application, Proof of vehicle ownership (Copy of the title or auction receipt), and Back-end products.",
       "note": "The record listed POR, ITIN, phone and references but never the dealer stip list itself — the checklist for what actually has to be in the funding package. Also adds the automatic stip waivers, the Quick Stips shortcut for the three upper tiers, and the FTB live-with-family exclusion, which is a flat decline.",
-      "approved": null
+      "approved": true
     }
   ],
   "not_in_source": [
@@ -66,5 +66,7 @@
       "field": "bureaus.note",
       "note": "Record says \"Vantage used for ICON PLUS (>=660). Confirm bureau with CPS rep.\" The Vantage part is confirmed on p2; which bureaus CPS pulls is not stated anywhere."
     }
-  ]
+  ],
+  "approved_by": "gage",
+  "approved_at": "2026-08-26T20:26:10"
 }

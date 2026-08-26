@@ -27,7 +27,7 @@
       "page": 1,
       "quote": "Dealer Acquisition Fee: Up to $795",
       "note": "A dealer acquisition fee of up to $795 comes off the deal and cannot be passed to the customer — it was nowhere in the record, and $795 is large enough to swallow the flat on a small contract entirely. Also adds the D and E tier participation cap: the record's DFI table has columns for the three term bands but not the separate 2.00% ceiling that applies to every D and E deal regardless of term.",
-      "approved": null
+      "approved": true
     },
     {
       "path": [
@@ -40,7 +40,7 @@
       "page": 1,
       "quote": "Braun, Delta Leasing, no CB score transactions, vehicles with upfits, and vehicles with greater than 100,999 miles are eligible for the increased back-end but there will be no change to the current all-in-advance",
       "note": "Five program notes the record did not carry. The increased-back-end list is the useful one: a high-mileage or upfitted unit gets more room on the back without losing front advance, which is the opposite of what most of the book does. Also that commercial-use deals belong with Ally Commercial Services rather than being declined on retail.",
-      "approved": null
+      "approved": true
     }
   ],
   "not_in_source": [
@@ -57,5 +57,7 @@
       "field": "PARTIAL EXTRACTION",
       "note": "Pages 2-7 were rendered but not re-extracted line by line, and the separate Funding Guidelines (10p) and 84-month sheet were not re-read — the 84-month matrix was already extracted on 2026-08-26 and verified against this page. If you want pages 2-7 checked, say so and I will do a second pass."
     }
-  ]
+  ],
+  "approved_by": "gage",
+  "approved_at": "2026-08-26T20:26:10"
 }

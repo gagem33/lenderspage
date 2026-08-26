@@ -28,7 +28,7 @@
       "page": 2,
       "quote": "Minimum Income: $2,000 per application",
       "note": "WRONG VALUE FIXED. The income section said $3,000 per application; the sheet says $2,000. The record contradicted itself — its own poi field already said $2,000. A $1,000/month overstatement of the income floor turns away deals Flagship would buy.",
-      "approved": null
+      "approved": true
     },
     {
       "path": [
@@ -41,7 +41,7 @@
       "page": 1,
       "quote": "60 months / 160,000 miles · 60 months / 170,000 miles* · *Vehicle Make: Toyota, Lexus, Acura, Honda",
       "note": "WRONG VALUE FIXED, plus a table cut from 5 rows to 2. The record said 140,000 miles at 60 months; the sheet says 160,000 — and 170,000 on a Toyota, Lexus, Acura or Honda. That is 20,000 to 30,000 miles of eligibility the desk was giving away, and again the record contradicted itself (maxMileage already said 160,000). The 75- and 78-month rows were missing entirely: those cap at 75,000 and 50,000 miles, so the 78-month term the record advertises only exists under 50,000 miles.",
-      "approved": null
+      "approved": true
     },
     {
       "path": [
@@ -54,7 +54,7 @@
       "page": 2,
       "quote": "Flagship only finances GAP on accounts with an LTV greater than or equal to 80%.",
       "note": "Three limits the record did not carry. The GAP floor is the one that bites: sell GAP under 80% LTV and Flagship will not fund it. The $7,500 / 30% ancillary ceiling sits alongside the $4,500 max back-end from page 1 — see the ambiguity note, they are different numbers.",
-      "approved": null
+      "approved": true
     },
     {
       "path": [
@@ -67,7 +67,7 @@
       "page": 2,
       "quote": "Flagship does not accept buy rate requests. Any buy rate data entered into Dealertrack, RouteOne, or any other interface will not be received or considered by Flagship during the application process.",
       "note": "Flagship ignores buy-rate requests outright — entering one is wasted effort, and the record said nothing about it. Also adds the $195 returned-contract fee and the 5-business-day funding deadline, both of which cost money or time after the deal is done.",
-      "approved": null
+      "approved": true
     }
   ],
   "not_in_source": [
@@ -90,5 +90,7 @@
       "field": "bureaus.note",
       "note": "Record says \"All three bureaus.\" Neither page mentions bureaus."
     }
-  ]
+  ],
+  "approved_by": "gage",
+  "approved_at": "2026-08-26T20:26:10"
 }

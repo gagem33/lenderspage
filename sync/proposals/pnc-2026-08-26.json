@@ -27,7 +27,7 @@
       "page": 1,
       "quote": "Maximum Front End Advance | Tier 0 800+ | New (up to 72 Month Terms) up to 125%",
       "note": "Two whole tables the record did not have. The front-end advance matrix is 4 rows x 5 tiers = 20 cells, transcribed in full: only Tier 0 on a new unit at 72 months or less gets 125%, and everything at Tier 2 and below is 110%. The record showed only the 140% total advance, which is a different number and does not tell the desk what it can put on the front. The term grid is 14 rows: PNC caps term by model year AND vehicle value, so a 2019 unit is 66 months and anything valued $5K-$10K is 60 regardless of year.",
-      "approved": null
+      "approved": true
     }
   ],
   "not_in_source": [
@@ -47,5 +47,7 @@
       "field": "poi",
       "note": "Record says \"Not specified in documents\". Confirmed — this sheet says nothing about income documentation."
     }
-  ]
+  ],
+  "approved_by": "gage",
+  "approved_at": "2026-08-26T20:26:10"
 }

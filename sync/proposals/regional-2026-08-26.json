@@ -39,7 +39,7 @@
       "page": 1,
       "quote": "84 | 30,000 | 30,000 | 30,000 | 30,000 | NA | NA | NA",
       "note": "WRONG VALUE FIXED. The tier table said 84 months needs 30,000 miles or less on Tiers 1-4; the record said 20,000 in four places, which is 10,000 miles stricter than Regional actually is and would turn away deals that qualify. Its own LTV section already had 30,000, so the record contradicted itself. Also adds the credit rules from the underwriting guide, none of which were in the record: the redeeming-tradeline requirement, BK rules, the I-5/I-8/I-9 auto-tradeline bar, and delinquent child support.",
-      "approved": null
+      "approved": true
     },
     {
       "path": [
@@ -52,7 +52,7 @@
       "page": 1,
       "quote": "54 | 125,000 | 125,000 | 125,000 | 125,000 | 125,000 | 115,000 | 115,000",
       "note": "The term table was missing an entire row. The sheet lists 8 terms — 84/78/75/72/66/60/54/48 — and the record had 7, with 54 months absent. A customer needing 54 months at 125,000 miles had no row to land on. AUDIT.md flagged this lender for exactly this in 2026-08-22 (\"20 of 28 cells... the rest waved through\") and the gap was still there. Also adds the 160% out-the-door ceiling — the record only carried the 125% front-end advance, so the number that actually caps a structured deal was missing — plus the advance definitions and the 5-band invoice allowance for units over 3,000 miles with no book.",
-      "approved": null
+      "approved": true
     },
     {
       "path": [
@@ -65,7 +65,7 @@
       "page": 1,
       "quote": "RAC's program does not allow rate participation.  However, RAC pays flats for contracts in certain tiers.",
       "note": "The record showed the flat/discount grid without saying the thing that governs it: Regional does not permit rate participation at all. Marking a customer up earns nothing here — the flat is the entire compensation. Worth having on the page before someone structures against it.",
-      "approved": null
+      "approved": true
     },
     {
       "path": [
@@ -81,7 +81,7 @@
       "page": 1,
       "quote": "$725 rent factor will be considered in all situations where no rent or mortgage payment is provided.",
       "note": "Regional had no income section at all — the record carried a one-line poi string and nothing else. The capacity ratios (DTI 55/50, PTI 20/18 by tier) and the $725 assumed rent factor are what decide whether a deal fits, and neither was anywhere on the page.",
-      "approved": null
+      "approved": true
     },
     {
       "path": [
@@ -97,7 +97,7 @@
       "page": 1,
       "quote": "Isuzu, Jaguar, Land Rover, Porsche, Saab, Suzuki, > 3/4 ton trucks, commercial use vehicles (e.g. ride-hailing, food delivery/ package delivery vehicles and unfinished work vans), salvage/flood vehicles/branded titles/grey market and vehicles w/out air conditioning.",
       "note": "Regional had no vehicles section. It bars six manufacturers outright — Isuzu, Jaguar, Land Rover, Porsche, Saab, Suzuki — which is unusual and easy to trip over on a trade. It also declines any vehicle without air conditioning.",
-      "approved": null
+      "approved": true
     }
   ],
   "not_in_source": [
@@ -120,5 +120,7 @@
       "field": "bureaus.note",
       "note": "Record says \"Primarily TransUnion.\" Neither document mentions bureaus. Unsourced."
     }
-  ]
+  ],
+  "approved_by": "gage",
+  "approved_at": "2026-08-26T20:26:11"
 }

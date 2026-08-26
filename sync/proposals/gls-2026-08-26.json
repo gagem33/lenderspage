@@ -28,7 +28,7 @@
       "page": 2,
       "quote": "KBB used in AZ, CA, CO, ID, NM, NV, OR, UT, WA, WY. All other states, use JD Power.",
       "note": "GLS had no valuation rows at all — only an EV allow-list and an ineligible list. Texas is not in the KBB group, so TX books on J.D. Power clean trade. The current-year-used rule is the unusual one worth having on the page: invoice required, then 90% of invoice less $0.25 per mile and less all rebates and incentives.",
-      "approved": null
+      "approved": true
     },
     {
       "path": [
@@ -41,7 +41,7 @@
       "page": 1,
       "quote": "Self-employed and/or 1099 earners · Open bankcrupties · Repossession(s) in the past 4 months",
       "note": "The sheet has a \"What to Avoid\" box naming three flat declines. The record carried only one of them (self-employed/1099); open bankruptcies and a repo inside 4 months were missing, and both are reasons not to bother submitting. Also adds the 9.95% rate floor and the $0 acquisition fee, neither of which was on the page.",
-      "approved": null
+      "approved": true
     },
     {
       "path": [
@@ -54,7 +54,7 @@
       "page": 1,
       "quote": "**T3-4 max term 72",
       "note": "The top mileage band read \"75mo (T1–T4)\", but the footnote caps Tiers 3 and 4 at 72. A T3 deal under 20,000 miles was showing three months more term than GLS will write. Also adds the two 66-month gates — book value under $10,000, and vehicles over 10 years old — which the record did not carry.",
-      "approved": null
+      "approved": true
     },
     {
       "path": [
@@ -67,7 +67,7 @@
       "page": 1,
       "quote": "Advantage (up to) 2%",
       "note": "The flat table lists six tiers — Select, 1, 2, 3, 4 and Advantage. The record had five; Advantage was absent, so a deal in that tier had no compensation row.",
-      "approved": null
+      "approved": true
     }
   ],
   "not_in_source": [
@@ -91,5 +91,7 @@
       "field": "bureaus.note",
       "note": "Record says \"Primarily Equifax.\" Neither page mentions bureaus."
     }
-  ]
+  ],
+  "approved_by": "gage",
+  "approved_at": "2026-08-26T20:26:10"
 }

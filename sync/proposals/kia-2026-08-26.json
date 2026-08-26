@@ -38,7 +38,7 @@
       "page": 1,
       "quote": "Minimum Amount Financed $7,500 · Kia Finance America does not finance branded or impaired titles.",
       "note": "Eight K504 standard-program rules the record never had. The cosigned-loan cap is the sharp one: 2.00% maximum participation on any cosigned deal regardless of FICO, so a strong-score cosigned contract does not earn the 2.5% the record advertises. Also the $7,500 floor, the branded-title refusal, and the quirk that demos and loaners are entered as used but price at new rates.",
-      "approved": null
+      "approved": true
     },
     {
       "path": [
@@ -51,7 +51,7 @@
       "page": 1,
       "quote": "Contracts Dated July 7, 2026 - August 3, 2026",
       "note": "THE BIGGEST FINDING OF THIS SWEEP. The store's own captive is displaying incentive rates that expired on April 14, 2026 — over four months ago — presented as current. The section header says \"Bulletins 2026-036 & 037\", contracts March 3-31. Meanwhile the record's effectiveDate reads \"Jan 6, 2026 · K500/K506 July 7, 2026\", which claims July, so the freshness check cannot see the problem: the date field describes a bulletin the content is not from. This change does not touch a single rate. It puts a red banner above them so nobody quotes them. Reject it if you would rather the section be emptied instead — but it should not stay as it is.",
-      "approved": null
+      "approved": true
     }
   ],
   "not_in_source": [
@@ -74,5 +74,7 @@
       "field": "VERIFIED CORRECT",
       "note": "Both LTV advance grids match the K504 sheet. The 12-75 month band (105% at 620-639 through 150% at 740+) and the 76+ band (95% / 105% / 115% / 120%) line up tier for tier with the four advance tables on the sheet, and the reserve summary (2.5% / 2% / 2% / 1.5% by term) is right."
     }
-  ]
+  ],
+  "approved_by": "gage",
+  "approved_at": "2026-08-26T20:26:10"
 }

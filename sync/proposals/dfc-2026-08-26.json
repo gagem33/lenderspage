@@ -27,7 +27,7 @@
       "page": 1,
       "quote": "GAP Guidelines: Maximum price $1500 or state cap whichever is less, Minimum 70% FELTV or state cap.",
       "note": "WRONG VALUE FIXED. The record required 80% front-end LTV for GAP; the sheet says 70%. Ten points stricter than DFC actually is, so the desk would decline GAP on deals that qualify — the error costs product revenue rather than causing a decline. The record also carried \"min $12K financed; 60+mo term\", which appears nowhere on this sheet; see ambiguities.",
-      "approved": null
+      "approved": true
     },
     {
       "path": [
@@ -40,7 +40,7 @@
       "page": 1,
       "quote": "Kelly Blue Book \"Lending Value\" or JD Power \"Clean Trade\" - Dealership must only use 1 source (Kelly or JD Power) and cannot vary back and forth",
       "note": "DFC had no valuation rows at all. The one-source rule is the one to know: the store picks KBB or J.D. Power and is held to it — you cannot book whichever is higher deal by deal. Also notable that DFC gives no CPO value increase, which is the opposite of most of the book and easy to assume wrongly.",
-      "approved": null
+      "approved": true
     },
     {
       "path": [
@@ -53,7 +53,7 @@
       "page": 1,
       "quote": "Loans over $75,000 require supervisor or above approval and may require additional time to process. No flat or reserve paid on $75,000+",
       "note": "The record already noted that no flat or reserve is paid above $75,000, but not that such a deal also needs supervisor sign-off and takes longer — worth knowing before promising a delivery time.",
-      "approved": null
+      "approved": true
     }
   ],
   "not_in_source": [
@@ -78,5 +78,7 @@
       "field": "VERIFIED CORRECT",
       "note": "The 13-tier P0-P11 plus No-Hit structure is faithfully collapsed in the record: P0-P4 and P6-P8 really are identical rows on the sheet, so 7 rows x 7 columns is a legitimate compression of the two 13-row tables, and every value matches."
     }
-  ]
+  ],
+  "approved_by": "gage",
+  "approved_at": "2026-08-26T20:26:10"
 }
