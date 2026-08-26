@@ -28,7 +28,7 @@
       "page": 1,
       "quote": "MSRP is less than (or equal to) $12,000: 35% of MSRP",
       "note": "Adds three rows the record was missing. (1) and (2): the sub-$12K aftermarket tier, 35% of MSRP for new and 35% of Cash Selling Price for used -- the record only carried the >$12K rows. (3) the MBP cap for MSRP/CSP under $12,000, quote: 'or Collateral Values with MSRP/CSP <$12.000 - Maximum of $3.500' (the sheet prints periods where it means commas). Everything else on this page already matched.",
-      "approved": null
+      "approved": true
     }
   ],
   "not_in_source": [
@@ -47,5 +47,7 @@
       "field": "chargebackWindow",
       "note": "Record says 'N/A (flat fee model)'. Reasonable inference from the flat-fee structure, but the sheet never states it."
     }
-  ]
+  ],
+  "approved_by": "gage",
+  "approved_at": "2026-08-26T18:21:05"
 }
