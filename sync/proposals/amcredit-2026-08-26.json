@@ -1,0 +1,79 @@
+{
+  "schema": "lenderhub.proposal.v1",
+  "lender_id": "amcredit",
+  "created": "2026-08-26",
+  "sources": [
+    {
+      "drive_file_id": "1BcVmDpbQotQpB93acjWvX2uH3BRcjP37",
+      "title": "AmeriCredit - Program Sheet - 061226.PDF",
+      "doc_type": "Program Sheet",
+      "effective_date": "2026-06-12",
+      "pages": 11,
+      "triage": {
+        "1": "TEXT_OK",
+        "2": "TEXT_OK",
+        "3": "TEXT_OK",
+        "11": "IMAGE_ONLY"
+      },
+      "read_as": "300 dpi render. p11 is the vector-art state valuation map (0 raster images, 278 chars)."
+    }
+  ],
+  "changes": [
+    {
+      "path": [
+        "sections",
+        "ltv",
+        "content"
+      ],
+      "old": "<div class=\"info-grid\"><div class=\"info-row\"><span class=\"info-key\">New Vehicles</span><span class=\"info-val\">Up to 125% LTV</span></div><div class=\"info-row\"><span class=\"info-key\">Used &lt;70K miles</span><span class=\"info-val\">Up to 125% LTV</span></div><div class=\"info-row\"><span class=\"info-key\">Used &lt;50K miles</span><span class=\"info-val\">Up to 135% LTV</span></div><div class=\"info-row\"><span class=\"info-key\">Canadian (A Tier)</span><span class=\"info-val\">Max 125%</span></div><div class=\"info-row\"><span class=\"info-key\">Canadian (B Tier)</span><span class=\"info-val\">Max 115%</span></div><div class=\"info-row\"><span class=\"info-key\">Max Term</span><span class=\"info-val\">84 months (B2+ on vehicles ≤4 yrs old)</span></div><div class=\"info-row\"><span class=\"info-key\">Min Amount ≤72mo</span><span class=\"info-val\">$7,500</span></div><div class=\"info-row\"><span class=\"info-key\">Min Amount 75–84mo</span><span class=\"info-val\">$15,000</span></div><div class=\"info-row\"><span class=\"info-key\">Max Vehicle Age</span><span class=\"info-val\">9 years old or newer</span></div><div class=\"info-row\"><span class=\"info-key\">Max Mileage</span><span class=\"info-val\">100,000 miles</span></div><div class=\"info-row\"><span class=\"info-key\">Approval Expiry</span><span class=\"info-val\">30 days from initial application</span></div></div><table class=\"tier-table\" style=\"margin-top:14px\"><thead><tr><th>Vehicle Age</th><th>&lt;60K mi</th><th>60K–79,999 mi</th><th>80K–100K mi</th></tr></thead><tbody><tr><td>Current–2025</td><td>75</td><td>60</td><td>60</td></tr><tr><td>2024</td><td>75</td><td>75</td><td>60</td></tr><tr><td>2023</td><td>75</td><td>75</td><td>72</td></tr><tr><td>2022</td><td>75</td><td>75</td><td>72</td></tr><tr><td>2021</td><td>75</td><td>75</td><td>72</td></tr><tr><td>2020</td><td>72</td><td>72</td><td>72</td></tr><tr><td>2019</td><td>72</td><td>72</td><td>72</td></tr><tr><td>2018</td><td>72</td><td>72</td><td>72</td></tr><tr><td>2017</td><td>72</td><td>72</td><td>72</td></tr><tr><td>2016</td><td>72</td><td>72</td><td>72</td></tr></tbody></table><div class=\"note-box info\" style=\"margin-top:10px\"><span class=\"note-icon\">🆕</span><span><strong>Updated Jan 8, 2026:</strong> Max term by age &amp; mileage above. 84mo only for B2+ on vehicles ≤4yrs old. Terms &gt;60mo require min book value $7,500 — or $12,000 if 2–3yr/60–80K mi or 3–7yr/80–100K mi.</span></div><div class=\"note-box warn\"><span class=\"note-icon\">⚠️</span><span>First payment: 19–47 days from contract date. Contracts must fund within 30 days of initial application.</span></div>",
+      "new": "<div class=\"info-grid\"><div class=\"info-row\"><span class=\"info-key\">New Vehicles</span><span class=\"info-val\">Up to 125% LTV</span></div><div class=\"info-row\"><span class=\"info-key\">Used &lt;70K miles</span><span class=\"info-val\">Up to 125% LTV</span></div><div class=\"info-row\"><span class=\"info-key\">Used &lt;50K miles</span><span class=\"info-val\">Up to 135% LTV</span></div><div class=\"info-row\"><span class=\"info-key\">Canadian (A Tier)</span><span class=\"info-val\">Max 125%</span></div><div class=\"info-row\"><span class=\"info-key\">Canadian (B Tier)</span><span class=\"info-val\">Max 115%</span></div><div class=\"info-row\"><span class=\"info-key\">Max Term</span><span class=\"info-val\">84 months (B2+ on vehicles ≤4 yrs old)</span></div><div class=\"info-row\"><span class=\"info-key\">Min Amount ≤72mo</span><span class=\"info-val\">$7,500</span></div><div class=\"info-row\"><span class=\"info-key\">Min Amount 75–84mo</span><span class=\"info-val\">$15,000</span></div><div class=\"info-row\"><span class=\"info-key\">Max Vehicle Age</span><span class=\"info-val\">9 years old or newer</span></div><div class=\"info-row\"><span class=\"info-key\">Max Mileage</span><span class=\"info-val\">100,000 miles</span></div><div class=\"info-row\"><span class=\"info-key\">Approval Expiry</span><span class=\"info-val\">30 days from initial application</span></div><div class=\"info-row\"><span class=\"info-key\">Min Term</span><span class=\"info-val\">12 months</span></div><div class=\"info-row\"><span class=\"info-key\">Dealer Advance</span><span class=\"info-val\">Invoice or clean trade + TT&amp;L + L/A&amp;H + service contract + GAP + approved doc fees</span></div><div class=\"info-row\"><span class=\"info-key\">Book Value Date</span><span class=\"info-val\">Set by the application date</span></div><div class=\"info-row\"><span class=\"info-key\">Over 60 Months</span><span class=\"info-val\">Book value must be at least $7,500</span></div><div class=\"info-row\"><span class=\"info-key\">Over 60 Months — 2–3 yr, 60–80K mi</span><span class=\"info-val\">Book value must be at least $12,000</span></div><div class=\"info-row\"><span class=\"info-key\">Over 60 Months — 3–7 yr, 80–100K mi</span><span class=\"info-val\">Book value must be at least $12,000</span></div><div class=\"info-row\"><span class=\"info-key\">Unfunded After 30 Days</span><span class=\"info-val\">Contract is returned to the dealer</span></div></div><table class=\"tier-table\" style=\"margin-top:14px\"><thead><tr><th>Vehicle Age</th><th>&lt;60K mi</th><th>60K–79,999 mi</th><th>80K–100K mi</th></tr></thead><tbody><tr><td>Current–2025</td><td>75</td><td>60</td><td>60</td></tr><tr><td>2024</td><td>75</td><td>75</td><td>60</td></tr><tr><td>2023</td><td>75</td><td>75</td><td>72</td></tr><tr><td>2022</td><td>75</td><td>75</td><td>72</td></tr><tr><td>2021</td><td>75</td><td>75</td><td>72</td></tr><tr><td>2020</td><td>72</td><td>72</td><td>72</td></tr><tr><td>2019</td><td>72</td><td>72</td><td>72</td></tr><tr><td>2018</td><td>72</td><td>72</td><td>72</td></tr><tr><td>2017</td><td>72</td><td>72</td><td>72</td></tr><tr><td>2016</td><td>72</td><td>72</td><td>72</td></tr></tbody></table><div class=\"note-box info\" style=\"margin-top:10px\"><span class=\"note-icon\">🆕</span><span><strong>Updated Jan 8, 2026:</strong> Max term by age &amp; mileage above. 84mo only for B2+ on vehicles ≤4yrs old. Terms &gt;60mo require min book value $7,500 — or $12,000 if 2–3yr/60–80K mi or 3–7yr/80–100K mi.</span></div><div class=\"note-box warn\"><span class=\"note-icon\">⚠️</span><span>First payment: 19–47 days from contract date. Contracts must fund within 30 days of initial application.</span></div>",
+      "page": 3,
+      "quote": "> 60-month term must have a minimum book value of $7,500 unless: Vehicle is 2-3 years old with 60,000-80,000 miles; must have minimum book value of $12,000",
+      "note": "The minimum-book-value gates on terms over 60 months were missing entirely. A 2-3 year old unit with 60-80K miles, or a 3-7 year old with 80-100K, needs $12,000 of book to go past 60 months — otherwise the floor is $7,500. The record had the term table but not the book-value condition on it. Also adds the dealer advance formula and the 30-day unfunded return, which sends the contract back.",
+      "approved": null
+    },
+    {
+      "path": [
+        "sections",
+        "vehicles",
+        "content"
+      ],
+      "old": "<div class=\"info-grid\"><div class=\"info-row\"><span class=\"info-key\">New Vehicle Definition</span><span class=\"info-val\">Current/future year, ≤7,500 miles (non-GM ≤5,000 mi)</span></div><div class=\"info-row\"><span class=\"info-key\">Book Value Guide</span><span class=\"info-val\">KBB (AZ,CA,CO,HI,ID,MT,NM,NV,OR,UT,WA,WY); JD Power all others</span></div></div><div class=\"note-box danger\" style=\"margin-top:10px\"><span class=\"note-icon\">🚫</span><span><strong>Ineligible:</strong> Commercial, livery, rideshare (Uber/Lyft/DoorDash), exotic, motorcycle, RV, gray market, branded titles (salvage, flood, VIN cloning).</span></div>",
+      "new": "<div class=\"info-grid\"><div class=\"info-row\"><span class=\"info-key\">New Vehicle Definition</span><span class=\"info-val\">Current/future year, ≤7,500 miles (non-GM ≤5,000 mi)</span></div><div class=\"info-row\"><span class=\"info-key\">Book Value Guide</span><span class=\"info-val\">KBB (AZ,CA,CO,HI,ID,MT,NM,NV,OR,UT,WA,WY); JD Power all others</span></div><div class=\"info-row\"><span class=\"info-key\">Value Adjustment</span><span class=\"info-val\">Current model year over 5,000 mi needs a value adjustment — Triton stores, 6,500 mi</span></div><div class=\"info-row\"><span class=\"info-key\">Must Be Booked</span><span class=\"info-val\">Vehicle has to appear in the appropriate monthly Value Guide</span></div><div class=\"info-row\"><span class=\"info-key\">Restricted List</span><span class=\"info-val\">Varies by make and model — full list on Dealertrack and RouteOne</span></div><div class=\"info-row\"><span class=\"info-key\">Canadian Units</span><span class=\"info-val\">Eligible only if modified to meet US safety, emissions and mileage standards</span></div></div><div class=\"note-box danger\" style=\"margin-top:10px\"><span class=\"note-icon\">🚫</span><span><strong>Ineligible:</strong> Commercial, livery, rideshare (Uber/Lyft/DoorDash), exotic, motorcycle, RV, gray market, branded titles (salvage, flood, VIN cloning).</span></div>",
+      "page": 2,
+      "quote": "Current model year vehicles with mileage in excess of 5,000 miles require a value adjustment. Triton dealerships: current model year vehicles with mileage in excess of 6,500 miles require a value adjustment",
+      "note": "Adds the value-adjustment trigger on current-model-year units, the requirement that the vehicle appear in the monthly Value Guide at all, and that the restricted-vehicle list varies by make and model and lives on Dealertrack/RouteOne rather than on this sheet.",
+      "approved": null
+    },
+    {
+      "path": [
+        "sections",
+        "reserve",
+        "content"
+      ],
+      "old": "<div class=\"info-grid\"><div class=\"info-row\"><span class=\"info-key\">Participation</span><span class=\"info-val\">Up to 2%</span></div><div class=\"info-row\"><span class=\"info-key\">Flat @ Buy Rate</span><span class=\"info-val\">$200</span></div><div class=\"info-row\"><span class=\"info-key\">Split</span><span class=\"info-val\">70/30 (AmeriCredit keeps 30%)</span></div><div class=\"info-row\"><span class=\"info-key\">Chargeback Window</span><span class=\"info-val\">3 payments and 3 payment cycles</span></div><div class=\"info-row\"><span class=\"info-key\">Assignment Fee</span><span class=\"info-val\">$150 nonrefundable per contract (cannot charge customer)</span></div></div>",
+      "new": "<div class=\"info-grid\"><div class=\"info-row\"><span class=\"info-key\">Participation</span><span class=\"info-val\">Up to 2%</span></div><div class=\"info-row\"><span class=\"info-key\">Flat @ Buy Rate</span><span class=\"info-val\">$200</span></div><div class=\"info-row\"><span class=\"info-key\">Split</span><span class=\"info-val\">70/30 (AmeriCredit keeps 30%)</span></div><div class=\"info-row\"><span class=\"info-key\">Chargeback Window</span><span class=\"info-val\">3 payments and 3 payment cycles</span></div><div class=\"info-row\"><span class=\"info-key\">Assignment Fee</span><span class=\"info-val\">$150 nonrefundable per contract (cannot charge customer)</span></div><div class=\"info-row\"><span class=\"info-key\">Acquisition Fee</span><span class=\"info-val\">A separate nonrefundable fee may be assessed on credit risk — also not chargeable to the customer</span></div><div class=\"info-row\"><span class=\"info-key\">Subvented Contracts</span><span class=\"info-val\">Follow the manufacturer program guidelines</span></div><div class=\"info-row\"><span class=\"info-key\">Contracts</span><span class=\"info-val\">Simple interest only; APR cannot exceed state usury limits</span></div></div>",
+      "page": 1,
+      "quote": "A nonrefundable acquisition fee may be assessed for each contract based on the customer's credit risk. Acquisition fees cannot be charged to the customer.",
+      "note": "The record had the $150 assignment fee. The sheet also describes a separate risk-based acquisition fee — two different charges, neither passable to the customer. Also that subvented contracts follow the manufacturer program rather than these guidelines.",
+      "approved": null
+    }
+  ],
+  "not_in_source": [
+    "poi",
+    "ficoMin",
+    "maxLTV",
+    "maxMileage",
+    "gapMax"
+  ],
+  "ambiguities": [
+    {
+      "field": "VERIFIED CORRECT",
+      "note": "The 10-row x 3-mileage-band maximum term table is complete and matches the sheet. So do the GAP rules the document itself flags as updated in this revision (no purchase under 70% advance, 80% in Indiana, $1,500 or state max, no NY indirect, no GAP or CL&D for covered service members in California) — the record is current on the one thing this revision changed. The $150 assignment fee, the 70/30 split, the $200 buy-rate flat, the 3-payment/3-cycle chargeback and the Canadian A/B tier LTVs are all right. And p11's state map is in the record correctly, as established on 2026-08-26."
+    },
+    {
+      "field": "vehicles — new vehicle definition",
+      "note": "Record says \"Current/future year, <=7,500 miles (non-GM <=5,000 mi)\". Page 2 speaks only of a value adjustment above 5,000 miles (6,500 for Triton) and does not define new vs used by mileage. The 7,500 figure may come from a page I did not read closely or another document. Left alone and added the value-adjustment rule as its own row rather than overwriting."
+    }
+  ]
+}
