@@ -15,7 +15,7 @@
     },
     "dfc": {
       "reviewed": "2026-08-26",
-      "reason": "App says Aug 13 2025, file says 2026-01-01. Resolved in the app's favour -- see AUDIT.md."
+      "reason": "RESOLVED at source: the sheet itself prints \"Revision Date: 8/13/2025\" in its header, so the record's August 13, 2025 is correct and the Drive filename (010126) is what is wrong. Rename the file to DFC - Program Sheet - 081325.pdf, update the SOURCES.md row, and this entry can be deleted instead of carried forever."
     }
   }
 }
