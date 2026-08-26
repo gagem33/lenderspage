@@ -63,13 +63,25 @@ def check(path):
     for i, ch in enumerate(p.get('changes', [])):
         label = '.'.join(map(str, ch.get('path', [])))
         new = ch.get('new')
+        old_v = ch.get('old')
+        # A change can add a whole section object ({icon, label, content}) rather
+        # than edit an HTML string. Check the content inside it.
+        if isinstance(new, dict):
+            missing = [k for k in ('icon', 'label', 'content') if k not in new]
+            if missing:
+                bad += 1
+                print(f'  [{i}] {label}  INCOMPLETE SECTION -- missing {", ".join(missing)}')
+                continue
+            new = new['content']
+            old_v = old_v['content'] if isinstance(old_v, dict) else (old_v or '')
+            label += ' (new section)'
         if not isinstance(new, str) or '<' not in new:
             print(f'  [{i}] {label}: not HTML, skipped')
             continue
         b = Balance()
         b.feed(new)
         errs = b.finish()
-        a, z = shape(ch.get('old') or ''), shape(new)
+        a, z = shape(old_v or ''), shape(new)
         delta = (f"rows {a['rows']}->{z['rows']}  cells {a['cells']}->{z['cells']}  "
                  f"tables {a['tables']}->{z['tables']}")
         if errs:
