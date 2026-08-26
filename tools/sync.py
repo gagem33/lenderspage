@@ -415,6 +415,37 @@ def get_path(obj, path):
             return None, False
     return cur, True
 
+# Where a brand-new section belongs on the lender detail page. The page renders
+# Object.values(lender.sections), so dict order *is* display order, and a key
+# created by set_path would otherwise land at the very bottom. This only places
+# keys that did not exist before -- existing sections keep the order they have.
+# `rates` sits with LTV & Terms because that is where CLAUDE.md spec #3 puts it.
+SECTION_ORDER = ['fico', 'id', 'income', 'program', 'ltv', 'rates', 'gap',
+                 'backend', 'reserve', 'vehicles', 'smallbusiness', 'incentives']
+
+def place_new_section(rec, key):
+    """Move a newly created sections[key] to its canonical slot.
+
+    Inserts it directly after the nearest preceding SECTION_ORDER key that the
+    record actually has; if it has none, the new section goes first. Every other
+    key keeps its relative position, so applying a proposal never silently
+    reshuffles sections it did not touch.
+    """
+    sections = rec.get('sections')
+    if not isinstance(sections, dict) or key not in sections or key not in SECTION_ORDER:
+        return False
+    existing = [k for k in sections if k != key]
+    anchor = None
+    for cand in SECTION_ORDER[:SECTION_ORDER.index(key)]:
+        if cand in existing:
+            anchor = cand
+    at = existing.index(anchor) + 1 if anchor else 0
+    ordered = existing[:at] + [key] + existing[at:]
+    if ordered == list(sections):
+        return False
+    rec['sections'] = {k: sections[k] for k in ordered}
+    return True
+
 def set_path(obj, path, value):
     cur = obj
     for key in path[:-1]:
@@ -712,13 +743,21 @@ def cmd_apply(a):
         return 0
 
     rec = lender_by_id(records, p['lender_id'])
+    placed = []
     for ch in approved:
-        set_path(rec, ch['path'], ch['new'])
+        path = ch['path']
+        fresh = len(path) == 2 and path[0] == 'sections' and ch.get('old') is None
+        set_path(rec, path, ch['new'])
+        if fresh and place_new_section(rec, path[1]):
+            placed.append(path[1])
 
     if a.dry_run:
         print(green(f'[dry run] would write {len(approved)} change(s) to {p["lender_id"]}:'))
         for ch in approved:
             print(f'  {".".join(map(str, ch["path"]))}  ->  {fmt(ch["new"], 80)}')
+        for k in placed:
+            print(dim(f'  new section {k!r} placed at its canonical slot: '
+                      f'{" > ".join(rec["sections"])}'))
         return 0
 
     write_lenders(records)
@@ -741,6 +780,9 @@ def cmd_apply(a):
     print(green(f'Applied {len(approved)} change(s) to {p["lender_id"]} in lenders.json'))
     for ch in approved:
         print(f'  {".".join(map(str, ch["path"]))}')
+    for k in placed:
+        print(dim(f'  new section {k!r} placed at its canonical slot: '
+                  f'{" > ".join(rec["sections"])}'))
     print(dim(f'\nLedger: {os.path.relpath(LEDGER, ROOT)}'))
     print(dim('Commit lenders.json and the proposal together, then Vercel redeploys.'))
     return 0
