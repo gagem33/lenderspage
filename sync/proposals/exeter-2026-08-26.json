@@ -1,0 +1,134 @@
+{
+  "schema": "lenderhub.proposal.v1",
+  "lender_id": "exeter",
+  "created": "2026-08-26",
+  "sources": [
+    {
+      "drive_file_id": "1fE1EdXQaWcqwyc_HGpYQs8UrUu0cVJpS",
+      "title": "Exeter - Program Sheet - 061226.pdf",
+      "doc_type": "Program Sheet",
+      "effective_date": "2026-06-12",
+      "sha256": "131fa24912373a96",
+      "pages": 2,
+      "triage": {
+        "1": "TEXT_OK",
+        "2": "TEXT_OK"
+      },
+      "read_as": "300 dpi render, per EXTRACTION_GUIDE section 9"
+    },
+    {
+      "drive_file_id": "15kVW67-Yhae_s6QvJ7TzmZH_1mq-tGe5",
+      "title": "Exeter - Funding Guidelines - 061226.pdf",
+      "doc_type": "Funding Guidelines",
+      "effective_date": "2026-06-12",
+      "sha256": "ff1002f8a858fe3e",
+      "pages": 1,
+      "triage": {
+        "1": "TEXT_OK"
+      },
+      "read_as": "cross-check only; SOURCES.md section 1 says Funding Guidelines are not authority for program terms. Its footer reads \"Revised 10.01.2025\" — older than the sheet."
+    }
+  ],
+  "changes": [
+    {
+      "path": [
+        "sections",
+        "ltv",
+        "content"
+      ],
+      "old": "<div class=\"info-grid\"><div class=\"info-row\"><span class=\"info-key\">Front-End LTV</span><span class=\"info-val\">Up to 135%</span></div><div class=\"info-row\"><span class=\"info-key\">Total LTV</span><span class=\"info-val\">Up to 150%</span></div><div class=\"info-row\"><span class=\"info-key\">Standard Max Term</span><span class=\"info-val\">Up to 84 months (75–84 for qualified customers/vehicles)</span></div><div class=\"info-row\"><span class=\"info-key\">Max Mileage</span><span class=\"info-val\">200,000 miles</span></div><div class=\"info-row\"><span class=\"info-key\">Vehicle Age Limit</span><span class=\"info-val\">13 years</span></div><div class=\"info-row\"><span class=\"info-key\">Under $10K Book Value</span><span class=\"info-val\">Max 66 months</span></div><div class=\"info-row\"><span class=\"info-key\">Max PTI (Standard)</span><span class=\"info-val\">15–21%</span></div><div class=\"info-row\"><span class=\"info-key\">Min Amount Financed</span><span class=\"info-val\">$6,000</span></div><div class=\"info-row\"><span class=\"info-key\">Max Amount Financed</span><span class=\"info-val\">Up to $57,500</span></div><div class=\"info-row\"><span class=\"info-key\">CPO Bonus</span><span class=\"info-val\">+$1,000 book value for manufacturer-certified pre-owned</span></div></div><div class=\"note-box warn\"><span class=\"note-icon\">⚠️</span><span>Non-PLUS approvals: contracts received after 20 days from initial submission NOT eligible for participation. All hail damage must be repaired before contracting.</span></div>",
+      "new": "<div class=\"info-grid\"><div class=\"info-row\"><span class=\"info-key\">Front-End LTV</span><span class=\"info-val\">Up to 135%</span></div><div class=\"info-row\"><span class=\"info-key\">Total LTV</span><span class=\"info-val\">Up to 150%</span></div><div class=\"info-row\"><span class=\"info-key\">Standard Max Term</span><span class=\"info-val\">Grid below caps at 72 mo — 75–84 mo only for qualified customers/vehicles</span></div><div class=\"info-row\"><span class=\"info-key\">Max Mileage</span><span class=\"info-val\">200,000 miles</span></div><div class=\"info-row\"><span class=\"info-key\">Vehicle Age Limit</span><span class=\"info-val\">13 years</span></div><div class=\"info-row\"><span class=\"info-key\">Under $10K Book Value</span><span class=\"info-val\">Max 66 months</span></div><div class=\"info-row\"><span class=\"info-key\">Max PTI (Standard)</span><span class=\"info-val\">15–21%</span></div><div class=\"info-row\"><span class=\"info-key\">Max DTI (Standard)</span><span class=\"info-val\">77–87%</span></div><div class=\"info-row\"><span class=\"info-key\">Max PTI / DTI (PLUS)</span><span class=\"info-val\">Up to 21% PTI · up to 87% DTI</span></div><div class=\"info-row\"><span class=\"info-key\">Min Amount Financed</span><span class=\"info-val\">$6,000</span></div><div class=\"info-row\"><span class=\"info-key\">Max Amount Financed</span><span class=\"info-val\">Up to $57,500</span></div><div class=\"info-row\"><span class=\"info-key\">CPO Bonus</span><span class=\"info-val\">+$1,000 book value for manufacturer-certified pre-owned</span></div></div><table class=\"tier-table\" style=\"margin-top:12px\"><thead><tr><th>Mileage</th><th>&lt;9 yrs</th><th>10 yrs</th><th>11 yrs</th><th>12–13 yrs</th></tr></thead><tbody><tr><td>&lt;100,000</td><td>72</td><td>66</td><td>66</td><td>60</td></tr><tr><td>100,000–119,999</td><td>72</td><td>66</td><td>66</td><td>60</td></tr><tr><td>120,000–139,999</td><td>66</td><td>66</td><td>66</td><td>60</td></tr><tr><td>140,000–159,999</td><td>66</td><td>66</td><td>66</td><td>60</td></tr><tr><td>160,000–200,000</td><td>60</td><td>60</td><td>60</td><td>60</td></tr></tbody></table><div class=\"note-box warn\"><span class=\"note-icon\">⚠️</span><span>Non-PLUS approvals: contracts received after 20 days from initial submission NOT eligible for participation. All hail damage must be repaired before contracting.</span></div>",
+      "page": 1,
+      "quote": "75 to 84 month terms available for qualified customers/vehicles",
+      "note": "The record said \"Up to 84 months\" with no grid. The sheet caps term by mileage AND vehicle age: 5 mileage bands x 4 age columns = 20 cells, transcribed in full. The best cell is 72 months, not 84 — a 10-year-old unit with 130,000 miles is 66 months. 75-84 is an exception for qualified customers/vehicles (footnote 6), not the standard ceiling. Also adds max DTI 77-87% (standard) / up to 87% (PLUS), which the record had nowhere.",
+      "approved": null
+    },
+    {
+      "path": [
+        "sections",
+        "backend",
+        "content"
+      ],
+      "old": "<div class=\"info-grid\"><div class=\"info-row\"><span class=\"info-key\">GAP (Standard)</span><span class=\"info-val\">$1,200 or state max</span></div><div class=\"info-row\"><span class=\"info-key\">GAP Min LTV</span><span class=\"info-val\">70% front-end</span></div><div class=\"info-row\"><span class=\"info-key\">GAP Not Allowed</span><span class=\"info-val\">MA, NY</span></div><div class=\"info-row\"><span class=\"info-key\">VSC (Standard)</span><span class=\"info-val\">$3,500 full coverage; $2,500 for 90K+ miles or 9+ year-old units (powertrain only)</span></div><div class=\"info-row\"><span class=\"info-key\">VSC (PLUS Gold)</span><span class=\"info-val\">$4,500</span></div><div class=\"info-row\"><span class=\"info-key\">Total Backend (Standard)</span><span class=\"info-val\">$4,000 or 25% of book (lesser)</span></div><div class=\"info-row\"><span class=\"info-key\">VSC Minimum Coverage</span><span class=\"info-val\">24 months / 24,000 miles</span></div></div>",
+      "new": "<div class=\"info-grid\"><div class=\"info-row\"><span class=\"info-key\">GAP (Standard)</span><span class=\"info-val\">$1,200 or state max</span></div><div class=\"info-row\"><span class=\"info-key\">GAP Min LTV</span><span class=\"info-val\">70% front-end</span></div><div class=\"info-row\"><span class=\"info-key\">GAP Not Allowed</span><span class=\"info-val\">MA, NY</span></div><div class=\"info-row\"><span class=\"info-key\">VSC (Standard)</span><span class=\"info-val\">$3,500 full coverage; $2,500 for 90K+ miles or 9+ year-old units (powertrain only)</span></div><div class=\"info-row\"><span class=\"info-key\">VSC (PLUS Gold)</span><span class=\"info-val\">$4,500</span></div><div class=\"info-row\"><span class=\"info-key\">VSC (PLUS Bronze/Silver)</span><span class=\"info-val\">$4,000</span></div><div class=\"info-row\"><span class=\"info-key\">Maint., Tire &amp; Wheel</span><span class=\"info-val\">$1,500 (higher case-by-case)</span></div><div class=\"info-row\"><span class=\"info-key\">Total Backend (Standard)</span><span class=\"info-val\">$4,000 or 25% of book (lesser)</span></div><div class=\"info-row\"><span class=\"info-key\">Total Backend (PLUS)</span><span class=\"info-val\">Bronze/Silver: lesser of $4,500 or 25% of book · Gold: lesser of $5,000 or 25% of book</span></div><div class=\"info-row\"><span class=\"info-key\">VSC Minimum Coverage</span><span class=\"info-val\">24 months / 24,000 miles</span></div></div>",
+      "page": 2,
+      "quote": "Maintenance, tire, and wheel up to $1,500.",
+      "note": "Three products the record never carried. Maintenance/tire/wheel had no row at all, so the desk had no ceiling for it. ExeterPLUS Bronze and Silver VSC ($4,000) sat between the standard $3,500 and the Gold $4,500 the record already had. PLUS total back-end splits Bronze/Silver from Gold (p1 footnote 10).",
+      "approved": null
+    },
+    {
+      "path": [
+        "sections",
+        "vehicles",
+        "content"
+      ],
+      "old": "<div class=\"info-grid\"><div class=\"info-row\"><span class=\"info-key\">Age Limit</span><span class=\"info-val\">Up to 13 years old</span></div><div class=\"info-row\"><span class=\"info-key\">Max Mileage</span><span class=\"info-val\">200,000 miles</span></div></div><div class=\"note-box danger\" style=\"margin-top:10px\"><span class=\"note-icon\">🚫</span><span><strong>Ineligible:</strong> Commercial, rideshare/delivery, above 1-ton trucks, exotics, motorcycles, RVs, models not in current JD Power or KBB.</span></div>",
+      "new": "<div class=\"info-grid\"><div class=\"info-row\"><span class=\"info-key\">Age Limit</span><span class=\"info-val\">Up to 13 years old</span></div><div class=\"info-row\"><span class=\"info-key\">Max Mileage</span><span class=\"info-val\">200,000 miles</span></div><div class=\"info-row\"><span class=\"info-key\">Used Value — TX</span><span class=\"info-val\">J.D. Power clean trade</span></div><div class=\"info-row\"><span class=\"info-key\">Used Value — KBB states</span><span class=\"info-val\">AZ, CA, CO, HI, ID, MT, NM, NV, OR, UT, WA, WY</span></div><div class=\"info-row\"><span class=\"info-key\">New Value</span><span class=\"info-val\">Current model year, untitled, &lt;6,000 mi — valued on invoice</span></div><div class=\"info-row\"><span class=\"info-key\">Prior-Year New</span><span class=\"info-val\">Invoice Jan–Mar; value guide Apr–Dec</span></div><div class=\"info-row\"><span class=\"info-key\">CPO</span><span class=\"info-val\">+$1,000 book value, manufacturer-certified</span></div></div><table class=\"tier-table\" style=\"margin-top:12px\"><thead><tr><th>Like-invoice mileage</th><th>0–6,000</th><th>6,001–12,000</th><th>12,001–18,000</th><th>18,001–25,000</th><th>25,000+</th></tr></thead><tbody><tr><td>Allowance</td><td>90%</td><td>85%</td><td>80%</td><td>75%</td><td>60%</td></tr></tbody></table><div class=\"note-box danger\" style=\"margin-top:10px\"><span class=\"note-icon\">🚫</span><span><strong>Ineligible:</strong> Commercial, rideshare/delivery, above 1-ton trucks, exotics, motorcycles, RVs, models not in current JD Power or KBB.</span></div>",
+      "page": 2,
+      "quote": "Established using J.D. Power clean trade in all states except AZ, CA, CO, HI, ID, MT, NM, NV, OR, UT, WA, and WY, where KBB applies.",
+      "note": "The record had no valuation row for Exeter at all — only \"models not in current JD Power or KBB\" buried in the ineligible list. Texas is not in the KBB list, so TX books on J.D. Power clean trade. Also adds the New Value definition and the 5-band like-invoice allowance chart (0-6,000 through 25,000+), transcribed in full. CPO +$1,000 moved here from the LTV section where it also appears; the $1,000 is confirmed on p2.",
+      "approved": null
+    },
+    {
+      "path": [
+        "sections",
+        "fico",
+        "content"
+      ],
+      "old": "<div class=\"info-grid\"><div class=\"info-row\"><span class=\"info-key\">Standard Min FICO</span><span class=\"info-val\">400 (zero FICO considered)</span></div><div class=\"info-row\"><span class=\"info-key\">ExeterPLUS Min FICO</span><span class=\"info-val\">620</span></div><div class=\"info-row\"><span class=\"info-key\">Standard Rate As Low As</span><span class=\"info-val\">10.95%</span></div><div class=\"info-row\"><span class=\"info-key\">BK — Chapter 7</span><span class=\"info-val\">Will consider</span></div><div class=\"info-row\"><span class=\"info-key\">BK — Chapter 13</span><span class=\"info-val\">Must be discharged</span></div><div class=\"info-row\"><span class=\"info-key\">Dismissed BK</span><span class=\"info-val\">Must be 12+ months old</span></div></div>",
+      "new": "<div class=\"info-grid\"><div class=\"info-row\"><span class=\"info-key\">Standard Min FICO</span><span class=\"info-val\">400 (zero FICO considered)</span></div><div class=\"info-row\"><span class=\"info-key\">ExeterPLUS Min FICO</span><span class=\"info-val\">620</span></div><div class=\"info-row\"><span class=\"info-key\">Standard Rate As Low As</span><span class=\"info-val\">10.95%</span></div><div class=\"info-row\"><span class=\"info-key\">ExeterPLUS Rate As Low As</span><span class=\"info-val\">9.95%</span></div><div class=\"info-row\"><span class=\"info-key\">BK — Chapter 7</span><span class=\"info-val\">Will consider</span></div><div class=\"info-row\"><span class=\"info-key\">BK — Chapter 13</span><span class=\"info-val\">Must be discharged</span></div><div class=\"info-row\"><span class=\"info-key\">Dismissed BK</span><span class=\"info-val\">Must be 12+ months old</span></div><div class=\"info-row\"><span class=\"info-key\">Repossessions</span><span class=\"info-val\">None in last 2 months (unless part of a BK)</span></div><div class=\"info-row\"><span class=\"info-key\">ExeterPLUS Credit</span><span class=\"info-val\">No repos in last 12 months · no multiple repos · 2+ tradelines</span></div><div class=\"info-row\"><span class=\"info-key\">Multiple Discharged BKs</span><span class=\"info-val\">Not accepted</span></div><div class=\"info-row\"><span class=\"info-key\">Dealership Employees</span><span class=\"info-val\">Ineligible at the submitting dealership</span></div></div>",
+      "page": 2,
+      "quote": "ExeterPLUS: 620+ credit score. No straw purchases. No repossessions in the last 12 months. No multiple repos. Two or more tradelines.",
+      "note": "The record had the standard 10.95% rate but not the PLUS 9.95%. It also had no repo rule, no PLUS tradeline requirement, and nothing about dealership employees being ineligible — all three are hard declines the desk would want before submitting.",
+      "approved": null
+    },
+    {
+      "path": [
+        "sections",
+        "income",
+        "content"
+      ],
+      "old": "<div class=\"info-grid\"><div class=\"info-row\"><span class=\"info-key\">W2 Paystub Age</span><span class=\"info-val\">Within 30 days of contract date + VOE</span></div><div class=\"info-row\"><span class=\"info-key\">Secondary Employment</span><span class=\"info-val\">Must be at secondary job ≥1 year</span></div><div class=\"info-row\"><span class=\"info-key\">Self-Employed</span><span class=\"info-val\">Last year's professionally prepared tax return OR 3 current months personal bank stmts (no NSF)</span></div><div class=\"info-row\"><span class=\"info-key\">SS / VA / Retirement</span><span class=\"info-val\">Current bank/card statement showing beneficiary name and amount</span></div><div class=\"info-row\"><span class=\"info-key\">Non-Taxable Gross-Up</span><span class=\"info-val\">+25%</span></div><div class=\"info-row\"><span class=\"info-key\">Child / Spousal Support</span><span class=\"info-val\">3 months consecutive pay history required; award letters alone NOT sufficient</span></div><div class=\"info-row\"><span class=\"info-key\">Min Income (Single)</span><span class=\"info-val\">$1,700/month</span></div><div class=\"info-row\"><span class=\"info-key\">Min Income (Joint)</span><span class=\"info-val\">$2,500/month</span></div><div class=\"info-row\"><span class=\"info-key\">Rideshare Drivers</span><span class=\"info-val\">Ineligible (Uber, DoorDash, etc.)</span></div><div class=\"info-row\"><span class=\"info-key\">Temp Workers</span><span class=\"info-val\">6+ months with same agency</span></div></div>",
+      "new": "<div class=\"info-grid\"><div class=\"info-row\"><span class=\"info-key\">W2 Paystub Age</span><span class=\"info-val\">Within 30 days of contract date + VOE</span></div><div class=\"info-row\"><span class=\"info-key\">Secondary Employment</span><span class=\"info-val\">Must be at secondary job ≥1 year</span></div><div class=\"info-row\"><span class=\"info-key\">Self-Employed</span><span class=\"info-val\">Last year's professionally prepared tax return OR 3 current months personal bank stmts (no NSF)</span></div><div class=\"info-row\"><span class=\"info-key\">SS / VA / Retirement</span><span class=\"info-val\">Current bank/card statement showing beneficiary name and amount</span></div><div class=\"info-row\"><span class=\"info-key\">Non-Taxable Gross-Up</span><span class=\"info-val\">+25%</span></div><div class=\"info-row\"><span class=\"info-key\">Child / Spousal Support</span><span class=\"info-val\">3 months consecutive pay history required; award letters alone NOT sufficient</span></div><div class=\"info-row\"><span class=\"info-key\">Min Income (Single)</span><span class=\"info-val\">$1,700/month</span></div><div class=\"info-row\"><span class=\"info-key\">Min Income (Joint)</span><span class=\"info-val\">$2,500/month</span></div><div class=\"info-row\"><span class=\"info-key\">Rideshare Drivers</span><span class=\"info-val\">Ineligible (Uber, DoorDash, etc.)</span></div><div class=\"info-row\"><span class=\"info-key\">Temp Workers</span><span class=\"info-val\">6+ months with same agency</span></div><div class=\"info-row\"><span class=\"info-key\">Garnishments</span><span class=\"info-val\">Paystub debt deductions (company loans, child support, other) count in DTI</span></div><div class=\"info-row\"><span class=\"info-key\">Military</span><span class=\"info-val\">Current Leave &amp; Earnings Statement showing dates of service</span></div><div class=\"info-row\"><span class=\"info-key\">Self-Employed Tenure</span><span class=\"info-val\">2+ years (contract workers too)</span></div></div>",
+      "page": 1,
+      "quote": "Debt-related deductions on paystubs (company loans, child support, and other) included in debt calculation.",
+      "note": "Garnishments counting against DTI changes whether a deal structures, and the record did not mention them. Military LES and the 2-year self-employment tenure were also absent.",
+      "approved": null
+    },
+    {
+      "path": [
+        "sections",
+        "id",
+        "content"
+      ],
+      "old": "<div class=\"info-grid\"><div class=\"info-row\"><span class=\"info-key\">ID Required</span><span class=\"info-val\">Valid government-issued ID at contracting</span></div><div class=\"info-row\"><span class=\"info-key\">ITIN</span><span class=\"info-val\">✓ Must provide IRS-issued letter</span></div><div class=\"info-row\"><span class=\"info-key\">POR Options</span><span class=\"info-val\">Valid driver's license OR utility bill ≤30 days of contract date</span></div><div class=\"info-row\"><span class=\"info-key\">Phone Requirement</span><span class=\"info-val\">Must have active phone number and physical address</span></div></div><div class=\"note-box info\"><span class=\"note-icon\">ℹ️</span><span>Applicants are called to verify information prior to funding (prefunding confirmation).</span></div>",
+      "new": "<div class=\"info-grid\"><div class=\"info-row\"><span class=\"info-key\">ID Required</span><span class=\"info-val\">Valid government-issued ID at contracting</span></div><div class=\"info-row\"><span class=\"info-key\">ITIN</span><span class=\"info-val\">✓ Must provide IRS-issued letter</span></div><div class=\"info-row\"><span class=\"info-key\">POR Options</span><span class=\"info-val\">Valid driver's license OR utility bill ≤30 days of contract date</span></div><div class=\"info-row\"><span class=\"info-key\">Phone Requirement</span><span class=\"info-val\">Must have active phone number and physical address</span></div><div class=\"info-row\"><span class=\"info-key\">Proof of Insurance</span><span class=\"info-val\">Six-month comprehensive/collision, $1,000 max deductible. No month-to-month, commercial, or 30-day drive-away</span></div><div class=\"info-row\"><span class=\"info-key\">Insurance Proof Form</span><span class=\"info-val\">Signed ATPI listing Exeter as lienholder, or insurance card/dec page</span></div></div><div class=\"note-box info\"><span class=\"note-icon\">ℹ️</span><span>Applicants are called to verify information prior to funding (prefunding confirmation).</span></div>",
+      "page": 1,
+      "quote": "Six-month comprehensive/collision policy, with $1,000 max. allowable deductible.",
+      "note": "The record had no insurance requirement anywhere. The deductible cap and the excluded policy types are funding stips — this is the kind of thing that bounces a package.",
+      "approved": null
+    }
+  ],
+  "not_in_source": [
+    "ficoMin",
+    "maxLTV",
+    "gapMax",
+    "maxMileage",
+    "chargebackWindow",
+    "bureaus.stateMap"
+  ],
+  "ambiguities": [
+    {
+      "field": "maxTerm",
+      "note": "Record stores 84 and the compare table shows it. The grid caps at 72 for the best mileage/age cell; 84 exists only \"for qualified customers/vehicles\" (p1 fn 6). Left at 84 per EXTRACTION_GUIDE section 6 (store the best-tier value), but 84 in a compare column overstates what most units get. Change it to 72, or leave it?"
+    },
+    {
+      "field": "sections.vehicles — KBB state list",
+      "note": "Program Sheet p2 lists 12 KBB states. The Funding Checklist lists 13, adding AK, and calls the book \"NADA\" rather than J.D. Power. Took the Program Sheet: newer and higher authority. Texas is in neither list, so TX is J.D. Power either way."
+    },
+    {
+      "field": "bureaus.note",
+      "note": "Record says \"Pulls all three bureaus. Minimum 400 average credit score.\" The 400 average is confirmed p2; neither document says all three bureaus are pulled."
+    }
+  ]
+}
