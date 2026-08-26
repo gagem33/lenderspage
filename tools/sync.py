@@ -201,6 +201,90 @@ def id_from_title(title):
     return BANK_TO_ID.get(prefix)
 
 
+# ---------------------------------------------------------------- freshness
+
+# How old a program sheet may get before the desk should re-check it. Gage set
+# the first threshold on 2026-08-26: 90 days is the point a bank is worth a look.
+# Past a year the document is not "aging", it is out of date -- dfc sat at 378
+# days behind a wrong filename until 2026-08-26, and nothing on the page said so.
+AGE_CHECK = 90
+AGE_STALE = 365
+
+FRESHNESS_PAINT = {
+    'ok': green, 'month-only': dim, 'acknowledged': dim,
+    'stale': red, 'ahead': yellow, 'undated': yellow, 'no-pdf': yellow,
+}
+
+def freshness(records, listing, ack=None):
+    """Per lender: what date the app claims, what Drive has, and whether they agree.
+
+    One computation, two consumers -- `scan` prints it, `freshness --write` bakes it
+    into lenders.json so the page can show it. They cannot drift apart, which is the
+    whole point: spec #4 says freshness comes from the source document automatically,
+    and a number the terminal knows but the desk cannot see does not satisfy that.
+
+    `date` is stored, age is not. An age baked into a file is wrong the next morning;
+    the browser subtracts it from today at render time.
+    """
+    ack = ack or {}
+    newest = {}
+    for f in listing:
+        lid = id_from_title(f['title'])
+        d = parse_filename_date(f['title'])
+        if not lid or not d or not is_authority_doc(f['title']):
+            continue
+        if lid not in newest or d > newest[lid][0]:
+            newest[lid] = (d, f['title'], f.get('id'))
+
+    today = datetime.date.today()
+    out = []
+    for r in records:
+        lid = r['id']
+        dates, precision = parse_app_dates(r.get('effectiveDate', ''))
+        app_date = dates[-1] if dates else None   # newest wins: a bulletin supersedes
+        drive = newest.get(lid)
+        status, label, note = 'ok', 'ok', ''
+
+        if not drive:
+            status, label, note = 'no-pdf', 'NO PDF', 'no source document in Drive'
+        elif app_date is None:
+            status, label = 'undated', 'UNDATED'
+            note = f"app shows {r['effectiveDate']!r}"
+        elif precision == 'month':
+            # 'July 2026' vs a file dated 2026-07-08 is agreement, not staleness.
+            same_month = (app_date.year, app_date.month) == (drive[0].year, drive[0].month)
+            if drive[0] < app_date or same_month:
+                status, label = 'month-only', 'month-only'
+                note = f"app shows {r['effectiveDate']!r}, newest file is {drive[0].isoformat()}"
+                if same_month:
+                    app_date = drive[0]
+            else:
+                status, label = 'stale', 'STALE'
+                note = f'Drive has {drive[0].isoformat()}, app shows only {r["effectiveDate"]!r}'
+        elif drive[0] > app_date:
+            status, label = 'stale', 'STALE'
+            note = f'Drive has {drive[0].isoformat()} ({drive[1]}), app shows {app_date.isoformat()}'
+        elif app_date > drive[0]:
+            status, label = 'ahead', 'AHEAD'
+            note = (f'app shows {app_date.isoformat()} but the newest source doc is '
+                    f'{drive[0].isoformat()} -- which is right?')
+        else:
+            note = f'{app_date.isoformat()}  ({(today - app_date).days}d old)'
+
+        if lid in ack and status in ('stale', 'undated', 'ahead'):
+            status, label = 'acknowledged', 'ack'
+            note = f'{note}  [reviewed {ack[lid].get("reviewed", "?")}]'
+
+        out.append({
+            'id': lid, 'status': status, 'label': label, 'note': note,
+            'date': app_date.isoformat() if app_date else None,
+            'precision': precision,
+            'doc': drive[1] if drive else None,
+            'drive_file_id': drive[2] if drive else None,
+        })
+    return out
+
+
 # ---------------------------------------------------------------- scan
 
 def load_listing(path):
@@ -283,56 +367,13 @@ def cmd_scan(a):
     if not (new or changed or untracked or missing):
         print(green('Drive and SOURCES.md agree. No new or changed files.\n'))
 
-    # Freshness: newest Drive doc per lender vs the date the app is showing.
     print(bold('Freshness -- newest Drive document vs lenders.json effectiveDate\n'))
-    newest = {}
-    for f in listing:
-        lid = id_from_title(f['title'])
-        d = parse_filename_date(f['title'])
-        if not lid or not d or not is_authority_doc(f['title']):
-            continue
-        if lid not in newest or d > newest[lid][0]:
-            newest[lid] = (d, f['title'])
-
-    today = datetime.date.today()
     ack = load_acknowledged()
-    rows = []
-    for r in records:
-        lid = r['id']
-        dates, precision = parse_app_dates(r.get('effectiveDate', ''))
-        app_date = dates[-1] if dates else None   # newest wins: a bulletin supersedes
-        drive = newest.get(lid)
-        flag, note = '', ''
-        if not drive:
-            flag, note = yellow('NO PDF'), 'no source document in Drive'
-        elif app_date is None:
-            flag, note = yellow('UNDATED'), f"app shows {r['effectiveDate']!r}"
-        elif precision == 'month':
-            # 'July 2026' vs a file dated 2026-07-08 is agreement, not staleness.
-            same_month = (app_date.year, app_date.month) == (drive[0].year, drive[0].month)
-            if drive[0] < app_date or same_month:
-                flag = dim('month-only')
-                note = f"app shows {r['effectiveDate']!r}, newest file is {drive[0].isoformat()}"
-            else:
-                flag = red('STALE')
-                note = f'Drive has {drive[0].isoformat()}, app shows only {r["effectiveDate"]!r}'
-        elif drive[0] > app_date:
-            flag = red('STALE')
-            note = f'Drive has {drive[0].isoformat()} ({drive[1]}), app shows {app_date.isoformat()}'
-        elif app_date > drive[0]:
-            flag = yellow('AHEAD')
-            note = (f'app shows {app_date.isoformat()} but the newest source doc is '
-                    f'{drive[0].isoformat()} -- which is right?')
-        else:
-            age = (today - app_date).days
-            flag = green('ok')
-            note = f'{app_date.isoformat()}  ({age}d old)'
-        if lid in ack and flag in (red('STALE'), yellow('UNDATED'), yellow('AHEAD')):
-            flag = dim('ack')
-            note = f'{note}  [reviewed {ack[lid].get("reviewed","?")}]'
-        rows.append((lid, flag, note))
+    rows = [(f['id'], FRESHNESS_PAINT[f['status']](f['label']), f['note'])
+            for f in freshness(records, listing, ack)]
 
-    live_issues = [r for r in rows if 'STALE' in r[1] or 'UNDATED' in r[1] or 'AHEAD' in r[1]]
+    live_issues = [f for f in freshness(records, listing, ack)
+                   if f['status'] in ('stale', 'undated', 'ahead')]
     width = max(len(r[0]) for r in rows)
     for lid, flag, note in rows:
         print(f'  {lid.ljust(width)}  {flag:<20} {dim(note)}')
@@ -345,6 +386,64 @@ def cmd_scan(a):
         print(dim(f'{len(ack)} acknowledged divergence(s) hidden -- see '
                   f'{os.path.relpath(ACKFILE, ROOT)}'))
     print()
+    return 0
+
+
+def cmd_freshness(a):
+    """Bake each lender's source date into lenders.json so the page can show it.
+
+    Spec #4: freshness comes from the source PDF automatically, with no button and
+    nothing to maintain by hand. That is only true if the number reaches the desk,
+    and until now it reached a terminal. This writes a `source` block per lender;
+    `index.html` turns it into a badge.
+
+    Age is deliberately NOT stored -- only the date. A stored age is wrong tomorrow.
+    """
+    records = load_lenders()
+    listing = load_listing(a.listing) if a.listing else (
+        load_listing(SNAPSHOT) if os.path.exists(SNAPSHOT) else None)
+    if listing is None:
+        print(red('No Drive listing and no snapshot. Run scan --listing first.'))
+        return 1
+
+    rows = {f['id']: f for f in freshness(records, listing, load_acknowledged())}
+    today = datetime.date.today().isoformat()
+    changed = []
+    for r in records:
+        f = rows.get(r['id'])
+        if not f:
+            continue
+        src_block = {
+            'date':        f['date'],
+            'precision':   f['precision'],
+            'status':      f['status'],
+            'doc':         f['doc'],
+            'driveFileId': f['drive_file_id'],
+            'syncedAt':    today,
+        }
+        # A warning is editorial -- it says the document is current but its CONTENT
+        # is not, which no date can express. Kia is the live case. Set through a
+        # proposal like any other value, so never clobber one here.
+        if isinstance(r.get('source'), dict) and r['source'].get('warning'):
+            src_block['warning'] = r['source']['warning']
+        before = r.get('source')
+        if before != src_block:
+            changed.append((r['id'], f['status'], f['date']))
+        r['source'] = src_block
+
+    if a.dry_run:
+        print(green(f'[dry run] would update source on {len(changed)} lender(s):'))
+        for lid, st, d in changed:
+            print(f'  {lid:<12} {st:<12} {d}')
+        return 0
+
+    write_lenders(records)
+    with open(LENDERS, encoding='utf-8') as f:
+        json.load(f)
+    print(green(f'Wrote source freshness for {len(records)} lender(s); '
+                f'{len(changed)} changed.'))
+    for lid, st, d in changed:
+        print(f'  {lid:<12} {st:<12} {d}')
     return 0
 
 
@@ -799,6 +898,11 @@ def main():
     s = sub.add_parser('scan', help='what changed in Drive, and which lenders look stale')
     s.add_argument('--listing', help='JSON from the Drive search_files tool')
     s.set_defaults(fn=cmd_scan)
+
+    s = sub.add_parser('freshness', help="bake each lender's source date into lenders.json")
+    s.add_argument('--listing', help='JSON from the Drive search_files tool')
+    s.add_argument('--dry-run', action='store_true')
+    s.set_defaults(fn=cmd_freshness)
 
     s = sub.add_parser('ingest', help='decode a downloaded PDF onto disk')
     s.add_argument('--result', required=True, help='the Drive download tool result file')

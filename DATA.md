@@ -56,6 +56,7 @@ Segment counts: Prime 7 · Near-Prime 4 · Sub-Prime 5 · Prime+ 1 · Deep Sub-P
 | `idReq`, `por`, `poi` | string | 20/20 | prose |
 | `bureaus` | object `{primary[], note, stateMap{}}` | 20/20 | OK — only structured field |
 | `stateRestriction` | string | 2/20 | absent = no restriction (implicit) |
+| `source` | object `{date, precision, status, doc, driveFileId, syncedAt, warning?}` | 20/20 | Added 2026-08-26 for spec #4. Written by `sync.py freshness`, never by hand. `date` is ISO and sortable — the machine-readable twin of the free-text `effectiveDate` above it. Age is **not** stored; the page subtracts from today. `warning` is optional and editorial, set through a proposal (kia only). |
 | `sections` | object of HTML strings | 20/20 | **All detailed program data is HTML, not data.** See 1.3 |
 
 ### 1.3 `sections` — the real problem

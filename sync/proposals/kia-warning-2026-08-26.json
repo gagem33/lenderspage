@@ -1,0 +1,41 @@
+{
+  "schema": "lenderhub.proposal.v1",
+  "lender_id": "kia",
+  "created": "2026-08-26",
+  "sources": [
+    {
+      "drive_file_id": "1IyXoIz8Pia7vRv4o9I6k44e4D-njRDV8",
+      "title": "KIA - K500&K506 - 070126.pdf",
+      "doc_type": "K500&K506",
+      "effective_date": "2026-07-01",
+      "pages": 10,
+      "triage": {
+        "1": "TEXT_OK"
+      },
+      "read_as": "Text layer, header of every page. This is Drive's NEWEST Kia bulletin and it is already expired."
+    }
+  ],
+  "changes": [
+    {
+      "path": [
+        "source",
+        "warning"
+      ],
+      "old": null,
+      "new": "Incentive rates below are from bulletins 2026-036/037 — contracts had to be dated by March 31, 2026 and funded by April 14. They are four months dead. Drive's newest bulletin (2026-091) has also expired: contracts July 7 – August 3, funding deadline August 17. There is no current Kia bulletin on file. Do not quote these rates — get the live bulletin from KFA.",
+      "page": 1,
+      "quote": "Effective with Contracts Dated July 7, 2026 - August 3, 2026 | Contract & Documentation Package must be Received & Funded by August 17, 2026",
+      "note": "Document age cannot express this. The Kia record's effectiveDate reads 'K500/K506 July 7, 2026', which is 50 days old and would badge green — but the rates stored in the incentives section are from March, and even the newest bulletin in Drive expired on August 17. A freshness check that reads only dates would wave the store's own captive through while it shows April money. This is the one case the date-based badge would get wrong, so it is stated explicitly.",
+      "approved": true
+    }
+  ],
+  "not_in_source": [],
+  "ambiguities": [
+    {
+      "field": "warning — lifespan",
+      "note": "This warning must be deleted the moment a current bulletin is loaded and the incentives section is re-extracted. `sync.py freshness` preserves an existing warning rather than recomputing it, so nothing will clear it automatically — that is deliberate, but it means it can outlive its truth if nobody removes it."
+    }
+  ],
+  "approved_by": "gage",
+  "approved_at": "2026-08-26T22:28:24"
+}

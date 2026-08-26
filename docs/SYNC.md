@@ -75,7 +75,22 @@ python3 tools/sync.py approve sync/proposals/chase-2026-08-26.json --fields 0,2 
 # Write it.
 python3 tools/sync.py apply sync/proposals/chase-2026-08-26.json --dry-run
 python3 tools/sync.py apply sync/proposals/chase-2026-08-26.json
+
+# Last step, every time: refresh what the page shows about document age.
+python3 tools/sync.py freshness --dry-run
+python3 tools/sync.py freshness
 ```
+
+Run `freshness` after any apply, and after any Drive change. It rewrites each
+lender's `source` block — the ISO date its `effectiveDate` resolves to, the
+document that date came from, its Drive ID, and today as `syncedAt`. The page
+turns that into the age badge; green under 90 days, amber past 90, red past a
+year. It stores the date and not the age, so the badge is right tomorrow too.
+
+It preserves an existing `source.warning` rather than recomputing it. A warning
+says the document is current but its *contents* are not, which no date can
+express — Kia is the live case. Set one through a proposal like any other value,
+and delete it by hand when it stops being true.
 
 `drive.json` is whatever the agent's Drive tool returns for
 `parentId = '1kf_mJ09Sxfg--PQ-xqOXdkouYUJ8ryz9'`. The scan also accepts the
