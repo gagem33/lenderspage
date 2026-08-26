@@ -1,10 +1,6 @@
 {
-  "_comment": "Divergences between a Drive filename date and lenders.json that have been looked at and settled. `scan` prints these as `ack` instead of STALE so the monthly report only shows things nobody has judged yet. Remove an entry when a new PDF arrives for that lender -- the question reopens.",
+  "_comment": "Divergences between a Drive filename date and lenders.json that have been looked at and settled. `scan` prints these as `ack` instead of STALE so the monthly report only shows things nobody has judged yet. Remove an entry when a new PDF arrives for that lender -- the question reopens. td and dfc were removed on 2026-08-26 once their Drive files were renamed to match the dates printed inside the documents — the divergence no longer exists.",
   "acknowledged": {
-    "td": {
-      "reviewed": "2026-08-26",
-      "reason": "RESOLVED at source: the sheet's own footer reads \"84-291-8462 06/30/2026\" on every page, so the record's June 30, 2026 is correct and the Drive filename (070126) is a day off. Rename to TD - Program Sheet - 063026.pdf, update the SOURCES.md row, and delete this entry."
-    },
     "gls": {
       "reviewed": "2026-08-26",
       "reason": "App stores a version string '2026 (v53)', not a date. The PDF is dated 2026-07-27. Needs a real date eventually."
@@ -12,10 +8,6 @@
     "kia": {
       "reviewed": "2026-08-26",
       "reason": "App says K500/K506 July 7, filename says 07-01. Resolved in the app's favour. Separately: bulletin 2026-091 expired 2026-08-03 and no current one exists."
-    },
-    "dfc": {
-      "reviewed": "2026-08-26",
-      "reason": "RESOLVED at source: the sheet itself prints \"Revision Date: 8/13/2025\" in its header, so the record's August 13, 2025 is correct and the Drive filename (010126) is what is wrong. Rename the file to DFC - Program Sheet - 081325.pdf, update the SOURCES.md row, and this entry can be deleted instead of carried forever."
     }
   }
 }

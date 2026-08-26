@@ -69,8 +69,8 @@ When a lender has both a Program Sheet and Guidelines/Rules, extract from Guidel
 | regional | Program Sheet | 2026-05-27 | `13dk1uBsz8kLhtDIsoRLD-v62w9eMOu04` | May 27, 2026 ✓ | ok (1p) |
 | regional | Underwriting Guidelines | 2026-05-27 | `1ILGWQes91nVYi89dVD2rjhEmA5OoPeLs` | | ok (2p) |
 | truist | Program Sheet | 2026-07-20 | `1dwSi3YQ1N7TnbXrQADGRMkaPpWnUMnxz` | July 20, 2026 ✓ | **PARTIAL** p1,2,4 of 4 |
-| td | Program Sheet | 2026-07-01 | `1O9q8uW2FdCawn6uauNxv9xYGPZ8fIEvO` | June 30, 2026 ≠ | ok (8p) |
-| td | Program Sheet2 | 2026-07-01 | `1X57L74CerUi8vHJ37BujDe00ZhrxEL_D` | | ok (4p) |
+| td | Program Sheet | 2026-06-30 | `1O9q8uW2FdCawn6uauNxv9xYGPZ8fIEvO` | June 30, 2026 ✓ | ok (8p) |
+| td | Program Sheet2 | 2026-06-30 | `1X57L74CerUi8vHJ37BujDe00ZhrxEL_D` | | ok (4p) |
 | wellsfargo | Program Sheet | 2026-06-16 | `1dXg8-YyViTdr9mbWuTlYRjiluVvcXRbo` | June 16, 2026 ✓ | ok (18p) |
 | ally | Program Sheet | 2026-04-01 | `1rm-zFIrAzSg4cLZ_z-GB4Y5r0fcZoZuE` | April 1, 2026 ✓ | ok (7p) |
 | ally | 84 month Program Sheet | 2026-04-01 | `1R-6gins9tE5wyy3dqNRUJv6FcaOyXo0Y` | | **IMAGE_ONLY** p1 of 1 |
@@ -93,7 +93,7 @@ When a lender has both a Program Sheet and Guidelines/Rules, extract from Guidel
 | pnc | Program Sheet | 2026-03-16 | `1bWKDBW9sVot4RWU_Shlyxk_w1CWb7Lgw` | March 16, 2026 ✓ | ok (1p) |
 | pnc | Funding Guidelines | 2026-03-16 | `1wm-elYRNIu8giTY37o58liJZQeii9-IZ` | | ok (1p) |
 | pnc | Proof of Residence | 2026-03-16 | `113xcnne99r6y1pRwU0koYmk1IKedJbq0` | | ok (1p) |
-| dfc | Program Sheet | 2026-01-01 | `1VJ5ltQPHIdsv62z8SYOP8C3NXCzNNrvJ` | Aug 13, 2025 ≠ | ok (1p) |
+| dfc | Program Sheet | 2025-08-13 | `1VJ5ltQPHIdsv62z8SYOP8C3NXCzNNrvJ` | Aug 13, 2025 ✓ | ok (1p) |
 | dfc | Funding Guidelines | 2026-01-01 | `1tjEUJLshnxu5pCEc8RpAObDk7QHqEJuc` | | ok (4p) |
 | cps | Program Sheet | 2026-01-01 | `1QkqPCEMlfOvTf2ExbxfNVYMQVEHmAmVq` | January 1, 2026 ✓ | ok (2p) |
 | usbank | Program Sheet | 2026-04-01 | `1ffhHRvMuvYytMXS_Rh6gpDr3_gFiRYTY` | April 1, 2026 ✓ | ok (4p) |
@@ -107,7 +107,9 @@ When a lender has both a Program Sheet and Guidelines/Rules, extract from Guidel
 
 **Text layer** = `tools/pdf_triage.py` verdict, run over the whole folder on 2026-08-25. `ok` means the page text can be quoted. Anything bold has to be read from a 200 DPI render instead — see §4.
 
-**Mismatches to resolve:** `td` (file 07-01, app 06-30), `gls` (app has a version string, not a date), `kia` bulletin (07-01 vs 07-07), `dfc` (file 01-01-26, app says Aug 2025 — the app is probably stale, not the file).
+**Mismatches to resolve:** `gls` (the sheet carries no date at all, only the footer `GLS_PG_V53_2026`), `kia` bulletin (07-01 vs 07-07).
+
+**Resolved 2026-08-26 by renaming the file, not the record.** `td` and `dfc` both stated their own dates internally — TD's footer reads `06/30/2026` on every page of the Program Sheet and `PROD-9034 Effective 06.30.2026` on Program Sheet2, DFC's header reads `Revision Date: 8/13/2025`. The records were right and the filenames were wrong, so the two Drive files were renamed to match their documents. Renaming does not change a Drive file ID (§4), so the IDs above are unchanged.
 
 ---
 
