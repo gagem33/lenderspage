@@ -210,7 +210,7 @@ value can be "cited" and still be fiction.
 
 ## 8. Known gaps in the schema (flag, don't fix silently)
 
-- No rate / buy-rate storage. Rate sheets exist for most lenders; DATA.md doesn't model them yet.
+- ~~No rate / buy-rate storage.~~ **Closed 2026-08-26.** Rates go in a `sections.rates` entry like any other program area — `sync.py` places it beside LTV & Terms. A typed v2 rate field is still unmodelled, so a *comparable* rate (one a compare column could sort on) remains out of scope; see CLAUDE.md open questions.
 - No DTI field (PTI only).
 - No sub-program structure (Exeter Standard vs PLUS, CPS program names). Currently goes in notes.
 - No per-tier income minimums (AmeriCredit).

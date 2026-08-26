@@ -30,7 +30,7 @@
       "page": 1,
       "quote": "Consumer Rates | Tier 1 ... New & Current Year Vehicles | 0 to 90% | 8.05% | 9.90% | 11.65% | 12.30% | 13.55% | 14.95% | 14.95%",
       "note": "Regional is the only lender in the corpus whose sheet carries a full consumer rate grid, and none of it was in the app. 112 cells: 4 model-year bands x 4 front-end LTV bands x 7 tiers. Every cell was read twice -- once from a 300 dpi render of each half of the table, once from the text layer -- and the two agree in document order, all 112. New/current-year and 2024-2025 are listed as separate bands and price identically.",
-      "approved": null
+      "approved": true
     }
   ],
   "not_in_source": [],
@@ -39,5 +39,7 @@
       "field": "rates -- scope",
       "note": "This grid is the TX sheet's consumer rate, i.e. the rate to the customer, not a buy rate the dealer marks up. The reserve section already holds the flat/discount participation schedule that sits alongside it. Both come off the same page."
     }
-  ]
+  ],
+  "approved_by": "gage",
+  "approved_at": "2026-08-26T21:20:40"
 }
