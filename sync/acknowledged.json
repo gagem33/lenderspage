@@ -3,7 +3,7 @@
   "acknowledged": {
     "td": {
       "reviewed": "2026-08-26",
-      "reason": "File says 07-01, app says 2026-06-30. Resolved in the app's favour -- see AUDIT.md."
+      "reason": "RESOLVED at source: the sheet's own footer reads \"84-291-8462 06/30/2026\" on every page, so the record's June 30, 2026 is correct and the Drive filename (070126) is a day off. Rename to TD - Program Sheet - 063026.pdf, update the SOURCES.md row, and delete this entry."
     },
     "gls": {
       "reviewed": "2026-08-26",
