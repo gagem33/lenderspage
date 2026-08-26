@@ -41,7 +41,7 @@
       "page": 1,
       "quote": "75 to 84 month terms available for qualified customers/vehicles",
       "note": "Adds the term grid the record never had: the sheet schedules term by mileage AND vehicle age, 5 bands x 4 age columns = 20 cells, transcribed in full. 84 months stays the headline — Gage: the bank does do 84, it is a case-by-case factor, not score-based. The grid is the standard schedule underneath it, and it is what a 10-year-old unit at 130,000 miles actually gets (66 months). Also adds max DTI 77-87% standard / up to 87% PLUS, which the record had nowhere.",
-      "approved": null
+      "approved": true
     },
     {
       "path": [
@@ -54,7 +54,7 @@
       "page": 2,
       "quote": "Maintenance, tire, and wheel up to $1,500.",
       "note": "Three products the record never carried. Maintenance/tire/wheel had no row at all, so the desk had no ceiling for it. ExeterPLUS Bronze and Silver VSC ($4,000) sat between the standard $3,500 and the Gold $4,500 the record already had. PLUS total back-end splits Bronze/Silver from Gold (p1 footnote 10).",
-      "approved": null
+      "approved": true
     },
     {
       "path": [
@@ -67,7 +67,7 @@
       "page": 2,
       "quote": "Established using J.D. Power clean trade in all states except AZ, CA, CO, HI, ID, MT, NM, NV, OR, UT, WA, and WY, where KBB applies.",
       "note": "The record had no valuation row for Exeter at all — only \"models not in current JD Power or KBB\" buried in the ineligible list. Texas is not in the KBB list, so TX books on J.D. Power clean trade. Also adds the New Value definition and the 5-band like-invoice allowance chart (0-6,000 through 25,000+), transcribed in full. CPO +$1,000 moved here from the LTV section where it also appears; the $1,000 is confirmed on p2.",
-      "approved": null
+      "approved": true
     },
     {
       "path": [
@@ -80,7 +80,7 @@
       "page": 2,
       "quote": "ExeterPLUS: 620+ credit score. No straw purchases. No repossessions in the last 12 months. No multiple repos. Two or more tradelines.",
       "note": "The record had the standard 10.95% rate but not the PLUS 9.95%. It also had no repo rule, no PLUS tradeline requirement, and nothing about dealership employees being ineligible — all three are hard declines the desk would want before submitting.",
-      "approved": null
+      "approved": true
     },
     {
       "path": [
@@ -93,7 +93,7 @@
       "page": 1,
       "quote": "Debt-related deductions on paystubs (company loans, child support, and other) included in debt calculation.",
       "note": "Garnishments counting against DTI changes whether a deal structures, and the record did not mention them. Military LES and the 2-year self-employment tenure were also absent.",
-      "approved": null
+      "approved": true
     },
     {
       "path": [
@@ -106,7 +106,7 @@
       "page": 1,
       "quote": "Six-month comprehensive/collision policy, with $1,000 max. allowable deductible.",
       "note": "The record had no insurance requirement anywhere. The deductible cap and the excluded policy types are funding stips — this is the kind of thing that bounces a package.",
-      "approved": null
+      "approved": true
     }
   ],
   "not_in_source": [
@@ -132,5 +132,7 @@
       "field": "bureaus.note",
       "note": "STILL OPEN. Record says \"Pulls all three bureaus. Minimum 400 average credit score.\" The 400 average is confirmed on p2; neither document says which bureaus are pulled. Left unchanged."
     }
-  ]
+  ],
+  "approved_by": "gage",
+  "approved_at": "2026-08-26T19:29:19"
 }
