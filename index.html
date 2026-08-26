@@ -379,6 +379,18 @@ footer {
 }
 .cb-badge.none { background: var(--greendim); color: var(--green); }
 
+/* Freshness pip — sidebar only, and only when a lender wants a look. A dot on
+   every row would be wallpaper; a dot on four rows is a signal. */
+.fresh-pip {
+  width: 6px; height: 6px; border-radius: var(--r-full);
+  flex: 0 0 auto; margin-right: 2px;
+}
+.fresh-pip.amber { background: var(--gold); }
+.fresh-pip.red   { background: var(--red); }
+/* "147d old" is one fact and must read as one. Left to wrap it breaks after the
+   number, which is exactly the half you skim for. */
+.chip.fresh { white-space: nowrap; }
+
 /* Quick Lists */
 .ql-grid {
   display: grid;
@@ -882,13 +894,13 @@ mark { background: var(--golddim2); color: var(--gold); border-radius: 2px; padd
     <div class="page-header">
       <h1 class="page-title">Lender Quick Compare</h1>
       <p class="page-subtitle">All 20 finance partners. Click any row to view full program details.</p>
-      <p class="page-date">Programs current as of Q1 2026 — verify with each lender before submitting deals</p>
+      <p class="page-date">Sheet Age is how old each lender's program document is, straight from the source PDF. Green under 90 days · amber past 90 · red past a year. Always confirm on the approval.</p>
     </div>
     <div class="compare-wrap">
       <table class="compare-table" role="grid">
         <thead>
           <tr>
-            <th>Lender</th><th>Min FICO</th><th>Segment</th><th>Max Term</th>
+            <th>Lender</th><th>Sheet Age</th><th>Min FICO</th><th>Segment</th><th>Max Term</th>
             <th>Max Miles</th><th>Max LTV</th><th>GAP Cap</th><th>Reserve / Flat</th><th>Chargeback</th>
           </tr>
         </thead>
@@ -1098,6 +1110,39 @@ function segClass(seg) { return {prime:'green',near:'blue',sub:'amber',deep:'red
 function segBadge(seg) { return {prime:'badge-prime',near:'badge-near',sub:'badge-sub',deep:'badge-deep',all:'badge-all'}[seg]||''; }
 function dotColor(seg) { return {prime:'var(--green)',near:'var(--blue)',sub:'var(--gold)',deep:'var(--red)',all:'var(--blue)'}[seg]||'var(--blue)'; }
 
+// ─── FRESHNESS (spec #4) ─────────────────────────────────────
+// `source` is written by tools/sync.py freshness, straight off the Drive filenames
+// and the record's own effectiveDate. The date is stored; the age is not, because a
+// stored age is wrong the next morning. Subtract here, at render time.
+const AGE_CHECK = 90;    // Gage, 2026-08-26: worth re-checking past this
+const AGE_STALE = 365;   // past a year it is not aging, it is out of date
+
+function freshnessOf(l) {
+  const s = l.source;
+  if (!s) return null;
+  const day = 86400000;
+  const age = s.date ? Math.floor((Date.now() - Date.parse(s.date + 'T00:00:00')) / day) : null;
+  const synced = s.syncedAt ? ` · synced ${s.syncedAt}` : '';
+
+  // A current document whose CONTENT has expired. No date can express that, so the
+  // sync carries an explicit warning. Kia is the live case: the bulletin on file is
+  // dated July but the incentives inside it died in April.
+  if (s.warning)
+    return {cls:'red', text:'Check bulletin', attention:true,
+            title:`${s.warning}${synced}`};
+
+  if (age === null)
+    return {cls:'amber', text:'Undated', attention:true,
+            title:`${s.doc || 'Source document'} carries no date — age unknown${synced}`};
+
+  const cls  = age > AGE_STALE ? 'red' : age > AGE_CHECK ? 'amber' : 'green';
+  const why  = age > AGE_STALE ? ' — over a year old'
+             : age > AGE_CHECK ? ` — past the ${AGE_CHECK}-day mark, worth re-checking`
+             : '';
+  return {cls, text:`${age}d old`, attention: cls !== 'green',
+          title:`${s.doc || 'Source document'} dated ${s.date}${why}${synced}`};
+}
+
 // ─── THEME ───────────────────────────────────────────────────
 let theme = 'light';
 function applyTheme() { document.documentElement.setAttribute('data-theme', theme); }
@@ -1112,6 +1157,7 @@ function buildSidebar() {
     <div class="sidebar-item" data-id="${l.id}" role="button" tabindex="0">
       <span class="tier-dot" style="background:${dotColor(l.segment)}"></span>
       <span style="flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${l.name}</span>
+      ${(f => f?.attention ? `<span class="fresh-pip ${f.cls}" title="${f.title}" aria-label="${f.text}"></span>` : '')(freshnessOf(l))}
       <span class="lender-badge ${segBadge(l.segment)}">${l.segmentLabel.split('-')[0]}</span>
     </div>`).join('');
 }
@@ -1123,6 +1169,7 @@ function buildCompareTable() {
   tbody.innerHTML = LENDERS.map(l => `
     <tr data-id="${l.id}">
       <td><div class="lender-name-cell">${l.name}<small>${l.fullName}${l.stateRestriction?` · <span style="color:var(--red)">${l.stateRestriction}</span>`:''}</small></div></td>
+      <td>${(f => f ? `<span class="chip fresh ${f.cls}" title="${f.title}">${f.text}</span>` : '<span class="chip fresh">—</span>')(freshnessOf(l))}</td>
       <td><span class="fico-chip ${segClass(l.segment)}">${l.ficoMin?l.ficoMin+'+':'Tier-Based'}</span></td>
       <td><span class="chip ${segClass(l.segment)}">${l.segmentLabel}</span></td>
       <td>${l.maxTerm?l.maxTerm+' mo':'Per Program'}</td>
@@ -1252,7 +1299,8 @@ function buildLenderDetail(lender) {
       <div class="lender-icon ${lender.colorClass}">${lender.abbr}</div>
       <div class="lender-hero-info">
         <h1>${lender.fullName}</h1>
-        <div class="doc-meta">${lender.docTitle} &nbsp;·&nbsp; Effective ${lender.effectiveDate}</div>
+        <div class="doc-meta">${lender.docTitle} &nbsp;·&nbsp; Effective ${lender.effectiveDate}${(f => f ? ` &nbsp;·&nbsp; <span class="chip fresh ${f.cls}" title="${f.title}">${f.text}</span>` : '')(freshnessOf(lender))}</div>
+        ${(f => f?.attention && lender.source?.warning ? `<div class="note-box danger" style="margin-top:8px;font-size:.72rem"><span class="note-icon">⏰</span><span>${lender.source.warning}</span></div>` : '')(freshnessOf(lender))}
         <div class="hero-chips">${chips}</div>
         <div class="note-box info" style="margin-top:10px;font-size:.72rem"><span class="note-icon">ℹ️</span><span>${lender.ficoNotes}</span></div>
         ${lender.uniqueFeature?`<div class="note-box success" style="margin-top:6px;font-size:.72rem"><span class="note-icon">⭐</span><span><strong>Notable:</strong> ${lender.uniqueFeature}</span></div>`:''}
