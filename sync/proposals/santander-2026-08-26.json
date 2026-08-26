@@ -1,0 +1,98 @@
+{
+  "schema": "lenderhub.proposal.v1",
+  "lender_id": "santander",
+  "created": "2026-08-26",
+  "sources": [
+    {
+      "drive_file_id": "1sIz87MWE15FzQSQPM4N3h8R_h4yxSl2G",
+      "title": "Santander - Program Sheet - 060126.pdf",
+      "doc_type": "Program Sheet",
+      "effective_date": "2026-06-01",
+      "pages": 11,
+      "triage": {
+        "all": "TEXT_OK"
+      },
+      "read_as": "300 dpi render, all 11 pages rendered. This proposal is built from pages 1 and 2, which carry the program tables and contract rules. Pages 3-11 are stipulation and income documentation detail that the record's existing id and income sections already reflect; they were not re-extracted."
+    }
+  ],
+  "changes": [
+    {
+      "path": [
+        "sections",
+        "ltv"
+      ],
+      "old": null,
+      "new": {
+        "icon": "📐",
+        "label": "LTV & Terms",
+        "content": "<div class=\"info-grid\"><div class=\"info-row\"><span class=\"info-key\">Max Amount Financed</span><span class=\"info-val\">$100,000 at any term</span></div><div class=\"info-row\"><span class=\"info-key\">Frontend Amount</span><span class=\"info-val\">Sales price + doc fee + taxes + TTL + trade (&plusmn;) &minus; cash down &minus; rebate + frontend products</span></div><div class=\"info-row\"><span class=\"info-key\">Total Amount Financed</span><span class=\"info-val\">Frontend amount + all backend products sold</span></div><div class=\"info-row\"><span class=\"info-key\">Prior-Year New ≤6,000 mi</span><span class=\"info-val\">Books at invoice (through April 30)</span></div><div class=\"info-row\"><span class=\"info-key\">Prior-Year New 6,001+ mi</span><span class=\"info-val\">Books at like invoice — ask the buyer for the calculation</span></div></div><h4 style=\"margin:14px 0 6px;font-size:.75rem;text-transform:uppercase;letter-spacing:.06em;opacity:.7\">75 months vs 84 months</h4><table class=\"mini-table\"><thead><tr><th></th><th>Up to 75 mo</th><th>84 mo</th></tr></thead><tbody><tr><td>Max LTV</td><td>145%</td><td>115% front · 120% back</td></tr><tr><td>Max PTI</td><td>22%</td><td>20%</td></tr><tr><td>Vehicle age</td><td>New to 12 years</td><td>New to 5 years</td></tr><tr><td>Max mileage</td><td>150,000</td><td>60,000</td></tr><tr><td>Max amount financed</td><td>$100,000</td><td>$100,000</td></tr><tr><td>Min line-3 frontend advance</td><td>$5,000</td><td>$15,000</td></tr></tbody></table>"
+      },
+      "page": 1,
+      "quote": "Max Term | Up to 75 Months | 84 Months · Max LTV | Up to 145% | 115% front, 120% back · Max Mileage | 150,000 | 60,000",
+      "note": "Santander had no LTV section at all. The 84-month column is the point: it is not simply a longer version of the 75-month program. LTV drops from 145% to 115% front and 120% back, mileage from 150,000 to 60,000, vehicle age from 12 years to 5, and the minimum frontend advance triples from $5,000 to $15,000. The record advertised maxTerm 84 and maxMileage 150,000 side by side, which are the two columns that never apply together.",
+      "approved": null
+    },
+    {
+      "path": [
+        "sections",
+        "backend"
+      ],
+      "old": null,
+      "new": {
+        "icon": "🏷️",
+        "label": "Backend Products",
+        "content": "<div class=\"info-grid\"><div class=\"info-row\"><span class=\"info-key\">GAP</span><span class=\"info-val\">$1,200 or the state maximum, whichever is less</span></div><div class=\"info-row\"><span class=\"info-key\">Vehicle Service Contract</span><span class=\"info-val\">Up to $6,500</span></div><div class=\"info-row\"><span class=\"info-key\">Backend Allowance</span><span class=\"info-val\">Subject to state maximums and varies by approval — check the callback</span></div></div>"
+      },
+      "page": 1,
+      "quote": "Vehicle service contracts up to $6,500 · GAP $1,200 or max permitted by state law, if less",
+      "note": "No backend section existed. The $6,500 VSC ceiling is high relative to the rest of the book and was recorded nowhere — the record only carried GAP at $1,200 as a scalar field.",
+      "approved": null
+    },
+    {
+      "path": [
+        "sections",
+        "reserve"
+      ],
+      "old": null,
+      "new": {
+        "icon": "💵",
+        "label": "Reserve & Compensation",
+        "content": "<div class=\"info-grid\"><div class=\"info-row\"><span class=\"info-key\">Participation</span><span class=\"info-val\">Up to 2.5% (12–60 mo) · 2% (61–75 mo) · 1.5% (76–84 mo)</span></div><div class=\"info-row\"><span class=\"info-key\">Split</span><span class=\"info-val\">75/25, ratio method: (dealer part &divide; contract rate) &times; total finance charge &times; split</span></div><div class=\"info-row\"><span class=\"info-key\">Rate Buydown</span><span class=\"info-val\">Dealer may buy the rate down up to 3 points, but never below base rate</span></div><div class=\"info-row\"><span class=\"info-key\">Dealer Fees</span><span class=\"info-val\">As low as $0 — a contract assignment fee may still apply</span></div><div class=\"info-row\"><span class=\"info-key\">Expired Approval</span><span class=\"info-val\">$495 to re-approve a deal that expired before funding</span></div></div><h4 style=\"margin:14px 0 6px;font-size:.75rem;text-transform:uppercase;letter-spacing:.06em;opacity:.7\">Flat scale — written at buy rate</h4><table class=\"mini-table\"><thead><tr><th>Amount financed</th><th>Flat</th></tr></thead><tbody><tr><td>$10,000–$14,999</td><td>$100</td></tr><tr><td>$15,000–$19,999</td><td>$150</td></tr><tr><td>$20,000–$24,999</td><td>$200</td></tr><tr><td>$25,000–$29,999</td><td>$250</td></tr><tr><td>$30,000–$34,999</td><td>$300</td></tr><tr><td>$35,000–$75,999</td><td>$350</td></tr></tbody></table>"
+      },
+      "page": 1,
+      "quote": "$10,000 - $14,999 | $100 · $35,000 - $75,999 | $350",
+      "note": "No reserve section existed — compensation was one sentence in a scalar field saying \"flat option up to $350\". The actual scale is six brackets, and $350 only arrives at $35,000 financed. Also adds the rate buydown (up to 3 points, never below base) and the ratio-method participation formula.",
+      "approved": null
+    },
+    {
+      "path": [
+        "sections",
+        "vehicles"
+      ],
+      "old": null,
+      "new": {
+        "icon": "🚗",
+        "label": "Vehicle Eligibility",
+        "content": "<div class=\"info-grid\"><div class=\"info-row\"><span class=\"info-key\">Max Vehicle Age</span><span class=\"info-val\">12 years (5 years on an 84-month term)</span></div><div class=\"info-row\"><span class=\"info-key\">Max Mileage</span><span class=\"info-val\">150,000 (60,000 on an 84-month term)</span></div><div class=\"info-row\"><span class=\"info-key\">Commercial Units</span><span class=\"info-val\">May still be eligible through the Small Business Auto channel</span></div></div><div class=\"note-box danger\" style=\"margin-top:10px\"><span class=\"note-icon\">🚫</span><span><strong>Ineligible:</strong> RVs, exotics, motorcycles, boats, ATVs, van conversions, trailers, right-hand drive, hail damage, vehicles from defunct manufacturers, gray market, frame damage, salvaged or reconditioned titles, and commercial use — livery, delivery, taxi, and ride-share (Uber, Lyft, Uber Eats, DoorDash, Grubhub).</span></div>"
+      },
+      "page": 2,
+      "quote": "Ineligible vehicles include but are not limited to recreational vehicles, exotics, motorcycles, boats, all-terrain vehicles, van conversions, trailers, right-hand drive, hail damage",
+      "note": "Santander had no vehicles section, so the page carried no ineligible list at all — the one thing a desk checks before wasting a submission. Note the exit at the end: commercial, livery and delivery units may still go through the Small Business Auto channel rather than being a flat decline.",
+      "approved": null
+    }
+  ],
+  "not_in_source": [
+    "ficoMin",
+    "chargebackWindow"
+  ],
+  "ambiguities": [
+    {
+      "field": "chargebackWindow",
+      "note": "Record says \"See callback\" and the record itself carries a warning that this is a new lender whose chargeback window and bureau should be confirmed with the rep. Pages 1-2 state no chargeback policy, so that warning still stands and I have not removed it."
+    },
+    {
+      "field": "PARTIAL EXTRACTION",
+      "note": "Pages 3-11 were rendered but not re-extracted line by line. They are the stipulation guidelines and the W-2 / self-employed / 1099 / other-taxable / non-taxable income document rules, which the record's id and income sections already cover in detail. If you want those verified rather than assumed, say so and I will do a second pass on this lender."
+    }
+  ]
+}
