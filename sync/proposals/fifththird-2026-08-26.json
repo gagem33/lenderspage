@@ -1,0 +1,108 @@
+{
+  "schema": "lenderhub.proposal.v1",
+  "lender_id": "fifththird",
+  "created": "2026-08-26",
+  "sources": [
+    {
+      "drive_file_id": "1M5cikg9r9KADCNhRNQQF4w9hzGnc_FoJ",
+      "title": "5th3rd - Program Sheet - 072326.pdf",
+      "doc_type": "Program Sheet",
+      "effective_date": "2026-07-23",
+      "sha256": "9f13c9331208ff36",
+      "pages": 2,
+      "triage": {
+        "1": "TEXT_OK",
+        "2": "TEXT_OK"
+      },
+      "read_as": "300 dpi render. Sheet is titled \"Consumer Auto Program Guide — TEXAS\"; wholly in scope."
+    }
+  ],
+  "changes": [
+    {
+      "path": [
+        "sections",
+        "ltv",
+        "content"
+      ],
+      "old": "<div class=\"info-grid\"><div class=\"info-row\"><span class=\"info-key\">Front-End Max LTV</span><span class=\"info-val\">115% (includes doc fees and TT&L; excludes qualified backend)</span></div><div class=\"info-row\"><span class=\"info-key\">Total LTV Max</span><span class=\"info-val\">140%</span></div><div class=\"info-row\"><span class=\"info-key\">Valuation Basis</span><span class=\"info-val\">MSRP / JD Power Retail</span></div><div class=\"info-row\"><span class=\"info-key\">Max Amount Funded</span><span class=\"info-val\">$125,000 (plus allowable backend)</span></div><div class=\"info-row\"><span class=\"info-key\">Max Mileage</span><span class=\"info-val\">140,000 miles</span></div><div class=\"info-row\"><span class=\"info-key\">Min Amount Financed</span><span class=\"info-val\">$6,000 (excluding backend)</span></div><div class=\"info-row\"><span class=\"info-key\">Max First Payment</span><span class=\"info-val\">45 days</span></div><div class=\"info-row\"><span class=\"info-key\">Approval Expiry</span><span class=\"info-val\">30 days</span></div></div><table class=\"tier-table\" style=\"margin-top:14px\"><thead><tr><th>Model Year</th><th>Available Terms</th><th>Min Value Req</th></tr></thead><tbody><tr><td>2023 &amp; newer</td><td>24–84 months</td><td>$20K for 76+mo</td></tr><tr><td>2019–2022</td><td>24–75 months</td><td>$12.5K for 67+mo</td></tr><tr><td>2017–2018</td><td>24–66 months</td><td>$10K for 61+mo</td></tr><tr><td>2014–2016</td><td>24–63 months</td><td>—</td></tr></tbody></table><div class=\"note-box warn\" style=\"margin-top:10px\"><span class=\"note-icon\">⚠️</span><span>Texas only. Black Book not accepted for valuation.</span></div>",
+      "new": "<div class=\"info-grid\"><div class=\"info-row\"><span class=\"info-key\">Front-End Max LTV</span><span class=\"info-val\">115% (includes doc fees and TT&L; excludes qualified backend)</span></div><div class=\"info-row\"><span class=\"info-key\">Total LTV Max</span><span class=\"info-val\">140%</span></div><div class=\"info-row\"><span class=\"info-key\">Valuation Basis</span><span class=\"info-val\">MSRP / JD Power Retail</span></div><div class=\"info-row\"><span class=\"info-key\">Max Amount Funded</span><span class=\"info-val\">$125,000 (plus allowable backend)</span></div><div class=\"info-row\"><span class=\"info-key\">Max Mileage</span><span class=\"info-val\">140,000 miles</span></div><div class=\"info-row\"><span class=\"info-key\">76+ Month Mileage Cap</span><span class=\"info-val\">45,000 mi — a 2023+ unit over 45K cannot reach 76–84 mo</span></div><div class=\"info-row\"><span class=\"info-key\">Max MSRP / JD Power Value</span><span class=\"info-val\">$150,000</span></div><div class=\"info-row\"><span class=\"info-key\">Min Amount Financed</span><span class=\"info-val\">$6,000 (excluding backend)</span></div><div class=\"info-row\"><span class=\"info-key\">Max First Payment</span><span class=\"info-val\">45 days</span></div><div class=\"info-row\"><span class=\"info-key\">Approval Expiry</span><span class=\"info-val\">30 days</span></div></div><table class=\"tier-table\" style=\"margin-top:14px\"><thead><tr><th>Model Year</th><th>Available Terms</th><th>Min Value Req</th></tr></thead><tbody><tr><td>2023 &amp; newer</td><td>24–84 months</td><td>$20K for 76+mo</td></tr><tr><td>2019–2022</td><td>24–75 months</td><td>$12.5K for 67+mo</td></tr><tr><td>2017–2018</td><td>24–66 months</td><td>$10K for 61+mo</td></tr><tr><td>2014–2016</td><td>24–63 months</td><td>—</td></tr></tbody></table><div class=\"note-box warn\" style=\"margin-top:10px\"><span class=\"note-icon\">⚠️</span><span>Texas only. Black Book not accepted for valuation.</span></div>",
+      "page": 1,
+      "quote": "*Max 45,000 miles 76+mos.",
+      "note": "The record carried the model-year term table but not the mileage gate printed beside it. 2023-and-newer shows \"24-84 months\" with only a $20K value requirement noted, so a 2023 unit with 60,000 miles reads as 84-month eligible when the sheet caps it at 75. Also adds the $150,000 max MSRP/JD Power value, which the record had nowhere.",
+      "approved": true
+    },
+    {
+      "path": [
+        "sections",
+        "id",
+        "content"
+      ],
+      "old": "<div class=\"info-grid\"><div class=\"info-row\"><span class=\"info-key\">ID Requirement</span><span class=\"info-val\">Valid driver's license AND SSN or ITIN required for all signers</span></div><div class=\"info-row\"><span class=\"info-key\">No Trust Accounts</span><span class=\"info-val\">✗ Not accepted</span></div><div class=\"info-row\"><span class=\"info-key\">No Power of Attorney</span><span class=\"info-val\">✗ Not accepted</span></div><div class=\"info-row\"><span class=\"info-key\">Down Payment</span><span class=\"info-val\">Must be cash or cash equivalent</span></div><div class=\"info-row\"><span class=\"info-key\">Doc Fee Cap</span><span class=\"info-val\">Not to exceed $399</span></div></div>",
+      "new": "<div class=\"info-grid\"><div class=\"info-row\"><span class=\"info-key\">ID Requirement</span><span class=\"info-val\">Valid driver's license AND SSN or ITIN required for all signers</span></div><div class=\"info-row\"><span class=\"info-key\">No Trust Accounts</span><span class=\"info-val\">✗ Not accepted</span></div><div class=\"info-row\"><span class=\"info-key\">No Power of Attorney</span><span class=\"info-val\">✗ Not accepted</span></div><div class=\"info-row\"><span class=\"info-key\">Down Payment</span><span class=\"info-val\">Must be cash or cash equivalent</span></div><div class=\"info-row\"><span class=\"info-key\">Doc Fee Cap</span><span class=\"info-val\">Not to exceed $399</span></div><div class=\"info-row\"><span class=\"info-key\">Doc Fee &gt; $225</span><span class=\"info-val\">Dealer must comply with Texas regulations and show proof on request</span></div><div class=\"info-row\"><span class=\"info-key\">Out-of-State Buyers</span><span class=\"info-val\">Signed Title Guarantee required</span></div><div class=\"info-row\"><span class=\"info-key\">TX ELT</span><span class=\"info-val\">31067686500</span></div></div>",
+      "page": 2,
+      "quote": "Doc fee not to exceed $399.00. If over $225.00, dealer must comply with specific Texas regulations and show proof of compliance upon the Bank’s request.",
+      "note": "The record had the $399 ceiling but not the $225 trigger, which is the number that actually creates work for the desk. Also adds the out-of-state title guarantee and the TX ELT number from the funding checklist.",
+      "approved": true
+    },
+    {
+      "path": [
+        "sections",
+        "backend",
+        "content"
+      ],
+      "old": "<div class=\"info-grid\"><div class=\"info-row\"><span class=\"info-key\">Total Backend (Standard)</span><span class=\"info-val\">20% of MSRP/JD Power Retail; max $7,500; guaranteed min $4,000</span></div><div class=\"info-row\"><span class=\"info-key\">Total Backend (Elite)</span><span class=\"info-val\">25% of MSRP/JD Power Retail; max $10,000; guaranteed min $4,000</span></div><div class=\"info-row\"><span class=\"info-key\">VSC</span><span class=\"info-val\">Greater of $3,500 or 15% of MSRP/JD Power Retail (24mo minimum)</span></div><div class=\"info-row\"><span class=\"info-key\">Maintenance</span><span class=\"info-val\">Greater of $1,500 or 10%; prepaid scheduled maintenance only</span></div><div class=\"info-row\"><span class=\"info-key\">GAP</span><span class=\"info-val\">Lesser of $1,850 or 5% of amount financed; min 70% LTV</span></div><div class=\"info-row\"><span class=\"info-key\">CLAH</span><span class=\"info-val\">✗ No longer accepted</span></div></div>",
+      "new": "<div class=\"info-grid\"><div class=\"info-row\"><span class=\"info-key\">Total Backend (Standard)</span><span class=\"info-val\">20% of MSRP/JD Power Retail; max $7,500; guaranteed min $4,000</span></div><div class=\"info-row\"><span class=\"info-key\">Total Backend (Elite)</span><span class=\"info-val\">25% of MSRP/JD Power Retail; max $10,000; guaranteed min $4,000</span></div><div class=\"info-row\"><span class=\"info-key\">VSC</span><span class=\"info-val\">Greater of $3,500 or 15% of MSRP/JD Power Retail (24mo minimum)</span></div><div class=\"info-row\"><span class=\"info-key\">Maintenance</span><span class=\"info-val\">Greater of $1,500 or 10%; prepaid scheduled maintenance only</span></div><div class=\"info-row\"><span class=\"info-key\">GAP</span><span class=\"info-val\">Lesser of $1,850 or 5% of amount financed; min 70% LTV</span></div><div class=\"info-row\"><span class=\"info-key\">GAP Admin Fee</span><span class=\"info-val\">$50 on contracts with GAP — charged to the monthly reserve statement</span></div><div class=\"info-row\"><span class=\"info-key\">Other Products &amp; Sales Tax</span><span class=\"info-val\">Applied to the front-end advance; may increase the buy rate</span></div><div class=\"info-row\"><span class=\"info-key\">CLAH</span><span class=\"info-val\">✗ No longer accepted</span></div></div>",
+      "page": 1,
+      "quote": "GAP Administration Fee - $50 on contracts that include GAP coverage; fee charged to monthly reserve statement.",
+      "note": "A $50 charge against reserve on every GAP contract, which the record did not mention. The sales-tax line matters for the same reason — it lands on the front end and can move the buy rate.",
+      "approved": true
+    },
+    {
+      "path": [
+        "sections",
+        "reserve",
+        "content"
+      ],
+      "old": "<div class=\"info-grid\"><div class=\"info-row\"><span class=\"info-key\">Buy Rate Flat</span><span class=\"info-val\">3% — 100% to dealer (no cap, no split)</span></div><div class=\"info-row\"><span class=\"info-key\">Chargeback</span><span class=\"info-val\">Reserve charged back if paid off before 3 payments or 120 days</span></div></div><table class=\"tier-table\" style=\"margin-top:12px\"><thead><tr><th>Rate Adjustment</th><th>Flat %</th></tr></thead><tbody><tr><td>+1.00%</td><td>5.00%</td></tr><tr><td>+0.75%</td><td>4.50%</td></tr><tr><td>+0.50%</td><td>4.00%</td></tr><tr><td>+0.25%</td><td>3.50%</td></tr><tr><td>Buy Rate</td><td>3.00%</td></tr><tr><td>−0.25%</td><td>2.50%</td></tr><tr><td>−0.50%</td><td>2.00%</td></tr><tr><td>−0.75%</td><td>1.50%</td></tr><tr><td>−1.00%</td><td>1.00%</td></tr><tr><td>−1.25%</td><td>0.00%</td></tr></tbody></table><div class=\"note-box info\" style=\"margin-top:10px\"><span class=\"note-icon\">ℹ️</span><span>100% flat to dealer (no split, no cap). Elite program adds up to +0.75% for qualifying point tiers.</span></div>",
+      "new": "<div class=\"info-grid\"><div class=\"info-row\"><span class=\"info-key\">Buy Rate Flat</span><span class=\"info-val\">3% — 100% to dealer (no cap, no split)</span></div><div class=\"info-row\"><span class=\"info-key\">48+ mo, TAF &ge; $10,000</span><span class=\"info-val\">Flat per the rate-adjustment table below</span></div><div class=\"info-row\"><span class=\"info-key\">24–47 mo, TAF &ge; $7,500</span><span class=\"info-val\">$100 flat</span></div><div class=\"info-row\"><span class=\"info-key\">48+ mo, TAF $7,500–$9,999.99</span><span class=\"info-val\">$100 flat</span></div><div class=\"info-row\"><span class=\"info-key\">Chargeback</span><span class=\"info-val\">Reserve charged back if paid off before 3 payments or 120 days</span></div><div class=\"info-row\"><span class=\"info-key\">Chargeback — Balance Cut</span><span class=\"info-val\">&gt;25% of original balance before 3 payments or 120 days</span></div><div class=\"info-row\"><span class=\"info-key\">Payoffs</span><span class=\"info-val\">Excluded from the 3-payment requirement</span></div><div class=\"info-row\"><span class=\"info-key\">Product Refunds</span><span class=\"info-val\">Charged back — early payoff, default or repossession</span></div><div class=\"info-row\"><span class=\"info-key\">Reserve Disputes</span><span class=\"info-val\">Must be raised within 4 months of the statement date</span></div></div><table class=\"tier-table\" style=\"margin-top:12px\"><thead><tr><th>Rate Adjustment</th><th>Flat %</th></tr></thead><tbody><tr><td>+1.00%</td><td>5.00%</td></tr><tr><td>+0.75%</td><td>4.50%</td></tr><tr><td>+0.50%</td><td>4.00%</td></tr><tr><td>+0.25%</td><td>3.50%</td></tr><tr><td>Buy Rate</td><td>3.00%</td></tr><tr><td>−0.25%</td><td>2.50%</td></tr><tr><td>−0.50%</td><td>2.00%</td></tr><tr><td>−0.75%</td><td>1.50%</td></tr><tr><td>−1.00%</td><td>1.00%</td></tr><tr><td>−1.25%</td><td>0.00%</td></tr></tbody></table><div class=\"note-box info\" style=\"margin-top:10px\"><span class=\"note-icon\">ℹ️</span><span>100% flat to dealer (no split, no cap). Elite program adds up to +0.75% for qualifying point tiers.</span></div>",
+      "page": 1,
+      "quote": "Contracts 24-47 months with a total amount financed of $7,500.00 or more will receive a $100 flat.",
+      "note": "The record showed the rate-adjustment table as if it applied to everything. It only applies to 48+ month contracts at $10,000 or more; smaller and shorter deals get a flat $100. The chargeback rule was also only half in the record — the 25% balance-reduction trigger and the product-refund clawback were missing, and both bite after funding.",
+      "approved": true
+    },
+    {
+      "path": [
+        "sections",
+        "vehicles",
+        "content"
+      ],
+      "old": "<div class=\"note-box danger\"><span class=\"note-icon\">🚫</span><span><strong>Ineligible:</strong> Branded titles, gray market, frame damage, salvage, lemon law, flood, commercial use (cargo van, livery, delivery, rideshare Uber/Lyft), over 1 ton, RVs, watercraft, ATVs, motorcycles. No trust accounts, no POA, no straw purchases, no brokered contracts.</span></div>",
+      "new": "<div class=\"info-grid\"><div class=\"info-row\"><span class=\"info-key\">Valuation</span><span class=\"info-val\">MSRP / JD Power Retail</span></div><div class=\"info-row\"><span class=\"info-key\">Not in JD Power Yet</span><span class=\"info-val\">Use KBB; else JD Power prior-year model, same trim/options</span></div><div class=\"info-row\"><span class=\"info-key\">Black Book</span><span class=\"info-val\">Not accepted</span></div><div class=\"info-row\"><span class=\"info-key\">Model Year Flip</span><span class=\"info-val\">From April 1 previous-year models book as Used</span></div><div class=\"info-row\"><span class=\"info-key\">Hail Damage</span><span class=\"info-val\">Up to $3,000 unrepaired, if the approved value is reduced by the damage</span></div><div class=\"info-row\"><span class=\"info-key\">EV Charging Stations</span><span class=\"info-val\">Not eligible for financing</span></div><div class=\"info-row\"><span class=\"info-key\">Manufacturers</span><span class=\"info-val\">Mainstream only</span></div></div><div class=\"note-box danger\"><span class=\"note-icon\">🚫</span><span><strong>Ineligible:</strong> Branded titles, gray market, frame damage, salvage, lemon law, flood, commercial use (cargo van, livery, delivery, rideshare Uber/Lyft), over 1 ton, RVs, watercraft, ATVs, motorcycles. No trust accounts, no POA, no straw purchases, no brokered contracts.</span></div>",
+      "page": 2,
+      "quote": "We will finance vehicles with up to $3,000 of unrepaired hail damage as long as the approved vehicle value is lowered by the amount of the damage.",
+      "note": "The vehicles section was a single ineligible list with no data rows at all. Adds the valuation fallback chain, the April 1 model-year flip, the hail-damage allowance (Fifth Third will take unrepaired hail up to $3,000 — most books will not), and the EV-charging-station exclusion.",
+      "approved": true
+    }
+  ],
+  "not_in_source": [
+    "ficoMin",
+    "maxTerm",
+    "maxLTV",
+    "maxMileage",
+    "gapMax",
+    "poi",
+    "bureaus.stateMap"
+  ],
+  "ambiguities": [
+    {
+      "field": "bureaus.note",
+      "note": "Record says \"All three bureaus.\" This sheet does not mention bureaus. Same unsourced pattern as chase and exeter."
+    },
+    {
+      "field": "poi",
+      "note": "Record says docs not specified. The sheet only says \"Only income earned by the applicant(s) will be considered\" — no document list. Left as is."
+    }
+  ],
+  "approved_by": "gage",
+  "approved_at": "2026-08-26T20:26:10"
+}

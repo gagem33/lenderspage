@@ -1,0 +1,97 @@
+{
+  "schema": "lenderhub.proposal.v1",
+  "lender_id": "gls",
+  "created": "2026-08-26",
+  "sources": [
+    {
+      "drive_file_id": "1FosJDBLX8H9vjNf-ZO3jdQAG1ecWBggs",
+      "title": "Global - Program Sheet - 072726.pdf",
+      "doc_type": "Program Sheet",
+      "effective_date": "2026-07-27",
+      "pages": 2,
+      "triage": {
+        "1": "TEXT_OK",
+        "2": "TEXT_OK"
+      },
+      "read_as": "300 dpi render. Footer reads GLS_PG_V53_2026 — the document carries a version, not a date."
+    }
+  ],
+  "changes": [
+    {
+      "path": [
+        "sections",
+        "vehicles",
+        "content"
+      ],
+      "old": "<div class=\"note-box info\" style=\"margin-bottom:10px\"><span class=\"note-icon\">🔋</span><span><strong>EV Eligible (max 6yrs/75K mi):</strong> Tesla Model 3/Y/X/S, Chevrolet Bolt, Ford Mustang Mach-E, Nissan Leaf/Ariya, Hyundai Ioniq/Kona, Kia EV6.</span></div><div class=\"note-box danger\"><span class=\"note-icon\">🚫</span><span><strong>Ineligible:</strong> Discontinued makes, Smart car, weather damaged, branded title, remanufactured title, non-listed EVs, modified vehicles, grey market, salvage, commercial use, rideshare (Uber/Lyft/taxi).</span></div>",
+      "new": "<div class=\"info-grid\"><div class=\"info-row\"><span class=\"info-key\">Used Value — TX</span><span class=\"info-val\">J.D. Power clean trade</span></div><div class=\"info-row\"><span class=\"info-key\">KBB States</span><span class=\"info-val\">AZ, CA, CO, ID, NM, NV, OR, UT, WA, WY — everywhere else is J.D. Power</span></div><div class=\"info-row\"><span class=\"info-key\">New</span><span class=\"info-val\">Manufacturer’s invoice, untitled, under 3,000 mi</span></div><div class=\"info-row\"><span class=\"info-key\">Prior-Year New</span><span class=\"info-val\">Invoice Jan–Mar; vehicle guide Apr–Dec</span></div><div class=\"info-row\"><span class=\"info-key\">Current-Year Used</span><span class=\"info-val\">Invoice required — 90% of invoice less $0.25/mi, less all rebates and incentives</span></div><div class=\"info-row\"><span class=\"info-key\">Not in JD Power / KBB</span><span class=\"info-val\">Ineligible</span></div></div><div class=\"note-box info\" style=\"margin-bottom:10px\"><span class=\"note-icon\">🔋</span><span><strong>EV Eligible (max 6yrs/75K mi):</strong> Tesla Model 3/Y/X/S, Chevrolet Bolt, Ford Mustang Mach-E, Nissan Leaf/Ariya, Hyundai Ioniq/Kona, Kia EV6.</span></div><div class=\"note-box danger\"><span class=\"note-icon\">🚫</span><span><strong>Ineligible:</strong> Discontinued makes, Smart car, weather damaged, branded title, remanufactured title, non-listed EVs, modified vehicles, grey market, salvage, commercial use, rideshare (Uber/Lyft/taxi).</span></div>",
+      "page": 2,
+      "quote": "KBB used in AZ, CA, CO, ID, NM, NV, OR, UT, WA, WY. All other states, use JD Power.",
+      "note": "GLS had no valuation rows at all — only an EV allow-list and an ineligible list. Texas is not in the KBB group, so TX books on J.D. Power clean trade. The current-year-used rule is the unusual one worth having on the page: invoice required, then 90% of invoice less $0.25 per mile and less all rebates and incentives.",
+      "approved": true
+    },
+    {
+      "path": [
+        "sections",
+        "fico",
+        "content"
+      ],
+      "old": "<div class=\"info-grid\"><div class=\"info-row\"><span class=\"info-key\">Score Range</span><span class=\"info-val\">400–700 (zero FICO also considered)</span></div><div class=\"info-row\"><span class=\"info-key\">Self-Employed / 1099</span><span class=\"info-val\" style=\"color:var(--red)\">✗ NOT ACCEPTED</span></div><div class=\"info-row\"><span class=\"info-key\">Max PTI</span><span class=\"info-val\">24%</span></div><div class=\"info-row\"><span class=\"info-key\">Min Income</span><span class=\"info-val\">$1,800/month</span></div><div class=\"info-row\"><span class=\"info-key\">Dealership Employees</span><span class=\"info-val\">GLS does not accept sales, management, or F&I personnel</span></div></div><div class=\"note-box success\" style=\"margin-top:10px\"><span class=\"note-icon\">⚡</span><span><strong>Approvals as fast as 15 seconds, 24/7/365.</strong> Clean deals fund in 48 hours. No book-to-look requirements.</span></div>",
+      "new": "<div class=\"info-grid\"><div class=\"info-row\"><span class=\"info-key\">Score Range</span><span class=\"info-val\">400–700 (zero FICO also considered)</span></div><div class=\"info-row\"><span class=\"info-key\">Self-Employed / 1099</span><span class=\"info-val\" style=\"color:var(--red)\">✗ NOT ACCEPTED</span></div><div class=\"info-row\"><span class=\"info-key\">Max PTI</span><span class=\"info-val\">24%</span></div><div class=\"info-row\"><span class=\"info-key\">Min Income</span><span class=\"info-val\">$1,800/month</span></div><div class=\"info-row\"><span class=\"info-key\">Dealership Employees</span><span class=\"info-val\">GLS does not accept sales, management, or F&I personnel</span></div><div class=\"info-row\"><span class=\"info-key\">Open Bankruptcy</span><span class=\"info-val\">Decline</span></div><div class=\"info-row\"><span class=\"info-key\">Recent Repossession</span><span class=\"info-val\">Decline if within the past 4 months</span></div><div class=\"info-row\"><span class=\"info-key\">Rates</span><span class=\"info-val\">As low as 9.95%</span></div><div class=\"info-row\"><span class=\"info-key\">Acquisition Fee</span><span class=\"info-val\">As low as $0 — cannot be passed to the customer</span></div></div><div class=\"note-box success\" style=\"margin-top:10px\"><span class=\"note-icon\">⚡</span><span><strong>Approvals as fast as 15 seconds, 24/7/365.</strong> Clean deals fund in 48 hours. No book-to-look requirements.</span></div>",
+      "page": 1,
+      "quote": "Self-employed and/or 1099 earners · Open bankcrupties · Repossession(s) in the past 4 months",
+      "note": "The sheet has a \"What to Avoid\" box naming three flat declines. The record carried only one of them (self-employed/1099); open bankruptcies and a repo inside 4 months were missing, and both are reasons not to bother submitting. Also adds the 9.95% rate floor and the $0 acquisition fee, neither of which was on the page.",
+      "approved": true
+    },
+    {
+      "path": [
+        "sections",
+        "ltv",
+        "content"
+      ],
+      "old": "<div class=\"info-grid\"><div class=\"info-row\"><span class=\"info-key\">Front-End LTV</span><span class=\"info-val\">Up to 130%</span></div><div class=\"info-row\"><span class=\"info-key\">Total LTV</span><span class=\"info-val\">Up to 140%</span></div><div class=\"info-row\"><span class=\"info-key\">Min Loan Amount</span><span class=\"info-val\">$7,000</span></div><div class=\"info-row\"><span class=\"info-key\">Max Loan Amount</span><span class=\"info-val\">$55,000</span></div><div class=\"info-row\"><span class=\"info-key\">Contract Fee</span><span class=\"info-val\">$199</span></div><div class=\"info-row\"><span class=\"info-key\">Max Vehicle Age</span><span class=\"info-val\">12 years</span></div><div class=\"info-row\"><span class=\"info-key\">Approval Expiry</span><span class=\"info-val\">30 days</span></div></div><table class=\"tier-table\" style=\"margin-top:14px\"><thead><tr><th>Mileage Range</th><th>Max Term</th></tr></thead><tbody><tr><td>0–20,000mi</td><td>78mo (Select) / 75mo (T1–T4)</td></tr><tr><td>20,001–80,000mi</td><td>75 months (Select) / 72mo (T1–T4)</td></tr><tr><td>80,001–120,000mi</td><td>72 months</td></tr><tr><td>120,001–180,000mi</td><td>66 months</td></tr></tbody></table>",
+      "new": "<div class=\"info-grid\"><div class=\"info-row\"><span class=\"info-key\">Front-End LTV</span><span class=\"info-val\">Up to 130%</span></div><div class=\"info-row\"><span class=\"info-key\">Total LTV</span><span class=\"info-val\">Up to 140%</span></div><div class=\"info-row\"><span class=\"info-key\">Min Loan Amount</span><span class=\"info-val\">$7,000</span></div><div class=\"info-row\"><span class=\"info-key\">Max Loan Amount</span><span class=\"info-val\">$55,000</span></div><div class=\"info-row\"><span class=\"info-key\">Contract Fee</span><span class=\"info-val\">$199</span></div><div class=\"info-row\"><span class=\"info-key\">Max Vehicle Age</span><span class=\"info-val\">12 years</span></div><div class=\"info-row\"><span class=\"info-key\">Approval Expiry</span><span class=\"info-val\">30 days</span></div><div class=\"info-row\"><span class=\"info-key\">Book Value Under $10,000</span><span class=\"info-val\">66 months maximum</span></div><div class=\"info-row\"><span class=\"info-key\">Over 10 Years Old</span><span class=\"info-val\">66 months maximum — 12-year ceiling</span></div><div class=\"info-row\"><span class=\"info-key\">Contracts</span><span class=\"info-val\">Simple interest; most Bankers System and LAW forms accepted</span></div><div class=\"info-row\"><span class=\"info-key\">Payment Calls</span><span class=\"info-val\">Final vehicle structure must be approved before funding</span></div></div><table class=\"tier-table\" style=\"margin-top:14px\"><thead><tr><th>Mileage Range</th><th>Max Term</th></tr></thead><tbody><tr><td>0–20,000mi</td><td>78 (Select) · 75 (T1–T2) · 72 (T3–T4)</td></tr><tr><td>20,001–80,000mi</td><td>75 months (Select) / 72mo (T1–T4)</td></tr><tr><td>80,001–120,000mi</td><td>72 months</td></tr><tr><td>120,001–180,000mi</td><td>66 months</td></tr></tbody></table>",
+      "page": 1,
+      "quote": "**T3-4 max term 72",
+      "note": "The top mileage band read \"75mo (T1–T4)\", but the footnote caps Tiers 3 and 4 at 72. A T3 deal under 20,000 miles was showing three months more term than GLS will write. Also adds the two 66-month gates — book value under $10,000, and vehicles over 10 years old — which the record did not carry.",
+      "approved": true
+    },
+    {
+      "path": [
+        "sections",
+        "reserve",
+        "content"
+      ],
+      "old": "<div class=\"info-grid\"><div class=\"info-row\"><span class=\"info-key\">T1–T2 Flat</span><span class=\"info-val\">Up to 3% of front-end</span></div><div class=\"info-row\"><span class=\"info-key\">T3–T4 Flat</span><span class=\"info-val\">Up to 2% of front-end</span></div><div class=\"info-row\"><span class=\"info-key\">Select Tier Flat</span><span class=\"info-val\">Up to 4% of front-end</span></div><div class=\"info-row\"><span class=\"info-key\">Chargebacks</span><span class=\"info-val\" style=\"color:var(--green);font-weight:700\">✓ NO CHARGEBACKS</span></div><div class=\"info-row\"><span class=\"info-key\">Flat Eligibility Window</span><span class=\"info-val\">Contracts received within 20 days of initial application receipt</span></div></div><div class=\"note-box success\" style=\"margin-top:10px\"><span class=\"note-icon\">✅</span><span>GLS offers NO chargebacks. Down payment must be cash or actual cash value of trade (no hold checks, borrowed funds, or credit cards).</span></div>",
+      "new": "<div class=\"info-grid\"><div class=\"info-row\"><span class=\"info-key\">T1–T2 Flat</span><span class=\"info-val\">Up to 3% of front-end</span></div><div class=\"info-row\"><span class=\"info-key\">T3–T4 Flat</span><span class=\"info-val\">Up to 2% of front-end</span></div><div class=\"info-row\"><span class=\"info-key\">Select Tier Flat</span><span class=\"info-val\">Up to 4% of front-end</span></div><div class=\"info-row\"><span class=\"info-key\">Advantage Flat</span><span class=\"info-val\">Up to 2% of front-end</span></div><div class=\"info-row\"><span class=\"info-key\">Chargebacks</span><span class=\"info-val\" style=\"color:var(--green);font-weight:700\">✓ NO CHARGEBACKS</span></div><div class=\"info-row\"><span class=\"info-key\">Flat Eligibility Window</span><span class=\"info-val\">Contracts received within 20 days of initial application receipt</span></div></div><div class=\"note-box success\" style=\"margin-top:10px\"><span class=\"note-icon\">✅</span><span>GLS offers NO chargebacks. Down payment must be cash or actual cash value of trade (no hold checks, borrowed funds, or credit cards).</span></div>",
+      "page": 1,
+      "quote": "Advantage (up to) 2%",
+      "note": "The flat table lists six tiers — Select, 1, 2, 3, 4 and Advantage. The record had five; Advantage was absent, so a deal in that tier had no compensation row.",
+      "approved": true
+    }
+  ],
+  "not_in_source": [
+    "ficoMin",
+    "maxTerm",
+    "maxLTV",
+    "maxMileage",
+    "idReq",
+    "bureaus.stateMap"
+  ],
+  "ambiguities": [
+    {
+      "field": "effectiveDate",
+      "note": "Record stores \"2026 (v53)\". Confirmed: the sheet has no date anywhere, only the footer GLS_PG_V53_2026. The filename says 072726. This is why gls sits in acknowledged.json — the divergence is the document's fault, not the record's. Consider storing \"July 27, 2026 (v53)\" so freshness can read it, but that is a judgement call about trusting a filename."
+    },
+    {
+      "field": "idReq",
+      "note": "Record says \"Photocopy of valid U.S. driver's license required for all signers.\" Neither page says that; p2 lists a driver's license only as one of the two-document residence options. Possibly from the separate Funding Guidelines PDF. Unverified here."
+    },
+    {
+      "field": "bureaus.note",
+      "note": "Record says \"Primarily Equifax.\" Neither page mentions bureaus."
+    }
+  ],
+  "approved_by": "gage",
+  "approved_at": "2026-08-26T20:26:10"
+}

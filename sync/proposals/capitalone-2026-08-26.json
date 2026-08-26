@@ -1,0 +1,88 @@
+{
+  "schema": "lenderhub.proposal.v1",
+  "lender_id": "capitalone",
+  "created": "2026-08-26",
+  "sources": [
+    {
+      "drive_file_id": "1iU_bLQVWiuaSeoTZKtUljRYia_9I0Nkl",
+      "title": "CapOne - Program Sheet - 010126.pdf",
+      "doc_type": "Program Sheet",
+      "effective_date": "2026-01-01",
+      "pages": 2,
+      "triage": {
+        "1": "TEXT_OK",
+        "2": "TEXT_OK"
+      },
+      "read_as": "300 dpi render. Issue date January 2026. Sheet is the Executive Diamond Partner tier."
+    }
+  ],
+  "changes": [
+    {
+      "path": [
+        "sections",
+        "backend",
+        "content"
+      ],
+      "old": "<div class=\"info-grid\"><div class=\"info-row\"><span class=\"info-key\">GAP Max</span><span class=\"info-val\">$1,200 or state max (T0–T5)</span></div><div class=\"info-row\"><span class=\"info-key\">VSC T0</span><span class=\"info-val\">Greater of $2,000 or 15% of book value (to $7,000)</span></div><div class=\"info-row\"><span class=\"info-key\">VSC T1</span><span class=\"info-val\">Greater of $2,000 or 25% of book; up to $8,000</span></div><div class=\"info-row\"><span class=\"info-key\">VSC T2</span><span class=\"info-val\">Up to $6,000</span></div><div class=\"info-row\"><span class=\"info-key\">VSC T3</span><span class=\"info-val\">Up to $5,000</span></div><div class=\"info-row\"><span class=\"info-key\">VSC T4</span><span class=\"info-val\">Up to $4,000</span></div><div class=\"info-row\"><span class=\"info-key\">VSC T5</span><span class=\"info-val\">Up to $3,000</span></div><div class=\"info-row\"><span class=\"info-key\">VSC Min Coverage</span><span class=\"info-val\">2 years / 24,000 miles to qualify as backend</span></div></div>",
+      "new": "<div class=\"info-grid\"><div class=\"info-row\"><span class=\"info-key\">Service Contract / Warranty</span><span class=\"info-val\">Greater of $2,000 or 15% of book value, up to $7,000 — all tiers</span></div><div class=\"info-row\"><span class=\"info-key\">Other Back End</span><span class=\"info-val\">Greater of $2,000 or up to 15% of book value</span></div><div class=\"info-row\"><span class=\"info-key\">GAP</span><span class=\"info-val\">Up to $1,200 or state maximum; see state guidelines for policy limits</span></div><div class=\"info-row\"><span class=\"info-key\">All-In Back End</span><span class=\"info-val\">Greater of $2,000 or 25% of book value, capped by tier below</span></div><div class=\"info-row\"><span class=\"info-key\">All-In Cap — T0–T5</span><span class=\"info-val\">$8,000</span></div><div class=\"info-row\"><span class=\"info-key\">All-In Cap — T6</span><span class=\"info-val\">$6,000</span></div><div class=\"info-row\"><span class=\"info-key\">All-In Cap — T7</span><span class=\"info-val\">$5,000</span></div><div class=\"info-row\"><span class=\"info-key\">All-In Cap — T8</span><span class=\"info-val\">$4,000</span></div><div class=\"info-row\"><span class=\"info-key\">All-In Cap — T9</span><span class=\"info-val\">$3,000</span></div><div class=\"info-row\"><span class=\"info-key\">All-In Includes</span><span class=\"info-val\">GAP, warranty and other back-end products</span></div><div class=\"info-row\"><span class=\"info-key\">VSC Min Coverage</span><span class=\"info-val\">2 years / 24,000 miles to qualify as a back-end product</span></div></div>",
+      "page": 1,
+      "quote": "Service Contract or Warranty: Greater of $2,000 or 15% of book value, up to a maximum of $7,000 · All-in Back End Limit: Greater of $2,000 or 25% of book value, up to: $8K $6K $5K $4K $3K",
+      "note": "WRONG DATA REBUILT. The record listed six rows as \"VSC T0\" through \"VSC T5\" with descending caps. That merged two separate limits and shifted the tier numbers. The sheet has one service-contract cap that applies to every tier (greater of $2,000 or 15% of book, max $7,000), and a separate ALL-IN back-end ceiling that steps down by tier — $8K for Tiers 0-5, then $6K, $5K, $4K, $3K for Tiers 6, 7, 8, 9. So the record showed \"VSC T2 up to $6,000\" when $6,000 is actually the all-in ceiling for Tier 6 and the VSC cap there is $7,000. Every row in this section was mislabelled.",
+      "approved": true
+    },
+    {
+      "path": [
+        "sections",
+        "ltv",
+        "content"
+      ],
+      "old": "<div class=\"info-grid\"><div class=\"info-row\"><span class=\"info-key\">Front-End Advance (Book ≥$25K)</span><span class=\"info-val\">Up to 120% (non-prime; all book values prime)</span></div><div class=\"info-row\"><span class=\"info-key\">Front-End Advance (Book &lt;$25K)</span><span class=\"info-val\">Up to 130% (non-prime)</span></div><div class=\"info-row\"><span class=\"info-key\">Loan to Value (Book ≥$10K)</span><span class=\"info-val\">Up to 150%</span></div><div class=\"info-row\"><span class=\"info-key\">Loan to Value (Book &lt;$10K)</span><span class=\"info-val\">Up to 175%</span></div><div class=\"info-row\"><span class=\"info-key\">Payment-to-Income</span><span class=\"info-val\">Up to 20%</span></div><div class=\"info-row\"><span class=\"info-key\">Max Loan (Prime)</span><span class=\"info-val\">$75,000</span></div><div class=\"info-row\"><span class=\"info-key\">Max Loan (Subprime)</span><span class=\"info-val\">$55,000</span></div><div class=\"info-row\"><span class=\"info-key\">Min Amount Financed</span><span class=\"info-val\">$2,000 front-end</span></div><div class=\"info-row\"><span class=\"info-key\">Max Mileage</span><span class=\"info-val\">200,000 miles</span></div><div class=\"info-row\"><span class=\"info-key\">Max Vehicle Age</span><span class=\"info-val\">15 years</span></div><div class=\"info-row\"><span class=\"info-key\">Vehicles 13+ Years</span><span class=\"info-val\">Maximum 48 months</span></div></div><table class=\"tier-table\" style=\"margin-top:14px\"><thead><tr><th>Mileage</th><th>T0–T5 Max Term</th><th>T6–T9 Max Term</th></tr></thead><tbody><tr><td>Under 80K mi</td><td>84mo (if ≤5yrs old &gt;$20K)</td><td>75mo</td></tr><tr><td>80K–100K mi</td><td>75mo</td><td>75mo</td></tr><tr><td>100K–150K mi</td><td>72mo</td><td>72mo</td></tr><tr><td>150K–200K mi</td><td>48mo</td><td>48mo</td></tr></tbody></table>",
+      "new": "<div class=\"info-grid\"><div class=\"info-row\"><span class=\"info-key\">Front-End Advance (Book ≥$25K)</span><span class=\"info-val\">Up to 120% (non-prime; all book values prime)</span></div><div class=\"info-row\"><span class=\"info-key\">Front-End Advance (Book &lt;$25K)</span><span class=\"info-val\">Up to 130% (non-prime)</span></div><div class=\"info-row\"><span class=\"info-key\">Loan to Value (Book ≥$10K)</span><span class=\"info-val\">Up to 150%</span></div><div class=\"info-row\"><span class=\"info-key\">Loan to Value (Book &lt;$10K)</span><span class=\"info-val\">Up to 175%</span></div><div class=\"info-row\"><span class=\"info-key\">Payment-to-Income</span><span class=\"info-val\">Up to 20%</span></div><div class=\"info-row\"><span class=\"info-key\">Max Loan (Prime)</span><span class=\"info-val\">$75,000</span></div><div class=\"info-row\"><span class=\"info-key\">Max Loan (Subprime)</span><span class=\"info-val\">$55,000</span></div><div class=\"info-row\"><span class=\"info-key\">Min Amount Financed</span><span class=\"info-val\">$4,000</span></div><div class=\"info-row\"><span class=\"info-key\">Low Book Advance</span><span class=\"info-val\">Greater of (book value + $2,000) &divide; book value, or the front-end limit — T0–T5</span></div><div class=\"info-row\"><span class=\"info-key\">Front-End Advance Formula</span><span class=\"info-val\">(Sales price + doc fees + approved front-end products &minus; down payment &minus; net trade &minus; rebate) &divide; book value</span></div><div class=\"info-row\"><span class=\"info-key\">Monthly Payment Cap</span><span class=\"info-val\">None T0–T1 · $1,200 T2–T5 · $1,000 T6 · $900 T7 · $800 T8–T9</span></div><div class=\"info-row\"><span class=\"info-key\">Pre-Qualified Leads</span><span class=\"info-val\">Auto Navigator leads reach Tiers 0–9: 84 mo at 0–50K mi on T0–T5, and up to 150K mi on all tiers</span></div><div class=\"info-row\"><span class=\"info-key\">Max Mileage</span><span class=\"info-val\">200,000 miles</span></div><div class=\"info-row\"><span class=\"info-key\">Max Vehicle Age</span><span class=\"info-val\">15 years</span></div><div class=\"info-row\"><span class=\"info-key\">Vehicles 13+ Years</span><span class=\"info-val\">Maximum 48 months</span></div></div><table class=\"tier-table\" style=\"margin-top:14px\"><thead><tr><th>Mileage</th><th>T0–T5 Max Term</th><th>T6–T9 Max Term</th></tr></thead><tbody><tr><td>Under 80K mi</td><td>84mo (if ≤5yrs old &gt;$20K)</td><td>75mo</td></tr><tr><td>80K–100K mi</td><td>75mo</td><td>75mo</td></tr><tr><td>100K–150K mi</td><td>72mo</td><td>72mo</td></tr><tr><td>150K–200K mi</td><td>48mo</td><td>48mo</td></tr></tbody></table>",
+      "page": 2,
+      "quote": "Amount Financed: From minimum of $4,000",
+      "note": "WRONG VALUE FIXED. The record said minimum amount financed $2,000 front-end. The sheet says $4,000. The $2,000 is a different thing — it is the low-book advance allowance, \"greater of (book value + $2,000) / book value or the FE limit\", which lets a cheap unit advance above book. The two got merged. uniqueFeature also still advertises \"lowest min financed ($2K)\", which is now wrong — see ambiguities. Adds the monthly payment caps by tier, which the record did not carry at all.",
+      "approved": true
+    },
+    {
+      "path": [
+        "sections",
+        "reserve",
+        "content"
+      ],
+      "old": "<div class=\"info-grid\"><div class=\"info-row\"><span class=\"info-key\">Participation (≤60mo)</span><span class=\"info-val\">Up to 2.5%</span></div><div class=\"info-row\"><span class=\"info-key\">Participation (≤75mo)</span><span class=\"info-val\">Up to 2.0%</span></div><div class=\"info-row\"><span class=\"info-key\">Participation (76+mo)</span><span class=\"info-val\">Up to 1.5%</span></div></div><h4 style=\"margin:12px 0 6px;font-size:.75rem;text-transform:uppercase;letter-spacing:.06em;opacity:.7\">Flat Fee Schedule — Buy Rate</h4><table class=\"tier-table\"><thead><tr><th>Amount Financed</th><th>Flat @ Buy Rate</th></tr></thead><tbody><tr><td>$10,000–$14,999</td><td>$100</td></tr><tr><td>$15,000–$19,999</td><td>$150</td></tr><tr><td>$20,000–$24,999</td><td>$200</td></tr><tr><td>$25,000–$29,999</td><td>$250</td></tr><tr><td>$30,000+</td><td>$300</td></tr></tbody></table><div class=\"note-box info\" style=\"margin-top:10px\"><span class=\"note-icon\">📱</span><span><strong>Auto Navigator:</strong> Capital One pre-qualified leads via dealer website and online platforms. Access for all tiers 0–9.</span></div>",
+      "new": "<div class=\"info-grid\"><div class=\"info-row\"><span class=\"info-key\">Participation (≤60mo)</span><span class=\"info-val\">Up to 2.5%</span></div><div class=\"info-row\"><span class=\"info-key\">Participation (≤75mo)</span><span class=\"info-val\">Up to 2.0%</span></div><div class=\"info-row\"><span class=\"info-key\">Participation (76+mo)</span><span class=\"info-val\">Up to 1.5%</span></div><div class=\"info-row\"><span class=\"info-key\">Participation — T8–T9</span><span class=\"info-val\">Up to 1 point on contracts ≤75 months</span></div><div class=\"info-row\"><span class=\"info-key\">Participation Ceiling</span><span class=\"info-val\">Cannot exceed the finance charge from Capital One</span></div><div class=\"info-row\"><span class=\"info-key\">Flats</span><span class=\"info-val\">Must contract at buy rate</span></div></div><h4 style=\"margin:12px 0 6px;font-size:.75rem;text-transform:uppercase;letter-spacing:.06em;opacity:.7\">Flat Fee Schedule — Buy Rate</h4><table class=\"tier-table\"><thead><tr><th>Amount Financed</th><th>Flat @ Buy Rate</th></tr></thead><tbody><tr><td>$10,000–$14,999</td><td>$100</td></tr><tr><td>$15,000–$19,999</td><td>$150</td></tr><tr><td>$20,000–$24,999</td><td>$200</td></tr><tr><td>$25,000–$29,999</td><td>$250</td></tr><tr><td>$30,000+</td><td>$300</td></tr></tbody></table><div class=\"note-box info\" style=\"margin-top:10px\"><span class=\"note-icon\">📱</span><span><strong>Auto Navigator:</strong> Capital One pre-qualified leads via dealer website and online platforms. Access for all tiers 0–9.</span></div>",
+      "page": 2,
+      "quote": "Dealer participation or flat cannot exceed the finance charge from Capital One, and a flat must contract at buy rate.",
+      "note": "Two rules that bound every deal and were nowhere on the page: participation can never exceed Capital One's own finance charge, and a flat only pays if the contract is written at buy rate. Also adds the separate 1-point cap for Tiers 8 and 9.",
+      "approved": true
+    }
+  ],
+  "not_in_source": [
+    "ficoMin",
+    "maxTerm",
+    "maxLTV",
+    "maxMileage",
+    "idReq",
+    "bureaus.stateMap"
+  ],
+  "ambiguities": [
+    {
+      "field": "uniqueFeature",
+      "note": "Says \"lowest min financed ($2K)\". That was built on the same mistake as the LTV row — the real minimum amount financed is $4,000. The claim should come out or be reworded, but it is a headline field so leaving it to Gage."
+    },
+    {
+      "field": "sections.id — minimum down by tier",
+      "note": "The Minimum Down row spans tier columns unevenly: \"None\", then \"$1,000 for <2 years on file or <3 trade lines\", then \"$1,000 for <4 years on file or <4 trade lines\", then \"$1,000\". The record assigns the <4-year rule to T0-T5, but T0-T5 appears to be the \"None\" span. AUDIT.md already flagged capitalone for unreliable per-tier attribution. Not changed — the column spans are not crisp enough at 300 dpi to assert exact tier boundaries, and guessing is what produced the current error."
+    },
+    {
+      "field": "DEALER STATUS",
+      "note": "This is the Executive Diamond Partner sheet. If the store's Capital One status changes, every payout and cap on this page changes with it. docTitle says so; worth knowing."
+    },
+    {
+      "field": "bureaus.note",
+      "note": "Record says \"All three bureaus; uses middle score.\" Neither page mentions bureaus. Same unsourced pattern as chase."
+    }
+  ],
+  "approved_by": "gage",
+  "approved_at": "2026-08-26T20:26:10"
+}

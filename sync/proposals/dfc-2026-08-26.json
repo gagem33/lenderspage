@@ -1,0 +1,84 @@
+{
+  "schema": "lenderhub.proposal.v1",
+  "lender_id": "dfc",
+  "created": "2026-08-26",
+  "sources": [
+    {
+      "drive_file_id": "1VJ5ltQPHIdsv62z8SYOP8C3NXCzNNrvJ",
+      "title": "DFC - Program Sheet - 010126.pdf",
+      "doc_type": "Program Sheet",
+      "effective_date": "2025-08-13",
+      "pages": 1,
+      "triage": {
+        "1": "TEXT_OK"
+      },
+      "read_as": "300 dpi render. The sheet prints \"Revision Date: 8/13/2025\" in its own header."
+    }
+  ],
+  "changes": [
+    {
+      "path": [
+        "sections",
+        "backend",
+        "content"
+      ],
+      "old": "<div class=\"info-grid\"><div class=\"info-row\"><span class=\"info-key\">GAP Max</span><span class=\"info-val\">$1,500 or state cap (lesser); min 80% FELTV; min $12K financed; 60+mo term</span></div><div class=\"info-row\"><span class=\"info-key\">GAP — NY</span><span class=\"info-val\">Available through TFS; max $190</span></div><div class=\"info-row\"><span class=\"info-key\">Backend Allowance</span><span class=\"info-val\">Dollar amount on deal approval; all products must be cancelable</span></div><div class=\"info-row\"><span class=\"info-key\">Service Contract</span><span class=\"info-val\">Must cover at least half the term of the loan</span></div></div>",
+      "new": "<div class=\"info-grid\"><div class=\"info-row\"><span class=\"info-key\">GAP Max</span><span class=\"info-val\">$1,500 or state cap (lesser); minimum 70% FELTV or state cap</span></div><div class=\"info-row\"><span class=\"info-key\">GAP — NY</span><span class=\"info-val\">Available through TFS; max $190</span></div><div class=\"info-row\"><span class=\"info-key\">Backend Allowance</span><span class=\"info-val\">Dollar amount on deal approval; all products must be cancelable</span></div><div class=\"info-row\"><span class=\"info-key\">Allowable Products</span><span class=\"info-val\">Service contracts · maintenance packages (lifetime oil) · cancelable bundles with refund · GAP</span></div><div class=\"info-row\"><span class=\"info-key\">Cancelability</span><span class=\"info-val\">Every financed product must be cancelable</span></div><div class=\"info-row\"><span class=\"info-key\">Service Contract</span><span class=\"info-val\">Must cover at least half the term of the loan</span></div></div>",
+      "page": 1,
+      "quote": "GAP Guidelines: Maximum price $1500 or state cap whichever is less, Minimum 70% FELTV or state cap.",
+      "note": "WRONG VALUE FIXED. The record required 80% front-end LTV for GAP; the sheet says 70%. Ten points stricter than DFC actually is, so the desk would decline GAP on deals that qualify — the error costs product revenue rather than causing a decline. The record also carried \"min $12K financed; 60+mo term\", which appears nowhere on this sheet; see ambiguities.",
+      "approved": true
+    },
+    {
+      "path": [
+        "sections",
+        "vehicles",
+        "content"
+      ],
+      "old": "<div class=\"note-box danger\"><span class=\"note-icon\">❌</span><span><strong>Ineligible:</strong> Commercial use, cargo vans for delivery, ride-sharing, branded titles, grey market. Vehicles over 14yrs or 175K miles auto-declined.</span></div>",
+      "new": "<div class=\"info-grid\"><div class=\"info-row\"><span class=\"info-key\">Used Value</span><span class=\"info-val\">KBB “Lending Value” or J.D. Power “Clean Trade”</span></div><div class=\"info-row\"><span class=\"info-key\">One Source Only</span><span class=\"info-val\">The dealership must pick one book and cannot switch back and forth between them</span></div><div class=\"info-row\"><span class=\"info-key\">Current-Year Used, No Book</span><span class=\"info-val\">80% of the “like invoice” new vehicle</span></div><div class=\"info-row\"><span class=\"info-key\">New Qualification</span><span class=\"info-val\">Never registered, and no older than the current model year as of March 31</span></div><div class=\"info-row\"><span class=\"info-key\">New Mileage Cap</span><span class=\"info-val\">7,500 mi</span></div><div class=\"info-row\"><span class=\"info-key\">Prior-Year “New”</span><span class=\"info-val\">Treated as used; if no used value exists, 80% of invoice</span></div><div class=\"info-row\"><span class=\"info-key\">CPO</span><span class=\"info-val\">No value increase — DFC does not pay a CPO bump</span></div><div class=\"info-row\"><span class=\"info-key\">Auto-Decline</span><span class=\"info-val\">Over 14 model years or over 175,000 mi — call for an exception</span></div></div><div class=\"note-box danger\"><span class=\"note-icon\">❌</span><span><strong>Ineligible:</strong> Commercial use, cargo vans for delivery, ride-sharing, branded titles, grey market. Vehicles over 14yrs or 175K miles auto-declined.</span></div>",
+      "page": 1,
+      "quote": "Kelly Blue Book \"Lending Value\" or JD Power \"Clean Trade\" - Dealership must only use 1 source (Kelly or JD Power) and cannot vary back and forth",
+      "note": "DFC had no valuation rows at all. The one-source rule is the one to know: the store picks KBB or J.D. Power and is held to it — you cannot book whichever is higher deal by deal. Also notable that DFC gives no CPO value increase, which is the opposite of most of the book and easy to assume wrongly.",
+      "approved": true
+    },
+    {
+      "path": [
+        "sections",
+        "ltv",
+        "content"
+      ],
+      "old": "<div class=\"info-grid\"><div class=\"info-row\"><span class=\"info-key\">Max Amount Financed</span><span class=\"info-val\">$100,000</span></div><div class=\"info-row\"><span class=\"info-key\">Max Vehicle Age</span><span class=\"info-val\">14 model years</span></div><div class=\"info-row\"><span class=\"info-key\">Max Mileage</span><span class=\"info-val\">175,000 miles (auto-decline above)</span></div><div class=\"info-row\"><span class=\"info-key\">New Vehicle Mileage</span><span class=\"info-val\">≤7,500 miles to qualify as new</span></div></div>",
+      "new": "<div class=\"info-grid\"><div class=\"info-row\"><span class=\"info-key\">Max Amount Financed</span><span class=\"info-val\">$100,000</span></div><div class=\"info-row\"><span class=\"info-key\">Over $75,000</span><span class=\"info-val\">Supervisor approval required, and expect extra processing time</span></div><div class=\"info-row\"><span class=\"info-key\">APR Ceiling</span><span class=\"info-val\">Total APR must not exceed state usury limits</span></div><div class=\"info-row\"><span class=\"info-key\">eContracting</span><span class=\"info-val\">RouteOne and Dealertrack</span></div><div class=\"info-row\"><span class=\"info-key\">Max Vehicle Age</span><span class=\"info-val\">14 model years</span></div><div class=\"info-row\"><span class=\"info-key\">Max Mileage</span><span class=\"info-val\">175,000 miles (auto-decline above)</span></div><div class=\"info-row\"><span class=\"info-key\">New Vehicle Mileage</span><span class=\"info-val\">≤7,500 miles to qualify as new</span></div></div>",
+      "page": 1,
+      "quote": "Loans over $75,000 require supervisor or above approval and may require additional time to process. No flat or reserve paid on $75,000+",
+      "note": "The record already noted that no flat or reserve is paid above $75,000, but not that such a deal also needs supervisor sign-off and takes longer — worth knowing before promising a delivery time.",
+      "approved": true
+    }
+  ],
+  "not_in_source": [
+    "ficoMin",
+    "maxTerm",
+    "maxLTV",
+    "maxMileage",
+    "poi",
+    "por"
+  ],
+  "ambiguities": [
+    {
+      "field": "effectiveDate — RESOLVED",
+      "resolved": "2026-08-26 — the document settles it.",
+      "note": "dfc has been in acknowledged.json because the filename says 010126 while the record says August 13, 2025. The sheet itself prints \"Revision Date: 8/13/2025\" in its header, so the RECORD IS RIGHT and the filename is the thing that is wrong. Worth renaming the Drive file to DFC - Program Sheet - 081325.pdf and updating the SOURCES.md row, which would let the acknowledgement be removed entirely rather than carried forever."
+    },
+    {
+      "field": "backend — GAP conditions",
+      "note": "The record also states \"min $12K financed\" and \"60+mo term\" for GAP. Neither appears on this sheet. They may come from the separate DFC Funding Guidelines PDF (1tjEUJLshnxu5pCEc8RpAObDk7QHqEJuc), which I did not read for this proposal. Left in place rather than deleted — but unverified."
+    },
+    {
+      "field": "VERIFIED CORRECT",
+      "note": "The 13-tier P0-P11 plus No-Hit structure is faithfully collapsed in the record: P0-P4 and P6-P8 really are identical rows on the sheet, so 7 rows x 7 columns is a legitimate compression of the two 13-row tables, and every value matches."
+    }
+  ],
+  "approved_by": "gage",
+  "approved_at": "2026-08-26T20:26:10"
+}

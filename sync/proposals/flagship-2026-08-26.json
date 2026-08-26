@@ -1,0 +1,96 @@
+{
+  "schema": "lenderhub.proposal.v1",
+  "lender_id": "flagship",
+  "created": "2026-08-26",
+  "sources": [
+    {
+      "drive_file_id": "1yqZG4W6_8CAThHGoJw3_6LfkQyZJUtO5",
+      "title": "Flagship - Program Sheet - 072926.pdf",
+      "doc_type": "Program Sheet",
+      "effective_date": "2026-07-29",
+      "pages": 2,
+      "triage": {
+        "1": "TEXT_OK",
+        "2": "TEXT_OK"
+      },
+      "read_as": "300 dpi render. Form 2395 National Program Guidelines v1.3, Rev. 7/2026."
+    }
+  ],
+  "changes": [
+    {
+      "path": [
+        "sections",
+        "income",
+        "content"
+      ],
+      "old": "<div class=\"info-grid\"><div class=\"info-row\"><span class=\"info-key\">Minimum Income</span><span class=\"info-val\">$3,000 per application</span></div><div class=\"info-row\"><span class=\"info-key\">W2 Employment</span><span class=\"info-val\">Minimum 2 months as a permanent employee; paystub within 30 days if POI required</span></div><div class=\"info-row\"><span class=\"info-key\">1099 / Self-Employed</span><span class=\"info-val\">Minimum 12 months; last 3 months bank statements + business verification</span></div><div class=\"info-row\"><span class=\"info-key\">Second Job</span><span class=\"info-val\">Minimum 12 months at second job required</span></div><div class=\"info-row\"><span class=\"info-key\">Non-Taxable Gross-Up</span><span class=\"info-val\">25% (SSI, pension, disability, etc.) — applied by dealer at submission</span></div></div><div class=\"note-box danger\" style=\"margin-top:10px\"><span class=\"note-icon\">❌</span><span>Employees of the submitting dealership are not eligible.</span></div>",
+      "new": "<div class=\"info-grid\"><div class=\"info-row\"><span class=\"info-key\">Minimum Income</span><span class=\"info-val\">$2,000 per application</span></div><div class=\"info-row\"><span class=\"info-key\">W2 Employment</span><span class=\"info-val\">Minimum 2 months as a permanent employee; paystub within 30 days if POI required</span></div><div class=\"info-row\"><span class=\"info-key\">1099 / Self-Employed</span><span class=\"info-val\">Minimum 12 months; last 3 months bank statements + business verification</span></div><div class=\"info-row\"><span class=\"info-key\">Second Job</span><span class=\"info-val\">Minimum 12 months at second job required</span></div><div class=\"info-row\"><span class=\"info-key\">Non-Taxable Gross-Up</span><span class=\"info-val\">25% (SSI, pension, disability, etc.) — applied by dealer at submission</span></div><div class=\"info-row\"><span class=\"info-key\">Protected Income Types</span><span class=\"info-val\">Workers comp · foster care · welfare · court-ordered child support · Medicaid waiver/IHSS · Roth IRA qualified distributions · disaster relief · survivor benefits</span></div><div class=\"info-row\"><span class=\"info-key\">SSI Proof</span><span class=\"info-val\">Recent full bank statement showing deposits, plus a current-year award letter or an SS check dated within 60 days (90 if the award letter matches)</span></div><div class=\"info-row\"><span class=\"info-key\">Pension Proof</span><span class=\"info-val\">Current-year pension statement, prior-year W-2, or 3 bank statements showing net deposits</span></div></div><div class=\"note-box danger\" style=\"margin-top:10px\"><span class=\"note-icon\">❌</span><span>Employees of the submitting dealership are not eligible.</span></div>",
+      "page": 2,
+      "quote": "Minimum Income: $2,000 per application",
+      "note": "WRONG VALUE FIXED. The income section said $3,000 per application; the sheet says $2,000. The record contradicted itself — its own poi field already said $2,000. A $1,000/month overstatement of the income floor turns away deals Flagship would buy.",
+      "approved": true
+    },
+    {
+      "path": [
+        "sections",
+        "ltv",
+        "content"
+      ],
+      "old": "<div class=\"info-grid\"><div class=\"info-row\"><span class=\"info-key\">Max Term</span><span class=\"info-val\">78 months</span></div><div class=\"info-row\"><span class=\"info-key\">Max Mileage (≤60mo)</span><span class=\"info-val\">140,000 miles</span></div><div class=\"info-row\"><span class=\"info-key\">Max Mileage (≤72mo)</span><span class=\"info-val\">120,000 miles</span></div><div class=\"info-row\"><span class=\"info-key\">Front-End Advance</span><span class=\"info-val\">Up to 125%</span></div><div class=\"info-row\"><span class=\"info-key\">Total LTV</span><span class=\"info-val\">Up to 150%</span></div><div class=\"info-row\"><span class=\"info-key\">Vehicle Age</span><span class=\"info-val\">13 model years or newer</span></div><div class=\"info-row\"><span class=\"info-key\">Valuation</span><span class=\"info-val\">JD Power Clean Trade (KBB Lending Value Good in AK, AZ, CA, CO, HI, ID, NV, OR, UT, WA)</span></div></div>",
+      "new": "<div class=\"info-grid\"><div class=\"info-row\"><span class=\"info-key\">Max Term</span><span class=\"info-val\">78 months</span></div><div class=\"info-row\"><span class=\"info-key\">Front-End Advance</span><span class=\"info-val\">Up to 125%</span></div><div class=\"info-row\"><span class=\"info-key\">Total LTV</span><span class=\"info-val\">Up to 150%</span></div><div class=\"info-row\"><span class=\"info-key\">Vehicle Age</span><span class=\"info-val\">13 model years or newer</span></div><div class=\"info-row\"><span class=\"info-key\">New With 6,000+ Miles</span><span class=\"info-val\">Books as used</span></div><div class=\"info-row\"><span class=\"info-key\">Third-Party Purchases</span><span class=\"info-val\">Not allowed — the vehicle must be for the applicant</span></div><div class=\"info-row\"><span class=\"info-key\">Multiple Transactions</span><span class=\"info-val\">Must be disclosed up front</span></div><div class=\"info-row\"><span class=\"info-key\">Valuation</span><span class=\"info-val\">JD Power Clean Trade (KBB Lending Value Good in AK, AZ, CA, CO, HI, ID, NV, OR, UT, WA)</span></div></div><h4 style=\"margin:14px 0 6px;font-size:.75rem;text-transform:uppercase;letter-spacing:.06em;opacity:.7\">Max term &amp; mileage</h4><table class=\"mini-table\"><thead><tr><th>Term</th><th>Max miles</th><th>Condition</th></tr></thead><tbody><tr><td>60 mo</td><td>160,000</td><td>—</td></tr><tr><td>60 mo</td><td>170,000</td><td>Toyota, Lexus, Acura, Honda</td></tr><tr><td>72 mo</td><td>120,000</td><td>—</td></tr><tr><td>75 mo</td><td>75,000</td><td>Additional requirements apply</td></tr><tr><td>78 mo</td><td>50,000</td><td>Additional requirements apply</td></tr></tbody></table>",
+      "page": 1,
+      "quote": "60 months / 160,000 miles · 60 months / 170,000 miles* · *Vehicle Make: Toyota, Lexus, Acura, Honda",
+      "note": "WRONG VALUE FIXED, plus a table cut from 5 rows to 2. The record said 140,000 miles at 60 months; the sheet says 160,000 — and 170,000 on a Toyota, Lexus, Acura or Honda. That is 20,000 to 30,000 miles of eligibility the desk was giving away, and again the record contradicted itself (maxMileage already said 160,000). The 75- and 78-month rows were missing entirely: those cap at 75,000 and 50,000 miles, so the 78-month term the record advertises only exists under 50,000 miles.",
+      "approved": true
+    },
+    {
+      "path": [
+        "sections",
+        "backend",
+        "content"
+      ],
+      "old": "<div class=\"info-grid\"><div class=\"info-row\"><span class=\"info-key\">Max Back-End</span><span class=\"info-val\">$4,500 total</span></div><div class=\"info-row\"><span class=\"info-key\">GAP</span><span class=\"info-val\">$1,200 or state max</span></div><div class=\"info-row\"><span class=\"info-key\">VSC</span><span class=\"info-val\">$3,500 max — 24mo/24K mi min; must cover seals & gaskets</span></div><div class=\"info-row\"><span class=\"info-key\">Tire & Wheel</span><span class=\"info-val\">$1,500 max</span></div><div class=\"info-row\"><span class=\"info-key\">Maintenance</span><span class=\"info-val\">$1,500 max</span></div></div>",
+      "new": "<div class=\"info-grid\"><div class=\"info-row\"><span class=\"info-key\">Max Back-End</span><span class=\"info-val\">$4,500 total</span></div><div class=\"info-row\"><span class=\"info-key\">Bundled Products</span><span class=\"info-val\">$2,000 max (bundles containing maintenance or tire &amp; wheel)</span></div><div class=\"info-row\"><span class=\"info-key\">Ancillary Ceiling</span><span class=\"info-val\">Cannot exceed $7,500 or 30% of vehicle value, whichever is less</span></div><div class=\"info-row\"><span class=\"info-key\">GAP Minimum LTV</span><span class=\"info-val\">80% — Flagship only finances GAP at or above it</span></div><div class=\"info-row\"><span class=\"info-key\">GAP</span><span class=\"info-val\">$1,200 or state max</span></div><div class=\"info-row\"><span class=\"info-key\">VSC</span><span class=\"info-val\">$3,500 max — 24mo/24K mi min; must cover seals & gaskets</span></div><div class=\"info-row\"><span class=\"info-key\">Tire & Wheel</span><span class=\"info-val\">$1,500 max</span></div><div class=\"info-row\"><span class=\"info-key\">Maintenance</span><span class=\"info-val\">$1,500 max</span></div></div>",
+      "page": 2,
+      "quote": "Flagship only finances GAP on accounts with an LTV greater than or equal to 80%.",
+      "note": "Three limits the record did not carry. The GAP floor is the one that bites: sell GAP under 80% LTV and Flagship will not fund it. The $7,500 / 30% ancillary ceiling sits alongside the $4,500 max back-end from page 1 — see the ambiguity note, they are different numbers.",
+      "approved": true
+    },
+    {
+      "path": [
+        "sections",
+        "reserve",
+        "content"
+      ],
+      "old": "<div class=\"info-grid\"><div class=\"info-row\"><span class=\"info-key\">Participation</span><span class=\"info-val\">Up to 2% — see callback</span></div><div class=\"info-row\"><span class=\"info-key\">Reserve Split</span><span class=\"info-val\">70/30 dealer/lender</span></div><div class=\"info-row\"><span class=\"info-key\">Chargeback</span><span class=\"info-val\">Before 3 payments OR within 90 days</span></div><div class=\"info-row\"><span class=\"info-key\">Max Back-End</span><span class=\"info-val\">$4,500 total</span></div><div class=\"info-row\"><span class=\"info-key\">Processing Fee</span><span class=\"info-val\">As low as $99</span></div></div>",
+      "new": "<div class=\"info-grid\"><div class=\"info-row\"><span class=\"info-key\">Participation</span><span class=\"info-val\">Up to 2% — see callback</span></div><div class=\"info-row\"><span class=\"info-key\">Reserve Split</span><span class=\"info-val\">70/30 dealer/lender</span></div><div class=\"info-row\"><span class=\"info-key\">Chargeback</span><span class=\"info-val\">Before 3 payments OR within 90 days</span></div><div class=\"info-row\"><span class=\"info-key\">Max Back-End</span><span class=\"info-val\">$4,500 total</span></div><div class=\"info-row\"><span class=\"info-key\">Processing Fee</span><span class=\"info-val\">As low as $99</span></div><div class=\"info-row\"><span class=\"info-key\">Buy Rate Requests</span><span class=\"info-val\">Not accepted — anything entered in Dealertrack or RouteOne is ignored</span></div><div class=\"info-row\"><span class=\"info-key\">Discount Fee</span><span class=\"info-val\">As low as $0 — contract and discount fees may not be charged to the applicant</span></div><div class=\"info-row\"><span class=\"info-key\">Returned Contracts</span><span class=\"info-val\">$195 per occurrence</span></div><div class=\"info-row\"><span class=\"info-key\">Funding Deadline</span><span class=\"info-val\">Must fund at least 5 business days before the contracted first payment</span></div><div class=\"info-row\"><span class=\"info-key\">Down Payment</span><span class=\"info-val\">No post-dated checks, borrowed funds or credit-card charges</span></div></div>",
+      "page": 2,
+      "quote": "Flagship does not accept buy rate requests. Any buy rate data entered into Dealertrack, RouteOne, or any other interface will not be received or considered by Flagship during the application process.",
+      "note": "Flagship ignores buy-rate requests outright — entering one is wasted effort, and the record said nothing about it. Also adds the $195 returned-contract fee and the 5-business-day funding deadline, both of which cost money or time after the deal is done.",
+      "approved": true
+    }
+  ],
+  "not_in_source": [
+    "ficoMin",
+    "maxTerm",
+    "maxLTV",
+    "gapMax",
+    "bureaus.stateMap"
+  ],
+  "ambiguities": [
+    {
+      "field": "backend — two different ceilings",
+      "note": "Page 1 says MAX BACK-END $4,500. Page 2 says max allowable ancillary products cannot exceed $7,500 or 30% of vehicle value, whichever is less. Both are in the same document and they are not the same number. Stored both rather than picking one. Worth a call to the rep."
+    },
+    {
+      "field": "maxMileage",
+      "note": "Record stores \"160,000 mi (≤60mo)\", which is right, but the sheet allows 170,000 on Toyota, Lexus, Acura and Honda. Left the scalar alone; the make-specific row is now in the table."
+    },
+    {
+      "field": "bureaus.note",
+      "note": "Record says \"All three bureaus.\" Neither page mentions bureaus."
+    }
+  ],
+  "approved_by": "gage",
+  "approved_at": "2026-08-26T20:26:10"
+}

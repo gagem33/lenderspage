@@ -1,0 +1,66 @@
+{
+  "schema": "lenderhub.proposal.v1",
+  "lender_id": "usbank",
+  "created": "2026-08-26",
+  "sources": [
+    {
+      "drive_file_id": "1ffhHRvMuvYytMXS_Rh6gpDr3_gFiRYTY",
+      "title": "USBank - Program Sheet - 040126.pdf",
+      "doc_type": "Program Sheet",
+      "effective_date": "2026-04-01",
+      "pages": 4,
+      "triage": {
+        "1": "TEXT_OK",
+        "2": "TEXT_OK",
+        "3": "TEXT_OK",
+        "4": "TEXT_OK"
+      },
+      "read_as": "300 dpi render. Rev. 4.01.26, National Installment Auto Finance Reference Guide."
+    }
+  ],
+  "changes": [
+    {
+      "path": [
+        "sections",
+        "ltv",
+        "content"
+      ],
+      "old": "<div class=\"info-grid\"><div class=\"info-row\"><span class=\"info-key\">New Valuation</span><span class=\"info-val\">Factory vehicle invoice</span></div><div class=\"info-row\"><span class=\"info-key\">Used Valuation</span><span class=\"info-val\">JD Power-NADA Clean Trade-In (Black Book Clean secondary). KBB Lending Value in AZ, CA, CO, HI, ID, MT, NM, NV, OR, UT, WA, WY.</span></div><div class=\"info-row\"><span class=\"info-key\">CPO Bump</span><span class=\"info-val\">+$500 if value &lt;$40K · +$1,000 if value &gt;$40K (automatic)</span></div><div class=\"info-row\"><span class=\"info-key\">Min Amount Financed</span><span class=\"info-val\">$5,000 (NJ: $10,000 cash selling price)</span></div><div class=\"info-row\"><span class=\"info-key\">Terms &gt;72mo</span><span class=\"info-val\">Max total LTV ≤120%. Hawaii: FE &amp; total LTV reduced 10%.</span></div></div><h4 style=\"margin:12px 0 6px;font-size:.75rem;text-transform:uppercase;letter-spacing:.06em;opacity:.7\">FE Advance / Max Total LTV — Advance &lt;$100K</h4><table class=\"mini-table\"><thead><tr><th>Model Year</th><th>FICO</th><th>FE Advance</th><th>Max Total LTV</th></tr></thead><tbody><tr><td>2027–2019</td><td>740+</td><td>135%</td><td>145%</td></tr><tr><td>2027–2019</td><td>700–739</td><td>135%</td><td>140%</td></tr><tr><td>2027–2019</td><td>675–699</td><td>135%</td><td>135%</td></tr><tr><td>2018–2017</td><td>675+</td><td>115%</td><td>115%</td></tr></tbody></table><h4 style=\"margin:12px 0 6px;font-size:.75rem;text-transform:uppercase;letter-spacing:.06em;opacity:.7\">Max Term by Model Year</h4><table class=\"mini-table\"><thead><tr><th>2027–25</th><th>2024–23</th><th>2022</th><th>2021–20</th><th>2019</th><th>2018–17</th></tr></thead><tbody><tr><td>84</td><td>75</td><td>72</td><td>72</td><td>60</td><td>60</td></tr></tbody></table><div class=\"note-box info\" style=\"margin-top:10px\"><span class=\"note-icon\">ℹ️</span><span><strong>Advance &gt;$100K:</strong> 740+ 105%/115% · 700–739 100%/115% · 675–699 90%/115%. Max term 72mo, PTI ≤13%.</span></div>",
+      "new": "<div class=\"info-grid\"><div class=\"info-row\"><span class=\"info-key\">New Valuation</span><span class=\"info-val\">Factory vehicle invoice</span></div><div class=\"info-row\"><span class=\"info-key\">Used Valuation</span><span class=\"info-val\">JD Power-NADA Clean Trade-In (Black Book Clean secondary). KBB Lending Value in AZ, CA, CO, HI, ID, MT, NM, NV, OR, UT, WA, WY.</span></div><div class=\"info-row\"><span class=\"info-key\">CPO Bump</span><span class=\"info-val\">+$500 if value &lt;$40K · +$1,000 if value &gt;$40K (automatic)</span></div><div class=\"info-row\"><span class=\"info-key\">Min Amount Financed</span><span class=\"info-val\">$5,000 (NJ: $10,000 cash selling price)</span></div><div class=\"info-row\"><span class=\"info-key\">Front-End Advance</span><span class=\"info-val\">All-in funded advance including TT&amp;L but excluding back-end &divide; collateral value</span></div><div class=\"info-row\"><span class=\"info-key\">Total LTV</span><span class=\"info-val\">All-in funded advance including TT&amp;L and all back-end &divide; collateral value</span></div><div class=\"info-row\"><span class=\"info-key\">Term Range</span><span class=\"info-val\">12–84 months, communicated systemically at approval</span></div><div class=\"info-row\"><span class=\"info-key\">Excessive Mileage</span><span class=\"info-val\">Term may be cut for remaining useful life</span></div><div class=\"info-row\"><span class=\"info-key\">Terms &gt;72mo</span><span class=\"info-val\">Max total LTV ≤120%. Hawaii: FE &amp; total LTV reduced 10%.</span></div></div><h4 style=\"margin:12px 0 6px;font-size:.75rem;text-transform:uppercase;letter-spacing:.06em;opacity:.7\">FE Advance / Max Total LTV — Advance &lt;$100K</h4><table class=\"mini-table\"><thead><tr><th>Model Year</th><th>FICO</th><th>FE Advance</th><th>Max Total LTV</th></tr></thead><tbody><tr><td>2027–2019</td><td>740+</td><td>135%</td><td>145%</td></tr><tr><td>2027–2019</td><td>700–739</td><td>135%</td><td>140%</td></tr><tr><td>2027–2019</td><td>675–699</td><td>135%</td><td>135%</td></tr><tr><td>2018–2017</td><td>675+</td><td>115%</td><td>115%</td></tr></tbody></table><h4 style=\"margin:12px 0 6px;font-size:.75rem;text-transform:uppercase;letter-spacing:.06em;opacity:.7\">Max Term by Model Year</h4><table class=\"mini-table\"><thead><tr><th>2027–25</th><th>2024–23</th><th>2022</th><th>2021–20</th><th>2019</th><th>2018–17</th></tr></thead><tbody><tr><td>84</td><td>75</td><td>72</td><td>72</td><td>60</td><td>60</td></tr></tbody></table><div class=\"note-box info\" style=\"margin-top:10px\"><span class=\"note-icon\">ℹ️</span><span><strong>Advance &gt;$100K:</strong> 740+ 105%/115% · 700–739 100%/115% · 675–699 90%/115%. Max term 72mo, PTI ≤13%.</span></div><h4 style=\"margin:14px 0 6px;font-size:.75rem;text-transform:uppercase;letter-spacing:.06em;opacity:.7\">Max term by model year</h4><table class=\"mini-table\"><thead><tr><th>Model year</th><th>Max term</th><th>Condition</th></tr></thead><tbody><tr><td>2027–2025</td><td>84</td><td>Over 72 mo needs DTI/PTI at 72-mo amortisation</td></tr><tr><td>2024–2023</td><td>75</td><td>Over 72 mo needs DTI/PTI at 72-mo amortisation</td></tr><tr><td>2022</td><td>72</td><td>—</td></tr><tr><td>2021–2020</td><td>72</td><td>Over 66 mo needs FICO 750+</td></tr><tr><td>2019</td><td>60</td><td>Over 48 mo needs FICO 750+ · 49–60 mo caps LTV at 115%</td></tr><tr><td>2018–2017</td><td>60</td><td>Over 48 mo needs FICO 750+ · LTV caps at 115%</td></tr></tbody></table>",
+      "page": 2,
+      "quote": "2019 | Up To 60 Months 4, 6 · 6 To qualify for terms greater than 48 months, borrowers must have a minimum Credit Bureau Risk Score (FICO) > 750",
+      "note": "The max-term-by-model-year table was missing. Six rows, transcribed with their footnote conditions. The one that matters and was nowhere in the record: on a 2019 or older unit, any term over 48 months requires FICO 750+. The record only carried the 750 rule for 2021-2020 over 66 months, so a 675-score customer on a 2019 car looked eligible for 60 months when the sheet caps them at 48. Also adds US Bank's own front-end vs total LTV definitions.",
+      "approved": true
+    },
+    {
+      "path": [
+        "sections",
+        "vehicles",
+        "content"
+      ],
+      "old": "<div class=\"info-grid\"><div class=\"info-row\"><span class=\"info-key\">Eligible</span><span class=\"info-val\">Autos, vans, light &amp; medium duty trucks</span></div><div class=\"info-row\"><span class=\"info-key\">Vehicle Age</span><span class=\"info-val\">2027–2016 MY (2027–2017 on/after Apr 1, 2026)</span></div><div class=\"info-row\"><span class=\"info-key\">New</span><span class=\"info-val\">Not previously titled, &lt;5,000 mi, current MY or newer</span></div><div class=\"info-row\"><span class=\"info-key\">Used</span><span class=\"info-val\">Prior calendar year, titled, or &gt;5,000 mi. Book-out sheet required in funding package.</span></div><div class=\"info-row\"><span class=\"info-key\">Max Mileage</span><span class=\"info-val\">125,000 (≤100K standard; 100,001–125,000 → FICO 675, term caps)</span></div><div class=\"info-row\"><span class=\"info-key\">WV Used</span><span class=\"info-val\">≤6 yr old &amp; &lt;100,000 mi</span></div></div><div class=\"note-box danger\" style=\"margin-top:10px\"><span class=\"note-icon\">❌</span><span><strong>Excluded:</strong> Lemon Law buyback, gray market, branded title, ride share.</span></div>",
+      "new": "<div class=\"info-grid\"><div class=\"info-row\"><span class=\"info-key\">Eligible</span><span class=\"info-val\">Autos, vans, light &amp; medium duty trucks</span></div><div class=\"info-row\"><span class=\"info-key\">Vehicle Age</span><span class=\"info-val\">2027–2016 MY (2027–2017 on/after Apr 1, 2026)</span></div><div class=\"info-row\"><span class=\"info-key\">New</span><span class=\"info-val\">Not previously titled, &lt;5,000 mi, current MY or newer</span></div><div class=\"info-row\"><span class=\"info-key\">Demonstrator / Loaner</span><span class=\"info-val\">Counts as new: current model year, under 5,000 mi, not previously titled — or previously titled where the state requires it</span></div><div class=\"info-row\"><span class=\"info-key\">Used</span><span class=\"info-val\">Prior calendar year, titled, or &gt;5,000 mi. Book-out sheet required in funding package.</span></div><div class=\"info-row\"><span class=\"info-key\">Max Mileage</span><span class=\"info-val\">125,000 (≤100K standard; 100,001–125,000 → FICO 675, term caps)</span></div><div class=\"info-row\"><span class=\"info-key\">WV Used</span><span class=\"info-val\">≤6 yr old &amp; &lt;100,000 mi</span></div></div><div class=\"note-box danger\" style=\"margin-top:10px\"><span class=\"note-icon\">❌</span><span><strong>Excluded:</strong> Lemon Law buyback, gray market, branded title, ride share.</span></div>",
+      "page": 1,
+      "quote": "Demonstrator or Dealer Loaner unit; current calendar model year with less than 5,000 miles; not previously titled; or, previously titled if state requirement",
+      "note": "Demo and loaner units book as NEW at US Bank, which the record did not say. On a store that runs loaners that is a meaningful difference in collateral value.",
+      "approved": true
+    }
+  ],
+  "not_in_source": [
+    "gapMax",
+    "chargebackWindow",
+    "reserveStructure"
+  ],
+  "ambiguities": [
+    {
+      "field": "VERIFIED CORRECT",
+      "note": "Most of this record is right. The 4-row front-end advance / total LTV table (2027-2019 at 740+/700-739/675-699 and 2018-2017 at 675+), the KBB state list, the CPO enhancement (+$500 under $40K, +$1,000 at or above, applied systemically), the 100,001-125,000 mile term caps, the 30/45-day payment window, the $5,000 minimum ($10,000 in NJ) and the back-end ceiling of $5,500 or 20% all match the sheet."
+    },
+    {
+      "field": "reserveStructure",
+      "note": "Record describes flats of 1-4.5%, markup caps and a $10,000 maximum. This sheet says only \"Refer to the U.S. Bank National Installment Auto Finance Program Rules\" for both loan processing fees and dealer participation. The numbers must come from the separate Program Rules PDF (1GVzTsNCRy1Dm7gdHEIfzZ3DoYS31EumL), which I did not read here. Unverified."
+    }
+  ],
+  "approved_by": "gage",
+  "approved_at": "2026-08-26T20:26:11"
+}

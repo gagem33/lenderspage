@@ -1,0 +1,126 @@
+{
+  "schema": "lenderhub.proposal.v1",
+  "lender_id": "regional",
+  "created": "2026-08-26",
+  "sources": [
+    {
+      "drive_file_id": "13dk1uBsz8kLhtDIsoRLD-v62w9eMOu04",
+      "title": "Regional - Program Sheet - 052726.pdf",
+      "doc_type": "Program Sheet",
+      "effective_date": "2026-05-27",
+      "pages": 1,
+      "triage": {
+        "1": "TEXT_OK"
+      },
+      "read_as": "300 dpi render. Header reads \"TX\" — Texas-specific sheet."
+    },
+    {
+      "drive_file_id": "1ILGWQes91nVYi89dVD2rjhEmA5OoPeLs",
+      "title": "Regional - Underwriting Guidelines - 052726.pdf",
+      "doc_type": "Underwriting Guidelines",
+      "effective_date": "2026-05-27",
+      "pages": 2,
+      "triage": {
+        "1": "TEXT_OK",
+        "2": "TEXT_OK"
+      },
+      "read_as": "300 dpi render. Footer reads \"Revised 02/2026\"."
+    }
+  ],
+  "changes": [
+    {
+      "path": [
+        "sections",
+        "fico",
+        "content"
+      ],
+      "old": "<div class=\"note-box info\"><span class=\"note-icon\">ℹ️</span><span>No explicit FICO minimums. Tier assignment (T1–T7) determines rates, LTV, and max terms. Contact RAC for tier qualification guidelines.</span></div><table class=\"tier-table\" style=\"margin-top:14px\"><thead><tr><th>Tier</th><th>Type</th><th>Max LTV</th><th>Max Term</th></tr></thead><tbody><tr><td>T1</td><td>Flat</td><td>125%</td><td>84mo (≤20K mi)</td></tr><tr><td>T2</td><td>Flat</td><td>125%</td><td>84mo (≤20K mi)</td></tr><tr><td>T3</td><td>Flat</td><td>125%</td><td>84mo (≤20K mi)</td></tr><tr><td>T4</td><td>Flat</td><td>125%</td><td>84mo (≤20K mi)</td></tr><tr><td>T5</td><td>Discount</td><td>120%</td><td>75mo (≤70K mi)</td></tr><tr><td>T6</td><td>Discount</td><td>115%</td><td>75mo (≤50K mi)</td></tr><tr><td>T7</td><td>Discount</td><td>110%</td><td>72mo (≤60K mi)</td></tr></tbody></table><div class=\"note-box warn\" style=\"margin-top:10px\"><span class=\"note-icon\">🏴</span><span><strong>Texas Only.</strong> ELT Code: 56124067800</span></div>",
+      "new": "<div class=\"note-box info\"><span class=\"note-icon\">ℹ️</span><span>No explicit FICO minimums. Tier assignment (T1–T7) determines rates, LTV, and max terms. Contact RAC for tier qualification guidelines.</span></div><table class=\"tier-table\" style=\"margin-top:14px\"><thead><tr><th>Tier</th><th>Type</th><th>Max LTV</th><th>Max Term</th></tr></thead><tbody><tr><td>T1</td><td>Flat</td><td>125%</td><td>84mo (≤30K mi)</td></tr><tr><td>T2</td><td>Flat</td><td>125%</td><td>84mo (≤30K mi)</td></tr><tr><td>T3</td><td>Flat</td><td>125%</td><td>84mo (≤30K mi)</td></tr><tr><td>T4</td><td>Flat</td><td>125%</td><td>84mo (≤30K mi)</td></tr><tr><td>T5</td><td>Discount</td><td>120%</td><td>75mo (≤70K mi)</td></tr><tr><td>T6</td><td>Discount</td><td>115%</td><td>75mo (≤50K mi)</td></tr><tr><td>T7</td><td>Discount</td><td>110%</td><td>72mo (≤60K mi)</td></tr></tbody></table><div class=\"note-box warn\" style=\"margin-top:10px\"><span class=\"note-icon\">🏴</span><span><strong>Texas Only.</strong> ELT Code: 56124067800</span></div><div class=\"info-grid\" style=\"margin-top:12px\"><div class=\"info-row\"><span class=\"info-key\">Redeeming Tradeline</span><span class=\"info-val\">At least one required, reporting on the bureau</span></div><div class=\"info-row\"><span class=\"info-key\">Bankruptcy</span><span class=\"info-val\">No multiple or open BKs. Dismissed 3+ yrs ago case-by-case. No limit on discharge age</span></div><div class=\"info-row\"><span class=\"info-key\">Charged-Off Autos</span><span class=\"info-val\">No repos or auto tradelines rated I-5, I-8 or I-9 in the past 6 months</span></div><div class=\"info-row\"><span class=\"info-key\">Child Support</span><span class=\"info-val\">No delinquent support. Case-by-case if it shows on the file</span></div><div class=\"info-row\"><span class=\"info-key\">Multiple Vehicles</span><span class=\"info-val\">Generally 1 financed vehicle per licensed applicant</span></div></div>",
+      "page": 1,
+      "quote": "84 | 30,000 | 30,000 | 30,000 | 30,000 | NA | NA | NA",
+      "note": "WRONG VALUE FIXED. The tier table said 84 months needs 30,000 miles or less on Tiers 1-4; the record said 20,000 in four places, which is 10,000 miles stricter than Regional actually is and would turn away deals that qualify. Its own LTV section already had 30,000, so the record contradicted itself. Also adds the credit rules from the underwriting guide, none of which were in the record: the redeeming-tradeline requirement, BK rules, the I-5/I-8/I-9 auto-tradeline bar, and delinquent child support.",
+      "approved": true
+    },
+    {
+      "path": [
+        "sections",
+        "ltv",
+        "content"
+      ],
+      "old": "<div class=\"info-grid\"><div class=\"info-row\"><span class=\"info-key\">T1–T4 Max LTV</span><span class=\"info-val\">125%</span></div><div class=\"info-row\"><span class=\"info-key\">T5 Max LTV</span><span class=\"info-val\">120%</span></div><div class=\"info-row\"><span class=\"info-key\">T6 Max LTV</span><span class=\"info-val\">115%</span></div><div class=\"info-row\"><span class=\"info-key\">T7 Max LTV</span><span class=\"info-val\">110%</span></div><div class=\"info-row\"><span class=\"info-key\">Valuation Basis</span><span class=\"info-val\">NADA Clean Trade (KBB Wholesale in approved markets). Current-year new: up to 125% of manufacturer’s invoice including destination; previous-year new on invoice through June</span></div><div class=\"info-row\"><span class=\"info-key\">Processing Fee</span><span class=\"info-val\">$100 (returned contracts: +$100)</span></div></div><table class=\"tier-table\" style=\"margin-top:14px\"><thead><tr><th>Term</th><th>T1-4 Miles</th><th>T5 Miles</th><th>T6 Miles</th><th>T7 Miles</th></tr></thead><tbody><tr><td>84mo</td><td>30,000</td><td>NA</td><td>NA</td><td>NA</td></tr><tr><td>78mo</td><td>40,000</td><td>NA</td><td>NA</td><td>NA</td></tr><tr><td>75mo</td><td>70,000</td><td>70,000</td><td>50,000</td><td>NA</td></tr><tr><td>72mo</td><td>80,000</td><td>80,000</td><td>60,000</td><td>60,000</td></tr><tr><td>66mo</td><td>100,000</td><td>100,000</td><td>80,000</td><td>80,000</td></tr><tr><td>60mo</td><td>120,000</td><td>120,000</td><td>100,000</td><td>100,000</td></tr><tr><td>48mo</td><td>130,000</td><td>130,000</td><td>120,000</td><td>120,000</td></tr></tbody></table>",
+      "new": "<div class=\"info-grid\"><div class=\"info-row\"><span class=\"info-key\">T1–T4 Max LTV</span><span class=\"info-val\">125%</span></div><div class=\"info-row\"><span class=\"info-key\">T5 Max LTV</span><span class=\"info-val\">120%</span></div><div class=\"info-row\"><span class=\"info-key\">T6 Max LTV</span><span class=\"info-val\">115%</span></div><div class=\"info-row\"><span class=\"info-key\">T7 Max LTV</span><span class=\"info-val\">110%</span></div><div class=\"info-row\"><span class=\"info-key\">Valuation Basis</span><span class=\"info-val\">NADA Clean Trade (KBB Wholesale in approved markets). Current-year new: up to 125% of manufacturer’s invoice including destination; previous-year new on invoice through June</span></div><div class=\"info-row\"><span class=\"info-key\">Max Amount Financed</span><span class=\"info-val\">160% out-the-door LTV</span></div><div class=\"info-row\"><span class=\"info-key\">Front-End Advance</span><span class=\"info-val\">Base sales price incl. all non-backend products, less any down payment (cash, trade or rebate)</span></div><div class=\"info-row\"><span class=\"info-key\">Total Amount Financed</span><span class=\"info-val\">Front-end advance + TT&amp;L + doc fee + warranty + GAP</span></div><div class=\"info-row\"><span class=\"info-key\">Processing Fee</span><span class=\"info-val\">$100 (returned contracts: +$100)</span></div></div><table class=\"tier-table\" style=\"margin-top:14px\"><thead><tr><th>Term</th><th>T1-4 Miles</th><th>T5 Miles</th><th>T6 Miles</th><th>T7 Miles</th></tr></thead><tbody><tr><td>84mo</td><td>30,000</td><td>NA</td><td>NA</td><td>NA</td></tr><tr><td>78mo</td><td>40,000</td><td>NA</td><td>NA</td><td>NA</td></tr><tr><td>75mo</td><td>70,000</td><td>70,000</td><td>50,000</td><td>NA</td></tr><tr><td>72mo</td><td>80,000</td><td>80,000</td><td>60,000</td><td>60,000</td></tr><tr><td>66mo</td><td>100,000</td><td>100,000</td><td>80,000</td><td>80,000</td></tr><tr><td>60mo</td><td>120,000</td><td>120,000</td><td>100,000</td><td>100,000</td></tr><tr><td>54mo</td><td>125,000</td><td>125,000</td><td>115,000</td><td>115,000</td></tr><tr><td>48mo</td><td>130,000</td><td>130,000</td><td>120,000</td><td>120,000</td></tr></tbody></table><h4 style=\"margin:12px 0 6px;font-size:.75rem;text-transform:uppercase;letter-spacing:.06em;opacity:.7\">Invoice allowance — over 3,000 mi, no book value</h4><table class=\"mini-table\"><thead><tr><th>&lt;6,000</th><th>&le;12,000</th><th>&le;18,000</th><th>&le;25,000</th><th>&gt;25,000</th></tr></thead><tbody><tr><td>90%</td><td>85%</td><td>80%</td><td>75%</td><td>Call RAC</td></tr></tbody></table>",
+      "page": 1,
+      "quote": "54 | 125,000 | 125,000 | 125,000 | 125,000 | 125,000 | 115,000 | 115,000",
+      "note": "The term table was missing an entire row. The sheet lists 8 terms — 84/78/75/72/66/60/54/48 — and the record had 7, with 54 months absent. A customer needing 54 months at 125,000 miles had no row to land on. AUDIT.md flagged this lender for exactly this in 2026-08-22 (\"20 of 28 cells... the rest waved through\") and the gap was still there. Also adds the 160% out-the-door ceiling — the record only carried the 125% front-end advance, so the number that actually caps a structured deal was missing — plus the advance definitions and the 5-band invoice allowance for units over 3,000 miles with no book.",
+      "approved": true
+    },
+    {
+      "path": [
+        "sections",
+        "reserve",
+        "content"
+      ],
+      "old": "<table class=\"tier-table\"><thead><tr><th>LTV Band</th><th>T1</th><th>T2</th><th>T3</th><th>T4</th><th>T5</th><th>T6</th><th>T7</th></tr></thead><tbody><tr><td>0–90%</td><td>2.75% / $1,100 <span style=\"opacity:.6\">max</span></td><td>2.25% / $900 <span style=\"opacity:.6\">max</span></td><td>1.75% / $700 <span style=\"opacity:.6\">max</span></td><td>1.25% / $500 <span style=\"opacity:.6\">max</span></td><td>0.25% / $100 <span style=\"opacity:.6\">max</span></td><td style=\"color:var(--red)\">1.25% / $500 <span style=\"opacity:.6\">min · disc</span></td><td style=\"color:var(--red)\">3.25% / $900 <span style=\"opacity:.6\">min · disc</span></td></tr><tr><td>&gt;90–100%</td><td>2.25% / $900 <span style=\"opacity:.6\">max</span></td><td>1.75% / $700 <span style=\"opacity:.6\">max</span></td><td>1.25% / $500 <span style=\"opacity:.6\">max</span></td><td>0.75% / $300 <span style=\"opacity:.6\">max</span></td><td style=\"color:var(--red)\">0.00% / $0 <span style=\"opacity:.6\">min · disc</span></td><td style=\"color:var(--red)\">2.00% / $800 <span style=\"opacity:.6\">min · disc</span></td><td style=\"color:var(--red)\">4.00% / $1,200 <span style=\"opacity:.6\">min · disc</span></td></tr><tr><td>&gt;100–115%</td><td>1.75% / $700 <span style=\"opacity:.6\">max</span></td><td>1.25% / $500 <span style=\"opacity:.6\">max</span></td><td>0.75% / $300 <span style=\"opacity:.6\">max</span></td><td>0.25% / $100 <span style=\"opacity:.6\">max</span></td><td style=\"color:var(--red)\">0.25% / $100 <span style=\"opacity:.6\">min · disc</span></td><td style=\"color:var(--red)\">3.75% / $1,100 <span style=\"opacity:.6\">min · disc</span></td><td style=\"color:var(--red)\">5.75% / $1,500 <span style=\"opacity:.6\">min · disc</span></td></tr><tr><td>&gt;115%</td><td>1.25% / $500 <span style=\"opacity:.6\">max</span></td><td>0.75% / $300 <span style=\"opacity:.6\">max</span></td><td>0.25% / $100 <span style=\"opacity:.6\">max</span></td><td style=\"color:var(--red)\">0.25% / $100 <span style=\"opacity:.6\">min · disc</span></td><td style=\"color:var(--red)\">0.75% / $300 <span style=\"opacity:.6\">min · disc</span></td><td style=\"color:var(--red)\">3.75% / $1,100 <span style=\"opacity:.6\">min · disc</span></td><td style=\"color:var(--red)\">5.75% / $1,500 <span style=\"opacity:.6\">min · disc</span></td></tr></tbody></table><div class=\"note-box warn\" style=\"margin-top:10px\"><span class=\"note-icon\">⚠️</span><span><strong>Flat vs discount is set by the LTV band, not the tier.</strong> Flat tiers: T1–<strong>T5</strong> at 0–90%; T1–T4 at &gt;90–100% and &gt;100–115%; only T1–<strong>T3</strong> above 115%, where <strong>T4 becomes a discount</strong>. Flat cells are a maximum; discount cells are a minimum.</span></div>",
+      "new": "<div class=\"info-grid\"><div class=\"info-row\"><span class=\"info-key\">Rate Participation</span><span class=\"info-val\">Not allowed — RAC pays flats on certain tiers instead</span></div><div class=\"info-row\"><span class=\"info-key\">Processing Fee</span><span class=\"info-val\">$100 · returned contracts +$100 per occurrence</span></div><div class=\"info-row\"><span class=\"info-key\">Payment Dates</span><span class=\"info-val\">Through the 20th of the month accepted</span></div></div><table class=\"tier-table\"><thead><tr><th>LTV Band</th><th>T1</th><th>T2</th><th>T3</th><th>T4</th><th>T5</th><th>T6</th><th>T7</th></tr></thead><tbody><tr><td>0–90%</td><td>2.75% / $1,100 <span style=\"opacity:.6\">max</span></td><td>2.25% / $900 <span style=\"opacity:.6\">max</span></td><td>1.75% / $700 <span style=\"opacity:.6\">max</span></td><td>1.25% / $500 <span style=\"opacity:.6\">max</span></td><td>0.25% / $100 <span style=\"opacity:.6\">max</span></td><td style=\"color:var(--red)\">1.25% / $500 <span style=\"opacity:.6\">min · disc</span></td><td style=\"color:var(--red)\">3.25% / $900 <span style=\"opacity:.6\">min · disc</span></td></tr><tr><td>&gt;90–100%</td><td>2.25% / $900 <span style=\"opacity:.6\">max</span></td><td>1.75% / $700 <span style=\"opacity:.6\">max</span></td><td>1.25% / $500 <span style=\"opacity:.6\">max</span></td><td>0.75% / $300 <span style=\"opacity:.6\">max</span></td><td style=\"color:var(--red)\">0.00% / $0 <span style=\"opacity:.6\">min · disc</span></td><td style=\"color:var(--red)\">2.00% / $800 <span style=\"opacity:.6\">min · disc</span></td><td style=\"color:var(--red)\">4.00% / $1,200 <span style=\"opacity:.6\">min · disc</span></td></tr><tr><td>&gt;100–115%</td><td>1.75% / $700 <span style=\"opacity:.6\">max</span></td><td>1.25% / $500 <span style=\"opacity:.6\">max</span></td><td>0.75% / $300 <span style=\"opacity:.6\">max</span></td><td>0.25% / $100 <span style=\"opacity:.6\">max</span></td><td style=\"color:var(--red)\">0.25% / $100 <span style=\"opacity:.6\">min · disc</span></td><td style=\"color:var(--red)\">3.75% / $1,100 <span style=\"opacity:.6\">min · disc</span></td><td style=\"color:var(--red)\">5.75% / $1,500 <span style=\"opacity:.6\">min · disc</span></td></tr><tr><td>&gt;115%</td><td>1.25% / $500 <span style=\"opacity:.6\">max</span></td><td>0.75% / $300 <span style=\"opacity:.6\">max</span></td><td>0.25% / $100 <span style=\"opacity:.6\">max</span></td><td style=\"color:var(--red)\">0.25% / $100 <span style=\"opacity:.6\">min · disc</span></td><td style=\"color:var(--red)\">0.75% / $300 <span style=\"opacity:.6\">min · disc</span></td><td style=\"color:var(--red)\">3.75% / $1,100 <span style=\"opacity:.6\">min · disc</span></td><td style=\"color:var(--red)\">5.75% / $1,500 <span style=\"opacity:.6\">min · disc</span></td></tr></tbody></table><div class=\"note-box warn\" style=\"margin-top:10px\"><span class=\"note-icon\">⚠️</span><span><strong>Flat vs discount is set by the LTV band, not the tier.</strong> Flat tiers: T1–<strong>T5</strong> at 0–90%; T1–T4 at &gt;90–100% and &gt;100–115%; only T1–<strong>T3</strong> above 115%, where <strong>T4 becomes a discount</strong>. Flat cells are a maximum; discount cells are a minimum.</span></div>",
+      "page": 1,
+      "quote": "RAC's program does not allow rate participation.  However, RAC pays flats for contracts in certain tiers.",
+      "note": "The record showed the flat/discount grid without saying the thing that governs it: Regional does not permit rate participation at all. Marking a customer up earns nothing here — the flat is the entire compensation. Worth having on the page before someone structures against it.",
+      "approved": true
+    },
+    {
+      "path": [
+        "sections",
+        "income"
+      ],
+      "old": null,
+      "new": {
+        "icon": "💰",
+        "label": "Income Verification",
+        "content": "<div class=\"info-grid\"><div class=\"info-row\"><span class=\"info-key\">Min Income</span><span class=\"info-val\">$1,900 gross individual · $2,200 gross joint</span></div><div class=\"info-row\"><span class=\"info-key\">Max DTI</span><span class=\"info-val\">55% Tiers 1–5 · 50% Tiers 6–7</span></div><div class=\"info-row\"><span class=\"info-key\">Max PTI</span><span class=\"info-val\">20% Tiers 1–3 · 18% Tiers 4–7</span></div><div class=\"info-row\"><span class=\"info-key\">Rent Factor</span><span class=\"info-val\">$725 assumed whenever no rent or mortgage payment is provided</span></div><div class=\"info-row\"><span class=\"info-key\">Rent Current</span><span class=\"info-val\">Must be current at funding</span></div><div class=\"info-row\"><span class=\"info-key\">W-2</span><span class=\"info-val\">Paystub with YTD, ≤60 days before funding. Base salary only unless OT verified 6 months</span></div><div class=\"info-row\"><span class=\"info-key\">Garnishments &amp; 401k Loans</span><span class=\"info-val\">Added to total debt</span></div><div class=\"info-row\"><span class=\"info-key\">Handwritten Paystubs</span><span class=\"info-val\">Also need 2 years tax returns + IRS 4506-C</span></div><div class=\"info-row\"><span class=\"info-key\">Self-Employed / 1099</span><span class=\"info-val\">2 years personal returns + 4506-C; income averaged over the 2 years</span></div><div class=\"info-row\"><span class=\"info-key\">Non-Salaried</span><span class=\"info-val\">Rental and investment income need 2 years returns with schedules</span></div><div class=\"info-row\"><span class=\"info-key\">Supplemental</span><span class=\"info-val\">SS, disability, pension: awards letter AND recent bank/card statement</span></div><div class=\"info-row\"><span class=\"info-key\">Child Support Received</span><span class=\"info-val\">Court documentation + 6 months of receipts or bank statements</span></div><div class=\"info-row\"><span class=\"info-key\">Military</span><span class=\"info-val\">Current LES ≤60 days; ratios computed on YTD entitlements</span></div><div class=\"info-row\"><span class=\"info-key\">Gross-Up</span><span class=\"info-val\">Not permitted — do not gross up on the application</span></div></div>"
+      },
+      "page": 1,
+      "quote": "$725 rent factor will be considered in all situations where no rent or mortgage payment is provided.",
+      "note": "Regional had no income section at all — the record carried a one-line poi string and nothing else. The capacity ratios (DTI 55/50, PTI 20/18 by tier) and the $725 assumed rent factor are what decide whether a deal fits, and neither was anywhere on the page.",
+      "approved": true
+    },
+    {
+      "path": [
+        "sections",
+        "vehicles"
+      ],
+      "old": null,
+      "new": {
+        "icon": "🚗",
+        "label": "Vehicle Eligibility",
+        "content": "<div class=\"info-grid\"><div class=\"info-row\"><span class=\"info-key\">Valuation</span><span class=\"info-val\">NADA Clean Trade (KBB Wholesale in approved markets)</span></div><div class=\"info-row\"><span class=\"info-key\">Current-Year New</span><span class=\"info-val\">Up to 125% of manufacturer’s invoice including destination</span></div><div class=\"info-row\"><span class=\"info-key\">Prior-Year New</span><span class=\"info-val\">125% of invoice through June</span></div><div class=\"info-row\"><span class=\"info-key\">Collateral Value</span><span class=\"info-val\">Must verify at the time of funding</span></div></div><div class=\"note-box danger\" style=\"margin-top:10px\"><span class=\"note-icon\">🚫</span><span><strong>Ineligible:</strong> Isuzu, Jaguar, Land Rover, Porsche, Saab, Suzuki; over 3/4-ton trucks; commercial use (ride-hailing, food or package delivery, unfinished work vans); salvage, flood, branded titles, grey market; and <strong>any vehicle without air conditioning</strong>.</span></div>"
+      },
+      "page": 1,
+      "quote": "Isuzu, Jaguar, Land Rover, Porsche, Saab, Suzuki, > 3/4 ton trucks, commercial use vehicles (e.g. ride-hailing, food delivery/ package delivery vehicles and unfinished work vans), salvage/flood vehicles/branded titles/grey market and vehicles w/out air conditioning.",
+      "note": "Regional had no vehicles section. It bars six manufacturers outright — Isuzu, Jaguar, Land Rover, Porsche, Saab, Suzuki — which is unusual and easy to trip over on a trade. It also declines any vehicle without air conditioning.",
+      "approved": true
+    }
+  ],
+  "not_in_source": [
+    "ficoMin",
+    "maxMileage",
+    "gapMax",
+    "chargebackWindow",
+    "bureaus.stateMap"
+  ],
+  "ambiguities": [
+    {
+      "field": "maxLTV",
+      "note": "Record stores \"125%\". That is the front-end advance cap for Tiers 1-4. The underwriting guide sets MAXIMUM amount financed at 160% out-the-door. Two different ceilings, and the compare column shows the tighter one. Left as is — changing it changes what the compare table means. Should maxLTV be the front-end or the out-the-door number?"
+    },
+    {
+      "field": "consumer rate tables",
+      "note": "The program sheet carries a 112-cell rate grid (4 model-year bands x 4 LTV bands x 7 tiers). EXTRACTION_GUIDE section 8: the schema has nowhere to store rates. Not extracted. This is the third lender where that gap has cost real data."
+    },
+    {
+      "field": "bureaus.note",
+      "note": "Record says \"Primarily TransUnion.\" Neither document mentions bureaus. Unsourced."
+    }
+  ],
+  "approved_by": "gage",
+  "approved_at": "2026-08-26T20:26:11"
+}

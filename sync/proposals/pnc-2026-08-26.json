@@ -1,0 +1,53 @@
+{
+  "schema": "lenderhub.proposal.v1",
+  "lender_id": "pnc",
+  "created": "2026-08-26",
+  "sources": [
+    {
+      "drive_file_id": "1bWKDBW9sVot4RWU_Shlyxk_w1CWb7Lgw",
+      "title": "PNC - Program Sheet - 031626.pdf",
+      "doc_type": "Program Sheet",
+      "effective_date": "2026-03-16",
+      "pages": 1,
+      "triage": {
+        "1": "TEXT_OK"
+      },
+      "read_as": "300 dpi render. Header: \"Applies to dealers in the following state: Texas\". Effective 3/16/2026, supersedes 1/9/2026."
+    }
+  ],
+  "changes": [
+    {
+      "path": [
+        "sections",
+        "ltv",
+        "content"
+      ],
+      "old": "<div class=\"info-grid\"><div class=\"info-row\"><span class=\"info-key\">Max Total Advance</span><span class=\"info-val\">140% of Factory Invoice (New) or Used Vehicle Value Source</span></div><div class=\"info-row\"><span class=\"info-key\">Max Mileage</span><span class=\"info-val\">125,000 miles</span></div><div class=\"info-row\"><span class=\"info-key\">New Model Years</span><span class=\"info-val\">2025–2027</span></div><div class=\"info-row\"><span class=\"info-key\">Used Model Years</span><span class=\"info-val\">2016–2026</span></div><div class=\"info-row\"><span class=\"info-key\">First Payment</span><span class=\"info-val\">Up to 60 days (PA max 45 days)</span></div><div class=\"info-row\"><span class=\"info-key\">Min Front End Amount</span><span class=\"info-val\">$5,000</span></div></div>",
+      "new": "<div class=\"info-grid\"><div class=\"info-row\"><span class=\"info-key\">Max Total Advance</span><span class=\"info-val\">140% of Factory Invoice (New) or Used Vehicle Value Source</span></div><div class=\"info-row\"><span class=\"info-key\">Advance Includes</span><span class=\"info-val\">Selling price, all taxes (front and back end), title, license, “hard adds”, dealer fees and ALL back-end products &divide; invoice (new) or used value source</span></div><div class=\"info-row\"><span class=\"info-key\">Value Source Missing</span><span class=\"info-val\">Call underwriting 800-752-2561 opt 1 — no “like-invoice” or substitute values</span></div><div class=\"info-row\"><span class=\"info-key\">Buy-Rate Discounts</span><span class=\"info-val\">Front-end advance discounts trigger above $10,000, $15,000 and $25,000</span></div><div class=\"info-row\"><span class=\"info-key\">Business Applications</span><span class=\"info-val\">Not eligible for financing</span></div><div class=\"info-row\"><span class=\"info-key\">Max Mileage</span><span class=\"info-val\">125,000 miles</span></div><div class=\"info-row\"><span class=\"info-key\">New Model Years</span><span class=\"info-val\">2025–2027</span></div><div class=\"info-row\"><span class=\"info-key\">Used Model Years</span><span class=\"info-val\">2016–2026</span></div><div class=\"info-row\"><span class=\"info-key\">First Payment</span><span class=\"info-val\">Up to 60 days (PA max 45 days)</span></div><div class=\"info-row\"><span class=\"info-key\">Min Front End Amount</span><span class=\"info-val\">$5,000</span></div></div><h4 style=\"margin:14px 0 6px;font-size:.75rem;text-transform:uppercase;letter-spacing:.06em;opacity:.7\">Max term by model year &amp; vehicle value</h4><table class=\"mini-table\"><thead><tr><th>Unit</th><th>Condition</th><th>Max term</th><th>Tiers</th></tr></thead><tbody><tr><td>New 2025–2027</td><td>Value $20K+</td><td>84</td><td>All</td></tr><tr><td>New 2025–2027</td><td>Value $10K–$20K</td><td>75</td><td>All</td></tr><tr><td>New 2025–2027</td><td>Value $5K–$10K</td><td>60</td><td>All</td></tr><tr><td>New</td><td>Loan $100K–$150K</td><td>84</td><td>0–3</td></tr><tr><td>New</td><td>Loan $150K–$200K</td><td>72</td><td>0–3</td></tr><tr><td>Used 2023–2026</td><td>Value $10K+</td><td>84</td><td>All</td></tr><tr><td>Used 2021–2022</td><td>Value $10K+</td><td>75</td><td>All</td></tr><tr><td>Used 2020</td><td>Value $10K+</td><td>72</td><td>All</td></tr><tr><td>Used 2019</td><td>Value $10K+</td><td>66</td><td>All</td></tr><tr><td>Used 2016–2018</td><td>—</td><td>60</td><td>All</td></tr><tr><td>Used 2019–2026</td><td>Value $5K–$10K</td><td>60</td><td>All</td></tr><tr><td>Used 2023–2026</td><td>Loan $100K–$150K</td><td>84</td><td>0–3</td></tr><tr><td>Used 2022</td><td>Loan $100K–$150K</td><td>75</td><td>0–3</td></tr><tr><td>Used 2022–2026</td><td>Loan $150K–$200K</td><td>72</td><td>0–3</td></tr></tbody></table><h4 style=\"margin:14px 0 6px;font-size:.75rem;text-transform:uppercase;letter-spacing:.06em;opacity:.7\">Max front-end advance by tier</h4><table class=\"mini-table\"><thead><tr><th></th><th>T0 800+</th><th>T1 760–799</th><th>T2 725–759</th><th>T3 700–724</th><th>T4 680–699</th></tr></thead><tbody><tr><td>New &le;72mo</td><td>125%</td><td>115%</td><td>110%</td><td>110%</td><td>110%</td></tr><tr><td>New 73–84mo</td><td>115%</td><td>115%</td><td>110%</td><td>110%</td><td>110%</td></tr><tr><td>Used &le;72mo</td><td>115%</td><td>115%</td><td>110%</td><td>110%</td><td>110%</td></tr><tr><td>Used 73–84mo</td><td>115%</td><td>115%</td><td>110%</td><td>110%</td><td>110%</td></tr></tbody></table>",
+      "page": 1,
+      "quote": "Maximum Front End Advance | Tier 0 800+ | New (up to 72 Month Terms) up to 125%",
+      "note": "Two whole tables the record did not have. The front-end advance matrix is 4 rows x 5 tiers = 20 cells, transcribed in full: only Tier 0 on a new unit at 72 months or less gets 125%, and everything at Tier 2 and below is 110%. The record showed only the 140% total advance, which is a different number and does not tell the desk what it can put on the front. The term grid is 14 rows: PNC caps term by model year AND vehicle value, so a 2019 unit is 66 months and anything valued $5K-$10K is 60 regardless of year.",
+      "approved": true
+    }
+  ],
+  "not_in_source": [
+    "poi",
+    "ficoMin",
+    "maxTerm",
+    "maxLTV",
+    "maxMileage",
+    "bureaus.stateMap"
+  ],
+  "ambiguities": [
+    {
+      "field": "chargebackWindow",
+      "note": "Record says \"N/A (flat fee model)\". This sheet states no chargeback policy either way — same unsourced inference as chase. The BuyDown section does describe an ACH debit when the net buy-down is negative, which is not the same thing."
+    },
+    {
+      "field": "poi",
+      "note": "Record says \"Not specified in documents\". Confirmed — this sheet says nothing about income documentation."
+    }
+  ],
+  "approved_by": "gage",
+  "approved_at": "2026-08-26T20:26:10"
+}

@@ -1,0 +1,96 @@
+{
+  "schema": "lenderhub.proposal.v1",
+  "lender_id": "bofa",
+  "created": "2026-08-26",
+  "sources": [
+    {
+      "drive_file_id": "1xbiqM_pi-0XcddGDV5flk9FaSDbmnHYz",
+      "title": "Bank of America - Program Sheet - 061826.pdf",
+      "doc_type": "Program Sheet",
+      "effective_date": "2026-06-18",
+      "pages": 3,
+      "triage": {
+        "1": "TEXT_OK",
+        "2": "TEXT_OK",
+        "3": "TEXT_OK"
+      },
+      "read_as": "300 dpi render. p1 Retail (All States), p2 Small Business (All States), p3 shared reserve/valuation/backend."
+    }
+  ],
+  "changes": [
+    {
+      "path": [
+        "sections",
+        "vehicles",
+        "content"
+      ],
+      "old": "<div class=\"info-grid\"><div class=\"info-row\"><span class=\"info-key\">Max Vehicle Age</span><span class=\"info-val\">≤10 model years (≤4 for 76–84mo terms)</span></div><div class=\"info-row\"><span class=\"info-key\">Max Mileage</span><span class=\"info-val\">125,000 miles</span></div><div class=\"info-row\"><span class=\"info-key\">Exotic Vehicles</span><span class=\"info-val\">10% cash down required; 90% max advance (Aston Martin, Bentley, Ferrari, Lamborghini, Maybach, McLaren, Rolls Royce)</span></div></div><div class=\"note-box danger\" style=\"margin-top:10px\"><span class=\"note-icon\">❌</span><span><strong>Ineligible:</strong> Commercial vehicles, customized vehicles, branded titles, grey market, vehicles over 1 ton, rental use, business-purpose vehicles.</span></div>",
+      "new": "<div class=\"info-grid\"><div class=\"info-row\"><span class=\"info-key\">Max Vehicle Age</span><span class=\"info-val\">≤10 model years (≤4 for 76–84mo terms)</span></div><div class=\"info-row\"><span class=\"info-key\">Max Mileage</span><span class=\"info-val\">125,000 miles</span></div><div class=\"info-row\"><span class=\"info-key\">Exotic Vehicles</span><span class=\"info-val\">10% cash down required; 90% max advance (Aston Martin, Bentley, Ferrari, Lamborghini, Maybach, McLaren, Rolls Royce)</span></div><div class=\"info-row\"><span class=\"info-key\">Used Value — TX</span><span class=\"info-val\">J.D. Power (formerly NADA) Clean Trade, via Automated Collateral Valuation</span></div><div class=\"info-row\"><span class=\"info-key\">KBB States</span><span class=\"info-val\">AZ, CA, CO, HI, ID, MT, NV, OR, UT, WA, WY — KBB “Good” Lending Value</span></div><div class=\"info-row\"><span class=\"info-key\">New Vehicle</span><span class=\"info-val\">Never registered, model year not older than the current calendar year, ≤10,000 mi</span></div><div class=\"info-row\"><span class=\"info-key\">Model Year Flip</span><span class=\"info-val\">From July 1 all previous-year models book as Used</span></div><div class=\"info-row\"><span class=\"info-key\">Not In Guidebook</span><span class=\"info-val\">90% of original invoice, else 90% of guidebook invoice — current, newer or up to 2 prior model years</span></div><div class=\"info-row\"><span class=\"info-key\">Used Exotics</span><span class=\"info-val\">Black Book “Cars of Particular Interest”, or the auction price paid receipt</span></div><div class=\"info-row\"><span class=\"info-key\">Auction Price Paid</span><span class=\"info-val\">Receipt must be dated within 60 days of purchase</span></div><div class=\"info-row\"><span class=\"info-key\">CPO</span><span class=\"info-val\">Manufacturer certified only — Car Bravo Budget excluded. Select the CPO bookout option in RouteOne/Dealertrack and the adjustor is added automatically; certification docs required to fund</span></div><div class=\"info-row\"><span class=\"info-key\">Van Conversions</span><span class=\"info-val\">100% of manufacturer invoice plus 100% of the conversion invoice</span></div><div class=\"info-row\"><span class=\"info-key\">Conversion Packages</span><span class=\"info-val\">Auto, truck and suspension conversion values are excluded from advance and LTV</span></div></div><div class=\"note-box danger\" style=\"margin-top:10px\"><span class=\"note-icon\">❌</span><span><strong>Ineligible:</strong> Commercial vehicles, customized vehicles, branded titles, grey market, vehicles over 1 ton, rental use, business-purpose vehicles.</span></div>",
+      "page": 3,
+      "quote": "Primary Value Source is determined using Automated Collateral Valuation (ACV) from J.D. Power Valuation Services' (formerly NADA) Guide Clean Trade Value in all states EXCEPT AZ, CA, CO, HI, ID, MT, NV, OR, UT, WA, WY",
+      "note": "Bank of America had no valuation rows anywhere in the record. Texas books on J.D. Power Clean Trade. Also adds the fallback chain when the guidebook has no number, the CPO mechanics (the adjustor is automatic if you select the right bookout option, and certification docs are required to fund), and the conversion-package rule — those values are excluded from advance and LTV entirely, which is easy to assume the other way on a converted van.",
+      "approved": true
+    },
+    {
+      "path": [
+        "sections",
+        "ltv",
+        "content"
+      ],
+      "old": "<div class=\"info-grid\"><div class=\"info-row\"><span class=\"info-key\">Max Term</span><span class=\"info-val\">Up to 84 months</span></div><div class=\"info-row\"><span class=\"info-key\">Max Advance</span><span class=\"info-val\">Up to 130% (110% for 76–84mo)</span></div><div class=\"info-row\"><span class=\"info-key\">Max LTV</span><span class=\"info-val\">Up to 145%</span></div><div class=\"info-row\"><span class=\"info-key\">Vehicle Age</span><span class=\"info-val\">≤10 model years (≤4 years for 76–84mo)</span></div><div class=\"info-row\"><span class=\"info-key\">Max Mileage</span><span class=\"info-val\">125,000 miles</span></div><div class=\"info-row\"><span class=\"info-key\">Min Amount Financed</span><span class=\"info-val\">$7,500 ($8,000 in MN; $25,000 for 76–84mo)</span></div><div class=\"info-row\"><span class=\"info-key\">Contract Deadlines</span><span class=\"info-val\">Receive within 30 days; fund within 45 days of app submission</span></div><div class=\"info-row\"><span class=\"info-key\">First Payment</span><span class=\"info-val\">Min 30 days — Max 45 days from contract date</span></div></div>",
+      "new": "<div class=\"info-grid\"><div class=\"info-row\"><span class=\"info-key\">Max Term</span><span class=\"info-val\">Up to 84 months</span></div><div class=\"info-row\"><span class=\"info-key\">Max Advance</span><span class=\"info-val\">Up to 130% (110% for 76–84mo)</span></div><div class=\"info-row\"><span class=\"info-key\">Max LTV</span><span class=\"info-val\">Up to 145%</span></div><div class=\"info-row\"><span class=\"info-key\">Vehicle Age</span><span class=\"info-val\">≤10 model years (≤4 years for 76–84mo)</span></div><div class=\"info-row\"><span class=\"info-key\">Max Mileage</span><span class=\"info-val\">125,000 miles</span></div><div class=\"info-row\"><span class=\"info-key\">Min Amount Financed</span><span class=\"info-val\">$7,500 ($8,000 in MN; $25,000 for 76–84mo)</span></div><div class=\"info-row\"><span class=\"info-key\">Min Collateral Value</span><span class=\"info-val\">$6,000</span></div><div class=\"info-row\"><span class=\"info-key\">Deferred Down Payments</span><span class=\"info-val\">Not financed in any state except California</span></div><div class=\"info-row\"><span class=\"info-key\">Lease Payments</span><span class=\"info-val\">Not financed unless the vehicle is being traded — contract must disclose trade value, prior lease balance and net trade</span></div><div class=\"info-row\"><span class=\"info-key\">Dealer Licensing</span><span class=\"info-val\">Must be licensed in the state where the customer contracts and the dealer delivers</span></div><div class=\"info-row\"><span class=\"info-key\">Advance %</span><span class=\"info-val\">(Sales price + fees + TT&amp;L &minus; net down &minus; rebates &minus; backend) &divide; collateral value</span></div><div class=\"info-row\"><span class=\"info-key\">LTV %</span><span class=\"info-val\">Loan amount including backend &divide; collateral value</span></div><div class=\"info-row\"><span class=\"info-key\">Contract Deadlines</span><span class=\"info-val\">Receive within 30 days; fund within 45 days of app submission</span></div><div class=\"info-row\"><span class=\"info-key\">First Payment</span><span class=\"info-val\">Min 30 days — Max 45 days from contract date</span></div></div>",
+      "page": 1,
+      "quote": "Min Collateral Value $6,000",
+      "note": "The $6,000 minimum collateral value is flagged NEW on the sheet and was not in the record at all — a cheap unit can now fail on collateral value alone. Also adds that deferred down payments are not financed outside California, and that lease payments are only financeable when the vehicle is traded.",
+      "approved": true
+    },
+    {
+      "path": [
+        "sections",
+        "reserve",
+        "content"
+      ],
+      "old": "<div class=\"info-grid\"><div class=\"info-row\"><span class=\"info-key\">Reserve Cap — ≤60mo</span><span class=\"info-val\">APR cannot exceed Buy Rate by more than 2.50%</span></div><div class=\"info-row\"><span class=\"info-key\">Reserve Cap — 61–75mo</span><span class=\"info-val\">APR cannot exceed Buy Rate by more than 2.00%</span></div><div class=\"info-row\"><span class=\"info-key\">Reserve Cap — 76–84mo</span><span class=\"info-val\">APR cannot exceed Buy Rate by more than 1.50%</span></div><div class=\"info-row\"><span class=\"info-key\">No $$$ Cap</span><span class=\"info-val\">✅ No cap on flat payouts</span></div><div class=\"info-row\"><span class=\"info-key\">Paid Greater Of</span><span class=\"info-val\">Eligible flat OR reserve — dealer paid the greater amount</span></div></div><table class=\"tier-table\" style=\"margin-top:12px\"><thead><tr><th>Markup</th><th>Flat %</th><th>Term Limit</th></tr></thead><tbody><tr><td>Buy Rate</td><td>1.00%</td><td>48–84mo</td></tr><tr><td>+50bps</td><td>1.50%</td><td>48–84mo</td></tr><tr><td>+75bps</td><td>2.00%</td><td>48–84mo</td></tr><tr><td>+100bps</td><td>2.50%</td><td>48–84mo</td></tr><tr><td>+125bps</td><td>3.00%</td><td>48–84mo</td></tr><tr><td>+150bps</td><td>3.50%</td><td>48–84mo</td></tr><tr><td>+175bps</td><td>4.00%</td><td>48–75mo only</td></tr><tr><td>+200bps</td><td>4.50%</td><td>48–75mo only</td></tr><tr><td>+225bps</td><td>5.00%</td><td>48–60mo only</td></tr></tbody></table><div class=\"note-box info\" style=\"margin-top:10px\"><span class=\"note-icon\">ℹ️</span><span>Min $10,000 financed and 48mo+ term to qualify for flat. No deferred down (except CA).</span></div>",
+      "new": "<div class=\"info-grid\"><div class=\"info-row\"><span class=\"info-key\">Reserve Cap — ≤60mo</span><span class=\"info-val\">APR cannot exceed Buy Rate by more than 2.50%</span></div><div class=\"info-row\"><span class=\"info-key\">Reserve Cap — 61–75mo</span><span class=\"info-val\">APR cannot exceed Buy Rate by more than 2.00%</span></div><div class=\"info-row\"><span class=\"info-key\">Reserve Cap — 76–84mo</span><span class=\"info-val\">APR cannot exceed Buy Rate by more than 1.50%</span></div><div class=\"info-row\"><span class=\"info-key\">No $$$ Cap</span><span class=\"info-val\">✅ No cap on flat payouts</span></div><div class=\"info-row\"><span class=\"info-key\">Paid Greater Of</span><span class=\"info-val\">Eligible flat OR reserve — dealer paid the greater amount</span></div><div class=\"info-row\"><span class=\"info-key\">Exact Markup Required</span><span class=\"info-val\">Contracts must be marked up exactly per the flat table to earn a flat</span></div><div class=\"info-row\"><span class=\"info-key\">Buy Rate Reduction</span><span class=\"info-val\">Waive the flat for an extra 30 bps off the buy rate</span></div><div class=\"info-row\"><span class=\"info-key\">Flat Cancellation</span><span class=\"info-val\">$100 if no new contract replaces the cancelled one; after 30 days from contract date it is treated as a regular payoff</span></div></div><table class=\"tier-table\" style=\"margin-top:12px\"><thead><tr><th>Markup</th><th>Flat %</th><th>Term Limit</th></tr></thead><tbody><tr><td>Buy Rate</td><td>1.00%</td><td>48–84mo</td></tr><tr><td>+50bps</td><td>1.50%</td><td>48–84mo</td></tr><tr><td>+75bps</td><td>2.00%</td><td>48–84mo</td></tr><tr><td>+100bps</td><td>2.50%</td><td>48–84mo</td></tr><tr><td>+125bps</td><td>3.00%</td><td>48–84mo</td></tr><tr><td>+150bps</td><td>3.50%</td><td>48–84mo</td></tr><tr><td>+175bps</td><td>4.00%</td><td>48–75mo only</td></tr><tr><td>+200bps</td><td>4.50%</td><td>48–75mo only</td></tr><tr><td>+225bps</td><td>5.00%</td><td>48–60mo only</td></tr></tbody></table><div class=\"note-box info\" style=\"margin-top:10px\"><span class=\"note-icon\">ℹ️</span><span>Min $10,000 financed and 48mo+ term to qualify for flat. No deferred down (except CA).</span></div>",
+      "page": 3,
+      "quote": "Buy Rate Reduction Option: Waive your flat for an additional 30bps off the buy rate",
+      "note": "Three compensation rules that were missing. The buy-rate reduction is a live option on every deal — give up the flat, get 30 bps off the customer's rate. The exact-markup requirement matters because being off the table by a basis point forfeits the flat entirely. And flat cancellation costs $100 unless a replacement contract follows.",
+      "approved": true
+    },
+    {
+      "path": [
+        "sections",
+        "smallbusiness"
+      ],
+      "old": null,
+      "new": {
+        "icon": "📐",
+        "label": "Small Business Program",
+        "content": "<div class=\"info-grid\"><div class=\"info-row\"><span class=\"info-key\">Collateral Age</span><span class=\"info-val\">5 model years or newer</span></div><div class=\"info-row\"><span class=\"info-key\">Max Term</span><span class=\"info-val\">75 months</span></div><div class=\"info-row\"><span class=\"info-key\">Max Advance</span><span class=\"info-val\">110%</span></div><div class=\"info-row\"><span class=\"info-key\">Max LTV</span><span class=\"info-val\">125%</span></div><div class=\"info-row\"><span class=\"info-key\">Max PTI</span><span class=\"info-val\">20% at FICO ≥720 · 17% under 720</span></div><div class=\"info-row\"><span class=\"info-key\">Minimum FICO</span><span class=\"info-val\">730 — higher than the 640 retail floor</span></div><div class=\"info-row\"><span class=\"info-key\">Min Amount Financed</span><span class=\"info-val\">$10,000</span></div><div class=\"info-row\"><span class=\"info-key\">Min Collateral Value</span><span class=\"info-val\">$10,000</span></div><div class=\"info-row\"><span class=\"info-key\">Max Mileage</span><span class=\"info-val\">75,000 — half the retail limit</span></div><div class=\"info-row\"><span class=\"info-key\">File Depth</span><span class=\"info-val\">6 years in file and 6 satisfactory tradelines (retail asks 4 and 4)</span></div><div class=\"info-row\"><span class=\"info-key\">Business Entity</span><span class=\"info-val\">US legal entity, 4+ years in business, physical address (no PO box), max 4 open BoA small-business loans</span></div><div class=\"info-row\"><span class=\"info-key\">Co-Applicant</span><span class=\"info-val\">Must be authorised to borrow — Resolution to Purchase and Borrow required</span></div><div class=\"info-row\"><span class=\"info-key\">Cargo Vans &amp; Medium Duty</span><span class=\"info-val\">Eligible here, unlike retail</span></div><div class=\"info-row\"><span class=\"info-key\">Ineligible</span><span class=\"info-val\">Salvage, customised, branded title, grey market, cab &amp; chassis, cutaway van chassis</span></div><div class=\"info-row\"><span class=\"info-key\">Ineligible Use</span><span class=\"info-val\">Any vehicle driven by a non-employee</span></div><div class=\"info-row\"><span class=\"info-key\">Flats</span><span class=\"info-val\">1% on amount financed, minimum $10,000, terms 48–75 mo</span></div><div class=\"info-row\"><span class=\"info-key\">Use Type</span><span class=\"info-val\">Business/Commercial must always be selected on the RISC; it reports to the business credit file only</span></div></div>"
+      },
+      "page": 2,
+      "quote": "Small Business Program Sheet (All States) · ≤ 5 model years · Up to 75mo · Up to 110% · Up to 125% · 730 · $10,000 · $10,000 · 75,000",
+      "note": "Page 2 of this PDF is a SECOND PROGRAM the record never covered. Bank of America runs a separate Small Business sheet with its own everything: 730 FICO instead of 640, 75,000 miles instead of 125,000, 5 model years instead of 10, and 6 tradelines instead of 4. It also reverses the retail vehicle rules — cargo vans and medium-duty trucks are eligible here and are not on retail. Anyone quoting the retail page for a business deal would be wrong on every number.",
+      "approved": true
+    }
+  ],
+  "not_in_source": [
+    "poi",
+    "ficoMin",
+    "maxTerm",
+    "maxLTV",
+    "maxMileage"
+  ],
+  "ambiguities": [
+    {
+      "field": "VERIFIED CORRECT",
+      "note": "The Texas GAP rule in the record — max 5% of total amount financed, no GAP under 70% LTV — matches p3 exactly. The 9-row flat fee table (buy rate through 225bps) also matches, including the term restrictions: 175-200bps is 48-75mo only and 225bps is 48-60mo only."
+    },
+    {
+      "field": "segment / segmentLabel",
+      "note": "Record is \"prime\". With the Small Business program added the record now covers two programs with different credit floors (640 retail, 730 small business). The scalar fields (ficoMin 640, maxTerm 84, maxMileage 125,000) all describe retail only. Worth deciding whether they should."
+    }
+  ],
+  "approved_by": "gage",
+  "approved_at": "2026-08-26T20:26:10"
+}

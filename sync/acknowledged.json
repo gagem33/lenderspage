@@ -3,7 +3,7 @@
   "acknowledged": {
     "td": {
       "reviewed": "2026-08-26",
-      "reason": "File says 07-01, app says 2026-06-30. Resolved in the app's favour -- see AUDIT.md."
+      "reason": "RESOLVED at source: the sheet's own footer reads \"84-291-8462 06/30/2026\" on every page, so the record's June 30, 2026 is correct and the Drive filename (070126) is a day off. Rename to TD - Program Sheet - 063026.pdf, update the SOURCES.md row, and delete this entry."
     },
     "gls": {
       "reviewed": "2026-08-26",
@@ -15,7 +15,7 @@
     },
     "dfc": {
       "reviewed": "2026-08-26",
-      "reason": "App says Aug 13 2025, file says 2026-01-01. Resolved in the app's favour -- see AUDIT.md."
+      "reason": "RESOLVED at source: the sheet itself prints \"Revision Date: 8/13/2025\" in its header, so the record's August 13, 2025 is correct and the Drive filename (010126) is what is wrong. Rename the file to DFC - Program Sheet - 081325.pdf, update the SOURCES.md row, and this entry can be deleted instead of carried forever."
     }
   }
 }

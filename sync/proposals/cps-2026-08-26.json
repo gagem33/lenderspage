@@ -1,0 +1,72 @@
+{
+  "schema": "lenderhub.proposal.v1",
+  "lender_id": "cps",
+  "created": "2026-08-26",
+  "sources": [
+    {
+      "drive_file_id": "1QkqPCEMlfOvTf2ExbxfNVYMQVEHmAmVq",
+      "title": "CPS - Program Sheet - 010126.pdf",
+      "doc_type": "Program Sheet",
+      "effective_date": "2026-01-01",
+      "sha256": "13745ab5cbbe59e9",
+      "pages": 2,
+      "triage": {
+        "1": "TEXT_OK",
+        "2": "TEXT_OK"
+      },
+      "read_as": "300 dpi render. Header reads \"Non-Franchised Program Guidelines, Exhibit A\"."
+    }
+  ],
+  "changes": [
+    {
+      "path": [
+        "sections",
+        "income",
+        "content"
+      ],
+      "old": "<div class=\"info-grid\"><div class=\"info-row\"><span class=\"info-key\">Paystub</span><span class=\"info-val\">Computer-generated with YTD, dated within 30 days. No cash-paid applicants. No job letters.</span></div><div class=\"info-row\"><span class=\"info-key\">Min Income (single source / base)</span><span class=\"info-val\">ICON+ $8,000 · then $2,500 / $2,000 / $1,600 / $1,400 by tier</span></div><div class=\"info-row\"><span class=\"info-key\">Job</span><span class=\"info-val\">Min 6 mo on current job (prev job verify, gap ≤90 days). Max 2 jobs/residences in 1 yr. ICON PLUS: no req.</span></div><div class=\"info-row\"><span class=\"info-key\">Self-Employed / 1099</span><span class=\"info-val\">≥1 yr in business. 3-mo digital bank statements or TurboPass. GIG (Uber/Lyft) = self-employed w/ LTV limits.</span></div><div class=\"info-row\"><span class=\"info-key\">Unearned Income</span><span class=\"info-val\">SSI, disability, public assistance, pension OK as primary; child support / foster / rental as secondary. CPS auto grosses up. 3-mo proof.</span></div><div class=\"info-row\"><span class=\"info-key\">Max DTI / PTI</span><span class=\"info-val\">DTI up to 50% / 80% / 50% / 45% · PTI up to 20% / 18% / 15% by tier</span></div></div>",
+      "new": "<div class=\"info-grid\"><div class=\"info-row\"><span class=\"info-key\">Paystub</span><span class=\"info-val\">Computer-generated with YTD, dated within 30 days. No cash-paid applicants. No job letters.</span></div><div class=\"info-row\"><span class=\"info-key\">Handwritten Paystubs</span><span class=\"info-val\">Need cancelled checks or bank statements — minimum 8 consecutive stubs</span></div><div class=\"info-row\"><span class=\"info-key\">Min Income (single source / base)</span><span class=\"info-val\">ICON+ $8,000 · then $2,500 / $2,000 / $1,600 / $1,400 by tier</span></div><div class=\"info-row\"><span class=\"info-key\">Job</span><span class=\"info-val\">Min 6 mo on current job (prev job verify, gap ≤90 days). Max 2 jobs/residences in 1 yr. ICON PLUS: no req.</span></div><div class=\"info-row\"><span class=\"info-key\">Self-Employed / 1099</span><span class=\"info-val\">≥1 yr in business. 3-mo digital bank statements or TurboPass. GIG (Uber/Lyft) = self-employed w/ LTV limits.</span></div><div class=\"info-row\"><span class=\"info-key\">Self-Employed — Disqualifiers</span><span class=\"info-val\">&gt;3 NSF in a month · &gt;5 NSF in 3 months · negative or zero month-end balance · any month’s deposits under 50% of the 3-month average</span></div><div class=\"info-row\"><span class=\"info-key\">Self-Employed — FTB</span><span class=\"info-val\">Not eligible in FTB (except ITIN applicants)</span></div><div class=\"info-row\"><span class=\"info-key\">Unearned Income</span><span class=\"info-val\">SSI, disability, public assistance, pension OK as primary; child support / foster / rental as secondary. CPS auto grosses up. 3-mo proof.</span></div><div class=\"info-row\"><span class=\"info-key\">Max DTI / PTI</span><span class=\"info-val\">DTI up to 50% / 80% / 50% / 45% · PTI up to 20% / 18% / 15% by tier</span></div><div class=\"info-row\"><span class=\"info-key\">Min Housing Expense</span><span class=\"info-val\">$600/mo — per applicant if separate residences</span></div><div class=\"info-row\"><span class=\"info-key\">Garnishments</span><span class=\"info-val\">Paystub garnishments are treated as debt</span></div><div class=\"info-row\"><span class=\"info-key\">Auto Insurance</span><span class=\"info-val\">Budgeted at $100/mo minimum per open auto</span></div><div class=\"info-row\"><span class=\"info-key\">Revolving Debt</span><span class=\"info-val\">Budgeted at 3% of the outstanding balance, or the actual payment</span></div></div>",
+      "page": 2,
+      "quote": "Minimum housing expense of $600 per month (per applicant if separate residences). Paystub garnishments will be treated as debt.",
+      "note": "The record had DTI and PTI ceilings but none of the inputs CPS uses to reach them. A $600 housing floor, $100/mo per open auto, and revolving debt at 3% of balance all get budgeted whether or not the customer actually pays that — which changes whether a deal fits before it is ever submitted. Also adds the self-employed bank-statement disqualifiers and the handwritten-paystub rule.",
+      "approved": true
+    },
+    {
+      "path": [
+        "sections",
+        "id",
+        "content"
+      ],
+      "old": "<div class=\"info-grid\"><div class=\"info-row\"><span class=\"info-key\">Proof of Residence</span><span class=\"info-val\">Utility bill or statement within 30 days at current residence. Internet print-screens not accepted.</span></div><div class=\"info-row\"><span class=\"info-key\">ITIN</span><span class=\"info-val\">Min $2,000 income, 9-mo job &amp; residence. Need ITIN card, ITIN letter, passport, or foreign DL.</span></div><div class=\"info-row\"><span class=\"info-key\">ITIN — ICON PLUS</span><span class=\"info-val\">ITIN IRS Certificate letter + completed W-8BEN + valid US Driver's License</span></div><div class=\"info-row\"><span class=\"info-key\">Phone</span><span class=\"info-val\">Working phone required — no prepaid, in applicant's name, no international numbers</span></div><div class=\"info-row\"><span class=\"info-key\">References</span><span class=\"info-val\">Required (relative preferred): name, address, phone. ICON PLUS: N/A</span></div></div><div class=\"note-box success\" style=\"margin-top:10px\"><span class=\"note-icon\">✅</span><span><strong>Passport accepted</strong> as an ITIN identification document.</span></div>",
+      "new": "<div class=\"info-grid\"><div class=\"info-row\"><span class=\"info-key\">Proof of Residence</span><span class=\"info-val\">Utility bill or statement within 30 days at current residence. Internet print-screens not accepted.</span></div><div class=\"info-row\"><span class=\"info-key\">ITIN</span><span class=\"info-val\">Min $2,000 income, 9-mo job &amp; residence. Need ITIN card, ITIN letter, passport, or foreign DL.</span></div><div class=\"info-row\"><span class=\"info-key\">ITIN — ICON PLUS</span><span class=\"info-val\">ITIN IRS Certificate letter + completed W-8BEN + valid US Driver's License</span></div><div class=\"info-row\"><span class=\"info-key\">Phone</span><span class=\"info-val\">Working phone required — no prepaid, in applicant's name, no international numbers</span></div><div class=\"info-row\"><span class=\"info-key\">References</span><span class=\"info-val\">Required (relative preferred): name, address, phone. ICON PLUS: N/A</span></div><div class=\"info-row\"><span class=\"info-key\">Dealer Stips</span><span class=\"info-val\">Full contract (all signatures/dates), odometer statement, buyer’s order, signed title application, bookout for the month contracted, signed credit app, proof of vehicle ownership (title copy or auction receipt), back-end products</span></div><div class=\"info-row\"><span class=\"info-key\">Automatic Stip Waivers</span><span class=\"info-val\">Well-scoring applicants get waivers, itemised on the CPS approval</span></div><div class=\"info-row\"><span class=\"info-key\">Quick Stips</span><span class=\"info-val\">Meta, Preferred, Super Alpha: paystub + 1 reference</span></div><div class=\"info-row\"><span class=\"info-key\">FTB — Live With Family</span><span class=\"info-val\">First-time buyers are ineligible if they live with family</span></div></div><div class=\"note-box success\" style=\"margin-top:10px\"><span class=\"note-icon\">✅</span><span><strong>Passport accepted</strong> as an ITIN identification document.</span></div>",
+      "page": 2,
+      "quote": "Full Contract with all signatures/dates/accurate info., Odometer Statement, Buyers Order, Signed Title Application, Bookout for the month contracted, Signed Credit Application, Proof of vehicle ownership (Copy of the title or auction receipt), and Back-end products.",
+      "note": "The record listed POR, ITIN, phone and references but never the dealer stip list itself — the checklist for what actually has to be in the funding package. Also adds the automatic stip waivers, the Quick Stips shortcut for the three upper tiers, and the FTB live-with-family exclusion, which is a flat decline.",
+      "approved": true
+    }
+  ],
+  "not_in_source": [
+    "ficoMin",
+    "maxTerm",
+    "maxLTV",
+    "maxMileage",
+    "gapMax",
+    "chargebackWindow"
+  ],
+  "ambiguities": [
+    {
+      "field": "WHOLE RECORD — non-franchised program",
+      "note": "This sheet is the NON-FRANCHISED program and the record says so in docTitle. Southwest Kia Dallas is a franchise store. Every number here — advance, tiers, fees, max amount financed — may not be what the store is actually on. Worth asking the CPS rep for the franchised Exhibit A and putting it in Drive. Not changing anything on that basis."
+    },
+    {
+      "field": "chargebackWindow",
+      "note": "Record says \"N/A\". This sheet states no chargeback policy either way, so it is unverified rather than confirmed."
+    },
+    {
+      "field": "bureaus.note",
+      "note": "Record says \"Vantage used for ICON PLUS (>=660). Confirm bureau with CPS rep.\" The Vantage part is confirmed on p2; which bureaus CPS pulls is not stated anywhere."
+    }
+  ],
+  "approved_by": "gage",
+  "approved_at": "2026-08-26T20:26:10"
+}

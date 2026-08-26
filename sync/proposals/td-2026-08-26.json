@@ -1,0 +1,78 @@
+{
+  "schema": "lenderhub.proposal.v1",
+  "lender_id": "td",
+  "created": "2026-08-26",
+  "sources": [
+    {
+      "drive_file_id": "1O9q8uW2FdCawn6uauNxv9xYGPZ8fIEvO",
+      "title": "TD - Program Sheet - 070126.pdf",
+      "doc_type": "Program Sheet",
+      "effective_date": "2026-06-30",
+      "pages": 8,
+      "triage": {
+        "all": "TEXT_OK"
+      },
+      "read_as": "300 dpi render, all 8 pages rendered; this proposal draws on pages 1-2, which carry the program rules and application/funding requirements. The document footer reads \"84-291-8462 06/30/2026\"."
+    }
+  ],
+  "changes": [
+    {
+      "path": [
+        "sections",
+        "ltv",
+        "content"
+      ],
+      "old": "<div class=\"info-grid\"><div class=\"info-row\"><span class=\"info-key\">Max Amount (per transaction)</span><span class=\"info-val\">$250,000</span></div><div class=\"info-row\"><span class=\"info-key\">Min Amount (24–75mo)</span><span class=\"info-val\">$7,500 front-end</span></div><div class=\"info-row\"><span class=\"info-key\">Min Amount (76–84mo)</span><span class=\"info-val\">$15,000</span></div><div class=\"info-row\"><span class=\"info-key\">Max Mileage (gas, T1–6)</span><span class=\"info-val\">120,000 (≤72mo); 100,000 (≥73mo)</span></div><div class=\"info-row\"><span class=\"info-key\">Max Mileage (T7–8)</span><span class=\"info-val\">100,000</span></div><div class=\"info-row\"><span class=\"info-key\">First Payment Window</span><span class=\"info-val\">22–45 days</span></div><div class=\"info-row\"><span class=\"info-key\">Approval Expiry</span><span class=\"info-val\">30 days</span></div></div><table class=\"tier-table\" style=\"margin-top:14px\"><thead><tr><th>Model Year</th><th>Maximum Term</th></tr></thead><tbody><tr><td>2026–2024</td><td>84mo</td></tr><tr><td>2023–2021</td><td>75mo</td></tr><tr><td>2020</td><td>72mo if amount financed &lt;$75,000; 66mo if ≥$75,000</td></tr><tr><td>2019–2018</td><td>60mo</td></tr><tr><td>2017</td><td>48mo</td></tr></tbody></table>",
+      "new": "<div class=\"info-grid\"><div class=\"info-row\"><span class=\"info-key\">Max Amount (per transaction)</span><span class=\"info-val\">$250,000</span></div><div class=\"info-row\"><span class=\"info-key\">Max Amount (per customer)</span><span class=\"info-val\">$300,000</span></div><div class=\"info-row\"><span class=\"info-key\">Max Mileage (diesel)</span><span class=\"info-val\">120,000 — all tiers</span></div><div class=\"info-row\"><span class=\"info-key\">Gas Under 100,000 mi</span><span class=\"info-val\">No tier or term limits</span></div><div class=\"info-row\"><span class=\"info-key\">Refinancing</span><span class=\"info-val\">TDAF does not refinance vehicles</span></div><div class=\"info-row\"><span class=\"info-key\">Business Applications</span><span class=\"info-val\">Need a qualified individual co-buyer — the buy rate follows the co-buyer’s credit</span></div><div class=\"info-row\"><span class=\"info-key\">APR Ceiling</span><span class=\"info-val\">Cannot exceed state usury limits</span></div><div class=\"info-row\"><span class=\"info-key\">Lien Perfection</span><span class=\"info-val\">21 days</span></div><div class=\"info-row\"><span class=\"info-key\">Title Receipt</span><span class=\"info-val\">90 days from the contract date</span></div><div class=\"info-row\"><span class=\"info-key\">Min Amount (24–75mo)</span><span class=\"info-val\">$7,500 front-end</span></div><div class=\"info-row\"><span class=\"info-key\">Min Amount (76–84mo)</span><span class=\"info-val\">$15,000</span></div><div class=\"info-row\"><span class=\"info-key\">Max Mileage (gas, T1–6)</span><span class=\"info-val\">120,000 (≤72mo); 100,000 (≥73mo)</span></div><div class=\"info-row\"><span class=\"info-key\">Max Mileage (T7–8)</span><span class=\"info-val\">100,000</span></div><div class=\"info-row\"><span class=\"info-key\">First Payment Window</span><span class=\"info-val\">22–45 days</span></div><div class=\"info-row\"><span class=\"info-key\">Approval Expiry</span><span class=\"info-val\">30 days</span></div></div><table class=\"tier-table\" style=\"margin-top:14px\"><thead><tr><th>Model Year</th><th>Maximum Term</th></tr></thead><tbody><tr><td>2026–2024</td><td>84mo</td></tr><tr><td>2023–2021</td><td>75mo</td></tr><tr><td>2020</td><td>72mo if amount financed &lt;$75,000; 66mo if ≥$75,000</td></tr><tr><td>2019–2018</td><td>60mo</td></tr><tr><td>2017</td><td>48mo</td></tr></tbody></table>",
+      "page": 1,
+      "quote": "Maximum amount financed per customer $300,000 · Maximum mileage – Diesel: 120,000",
+      "note": "The record had the $250,000 per-transaction cap but not the $300,000 per-customer cap, which is the one that bites a repeat buyer. It also had no diesel mileage line at all — diesel runs 120,000 across every tier, where gas drops to 100,000 above 72 months. Also adds the 21-day lien perfection and 90-day title deadlines, and that TDAF does not refinance.",
+      "approved": true
+    },
+    {
+      "path": [
+        "sections",
+        "id",
+        "content"
+      ],
+      "old": "<div class=\"info-grid\"><div class=\"info-row\"><span class=\"info-key\">Application Requires</span><span class=\"info-val\">Full name, DOB, SSN or ITIN, physical address (no PO Box without physical)</span></div><div class=\"info-row\"><span class=\"info-key\">ID Copies</span><span class=\"info-val\">Do NOT include copies of applicant ID in finance package sent to TDAF</span></div><div class=\"info-row\"><span class=\"info-key\">POR Options</span><span class=\"info-val\">Utility/phone bill (≤60 days); bank statement with address (≤30 days); tribal chapter letter</span></div></div>",
+      "new": "<div class=\"info-grid\"><div class=\"info-row\"><span class=\"info-key\">Application Requires</span><span class=\"info-val\">Full name, DOB, SSN or ITIN, physical address (no PO Box without physical)</span></div><div class=\"info-row\"><span class=\"info-key\">ID Copies</span><span class=\"info-val\">Do NOT include copies of applicant ID in finance package sent to TDAF</span></div><div class=\"info-row\"><span class=\"info-key\">POR Options</span><span class=\"info-val\">Utility/phone bill (≤60 days); bank statement with address (≤30 days); tribal chapter letter</span></div><div class=\"info-row\"><span class=\"info-key\">References</span><span class=\"info-val\">Two, with verifiable address and phone number</span></div><div class=\"info-row\"><span class=\"info-key\">Address History</span><span class=\"info-val\">Under 2 years at the current address means the previous address is required too</span></div><div class=\"info-row\"><span class=\"info-key\">Power of Attorney</span><span class=\"info-val\">Form must be approved before the credit decision</span></div><div class=\"info-row\"><span class=\"info-key\">Trusts</span><span class=\"info-val\">Contracts or titles in the name of a trust are ineligible</span></div></div>",
+      "page": 2,
+      "quote": "Two references with verifiable address and phone number",
+      "note": "Two references are a required credit-application field at TDAF and the record did not say so — a missing reference is a stip that holds the deal. Same for the two-year address history rule. Also adds that a POA must be approved before the decision, not after, and that trusts are ineligible outright.",
+      "approved": true
+    },
+    {
+      "path": [
+        "sections",
+        "vehicles",
+        "content"
+      ],
+      "old": "<div class=\"note-box info\"><span class=\"note-icon\">🚛</span><span><strong>Medium-Duty Truck Program:</strong> New only (Dodge/Ram/Ford/GM/Mercedes/Nissan 1500–5500). GVWR ≤33,000 lbs. T1–T7; 72mo max; 120% LTV (T1–5), 115% (T6–7).</span></div><div class=\"note-box danger\" style=\"margin-top:10px\"><span class=\"note-icon\">🚫</span><span><strong>Ineligible:</strong> Salvage/lemon/factory buy-back titles, motorcycles, RVs, livery, non-major OEM EVs, Suzuki, unrepaired hail damage, right-hand drive, van conversions, gray market.</span></div>",
+      "new": "<div class=\"info-grid\"><div class=\"info-row\"><span class=\"info-key\">Books As New</span><span class=\"info-val\">1 year old or less, never registered, 8,000 mi or under</span></div><div class=\"info-row\"><span class=\"info-key\">Books As Used</span><span class=\"info-val\">2 model years and older</span></div></div><div class=\"note-box info\"><span class=\"note-icon\">🚛</span><span><strong>Medium-Duty Truck Program:</strong> New only (Dodge/Ram/Ford/GM/Mercedes/Nissan 1500–5500). GVWR ≤33,000 lbs. T1–T7; 72mo max; 120% LTV (T1–5), 115% (T6–7).</span></div><div class=\"note-box danger\" style=\"margin-top:10px\"><span class=\"note-icon\">🚫</span><span><strong>Ineligible:</strong> Salvage/lemon/factory buy-back titles, motorcycles, RVs, livery, non-major OEM EVs, Suzuki, unrepaired hail damage, right-hand drive, van conversions, gray market.</span></div>",
+      "page": 1,
+      "quote": "Vehicles less than or equal to 1 year old that have not been registered, and have 8,000 miles or less, will be valued as new vehicles",
+      "note": "TDAF's new-vs-used line is 8,000 miles and one model year, which is looser than most of the book and was not recorded. It decides which value source applies.",
+      "approved": true
+    }
+  ],
+  "not_in_source": [
+    "ficoMin",
+    "maxTerm",
+    "maxLTV",
+    "gapMax"
+  ],
+  "ambiguities": [
+    {
+      "field": "effectiveDate — RESOLVED",
+      "resolved": "2026-08-26 — the document settles it.",
+      "note": "td has been in acknowledged.json because the filename says 070126 while the record says June 30, 2026. The sheet's own footer reads 06/30/2026 on every page. The RECORD IS RIGHT and the filename is a day off. Same pattern as dfc. Renaming the Drive file to TD - Program Sheet - 063026.pdf and updating the SOURCES.md row would let this acknowledgement be deleted rather than carried."
+    },
+    {
+      "field": "VERIFIED CORRECT",
+      "note": "The gas mileage tiers (120,000 for T1-6 to 72 months, 100,000 above 73 months, 100,000 for T7-8), the model-year term table, the BPS flat enhancement grid, the 80/20 split, the 6-payment chargeback protection, GAP at $1,500 with a 70% front-end LTV floor and the dealer self-funded warranty exclusion all match the sheet."
+    }
+  ],
+  "approved_by": "gage",
+  "approved_at": "2026-08-26T20:26:11"
+}
