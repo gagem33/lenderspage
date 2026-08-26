@@ -1,0 +1,61 @@
+{
+  "schema": "lenderhub.proposal.v1",
+  "lender_id": "wellsfargo",
+  "created": "2026-08-26",
+  "sources": [
+    {
+      "drive_file_id": "1dXg8-YyViTdr9mbWuTlYRjiluVvcXRbo",
+      "title": "Wells Fargo - Program Sheet - 061626.pdf",
+      "doc_type": "Program Sheet",
+      "effective_date": "2026-06-16",
+      "pages": 18,
+      "triage": {
+        "all": "TEXT_OK"
+      },
+      "read_as": "300 dpi render, all 18 pages rendered. This proposal draws on page 2 (Credit) and page 9 (Structure standards). Form OF-742 (06/16/26)."
+    }
+  ],
+  "changes": [
+    {
+      "path": [
+        "sections",
+        "vehicles",
+        "content"
+      ],
+      "old": "<div class=\"note-box danger\"><span class=\"note-icon\">🚫</span><span><strong>Ineligible Makes:</strong> Chamco, Daewoo, Fisker, Hummer (excl. EV), Isuzu, Mercury, Oldsmobile, Plymouth, Pontiac, Saab, Saturn, Suzuki, Ford F-450 to F-750, Dodge Ram 4500–5500.</span></div><div class=\"note-box danger\" style=\"margin-top:10px\"><span class=\"note-icon\">🚫</span><span><strong>Prohibited:</strong> Auto refinance loans, lease buyouts, cash-out contracts, commercial vehicles, Uber/Lyft vehicles.</span></div>",
+      "new": "<div class=\"info-grid\"><div class=\"info-row\"><span class=\"info-key\">Used Value — TX</span><span class=\"info-val\">J.D. Power / NADA trade-in or wholesale</span></div><div class=\"info-row\"><span class=\"info-key\">KBB States</span><span class=\"info-val\">AK, CA, CO, HI, ID, MT, NV, OR, UT, WA — lending or wholesale value</span></div><div class=\"info-row\"><span class=\"info-key\">New Definition</span><span class=\"info-val\">Current, future or one-year prior model, 10,000 mi or less</span></div><div class=\"info-row\"><span class=\"info-key\">New Value</span><span class=\"info-val\">Invoice cost or book value, minus any manufacturer rebate above $5,000</span></div><div class=\"info-row\"><span class=\"info-key\">Used Definition</span><span class=\"info-val\">Over 10,000 mi, or older than one prior year — valued at book</span></div><div class=\"info-row\"><span class=\"info-key\">Supplemental Invoices</span><span class=\"info-val\">Not counted toward collateral value</span></div><div class=\"info-row\"><span class=\"info-key\">Max TT&amp;L</span><span class=\"info-val\">State maximum</span></div></div><div class=\"note-box info\" style=\"margin-top:10px\"><span class=\"note-icon\">ℹ️</span><span><strong>Alternate valuation, when the primary book has no number:</strong> auction receipt · Manheim Market Report (adjusted or wholesale) · NADA low retail · NADA classic car guides · primary book for the prior model year with miles matching within 5,000 · secondary book (KBB or NADA) · 85% of invoice on current, future or one-prior-year units over 10,000 mi · 50% of invoice on anything older than one prior year.</span></div><div class=\"note-box danger\"><span class=\"note-icon\">🚫</span><span><strong>Ineligible Makes:</strong> Chamco, Daewoo, Fisker, Hummer (excl. EV), Isuzu, Mercury, Oldsmobile, Plymouth, Pontiac, Saab, Saturn, Suzuki, Ford F-450 to F-750, Dodge Ram 4500–5500.</span></div><div class=\"note-box danger\" style=\"margin-top:10px\"><span class=\"note-icon\">🚫</span><span><strong>Prohibited:</strong> Auto refinance loans, lease buyouts, cash-out contracts, commercial vehicles, Uber/Lyft vehicles.</span></div>",
+      "page": 9,
+      "quote": "J.D. Power/National Automobile Dealers Association (NADA) – trade-in or wholesale value: All other states use NADA as their primary collateral value source.",
+      "note": "Wells Fargo had no valuation rows anywhere in the record — only an ineligible-makes list. Texas books on J.D. Power/NADA trade-in or wholesale; KBB applies in 10 named states. The rebate rule is the sharp one: new vehicle value is invoice or book MINUS any manufacturer rebate above $5,000, so a big rebate cuts the collateral value the advance is calculated on. Also the full alternate-valuation ladder for when the book has no number, which ends at 50% of invoice on older units.",
+      "approved": null
+    },
+    {
+      "path": [
+        "sections",
+        "ltv",
+        "content"
+      ],
+      "old": "<div class=\"info-grid\"><div class=\"info-row\"><span class=\"info-key\">LTV (New & Used)</span><span class=\"info-val\">135% (all tiers)</span></div><div class=\"info-row\"><span class=\"info-key\">84-Mo LTV Restriction</span><span class=\"info-val\">120% for T1/T2 only (PTI ≤15%)</span></div><div class=\"info-row\"><span class=\"info-key\">Max Mileage</span><span class=\"info-val\">150,000 miles</span></div><div class=\"info-row\"><span class=\"info-key\">Min Amount (≤63mo)</span><span class=\"info-val\">$5,000.01</span></div><div class=\"info-row\"><span class=\"info-key\">Min Amount (64+mo)</span><span class=\"info-val\">$7,500.01</span></div><div class=\"info-row\"><span class=\"info-key\">First Payment Window</span><span class=\"info-val\">19–45 days from contract date</span></div><div class=\"info-row\"><span class=\"info-key\">Approval Expiry</span><span class=\"info-val\">30 days</span></div></div><table class=\"tier-table\" style=\"margin-top:14px\"><thead><tr><th>Vehicle Age</th><th>0–44,999mi</th><th>45K–74,999mi</th><th>75K–119,999mi</th><th>120K–150Kmi</th></tr></thead><tbody><tr><td>New</td><td>84mo</td><td>—</td><td>—</td><td>—</td></tr><tr><td>1yr old</td><td>84mo</td><td>75mo</td><td>—</td><td>—</td></tr><tr><td>2–3yrs old</td><td>84mo</td><td>75mo</td><td>63mo</td><td>51mo</td></tr><tr><td>4–7yrs old</td><td>75mo</td><td>75mo</td><td>63mo</td><td>51mo</td></tr><tr><td>8–9yrs old</td><td>63mo</td><td>63mo</td><td>63mo</td><td>51mo</td></tr><tr><td>10+yrs old</td><td>51mo</td><td>51mo</td><td>51mo</td><td>51mo</td></tr></tbody></table>",
+      "new": "<div class=\"info-grid\"><div class=\"info-row\"><span class=\"info-key\">LTV (New & Used)</span><span class=\"info-val\">135% (all tiers)</span></div><div class=\"info-row\"><span class=\"info-key\">84-Mo LTV Restriction</span><span class=\"info-val\">120% for T1/T2 only (PTI ≤15%)</span></div><div class=\"info-row\"><span class=\"info-key\">Max Mileage</span><span class=\"info-val\">150,000 miles</span></div><div class=\"info-row\"><span class=\"info-key\">Min Amount (≤63mo)</span><span class=\"info-val\">$5,000.01</span></div><div class=\"info-row\"><span class=\"info-key\">Min Amount (64+mo)</span><span class=\"info-val\">$7,500.01</span></div><div class=\"info-row\"><span class=\"info-key\">First Payment Window</span><span class=\"info-val\">19–45 days from contract date</span></div><div class=\"info-row\"><span class=\"info-key\">Approval Expiry</span><span class=\"info-val\">30 days</span></div><div class=\"info-row\"><span class=\"info-key\">Min Term</span><span class=\"info-val\">12 months</span></div><div class=\"info-row\"><span class=\"info-key\">Structure Changes</span><span class=\"info-val\">Any change to the sale terms can alter the decision, stips, rate or term</span></div><div class=\"info-row\"><span class=\"info-key\">Dealer Compensation</span><span class=\"info-val\">Contingent on the approval terms and the contract as funded</span></div></div><table class=\"tier-table\" style=\"margin-top:14px\"><thead><tr><th>Vehicle Age</th><th>0–44,999mi</th><th>45K–74,999mi</th><th>75K–119,999mi</th><th>120K–150Kmi</th></tr></thead><tbody><tr><td>New</td><td>84mo</td><td>—</td><td>—</td><td>—</td></tr><tr><td>1yr old</td><td>84mo</td><td>75mo</td><td>—</td><td>—</td></tr><tr><td>2–3yrs old</td><td>84mo</td><td>75mo</td><td>63mo</td><td>51mo</td></tr><tr><td>4–7yrs old</td><td>75mo</td><td>75mo</td><td>63mo</td><td>51mo</td></tr><tr><td>8–9yrs old</td><td>63mo</td><td>63mo</td><td>63mo</td><td>51mo</td></tr><tr><td>10+yrs old</td><td>51mo</td><td>51mo</td><td>51mo</td><td>51mo</td></tr></tbody></table>",
+      "page": 2,
+      "quote": "Minimum term to finance: 12 months.",
+      "note": "Small but absent: the 12-month floor, and the warning that re-structuring a funded-shape deal can move the decision, stips, rate or term rather than just the payment.",
+      "approved": null
+    }
+  ],
+  "not_in_source": [
+    "ficoMin",
+    "chargebackWindow",
+    "gapMax"
+  ],
+  "ambiguities": [
+    {
+      "field": "VERIFIED CORRECT",
+      "note": "The 6-row x 4-mileage-band term matrix matches the sheet cell for cell — 84 months only under 45,000 miles on units up to 3 years old, down to 51 months everywhere past 120,000. So do the 135% LTV, the 84-month restriction (120%, PTI 15%, Tiers 1-2, no thin file or first-time buyers), the $5,000.01 / $7,500.01 minimums at the 63-month line, and the $5,000 compensation cap."
+    },
+    {
+      "field": "PARTIAL EXTRACTION",
+      "note": "18 pages rendered; this proposal draws on pages 2 and 9. Pages 3-8 and 10-18 cover the aftermarket product matrix, funding checklist, POR/POI documents, additional programs, excluded collateral and the Dealer Desk — material the record's backend, id and income sections already cover in detail. The backend matrix in particular (total $6,000 or 20% to $12,500, VSC, GAP with its state LTV floors, tire & wheel, maintenance, windshield) is unusually complete. Say the word if you want those pages verified line by line."
+    }
+  ]
+}
