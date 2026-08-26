@@ -109,6 +109,7 @@ The repo holds a committed copy of the md files. Drive is the master; when they 
 | 2026-08-26 | Approval enforced by three refusals in `apply`, not by convention | "No silent writes" is only true if something refuses. Undecided field, stale `old`, or a missing page/quote each stop the write |
 | 2026-08-26 | Provenance stays **beside** `lenders.json`, not inside it | Per-field source and verified-date would be a data model change, and the working rules say ask first. The proposal + `sync/applied.jsonl` + git history carry it meanwhile |
 | 2026-08-26 | Freshness compares the **authority document** only | Funding Guidelines and Proof of Residence are not authority for a program date (SOURCES.md §1). Counting them made capitalone, westlake and flagship look stale when they were not |
+| 2026-08-26 | **First sync applied through the gate: `chase` backend rows** | Reading the Chase sheet at 300 dpi found three rows the record never had — the sub-$12K aftermarket tier (35% of MSRP / Cash Selling Price) and the MBP cap for MSRP/CSP under $12,000 ($3,500). Approved by Gage, written by `sync.py apply`, logged in `sync/applied.jsonl`. The pipeline has now been used for real, not just tested |
 | 2026-08-26 | `sync/acknowledged.json` hides settled divergences | td, gls, kia and dfc were adjudicated on 2026-08-26. A report that flags the same four every month stops being read |
 | 2026-08-24 | Shared Supabase client renamed `SP_*` → `SB_*` / `sbClient()` / `editPin()`, session key `sp_pin` → `lender_edit_pin` | The `sp` prefix referred to a feature that no longer exists. `ARCHITECTURE.md` §8 had flagged this rename as part of the removal |
 
@@ -119,6 +120,7 @@ The repo holds a committed copy of the md files. Drive is the master; when they 
   - `ally` — the 84-month advance matrix above $100K, the upfit and non-prime rows, and the 5-model-year / 75,000-beginning-mile gate. Applied 2026-08-26
   - `amcredit` — p11's valuation map was already in the app and already correct. No change
 - **~160 lender values changed on 2026-08-24 have been checked by nobody but Claude.** Each cites a Drive file ID and page in `AUDIT.md`. Spot-check before trusting them on a live deal.
+- **Two values in `chase` have no source document.** `bureaus.note` says "All three bureaus; uses middle score" and `chargebackWindow` says "N/A (flat fee model)" — the Program Sheet states neither. Left as-is on 2026-08-26; either find the doc they came from or drop them. Same question probably applies to other lenders.
 - **Kia has no current bulletin.** 2026-091 expired 2026-08-03. The store's own captive is running on expired incentive data. Needs a fresh PDF in Drive.
 
 - `lenders.json` in repo vs Supabase JSONB for v2 data. DATA.md §5 recommends JSON-in-repo first.
