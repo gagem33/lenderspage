@@ -215,6 +215,15 @@ ul, ol { list-style: none; }
   transition: background .15s, color .15s, border-color .15s;
 }
 .sidebar-item:hover { background: var(--bg3); color: var(--text); }
+/* The name, plus a line saying where a search hit landed. The hit line is hidden
+   unless searching, so a resting sidebar row is exactly what it always was. */
+.sidebar-item-main { flex: 1; min-width: 0; display: flex; flex-direction: column; }
+.sidebar-name { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.sidebar-hit {
+  font-size: .62rem; color: var(--text3); font-weight: 500;
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+.sidebar-hit[hidden] { display: none; }
 .sidebar-item.active {
   background: var(--golddim); color: var(--gold);
   border-color: var(--golddim2);
@@ -596,6 +605,59 @@ mark { background: var(--golddim2); color: var(--gold); border-radius: 2px; padd
   transition: color .12s;
 }
 .tool-modal-close:hover { color: var(--text); }
+
+/* Jump-to. Borrows the modal chrome so the visual style is untouched (spec #10);
+   only the position and the row list are new. */
+.jump-modal { align-items: flex-start; padding-top: 12vh; }
+.jump-panel { max-width: 560px; }
+.jump-input {
+  width: 100%; border: none; outline: none;
+  background: var(--bg3); color: var(--text);
+  padding: 16px 18px; font-size: .95rem; font-family: inherit;
+  border-bottom: 1px solid var(--border2);
+}
+.jump-input::placeholder { color: var(--text3); }
+.jump-results { max-height: min(52vh, 420px); overflow-y: auto; }
+.jump-row {
+  display: flex; align-items: center; gap: 10px;
+  padding: 9px 18px; cursor: pointer;
+  border-left: 2px solid transparent;
+}
+.jump-row[aria-selected="true"] { background: var(--golddim); border-left-color: var(--gold); }
+.jump-row-icon {
+  width: 26px; height: 26px; flex: 0 0 auto;
+  border-radius: var(--r-sm);
+  display: flex; align-items: center; justify-content: center;
+  font-size: .62rem; font-weight: 800; color: #fff;
+}
+.jump-row-main { flex: 1; min-width: 0; }
+.jump-row-title {
+  font-size: .82rem; font-weight: 600;
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+.jump-row-sub {
+  font-size: .68rem; color: var(--text3);
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+.jump-empty { padding: 22px 18px; text-align: center; color: var(--text3); font-size: .8rem; }
+.jump-group {
+  padding: 9px 18px 4px; font-size: .62rem; font-weight: 700;
+  text-transform: uppercase; letter-spacing: .07em; color: var(--text3);
+}
+.jump-foot {
+  display: flex; gap: 12px; align-items: center; flex-wrap: wrap;
+  padding: 9px 18px; border-top: 1px solid var(--border2);
+  background: var(--bg3); font-size: .66rem; color: var(--text3);
+}
+kbd {
+  display: inline-block; padding: 1px 5px; margin-right: 3px;
+  border: 1px solid var(--border2); border-bottom-width: 2px;
+  border-radius: var(--r-sm); background: var(--bg2);
+  font-family: inherit; font-size: .64rem; color: var(--text2);
+}
+.keys-grid { display: grid; grid-template-columns: auto 1fr; gap: 8px 14px; align-items: center; }
+.keys-grid .keys-desc { font-size: .78rem; color: var(--text2); }
+@media (max-width: 540px) { .jump-modal { padding-top: 6vh; } }
 .tool-modal-body {
   padding: 18px;
   display: flex; flex-direction: column; gap: 14px;
@@ -859,7 +921,7 @@ mark { background: var(--golddim2); color: var(--gold); border-radius: 2px; padd
   <div class="sidebar-section" style="padding-bottom:6px">
     <div class="sidebar-search-wrap">
       <svg class="sidebar-search-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
-      <input id="sidebar-search" type="search" placeholder="Search lenders…" autocomplete="off" spellcheck="false">
+      <input id="sidebar-search" type="search" placeholder="Search lenders — press / to jump" autocomplete="off" spellcheck="false">
       <button id="sidebar-search-clear" title="Clear">✕</button>
     </div>
     <div id="sidebar-filter-chips">
@@ -1091,6 +1153,35 @@ mark { background: var(--golddim2); color: var(--gold); border-radius: 2px; padd
   </div>
 </div>
 
+<!-- Jump-to (spec #10). Anchored near the top rather than centred: the list grows
+     downward as you type, so the input must not move under your hands. -->
+<div id="modal-jump" class="tool-modal jump-modal" role="dialog" aria-modal="true" aria-label="Jump to" hidden>
+  <div class="tool-modal-backdrop"></div>
+  <div class="tool-modal-panel jump-panel">
+    <input id="jump-input" class="jump-input" type="text" role="combobox" aria-expanded="true"
+           aria-controls="jump-results" aria-autocomplete="list" spellcheck="false" autocomplete="off"
+           placeholder="Jump to a lender, tool or view…">
+    <div id="jump-results" class="jump-results" role="listbox" aria-label="Results"></div>
+    <div class="jump-foot">
+      <span><kbd>↑</kbd><kbd>↓</kbd> move</span>
+      <span><kbd>↵</kbd> open</span>
+      <span><kbd>esc</kbd> close</span>
+      <span style="margin-left:auto"><kbd>?</kbd> all shortcuts</span>
+    </div>
+  </div>
+</div>
+
+<div id="modal-keys" class="tool-modal" role="dialog" aria-modal="true" hidden>
+  <div class="tool-modal-backdrop"></div>
+  <div class="tool-modal-panel">
+    <div class="tool-modal-header"><h2>Keyboard Shortcuts</h2><button class="tool-modal-close" id="keys-modal-close">&times;</button></div>
+    <div class="tool-modal-body">
+      <div class="keys-grid" id="keys-grid"></div>
+      <div class="note-box info" style="margin-top:12px;font-size:.72rem"><span class="note-icon">ℹ️</span><span>Single-key shortcuts are ignored while you are typing in a field.</span></div>
+    </div>
+  </div>
+</div>
+
 </div><!-- /#app -->
 
 <script>
@@ -1156,7 +1247,10 @@ function buildSidebar() {
   c.innerHTML = LENDERS.map(l => `
     <div class="sidebar-item" data-id="${l.id}" role="button" tabindex="0">
       <span class="tier-dot" style="background:${dotColor(l.segment)}"></span>
-      <span style="flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${l.name}</span>
+      <span class="sidebar-item-main">
+        <span class="sidebar-name">${l.name}</span>
+        <span class="sidebar-hit" hidden></span>
+      </span>
       ${(f => f?.attention ? `<span class="fresh-pip ${f.cls}" title="${f.title}" aria-label="${f.text}"></span>` : '')(freshnessOf(l))}
       <span class="lender-badge ${segBadge(l.segment)}">${l.segmentLabel.split('-')[0]}</span>
     </div>`).join('');
@@ -1370,53 +1464,81 @@ function closeMobileSidebar() { $('#sidebar').classList.remove('open'); $('#side
 // ─── SIDEBAR SEARCH & FILTER ─────────────────────────────────
 let activeSegFilter = 'all';
 
+// Where in a lender's record a query matched, and how strongly. The sidebar
+// searches every section's text, so "gap" hits almost everything — without saying
+// where, a full list of results is no more useful than no filter at all.
+function sidebarMatch(lender, q) {
+  const head = [lender.name, lender.fullName, lender.abbr].join(' ').toLowerCase();
+  if (head.includes(q)) return { rank: 0, where: null };
+
+  const summary = {
+    'Segment': lender.segmentLabel,
+    'FICO notes': lender.ficoNotes,
+    'Notable': lender.uniqueFeature || '',
+    'Reserve': lender.reserveStructure,
+    'Chargeback': lender.chargebackWindow,
+    'State limits': lender.stateRestriction || '',
+    'Max LTV': lender.maxLTV,
+    'Max mileage': lender.maxMileage,
+    'GAP cap': lender.gapMax,
+  };
+  for (const [label, val] of Object.entries(summary))
+    if (String(val || '').toLowerCase().includes(q)) return { rank: 1, where: label };
+
+  for (const s of Object.values(lender.sections)) {
+    const text = (s.label + ' ' + s.content.replace(/<[^>]+>/g, ' ')).toLowerCase();
+    if (text.includes(q)) return { rank: 2, where: s.label };
+  }
+  return null;
+}
+
 function filterSidebar() {
   const q = ($('#sidebar-search')?.value || '').trim().toLowerCase();
   const items = $$('.sidebar-item[data-id]');
   let visible = 0;
+  const ranked = [];
 
   items.forEach(item => {
     const id = item.getAttribute('data-id');
     const lender = LENDERS.find(l => l.id === id);
     if (!lender) return;
 
-    // Segment filter
     const segMatch = activeSegFilter === 'all' || lender.segment === activeSegFilter;
-
-    // Text search: check name, fullName, uniqueFeature, ficoNotes, and all section content
-    let textMatch = true;
-    if (q) {
-      const searchable = [
-        lender.name, lender.fullName, lender.ficoNotes,
-        lender.uniqueFeature || '', lender.segmentLabel,
-        lender.reserveStructure, lender.chargebackWindow,
-        lender.stateRestriction || '',
-        ...Object.values(lender.sections).map(s => s.label + ' ' + s.content.replace(/<[^>]+>/g,''))
-      ].join(' ').toLowerCase();
-      textMatch = searchable.includes(q);
-    }
-
-    const show = segMatch && textMatch;
+    const hit = q ? sidebarMatch(lender, q) : { rank: 0, where: null };
+    const show = segMatch && !!hit;
     item.classList.toggle('hidden', !show);
 
-    // Highlight match in name
-    const nameEl = item.querySelector('span:nth-child(2)');
+    const nameEl = $('.sidebar-name', item);
     if (nameEl) {
-      if (q && textMatch) {
-        const raw = lender.name;
-        const idx = raw.toLowerCase().indexOf(q);
-        if (idx >= 0) {
-          nameEl.innerHTML = raw.slice(0,idx) + '<mark>' + raw.slice(idx, idx+q.length) + '</mark>' + raw.slice(idx+q.length);
-        } else {
-          nameEl.textContent = raw;
-        }
+      const raw = lender.name;
+      const idx = q ? raw.toLowerCase().indexOf(q) : -1;
+      if (idx >= 0) {
+        nameEl.innerHTML = raw.slice(0, idx) + '<mark>' + raw.slice(idx, idx + q.length)
+                         + '</mark>' + raw.slice(idx + q.length);
       } else {
-        nameEl.textContent = lender.name;
+        nameEl.textContent = raw;
       }
     }
 
-    if (show) visible++;
+    // Only say where when it is not the name — "matched in: Regional" is noise.
+    const hitEl = $('.sidebar-hit', item);
+    if (hitEl) {
+      if (show && hit.where) { hitEl.textContent = `in ${hit.where}`; hitEl.hidden = false; }
+      else { hitEl.hidden = true; }
+    }
+
+    if (show) { visible++; ranked.push({ item, rank: hit.rank, name: lender.name }); }
   });
+
+  // Name matches first. Typing "chase" must not leave Chase below five banks whose
+  // rate tables happen to contain the word.
+  const box = $('#sidebar-lenders');
+  if (box && q) {
+    ranked.sort((a, b) => a.rank - b.rank || a.name.localeCompare(b.name))
+          .forEach(r => box.appendChild(r.item));
+  } else if (box) {
+    LENDERS.forEach(l => { const el = $(`.sidebar-item[data-id="${l.id}"]`, box); if (el) box.appendChild(el); });
+  }
 
   // Update count label
   const label = $('#sidebar-lenders-label');
@@ -1494,11 +1616,187 @@ function init() {
   initLTVCalc();
   initDealStructurer();
   initSBSCompare();
+  initJump();
+  initShortcuts();
+}
+
+// ─── JUMP-TO & KEYBOARD (spec #10) ───────────────────────────
+// Mid-deal the slow part is getting to the right bank, not reading it. This is
+// one box that reaches any lender, tool or view without touching the mouse.
+
+// key, what it does, and how to run it. One list feeds the shortcut sheet and
+// the dispatcher, so the sheet cannot describe a key that does nothing.
+const SHORTCUTS = [
+  { keys: ['/', '⌘K'], desc: 'Jump to a lender, tool or view', run: () => openJump() },
+  { keys: ['c'],       desc: 'Compare table',                  run: () => showView('compare') },
+  { keys: ['i'],       desc: 'Income calculator',              run: () => $('#income-calc-btn')?.click() },
+  { keys: ['b'],       desc: 'Bureau score search',            run: () => $('#bureau-search-btn')?.click() },
+  { keys: ['l'],       desc: 'LTV calculator',                 run: () => $('#ltv-calc-btn')?.click() },
+  { keys: ['d'],       desc: 'Deal structurer',                run: () => $('#deal-struct-btn')?.click() },
+  { keys: ['s'],       desc: 'Side-by-side compare',           run: () => $('#compare-tool-btn')?.click() },
+  { keys: ['y'],       desc: 'Date calculator',                run: () => $('#date-calc-btn')?.click() },
+  { keys: ['[', ']'],  desc: 'Previous / next lender',         run: k => stepLender(k === '[' ? -1 : 1) },
+  { keys: ['?'],       desc: 'This list',                      run: () => openKeys() },
+  { keys: ['esc'],     desc: 'Close whatever is open',         run: null },
+];
+
+function stepLender(dir) {
+  if (!LENDERS.length) return;
+  const at = LENDERS.findIndex(l => l.id === currentLender);
+  // From the compare table, ] opens the first lender and [ opens the last.
+  const next = at === -1 ? (dir > 0 ? 0 : LENDERS.length - 1)
+                         : (at + dir + LENDERS.length) % LENDERS.length;
+  showView('lender', LENDERS[next].id);
+}
+
+// Rank, don't just filter. A name match must beat a match buried in a rate table,
+// or typing "chase" puts Chase somewhere down the list.
+function jumpScore(hay, q) {
+  hay = hay.toLowerCase();
+  if (hay === q) return 100;
+  if (hay.startsWith(q)) return 80;
+  const w = hay.split(/[^a-z0-9]+/).some(x => x.startsWith(q));
+  if (w) return 60;
+  return hay.includes(q) ? 40 : 0;
+}
+
+function jumpItems() {
+  const tools = [
+    ['Compare Table', 'All 20 lenders side by side', () => showView('compare'), 'view'],
+    ['Income Calculator', 'Hourly, weekly, bi-weekly to monthly', () => $('#income-calc-btn')?.click(), 'tool'],
+    ['Bureau Score Search', 'Which lender uses which bureau', () => $('#bureau-search-btn')?.click(), 'tool'],
+    ['LTV Calculator', 'Book value against amount financed', () => $('#ltv-calc-btn')?.click(), 'tool'],
+    ['Deal Structurer', 'Which banks can buy this deal', () => $('#deal-struct-btn')?.click(), 'tool'],
+    ['Side-by-Side Compare', 'Up to three lenders in detail', () => $('#compare-tool-btn')?.click(), 'tool'],
+    ['Date Calculator', 'First payment and day counts', () => $('#date-calc-btn')?.click(), 'tool'],
+  ].map(([title, sub, run, kind]) => ({ title, sub, run, kind, hay: [title, sub] }));
+
+  const lenders = LENDERS.map(l => ({
+    title: l.name, kind: 'lender', lender: l,
+    sub: `${l.segmentLabel} · ${l.ficoMin ? 'FICO ' + l.ficoMin + '+' : 'Tier-based'} · ${l.maxLTV} LTV`,
+    run: () => showView('lender', l.id),
+    hay: [l.name, l.fullName, l.abbr, l.segmentLabel],
+  }));
+  return [...lenders, ...tools];
+}
+
+let jumpRows = [], jumpAt = 0;
+
+function renderJump(q) {
+  const box = $('#jump-results');
+  if (!box) return;
+  q = q.trim().toLowerCase();
+
+  jumpRows = (!q ? jumpItems().map(it => ({ it, score: 0 }))
+                 : jumpItems()
+                     .map(it => ({ it, score: Math.max(...it.hay.map(h => jumpScore(h, q))) }))
+                     .filter(r => r.score > 0)
+                     .sort((a, b) => b.score - a.score || a.it.title.localeCompare(b.it.title))
+             ).map(r => r.it);
+
+  if (!jumpRows.length) {
+    box.innerHTML = `<div class="jump-empty">Nothing matches “${q.replace(/[<&]/g, '')}”</div>`;
+    return;
+  }
+  jumpAt = Math.min(jumpAt, jumpRows.length - 1);
+
+  let lastKind = null;
+  box.innerHTML = jumpRows.map((it, i) => {
+    const head = it.kind !== lastKind && !q
+      ? `<div class="jump-group">${it.kind === 'lender' ? 'Lenders' : 'Tools & Views'}</div>` : '';
+    lastKind = it.kind;
+    const icon = it.lender
+      ? `<span class="jump-row-icon ${it.lender.colorClass}">${it.lender.abbr}</span>`
+      : `<span class="jump-row-icon" style="background:var(--bg3);color:var(--text3)">${it.kind === 'view' ? '▦' : '⚙'}</span>`;
+    const f = it.lender ? freshnessOf(it.lender) : null;
+    const age = f ? ` <span class="chip fresh ${f.cls}" style="font-size:.6rem;padding:1px 6px">${f.text}</span>` : '';
+    return `${head}<div class="jump-row" role="option" data-i="${i}" aria-selected="${i === jumpAt}">
+      ${icon}
+      <span class="jump-row-main">
+        <span class="jump-row-title">${it.title}${age}</span>
+        <span class="jump-row-sub">${it.sub}</span>
+      </span>
+    </div>`;
+  }).join('');
+  scrollJumpIntoView();
+}
+
+function scrollJumpIntoView() {
+  $(`.jump-row[data-i="${jumpAt}"]`)?.scrollIntoView({ block: 'nearest' });
+}
+
+function moveJump(d) {
+  if (!jumpRows.length) return;
+  jumpAt = (jumpAt + d + jumpRows.length) % jumpRows.length;
+  $$('.jump-row').forEach(r => r.setAttribute('aria-selected', String(+r.dataset.i === jumpAt)));
+  scrollJumpIntoView();
+}
+
+function openJump() {
+  closeAllModals();
+  const m = $('#modal-jump'), input = $('#jump-input');
+  if (!m || !input) return;
+  m.hidden = false; m.removeAttribute('hidden');
+  input.value = ''; jumpAt = 0;
+  renderJump('');
+  input.focus();
+}
+function closeJump() { const m = $('#modal-jump'); if (m) { m.hidden = true; m.setAttribute('hidden', ''); } }
+
+function openKeys() {
+  closeAllModals();
+  const grid = $('#keys-grid');
+  if (grid) grid.innerHTML = SHORTCUTS.map(s =>
+    `<div>${s.keys.map(k => `<kbd>${k}</kbd>`).join('')}</div><div class="keys-desc">${s.desc}</div>`).join('');
+  const m = $('#modal-keys');
+  if (m) { m.hidden = false; m.removeAttribute('hidden'); }
+}
+
+function initJump() {
+  const input = $('#jump-input'), box = $('#jump-results');
+  input?.addEventListener('input', () => { jumpAt = 0; renderJump(input.value); });
+  input?.addEventListener('keydown', e => {
+    if (e.key === 'ArrowDown') { e.preventDefault(); moveJump(1); }
+    else if (e.key === 'ArrowUp') { e.preventDefault(); moveJump(-1); }
+    else if (e.key === 'Enter') { e.preventDefault(); const it = jumpRows[jumpAt]; if (it) { closeJump(); it.run(); } }
+    else if (e.key === 'Escape') { e.preventDefault(); closeJump(); }
+  });
+  // mousedown, not click: the input blurs first otherwise and the row moves.
+  box?.addEventListener('mousedown', e => {
+    const row = e.target.closest('.jump-row');
+    if (!row) return;
+    e.preventDefault();
+    const it = jumpRows[+row.dataset.i];
+    if (it) { closeJump(); it.run(); }
+  });
+  $('#modal-jump .tool-modal-backdrop')?.addEventListener('click', closeJump);
+  $('#keys-modal-close')?.addEventListener('click', closeAllModals);
+  $('#modal-keys .tool-modal-backdrop')?.addEventListener('click', closeAllModals);
+}
+
+// A single-key shortcut must never fire while Gage is typing a customer's income
+// into a calculator. Anything focused that accepts text is off limits.
+const isTyping = el => !!el && (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA'
+  || el.tagName === 'SELECT' || el.isContentEditable);
+
+function initShortcuts() {
+  document.addEventListener('keydown', e => {
+    const cmdK = (e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k';
+    if (cmdK) { e.preventDefault(); openJump(); return; }
+    if (e.metaKey || e.ctrlKey || e.altKey) return;
+
+    if (e.key === 'Escape') { closeAllModals(); return; }
+    if (isTyping(document.activeElement)) return;
+
+    const hit = SHORTCUTS.find(s => s.run && s.keys.includes(e.key));
+    if (hit) { e.preventDefault(); hit.run(e.key); }
+  });
 }
 
 // ─── MODAL HELPERS ───────────────────────────────────────────
 function closeAllModals() {
-  ['modal-income','modal-bureau','modal-date','modal-ltv','modal-deal','modal-compare-tool']
+  ['modal-income','modal-bureau','modal-date','modal-ltv','modal-deal','modal-compare-tool',
+   'modal-jump','modal-keys']
     .forEach(id => { const m = $(`#${id}`); if (m) { m.hidden=true; m.setAttribute('hidden',''); } });
 }
 function makeModal(openId, modalId, closeId) {
