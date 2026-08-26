@@ -130,6 +130,36 @@ The records still carry the v1 shape (`DATA.md` §1), not the typed v2 schema.
 
 39 bank PDFs in `LENDERHUB/LENDERHUBSOURCES` (`1kf_mJ09Sxfg--PQ-xqOXdkouYUJ8ryz9`), manifest in `SOURCES.md`. The app has no link to them — nothing in the browser reads Drive. `DATA.md` v2 adds `source.drive_file_id` per lender so each record points at its source document.
 
+**The sync (built 2026-08-26).** `tools/sync.py` is the path from those PDFs to
+`lenders.json`. It runs on a laptop, not on a server, and nothing about it is
+scheduled — the folder is not watched.
+
+```
+Drive folder ──list──► sync.py scan      new / changed / stale
+      │
+      ├──download──► sync.py ingest ──► sync/pdfs/*.pdf      (gitignored)
+      │                                      │
+      │                              pdf_triage.py --render
+      │                                      │
+      │                                 sync/pages/*.png     (gitignored)
+      │                                      │
+      │                              agent reads the images
+      │                                      ▼
+      │                           sync/proposals/*.json      (committed)
+      │                                      │
+      │                              sync.py diff ──► Gage
+      │                                      │
+      │                            approve / reject each field
+      │                                      ▼
+      └───────────────────────────► sync.py apply ──► lenders.json
+                                                 └─► sync/applied.jsonl
+```
+
+`apply` refuses to write on an undecided field, on an `old` value that no longer
+matches `lenders.json`, or on a change with no page number and verbatim quote.
+Working files live under `sync/`; the PDFs and renders are gitignored because they
+are Gage's bank documents and the repo is public. Details in `docs/SYNC.md`.
+
 ## 8. What this means for the next changes
 
 1. ~~**Removing Sales Pace**~~ — done 2026-08-24. The Supabase client bootstrap was kept and renamed, as this section advised.
