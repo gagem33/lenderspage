@@ -130,11 +130,12 @@ The four that need rendering, and what's actually on those pages:
 |---|---|---|---|---|
 | `Ally - 84 month Program Sheet` | 1 of 1 | IMAGE_ONLY | The entire 84-month program: $20,000 minimum amount financed, FICO 620 under $100K EDC/AWV and 680 at or above, models through 5 years / 75,000 beginning miles, the tier advance matrix, 1.50% max dealer finance income | **Gap.** None of it is in `index.html`. The audit filed it UNVERIFIABLE |
 | `Truist - Program Sheet` | 1, 2, 4 of 4 | PARTIAL | State-by-state GAP rules (SC, IN, OR, TX, NY, CA, CO) and the per-tier maximum-term table. Page 3, the flat reserve scale, is clean | **Gap.** The GAP section is absent from the app; the term table was mis-read (`2023` came out as `20(3`) |
-| `AmeriCredit - Program Sheet` | 11 of 11 | IMAGE_ONLY | "Monthly Value Guide by State" — a US map. **Kelley Blue Book** for WA, OR, ID, MT, WY, NV, UT, CA, AZ, CO, NM; **J.D. Power everywhere else, including Texas** | **Gap.** Found by this triage run. Not in the app, and it decides which book the advance is calculated from |
+| `AmeriCredit - Program Sheet` | 11 of 11 | IMAGE_ONLY | "Monthly Value Guide by State" — a US map. **Kelley Blue Book** for AZ, CA, CO, HI, ID, MT, NM, NV, OR, UT, WA, WY; **J.D. Power everywhere else, including Texas** | **Already correct in the app.** Verified 2026-08-26 by rendering the page and comparing: `index.html` carries exactly this state list. The 2026-08-25 note calling it a gap was wrong — it was written without checking `index.html` |
 | `Westlake - Program Guidelines` | 1 of 6 | IMAGE_ONLY | A logo cover page: "PROGRAM GUIDELINES / JANUARY 2026", footer `v.120925_2` | **Benign.** A true positive for the classifier, nothing to extract. Pages 2–6 carry the program |
 
-Two things this run establishes:
+Three things this run establishes:
 
+- **An IMAGE_ONLY verdict is not a verdict about the app.** The classifier says a page cannot be read from its text layer. Whether the app already holds that page's content is a separate question, answered only by reading `index.html`. AmeriCredit p11 was filed as a data gap on 2026-08-25 without that second check, and it was not one.
 - The corpus is in better shape than the two known failures suggested. 35 of 39 files extract cleanly end to end; the damage is concentrated in 6 pages.
 - Per-page beats per-file. Truist page 3 is clean while 1, 2 and 4 are not, and AmeriCredit is 10 clean pages followed by one that is a picture. A file-level verdict would have thrown away good pages or trusted bad ones.
 

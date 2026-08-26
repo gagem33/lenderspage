@@ -289,18 +289,24 @@ verdict would have thrown away a good page or trusted three bad ones.
 
 Run over the whole folder: **39 files, 141 pages, 6 pages unreadable.** 35 files
 are clean end to end. Full table in `SOURCES.md` §3; the short version is that
-the corpus is in better shape than the two known failures suggested, and the
-sweep turned up a third gap nobody had noticed:
+the corpus is in better shape than the two known failures suggested.
 
 **AmeriCredit page 11 is a US map** — "Monthly Value Guide by State". Kelley Blue
-Book for eleven western states, **J.D. Power everywhere else, including Texas.**
-It has 278 characters of text and **zero raster images**: it is vector art, so
-the image-count test does nothing and only the length rule catches it. That
-matters — it decides which book the advance is calculated from, and it is not in
-the app.
+Book for AZ, CA, CO, HI, ID, MT, NM, NV, OR, UT, WA and WY, **J.D. Power
+everywhere else, including Texas.** It has 278 characters of text and **zero
+raster images**: it is vector art, so the image-count test does nothing and only
+the length rule catches it.
 
 The lesson for the classifier: an image-only page does not have to contain
 images. Length is the test that generalises.
+
+**And a lesson that is not about the classifier.** This page was written up on
+2026-08-25 as a third data gap. It was not one — `index.html` already carried the
+full state list, correctly. Rendering it on 2026-08-26 and comparing proved that
+in a minute. **A verdict of `IMAGE_ONLY` is a statement about the PDF, never
+about the app.** Before calling anything a gap, grep `index.html` for it. Step 6
+below exists for exactly this reason: the diff is what tells you whether there is
+anything to change.
 
 ### The extraction order, end to end
 
