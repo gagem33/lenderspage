@@ -37,9 +37,9 @@ open index.html
 ```
 
 That's the whole workflow. `index.html` is self-contained — HTML, all CSS, and
-all JavaScript inline. Its only external dependencies are Google Fonts and the
-Supabase JS client, both from CDNs, so it needs a network connection but no
-local tooling.
+all JavaScript inline. Its only external dependency is Google Fonts, so it needs
+a network connection for the typeface and nothing else. No local tooling, no
+build, no API.
 
 Verification means opening the file in a browser and clicking through. There is
 nothing to run and nothing to install.
@@ -81,18 +81,17 @@ dashboard rather than in version control. `.gitignore` excludes `.vercel`.
 
 ### The GitHub repository is public
 
-`gagem33/lenderspage` is a **public** repo. Nothing here is customer data, but
-it does mean the Supabase project URL and publishable key at
-`index.html:2439-2440` are readable by anyone — which matters given the findings
-in [`docs/supabase-contract.md`](docs/supabase-contract.md) section 1. Treat
-everything committed here as published.
+`gagem33/lenderspage` is a **public** repo. Nothing here is customer data, and
+since the backend was removed on 2026-08-25 there are no keys or secrets in the
+page either. Lender program terms are the sensitive part — they are the banks'
+material, so treat everything committed here as published.
 
 ## Repository layout
 
 ```
 index.html                  The entire application (~2,600 lines)
 CLAUDE.md                   Architecture, LENDERS[] schema, how to add a lender
-docs/supabase-contract.md   The six backend RPCs, verified — and two security findings
+docs/supabase-contract.md   Obsolete — what the backend was, and why it's gone
 .gitignore
 ```
 
@@ -106,20 +105,17 @@ commit if you need them back.
 
 ## Backend
 
-Three Supabase RPCs back the program-tracking panel: `lender_get_updates`,
-`lender_mark_verified` and `lender_add_note`. All access is by RPC — the tables
-themselves are closed to anonymous callers.
+**There isn't one.** As of 2026-08-25 this is a pure static page — no database,
+no auth, no API. The only network request it makes is Google Fonts.
 
-The SQL applied on 2026-08-24 is in [`supabase/migrations/`](supabase/migrations).
-Everything older still lives only in the Supabase dashboard.
+It used to have a Supabase backend for a sales tracker and a lender
+update-tracking panel. Both features were removed, and the database was emptied
+along with them. The migrations that did it are in
+[`supabase/migrations/`](supabase/migrations); the history is in
+[`docs/supabase-contract.md`](docs/supabase-contract.md).
 
-See [`docs/supabase-contract.md`](docs/supabase-contract.md) for the full
-contract.
-
-> The two critical security findings that document used to carry — a plaintext,
-> world-readable PIN and two anonymously writable tables — were **fixed on
-> 2026-08-24**. Section 1 has the detail. One item is still open there:
-> rotating the PIN, whose value was exposed for the life of the project.
+Lender data lives in the `LENDERS` array inside `index.html`. Keeping it current
+is a sync from the source PDFs in Google Drive — see `CLAUDE.md`.
 
 ---
 

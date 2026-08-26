@@ -174,15 +174,25 @@ Add here anything you know from the portal or rep that the PDF doesn't say, tagg
 
 ## 6. Confidence rules
 
+> **Rule zero, added 2026-08-25: render every page and read the image.**
+> The text layer is a cross-check, never the source. See §9 for why.
+
 - **Exact number on the page** → store it, cite page.
 - **Number only in an example** ("e.g., a $25,000 loan at 125%…") → do not store as a cap. Note it.
 - **Two different numbers for the same field** in one doc → store neither. List both in ambiguities with pages.
 - **Conditional value** ("up to 84mo for Tier A on ≤4yr units") → store the max, put the condition in the paired `_conditions` or `notes` field. Never drop the condition.
 - **"Contact your rep" / "Varies"** → `null` + note.
 - **Value depends on tier and the PDF gives the full table** → store the best-tier value in the scalar field and the table in notes or `term_matrix`. Say which tier the scalar came from.
-- **PDF is a scan / OCR is bad** → stop and tell Gage which pages are unreadable. Don't guess digits.
+- **PDF is a scan / no text layer** → ~~stop and tell Gage~~ **render it at 200 DPI and read the image.** This is no longer a reason to give up; see §9. Only stop if the *image* is genuinely illegible.
+- **Text layer and image disagree** → the image wins, and flag it. Never silently pick one.
+- **A table** → transcribe every cell. Count the rows and columns first, state the count, then fill it. If your output has fewer cells than that, you are not finished.
+- **"The remaining rows follow the same pattern"** → banned. Never write it, never act on it. Transcribe or leave blank.
 
 Every extracted value in the diff carries: page number + a short verbatim quote. If you can't quote it, you didn't find it.
+
+**And the quote has to come from a page that passed triage.** A mis-encoded text
+layer will happily give you a quote — it just won't be words. That is how a
+value can be "cited" and still be fiction.
 
 ---
 
@@ -206,3 +216,114 @@ Every extracted value in the diff carries: page number + a short verbatim quote.
 - No per-tier income minimums (AmeriCredit).
 
 If a PDF hits one of these repeatedly, propose a schema change in `CLAUDE.md` open questions. Don't bolt fields on mid-extraction.
+
+---
+
+## 9. Reading the PDF — the part that actually goes wrong
+
+Added 2026-08-25, after the audit. The extraction rules above were sound; the
+inputs were not. Two of the 38 source PDFs defeated text extraction, in two
+different ways, and the failures looked nothing alike.
+
+### The two failure modes
+
+**Image-only.** `Ally - 84 month Program Sheet` has 190 characters of text
+across a full page of program terms — bullet glyphs, checkmarks, and the
+copyright footer. The other 112 objects on the page are images. The audit read
+it, got nothing, and filed the entire lender under UNVERIFIABLE.
+
+That page contains the minimum amount financed ($20,000), the FICO cutoffs
+(620 under $100K EDC/AWV, 680 at or above), the eligible model years and mileage
+(5-year-old, 75,000 beginning miles), the full tier-by-tier advance matrix, and
+the maximum dealer finance income (1.50%). All of it was sitting there,
+perfectly legible — to a reader looking at the page instead of parsing it.
+
+**Mis-encoded — the dangerous one.** `Truist - Program Sheet` embeds fonts with
+a custom encoding, so its text layer is a substitution cipher. This:
+
+```
+CWn Wcekdj \_dWdY[Z \eh =7F i^ekbZ dej [nY[[Z '"(&&
+```
+
+is the page saying:
+
+> Max amount financed for GAP should not exceed $1,200 or state cap, whichever
+> is less. … **South Carolina and Indiana**: LTV must be greater than 80%. …
+> **New York**: GAP cannot be financed. **California**: premium must not exceed
+> $1,200 or 4%. **Colorado**: the greater of $600 or 4%.
+
+None of that is in the app. Not because anyone decided to skip it — because it
+was unreadable and nobody noticed it was unreadable. The same encoding mangled
+Truist's per-tier maximum-term table, where `2023` came through as `20(3`.
+
+This mode is worse than an image-only page. An empty result announces itself. A
+corrupted one returns text you can quote, cite a page for, and be completely
+wrong about. **"If you can't quote it, you didn't find it" passes vacuously when
+the text layer is lying.**
+
+### What to do instead
+
+```
+python3 tools/pdf_triage.py "FILE.pdf" --render          # one file
+python3 tools/pdf_triage.py <folder> --json triage.json  # sweep the corpus
+```
+
+Per page it reports `TEXT_OK`, `PARTIAL`, `MOJIBAKE` or `IMAGE_ONLY`, and writes
+a PNG for anything that isn't clean. Then **read the PNGs.**
+
+The classifier checks length before quality, which is the bug worth knowing
+about: Ally's 190 characters are fluent English, so every word-frequency test
+passes on that tiny sample. A page of lender terms runs to thousands of
+characters; a few hundred means the content is in the images. It also weighs the
+image count — 112 images and no text is not a text page.
+
+It leans toward false positives on purpose. Rendering a page that was fine costs
+one image. Trusting a text layer that lied puts a wrong number in front of the
+desk mid-deal.
+
+Truist is the case that shows why it is per page and not per file: pages 1, 2
+and 4 are corrupted, page 3 — the flat reserve scale — is clean. A per-file
+verdict would have thrown away a good page or trusted three bad ones.
+
+### What the sweep found — 2026-08-25
+
+Run over the whole folder: **39 files, 141 pages, 6 pages unreadable.** 35 files
+are clean end to end. Full table in `SOURCES.md` §3; the short version is that
+the corpus is in better shape than the two known failures suggested, and the
+sweep turned up a third gap nobody had noticed:
+
+**AmeriCredit page 11 is a US map** — "Monthly Value Guide by State". Kelley Blue
+Book for eleven western states, **J.D. Power everywhere else, including Texas.**
+It has 278 characters of text and **zero raster images**: it is vector art, so
+the image-count test does nothing and only the length rule catches it. That
+matters — it decides which book the advance is calculated from, and it is not in
+the app.
+
+The lesson for the classifier: an image-only page does not have to contain
+images. Length is the test that generalises.
+
+### The extraction order, end to end
+
+1. **Triage** the PDF. Note the verdict per page.
+2. **Render** every page that isn't `TEXT_OK`. In practice, render all of them —
+   it costs little and the image is the authority.
+3. **Read the images.** Extract into the §1 output contract, with a page number
+   and a verbatim quote for every value.
+4. **Cross-check against the text layer** where triage said `TEXT_OK`. Agreement
+   is confirmation. Disagreement is a flag, not a coin toss — the image wins and
+   the conflict goes in the diff.
+5. **Count the cells** of every table before and after. A 4×7 matrix produces 28
+   values or it is incomplete.
+6. **Diff** against the current record, per lender, and show Gage. Nothing is
+   written without approval — `CLAUDE.md` spec item 1.
+
+### What this would have caught in the 2026-08-22 audit
+
+| | |
+|---|---|
+| `ally` | The whole 84-month program, filed UNVERIFIABLE. Fully legible as an image |
+| `truist` | Every state-specific GAP rule, and the per-tier term table. Still missing from the app |
+| `td` | The "tier columns interleave, per-tier attribution not reliable" caveat — a layout problem the rendered page does not have |
+| `capitalone`, `cps` | Same interleaving caveat, same fix |
+| `regional` | 20 of 28 matrix cells enumerated, the rest waved through as "the same pattern." They were not. Rule: count the cells |
+
