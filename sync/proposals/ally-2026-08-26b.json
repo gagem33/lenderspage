@@ -1,0 +1,61 @@
+{
+  "schema": "lenderhub.proposal.v1",
+  "lender_id": "ally",
+  "created": "2026-08-26",
+  "sources": [
+    {
+      "drive_file_id": "1rm-zFIrAzSg4cLZ_z-GB4Y5r0fcZoZuE",
+      "title": "Ally - Program Sheet - 040126.pdf",
+      "doc_type": "Program Sheet",
+      "effective_date": "2026-04-01",
+      "pages": 7,
+      "triage": {
+        "all": "TEXT_OK"
+      },
+      "read_as": "300 dpi render, all 7 pages rendered; this proposal draws on page 1, the Consumer Retail Product sheet for EDC/AWV under $100K, which carries the advance matrices, participation table and program notes."
+    }
+  ],
+  "changes": [
+    {
+      "path": [
+        "sections",
+        "reserve",
+        "content"
+      ],
+      "old": "<div class=\"note-box success\"><span class=\"note-icon\">✅</span><span>Effective Feb 1, 2026: ADR Retail Bonus Reward applies to all prime & non-prime contracts with DAF.</span></div><table class=\"tier-table\" style=\"margin-top:12px\"><thead><tr><th>Amount Financed</th><th>Flat Payout</th><th>Max DFI ≤60mo</th><th>Max DFI 61–75mo</th><th>Max DFI 76–84mo</th></tr></thead><tbody><tr><td>$5K–$24,999</td><td>$150</td><td>2.50%</td><td>2.00%</td><td>1.50%</td></tr><tr><td>$25K–$34,999</td><td>$250</td><td>2.50%</td><td>2.00%</td><td>1.50%</td></tr><tr><td>$35K–$44,999</td><td>$350</td><td>2.50%</td><td>2.00%</td><td>1.50%</td></tr><tr><td>$45K–$74,999</td><td>$450</td><td>2.50%</td><td>2.00%</td><td>1.50%</td></tr><tr><td>$75K–$149,999</td><td>$500</td><td>2.50%</td><td>2.00%</td><td>1.50%</td></tr></tbody></table><div class=\"info-grid\" style=\"margin-top:12px\"><div class=\"info-row\"><span class=\"info-key\">D & E Tiers</span><span class=\"info-val\">2.00% max DFI on all terms</span></div><div class=\"info-row\"><span class=\"info-key\">Dealer Acq. Fee (DAF)</span><span class=\"info-val\">Up to $795 (non-Champions Club) · $0 or $500 (Champions Club)</span></div></div>",
+      "new": "<div class=\"info-grid\" style=\"margin-bottom:10px\"><div class=\"info-row\"><span class=\"info-key\">Dealer Acquisition Fee</span><span class=\"info-val\">Up to $795, assessed on the deal — cannot be passed to the customer</span></div><div class=\"info-row\"><span class=\"info-key\">Max DFI — D &amp; E Tiers</span><span class=\"info-val\">2.00% at any term</span></div><div class=\"info-row\"><span class=\"info-key\">Min All-In Amount Financed</span><span class=\"info-val\">$5,000</span></div></div><div class=\"note-box success\"><span class=\"note-icon\">✅</span><span>Effective Feb 1, 2026: ADR Retail Bonus Reward applies to all prime & non-prime contracts with DAF.</span></div><table class=\"tier-table\" style=\"margin-top:12px\"><thead><tr><th>Amount Financed</th><th>Flat Payout</th><th>Max DFI ≤60mo</th><th>Max DFI 61–75mo</th><th>Max DFI 76–84mo</th></tr></thead><tbody><tr><td>$5K–$24,999</td><td>$150</td><td>2.50%</td><td>2.00%</td><td>1.50%</td></tr><tr><td>$25K–$34,999</td><td>$250</td><td>2.50%</td><td>2.00%</td><td>1.50%</td></tr><tr><td>$35K–$44,999</td><td>$350</td><td>2.50%</td><td>2.00%</td><td>1.50%</td></tr><tr><td>$45K–$74,999</td><td>$450</td><td>2.50%</td><td>2.00%</td><td>1.50%</td></tr><tr><td>$75K–$149,999</td><td>$500</td><td>2.50%</td><td>2.00%</td><td>1.50%</td></tr></tbody></table><div class=\"info-grid\" style=\"margin-top:12px\"><div class=\"info-row\"><span class=\"info-key\">D & E Tiers</span><span class=\"info-val\">2.00% max DFI on all terms</span></div><div class=\"info-row\"><span class=\"info-key\">Dealer Acq. Fee (DAF)</span><span class=\"info-val\">Up to $795 (non-Champions Club) · $0 or $500 (Champions Club)</span></div></div>",
+      "page": 1,
+      "quote": "Dealer Acquisition Fee: Up to $795",
+      "note": "A dealer acquisition fee of up to $795 comes off the deal and cannot be passed to the customer — it was nowhere in the record, and $795 is large enough to swallow the flat on a small contract entirely. Also adds the D and E tier participation cap: the record's DFI table has columns for the three term bands but not the separate 2.00% ceiling that applies to every D and E deal regardless of term.",
+      "approved": null
+    },
+    {
+      "path": [
+        "sections",
+        "ltv",
+        "content"
+      ],
+      "old": "<div class=\"info-grid\"><div class=\"info-row\"><span class=\"info-key\">Max Retail Term</span><span class=\"info-val\">84 months</span></div><div class=\"info-row\"><span class=\"info-key\">Min All-In Amount Financed</span><span class=\"info-val\">$5,000</span></div><div class=\"info-row\"><span class=\"info-key\">Min for 76–84mo</span><span class=\"info-val\">$20,000</span></div><div class=\"info-row\"><span class=\"info-key\">Max Mileage</span><span class=\"info-val\">150,000 miles</span></div><div class=\"info-row\"><span class=\"info-key\">Used 2020–2016</span><span class=\"info-val\">Max 75 months (FICO ≥620, AMF &gt;$5K, Mileage &lt;100K)</span></div><div class=\"info-row\"><span class=\"info-key\">Used 2015–2014</span><span class=\"info-val\">Max 63 months (S–B tiers only)</span></div><div class=\"info-row\"><span class=\"info-key\">Approval Expiry</span><span class=\"info-val\">30 days</span></div><div class=\"info-row\"><span class=\"info-key\">Lease Programs</span><span class=\"info-val\">SmartLease, ComTRAC available</span></div><div class=\"info-row\"><span class=\"info-key\">76–84mo Vehicle Age</span><span class=\"info-val\">Through 5-year-old model years (medium duty: 2-year-old)</span></div><div class=\"info-row\"><span class=\"info-key\">76–84mo Beginning Miles</span><span class=\"info-val\"><strong>75,000 max</strong> — not the 150,000 that applies to shorter terms</span></div><div class=\"info-row\"><span class=\"info-key\">76–84mo Exclusions</span><span class=\"info-val\">Discontinued models ineligible. Not compatible with Deferred Payment Options or Custom Payment Plan</span></div><div class=\"info-row\"><span class=\"info-key\">84mo Addendum Date</span><span class=\"info-val\">The 84-month sheet is dated Jan 26, 2026 (filed as 040126)</span></div></div>",
+      "new": "<div class=\"info-grid\"><div class=\"info-row\"><span class=\"info-key\">Max Retail Term</span><span class=\"info-val\">84 months</span></div><div class=\"info-row\"><span class=\"info-key\">Min All-In Amount Financed</span><span class=\"info-val\">$5,000</span></div><div class=\"info-row\"><span class=\"info-key\">Min for 76–84mo</span><span class=\"info-val\">$20,000</span></div><div class=\"info-row\"><span class=\"info-key\">Max Mileage</span><span class=\"info-val\">150,000 miles</span></div><div class=\"info-row\"><span class=\"info-key\">Used 2020–2016</span><span class=\"info-val\">Max 75 months (FICO ≥620, AMF &gt;$5K, Mileage &lt;100K)</span></div><div class=\"info-row\"><span class=\"info-key\">Used 2015–2014</span><span class=\"info-val\">Max 63 months (S–B tiers only)</span></div><div class=\"info-row\"><span class=\"info-key\">Approval Expiry</span><span class=\"info-val\">30 days</span></div><div class=\"info-row\"><span class=\"info-key\">Book-Out Sheet</span><span class=\"info-val\">Required with every used contract package</span></div><div class=\"info-row\"><span class=\"info-key\">Light &amp; Medium Duty</span><span class=\"info-val\">Eligible up to 120,000 mi</span></div><div class=\"info-row\"><span class=\"info-key\">Increased Back-End</span><span class=\"info-val\">Braun, Delta Leasing, no-credit-score deals, upfitted units and vehicles over 100,999 mi qualify — the all-in advance does not change</span></div><div class=\"info-row\"><span class=\"info-key\">Conversion Packages</span><span class=\"info-val\">Conversion, dealer-installed and upfit valuations need Ally approval</span></div><div class=\"info-row\"><span class=\"info-key\">Commercial Use</span><span class=\"info-val\">Route to Ally Commercial Services Group, not retail</span></div><div class=\"info-row\"><span class=\"info-key\">Lease Programs</span><span class=\"info-val\">SmartLease, ComTRAC available</span></div><div class=\"info-row\"><span class=\"info-key\">76–84mo Vehicle Age</span><span class=\"info-val\">Through 5-year-old model years (medium duty: 2-year-old)</span></div><div class=\"info-row\"><span class=\"info-key\">76–84mo Beginning Miles</span><span class=\"info-val\"><strong>75,000 max</strong> — not the 150,000 that applies to shorter terms</span></div><div class=\"info-row\"><span class=\"info-key\">76–84mo Exclusions</span><span class=\"info-val\">Discontinued models ineligible. Not compatible with Deferred Payment Options or Custom Payment Plan</span></div><div class=\"info-row\"><span class=\"info-key\">84mo Addendum Date</span><span class=\"info-val\">The 84-month sheet is dated Jan 26, 2026 (filed as 040126)</span></div></div>",
+      "page": 1,
+      "quote": "Braun, Delta Leasing, no CB score transactions, vehicles with upfits, and vehicles with greater than 100,999 miles are eligible for the increased back-end but there will be no change to the current all-in-advance",
+      "note": "Five program notes the record did not carry. The increased-back-end list is the useful one: a high-mileage or upfitted unit gets more room on the back without losing front advance, which is the opposite of what most of the book does. Also that commercial-use deals belong with Ally Commercial Services rather than being declined on retail.",
+      "approved": null
+    }
+  ],
+  "not_in_source": [
+    "chargebackWindow",
+    "poi",
+    "idReq"
+  ],
+  "ambiguities": [
+    {
+      "field": "VERIFIED CORRECT",
+      "note": "The prime advance matrix matches the sheet row for row — 140/135/130/135/125/130 at 63 months and down through the 76-84 band. So do the consumer term limits (84 for new through 2021, 75 for 2020-2016 with the FICO 620 / $5,000 / 100,000-mile conditions, 63 for 2015-2014 on S-B tiers only), the DFI flat scale, the $1,500/$2,000 GAP split at the $80K EDC line, and the 24%/25% new/used rate caps. The 84-month work applied on 2026-08-26 holds up."
+    },
+    {
+      "field": "PARTIAL EXTRACTION",
+      "note": "Pages 2-7 were rendered but not re-extracted line by line, and the separate Funding Guidelines (10p) and 84-month sheet were not re-read — the 84-month matrix was already extracted on 2026-08-26 and verified against this page. If you want pages 2-7 checked, say so and I will do a second pass."
+    }
+  ]
+}
