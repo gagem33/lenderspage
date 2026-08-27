@@ -59,7 +59,7 @@
       "page": 6,
       "quote": "SORENTO | KFA Low APR -- (Select code '500') | MY 2026 | Tier 1/2 | 720+ | $0 | 0.00% | 0.90% | 2.99% | 3.49% | 4.49%",
       "note": "Correcting an error I introduced earlier today. My extractor treated 0.00% as 'term not offered' in EVERY column, because that is what a greyed 73-84 cell reads as. But the greyed block is only ever the 73-84 column. Four cells elsewhere are genuine subvented 0% APR offers and were published as a dash: SORENTO, SORENTO HYBRID, SPORTAGE and SPORTAGE HYBRID, all K500 tier 1/2, 24-48 months. The desk was being shown 'not offered' on the single best rate in the bulletin. Verified by rendering the Sorento and Sportage tables at 230 dpi: the 0.00% is printed in black on a normal white cell, while the greyed block sits only under 73-84 for tiers 3-8. The rule is now scoped to that column, and a 0.00% renders bold so it reads as a rate rather than as missing data. 248 dashes remain, all in 73-84, which is correct.",
-      "approved": null
+      "approved": true
     }
   ],
   "not_in_source": [],
@@ -68,5 +68,7 @@
       "field": "how this got through",
       "note": "The validation I ran checked that every non-blank cell was a well-formed percentage and that 73-84 was live only on tier 1/2. Neither test can see a cell wrongly blanked - a false negative passes both. The check that would have caught it is the one that found it: rendering a page and reading the cells against the extraction. It was caught only because the card prototype put Sportage on screen next to its own source."
     }
-  ]
+  ],
+  "approved_by": "gage",
+  "approved_at": "2026-08-27T19:45:08"
 }
