@@ -70,7 +70,7 @@
       "page": 1,
       "quote": "Effective with Contracts Dated August 4, 2026 - August 31, 2026 | Contract & Documentation Package must be Received & Funded by September 14, 2026",
       "note": "Replaces the March bulletins (2026-036/037) that expired 2026-04-14. 16 model pages across two bulletins, 35 rate tables, 264 tier rows. 2026-104 carries the current model year per model; 2026-105 carries MY 2026 and the two models 104 omits (K4, Sportage). Tabs go from 9 models to 12 — Soul is gone, the Hybrid variants are now separate. The Lease (K502) panel is DELETED rather than carried: neither bulletin contains lease money and the old figures were four months dead.",
-      "approved": null
+      "approved": true
     },
     {
       "path": [
@@ -90,7 +90,7 @@
       "page": 1,
       "quote": "Maximum Back-End | Greater of 20% of Invoice or $5,000 | Greater of 16% of Invoice or $4,000 ... Non-Branded Back-End Advance Guidelines | Greater of 15% of Invoice or $4,000 | Greater of 11% of Invoice or $3,000",
       "note": "Two errors in the stored section, both material. (1) It read '20% of amount financed or $5,000 — whichever is LESS'. The sheet says the GREATER of 20% of INVOICE or $5,000 — wrong comparison and wrong base, and it understates what Kia will advance. (2) The stored figures are the BRANDED limits presented as the only limits; non-branded is materially lower (15%/$4,000 and 11%/$3,000) with a $1,000 GAP cap and its own VSC ceiling. Excess Wear & Use was missing entirely.",
-      "approved": null
+      "approved": true
     },
     {
       "path": [
@@ -101,7 +101,7 @@
       "page": 1,
       "quote": "Effective with Contracts Dated August 4, 2026 - August 31, 2026",
       "note": "The base LTV/backend sheet is still the January 6 Standard New document (unchanged, byte-identical in Drive). Only the bulletin half moves.",
-      "approved": null
+      "approved": true
     },
     {
       "path": [
@@ -112,7 +112,7 @@
       "page": 1,
       "quote": "GAP (cannot exceed state limits) | Maximum of $1,500 ... Non-Branded ... GAP (cannot exceed state limits) | Maximum of $1,000",
       "note": "Stored as a flat $1,500, which is the branded figure only. A non-branded deal caps at $1,000. This value drives the compare table's GAP Cap column, so the shorter form is deliberate.",
-      "approved": null
+      "approved": true
     },
     {
       "path": [
@@ -124,7 +124,7 @@
       "page": 1,
       "quote": "Effective with Contracts Dated August 4, 2026 - August 31, 2026",
       "note": "The banner said there was no current Kia bulletin on file. There is now: 2026-104/105 run through August 31 with funding to September 14. Deleting it is the point of loading these — the warning must not outlive its truth.",
-      "approved": null
+      "approved": true
     }
   ],
   "not_in_source": [],
@@ -141,5 +141,7 @@
       "field": "back-end age",
       "note": "The Back-End Advance Updates sheet is dated 2025-04-14 — 500 days old. It is the newest Kia publishes on back-end advance, so it is current, but worth a rep conversation."
     }
-  ]
+  ],
+  "approved_by": "gage",
+  "approved_at": "2026-08-27T15:03:32"
 }

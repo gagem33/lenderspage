@@ -3,7 +3,7 @@
 Manifest of source documents. Maps each lender `id` (DATA.md) to its PDFs in the **LENDERHUB/LENDERHUBSOURCES** Drive folder, with file IDs so the agent can fetch them directly and fill `source.drive_file_id`.
 
 Folder: `LENDERHUB/LENDERHUBSOURCES` — Drive ID `1kf_mJ09Sxfg--PQ-xqOXdkouYUJ8ryz9`
-Inventory taken 2026-08-22, recounted 2026-08-25. **39 PDFs** + 1 README. All uploaded 2026-07-29.
+Inventory taken 2026-08-22, recounted 2026-08-25. **42 PDFs** + 1 README. All uploaded 2026-07-29.
 (This line said 38 until 2026-08-25. `DFC - Funding Guidelines` was in the table below all along
 and was never counted.)
 
@@ -85,8 +85,11 @@ When a lender has both a Program Sheet and Guidelines/Rules, extract from Guidel
 | westlake | Prime Program Sheet | 2026-07-08 | `1fwQ1YndmQi0zq9r5WTDTmAy9hhVje6VI` | | ok (1p) |
 | westlake | Program Guidelines | 2026-01-01 | `1FHLl1NXqFdoIBTnwhWpfInJqUfIS610C` | | **IMAGE_ONLY** p1 of 6 |
 | kia | Standard New - National | 2026-01-06 | `1w-r5QJqPQDMFZT1rBrfAVfSL2qxTosc9` | Jan 6, 2026 ✓ | ok (1p) |
-| kia | K500&K506 | 2026-07-01 | `1IyXoIz8Pia7vRv4o9I6k44e4D-njRDV8` | "K500/K506 July 7" ≠ (file says 07-01) | ok (10p) |
-| kia | K500&K506-2 | 2026-07-01 | `1Ur5v1OgYWfrJUkxsZCQqXLVzE2Yq84Xx` | | ok (6p) |
+| kia | K500&K506 | 2026-08-04 | `1erRPv4bOVTOpw5SdyjcOsX-3k3TanEJO` | K500/K506 Aug 4, 2026 ✓ | ok (10p) |
+| kia | K500&K506-2 | 2026-08-04 | `18JxCf14InKJ2pghApWzOcvf9K_Gn-XQN` | | ok (6p) |
+| kia | Back-End Advance Updates | 2025-04-14 | `1Azn5vC-Ul7GJJtreLHGBfzPmA4ZdahC4` | | ok (1p) |
+| kia | K500&K506 (superseded) | 2026-07-01 | `1IyXoIz8Pia7vRv4o9I6k44e4D-njRDV8` | | ok (10p) |
+| kia | K500&K506-2 (superseded) | 2026-07-01 | `1Ur5v1OgYWfrJUkxsZCQqXLVzE2Yq84Xx` | | ok (6p) |
 | bofa | Program Sheet | 2026-06-18 | `1xbiqM_pi-0XcddGDV5flk9FaSDbmnHYz` | June 18, 2026 ✓ | ok (3p) |
 | bofa | Funding Guidelines | 2026-06-17 | `18W0arwbkG4U36_y0KBP6gCY7NFX8vdyU` | | ok (2p) |
 | chase | Program Sheet | 2026-05-10 | `1UZCajZt9a2pvWahnBzcs4K5WraU4IX8m` | May 10, 2026 ✓ | ok (1p) |
@@ -107,7 +110,9 @@ When a lender has both a Program Sheet and Guidelines/Rules, extract from Guidel
 
 **Text layer** = `tools/pdf_triage.py` verdict, run over the whole folder on 2026-08-25. `ok` means the page text can be quoted. Anything bold has to be read from a 200 DPI render instead — see §4.
 
-**Mismatches to resolve:** `gls` (the sheet carries no date at all, only the footer `GLS_PG_V53_2026`), `kia` bulletin (07-01 vs 07-07).
+**Mismatches to resolve:** `gls` (the sheet carries no date at all, only the footer `GLS_PG_V53_2026`).
+
+**Resolved 2026-08-27.** The `kia` bulletin divergence (07-01 vs 07-07) is gone: the July bulletins were superseded by 2026-104 / 2026-105, and the record now reads `K500/K506 Aug 4, 2026` against files dated `080426`. The July rows are kept, marked superseded, because they are still the source behind entries in `sync/applied.jsonl`.
 
 **Resolved 2026-08-26 by renaming the file, not the record.** `td` and `dfc` both stated their own dates internally — TD's footer reads `06/30/2026` on every page of the Program Sheet and `PROD-9034 Effective 06.30.2026` on Program Sheet2, DFC's header reads `Revision Date: 8/13/2025`. The records were right and the filenames were wrong, so the two Drive files were renamed to match their documents. Renaming does not change a Drive file ID (§4), so the IDs above are unchanged.
 

@@ -4,10 +4,6 @@
     "gls": {
       "reviewed": "2026-08-26",
       "reason": "App stores a version string '2026 (v53)', not a date. The PDF is dated 2026-07-27. Needs a real date eventually."
-    },
-    "kia": {
-      "reviewed": "2026-08-26",
-      "reason": "App says K500/K506 July 7, filename says 07-01. Resolved in the app's favour. Separately: bulletin 2026-091 expired 2026-08-03 and no current one exists."
     }
   }
 }
