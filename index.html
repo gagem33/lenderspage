@@ -775,6 +775,9 @@ kbd {
 .kfa-tab { background: var(--bg3); border: 1px solid var(--border2); border-radius: var(--r-sm); color: var(--text2); font-size: .72rem; font-weight: 600; padding: 4px 11px; cursor: pointer; transition: all .15s; white-space: nowrap; }
 .kfa-tab:hover { border-color: var(--gold); color: var(--text); }
 .kfa-tab.active { background: var(--gold); border-color: var(--gold); color: #000; font-weight: 700; }
+/* A dash in a rate cell means the term is not offered. It must not read as a
+   rate, and must not read as missing data either. */
+.kfa-na { color: var(--text3); opacity: .55; }
 .kfa-model-panel { display: none; }
 .kfa-model-panel.active { display: block; }
 .kfa-program-toggle { display: flex; gap: 4px; margin-bottom: 10px; }
