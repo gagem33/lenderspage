@@ -937,8 +937,10 @@ kbd {
         <div class="calc-row" style="margin:0"><label class="calc-label" for="ds-down">Cash Down ($)</label><input type="number" id="ds-down" class="calc-input" placeholder="e.g. 1000"></div>
         <div class="calc-row" style="margin:0"><label class="calc-label" for="ds-backend">Backend Products ($)</label><input type="number" id="ds-backend" class="calc-input" placeholder="e.g. 2500"></div>
         <div class="calc-row" style="margin:0"><label class="calc-label" for="ds-target">Target Payment ($/mo)<span class="calc-sublabel">Leave blank to see all</span></label><input type="number" id="ds-target" class="calc-input" placeholder="e.g. 450"></div>
-        <div class="calc-row" style="margin:0"><label class="calc-label" for="ds-term">Preferred Term</label><select id="ds-term" class="calc-input"><option value="0">Best available</option><option value="60">60 months</option><option value="72">72 months</option><option value="84">84 months</option></select></div>
+        <div class="calc-row" style="margin:0"><label class="calc-label" for="ds-term">Preferred Term</label><select id="ds-term" class="calc-input"><option value="0">Best available</option><option value="48">48 months</option><option value="60">60 months</option><option value="66">66 months</option><option value="72">72 months</option><option value="75">75 months</option><option value="78">78 months</option><option value="84">84 months</option></select></div>
         <div class="calc-row" style="margin:0"><label class="calc-label" for="ds-fico">Customer FICO</label><input type="number" id="ds-fico" class="calc-input" placeholder="e.g. 620" min="300" max="850"></div>
+        <div class="calc-row" style="margin:0"><label class="calc-label" for="ds-apr">APR (%)<span class="calc-sublabel">Your buy rate. Blank = no payment estimate</span></label><input type="number" id="ds-apr" class="calc-input" placeholder="e.g. 11.9" min="0" max="40" step="0.01"></div>
+        <div class="calc-row" style="margin:0"><label class="calc-label" for="ds-miles">Odometer<span class="calc-sublabel">Optional</span></label><input type="number" id="ds-miles" class="calc-input" placeholder="e.g. 62000" min="0"></div>
         <div class="calc-row" style="margin:0"><label class="calc-label" for="ds-vtype">Vehicle Type</label><select id="ds-vtype" class="calc-input"><option value="used">Used</option><option value="new">New</option></select></div>
       </div>
       <button id="deal-struct-run" class="calc-btn" style="margin-top:14px">Structure Deal</button>
@@ -1179,6 +1181,62 @@ function openCard(id, scroll = true) {
 }
 function closeCards() { openLender = null; renderCards(); }
 // ─── QUICK LISTS ─────────────────────────────────────────────
+// ─── TYPED CORE (v2) ─────────────────────────────────────────
+// DATA.md §2. Two lenders carry a `core` so far; the rest still answer from
+// their v1 strings, which is why every read goes through lenderLimit().
+// This mirrors resolve() in tools/core.py — `core.py selftest` runs the same
+// cases, so if you change one, change both.
+const NUMERIC_PRED = ['term_months_gte','term_months_lte','amount_financed_gte','amount_financed_lte'];
+
+function matchWhen(when, deal) {
+  // A predicate the deal can't answer does NOT hold, so an unknown deal keeps
+  // the base value instead of inheriting a better one it may not qualify for.
+  for (const [k, want] of Object.entries(when || {})) {
+    if (NUMERIC_PRED.includes(k)) {
+      const got = k.startsWith('term') ? deal.term_months : deal.amount_financed;
+      if (got == null) return false;
+      if (k.endsWith('_gte') && got < want) return false;
+      if (k.endsWith('_lte') && got > want) return false;
+    } else {
+      if (deal[k] == null || String(deal[k]) !== String(want)) return false;
+    }
+  }
+  return true;
+}
+
+// -> { value, why, conditional } ; value null means "not published here"
+function resolveLimit(limit, deal) {
+  if (!limit) return { value: null, why: 'no typed limit', conditional: false };
+  const hits = (limit.except || []).filter(e => !e.unresolved && matchWhen(e.when, deal));
+  const couldDiffer = (limit.except || []).some(e => !e.unresolved);
+  if (hits.length) {
+    const withVal = hits.filter(e => e.value != null);
+    if (!withVal.length) return { value: null, why: 'the sheet gives no number for this case',
+                                  conditional: true, note: hits[0].note };
+    // Several matches means overlapping bands (core.py validate warns). Lowest
+    // wins: understating costs a resubmit, overstating costs a funding decline.
+    const pick = withVal.reduce((a, b) => b.value < a.value ? b : a);
+    return { value: pick.value, why: JSON.stringify(pick.when), conditional: true, note: pick.note };
+  }
+  return { value: limit.value, why: 'base', conditional: couldDiffer, note: limit.note };
+}
+
+// A limit whose better value the sheet publishes without saying when it applies.
+const unresolvedOf = limit => (limit?.except || []).filter(e => e.unresolved);
+
+// Typed value when the lender has a core, the old string parse when it doesn't.
+function lenderLimit(l, key, deal) {
+  const typed = key === 'fico_min' ? l.core?.credit?.fico_min : l.core?.limits?.[key];
+  if (typed) return { ...resolveLimit(typed, deal || {}), typed: true,
+                      unresolved: unresolvedOf(typed) };
+  const fb = { typed: false, conditional: false, unresolved: [] };
+  if (key === 'ltv_total_max_pct') { const v = parseFloat(String(l.maxLTV||'').replace('%','')); return {...fb, value: isNaN(v)?null:v, why: 'parsed from maxLTV'}; }
+  if (key === 'max_term_months')   return { ...fb, value: l.maxTerm ?? null, why: 'maxTerm' };
+  if (key === 'max_mileage')       { const v = miNum(l.maxMileage); return {...fb, value: v||null, why: 'parsed from maxMileage'}; }
+  if (key === 'fico_min')          return { ...fb, value: typeof l.ficoMin === 'number' ? l.ficoMin : null, why: 'ficoMin' };
+  return { ...fb, value: null, why: 'not modelled in v1' };
+}
+
 const pctNum = s => parseInt(String(s||'').replace(/[^0-9]/g,''),10) || 0;
 const miNum  = s => parseInt(String(s||'').replace(/[^0-9]/g,''),10) || 0;
 const QUICK_LISTS = [
@@ -1641,26 +1699,59 @@ function initLTVCalc() {
     const ltvColor=ltv<=110?'var(--green)':ltv<=130?'var(--gold)':ltv<=150?'#f97316':'var(--red)';
     $('#ltv-summary').innerHTML=`<div class="ltv-summary-box" style="border-color:${ltvColor}"><div class="ltv-summary-stat"><div class="ltv-summary-label">Book Value</div><div class="ltv-summary-val">$${book.toLocaleString()}</div></div><div class="ltv-summary-stat"><div class="ltv-summary-label">Amt Financed</div><div class="ltv-summary-val">$${fin.toLocaleString()}</div></div><div class="ltv-summary-stat"><div class="ltv-summary-label">Actual LTV</div><div class="ltv-summary-val" style="color:${ltvColor}">${ltv.toFixed(1)}%</div></div></div>`;
     const list=$('#ltv-lender-results'); list.innerHTML='';
-    const pass=[],fail=[];
+    const pass=[],fail=[],unknown=[];
+    // The calculator divides amount financed by book, so backend is already in
+    // the number -- the comparable cap is TOTAL LTV, not front-end.
     LENDERS.forEach(l => {
-      const cap=parseFloat((l.maxLTV||'').replace('%',''));
-      if (isNaN(cap)) return;
-      (ltv<=cap?pass:fail).push({l,cap});
+      const r=lenderLimit(l,'ltv_total_max_pct',{});
+      if (r.value==null) { unknown.push({l,r}); return; }
+      (ltv<=r.value?pass:fail).push({l,cap:r.value,r});
     });
-    if (pass.length){const h=document.createElement('div');h.className='bureau-section-label pass';h.textContent=`✅ Eligible (${pass.length} lenders)`;list.appendChild(h);pass.forEach(({l,cap})=>list.appendChild(buildLTVCard(l,ltv,cap,true)));}
-    if (fail.length){const h=document.createElement('div');h.className='bureau-section-label fail';h.style.marginTop='12px';h.textContent=`❌ Over LTV Cap (${fail.length} lenders)`;list.appendChild(h);fail.forEach(({l,cap})=>list.appendChild(buildLTVCard(l,ltv,cap,false)));}
+    if (pass.length){const h=document.createElement('div');h.className='bureau-section-label pass';h.textContent=`✅ Eligible (${pass.length} lenders)`;list.appendChild(h);pass.forEach(({l,cap,r})=>list.appendChild(buildLTVCard(l,ltv,cap,true,r)));}
+    if (fail.length){const h=document.createElement('div');h.className='bureau-section-label fail';h.style.marginTop='12px';h.textContent=`❌ Over LTV Cap (${fail.length} lenders)`;list.appendChild(h);fail.forEach(({l,cap,r})=>list.appendChild(buildLTVCard(l,ltv,cap,false,r)));}
+    // A lender whose sheet never says front or total is not a pass and not a
+    // fail -- it is a question. DATA.md §3.2.
+    if (unknown.length){const h=document.createElement('div');h.className='bureau-section-label warn';h.style.marginTop='12px';h.textContent=`❔ No published total-LTV cap (${unknown.length})`;list.appendChild(h);
+      unknown.forEach(({l,r})=>{const c=document.createElement('div');
+        c.style.cssText='background:var(--bg3);border:1px solid var(--border2);border-radius:var(--r-md);padding:10px 14px;cursor:pointer';
+        c.innerHTML=`<div style="display:flex;align-items:center;gap:7px;flex-wrap:wrap"><span class="lender-badge ${segBadge(l.segment)}" style="font-size:.6rem">${l.segmentLabel}</span><span style="font-weight:700;font-size:.825rem">${l.name}</span></div><div style="font-size:.7rem;color:var(--text3);margin-top:4px">${r.note||'The sheet does not state a total LTV cap.'}</div>`;
+        c.addEventListener('click',()=>{closeAllModals();showView('lender',l.id);});list.appendChild(c);});}
     const r=$('#ltv-results'); r.hidden=false; r.removeAttribute('hidden');
   });
   ['ltv-book','ltv-financed'].forEach(id=>$(`#${id}`)?.addEventListener('keydown',e=>{if(e.key==='Enter')$('#ltv-calc-run')?.click();}));
 }
 
-function buildLTVCard(l,ltv,cap,ok) {
+function buildLTVCard(l,ltv,cap,ok,r) {
   const card=document.createElement('div');
   const headroom=cap-ltv, barW=Math.min(100,(ltv/cap)*100), barC=ok?(headroom>20?'var(--green)':'var(--gold)'):'var(--red)';
   card.style.cssText=`background:var(--bg3);border:1px solid ${ok?'var(--green)':'var(--border2)'};border-radius:var(--r-md);padding:10px 14px;cursor:pointer;`;
-  card.innerHTML=`<div style="display:flex;align-items:center;gap:7px;margin-bottom:5px;flex-wrap:wrap"><span class="lender-badge ${segBadge(l.segment)}" style="font-size:.6rem">${l.segmentLabel}</span><span style="font-weight:700;font-size:.825rem">${l.name}</span><span style="margin-left:auto;font-size:.72rem;color:var(--text3)">Cap: <strong style="color:var(--text)">${cap}%</strong></span></div><div style="background:var(--bg2);border-radius:4px;height:5px;overflow:hidden"><div style="height:100%;width:${barW}%;background:${barC};border-radius:4px"></div></div><div style="display:flex;justify-content:space-between;margin-top:4px;font-size:.7rem;color:var(--text3)"><span>Your LTV: <strong style="color:${barC}">${ltv.toFixed(1)}%</strong></span><span>${ok?`<span style="color:var(--green)">+${headroom.toFixed(1)}% headroom</span>`:`<span style="color:var(--red)">${Math.abs(headroom).toFixed(1)}% over cap</span>`}</span></div>`;
+  card.innerHTML=`<div style="display:flex;align-items:center;gap:7px;margin-bottom:5px;flex-wrap:wrap"><span class="lender-badge ${segBadge(l.segment)}" style="font-size:.6rem">${l.segmentLabel}</span><span style="font-weight:700;font-size:.825rem">${l.name}</span><span style="margin-left:auto;font-size:.72rem;color:var(--text3)">Cap: <strong style="color:var(--text)">${cap}%</strong></span></div><div style="background:var(--bg2);border-radius:4px;height:5px;overflow:hidden"><div style="height:100%;width:${barW}%;background:${barC};border-radius:4px"></div></div><div style="display:flex;justify-content:space-between;margin-top:4px;font-size:.7rem;color:var(--text3)"><span>Your LTV: <strong style="color:${barC}">${ltv.toFixed(1)}%</strong></span><span>${ok?`<span style="color:var(--green)">+${headroom.toFixed(1)}% headroom</span>`:`<span style="color:var(--red)">${Math.abs(headroom).toFixed(1)}% over cap</span>`}</span></div>${capNote(r,l,'ltv_total_max_pct')}`;
   card.addEventListener('click',()=>{closeAllModals();showView('lender',l.id);});
   return card;
+}
+
+// The highest a typed limit reaches under any condition. `value` is the floor
+// (DATA.md §2.1), so without this a 48-cell grid reads as one number.
+function limitCeiling(l, key) {
+  const t = key === 'fico_min' ? l.core?.credit?.fico_min : l.core?.limits?.[key];
+  if (!t) return null;
+  const vals = [t.value, ...(t.except || []).map(e => e.value)].filter(v => v != null);
+  return vals.length ? Math.max(...vals) : null;
+}
+
+// A typed cap is only the whole story once the deal names a tier and a term.
+// Say so on the card rather than letting a floor read as the bank's answer.
+function capNote(r, l, key) {
+  if (!r?.typed) return '';
+  const bits = [];
+  const top = l && key ? limitCeiling(l, key) : null;
+  if (r.why === 'base' && top != null && top > r.value)
+    bits.push(`${r.value}&ndash;${top}% across this bank's grid &mdash; ${r.value}% is the floor`);
+  else if (r.conditional && r.why !== 'base') bits.push('for this deal');
+  (r.unresolved || []).forEach(u => bits.push(
+    `up to ${u.value}% &mdash; condition not published`));
+  if (!bits.length) return '';
+  return `<div style="font-size:.66rem;color:var(--text3);margin-top:4px">${bits.join(' &middot; ')}</div>`;
 }
 
 // ─── DEAL STRUCTURER ─────────────────────────────────────────
@@ -1670,27 +1761,53 @@ function initDealStructurer() {
     const price=parseFloat($('#ds-price').value)||0, trade=parseFloat($('#ds-trade').value)||0,
           down=parseFloat($('#ds-down').value)||0, backend=parseFloat($('#ds-backend').value)||0,
           target=parseFloat($('#ds-target').value)||0, prefTerm=parseInt($('#ds-term').value)||0,
-          fico=parseInt($('#ds-fico').value)||0;
+          fico=parseInt($('#ds-fico').value)||0, aprIn=parseFloat($('#ds-apr').value),
+          miles=parseInt($('#ds-miles').value)||0, vtype=$('#ds-vtype').value||null;
     if (!price){alert('Enter a vehicle price.');return;}
     const af=price-trade-down+backend, ltv=price>0?(af/price)*100:0;
     if (af<=0){alert('Amount financed is zero or negative.');return;}
     $('#deal-summary').innerHTML=`<div class="ltv-summary-box" style="border-color:var(--gold)"><div class="ltv-summary-stat"><div class="ltv-summary-label">Price</div><div class="ltv-summary-val">$${price.toLocaleString()}</div></div><div class="ltv-summary-stat"><div class="ltv-summary-label">Trade</div><div class="ltv-summary-val" style="color:${trade>=0?'var(--green)':'var(--red)'}">${trade>=0?'+':''}$${trade.toLocaleString()}</div></div><div class="ltv-summary-stat"><div class="ltv-summary-label">Down</div><div class="ltv-summary-val">$${down.toLocaleString()}</div></div><div class="ltv-summary-stat highlight"><div class="ltv-summary-label">Amt Financed</div><div class="ltv-summary-val" style="color:var(--gold)">$${af.toLocaleString()}</div></div><div class="ltv-summary-stat highlight"><div class="ltv-summary-label">LTV</div><div class="ltv-summary-val" style="color:var(--gold)">${ltv.toFixed(1)}%</div></div></div>`;
     const list=$('#deal-lender-results'); list.innerHTML='';
-    const segRates={prime:.06,near:.09,sub:.14,deep:.20,all:.10};
+    // Ranking is on eligibility, which every lender publishes. Rate is a
+    // tiebreaker where one exists -- see DATA.md §2.3. The old
+    // prime 6% / near 9% / sub 14% / deep 20% was invented, and an invented
+    // rate sitting beside real ones on a live deal is the thing this app
+    // exists to prevent.
+    const deal={term_months:prefTerm||null, amount_financed:Math.round(af),
+                vehicle_condition:vtype};
     const results=LENDERS.map(l=>{
-      const issues=[];
-      if(fico&&typeof l.ficoMin==='number'&&fico<l.ficoMin) issues.push(`FICO ${fico} below min ${l.ficoMin}`);
-      const cap=parseFloat((l.maxLTV||'').replace('%',''));
-      if(!isNaN(cap)&&ltv>cap) issues.push(`LTV ${ltv.toFixed(0)}% > ${cap}% cap`);
-      const apr=segRates[l.segment]||.09, mr=apr/12;
-      const maxT=l.maxTerm||84;
-      const terms=[84,72,60,48,36].filter(t=>t<=maxT);
-      const pmts=terms.map(t=>({t,pmt:af*(mr*Math.pow(1+mr,t))/(Math.pow(1+mr,t)-1)}));
-      const best=prefTerm&&terms.includes(prefTerm)?pmts.find(p=>p.t===prefTerm):pmts[0];
-      const meetsTarget=!target||(best&&best.pmt<=target);
-      return{l,issues,pmts,best,meetsTarget,apr,ok:issues.length===0};
+      const issues=[], unknowns=[];
+      const F=lenderLimit(l,'fico_min',deal);
+      if(fico&&F.value!=null&&fico<F.value) issues.push(`FICO ${fico} below min ${F.value}`);
+      const L=lenderLimit(l,'ltv_total_max_pct',deal);
+      if(L.value!=null&&ltv>L.value) issues.push(`LTV ${ltv.toFixed(0)}% > ${L.value}% cap`);
+      else if(L.value==null) unknowns.push('no published total-LTV cap');
+      const T=lenderLimit(l,'max_term_months',deal);
+      if(prefTerm&&T.value!=null&&prefTerm>T.value) issues.push(`${prefTerm}mo over ${T.value}mo max`);
+      const M=lenderLimit(l,'max_mileage',deal);
+      if(miles&&M.value!=null&&miles>M.value) issues.push(`${miles.toLocaleString()} mi > ${M.value.toLocaleString()} mi`);
+      const A=lenderLimit(l,'min_amount_financed',deal);
+      if(A.value!=null&&af<A.value) issues.push(`$${Math.round(af).toLocaleString()} under $${A.value.toLocaleString()} min`);
+      const X=lenderLimit(l,'max_amount_financed',deal);
+      if(X.value!=null&&af>X.value) issues.push(`$${Math.round(af).toLocaleString()} over $${X.value.toLocaleString()} max`);
+      const maxT=T.value||84;
+      const terms=[84,78,75,72,66,60,48,36].filter(t=>t<=maxT);
+      const floor=l.core?.rates?.floor_apr_pct ?? null;
+      const apr=!isNaN(aprIn)?aprIn/100:null;      // the desk's number, never ours
+      const pmts=apr==null?[]:terms.map(t=>{const mr=apr/12;
+        return{t,pmt:af*(mr*Math.pow(1+mr,t))/(Math.pow(1+mr,t)-1)};});
+      const best=pmts.length?(prefTerm&&terms.includes(prefTerm)?pmts.find(p=>p.t===prefTerm):pmts[0]):null;
+      const meetsTarget=!target||!best||best.pmt<=target;
+      return{l,issues,unknowns,pmts,best,meetsTarget,apr,floor,caps:{L,T,M},ok:issues.length===0};
     });
-    results.sort((a,b)=>{if(a.ok&&a.meetsTarget&&!(b.ok&&b.meetsTarget))return -1;if(!(a.ok&&a.meetsTarget)&&b.ok&&b.meetsTarget)return 1;if(a.ok&&!b.ok)return -1;if(!a.ok&&b.ok)return 1;return(a.best?.pmt||9999)-(b.best?.pmt||9999);});
+    const rank=r=>(r.ok?0:2)+(r.ok&&!r.meetsTarget?1:0);
+    results.sort((a,b)=>{
+      const d=rank(a)-rank(b); if(d) return d;
+      if(a.unknowns.length!==b.unknowns.length) return a.unknowns.length-b.unknowns.length;
+      if(a.floor!=null&&b.floor!=null&&a.floor!==b.floor) return a.floor-b.floor;
+      if((a.floor!=null)!==(b.floor!=null)) return a.floor!=null?-1:1;
+      return (a.best?.pmt??Infinity)-(b.best?.pmt??Infinity);
+    });
     const good=results.filter(r=>r.ok&&r.meetsTarget), close=results.filter(r=>r.ok&&!r.meetsTarget), nogo=results.filter(r=>!r.ok);
     function addSection(arr,cls,label){if(!arr.length)return;const h=document.createElement('div');h.className='bureau-section-label '+cls;h.textContent=label;list.appendChild(h);arr.forEach(r=>list.appendChild(buildDealCard(r,target)));}
     addSection(good,'pass',`✅ Can Structure (${good.length})`);
@@ -1704,8 +1821,28 @@ function buildDealCard(r,target){
   const card=document.createElement('div');
   const bc=r.ok&&(!target||r.meetsTarget)?'var(--green)':r.ok?'var(--gold)':'var(--border2)';
   const chips=r.pmts.map(p=>{const hit=target&&p.pmt<=target,isBest=p.t===(r.best?.t);return`<span style="background:${hit?'var(--greendim)':'var(--bg2)'};border:1px solid ${hit?'var(--green)':isBest?'var(--gold)':'var(--border)'};border-radius:6px;padding:3px 9px;display:inline-flex;flex-direction:column;align-items:center;cursor:default"><span style="font-size:.6rem;opacity:.7">${p.t}mo</span><span style="font-weight:700;color:${hit?'var(--green)':'var(--text)'};font-size:.825rem">$${Math.round(p.pmt).toLocaleString()}</span></span>`;}).join('');
+  // The rate line states where the number came from. "No published rate" is an
+  // honest answer; an assumed APR next to a real one is not.
+  const rate = r.apr!=null
+      ? `${(r.apr*100).toFixed(2)}% APR (yours)`
+      : r.floor!=null ? `Floor ${r.floor}% &mdash; enter an APR for payments`
+                      : 'No published rate';
+  const body = r.pmts.length
+      ? `<div style="display:flex;flex-wrap:wrap;gap:5px">${chips}</div>`
+      : `<div style="font-size:.72rem;color:var(--text3)">Eligible terms: ${
+           [84,78,75,72,66,60,48,36].filter(t=>t<=(r.caps.T.value||84)).join(' &middot; ')} mo</div>`;
+  // A cap that is really a floor, or one whose better value has no published
+  // condition, says so here rather than reading as the bank's final answer.
+  const caveats=[];
+  if(r.caps.L.typed&&r.caps.L.why==='base'){
+    const top=limitCeiling(r.l,'ltv_total_max_pct');
+    if(top!=null&&top>r.caps.L.value)
+      caveats.push(`LTV ${r.caps.L.value}&ndash;${top}% by tier &mdash; ${r.caps.L.value}% is the floor`);
+  }
+  (r.caps.L.unresolved||[]).forEach(u=>caveats.push(`LTV up to ${u.value}% &mdash; condition not published`));
+  r.unknowns.forEach(u=>caveats.push(u));
   card.style.cssText=`background:var(--bg3);border:1px solid ${bc};border-radius:var(--r-md);padding:10px 14px;cursor:pointer;`;
-  card.innerHTML=`<div style="display:flex;align-items:center;gap:7px;margin-bottom:8px;flex-wrap:wrap"><span class="lender-badge ${segBadge(r.l.segment)}" style="font-size:.6rem">${r.l.segmentLabel}</span><span style="font-weight:700">${r.l.name}</span><span style="margin-left:auto;font-size:.7rem;color:var(--text3)">Est. ~${(r.apr*100).toFixed(0)}% APR</span></div><div style="display:flex;flex-wrap:wrap;gap:5px">${chips}</div>${r.issues.length?`<div style="margin-top:7px;display:flex;flex-wrap:wrap;gap:4px">${r.issues.map(i=>`<span style="font-size:.7rem;color:var(--red);background:var(--reddim);border-radius:4px;padding:1px 7px">${i}</span>`).join('')}</div>`:''}<div style="margin-top:5px;font-size:.7rem;color:var(--text3)">⚠️ Payments are estimates. Verify actual rate on callback.</div>`;
+  card.innerHTML=`<div style="display:flex;align-items:center;gap:7px;margin-bottom:8px;flex-wrap:wrap"><span class="lender-badge ${segBadge(r.l.segment)}" style="font-size:.6rem">${r.l.segmentLabel}</span><span style="font-weight:700">${r.l.name}</span>${r.l.core?`<span title="Typed program data, read from the source sheet" style="font-size:.58rem;font-weight:700;letter-spacing:.04em;color:var(--gold);border:1px solid var(--gold);border-radius:3px;padding:0 4px">TYPED</span>`:''}<span style="margin-left:auto;font-size:.7rem;color:var(--text3)">${rate}</span></div>${body}${r.issues.length?`<div style="margin-top:7px;display:flex;flex-wrap:wrap;gap:4px">${r.issues.map(i=>`<span style="font-size:.7rem;color:var(--red);background:var(--reddim);border-radius:4px;padding:1px 7px">${i}</span>`).join('')}</div>`:''}${caveats.length?`<div style="margin-top:6px;font-size:.66rem;color:var(--text3)">${caveats.join(' &middot; ')}</div>`:''}${r.pmts.length?`<div style="margin-top:5px;font-size:.7rem;color:var(--text3)">⚠️ Payments use the APR you entered. Verify on callback.</div>`:''}`;
   card.addEventListener('click',()=>{closeAllModals();showView('lender',r.l.id);});
   return card;
 }

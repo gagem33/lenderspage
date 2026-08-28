@@ -9,7 +9,8 @@ How the app is wired today. Factual, from `main` on 2026-08-28. Not a design doc
 | File | Size | Status |
 |---|---|---|
 | `index.html` | ~97 KB | **The app.** HTML + CSS + JS inline. No lender data. |
-| `lenders.json` | ~201 KB | **The data.** 20 lender records, fetched at boot. |
+| `lenders.json` | ~298 KB | **The data.** 20 lender records, fetched at boot. 2 carry a typed `core`. |
+| `tools/core.py` | — | Validates typed cores and self-tests the resolution rule. |
 | `tools/pdf_triage.py` | — | Classifies a source PDF's text layer and renders pages. |
 | `.gitignore` | — | — |
 
@@ -83,7 +84,23 @@ so a card's body still can't be driven by structured data. `'__stips'` is a synt
 assembles ID / proof-of-residence / proof-of-insurance from top-level fields rather than a
 `sections` entry.
 
-### 3.4 Tools (modals)
+### 3.4 The typed core
+
+`lenders.json` records may carry a `core` block (DATA.md §2) — typed, condition-
+aware versions of the values the tools compute on. Two of twenty have one so far.
+
+Nothing reads `core` directly. Every read goes through `lenderLimit(l, key, deal)`,
+which returns the typed value when the lender has a core and falls back to the old
+string parse when it does not, so the eighteen un-migrated lenders keep working
+unchanged. `resolveLimit()` evaluates a limit's `except` list against the deal and
+mirrors `resolve()` in `tools/core.py`; `core.py selftest` holds the 20 cases both
+must agree on.
+
+`limitCeiling(l, key)` returns the highest a limit reaches under any condition —
+needed because `value` is the floor, so a 48-cell grid would otherwise render as
+one number.
+
+### 3.5 Tools (modals)
 
 Six modals wired by `makeModal(btnId, modalId, closeId)` in `init()`:
 
