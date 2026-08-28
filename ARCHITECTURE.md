@@ -56,11 +56,20 @@ Approximate line map (drifts as the file changes — grep, don't trust line numb
 
 ### 3.1 Views
 
-Two `div.view` elements toggled by `showView(name, lenderId)`:
-- `view-compare` — default. Sidebar + compare table + quick lists.
-- `view-lender` — one lender's detail page, built by `buildLenderDetail(lender)`.
+**One view since 2026-08-27.** `view-compare` holds the whole app: a filter bar, the
+card list, quick lists and the differentiator grid.
 
-`view-pace` (Sales Pace) was removed 2026-08-24.
+Every lender is a `.lh-card` rendered by `cardHTML(l)`. Collapsed it is one scannable
+row; open it shows a stat strip and its sections as chips, with `sectionHTML(l, key)`
+swapping the pane. Only one card is open at a time, and `lastSection` remembers which
+section each lender was left on.
+
+`showView(name, lenderId)` survives as the navigation entry point — everything that
+used to open the detail page (jump box, quick lists, deal structurer, `[` / `]`) now
+calls `openCard(id)` through it.
+
+`view-lender` and the sidebar were removed 2026-08-27; `view-pace` (Sales Pace) on
+2026-08-24.
 
 ### 3.2 Render model
 
@@ -112,8 +121,9 @@ reintroduce.
 ```
 lenders.json ──fetch──► boot() ──► LENDERS ──► init()
                                     │
-                                    ├─► compare table / sidebar / quick lists
-                                    ├─► lender detail (render on click)
+                                    ├─► card list (filterCards → renderCards)
+                                    ├─► a card's sections (sectionHTML, on chip click)
+                                    ├─► quick lists
                                     └─► tools (read a few top-level fields)
 ```
 
