@@ -93,9 +93,9 @@
       },
       "credit": {
         "fico_min": {
-          "value": null,
+          "value": 500,
           "except": [],
-          "note": "Tier-based; no single published floor."
+          "note": "Carried forward from the 2026-08-26 corpus sweep, which read this lender's PDF at 300 dpi. Not re-read for the typed core, so it has no page cite of its own."
         },
         "fico_basis": "tier",
         "tiers": [
@@ -437,14 +437,14 @@
       },
       "limits": {
         "max_term_months": {
-          "value": null,
+          "value": 84,
           "except": [],
-          "note": "Not published."
+          "note": "Carried forward from the 2026-08-26 corpus sweep, which read this lender's PDF at 300 dpi. Not re-read for the typed core, so it has no page cite of its own."
         },
         "max_mileage": {
-          "value": null,
+          "value": 130000,
           "except": [],
-          "note": "Not published."
+          "note": "Carried forward from the 2026-08-26 corpus sweep, which read this lender's PDF at 300 dpi. Not re-read for the typed core, so it has no page cite of its own."
         },
         "max_vehicle_age_yr": {
           "value": null,
@@ -953,13 +953,20 @@
       "limits": {
         "max_term_months": {
           "value": 72,
-          "except": [],
+          "except": [
+            {
+              "when": {},
+              "value": 84,
+              "unresolved": true,
+              "note": "The 2026-08-26 sweep read 84 months for TD; Program Sheet2's tier guidelines say 72. Which programs get 84 is not stated."
+            }
+          ],
           "note": "72 months max under the tier guidelines on p2."
         },
         "max_mileage": {
-          "value": null,
+          "value": 120000,
           "except": [],
-          "note": "Not published."
+          "note": "Carried forward from the 2026-08-26 corpus sweep, which read this lender's PDF at 300 dpi. Not re-read for the typed core, so it has no page cite of its own."
         },
         "max_vehicle_age_yr": {
           "value": null,
@@ -1109,9 +1116,9 @@
           "except": []
         },
         "max_mileage": {
-          "value": null,
+          "value": 150000,
           "except": [],
-          "note": "Not published."
+          "note": "Carried forward from the 2026-08-26 corpus sweep, which read this lender's PDF at 300 dpi. Not re-read for the typed core, so it has no page cite of its own."
         },
         "max_vehicle_age_yr": {
           "value": null,
@@ -1474,8 +1481,9 @@
       },
       "credit": {
         "fico_min": {
-          "value": null,
-          "except": []
+          "value": 650,
+          "except": [],
+          "note": "Carried forward from the 2026-08-26 corpus sweep, which read this lender's PDF at 300 dpi. Not re-read for the typed core, so it has no page cite of its own."
         },
         "fico_basis": "tier",
         "tiers": []
@@ -1486,9 +1494,9 @@
           "except": []
         },
         "max_mileage": {
-          "value": null,
+          "value": 140000,
           "except": [],
-          "note": "Not published."
+          "note": "Carried forward from the 2026-08-26 corpus sweep, which read this lender's PDF at 300 dpi. Not re-read for the typed core, so it has no page cite of its own."
         },
         "max_vehicle_age_yr": {
           "value": null,
@@ -1617,8 +1625,9 @@
       },
       "credit": {
         "fico_min": {
-          "value": null,
-          "except": []
+          "value": 400,
+          "except": [],
+          "note": "Carried forward from the 2026-08-26 corpus sweep, which read this lender's PDF at 300 dpi. Not re-read for the typed core, so it has no page cite of its own."
         },
         "fico_basis": "tier",
         "tiers": [
@@ -1635,9 +1644,9 @@
           "except": []
         },
         "max_mileage": {
-          "value": null,
+          "value": 180000,
           "except": [],
-          "note": "Not published."
+          "note": "Carried forward from the 2026-08-26 corpus sweep, which read this lender's PDF at 300 dpi. Not re-read for the typed core, so it has no page cite of its own."
         },
         "max_vehicle_age_yr": {
           "value": null,
@@ -1775,14 +1784,14 @@
       },
       "limits": {
         "max_term_months": {
-          "value": null,
+          "value": 84,
           "except": [],
-          "note": "Not published."
+          "note": "Carried forward from the 2026-08-26 corpus sweep, which read this lender's PDF at 300 dpi. Not re-read for the typed core, so it has no page cite of its own."
         },
         "max_mileage": {
-          "value": null,
+          "value": 200000,
           "except": [],
-          "note": "Not published."
+          "note": "Carried forward from the 2026-08-26 corpus sweep, which read this lender's PDF at 300 dpi. Not re-read for the typed core, so it has no page cite of its own."
         },
         "max_vehicle_age_yr": {
           "value": null,
@@ -1955,9 +1964,9 @@
           "note": "Not published."
         },
         "max_mileage": {
-          "value": null,
+          "value": 150000,
           "except": [],
-          "note": "Not published."
+          "note": "Sheet says no maximum; 150,000 is the Prime program figure. Carried forward from the 2026-08-26 corpus sweep, which read this lender's PDF at 300 dpi. Not re-read for the typed core, so it has no page cite of its own."
         },
         "max_vehicle_age_yr": {
           "value": null,
@@ -2460,9 +2469,9 @@
           "except": []
         },
         "max_mileage": {
-          "value": null,
+          "value": 120000,
           "except": [],
-          "note": "Not published."
+          "note": "Carried forward from the 2026-08-26 corpus sweep, which read this lender's PDF at 300 dpi. Not re-read for the typed core, so it has no page cite of its own."
         },
         "max_vehicle_age_yr": {
           "value": null,
@@ -2930,9 +2939,9 @@
           "note": "Per-tier max term, p1. 'P10 (No Hit)' is 60 months, front 90%/80%, total 100%/90% - a distinct row from P10."
         },
         "max_mileage": {
-          "value": null,
+          "value": 175000,
           "except": [],
-          "note": "Not published."
+          "note": "Carried forward from the 2026-08-26 corpus sweep, which read this lender's PDF at 300 dpi. Not re-read for the typed core, so it has no page cite of its own."
         },
         "max_vehicle_age_yr": {
           "value": null,
@@ -3633,8 +3642,9 @@
       },
       "credit": {
         "fico_min": {
-          "value": null,
-          "except": []
+          "value": 675,
+          "except": [],
+          "note": "Carried forward from the 2026-08-26 corpus sweep, which read this lender's PDF at 300 dpi. Not re-read for the typed core, so it has no page cite of its own."
         },
         "fico_basis": "tier",
         "tiers": []
@@ -3645,9 +3655,9 @@
           "except": []
         },
         "max_mileage": {
-          "value": null,
+          "value": 125000,
           "except": [],
-          "note": "Not published."
+          "note": "Carried forward from the 2026-08-26 corpus sweep, which read this lender's PDF at 300 dpi. Not re-read for the typed core, so it has no page cite of its own."
         },
         "max_vehicle_age_yr": {
           "value": null,

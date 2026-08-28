@@ -233,6 +233,28 @@ CASES = [
     ('fifththird', 'ltv_total_max_pct', {}, 140),
     ('fifththird', 'ltv_front_max_pct', {}, 115),
     ('exeter', 'ltv_total_max_pct', {}, 150),
+
+    # --- values carried forward from the 2026-08-26 sweep, added 2026-08-28.
+    # The typed core had dropped these, and because every record now has a core
+    # the string fallback in lenderLimit() can no longer cover for it.
+    ('regional', 'max_mileage', {}, 130000),
+    ('td', 'max_mileage', {}, 120000),
+    ('wellsfargo', 'max_mileage', {}, 150000),
+    ('fifththird', 'max_mileage', {}, 140000),
+    ('gls', 'max_mileage', {}, 180000),
+    ('capitalone', 'max_mileage', {}, 200000),
+    ('chase', 'max_mileage', {}, 120000),
+    ('dfc', 'max_mileage', {}, 175000),
+    ('usbank', 'max_mileage', {}, 125000),
+    ('westlake', 'max_mileage', {}, 150000),
+    ('amcredit', 'fico_min', {}, 500),
+    ('fifththird', 'fico_min', {}, 650),
+    ('gls', 'fico_min', {}, 400),
+    ('usbank', 'fico_min', {}, 675),
+    ('regional', 'max_term_months', {}, 84),
+    ('capitalone', 'max_term_months', {}, 84),
+    ('td', 'max_term_months', {}, 72),      # unresolved 84 must not apply on its own
+    ('kia', 'max_mileage', {}, None),       # sheet says N/A - stays unknown
 ]
 
 
