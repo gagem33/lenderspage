@@ -2,7 +2,7 @@
 
 The lender data contract. What a lender record is, what each field means, where values come from, and the rules for changing them. Any PDF → extract → diff → approve flow depends on this file being accurate.
 
-Audit basis: `index.html` on `main`, pulled 2026-08-22. 20 lenders in `LENDERS`.
+Audit basis: `lenders.json` on `main`, 20 lenders. Current-state audit pulled 2026-08-22 from `index.html`, before the data moved to `lenders.json` on 2026-08-26; the counts in §1 were re-measured 2026-08-28 and still hold. §2's target was rewritten 2026-08-28 — see the decisions there.
 
 ---
 
@@ -61,6 +61,8 @@ Segment counts: Prime 7 · Near-Prime 4 · Sub-Prime 5 · Prime+ 1 · Deep Sub-P
 
 ### 1.3 `sections` — the real problem
 
+*(Read §2 with this. The measurement there — 627 distinct labels, 537 on a single lender — shows the problem is only partly one of inconsistent naming.)*
+
 Section keys: `fico`, `id`, `income`, `ltv`, `backend`, `reserve`, `vehicles` (standard), plus `program` and `incentives` (one lender each). Each holds an HTML `content` string of `info-row` key/value pairs, tables, and note boxes.
 
 The same concept is labeled differently across lenders. Examples found:
@@ -73,114 +75,134 @@ Consequence: you cannot diff a new PDF against current data, because the current
 
 ---
 
-## 2. Target schema (v2)
+## 2. Target schema (v2 core)
 
-Principle: **every comparable value gets a typed field. Prose is allowed only in a `notes` field next to the value it qualifies.**
+**Decided 2026-08-28, after measuring what is actually in `sections`.**
 
-One record per lender. Shown as JSON; maps 1:1 to a Supabase row (`lenders` table, JSONB `program` column) or to a JS object.
+The earlier target replaced `sections` entirely with typed fields. The data says
+that cannot work. Across the 20 lenders there are **828 info-rows carrying 627
+distinct labels, and 537 of those appear on exactly one lender.** Only 20 labels
+are shared by four or more lenders; exactly one (`Max Mileage`) by ten or more.
+There are also 79 tables. §1.3 read the problem as one of inconsistent naming.
+That is true for a handful — GAP, LTV, income — but roughly 86% of the content is
+genuinely bank-specific, and a fixed schema has nowhere to put it except a prose
+`notes` field, which is the HTML problem with extra steps.
+
+So v2 is **a typed core beside the existing detail, not instead of it**:
+
+- **Typed** — the values Gage compares across banks and the tools compute on.
+  Roughly a dozen fields. These get types, units, and conditions.
+- **Kept as-is** — `sections`, unchanged. Bank-specific detail, rate grids and
+  term matrices stay HTML and stay searchable. They are for reading, not
+  computing.
+- **Untouched** — `source`, which already does its job (§1.2). Written by
+  `sync.py freshness`, ISO-dated, never edited by hand.
+
+### 2.1 A limit is a number plus the condition it holds under
+
+The single most common shape in this data is not a number. It is a number that
+changes with the term, the state, or the program:
+
+- truist — 120,000 miles, but 50,000 on 76–84 month terms
+- ally — 150,000 miles, but 75,000 on 76–84 month terms
+- cps — 130% LTV, 140% on ICON+
+- truist — $1,200 GAP, but in Texas the lesser of $1,200 or 5% of amount financed
+
+Storing only the headline number makes the deal structurer overstate a bank on a
+long-term deal. Storing only the worst case makes it drop banks that would have
+bought. So every limit is:
 
 ```jsonc
 {
-  "id": "amcredit",
-  "name": "AmeriCredit",
-  "full_name": "AmeriCredit (GM Financial)",
-  "abbr": "GMF",
-  "color_class": "lc-amcredit",
-
-  "source": {
-    "doc_title": "Retail Underwriting Guidelines",
-    "effective_date": "2026-06-12",   // ISO. Required.
-    "drive_file_id": "",              // Google Drive file ID of the PDF
-    "verified_date": "2026-07-14",    // last time Gage confirmed against portal/PDF
-    "verified_by": "gage"
-  },
-
-  "segment": "near_prime",            // enum, see §3.1
-  "state_restriction": null,          // null | ["TX"]
-
-  "credit": {
-    "fico_min": 500,                  // number | null (null = no published floor)
-    "fico_basis": "tier",             // "score" | "tier" | "none"
-    "tiers": ["A+","A1","A2","A3","B1","B2","B3"],  // [] if score-based
-    "bureaus": { "primary": ["equifax","transunion","experian"], "state_map": {}, "note": "" },
-    "bk_ch7": "discharged",           // "discharged" | "considered" | "not_allowed" | null
-    "bk_ch13": "discharged",
-    "itin_accepted": true,
-    "min_age": 18,
-    "notes": ""
-  },
-
-  "income": {
-    "min_monthly": 2200,              // number | null
-    "min_monthly_joint": null,
-    "paystub_max_age_days": 45,
-    "self_employed_docs": "3 consecutive bank stmts ≤45 days, no NSF, ending bal ≥2× payment",
-    "gross_up_pct": 25,               // non-taxable income gross-up
-    "rideshare_income": false,        // eligible?
-    "min_job_time_months": null,
-    "notes": ""
-  },
-
-  "residency": {
-    "id_required": "Government-issued",
-    "por_docs": "Utility bill or paystub ≤45 days",
-    "por_max_age_days": 45,
-    "min_residence_months": 12,
-    "notes": ""
-  },
-
-  "terms": {
-    "max_term_months": 84,
-    "max_term_conditions": "84 only for B2+ on vehicles ≤4 yrs",
-    "min_amount_financed": 7500,
-    "max_amount_financed": null,
-    "ltv_front_max_pct": 125,         // front-end (before backend products)
-    "ltv_total_max_pct": 135,         // including backend
-    "ltv_basis": "JD Power / KBB by state",   // which book
-    "max_pti_pct": null,
-    "approval_expiry_days": 30,
-    "first_payment_window_days": [19, 47],
-    "notes": ""
-  },
-
-  "vehicle": {
-    "max_age_years": 9,
-    "max_mileage": 100000,            // number | null (null = no published max)
-    "new_definition": "Current/future year ≤7,500 mi",
-    "ineligible": ["commercial","livery","rideshare","exotic","motorcycle","rv","gray_market","branded_title"],
-    "notes": ""
-  },
-
-  "backend": {
-    "gap_max_usd": 1500,              // number | null
-    "gap_min_ltv_pct": 65,
-    "vsc_max_usd": null,
-    "total_backend_max_usd": null,
-    "total_backend_max_pct_of_book": null,
-    "notes": "GAP not allowed NY indirect; service contract counts toward advance"
-  },
-
-  "reserve": {
-    "structure": "participation",     // "participation" | "flat" | "both" | "none"
-    "max_participation_pct": 2,
-    "flat_usd": 200,
-    "split": "70/30",
-    "chargeback_window": "3 payments / 3 cycles",
-    "assignment_fee_usd": 150,
-    "rate_markup_allowed": true,
-    "notes": ""
-  },
-
-  "term_matrix": [                    // optional. Age × mileage → max term. Only if bank publishes one.
-    { "model_years": "2021-2026", "mileage_max": 59999, "max_term": 75 }
+  "value": 120000,          // number | null (null = not published)
+  "except": [               // [] when the limit is unconditional
+    { "when": { "term_months_gte": 76 }, "value": 50000 }
   ],
-
-  "unique_feature": "ITIN accepted; 70/30 split",
-  "free_notes": ""                    // anything that doesn't fit. Keep short.
+  "note": ""                // prose only for what the predicates cannot express
 }
 ```
 
-Anything a bank does not publish is `null`, never `""`, never `"N/A"`. Null means "not published", which is itself useful information.
+`when` uses a **closed vocabulary**, so the tools can evaluate it rather than
+display it. Adding a predicate is a schema change, deliberately:
+
+| predicate | value | means |
+|---|---|---|
+| `term_months_gte` / `_lte` | number | term at or beyond / within |
+| `amount_financed_gte` / `_lte` | number | deal size band |
+| `state` | `"TX"` | state-specific rule |
+| `program` | `"ICON+"` | named program or tier the bank publishes |
+| `vehicle_condition` | `"new"` \| `"used"` | |
+
+A condition the vocabulary cannot express sets `value: null` on the exception and
+explains it in `note` — the tools then treat that case as *unknown*, never as
+*allowed*. Unknown is the safe default: it makes the tool say "check the sheet"
+rather than quote a limit it cannot stand behind.
+
+### 2.2 The typed core
+
+```jsonc
+{
+  "id": "truist",
+  "segment": "prime",                 // enum, §3.1
+
+  "credit": {
+    "fico_min":   { "value": 620, "except": [], "note": "" },
+    "fico_basis": "score",            // "score" | "tier" | "none"
+    "tiers": []                       // [] when score-based
+  },
+
+  "limits": {
+    "max_term_months":   { "value": 84,     "except": [], "note": "" },
+    "max_mileage":       { "value": 120000, "except": [
+                             { "when": { "term_months_gte": 76 }, "value": 50000 } ] },
+    "max_vehicle_age_yr":{ "value": 9,      "except": [], "note": "" },
+    "ltv_front_max_pct": { "value": null,   "except": [], "note": "" },
+    "ltv_total_max_pct": { "value": 155,    "except": [], "note": "" },
+    "min_amount_financed": { "value": 7500, "except": [], "note": "" },
+    "max_amount_financed": { "value": null, "except": [], "note": "" },
+    "gap_max_usd":       { "value": 1200,   "except": [
+                             { "when": { "state": "TX" }, "value": null,
+                               "note": "lesser of $1,200 or 5% of amount financed" } ] }
+  },
+
+  "rates": {
+    "basis": "none",                  // "grid" | "floor" | "none"
+    "floor_apr_pct": null,            // lowest published buy rate
+    "ceiling_apr_pct": null,          // usury or program cap
+    "grid_section": null,             // key into sections.* holding the full grid
+    "note": ""
+  }
+}
+```
+
+Everything else — bureaus, income, residency, reserve, backend detail, vehicle
+ineligibility lists, term matrices — stays where it is today, in `sections`.
+
+### 2.3 Rates: eligibility first, rate as a tiebreaker
+
+**Decided 2026-08-28.** Only two of the twenty lenders publish a rate grid
+(`regional`, 112 cells; `kia`, 264 tier rows). One publishes a buy-rate/flat
+table (`bofa`). About six publish a floor or a usury cap and nothing else. About
+six publish no rate figures at all — `amcredit`, `wellsfargo`, `usbank`,
+`flagship`, plus `fifththird` (its "rate sheet" is a dealer reserve schedule) and
+`santander` (buydown rule only).
+
+The structurer therefore ranks on **whether the bank buys the deal** — FICO, LTV,
+term, mileage, vehicle age, amount financed, each evaluated with its conditions.
+Every lender publishes that. `rates.floor_apr_pct` breaks ties where it exists,
+and where it does not the lender shows **"no published rate"** rather than an
+assumed one. The hardcoded `prime 6% · near 9% · sub 14% · deep 20%` the current
+structurer prices with is removed, not replaced: a made-up number sitting beside
+real ones on a live deal is the failure mode this whole file exists to prevent.
+
+`basis: "grid"` points at the section holding the grid so the UI can link to it.
+Reading a grid is a human job; the schema does not model its axes.
+
+### 2.4 Nulls
+
+`null` means **the bank does not publish this**, which is information. Never `""`,
+never `"N/A"`, never a zero standing in for absent. A tool that meets `null` says
+so; it never treats it as unlimited or as zero.
 
 ---
 
@@ -192,44 +214,94 @@ Anything a bank does not publish is `null`, never `""`, never `"N/A"`. Null mean
 Map from today's labels: "Prime+" → prime_plus; "All Tiers (0–9)" → full_spectrum.
 
 ### 3.2 LTV
-Always store two numbers: `ltv_front_max_pct` and `ltv_total_max_pct`. If the bank publishes one number and doesn't say which, store it as `ltv_total_max_pct` and note the ambiguity in `terms.notes`. Ranges ("150–175%") → store the max and put the condition in notes.
+Two separate fields, `ltv_front_max_pct` and `ltv_total_max_pct`. **Neither is a default for the other.**
+
+Checked 2026-08-28: of the 20 stored records, 6 distinguish front-end from total, 5 give front only, 1 total only, and **8 do not say which their number is** — the information is not in the record, so it has to come from the PDF. The earlier rule here said to assume the ambiguous ones were total. That assumption feeds the LTV calculator and the structurer's ranking, and being wrong by 10–20 points of advance on a live deal is exactly the harm this file exists to prevent. So an unadjudicated number stays `null` in both fields until someone reads the sheet.
+
+Ranges (`150–175%`) are not a single number: store the base in `value` and the upper figure as an `except` with the condition that unlocks it. Where the condition is not known, store the lower number — understating an advance costs a resubmit, overstating costs a funding decline.
 
 ### 3.3 Dates
 ISO `YYYY-MM-DD` only. If a PDF says "July 2026", use the first of the month and note it. If a lender has two dates (base guide + supplemental bulletin), `effective_date` is the newer one; list the other in `source.notes`.
 
-### 3.4 Verified vs effective
-- `effective_date` = what the bank's document says.
-- `verified_date` = when Gage last confirmed the record matches the bank's current portal/sheet.
-A record with `verified_date` older than 60 days shows as stale in the UI. (Currently tracked in Supabase `lender_updates`; move to the record.)
+### 3.4 Freshness comes from the document, not from a person
+**Rewritten 2026-08-28.** This section used to define a `verified_date` — when Gage
+last confirmed a record against the bank's portal — tracked in Supabase
+`lender_updates`. That feature was deleted on 2026-08-25, the Supabase project is
+empty, and spec #4 replaced the idea outright: freshness is a property of the
+source PDF, because a date nobody has to remember to click cannot go stale through
+forgetfulness.
+
+There is one date, `source.date`, ISO, written by `sync.py freshness` from the
+authority document. The page subtracts it from today at render — green under 90
+days, amber past 90, red past a year. Age is never stored. `source.warning` covers
+the one case a date gets wrong: a document that is current while its *contents* have
+expired.
+
+**Do not reintroduce `verified_date` or `verified_by` into the schema.** They are
+listed here only so the next reader knows they were considered and removed.
 
 ### 3.5 Changing a value
 Every change to a program value requires: source PDF (Drive file ID) + effective date. No "I heard from the rep" edits without a note saying so.
 
 ---
 
-## 4. Migration from current `LENDERS` → v2
+## 4. Migration to the v2 core
 
-| Today | v2 | Transform |
+Not a rewrite. The typed core is **added beside** the current record; `sections`
+and `source` are untouched, so nothing that renders today stops rendering.
+
+| Today | v2 core | Transform |
 |---|---|---|
-| `effectiveDate` | `source.effective_date` | normalize to ISO; see §3.3 |
-| `segmentLabel` | `segment` | enum map §3.1 |
-| `ficoMin` | `credit.fico_min` + `credit.fico_basis` | null → fico_basis "tier" if ficoNotes mentions tiers, else "none" |
-| `maxTerm` | `terms.max_term_months` | as-is |
-| `maxMileage` | `vehicle.max_mileage` | parse number; "No max"/"N/A" → null |
-| `maxLTV` | `terms.ltv_front_max_pct` / `ltv_total_max_pct` | parse; see §3.2 |
-| `gapMax` | `backend.gap_max_usd` | parse; non-numeric → null + note |
-| `reserveStructure`, `chargebackWindow` | `reserve.*` | extract numbers; rest → notes |
-| `idReq`, `por`, `poi` | `residency.*`, `income.*` | extract numbers (days, $/mo); rest → notes |
-| `sections.*.content` (HTML) | all structured fields | **manual extraction, one lender at a time, against the source PDF.** Do not regex the HTML. |
-| `stateRestriction` | `state_restriction` | "Texas Only" → ["TX"] |
-| `uniqueFeature` | `unique_feature` | as-is |
+| `ficoMin` + `ficoNotes` | `credit.fico_min`, `credit.fico_basis`, `credit.tiers` | numeric in 10/20 already. `null` → basis `tier` where `ficoNotes` names tiers, else `none` |
+| `maxTerm` | `limits.max_term_months` | 19/20 parse as-is |
+| `maxMileage` | `limits.max_mileage` | 19/20 parse to a number; **6 carry a condition** (truist, ally, cps, flagship, westlake, kia) that becomes an `except` |
+| `maxLTV` | `limits.ltv_front_max_pct` / `ltv_total_max_pct` | 16/20 parse as a number, but **8 records cannot say front or total** — those stay `null` pending a PDF read. See §3.2 |
+| `gapMax` | `limits.gap_max_usd` | **only 9/20 are a bare figure.** 11 carry state, program, or size-band conditions |
+| `segment` / `segmentLabel` | `segment` | enum map, §3.1 |
+| rate figures in `sections` | `rates.*` | floor and ceiling by hand from the sheet; `basis: "grid"` for `regional` and `kia`, pointing at the section |
+| everything else in `sections` | — | **stays.** 537 of 627 labels are single-lender; there is nothing to migrate them into |
 
-Migration order: pick one sub-prime and one prime lender first (e.g. `exeter`, `chase`), migrate by hand, confirm the UI can render from v2, then do the rest. The detail page renders from structured fields; the HTML `sections` go away.
+### 4.1 What is parsing and what needs a person
+
+Parsing gets the number. It cannot get the two things that matter most:
+
+- **Whether an LTV is front-end or total.** 8 lenders. Requires the PDF.
+- **The condition attached to a limit.** ~17 across the four fields. The
+  condition is usually stated in the record's prose, but turning it into a
+  predicate is a reading job, not a regex.
+
+So the order is: parse what parses, leave the rest `null`, and fill the gaps
+lender by lender against the source PDFs — through `sync.py`'s gate like any other
+value change, citing Drive file ID and page (§3.5). A parsed value is not a
+verified one; a wrong number that looks confident is worse than a `null`.
+
+### 4.2 Order
+
+`truist` and `cps` first — between them they carry a term-conditioned mileage cap,
+a state-conditioned GAP rule, a program-conditioned LTV, and an unadjudicated
+front/total. If the shape in §2.1 holds for those two it holds for the other 18.
+Then wire the LTV calculator and the deal structurer to read the typed fields
+instead of parsing `maxLTV` strings, and only then do the remaining lenders.
 
 ---
 
 ## 5. Open questions
 
-- Does the compare table need every v2 field, or a curated column set with "show all" toggle? (Gage: "I use everything.")
-- `term_matrix` exists for AmeriCredit; how many other lenders publish one?
-- ~~Store in Supabase JSONB or keep as a `lenders.json` in the repo?~~ **Settled 2026-08-26: `lenders.json` in the repo.** Git is the history and the diff. Supabase stays off the table unless an approval UI needs it — and there is no Supabase project any more, so that would be a fresh decision. The move was storage only: the v2 schema in §2 is still unbuilt, and `lenders.json` currently holds the v1 shape verbatim.
+- **How does the compare surface use the typed core?** Pick-your-columns (#8) was
+  specified against a compare table that was deleted on 2026-08-27, so the surface
+  is an open design question before it is a schema one. The typed core is what any
+  such surface would need either way.
+- **Do `sections` and the typed core drift?** Once `limits.max_mileage` is typed and
+  `sections.vehicles` still says "120,000 mi" in prose, there are two copies of one
+  fact. Options: render the prose row from the typed value, drop the duplicated
+  rows, or accept the drift and check it in the sync. Not urgent until the core is
+  populated, but it does not fix itself.
+- **`term_matrix`.** `amcredit`, `exeter` and `truist` publish age × mileage → term
+  grids. They stay in `sections` under the current decision. If the structurer
+  should rank on them, they need a typed shape of their own.
+- ~~Supabase JSONB or `lenders.json` in the repo?~~ **Settled 2026-08-26:
+  `lenders.json`.** Git is the history and the diff. There is no Supabase project
+  any more, so returning to one would be a fresh decision.
+- ~~Does the compare table need every v2 field or a curated set?~~ Superseded: the
+  table no longer exists, and the typed core is deliberately small enough that
+  "all of it" is a reasonable default.
