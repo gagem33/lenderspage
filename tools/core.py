@@ -255,6 +255,15 @@ CASES = [
     ('capitalone', 'max_term_months', {}, 84),
     ('td', 'max_term_months', {}, 72),      # unresolved 84 must not apply on its own
     ('kia', 'max_mileage', {}, None),       # sheet says N/A - stays unknown
+
+    # --- corrections found by rendering the cards from the core, 2026-08-28 ---
+    # ally's 620 is the prime threshold; the same sheet buys non-prime below it
+    ('ally', 'fico_min', {}, 520),
+    ('ally', 'fico_min', {'program': 'Prime'}, 620),
+    ('ally', 'gap_max_usd', {}, 1500),
+    ('ally', 'gap_max_usd', {'book_value': 90000}, 2000),
+    ('westlake', 'fico_min', {}, None),     # 700 was a rate band, not a floor
+    ('td', 'gap_max_usd', {}, 1500),
 ]
 
 

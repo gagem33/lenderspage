@@ -1001,9 +1001,9 @@
           "note": "Front-end amount financed per transaction; $300,000 per customer."
         },
         "gap_max_usd": {
-          "value": null,
+          "value": 1500,
           "except": [],
-          "note": "Needs front-end LTV >= 70%; dollar cap not on this sheet."
+          "note": "Needs front-end LTV of 70% or more. Carried forward from the 2026-08-26 corpus sweep, which read this lender's PDF at 300 dpi. Not re-read for the typed core, so it has no page cite of its own."
         }
       },
       "rates": {
@@ -1258,9 +1258,17 @@
       },
       "credit": {
         "fico_min": {
-          "value": 620,
-          "except": [],
-          "note": "620 for EDC/AWV under $100K, 680 at or above (prime). Non-prime under 620 with AWV under $100K."
+          "value": 520,
+          "except": [
+            {
+              "when": {
+                "program": "Prime"
+              },
+              "value": 620,
+              "note": "Prime needs 620 for EDC/AWV under $100K, 680 at or above."
+            }
+          ],
+          "note": "The sheet's 620/680 are the *prime* thresholds; it buys non-prime below 620 (non-commercial, AWV under $100K), so neither is a floor. 520 carried forward from the 2026-08-26 corpus sweep, which read this lender's pdf at 300 dpi. not re-read for the typed core, so it has no page cite of its own."
         },
         "fico_basis": "tier",
         "tiers": [
@@ -1382,9 +1390,16 @@
           "note": "Not published."
         },
         "gap_max_usd": {
-          "value": null,
-          "except": [],
-          "note": "Not published."
+          "value": 1500,
+          "except": [
+            {
+              "when": {
+                "book_value_gte": 80000
+              },
+              "value": 2000
+            }
+          ],
+          "note": "$1,500 under $80K EDC/AWV, $2,000 at or above. Carried forward from the 2026-08-26 corpus sweep, which read this lender's PDF at 300 dpi. Not re-read for the typed core, so it has no page cite of its own."
         }
       },
       "rates": {
@@ -1950,9 +1965,9 @@
       },
       "credit": {
         "fico_min": {
-          "value": 700,
+          "value": null,
           "except": [],
-          "note": "Rate grid starts at 700-724."
+          "note": "The Prime sheet's rate grid starts at 700-724, but that is the lowest *priced* band, not a published minimum. No floor is stated."
         },
         "fico_basis": "score",
         "tiers": []
