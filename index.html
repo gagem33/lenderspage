@@ -30,8 +30,7 @@
   --gold2:     #BE8C39;
   --golddim:   rgba(212,162,76,0.14);
   --golddim2:  rgba(212,162,76,0.26);
-  --gold-grad: linear-gradient(135deg, #D4A24C, #BE8C39);
-
+  
   --green:     #58B389;
   --greendim:  rgba(88,179,137,0.15);
   --red:       #DC7C64;
@@ -48,8 +47,7 @@
   --r-xl:   8px;
   --r-full: 9999px;
 
-  --sidebar: 248px;
-  --header:  58px;
+    --header:  58px;
 
   --shadow-md: 0 1px 2px rgba(0,0,0,.18), 0 6px 20px rgba(0,0,0,.22);
   --shadow-lg: 0 8px 28px rgba(0,0,0,.35), 0 28px 80px rgba(0,0,0,.45);
@@ -70,8 +68,7 @@
   --gold2:    #6E4709;
   --golddim:  rgba(138,90,16,0.10);
   --golddim2: rgba(138,90,16,0.22);
-  --gold-grad: linear-gradient(135deg, #8A5A10, #6E4709);
-  --green:    #1F7A52;
+    --green:    #1F7A52;
   --greendim: rgba(31,122,82,0.12);
   --red:      #B24427;
   --reddim:   rgba(178,68,39,0.11);
@@ -137,23 +134,6 @@ ul, ol { list-style: none; }
 .logo-text { font-size: 1rem; font-weight: 800; letter-spacing: -.03em; line-height: 1; }
 .logo-sub { font-size: .65rem; color: var(--text3); text-transform: uppercase; letter-spacing: .08em; }
 
-.header-search {
-  flex: 1; max-width: 380px; margin: 0 auto; position: relative;
-}
-.header-search input {
-  width: 100%; height: 34px;
-  background: var(--bg3);
-  border: 1px solid var(--border);
-  border-radius: var(--r-full);
-  padding: 0 14px 0 34px;
-  color: var(--text);
-  font-size: .825rem;
-  transition: border-color .15s, box-shadow .15s;
-}
-.header-search input::placeholder { color: var(--text3); }
-.header-search input:focus { outline: none; border-color: var(--gold); box-shadow: 0 0 0 3px var(--golddim); }
-.search-icon { position: absolute; left: 10px; top: 50%; transform: translateY(-50%); color: var(--text3); pointer-events: none; }
-
 .header-actions { display: flex; align-items: center; gap: 6px; margin-left: auto; flex-shrink: 0; }
 
 .btn-tool {
@@ -207,7 +187,6 @@ ul, ol { list-style: none; }
   min-height: calc(100vh - var(--header));
   padding: 28px 28px 80px;
 }
-
 
 /* ── LENDER CARDS ─────────────────────────────
    The whole book is one list. A card opens where it sits and its sections switch
@@ -355,47 +334,6 @@ footer {
 .page-subtitle { font-size: .9rem; color: var(--text2); margin-top: 6px; }
 .page-date { font-size: .72rem; color: var(--text3); margin-top: 3px; }
 
-.compare-wrap {
-  overflow-x: auto;
-  border-radius: var(--r-lg);
-  border: 1px solid var(--border);
-  box-shadow: var(--shadow-md);
-  background: var(--bg2);
-}
-.compare-table { min-width: 860px; }
-.compare-table thead tr { background: var(--surface); }
-.compare-table th {
-  font-size: .64rem; font-weight: 700; color: var(--text3);
-  text-transform: uppercase; letter-spacing: .1em;
-  padding: 12px 16px; text-align: left; white-space: nowrap;
-  border-bottom: 1px solid var(--border2);
-  position: sticky; top: 0; background: var(--surface); z-index: 2;
-}
-.compare-table th:first-child { min-width: 175px; }
-.compare-table td {
-  padding: 12px 16px; font-size: .825rem; color: var(--text);
-  border-bottom: 1px solid var(--border); vertical-align: middle;
-}
-.compare-table tr:last-child td { border-bottom: none; }
-.compare-table tbody tr { background: transparent; transition: background .12s; cursor: pointer; }
-.compare-table tbody tr:nth-child(even) { background: rgba(148,163,210,.025); }
-.compare-table tbody tr:hover { background: var(--golddim); box-shadow: inset 3px 0 0 var(--gold); }
-
-.lender-name-cell { font-weight: 700; }
-.lender-name-cell small { display: block; font-weight: 400; color: var(--text3); font-size: .72rem; margin-top: 1px; }
-
-.fico-chip {
-  display: inline-flex; align-items: center;
-  background: var(--surface2); border: none;
-  border-radius: var(--r-sm); padding: 3px 9px;
-  font-size: .72rem; font-weight: 700; white-space: nowrap;
-  font-family: var(--mono);
-}
-.fico-chip.green { color: var(--green); background: var(--greendim); }
-.fico-chip.blue  { color: var(--blue);  background: var(--bluedim); }
-.fico-chip.amber { color: var(--gold);  background: var(--golddim); }
-.fico-chip.red   { color: var(--red);   background: var(--reddim); }
-
 .chip {
   display: inline-flex; align-items: center;
   padding: 3px 10px; border-radius: var(--r-full);
@@ -407,22 +345,8 @@ footer {
 .chip.amber { background: var(--golddim);  color: var(--gold); }
 .chip.red   { background: var(--reddim);   color: var(--red); }
 
-.cb-badge {
-  display: inline-flex; align-items: center; gap: 4px;
-  padding: 3px 10px; border-radius: var(--r-full);
-  font-size: .7rem; font-weight: 700;
-  background: var(--reddim); border: none; color: var(--red);
-}
-.cb-badge.none { background: var(--greendim); color: var(--green); }
-
 /* Freshness pip — sidebar only, and only when a lender wants a look. A dot on
    every row would be wallpaper; a dot on four rows is a signal. */
-.fresh-pip {
-  width: 6px; height: 6px; border-radius: var(--r-full);
-  flex: 0 0 auto; margin-right: 2px;
-}
-.fresh-pip.amber { background: var(--gold); }
-.fresh-pip.red   { background: var(--red); }
 /* "147d old" is one fact and must read as one. Left to wrap it breaks after the
    number, which is exactly the half you skim for. */
 .chip.fresh { white-space: nowrap; }
@@ -476,93 +400,6 @@ footer {
 /* ═══════════════════════════════════════════════
    LENDER DETAIL
 ═══════════════════════════════════════════════ */
-.lender-hero {
-  display: flex; align-items: flex-start; gap: 20px;
-  padding: 24px;
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: var(--r-xl);
-  margin-bottom: 20px;
-  position: relative; overflow: hidden;
-}
-.lender-hero::before {
-  content: ''; position: absolute; inset: 0 0 auto 0; height: 3px;
-  background: var(--gold);
-}
-.lender-icon {
-  width: 54px; height: 54px;
-  border-radius: var(--r-lg);
-  display: flex; align-items: center; justify-content: center;
-  font-size: 1rem; font-weight: 900; flex-shrink: 0;
-  color: #fff; letter-spacing: -.03em;
-  box-shadow: 0 4px 14px rgba(0,0,0,.35), inset 0 1px 0 rgba(255,255,255,.2);
-}
-.lender-hero-info { flex: 1; min-width: 0; }
-.lender-hero-info h1 { font-size: 1.5rem; font-weight: 800; letter-spacing: -.04em; margin-bottom: 4px; }
-.doc-meta { font-size: .72rem; color: var(--text3); }
-.hero-chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
-
-.stat-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-  gap: 10px; margin-bottom: 20px;
-}
-.stat-card {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: var(--r-lg);
-  padding: 14px 16px;
-  transition: border-color .18s;
-}
-.stat-card:hover { border-color: var(--golddim2); }
-.stat-label { font-size: .65rem; font-weight: 700; color: var(--text3); text-transform: uppercase; letter-spacing: .08em; margin-bottom: 4px; }
-.stat-value { font-size: 1.1rem; font-weight: 800; color: var(--text); letter-spacing: -.03em; line-height: 1.1; }
-.stat-value.gold  { color: var(--gold); }
-.stat-value.green { color: var(--green); }
-.stat-value.blue  { color: var(--blue); }
-.stat-sub { font-size: .65rem; color: var(--text3); margin-top: 2px; }
-
-.detail-section {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: var(--r-lg);
-  margin-bottom: 12px;
-  overflow: hidden;
-  transition: border-color .18s;
-}
-.detail-section:hover { border-color: var(--border2); }
-.detail-section-header {
-  display: flex; align-items: center; gap: 10px;
-  padding: 14px 18px;
-  border-bottom: 1px solid var(--border);
-  cursor: pointer; user-select: none;
-  transition: background .12s, border-color .18s;
-}
-.detail-section-header:hover { background: var(--bg3); }
-.detail-section-header:focus-visible { outline: 2px solid var(--gold); outline-offset: -2px; }
-.detail-section-header h3 { font-size: .9rem; font-weight: 700; flex: 1; }
-.section-icon {
-  width: 30px; height: 30px;
-  border-radius: var(--r-sm);
-  background: var(--golddim);
-  border: 1px solid var(--golddim2);
-  display: flex; align-items: center; justify-content: center;
-  color: var(--gold); flex-shrink: 0; font-size: .9rem;
-}
-.chevron { color: var(--text3); transition: transform .18s; }
-.detail-section.collapsed .detail-section-header { border-bottom-color: transparent; }
-.detail-section.collapsed .chevron { transform: rotate(-90deg); }
-.detail-section-wrap { display: grid; grid-template-rows: 1fr; transition: grid-template-rows .2s ease; }
-.detail-section.collapsed .detail-section-wrap { grid-template-rows: 0fr; }
-.detail-section-clip { overflow: hidden; min-height: 0; }
-.detail-section-body { padding: 18px 20px; }
-@media (prefers-reduced-motion: reduce) { .detail-section-wrap { transition: none; } }
-
-.section-toolbar { display: flex; align-items: center; gap: 8px; margin: 2px 0 12px; }
-.section-toolbar .sec-count {
-  font-size: .68rem; font-weight: 700; color: var(--text3);
-  text-transform: uppercase; letter-spacing: .07em; margin-left: auto;
-}
 
 .info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px 22px; }
 .info-row { display: flex; flex-direction: column; gap: 2px; padding: 7px 0; border-bottom: 1px solid var(--border); }
@@ -814,53 +651,25 @@ kbd {
 .kfa-prog-panel.active { display: block; }
 .kfa-prog-section { margin-bottom: 14px; background: var(--bg3); border: 1px solid var(--border2); border-radius: var(--r-md); padding: 10px 14px; }
 .kfa-prog-label { font-size: .72rem; font-weight: 700; color: var(--text); margin-bottom: 5px; display: flex; align-items: center; flex-wrap: wrap; gap: 5px; }
-.kfa-prog-note { font-size: .72rem; color: var(--text3); margin-bottom: 7px; }
 .kfa-badge { font-size: .6rem; font-weight: 800; text-transform: uppercase; letter-spacing: .05em; border-radius: 4px; padding: 1px 7px; }
 .kfa-badge.k500 { background: var(--bluedim); color: var(--blue); border: none; }
 .kfa-badge.k506 { background: var(--golddim); color: var(--gold); border: 1px solid var(--gold); }
-.kfa-badge.k502 { background: var(--greendim); color: var(--green); border: none; }
 .kfa-my { font-size: .6rem; font-weight: 700; color: var(--text3); background: var(--bg2); border-radius: 4px; padding: 1px 7px; }
 
 /* MOBILE MENU */
-#menu-toggle {
-  display: none; align-items: center; justify-content: center;
-  width: 32px; height: 32px;
-  border-radius: var(--r-md);
-  border: 1px solid var(--border);
-  background: var(--bg3); color: var(--text2);
-}
-#sidebar-overlay {
-  display: none; position: fixed; inset: 0;
-  background: rgba(0,0,0,.6); z-index: 150;
-  backdrop-filter: blur(2px);
-}
-#sidebar-overlay.active { display: block; }
 
 /* PROG TABS */
-.prog-tabs { display: flex; gap: 4px; background: var(--bg3); padding: 4px; border-radius: var(--r-md); margin-bottom: 16px; width: fit-content; }
-.prog-tab { padding: 5px 13px; border-radius: calc(var(--r-md) - 2px); font-size: .72rem; font-weight: 600; color: var(--text3); cursor: pointer; transition: all .15s; }
-.prog-tab.active { background: var(--surface); color: var(--gold); box-shadow: var(--shadow-md); }
 
 /* RESPONSIVE */
 @media (max-width: 900px) {
-  :root { --sidebar: 0px; }
-  #sidebar { transform: translateX(-100%); width: 260px; z-index: 200; box-shadow: var(--shadow-lg); }
-  #sidebar.open { transform: translateX(0); }
   #main { padding: 14px 12px 70px; }
   footer { margin-left: 0; }
-  #menu-toggle { display: flex; }
-  .stat-grid { grid-template-columns: repeat(2,1fr); }
   .info-grid  { grid-template-columns: 1fr; }
-  .lender-hero { flex-direction: column; gap: 14px; }
-  .compare-wrap { border-radius: var(--r-md); }
   .diff-grid { grid-template-columns: repeat(2,1fr); }
 }
 @media (max-width: 480px) {
-  .stat-grid { grid-template-columns: repeat(2,1fr); }
-  .header-search { max-width: 160px; }
   .page-title { font-size: 1.4rem; }
   .diff-grid { grid-template-columns: 1fr; }
-  .header-search { display: none; }
 }
 
 /* LENDER COLOR ICONS */
@@ -884,7 +693,6 @@ kbd {
 .lc-cps       { background: linear-gradient(135deg,#0f766e,#14b8a6); }
 .lc-usbank    { background: linear-gradient(135deg,#1d3a8a,#2854c5); }
 .lc-santander { background: linear-gradient(135deg,#ec0000,#b30000); }
-
 
 </style>
 </head>
