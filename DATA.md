@@ -133,6 +133,12 @@ display it. Adding a predicate is a schema change, deliberately:
 | `program` | `"ICON+"` | named program or tier the bank publishes |
 | `vehicle_condition` | `"new"` \| `"used"` | |
 | `tier` | `"T1 (A1)"` | the bank's own tier label, verbatim from its sheet |
+| `book_value_gte` / `_lte` | number | collateral value band |
+| `mileage_gte` / `_lte` | number | odometer band |
+
+`book_value` and `mileage` were added 2026-08-28 with the remaining 18: capitalone
+keys its LTV to **book value** (150% at or above $10K, 175% below) rather than
+amount financed, and amcredit's 135% needs a used vehicle **under 50,000 miles**.
 
 Added `tier` on 2026-08-28, when truist turned out to publish LTV as a **48-cell
 grid** — 6 tiers × 2 term bands × {front LTV, total LTV, DTI, PTI}. Term alone
@@ -322,7 +328,31 @@ What reading the two sheets changed, beyond typing what was already stored:
 - **cps never defines "extended term"**, so the 130% carries `unresolved` and
   the base stays 115%.
 
-Then the remaining 18, in whatever order their PDFs get read.
+**All 20 typed 2026-08-28.** 78 resolution cases, matched between `core.py` and
+the browser. What reading the other 18 sheets turned up:
+
+- **The floor-vs-headline problem is not unique to truist.** `dfc` publishes a
+  13-tier × new/used grid and the card shows its best cell (135%); `pnc`, `regional`,
+  `ally` and `capitalone` all do the same thing in different shapes.
+- **`regional`'s 125% is a front-end cap, and it publishes no total at all.** Its
+  own sheet defines total as front-end advance + tax, tag, license, doc, warranty
+  and GAP — with no percentage limit on the result. The LTV calculator had been
+  comparing a total-LTV number against it.
+- **Five lenders drop a limit at 76+ months** and the card shows only the low-term
+  figure: `usbank` 145%→120%, `wellsfargo` 135%→120%, `bofa` 145%→125% (and age
+  10yr→4yr, min financed $7,500→$25,000), `santander` 145%→120% (and mileage
+  150,000→60,000, age 12yr→5yr), `truist` 155%→140%.
+- **Three records' LTV is not in the document their `source` block names.**
+  `ally`'s points at the 84-month sheet (ceiling 135%, not the 140% shown), `td`'s
+  at a documentation guide with no LTV in it, `kia`'s at an APR-only bulletin. All
+  three are sourced from the correct sibling file, recorded in `provenance.note`.
+  `core.py validate` warns on the date divergence rather than hiding it.
+- **`westlake`'s Prime sheet publishes no total LTV**, so the card's
+  "140–150% incl. backend" is unsupported by it. Left `null`. This is entangled
+  with the open question of whether the Prime or Independent Dealer sheet applies.
+- **A text layer without its heading lies.** AmeriCredit's "A Tiers – Maximum LTV
+  125%" sits under a **Canadian Vehicles** heading; taken at face value it would
+  have capped the bank 10 points low. Rendering the page is what caught it.
 
 *(Original plan:)* `truist` and `cps` first — between them they carry a term-conditioned mileage cap,
 a state-conditioned GAP rule, a program-conditioned LTV, and an unadjudicated

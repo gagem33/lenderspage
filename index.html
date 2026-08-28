@@ -1186,14 +1186,20 @@ function closeCards() { openLender = null; renderCards(); }
 // their v1 strings, which is why every read goes through lenderLimit().
 // This mirrors resolve() in tools/core.py — `core.py selftest` runs the same
 // cases, so if you change one, change both.
-const NUMERIC_PRED = ['term_months_gte','term_months_lte','amount_financed_gte','amount_financed_lte'];
+// predicate -> the deal field it reads. Mirrors NUMERIC in tools/core.py.
+const NUMERIC_PRED = {
+  term_months_gte:'term_months', term_months_lte:'term_months',
+  amount_financed_gte:'amount_financed', amount_financed_lte:'amount_financed',
+  book_value_gte:'book_value', book_value_lte:'book_value',
+  mileage_gte:'mileage', mileage_lte:'mileage',
+};
 
 function matchWhen(when, deal) {
   // A predicate the deal can't answer does NOT hold, so an unknown deal keeps
   // the base value instead of inheriting a better one it may not qualify for.
   for (const [k, want] of Object.entries(when || {})) {
-    if (NUMERIC_PRED.includes(k)) {
-      const got = k.startsWith('term') ? deal.term_months : deal.amount_financed;
+    if (k in NUMERIC_PRED) {
+      const got = deal[NUMERIC_PRED[k]];
       if (got == null) return false;
       if (k.endsWith('_gte') && got < want) return false;
       if (k.endsWith('_lte') && got > want) return false;
@@ -1699,15 +1705,25 @@ function initLTVCalc() {
     const ltvColor=ltv<=110?'var(--green)':ltv<=130?'var(--gold)':ltv<=150?'#f97316':'var(--red)';
     $('#ltv-summary').innerHTML=`<div class="ltv-summary-box" style="border-color:${ltvColor}"><div class="ltv-summary-stat"><div class="ltv-summary-label">Book Value</div><div class="ltv-summary-val">$${book.toLocaleString()}</div></div><div class="ltv-summary-stat"><div class="ltv-summary-label">Amt Financed</div><div class="ltv-summary-val">$${fin.toLocaleString()}</div></div><div class="ltv-summary-stat"><div class="ltv-summary-label">Actual LTV</div><div class="ltv-summary-val" style="color:${ltvColor}">${ltv.toFixed(1)}%</div></div></div>`;
     const list=$('#ltv-lender-results'); list.innerHTML='';
-    const pass=[],fail=[],unknown=[];
+    // Three outcomes, not two. The base value is a floor (DATA.md §2.1), so a
+    // deal above the floor but under the grid's ceiling is not "over cap" -- it
+    // is "over cap unless the tier is right", which is a different sentence to
+    // say to a customer.
+    const pass=[],maybe=[],fail=[],unknown=[];
     // The calculator divides amount financed by book, so backend is already in
     // the number -- the comparable cap is TOTAL LTV, not front-end.
+    const ltvDeal={book_value:book||null};
     LENDERS.forEach(l => {
-      const r=lenderLimit(l,'ltv_total_max_pct',{});
+      const r=lenderLimit(l,'ltv_total_max_pct',ltvDeal);
       if (r.value==null) { unknown.push({l,r}); return; }
-      (ltv<=r.value?pass:fail).push({l,cap:r.value,r});
+      const top=limitCeiling(l,'ltv_total_max_pct') ?? r.value;
+      if (ltv<=r.value) pass.push({l,cap:r.value,r});
+      else if (ltv<=top) maybe.push({l,cap:r.value,r,top});
+      else fail.push({l,cap:r.value,r});
     });
     if (pass.length){const h=document.createElement('div');h.className='bureau-section-label pass';h.textContent=`✅ Eligible (${pass.length} lenders)`;list.appendChild(h);pass.forEach(({l,cap,r})=>list.appendChild(buildLTVCard(l,ltv,cap,true,r)));}
+    if (maybe.length){const h=document.createElement('div');h.className='bureau-section-label warn';h.style.marginTop='12px';h.textContent=`⚠️ Depends on tier or term (${maybe.length})`;list.appendChild(h);
+      maybe.forEach(({l,cap,r,top})=>list.appendChild(buildLTVCard(l,ltv,top,'maybe',r,cap)));}
     if (fail.length){const h=document.createElement('div');h.className='bureau-section-label fail';h.style.marginTop='12px';h.textContent=`❌ Over LTV Cap (${fail.length} lenders)`;list.appendChild(h);fail.forEach(({l,cap,r})=>list.appendChild(buildLTVCard(l,ltv,cap,false,r)));}
     // A lender whose sheet never says front or total is not a pass and not a
     // fail -- it is a question. DATA.md §3.2.
@@ -1721,11 +1737,15 @@ function initLTVCalc() {
   ['ltv-book','ltv-financed'].forEach(id=>$(`#${id}`)?.addEventListener('keydown',e=>{if(e.key==='Enter')$('#ltv-calc-run')?.click();}));
 }
 
-function buildLTVCard(l,ltv,cap,ok,r) {
+function buildLTVCard(l,ltv,cap,ok,r,floorCap) {
   const card=document.createElement('div');
-  const headroom=cap-ltv, barW=Math.min(100,(ltv/cap)*100), barC=ok?(headroom>20?'var(--green)':'var(--gold)'):'var(--red)';
-  card.style.cssText=`background:var(--bg3);border:1px solid ${ok?'var(--green)':'var(--border2)'};border-radius:var(--r-md);padding:10px 14px;cursor:pointer;`;
-  card.innerHTML=`<div style="display:flex;align-items:center;gap:7px;margin-bottom:5px;flex-wrap:wrap"><span class="lender-badge ${segBadge(l.segment)}" style="font-size:.6rem">${l.segmentLabel}</span><span style="font-weight:700;font-size:.825rem">${l.name}</span><span style="margin-left:auto;font-size:.72rem;color:var(--text3)">Cap: <strong style="color:var(--text)">${cap}%</strong></span></div><div style="background:var(--bg2);border-radius:4px;height:5px;overflow:hidden"><div style="height:100%;width:${barW}%;background:${barC};border-radius:4px"></div></div><div style="display:flex;justify-content:space-between;margin-top:4px;font-size:.7rem;color:var(--text3)"><span>Your LTV: <strong style="color:${barC}">${ltv.toFixed(1)}%</strong></span><span>${ok?`<span style="color:var(--green)">+${headroom.toFixed(1)}% headroom</span>`:`<span style="color:var(--red)">${Math.abs(headroom).toFixed(1)}% over cap</span>`}</span></div>${capNote(r,l,'ltv_total_max_pct')}`;
+  // 'maybe' = above the floor, under the grid's ceiling. Neither a green
+  // headroom claim nor a red rejection is true of it.
+  const isMaybe = ok === 'maybe';
+  const headroom=cap-ltv, barW=Math.min(100,(ltv/cap)*100);
+  const barC = isMaybe ? 'var(--gold)' : ok ? (headroom>20?'var(--green)':'var(--gold)') : 'var(--red)';
+  card.style.cssText=`background:var(--bg3);border:1px solid ${isMaybe?'var(--gold)':ok?'var(--green)':'var(--border2)'};border-radius:var(--r-md);padding:10px 14px;cursor:pointer;`;
+  card.innerHTML=`<div style="display:flex;align-items:center;gap:7px;margin-bottom:5px;flex-wrap:wrap"><span class="lender-badge ${segBadge(l.segment)}" style="font-size:.6rem">${l.segmentLabel}</span><span style="font-weight:700;font-size:.825rem">${l.name}</span><span style="margin-left:auto;font-size:.72rem;color:var(--text3)">Cap: <strong style="color:var(--text)">${floorCap!=null?`${floorCap}&ndash;${cap}%`:`${cap}%`}</strong></span></div><div style="background:var(--bg2);border-radius:4px;height:5px;overflow:hidden"><div style="height:100%;width:${barW}%;background:${barC};border-radius:4px"></div></div><div style="display:flex;justify-content:space-between;margin-top:4px;font-size:.7rem;color:var(--text3)"><span>Your LTV: <strong style="color:${barC}">${ltv.toFixed(1)}%</strong></span><span>${isMaybe?`<span style="color:var(--gold)">over the ${floorCap}% floor &mdash; needs a tier that reaches ${ltv.toFixed(0)}%</span>`:ok?`<span style="color:var(--green)">+${headroom.toFixed(1)}% headroom</span>`:`<span style="color:var(--red)">${Math.abs(headroom).toFixed(1)}% over cap</span>`}</span></div>${capNote(r,l,'ltv_total_max_pct')}`;
   card.addEventListener('click',()=>{closeAllModals();showView('lender',l.id);});
   return card;
 }
@@ -1773,15 +1793,19 @@ function initDealStructurer() {
     // prime 6% / near 9% / sub 14% / deep 20% was invented, and an invented
     // rate sitting beside real ones on a live deal is the thing this app
     // exists to prevent.
+    // price stands in for book value: the structurer already computes LTV
+    // against it, so it is the basis capitalone's book-value bands compare to.
     const deal={term_months:prefTerm||null, amount_financed:Math.round(af),
-                vehicle_condition:vtype};
+                vehicle_condition:vtype, book_value:price||null, mileage:miles||null};
     const results=LENDERS.map(l=>{
       const issues=[], unknowns=[];
       const F=lenderLimit(l,'fico_min',deal);
       if(fico&&F.value!=null&&fico<F.value) issues.push(`FICO ${fico} below min ${F.value}`);
       const L=lenderLimit(l,'ltv_total_max_pct',deal);
-      if(L.value!=null&&ltv>L.value) issues.push(`LTV ${ltv.toFixed(0)}% > ${L.value}% cap`);
-      else if(L.value==null) unknowns.push('no published total-LTV cap');
+      const Ltop=limitCeiling(l,'ltv_total_max_pct') ?? L.value;
+      if(L.value==null) unknowns.push('no published total-LTV cap');
+      else if(ltv>Ltop) issues.push(`LTV ${ltv.toFixed(0)}% > ${Ltop}% cap`);
+      else if(ltv>L.value) unknowns.push(`LTV ${ltv.toFixed(0)}% needs a tier at or above ${L.value}%`);
       const T=lenderLimit(l,'max_term_months',deal);
       if(prefTerm&&T.value!=null&&prefTerm>T.value) issues.push(`${prefTerm}mo over ${T.value}mo max`);
       const M=lenderLimit(l,'max_mileage',deal);

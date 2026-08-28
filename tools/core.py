@@ -14,10 +14,15 @@ import json, sys, os, itertools
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 LENDERS = os.path.join(ROOT, 'lenders.json')
 
-NUMERIC = {'term_months_gte', 'term_months_lte',
-           'amount_financed_gte', 'amount_financed_lte'}
+# Each numeric predicate names the deal field it reads. Added 2026-08-28:
+# book_value (capitalone keys its LTV to book, not amount financed) and
+# mileage (amcredit's 135% needs <= 50,000 miles).
+NUMERIC = {'term_months_gte': 'term_months', 'term_months_lte': 'term_months',
+           'amount_financed_gte': 'amount_financed', 'amount_financed_lte': 'amount_financed',
+           'book_value_gte': 'book_value', 'book_value_lte': 'book_value',
+           'mileage_gte': 'mileage', 'mileage_lte': 'mileage'}
 EXACT = {'state', 'program', 'tier', 'vehicle_condition'}
-PREDICATES = NUMERIC | EXACT
+PREDICATES = set(NUMERIC) | EXACT
 
 LIMIT_KEYS = ['max_term_months', 'max_mileage', 'max_vehicle_age_yr',
               'ltv_front_max_pct', 'ltv_total_max_pct',
@@ -30,7 +35,7 @@ def _match(when, deal):
     inheriting a better one it may not qualify for."""
     for k, want in when.items():
         if k in NUMERIC:
-            got = deal.get('term_months') if k.startswith('term') else deal.get('amount_financed')
+            got = deal.get(NUMERIC[k])
             if got is None:
                 return False
             if k.endswith('_gte') and got < want: return False
@@ -73,7 +78,9 @@ def _overlap(a, b):
         if (k in a) != (k in b):
             return False          # one is scoped to a program/tier, the other is not
     for lo, hi in (('term_months_gte', 'term_months_lte'),
-                   ('amount_financed_gte', 'amount_financed_lte')):
+                   ('amount_financed_gte', 'amount_financed_lte'),
+                   ('book_value_gte', 'book_value_lte'),
+                   ('mileage_gte', 'mileage_lte')):
         a0, a1 = a.get(lo, float('-inf')), a.get(hi, float('inf'))
         b0, b1 = b.get(lo, float('-inf')), b.get(hi, float('inf'))
         if a1 < b0 or b1 < a0:
@@ -155,6 +162,77 @@ CASES = [
     ('cps', 'max_term_months', {}, 78),
     ('cps', 'max_term_months', {'program': 'ICON+'}, 84),
     ('cps', 'gap_max_usd', {'program': 'ICON+'}, 1200),
+
+    # --- the other 18, added 2026-08-28 ---
+    # capitalone keys LTV to BOOK VALUE, not amount financed
+    ('capitalone', 'ltv_total_max_pct', {'book_value': 30000}, 150),
+    ('capitalone', 'ltv_total_max_pct', {'book_value': 8000}, 175),
+    ('capitalone', 'ltv_total_max_pct', {}, 150),
+    ('capitalone', 'ltv_front_max_pct', {'book_value': 20000, 'program': 'Non-Prime'}, 130),
+    ('capitalone', 'ltv_front_max_pct', {'book_value': 30000, 'program': 'Non-Prime'}, 120),
+    # amcredit's 135% needs a used vehicle under 50,000 miles
+    ('amcredit', 'ltv_total_max_pct', {'vehicle_condition': 'used', 'mileage': 40000}, 135),
+    ('amcredit', 'ltv_total_max_pct', {'vehicle_condition': 'used', 'mileage': 60000}, 125),
+    ('amcredit', 'ltv_total_max_pct', {'vehicle_condition': 'new'}, 125),
+    ('amcredit', 'ltv_total_max_pct', {}, 125),
+    # santander drops mileage and age hard at 84 months
+    ('santander', 'max_mileage', {'term_months': 72}, 150000),
+    ('santander', 'max_mileage', {'term_months': 84}, 60000),
+    ('santander', 'max_vehicle_age_yr', {'term_months': 72}, 12),
+    ('santander', 'max_vehicle_age_yr', {'term_months': 84}, 5),
+    ('santander', 'ltv_total_max_pct', {'term_months': 75}, 145),
+    ('santander', 'ltv_total_max_pct', {'term_months': 84}, 120),
+    # bofa: both caps step at 76 months
+    ('bofa', 'ltv_total_max_pct', {'term_months': 60}, 145),
+    ('bofa', 'ltv_total_max_pct', {'term_months': 84}, 125),
+    ('bofa', 'ltv_front_max_pct', {'term_months': 60}, 130),
+    ('bofa', 'min_amount_financed', {'term_months': 84}, 25000),
+    ('bofa', 'max_vehicle_age_yr', {'term_months': 84}, 4),
+    ('bofa', 'gap_max_usd', {'state': 'NY'}, 225),
+    ('bofa', 'gap_max_usd', {'state': 'TX'}, None),
+    ('bofa', 'gap_max_usd', {}, 1500),
+    # usbank / wellsfargo: one step each, in opposite directions of the boundary
+    ('usbank', 'ltv_total_max_pct', {'term_months': 72}, 145),
+    ('usbank', 'ltv_total_max_pct', {'term_months': 84}, 120),
+    ('wellsfargo', 'ltv_total_max_pct', {'term_months': 72}, 135),
+    ('wellsfargo', 'ltv_total_max_pct', {'term_months': 84}, 120),
+    # dfc: 13 tiers x new/used
+    ('dfc', 'ltv_total_max_pct', {'tier': 'P0', 'vehicle_condition': 'new'}, 135),
+    ('dfc', 'ltv_total_max_pct', {'tier': 'P5', 'vehicle_condition': 'used'}, 125),
+    ('dfc', 'ltv_total_max_pct', {'tier': 'P11', 'vehicle_condition': 'used'}, 110),
+    ('dfc', 'ltv_total_max_pct', {}, 110),
+    ('dfc', 'max_term_months', {'tier': 'P9', 'vehicle_condition': 'new'}, 60),
+    ('dfc', 'ltv_front_max_pct', {'tier': 'P0', 'vehicle_condition': 'new'}, 120),
+    # regional publishes a front cap only -- total must stay unknown
+    ('regional', 'ltv_front_max_pct', {'tier': 'Tier 1'}, 125),
+    ('regional', 'ltv_front_max_pct', {'tier': 'Tier 7'}, 110),
+    ('regional', 'ltv_front_max_pct', {}, 110),
+    ('regional', 'ltv_total_max_pct', {}, None),
+    ('westlake', 'ltv_total_max_pct', {}, None),
+    # pnc's front-end grid; total is flat
+    ('pnc', 'ltv_front_max_pct', {'tier': 'Tier 0 (800+)', 'vehicle_condition': 'new', 'term_months': 60}, 125),
+    ('pnc', 'ltv_front_max_pct', {'tier': 'Tier 0 (800+)', 'vehicle_condition': 'new', 'term_months': 84}, 115),
+    ('pnc', 'ltv_front_max_pct', {'tier': 'Tier 3 (700-724)', 'vehicle_condition': 'new', 'term_months': 60}, 110),
+    ('pnc', 'ltv_total_max_pct', {'term_months': 84}, 140),
+    # ally: the 84-month tier matrix, and 140% stays unresolved without a tier
+    ('ally', 'ltv_total_max_pct', {'tier': 'S Tier', 'term_months': 84, 'vehicle_condition': 'new'}, 135),
+    ('ally', 'ltv_total_max_pct', {'tier': 'B Tier', 'term_months': 84, 'vehicle_condition': 'used'}, 115),
+    ('ally', 'ltv_total_max_pct', {}, 105),
+    ('ally', 'max_mileage', {'term_months': 84}, 75000),
+    ('ally', 'max_mileage', {'term_months': 60}, 150000),
+    ('ally', 'min_amount_financed', {'term_months': 84}, 20000),
+    # unresolved exceptions never apply on their own
+    ('td', 'ltv_total_max_pct', {}, 110),
+    ('kia', 'ltv_total_max_pct', {}, 105),
+    ('exeter', 'max_term_months', {}, 60),
+    # simple prose-stated caps
+    ('chase', 'ltv_total_max_pct', {}, 150),
+    ('gls', 'ltv_total_max_pct', {}, 140),
+    ('gls', 'ltv_front_max_pct', {}, 130),
+    ('flagship', 'ltv_total_max_pct', {}, 150),
+    ('fifththird', 'ltv_total_max_pct', {}, 140),
+    ('fifththird', 'ltv_front_max_pct', {}, 115),
+    ('exeter', 'ltv_total_max_pct', {}, 150),
 ]
 
 
