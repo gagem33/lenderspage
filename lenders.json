@@ -310,6 +310,251 @@
       "doc": "Truist - Program Sheet - 072026.pdf",
       "driveFileId": "1dwSi3YQ1N7TnbXrQADGRMkaPpWnUMnxz",
       "syncedAt": "2026-08-27"
+    },
+    "core": {
+      "schema": 1,
+      "provenance": {
+        "drive_file_id": "1dwSi3YQ1N7TnbXrQADGRMkaPpWnUMnxz",
+        "doc": "Truist - Program Sheet - 072026.pdf",
+        "effective_date": "2026-07-20",
+        "pages": [
+          1
+        ],
+        "built": "2026-08-28"
+      },
+      "credit": {
+        "fico_min": {
+          "value": 640,
+          "except": [
+            {
+              "when": {
+                "term_months_gte": 76,
+                "term_months_lte": 84
+              },
+              "value": 680
+            }
+          ],
+          "note": "Both applicants must score 640+."
+        },
+        "fico_basis": "score",
+        "tiers": [
+          "T1 (A1)",
+          "T2 (A2)",
+          "T3 (B1)",
+          "T4 (B2)",
+          "T5 (B3)",
+          "T6 (C1)"
+        ]
+      },
+      "limits": {
+        "max_term_months": {
+          "value": 84,
+          "except": [],
+          "note": "Model-year table (sections.ltv) caps 2023 and older below 84."
+        },
+        "max_mileage": {
+          "value": 120000,
+          "except": [
+            {
+              "when": {
+                "term_months_gte": 76,
+                "term_months_lte": 84
+              },
+              "value": 50000
+            }
+          ]
+        },
+        "max_vehicle_age_yr": {
+          "value": null,
+          "except": [],
+          "note": "Not published as an age; expressed as the model-year term table."
+        },
+        "ltv_front_max_pct": {
+          "value": 115,
+          "except": [
+            {
+              "when": {
+                "tier": "T1 (A1)",
+                "term_months_gte": 1,
+                "term_months_lte": 75
+              },
+              "value": 130
+            },
+            {
+              "when": {
+                "tier": "T2 (A2)",
+                "term_months_gte": 1,
+                "term_months_lte": 75
+              },
+              "value": 130
+            },
+            {
+              "when": {
+                "tier": "T3 (B1)",
+                "term_months_gte": 1,
+                "term_months_lte": 75
+              },
+              "value": 125
+            },
+            {
+              "when": {
+                "tier": "T4 (B2)",
+                "term_months_gte": 1,
+                "term_months_lte": 75
+              },
+              "value": 120
+            },
+            {
+              "when": {
+                "tier": "T5 (B3)",
+                "term_months_gte": 1,
+                "term_months_lte": 75
+              },
+              "value": 120
+            },
+            {
+              "when": {
+                "tier": "T6 (C1)",
+                "term_months_gte": 1,
+                "term_months_lte": 75
+              },
+              "value": 120
+            },
+            {
+              "when": {
+                "tier": "T1 (A1)",
+                "term_months_gte": 76,
+                "term_months_lte": 84
+              },
+              "value": 120
+            },
+            {
+              "when": {
+                "tier": "T2 (A2)",
+                "term_months_gte": 76,
+                "term_months_lte": 84
+              },
+              "value": 120
+            }
+          ],
+          "note": "48-cell grid, p1. Base is the floor (tier 3-6 at 76-84mo)."
+        },
+        "ltv_total_max_pct": {
+          "value": 130,
+          "except": [
+            {
+              "when": {
+                "tier": "T1 (A1)",
+                "term_months_gte": 1,
+                "term_months_lte": 75
+              },
+              "value": 155
+            },
+            {
+              "when": {
+                "tier": "T2 (A2)",
+                "term_months_gte": 1,
+                "term_months_lte": 75
+              },
+              "value": 155
+            },
+            {
+              "when": {
+                "tier": "T3 (B1)",
+                "term_months_gte": 1,
+                "term_months_lte": 75
+              },
+              "value": 145
+            },
+            {
+              "when": {
+                "tier": "T4 (B2)",
+                "term_months_gte": 1,
+                "term_months_lte": 75
+              },
+              "value": 140
+            },
+            {
+              "when": {
+                "tier": "T5 (B3)",
+                "term_months_gte": 1,
+                "term_months_lte": 75
+              },
+              "value": 135
+            },
+            {
+              "when": {
+                "tier": "T1 (A1)",
+                "term_months_gte": 76,
+                "term_months_lte": 84
+              },
+              "value": 140
+            },
+            {
+              "when": {
+                "tier": "T2 (A2)",
+                "term_months_gte": 76,
+                "term_months_lte": 84
+              },
+              "value": 140
+            },
+            {
+              "when": {
+                "tier": "T3 (B1)",
+                "term_months_gte": 76,
+                "term_months_lte": 84
+              },
+              "value": 135
+            },
+            {
+              "when": {
+                "tier": "T4 (B2)",
+                "term_months_gte": 76,
+                "term_months_lte": 84
+              },
+              "value": 135
+            },
+            {
+              "when": {
+                "tier": "T5 (B3)",
+                "term_months_gte": 76,
+                "term_months_lte": 84
+              },
+              "value": 135
+            }
+          ],
+          "note": "48-cell grid, p1. Base is the floor (tier 6). The 155% on the card is tier 1-2 at <=75mo."
+        },
+        "min_amount_financed": {
+          "value": null,
+          "except": [],
+          "note": "Sheet publishes min *collateral* value, not amount financed: $20,000 at 76-84mo, $12,000 at 73-75mo."
+        },
+        "max_amount_financed": {
+          "value": null,
+          "except": [],
+          "note": "Not published."
+        },
+        "gap_max_usd": {
+          "value": 1200,
+          "except": [
+            {
+              "when": {
+                "state": "TX"
+              },
+              "value": null,
+              "note": "Lesser of $1,200 or 5% of amount financed - a formula, not a cap."
+            }
+          ]
+        }
+      },
+      "rates": {
+        "basis": "none",
+        "floor_apr_pct": null,
+        "ceiling_apr_pct": null,
+        "grid_section": null,
+        "note": "Sheet publishes dealer participation and a flat guide, not consumer buy rates."
+      }
     }
   },
   {
@@ -1252,6 +1497,217 @@
       "doc": "CPS - Program Sheet - 010126.pdf",
       "driveFileId": "1QkqPCEMlfOvTf2ExbxfNVYMQVEHmAmVq",
       "syncedAt": "2026-08-27"
+    },
+    "core": {
+      "schema": 1,
+      "provenance": {
+        "drive_file_id": "1QkqPCEMlfOvTf2ExbxfNVYMQVEHmAmVq",
+        "doc": "CPS - Program Sheet - 010126.pdf",
+        "effective_date": "2026-01-01",
+        "pages": [
+          1
+        ],
+        "built": "2026-08-28"
+      },
+      "credit": {
+        "fico_min": {
+          "value": null,
+          "except": [],
+          "note": "No minimum score; no-score applicants eligible. ICON PLUS calls on Vantage >=660."
+        },
+        "fico_basis": "tier",
+        "tiers": [
+          "ICON+",
+          "Meta/Pref/SUAL",
+          "ALPL/Alpha",
+          "STD/Delta/FTB"
+        ]
+      },
+      "limits": {
+        "max_term_months": {
+          "value": 78,
+          "except": [
+            {
+              "when": {
+                "program": "ICON+"
+              },
+              "value": 84
+            }
+          ],
+          "note": "78mo needs Meta/Pref/SUAL and amt financed > $26K; 75mo needs Alpha or above and > $21K."
+        },
+        "max_mileage": {
+          "value": 60000,
+          "except": [
+            {
+              "when": {
+                "term_months_gte": 1,
+                "term_months_lte": 24
+              },
+              "value": 200000
+            },
+            {
+              "when": {
+                "term_months_gte": 25,
+                "term_months_lte": 36
+              },
+              "value": 150000
+            },
+            {
+              "when": {
+                "term_months_gte": 37,
+                "term_months_lte": 48
+              },
+              "value": 130000
+            },
+            {
+              "when": {
+                "term_months_gte": 49,
+                "term_months_lte": 60
+              },
+              "value": 120000
+            },
+            {
+              "when": {
+                "term_months_gte": 61,
+                "term_months_lte": 66
+              },
+              "value": 110000
+            },
+            {
+              "when": {
+                "term_months_gte": 67,
+                "term_months_lte": 72
+              },
+              "value": 100000
+            },
+            {
+              "when": {
+                "term_months_gte": 73,
+                "term_months_lte": 75
+              },
+              "value": 65000
+            },
+            {
+              "when": {
+                "program": "ICON+",
+                "term_months_gte": 1,
+                "term_months_lte": 72
+              },
+              "value": 100000
+            },
+            {
+              "when": {
+                "program": "ICON+",
+                "term_months_gte": 73,
+                "term_months_lte": 75
+              },
+              "value": 95000
+            },
+            {
+              "when": {
+                "program": "ICON+",
+                "term_months_gte": 76,
+                "term_months_lte": 78
+              },
+              "value": 90000
+            },
+            {
+              "when": {
+                "program": "ICON+",
+                "term_months_gte": 79,
+                "term_months_lte": 84
+              },
+              "value": 80000
+            }
+          ],
+          "note": "Term ladder, p1. Base is the floor (78mo)."
+        },
+        "max_vehicle_age_yr": {
+          "value": 15,
+          "except": [
+            {
+              "when": {
+                "vehicle_condition": "used"
+              },
+              "value": 15
+            }
+          ],
+          "note": "15 years or newer for ICE; 4 years or newer for EV - EV is not expressible as a predicate here."
+        },
+        "ltv_front_max_pct": {
+          "value": 115,
+          "except": [
+            {
+              "when": {
+                "program": "ICON+"
+              },
+              "value": 125
+            }
+          ],
+          "note": "ADVANCE row: 115% invoice/book (Triple Play), 125% KBB Retail/MSRP on ICON+."
+        },
+        "ltv_total_max_pct": {
+          "value": 115,
+          "except": [
+            {
+              "when": {},
+              "value": 130,
+              "unresolved": true,
+              "note": "Sheet says 'Up to 130% LTV regular term, 115% extended term' and never defines where regular ends. Rep question."
+            },
+            {
+              "when": {
+                "program": "ICON+"
+              },
+              "value": 140
+            }
+          ],
+          "note": "MAX LTV row; total, since the Basic Formula adds tax, license, $200 doc, service contract and GAP on top of the 115% advance."
+        },
+        "min_amount_financed": {
+          "value": 5000,
+          "except": [
+            {
+              "when": {
+                "program": "ICON+"
+              },
+              "value": 7500
+            }
+          ]
+        },
+        "max_amount_financed": {
+          "value": 30000,
+          "except": [
+            {
+              "when": {
+                "program": "ICON+"
+              },
+              "value": 75000
+            }
+          ],
+          "note": "Descends by tier: $75K ICON+, then $55K / $50K / $45K / $40K / $35K / $30K. Only the ICON+ column is tier-labelled on the sheet, so the middle steps stay in sections."
+        },
+        "gap_max_usd": {
+          "value": 1000,
+          "except": [
+            {
+              "when": {
+                "program": "ICON+"
+              },
+              "value": 1200
+            }
+          ],
+          "note": "Or state limit, whichever is lower."
+        }
+      },
+      "rates": {
+        "basis": "floor",
+        "floor_apr_pct": 14.55,
+        "ceiling_apr_pct": null,
+        "grid_section": null,
+        "note": "'As low as 14.55%' - a floor, not a grid."
+      }
     }
   },
   {

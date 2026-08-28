@@ -132,6 +132,31 @@ display it. Adding a predicate is a schema change, deliberately:
 | `state` | `"TX"` | state-specific rule |
 | `program` | `"ICON+"` | named program or tier the bank publishes |
 | `vehicle_condition` | `"new"` \| `"used"` | |
+| `tier` | `"T1 (A1)"` | the bank's own tier label, verbatim from its sheet |
+
+Added `tier` on 2026-08-28, when truist turned out to publish LTV as a **48-cell
+grid** — 6 tiers × 2 term bands × {front LTV, total LTV, DTI, PTI}. Term alone
+could not express it.
+
+**Bands, not open ends.** Where a limit steps by term, give each exception both
+bounds (`term_months_gte` *and* `_lte`) so exactly one matches. Open-ended
+predicates overlap, and then the answer depends on evaluation order. Validation
+warns when two exceptions can match the same deal; if it happens anyway the
+**lowest** value wins, because understating a limit costs a resubmit and
+overstating costs a funding decline.
+
+**`value` is the floor, not the headline.** Base is what holds when nothing about
+the deal is known; exceptions raise it once a tier, term or program is supplied.
+truist's base total LTV is therefore 130%, not the 155% on its card — 155% is one
+cell of the 48 (tier 1–2, ≤75 months). A tool that starts from the best cell
+overstates every deal that isn't that cell.
+
+**`"unresolved": true`** marks an exception whose *value* the sheet publishes but
+whose *condition* it does not. cps is the case: "Up to 130% LTV regular term, 115%
+extended term", with no definition anywhere of where regular ends. The better
+value never applies automatically — the tool shows it as "up to 130%, condition
+not published" so the gap is visible and askable, instead of being resolved by a
+guess.
 
 A condition the vocabulary cannot express sets `value: null` on the exception and
 explains it in `note` — the tools then treat that case as *unknown*, never as
@@ -277,7 +302,29 @@ verified one; a wrong number that looks confident is worse than a `null`.
 
 ### 4.2 Order
 
-`truist` and `cps` first — between them they carry a term-conditioned mileage cap,
+**Built 2026-08-28: `truist` and `cps` carry a core, and both tools read it.**
+`tools/core.py validate` checks shape and warns on overlapping bands;
+`core.py selftest` runs 20 resolution cases that `index.html` must agree with.
+
+What reading the two sheets changed, beyond typing what was already stored:
+
+- **truist publishes LTV as a 48-cell grid** — 6 tiers × 2 term bands ×
+  {front, total, DTI, PTI}. The record's `155%` is one cell of it: total LTV,
+  tier 1–2, ≤75 months. At tier 6 on 84 months the total cap is 130% and the
+  front cap 115%. The card still says 155%; the tools now say 130–155% and
+  which end applies.
+- **truist's front and total caps are both published**, so the pair is filled
+  rather than left null.
+- **cps's sheet is two columns** — a narrow ICON+ column and a general band.
+  That settles front vs total: ADVANCE is front (115% of book), MAX LTV is
+  total (130%), because the Basic Formula adds tax, license, $200 doc, service
+  contract and GAP on top of the advance.
+- **cps never defines "extended term"**, so the 130% carries `unresolved` and
+  the base stays 115%.
+
+Then the remaining 18, in whatever order their PDFs get read.
+
+*(Original plan:)* `truist` and `cps` first — between them they carry a term-conditioned mileage cap,
 a state-conditioned GAP rule, a program-conditioned LTV, and an unadjudicated
 front/total. If the shape in §2.1 holds for those two it holds for the other 18.
 Then wire the LTV calculator and the deal structurer to read the typed fields
