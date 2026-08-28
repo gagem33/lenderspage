@@ -1081,19 +1081,21 @@ function cardHTML(l) {
         l.stateRestriction ? ` &middot; <i class="lh-tag bad">${l.stateRestriction}</i>` : ''}</em></span>
       <span class="lh-agecell">${f ? `<i class="lh-tag ${f.cls}" title="${f.title}">${f.text}</i>` : ''}</span>
       <span class="lh-segcell"><i class="lh-tag seg ${segClass(l.segment)}">${l.segmentLabel}</i></span>
-      ${cell('FICO', l.ficoMin || 'Tier')}
-      ${cell('Term', l.maxTerm ? l.maxTerm + ' mo' : '&mdash;')}
-      ${cell('Miles', l.maxMileage)}
-      ${cell('LTV', l.maxLTV)}
-      ${cell('GAP', l.gapMax)}
+      ${cell('FICO', cardCell(l, 'fico_min', 'Tier'))}
+      ${cell('Term', cardCell(l, 'max_term_months'))}
+      ${cell('Miles', cardCell(l, 'max_mileage'))}
+      ${cell('LTV', cardCell(l, 'ltv_total_max_pct'))}
+      ${cell('GAP', cardCell(l, 'gap_max_usd'))}
       <span class="lh-chev" aria-hidden="true">&#9654;</span>
     </div>
     <div class="lh-body">
       <div class="lh-strip">
-        ${[['Min FICO', l.ficoMin || 'Tier-based'],
-           ['Max Term', l.maxTerm ? l.maxTerm + ' mo' : 'Per program'],
-           ['Max Mileage', l.maxMileage], ['Max LTV', l.maxLTV],
-           ['GAP Max', l.gapMax], ['Chargeback', l.chargebackWindow]]
+        ${[['Min FICO', cardCell(l, 'fico_min', 'Tier-based')],
+           ['Max Term', cardCell(l, 'max_term_months', 'Per program')],
+           ['Max Mileage', cardCell(l, 'max_mileage')],
+           ['Total LTV', cardCell(l, 'ltv_total_max_pct')],
+           ['GAP Max', cardCell(l, 'gap_max_usd')],
+           ['Chargeback', l.chargebackWindow]]
           .map(([k, v]) => `<span class="lh-st"><u>${k}</u><b>${v}</b></span>`).join('')}
       </div>
       ${l.source?.warning ? `<div class="note-box danger" style="margin-bottom:9px"><span class="note-icon">&#9200;</span><span>${l.source.warning}</span></div>` : ''}
@@ -1133,8 +1135,10 @@ function cardMatch(lender, q) {
   if (head.includes(q)) return {rank: 0};
   const summary = {Segment: lender.segmentLabel, 'FICO notes': lender.ficoNotes,
     Notable: lender.uniqueFeature || '', Reserve: lender.reserveStructure,
-    Chargeback: lender.chargebackWindow, 'Max LTV': lender.maxLTV,
-    'Max mileage': lender.maxMileage, 'GAP cap': lender.gapMax};
+    Chargeback: lender.chargebackWindow,
+    'Total LTV': cardLimit(lender,'ltv_total_max_pct').text,
+    'Max mileage': cardLimit(lender,'max_mileage').text,
+    'GAP cap': cardLimit(lender,'gap_max_usd').text};
   for (const [label, val] of Object.entries(summary))
     if (String(val || '').toLowerCase().includes(q)) return {rank: 1, where: label};
   for (const sec of Object.values(lender.sections))
@@ -1247,14 +1251,16 @@ const pctNum = s => parseInt(String(s||'').replace(/[^0-9]/g,''),10) || 0;
 const miNum  = s => parseInt(String(s||'').replace(/[^0-9]/g,''),10) || 0;
 const QUICK_LISTS = [
   { title:'84-Month Terms', icon:'📅',
-    test: l => l.maxTerm >= 84 },
+    test: l => (limitTop(l,'max_term_months') ?? 0) >= 84,
+    note:'Reaches 84 months at some tier. Several banks cut LTV, mileage or vehicle age at 76+ &mdash; the card shows both ends.' },
   { title:'Advance Over 130% LTV', icon:'📈',
-    test: l => pctNum(l.maxLTV) > 130,
-    note:'Sorted highest first. Capital One leads at 175%.' ,
-    sort:(a,b)=>pctNum(b.maxLTV)-pctNum(a.maxLTV) },
+    test: l => (limitTop(l,'ltv_total_max_pct') ?? 0) > 130,
+    note:'Total LTV, sorted by the highest each bank reaches. A range means the top figure needs the right tier or term; the floor is what holds otherwise.',
+    sort:(a,b)=>(limitTop(b,'ltv_total_max_pct')??0)-(limitTop(a,'ltv_total_max_pct')??0) },
   { title:'150K+ Miles OK', icon:'🛣️',
-    test: l => miNum(l.maxMileage) >= 150000,
-    sort:(a,b)=>miNum(b.maxMileage)-miNum(a.maxMileage) },
+    test: l => (limitTop(l,'max_mileage') ?? 0) >= 150000,
+    note:'Truist, Ally and Santander reach 150K only on shorter terms &mdash; all three drop hard at 76+ months.',
+    sort:(a,b)=>(limitTop(b,'max_mileage')??0)-(limitTop(a,'max_mileage')??0) },
   { title:'ID Card OK — No DL Required', icon:'🪪',
     ids:['amcredit','exeter','td','westlake','cps','capitalone','santander','dfc'],
     note:'Westlake takes foreign IDs (passport, matrícula, consular). Santander requires a U.S. government or state-issued ID — no matrícula. DL explicitly REQUIRED at: Fifth Third, BofA, US Bank, Flagship & GLS.' },
@@ -1265,7 +1271,7 @@ const QUICK_LISTS = [
     ids:['westlake','cps'],
     note:'CPS: open Ch. 13 needs 12+ months in plan + trustee authorization letter. Everyone else requires BK discharged.' },
   { title:'No Hard FICO Floor', icon:'🎯',
-    test: l => !l.ficoMin,
+    test: l => limitBase(l,'fico_min') == null,
     note:'Tier-based or no-score programs — structure matters more than score.' },
   { title:'DACA / Non-Permanent Residents', icon:'🗽',
     ids:['wellsfargo','westlake'],
@@ -1430,7 +1436,7 @@ function jumpItems() {
 
   const lenders = LENDERS.map(l => ({
     title: l.name, kind: 'lender', lender: l,
-    sub: `${l.segmentLabel} · ${l.ficoMin ? 'FICO ' + l.ficoMin + '+' : 'Tier-based'} · ${l.maxLTV} LTV`,
+    sub: `${l.segmentLabel} · ${limitBase(l,'fico_min') != null ? 'FICO ' + cardLimit(l,'fico_min').text + '+' : 'Tier-based'} · ${cardLimit(l,'ltv_total_max_pct').text} LTV`,
     run: () => showView('lender', l.id),
     hay: [l.name, l.fullName, l.abbr, l.segmentLabel],
   }));
@@ -1663,7 +1669,8 @@ function initBureauSearch() {
     const results = LENDERS.map(l => {
       let best=null, bestB=null;
       l.bureaus?.primary.forEach(b => { const s=scores[b]; if(s!==null && (best===null||s>best)){best=s;bestB=b;} });
-      const ficoOk = typeof l.ficoMin==='number' ? (best!==null && best>=l.ficoMin) : best!==null;
+      const fmin = lenderLimit(l,'fico_min',{}).value;
+      const ficoOk = fmin!=null ? (best!==null && best>=fmin) : best!==null;
       return {l, best, bestB, ficoOk};
     });
 
@@ -1690,7 +1697,7 @@ function initBureauSearch() {
 function buildBureauCard(r, scores, BL, BC, ok) {
   const card=document.createElement('div');
   card.style.cssText=`background:var(--bg3);border:1px solid ${ok?'var(--green)':'var(--border2)'};border-radius:var(--r-md);padding:10px 14px;display:flex;flex-direction:column;gap:5px;cursor:pointer;`;
-  card.innerHTML=`<div style="display:flex;align-items:center;gap:7px;flex-wrap:wrap"><span class="lender-badge ${segBadge(r.l.segment)}" style="font-size:.6rem">${r.l.segmentLabel}</span><span style="font-weight:700;font-size:.825rem">${r.l.name}</span><span style="margin-left:auto;font-size:.72rem;color:var(--text3)">Min FICO: <strong style="color:var(--text)">${r.l.ficoMin||'Tier'}</strong></span></div><div style="display:flex;gap:5px;flex-wrap:wrap">${r.l.bureaus.primary.map(b=>{const s=scores[b],isBest=b===r.bestB;return`<span style="background:${BC[b]}22;border:1.5px solid ${isBest&&ok?BC[b]:BC[b]+'44'};color:${s?BC[b]:'var(--text3)'};border-radius:20px;padding:1px 9px;font-size:.7rem;font-weight:700">${BL[b]}: ${s||'N/A'}</span>`;}).join('')}</div>${r.l.bureaus.note?`<div style="font-size:.7rem;color:var(--text3)">${r.l.bureaus.note}</div>`:''}`;
+  card.innerHTML=`<div style="display:flex;align-items:center;gap:7px;flex-wrap:wrap"><span class="lender-badge ${segBadge(r.l.segment)}" style="font-size:.6rem">${r.l.segmentLabel}</span><span style="font-weight:700;font-size:.825rem">${r.l.name}</span><span style="margin-left:auto;font-size:.72rem;color:var(--text3)">Min FICO: <strong style="color:var(--text)">${cardLimit(r.l,'fico_min','Tier').text}</strong></span></div><div style="display:flex;gap:5px;flex-wrap:wrap">${r.l.bureaus.primary.map(b=>{const s=scores[b],isBest=b===r.bestB;return`<span style="background:${BC[b]}22;border:1.5px solid ${isBest&&ok?BC[b]:BC[b]+'44'};color:${s?BC[b]:'var(--text3)'};border-radius:20px;padding:1px 9px;font-size:.7rem;font-weight:700">${BL[b]}: ${s||'N/A'}</span>`;}).join('')}</div>${r.l.bureaus.note?`<div style="font-size:.7rem;color:var(--text3)">${r.l.bureaus.note}</div>`:''}`;
   card.addEventListener('click', ()=>{ closeAllModals(); showView('lender',r.l.id); });
   return card;
 }
@@ -1758,6 +1765,75 @@ function limitCeiling(l, key) {
   const vals = [t.value, ...(t.except || []).map(e => e.value)].filter(v => v != null);
   return vals.length ? Math.max(...vals) : null;
 }
+
+// ─── CARD DISPLAY, FROM THE TYPED CORE ───────────────────────
+// The cards used to render the v1 summary strings, which show a bank's *best*
+// cell -- truist 155%, dfc 135%. The tools read the typed floor. Same lender,
+// two answers. These render the same numbers the tools resolve: one figure when
+// the limit is unconditional, a range when it is not.
+const HOME_STATE = 'TX';   // Southwest Kia Dallas. See CLAUDE.md.
+
+function limitSpan(l, key) {
+  const t = key === 'fico_min' ? l.core?.credit?.fico_min : l.core?.limits?.[key];
+  if (!t) return null;
+  // A rule scoped to another state cannot apply on this desk, and letting it
+  // into the range is actively misleading: bofa's GAP would read "$225-$1,500"
+  // because New York caps at $225. Those become a note instead.
+  const here = (t.except || []).filter(e => !e.when?.state || e.when.state === HOME_STATE);
+  const elsewhere = (t.except || []).filter(e => e.when?.state && e.when.state !== HOME_STATE);
+  const vals = [t.value, ...here.map(e => e.value)].filter(v => v != null);
+  const stateNote = elsewhere.length
+    ? ` Other states differ (${elsewhere.map(e => e.when.state).join(', ')}).` : '';
+  if (!vals.length) return { published: false, note: (t.note || '') + stateNote };
+  return { published: true, lo: Math.min(...vals), hi: Math.max(...vals),
+           base: t.value, note: (t.note || '') + stateNote,
+           unresolved: here.some(e => e.unresolved) };
+}
+
+const FMT = {
+  fico_min:          { one: v => `${v}`,                    lo: v => `${v}` },
+  max_term_months:   { one: v => `${v} mo`,                 lo: v => `${v}` },
+  max_mileage:       { one: v => v >= 1000 ? `${Math.round(v/1000)}K` : `${v}`,
+                       lo:  v => v >= 1000 ? `${Math.round(v/1000)}` : `${v}` },
+  ltv_total_max_pct: { one: v => `${v}%`,                   lo: v => `${v}` },
+  ltv_front_max_pct: { one: v => `${v}%`,                   lo: v => `${v}` },
+  gap_max_usd:       { one: v => `$${v.toLocaleString()}`,  lo: v => `$${v.toLocaleString()}` },
+};
+
+// -> { text, title } ; text is safe to drop straight into the markup
+function cardLimit(l, key, dash = '&mdash;') {
+  const sp = limitSpan(l, key), f = FMT[key];
+  if (!sp || !sp.published) {
+    // regional and westlake publish a front-end cap and no total. Showing a bare
+    // dash throws away the only advance figure they do publish, so show it and
+    // label it, rather than letting it read as a total.
+    if (key === 'ltv_total_max_pct') {
+      const fe = limitSpan(l, 'ltv_front_max_pct');
+      if (fe?.published) {
+        const t = fe.lo === fe.hi ? FMT.ltv_front_max_pct.one(fe.lo)
+                : `${FMT.ltv_front_max_pct.lo(fe.lo)}&ndash;${FMT.ltv_front_max_pct.one(fe.hi)}`;
+        return { text: `${t} <span style="opacity:.6;font-size:.85em">FE</span>`,
+                 title: 'Front-end only. This sheet publishes no total-LTV cap, so this '
+                      + 'figure excludes tax, tag, licence, doc fee and back-end products.' };
+      }
+    }
+    return { text: dash, title: sp?.note || 'Not published on this lender\u2019s sheet.' };
+  }
+  if (sp.lo === sp.hi) return { text: f.one(sp.lo), title: sp.note };
+  const t = `${f.lo(sp.lo)}&ndash;${f.one(sp.hi)}`;
+  const why = sp.unresolved
+    ? `The sheet publishes the higher figure without saying when it applies.`
+    : `${f.one(sp.lo)} is the floor; ${f.one(sp.hi)} needs the right tier, term or program. The calculators resolve it for a specific deal.`;
+  return { text: t, title: (sp.note ? sp.note + ' ' : '') + why };
+}
+// Filters and sorts want a number. Use the ceiling: "banks that advance over
+// 130%" means banks that CAN, at some tier -- and the card shows the range, so
+// the reason a 130-155% lender is in the list is visible.
+const limitTop = (l, key) => limitSpan(l, key)?.hi ?? null;
+const limitBase = (l, key) => limitSpan(l, key)?.lo ?? null;
+
+const cardCell = (l, key, dash) => { const r = cardLimit(l, key, dash);
+  return `<span title="${String(r.title).replace(/"/g,'&quot;')}">${r.text}</span>`; };
 
 // A typed cap is only the whole story once the deal names a tier and a term.
 // Say so on the card rather than letting a floor read as the bank's answer.
@@ -1882,10 +1958,13 @@ function initSBSCompare() {
     if(ids.length<2){alert('Select at least 2 lenders.');return;}
     const sel=ids.map(id=>LENDERS.find(l=>l.id===id)).filter(Boolean);
     const rows=[
-      ['Segment',l=>l.segmentLabel],['Min FICO',l=>typeof l.ficoMin==='number'?l.ficoMin:l.ficoMin||'—'],
-      ['Max Term',l=>l.maxTerm?`${l.maxTerm} mo`:'—'],['Max LTV',l=>l.maxLTV||'—'],
-      ['Max Mileage',l=>l.maxMileage||'—'],['Bureau',l=>l.bureaus?.primary?.map(b=>b.charAt(0).toUpperCase()+b.slice(1)).join(', ')||'—'],
-      ['GAP Max',l=>l.gapMax||'—'],['Reserve/Flat',l=>l.reserveStructure||'—'],
+      ['Segment',l=>l.segmentLabel],['Min FICO',l=>cardLimit(l,'fico_min','—').text],
+      ['Max Term',l=>cardLimit(l,'max_term_months','—').text],
+      ['Total LTV',l=>cardLimit(l,'ltv_total_max_pct','—').text],
+      ['Front LTV',l=>cardLimit(l,'ltv_front_max_pct','—').text],
+      ['Max Mileage',l=>cardLimit(l,'max_mileage','—').text],
+      ['Bureau',l=>l.bureaus?.primary?.map(b=>b.charAt(0).toUpperCase()+b.slice(1)).join(', ')||'—'],
+      ['GAP Max',l=>cardLimit(l,'gap_max_usd','—').text],['Reserve/Flat',l=>l.reserveStructure||'—'],
       ['Chargeback',l=>l.chargebackWindow||'—'],['Effective',l=>l.effectiveDate||'—'],
       ['Key Feature',l=>l.uniqueFeature||'—']
     ];

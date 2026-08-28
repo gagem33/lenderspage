@@ -99,6 +99,14 @@ forward from the corpus sweep for exactly that reason. `resolveLimit()` evaluate
 mirrors `resolve()` in `tools/core.py`; `core.py selftest` holds the 20 cases both
 must agree on.
 
+**The cards render from the core too, since 2026-08-28.** `cardLimit(l, key)` returns
+`{text, title}` — one figure when a limit is unconditional, a range when it is not,
+and the front-end cap labelled `FE` for the two lenders that publish no total.
+`limitSpan()` drops exceptions scoped to a state other than `HOME_STATE` so an
+out-of-state rule cannot drag the displayed floor down. The quick lists filter and
+sort on `limitTop()`, the ceiling, so "advance over 130%" still means "can, at some
+tier" while the card shows both ends.
+
 `limitCeiling(l, key)` returns the highest a limit reaches under any condition —
 needed because `value` is the floor, so a 48-cell grid would otherwise render as
 one number. The LTV calculator uses both ends: at or under the floor is *eligible*,
