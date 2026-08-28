@@ -80,6 +80,22 @@
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html { font-size: 15px; scroll-behavior: smooth; }
+
+/* Reduced motion. Deliberately blanket rather than per-component: the page's
+   previous guard named .detail-section-wrap and died with it in the rewrite,
+   leaving nothing. A wildcard covers the twelve transitions, the modalIn
+   keyframe and anything added later. Durations go to .01ms rather than 0 so
+   transitionend/animationend still fire. CSS cannot reach a scroll asked for
+   with behavior:'smooth' in JS -- see prefersReducedMotion() for those. */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
 body {
   font-family: var(--font);
   background: var(--bg);
@@ -1159,7 +1175,7 @@ function openCard(id, scroll = true) {
   openLender = id;
   renderCards();
   const card = $(`.lh-card[data-id="${id}"]`);
-  if (card && scroll) card.scrollIntoView({block: 'start', behavior: 'smooth'});
+  if (card && scroll) card.scrollIntoView({block: 'start', behavior: scrollBehavior()});
 }
 function closeCards() { openLender = null; renderCards(); }
 // ─── QUICK LISTS ─────────────────────────────────────────────
@@ -1211,13 +1227,20 @@ function buildQuickLists() {
 }
 
 // ─── NAVIGATION ──────────────────────────────────────────────
+// scrollIntoView({behavior:'smooth'}) ignores the CSS guard above -- the option
+// wins over the property -- so the two call sites ask here instead. Read live
+// rather than cached: the OS setting can change while the page is open.
+const prefersReducedMotion = () =>
+  window.matchMedia?.('(prefers-reduced-motion: reduce)').matches ?? false;
+const scrollBehavior = () => prefersReducedMotion() ? 'auto' : 'smooth';
+
 // One view now. "Go to a lender" means open its card, so everything that used to
 // call showView('lender', id) -- jump box, quick lists, deal structurer -- still works.
 let currentLender = null;
 
 function showView(name, lenderId) {
   if (name === 'lender' && lenderId) { currentLender = lenderId; openCard(lenderId); }
-  else { currentLender = null; closeCards(); $('#main')?.scrollTo({top:0, behavior:'smooth'}); }
+  else { currentLender = null; closeCards(); $('#main')?.scrollTo({top:0, behavior: scrollBehavior()}); }
 }
 
 // ─── INIT ────────────────────────────────────────────────────
