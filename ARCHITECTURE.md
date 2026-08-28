@@ -1,6 +1,6 @@
 # Lender Hub — ARCHITECTURE.md
 
-How the app is wired today. Factual, from `main` on 2026-08-22. Not a design doc — the target design lives in `CLAUDE.md` (open questions) and `DATA.md` (target schema).
+How the app is wired today. Factual, from `main` on 2026-08-28. Not a design doc — the target design lives in `CLAUDE.md` (open questions) and `DATA.md` (target schema).
 
 ---
 
@@ -75,9 +75,13 @@ calls `openCard(id)` through it.
 
 Everything is string-templated `innerHTML`. No framework. Re-rendering a region wipes its DOM, so event handlers are bound via **delegation on stable parent containers**, not on rendered children. Keep this pattern; it's the fix for the click-through bug from July.
 
-### 3.3 Lender detail page
+### 3.3 Section rendering
 
-`buildLenderDetail` renders header fields from the top-level lender keys, then dumps each `sections.*.content` HTML string verbatim. This is why the detail page can't be driven by structured data yet — the content *is* HTML.
+`buildLenderDetail` is gone with the detail page. Its job now belongs to `sectionHTML(l, key)`,
+which dumps `sections[key].content` into the open card's pane verbatim — still an HTML string,
+so a card's body still can't be driven by structured data. `'__stips'` is a synthetic key that
+assembles ID / proof-of-residence / proof-of-insurance from top-level fields rather than a
+`sections` entry.
 
 ### 3.4 Tools (modals)
 
