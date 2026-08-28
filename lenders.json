@@ -78,6 +78,96 @@
       "doc": "AmeriCredit - Program Sheet - 061226.PDF",
       "driveFileId": "1BcVmDpbQotQpB93acjWvX2uH3BRcjP37",
       "syncedAt": "2026-08-27"
+    },
+    "core": {
+      "schema": 1,
+      "provenance": {
+        "drive_file_id": "1BcVmDpbQotQpB93acjWvX2uH3BRcjP37",
+        "doc": "AmeriCredit - Program Sheet - 061226.PDF",
+        "effective_date": "2026-06-12",
+        "pages": [
+          2,
+          3
+        ],
+        "built": "2026-08-28"
+      },
+      "credit": {
+        "fico_min": {
+          "value": null,
+          "except": [],
+          "note": "Tier-based; no single published floor."
+        },
+        "fico_basis": "tier",
+        "tiers": [
+          "A Tiers",
+          "B Tiers"
+        ]
+      },
+      "limits": {
+        "max_term_months": {
+          "value": 75,
+          "except": [
+            {
+              "when": {
+                "vehicle_condition": "new"
+              },
+              "value": 84,
+              "note": "84 months up to a 4-year-old vehicle for B2 or higher."
+            }
+          ],
+          "note": "Age x mileage term grid on p2 (75/72/60) stays in sections."
+        },
+        "max_mileage": {
+          "value": 100000,
+          "except": [],
+          "note": "Term grid tops out at the 80K-100K band."
+        },
+        "max_vehicle_age_yr": {
+          "value": null,
+          "except": [],
+          "note": "Not published."
+        },
+        "ltv_front_max_pct": {
+          "value": null,
+          "except": [],
+          "note": "Not published."
+        },
+        "ltv_total_max_pct": {
+          "value": 125,
+          "except": [
+            {
+              "when": {
+                "vehicle_condition": "used",
+                "mileage_lte": 50000
+              },
+              "value": 135
+            }
+          ],
+          "note": "Dealer Advance includes service contract and GAP, so it is total. Canadian vehicles are capped separately at 125% (A tiers) / 115% (B tiers) - vehicle origin is not a predicate here."
+        },
+        "min_amount_financed": {
+          "value": null,
+          "except": [],
+          "note": "Not published."
+        },
+        "max_amount_financed": {
+          "value": null,
+          "except": [],
+          "note": "Not published."
+        },
+        "gap_max_usd": {
+          "value": 1500,
+          "except": [],
+          "note": "GAP has its own advance-rate floor; see sections."
+        }
+      },
+      "rates": {
+        "basis": "none",
+        "floor_apr_pct": null,
+        "ceiling_apr_pct": null,
+        "grid_section": null,
+        "note": "Sheet publishes no consumer buy rate."
+      }
     }
   },
   {
@@ -155,6 +245,92 @@
       "doc": "Exeter - Program Sheet - 061226.pdf",
       "driveFileId": "1fE1EdXQaWcqwyc_HGpYQs8UrUu0cVJpS",
       "syncedAt": "2026-08-27"
+    },
+    "core": {
+      "schema": 1,
+      "provenance": {
+        "drive_file_id": "1fE1EdXQaWcqwyc_HGpYQs8UrUu0cVJpS",
+        "doc": "Exeter - Program Sheet - 061226.pdf",
+        "effective_date": "2026-06-12",
+        "pages": [
+          1
+        ],
+        "built": "2026-08-28"
+      },
+      "credit": {
+        "fico_min": {
+          "value": 400,
+          "except": [],
+          "note": "400, will consider 0. ExeterPLUS needs 620+."
+        },
+        "fico_basis": "score",
+        "tiers": [
+          "Exeter",
+          "ExeterPLUS Bronze",
+          "ExeterPLUS Silver",
+          "ExeterPLUS Gold"
+        ]
+      },
+      "limits": {
+        "max_term_months": {
+          "value": 60,
+          "except": [
+            {
+              "when": {
+                "program": "ExeterPLUS"
+              },
+              "value": 84,
+              "unresolved": true
+            },
+            {
+              "when": {},
+              "value": 84,
+              "unresolved": true,
+              "note": "Sheet says 'up to 84 months', but its mileage x age grid tops out at 72; 75-84 is 'available for qualified customers/vehicles'."
+            }
+          ],
+          "note": "Mileage x age grid (72/66/60) stays in sections. Max 66 months under $10,000 book."
+        },
+        "max_mileage": {
+          "value": 200000,
+          "except": [],
+          "note": "Above 160,000 is subject to program tier."
+        },
+        "max_vehicle_age_yr": {
+          "value": 13,
+          "except": []
+        },
+        "ltv_front_max_pct": {
+          "value": 135,
+          "except": [],
+          "note": "Includes TT&L."
+        },
+        "ltv_total_max_pct": {
+          "value": 150,
+          "except": []
+        },
+        "min_amount_financed": {
+          "value": 6000,
+          "except": [],
+          "note": "Must be met on the front-end amount, excluding back-end."
+        },
+        "max_amount_financed": {
+          "value": 57500,
+          "except": []
+        },
+        "gap_max_usd": {
+          "value": 1200,
+          "except": [],
+          "note": "Lesser of $1,200 or state maximum. Not allowed in MA or NY; needs front-end LTV >= 70%."
+        }
+      },
+      "rates": {
+        "basis": "floor",
+        "floor_apr_pct": 10.95,
+        "ceiling_apr_pct": null,
+        "grid_section": null,
+        "note": "10.95% standard, 9.95% ExeterPLUS. NY not to exceed 25%."
+      }
     }
   },
   {
@@ -231,6 +407,120 @@
       "doc": "Regional - Program Sheet - 052726.pdf",
       "driveFileId": "13dk1uBsz8kLhtDIsoRLD-v62w9eMOu04",
       "syncedAt": "2026-08-27"
+    },
+    "core": {
+      "schema": 1,
+      "provenance": {
+        "drive_file_id": "13dk1uBsz8kLhtDIsoRLD-v62w9eMOu04",
+        "doc": "Regional - Program Sheet - 052726.pdf",
+        "effective_date": "2026-05-27",
+        "pages": [
+          1
+        ],
+        "built": "2026-08-28"
+      },
+      "credit": {
+        "fico_min": {
+          "value": null,
+          "except": []
+        },
+        "fico_basis": "tier",
+        "tiers": [
+          "Tier 1",
+          "Tier 2",
+          "Tier 3",
+          "Tier 4",
+          "Tier 5",
+          "Tier 6",
+          "Tier 7"
+        ]
+      },
+      "limits": {
+        "max_term_months": {
+          "value": null,
+          "except": [],
+          "note": "Not published."
+        },
+        "max_mileage": {
+          "value": null,
+          "except": [],
+          "note": "Not published."
+        },
+        "max_vehicle_age_yr": {
+          "value": null,
+          "except": [],
+          "note": "Not published."
+        },
+        "ltv_front_max_pct": {
+          "value": 110,
+          "except": [
+            {
+              "when": {
+                "tier": "Tier 1"
+              },
+              "value": 125
+            },
+            {
+              "when": {
+                "tier": "Tier 2"
+              },
+              "value": 125
+            },
+            {
+              "when": {
+                "tier": "Tier 3"
+              },
+              "value": 125
+            },
+            {
+              "when": {
+                "tier": "Tier 4"
+              },
+              "value": 125
+            },
+            {
+              "when": {
+                "tier": "Tier 5"
+              },
+              "value": 120
+            },
+            {
+              "when": {
+                "tier": "Tier 6"
+              },
+              "value": 115
+            }
+          ],
+          "note": "Max Front-End Advance LTV % against NADA Trade-In, by tier. Base is the floor (Tier 7)."
+        },
+        "ltv_total_max_pct": {
+          "value": null,
+          "except": [],
+          "note": "NOT PUBLISHED. The sheet defines total as front-end advance + tax, tag, license, doc fee, warranty and GAP, but sets no cap on it. The 125% on the card is the front-end figure."
+        },
+        "min_amount_financed": {
+          "value": null,
+          "except": [],
+          "note": "Not published."
+        },
+        "max_amount_financed": {
+          "value": null,
+          "except": [],
+          "note": "Not published."
+        },
+        "gap_max_usd": {
+          "value": 1000,
+          "except": [],
+          "note": "Allowed only with total advances at or above 70% LTV."
+        }
+      },
+      "rates": {
+        "basis": "grid",
+        "floor_apr_pct": null,
+        "ceiling_apr_pct": null,
+        "grid_section": "rates",
+        "note": "112-cell consumer grid in sections.rates."
+      }
     }
   },
   {
@@ -630,6 +920,92 @@
       "doc": "TD - Program Sheet - 063026.pdf",
       "driveFileId": "1O9q8uW2FdCawn6uauNxv9xYGPZ8fIEvO",
       "syncedAt": "2026-08-27"
+    },
+    "core": {
+      "schema": 1,
+      "provenance": {
+        "drive_file_id": "1X57L74CerUi8vHJ37BujDe00ZhrxEL_D",
+        "doc": "TD - Program Sheet2 - 063026.pdf",
+        "effective_date": "2026-06-30",
+        "pages": [
+          1,
+          2
+        ],
+        "built": "2026-08-28",
+        "note": "source.driveFileId points at the 8-page Program Sheet, which states TD's effective date but carries no LTV. The caps come from Program Sheet2."
+      },
+      "credit": {
+        "fico_min": {
+          "value": null,
+          "except": []
+        },
+        "fico_basis": "tier",
+        "tiers": [
+          "Tier 1",
+          "Tier 2",
+          "Tier 3",
+          "Tier 4",
+          "Tier 5",
+          "Tier 6",
+          "Tier 7"
+        ]
+      },
+      "limits": {
+        "max_term_months": {
+          "value": 72,
+          "except": [],
+          "note": "72 months max under the tier guidelines on p2."
+        },
+        "max_mileage": {
+          "value": null,
+          "except": [],
+          "note": "Not published."
+        },
+        "max_vehicle_age_yr": {
+          "value": null,
+          "except": [],
+          "note": "Not published."
+        },
+        "ltv_front_max_pct": {
+          "value": null,
+          "except": [],
+          "note": "Not published."
+        },
+        "ltv_total_max_pct": {
+          "value": 110,
+          "except": [
+            {
+              "when": {},
+              "value": 150,
+              "unresolved": true,
+              "note": "'When a backend dollar amount is used, total LTV not to exceed 150%.' The per-tier grid on p1-2 runs 110-150% by tier and new/used; only the 150% ceiling is unambiguous without the tier."
+            }
+          ],
+          "note": "Maximum Total LTV grid, p1-2. Base is the floor of that grid."
+        },
+        "min_amount_financed": {
+          "value": null,
+          "except": [],
+          "note": "Not published."
+        },
+        "max_amount_financed": {
+          "value": 250000,
+          "except": [],
+          "note": "Front-end amount financed per transaction; $300,000 per customer."
+        },
+        "gap_max_usd": {
+          "value": null,
+          "except": [],
+          "note": "Needs front-end LTV >= 70%; dollar cap not on this sheet."
+        }
+      },
+      "rates": {
+        "basis": "none",
+        "floor_apr_pct": null,
+        "ceiling_apr_pct": null,
+        "grid_section": null,
+        "note": ""
+      }
     }
   },
   {
@@ -707,6 +1083,82 @@
       "doc": "Wells Fargo - Program Sheet - 061626.pdf",
       "driveFileId": "1dXg8-YyViTdr9mbWuTlYRjiluVvcXRbo",
       "syncedAt": "2026-08-27"
+    },
+    "core": {
+      "schema": 1,
+      "provenance": {
+        "drive_file_id": "1dXg8-YyViTdr9mbWuTlYRjiluVvcXRbo",
+        "doc": "Wells Fargo - Program Sheet - 061626.pdf",
+        "effective_date": "2026-06-16",
+        "pages": [
+          2
+        ],
+        "built": "2026-08-28"
+      },
+      "credit": {
+        "fico_min": {
+          "value": null,
+          "except": []
+        },
+        "fico_basis": "tier",
+        "tiers": []
+      },
+      "limits": {
+        "max_term_months": {
+          "value": 84,
+          "except": []
+        },
+        "max_mileage": {
+          "value": null,
+          "except": [],
+          "note": "Not published."
+        },
+        "max_vehicle_age_yr": {
+          "value": null,
+          "except": [],
+          "note": "Not published."
+        },
+        "ltv_front_max_pct": {
+          "value": null,
+          "except": [],
+          "note": "Not published."
+        },
+        "ltv_total_max_pct": {
+          "value": 120,
+          "except": [
+            {
+              "when": {
+                "term_months_gte": 1,
+                "term_months_lte": 83
+              },
+              "value": 135
+            }
+          ],
+          "note": "New and used up to 135%; 84-month terms drop to 120% and require payment-to-income <= 15%."
+        },
+        "min_amount_financed": {
+          "value": null,
+          "except": [],
+          "note": "Not published."
+        },
+        "max_amount_financed": {
+          "value": null,
+          "except": [],
+          "note": "Not published."
+        },
+        "gap_max_usd": {
+          "value": 1500,
+          "except": [],
+          "note": "$1,500 for both waiver and insurance products, subject to state requirements."
+        }
+      },
+      "rates": {
+        "basis": "none",
+        "floor_apr_pct": null,
+        "ceiling_apr_pct": null,
+        "grid_section": null,
+        "note": ""
+      }
     }
   },
   {
@@ -784,6 +1236,157 @@
       "doc": "Ally - 84 month Program Sheet - 040126.pdf",
       "driveFileId": "1R-6gins9tE5wyy3dqNRUJv6FcaOyXo0Y",
       "syncedAt": "2026-08-27"
+    },
+    "core": {
+      "schema": 1,
+      "provenance": {
+        "drive_file_id": "1rm-zFIrAzSg4cLZ_z-GB4Y5r0fcZoZuE",
+        "doc": "Ally - Program Sheet - 040126.pdf",
+        "effective_date": "2026-04-01",
+        "pages": [
+          1
+        ],
+        "built": "2026-08-28",
+        "note": "source.driveFileId points at the 84-month Program Sheet, whose ceiling is 135%. The 140% all-in comes from the general Consumer Max All-In Advance table."
+      },
+      "credit": {
+        "fico_min": {
+          "value": 620,
+          "except": [],
+          "note": "620 for EDC/AWV under $100K, 680 at or above (prime). Non-prime under 620 with AWV under $100K."
+        },
+        "fico_basis": "tier",
+        "tiers": [
+          "S Tier",
+          "A Tier",
+          "B Tier"
+        ]
+      },
+      "limits": {
+        "max_term_months": {
+          "value": 84,
+          "except": []
+        },
+        "max_mileage": {
+          "value": 150000,
+          "except": [
+            {
+              "when": {
+                "term_months_gte": 76,
+                "term_months_lte": 84
+              },
+              "value": 75000,
+              "note": "84-month program: models through 5 years, 75,000 beginning miles."
+            }
+          ]
+        },
+        "max_vehicle_age_yr": {
+          "value": null,
+          "except": [],
+          "note": "Not published."
+        },
+        "ltv_front_max_pct": {
+          "value": null,
+          "except": [],
+          "note": "Not published."
+        },
+        "ltv_total_max_pct": {
+          "value": 105,
+          "except": [
+            {
+              "when": {
+                "tier": "S Tier",
+                "term_months_gte": 76,
+                "term_months_lte": 84,
+                "vehicle_condition": "new"
+              },
+              "value": 135
+            },
+            {
+              "when": {
+                "tier": "A Tier",
+                "term_months_gte": 76,
+                "term_months_lte": 84,
+                "vehicle_condition": "new"
+              },
+              "value": 125
+            },
+            {
+              "when": {
+                "tier": "B Tier",
+                "term_months_gte": 76,
+                "term_months_lte": 84,
+                "vehicle_condition": "new"
+              },
+              "value": 115
+            },
+            {
+              "when": {
+                "tier": "S Tier",
+                "term_months_gte": 76,
+                "term_months_lte": 84,
+                "vehicle_condition": "used"
+              },
+              "value": 130
+            },
+            {
+              "when": {
+                "tier": "A Tier",
+                "term_months_gte": 76,
+                "term_months_lte": 84,
+                "vehicle_condition": "used"
+              },
+              "value": 120
+            },
+            {
+              "when": {
+                "tier": "B Tier",
+                "term_months_gte": 76,
+                "term_months_lte": 84,
+                "vehicle_condition": "used"
+              },
+              "value": 115
+            },
+            {
+              "when": {},
+              "value": 140,
+              "unresolved": true,
+              "note": "General Consumer Max All-In Advance tops out at 140%; the per-tier/collateral grid is on p1 of the general sheet."
+            }
+          ],
+          "note": "'All-in' includes back-end, so it is total. The 76-84 exceptions are the 84-month sheet's tier matrix for EDC/AWV under $100K; at or above $100K it drops to 115% new / 105% used."
+        },
+        "min_amount_financed": {
+          "value": null,
+          "except": [
+            {
+              "when": {
+                "term_months_gte": 76,
+                "term_months_lte": 84
+              },
+              "value": 20000,
+              "note": "84-month program minimum."
+            }
+          ]
+        },
+        "max_amount_financed": {
+          "value": null,
+          "except": [],
+          "note": "Not published."
+        },
+        "gap_max_usd": {
+          "value": null,
+          "except": [],
+          "note": "Not published."
+        }
+      },
+      "rates": {
+        "basis": "none",
+        "floor_apr_pct": null,
+        "ceiling_apr_pct": 24.0,
+        "grid_section": null,
+        "note": "Rate caps: new 24.00%, used 25.00%, or the state cap, whichever is lower."
+      }
     }
   },
   {
@@ -857,6 +1460,74 @@
       "doc": "5th3rd - Program Sheet - 072326.pdf",
       "driveFileId": "1M5cikg9r9KADCNhRNQQF4w9hzGnc_FoJ",
       "syncedAt": "2026-08-27"
+    },
+    "core": {
+      "schema": 1,
+      "provenance": {
+        "drive_file_id": "1M5cikg9r9KADCNhRNQQF4w9hzGnc_FoJ",
+        "doc": "5th3rd - Program Sheet - 072326.pdf",
+        "effective_date": "2026-07-23",
+        "pages": [
+          1
+        ],
+        "built": "2026-08-28"
+      },
+      "credit": {
+        "fico_min": {
+          "value": null,
+          "except": []
+        },
+        "fico_basis": "tier",
+        "tiers": []
+      },
+      "limits": {
+        "max_term_months": {
+          "value": 84,
+          "except": []
+        },
+        "max_mileage": {
+          "value": null,
+          "except": [],
+          "note": "Not published."
+        },
+        "max_vehicle_age_yr": {
+          "value": null,
+          "except": [],
+          "note": "Not published."
+        },
+        "ltv_front_max_pct": {
+          "value": 115,
+          "except": [],
+          "note": "Front-end advance against MSRP / JD Power Retail, up to 115% including doc fees."
+        },
+        "ltv_total_max_pct": {
+          "value": 140,
+          "except": [],
+          "note": "'Contract maximum total LTV not to exceed 140% (total amount financed / MSRP or JD Power Retail).'"
+        },
+        "min_amount_financed": {
+          "value": null,
+          "except": [],
+          "note": "Not published."
+        },
+        "max_amount_financed": {
+          "value": null,
+          "except": [],
+          "note": "Not published."
+        },
+        "gap_max_usd": {
+          "value": 1850,
+          "except": [],
+          "note": "$1,850 or 5% of amount financed. Needs front-end advance >= 70% of MSRP/JD Power Retail."
+        }
+      },
+      "rates": {
+        "basis": "none",
+        "floor_apr_pct": null,
+        "ceiling_apr_pct": null,
+        "grid_section": null,
+        "note": "Page 1 is a dealer reserve rate-adjustment schedule, not a buy-rate table."
+      }
     }
   },
   {
@@ -932,6 +1603,85 @@
       "doc": "Global - Program Sheet - 072726.pdf",
       "driveFileId": "1FosJDBLX8H9vjNf-ZO3jdQAG1ecWBggs",
       "syncedAt": "2026-08-27"
+    },
+    "core": {
+      "schema": 1,
+      "provenance": {
+        "drive_file_id": "1FosJDBLX8H9vjNf-ZO3jdQAG1ecWBggs",
+        "doc": "Global - Program Sheet - 072726.pdf",
+        "effective_date": "2026-07-27",
+        "pages": [
+          1
+        ],
+        "built": "2026-08-28"
+      },
+      "credit": {
+        "fico_min": {
+          "value": null,
+          "except": []
+        },
+        "fico_basis": "tier",
+        "tiers": [
+          "Tier 1",
+          "Tier 2",
+          "Tier 3",
+          "Tier 4",
+          "Advantage"
+        ]
+      },
+      "limits": {
+        "max_term_months": {
+          "value": 78,
+          "except": []
+        },
+        "max_mileage": {
+          "value": null,
+          "except": [],
+          "note": "Not published."
+        },
+        "max_vehicle_age_yr": {
+          "value": null,
+          "except": [],
+          "note": "Not published."
+        },
+        "ltv_front_max_pct": {
+          "value": 130,
+          "except": [],
+          "note": "'Front-End (as high as) 130%'."
+        },
+        "ltv_total_max_pct": {
+          "value": 140,
+          "except": [],
+          "note": "'Loan to Value (as high as) 140%'."
+        },
+        "min_amount_financed": {
+          "value": 7000,
+          "except": []
+        },
+        "max_amount_financed": {
+          "value": 55000,
+          "except": []
+        },
+        "gap_max_usd": {
+          "value": 1100,
+          "except": [
+            {
+              "when": {
+                "program": "Select"
+              },
+              "value": 1200
+            }
+          ],
+          "note": "Needs front-end LTV above 80%. Not allowed in MA or NY."
+        }
+      },
+      "rates": {
+        "basis": "floor",
+        "floor_apr_pct": 9.95,
+        "ceiling_apr_pct": null,
+        "grid_section": null,
+        "note": "'Rates as low as 9.95%'."
+      }
     }
   },
   {
@@ -999,6 +1749,106 @@
       "doc": "CapOne - Program Sheet - 010126.pdf",
       "driveFileId": "1iU_bLQVWiuaSeoTZKtUljRYia_9I0Nkl",
       "syncedAt": "2026-08-27"
+    },
+    "core": {
+      "schema": 1,
+      "provenance": {
+        "drive_file_id": "1iU_bLQVWiuaSeoTZKtUljRYia_9I0Nkl",
+        "doc": "CapOne - Program Sheet - 010126.pdf",
+        "effective_date": "2026-01-01",
+        "pages": [
+          1
+        ],
+        "built": "2026-08-28"
+      },
+      "credit": {
+        "fico_min": {
+          "value": null,
+          "except": []
+        },
+        "fico_basis": "tier",
+        "tiers": [
+          "Prime",
+          "Near Prime",
+          "Subprime"
+        ]
+      },
+      "limits": {
+        "max_term_months": {
+          "value": null,
+          "except": [],
+          "note": "Not published."
+        },
+        "max_mileage": {
+          "value": null,
+          "except": [],
+          "note": "Not published."
+        },
+        "max_vehicle_age_yr": {
+          "value": null,
+          "except": [],
+          "note": "Not published."
+        },
+        "ltv_front_max_pct": {
+          "value": 120,
+          "except": [
+            {
+              "when": {
+                "book_value_lte": 24999,
+                "program": "Non-Prime"
+              },
+              "value": 130
+            }
+          ],
+          "note": "Front End Advance: 120% for book value >= $25K (non-prime) or any book value (prime); 130% for book under $25K (non-prime)."
+        },
+        "ltv_total_max_pct": {
+          "value": 150,
+          "except": [
+            {
+              "when": {
+                "book_value_lte": 9999
+              },
+              "value": 175
+            }
+          ],
+          "note": "Loan to Value: 150% for book value >= $10K, 175% under $10K."
+        },
+        "min_amount_financed": {
+          "value": 2000,
+          "except": [],
+          "note": "Low Book Advance minimum $2,000 front-end."
+        },
+        "max_amount_financed": {
+          "value": 55000,
+          "except": [
+            {
+              "when": {
+                "program": "Prime"
+              },
+              "value": 75000
+            },
+            {
+              "when": {
+                "program": "Near Prime"
+              },
+              "value": 75000
+            }
+          ],
+          "note": "Up to $75K for prime and near prime; subprime $55K."
+        },
+        "gap_max_usd": {
+          "value": 1200,
+          "except": []
+        }
+      },
+      "rates": {
+        "basis": "none",
+        "floor_apr_pct": null,
+        "ceiling_apr_pct": null,
+        "grid_section": null,
+        "note": ""
+      }
     }
   },
   {
@@ -1076,6 +1926,77 @@
       "doc": "Westlake - Prime Program Sheet - 070826.pdf",
       "driveFileId": "1fwQ1YndmQi0zq9r5WTDTmAy9hhVje6VI",
       "syncedAt": "2026-08-27"
+    },
+    "core": {
+      "schema": 1,
+      "provenance": {
+        "drive_file_id": "1fwQ1YndmQi0zq9r5WTDTmAy9hhVje6VI",
+        "doc": "Westlake - Prime Program Sheet - 070826.pdf",
+        "effective_date": "2026-07-08",
+        "pages": [
+          1
+        ],
+        "built": "2026-08-28",
+        "note": "Prime sheet. CLAUDE.md's open question - whether this or the Independent Dealer sheet applies to a franchise store - is unresolved."
+      },
+      "credit": {
+        "fico_min": {
+          "value": 700,
+          "except": [],
+          "note": "Rate grid starts at 700-724."
+        },
+        "fico_basis": "score",
+        "tiers": []
+      },
+      "limits": {
+        "max_term_months": {
+          "value": null,
+          "except": [],
+          "note": "Not published."
+        },
+        "max_mileage": {
+          "value": null,
+          "except": [],
+          "note": "Not published."
+        },
+        "max_vehicle_age_yr": {
+          "value": null,
+          "except": [],
+          "note": "Not published."
+        },
+        "ltv_front_max_pct": {
+          "value": 140,
+          "except": [],
+          "note": "Top band of the rate grid is 120-140% front-end LTV; no higher band is published."
+        },
+        "ltv_total_max_pct": {
+          "value": null,
+          "except": [],
+          "note": "NOT PUBLISHED on the Prime sheet. The card's '140-150% incl. backend' is not supported by this document."
+        },
+        "min_amount_financed": {
+          "value": null,
+          "except": [],
+          "note": "Not published."
+        },
+        "max_amount_financed": {
+          "value": null,
+          "except": [],
+          "note": "Not published."
+        },
+        "gap_max_usd": {
+          "value": null,
+          "except": [],
+          "note": "Not published."
+        }
+      },
+      "rates": {
+        "basis": "floor",
+        "floor_apr_pct": 7.99,
+        "ceiling_apr_pct": null,
+        "grid_section": null,
+        "note": "Best cell of the front-end LTV x FICO grid (0-90% LTV, 800+ FICO), used cars up to 50,000 miles."
+      }
     }
   },
   {
@@ -1133,6 +2054,98 @@
       "doc": "Kia - K500&K506 - 080426.pdf",
       "driveFileId": "1erRPv4bOVTOpw5SdyjcOsX-3k3TanEJO",
       "syncedAt": "2026-08-27"
+    },
+    "core": {
+      "schema": 1,
+      "provenance": {
+        "drive_file_id": "1w-r5QJqPQDMFZT1rBrfAVfSL2qxTosc9",
+        "doc": "Kia - Standard New - National - 010626.pdf",
+        "effective_date": "2026-01-06",
+        "pages": [
+          1
+        ],
+        "built": "2026-08-28",
+        "note": "source.driveFileId points at the K500/K506 August bulletin, which is APR only. The advance ladder is on the Standard New sheet."
+      },
+      "credit": {
+        "fico_min": {
+          "value": 580,
+          "except": [],
+          "note": "Lowest published band is under 620 (custom advance); lowest bulletin tier is T8 = 580-619."
+        },
+        "fico_basis": "tier",
+        "tiers": [
+          "Tier 1",
+          "Tier 2",
+          "Tier 3",
+          "Tier 4",
+          "Tier 5",
+          "Tier 6",
+          "Tier 7",
+          "Tier 8"
+        ]
+      },
+      "limits": {
+        "max_term_months": {
+          "value": 84,
+          "except": []
+        },
+        "max_mileage": {
+          "value": null,
+          "except": [],
+          "note": "Not published."
+        },
+        "max_vehicle_age_yr": {
+          "value": null,
+          "except": [],
+          "note": "Not published."
+        },
+        "ltv_front_max_pct": {
+          "value": null,
+          "except": [],
+          "note": "Not published."
+        },
+        "ltv_total_max_pct": {
+          "value": 105,
+          "except": [
+            {
+              "when": {},
+              "value": 150,
+              "unresolved": true,
+              "note": "Max Advance ladder runs 105/115/125/135/150% by tier; the sheet's tier labels are not aligned to the bulletin's T1-T8, so only the ceiling is unambiguous."
+            }
+          ],
+          "note": "New vehicle advances include TT&L, so this is total."
+        },
+        "min_amount_financed": {
+          "value": 7500,
+          "except": []
+        },
+        "max_amount_financed": {
+          "value": null,
+          "except": [],
+          "note": "Not published."
+        },
+        "gap_max_usd": {
+          "value": 1000,
+          "except": [
+            {
+              "when": {
+                "program": "branded"
+              },
+              "value": 1500
+            }
+          ],
+          "note": "$1,500 branded (PPES/JM&A), $1,000 non-branded."
+        }
+      },
+      "rates": {
+        "basis": "grid",
+        "floor_apr_pct": null,
+        "ceiling_apr_pct": null,
+        "grid_section": "incentives",
+        "note": "K500/K506 bulletins 2026-104/105: 35 tables, 264 tier rows."
+      }
     }
   },
   {
@@ -1213,6 +2226,147 @@
       "doc": "Bank of America - Program Sheet - 061826.pdf",
       "driveFileId": "1xbiqM_pi-0XcddGDV5flk9FaSDbmnHYz",
       "syncedAt": "2026-08-27"
+    },
+    "core": {
+      "schema": 1,
+      "provenance": {
+        "drive_file_id": "1xbiqM_pi-0XcddGDV5flk9FaSDbmnHYz",
+        "doc": "Bank of America - Program Sheet - 061826.pdf",
+        "effective_date": "2026-06-18",
+        "pages": [
+          1,
+          3
+        ],
+        "built": "2026-08-28"
+      },
+      "credit": {
+        "fico_min": {
+          "value": 640,
+          "except": [],
+          "note": "640 for all applicants; 720 unlocks 84-month terms and the higher PTI."
+        },
+        "fico_basis": "score",
+        "tiers": []
+      },
+      "limits": {
+        "max_term_months": {
+          "value": 75,
+          "except": [
+            {
+              "when": {},
+              "value": 84,
+              "unresolved": true,
+              "note": "84 months requires FICO >= 720 for all applicants."
+            }
+          ]
+        },
+        "max_mileage": {
+          "value": 125000,
+          "except": []
+        },
+        "max_vehicle_age_yr": {
+          "value": 10,
+          "except": [
+            {
+              "when": {
+                "term_months_gte": 76,
+                "term_months_lte": 84
+              },
+              "value": 4
+            }
+          ],
+          "note": "<= 10 model years generally; <= 4 on 76-84 month terms."
+        },
+        "ltv_front_max_pct": {
+          "value": 110,
+          "except": [
+            {
+              "when": {
+                "term_months_gte": 1,
+                "term_months_lte": 75
+              },
+              "value": 130
+            }
+          ],
+          "note": "'Advance %' excludes back-end. 130% up to 75 months, 110% on 76-84."
+        },
+        "ltv_total_max_pct": {
+          "value": 125,
+          "except": [
+            {
+              "when": {
+                "term_months_gte": 1,
+                "term_months_lte": 75
+              },
+              "value": 145
+            }
+          ],
+          "note": "'LTV % = loan amount including back-end / collateral value', so this is total. 145% up to 75 months, 125% on 76-84."
+        },
+        "min_amount_financed": {
+          "value": 7500,
+          "except": [
+            {
+              "when": {
+                "term_months_gte": 76,
+                "term_months_lte": 84
+              },
+              "value": 25000
+            },
+            {
+              "when": {
+                "state": "MN"
+              },
+              "value": 8000
+            }
+          ]
+        },
+        "max_amount_financed": {
+          "value": null,
+          "except": [],
+          "note": "Not published."
+        },
+        "gap_max_usd": {
+          "value": 1500,
+          "except": [
+            {
+              "when": {
+                "state": "NY"
+              },
+              "value": 225
+            },
+            {
+              "when": {
+                "state": "CO"
+              },
+              "value": 600,
+              "note": "Greater of $600 or 4% of total amount financed."
+            },
+            {
+              "when": {
+                "state": "TX"
+              },
+              "value": null,
+              "note": "5% of total amount financed - a formula, not a cap."
+            },
+            {
+              "when": {
+                "state": "CA"
+              },
+              "value": null,
+              "note": "Capped by amount financed; see sections."
+            }
+          ],
+          "note": "No GAP below 70% LTV in most states."
+        }
+      },
+      "rates": {
+        "basis": "none",
+        "floor_apr_pct": null,
+        "ceiling_apr_pct": null,
+        "grid_section": null,
+        "note": "Publishes a 9-row dealer buy-rate/flat table (sections.reserve), not a consumer rate floor, so there is no single figure to rank on."
+      }
     }
   },
   {
@@ -1280,6 +2434,74 @@
       "doc": "Chase - Program Sheet - 051026.pdf",
       "driveFileId": "1UZCajZt9a2pvWahnBzcs4K5WraU4IX8m",
       "syncedAt": "2026-08-27"
+    },
+    "core": {
+      "schema": 1,
+      "provenance": {
+        "drive_file_id": "1UZCajZt9a2pvWahnBzcs4K5WraU4IX8m",
+        "doc": "Chase - Program Sheet - 051026.pdf",
+        "effective_date": "2026-05-10",
+        "pages": [
+          1
+        ],
+        "built": "2026-08-28"
+      },
+      "credit": {
+        "fico_min": {
+          "value": null,
+          "except": []
+        },
+        "fico_basis": "tier",
+        "tiers": []
+      },
+      "limits": {
+        "max_term_months": {
+          "value": 84,
+          "except": []
+        },
+        "max_mileage": {
+          "value": null,
+          "except": [],
+          "note": "Not published."
+        },
+        "max_vehicle_age_yr": {
+          "value": null,
+          "except": [],
+          "note": "Not published."
+        },
+        "ltv_front_max_pct": {
+          "value": null,
+          "except": [],
+          "note": "Not published."
+        },
+        "ltv_total_max_pct": {
+          "value": 150,
+          "except": [],
+          "note": "'Total Maximum LTV Advance allowed is 150% and includes both TT&L and all Aftermarket/Voluntary Products.'"
+        },
+        "min_amount_financed": {
+          "value": null,
+          "except": [],
+          "note": "Not published."
+        },
+        "max_amount_financed": {
+          "value": null,
+          "except": [],
+          "note": "Not published."
+        },
+        "gap_max_usd": {
+          "value": null,
+          "except": [],
+          "note": "State-specific."
+        }
+      },
+      "rates": {
+        "basis": "none",
+        "floor_apr_pct": null,
+        "ceiling_apr_pct": 24.99,
+        "grid_section": null,
+        "note": "24.99% cap."
+      }
     }
   },
   {
@@ -1345,6 +2567,112 @@
       "doc": "PNC - Program Sheet - 031626.pdf",
       "driveFileId": "1bWKDBW9sVot4RWU_Shlyxk_w1CWb7Lgw",
       "syncedAt": "2026-08-27"
+    },
+    "core": {
+      "schema": 1,
+      "provenance": {
+        "drive_file_id": "1bWKDBW9sVot4RWU_Shlyxk_w1CWb7Lgw",
+        "doc": "PNC - Program Sheet - 031626.pdf",
+        "effective_date": "2026-03-16",
+        "pages": [
+          1
+        ],
+        "built": "2026-08-28"
+      },
+      "credit": {
+        "fico_min": {
+          "value": 680,
+          "except": []
+        },
+        "fico_basis": "tier",
+        "tiers": [
+          "Tier 0 (800+)",
+          "Tier 1 (760-799)",
+          "Tier 2 (725-759)",
+          "Tier 3 (700-724)",
+          "Tier 4 (680-699)"
+        ]
+      },
+      "limits": {
+        "max_term_months": {
+          "value": 84,
+          "except": []
+        },
+        "max_mileage": {
+          "value": 125000,
+          "except": [],
+          "note": "'Based on tier and term conditions'."
+        },
+        "max_vehicle_age_yr": {
+          "value": null,
+          "except": [],
+          "note": "Not published."
+        },
+        "ltv_front_max_pct": {
+          "value": 110,
+          "except": [
+            {
+              "when": {
+                "tier": "Tier 0 (800+)",
+                "vehicle_condition": "new",
+                "term_months_gte": 1,
+                "term_months_lte": 72
+              },
+              "value": 125
+            },
+            {
+              "when": {
+                "tier": "Tier 0 (800+)",
+                "vehicle_condition": "new",
+                "term_months_gte": 73,
+                "term_months_lte": 84
+              },
+              "value": 115
+            },
+            {
+              "when": {
+                "tier": "Tier 0 (800+)",
+                "vehicle_condition": "used"
+              },
+              "value": 115
+            },
+            {
+              "when": {
+                "tier": "Tier 1 (760-799)"
+              },
+              "value": 115
+            }
+          ],
+          "note": "Maximum Front End Advance grid, 5 tiers x new/used x term band. Base is the floor (tiers 2-4)."
+        },
+        "ltv_total_max_pct": {
+          "value": 140,
+          "except": [],
+          "note": "'Maximum Total Advance 140%' - amount financed / invoice (new) or used vehicle value source."
+        },
+        "min_amount_financed": {
+          "value": null,
+          "except": [],
+          "note": "Not published."
+        },
+        "max_amount_financed": {
+          "value": null,
+          "except": [],
+          "note": "Not published."
+        },
+        "gap_max_usd": {
+          "value": 1200,
+          "except": [],
+          "note": "Lesser of $1,200 or the state legal limit. Needs front-end LTV above 70%."
+        }
+      },
+      "rates": {
+        "basis": "none",
+        "floor_apr_pct": null,
+        "ceiling_apr_pct": null,
+        "grid_section": null,
+        "note": ""
+      }
     }
   },
   {
@@ -1420,6 +2748,512 @@
       "doc": "DFC - Program Sheet - 081325.pdf",
       "driveFileId": "1VJ5ltQPHIdsv62z8SYOP8C3NXCzNNrvJ",
       "syncedAt": "2026-08-27"
+    },
+    "core": {
+      "schema": 1,
+      "provenance": {
+        "drive_file_id": "1VJ5ltQPHIdsv62z8SYOP8C3NXCzNNrvJ",
+        "doc": "DFC - Program Sheet - 081325.pdf",
+        "effective_date": "2025-08-13",
+        "pages": [
+          1
+        ],
+        "built": "2026-08-28"
+      },
+      "credit": {
+        "fico_min": {
+          "value": null,
+          "except": []
+        },
+        "fico_basis": "tier",
+        "tiers": [
+          "P0",
+          "P1",
+          "P2",
+          "P3",
+          "P4",
+          "P5",
+          "P6",
+          "P7",
+          "P8",
+          "P9",
+          "P10",
+          "P11",
+          "P10 (No Hit)"
+        ]
+      },
+      "limits": {
+        "max_term_months": {
+          "value": 60,
+          "except": [
+            {
+              "when": {
+                "tier": "P0",
+                "vehicle_condition": "new"
+              },
+              "value": 84
+            },
+            {
+              "when": {
+                "tier": "P1",
+                "vehicle_condition": "new"
+              },
+              "value": 84
+            },
+            {
+              "when": {
+                "tier": "P2",
+                "vehicle_condition": "new"
+              },
+              "value": 84
+            },
+            {
+              "when": {
+                "tier": "P3",
+                "vehicle_condition": "new"
+              },
+              "value": 84
+            },
+            {
+              "when": {
+                "tier": "P4",
+                "vehicle_condition": "new"
+              },
+              "value": 84
+            },
+            {
+              "when": {
+                "tier": "P5",
+                "vehicle_condition": "new"
+              },
+              "value": 72
+            },
+            {
+              "when": {
+                "tier": "P6",
+                "vehicle_condition": "new"
+              },
+              "value": 72
+            },
+            {
+              "when": {
+                "tier": "P7",
+                "vehicle_condition": "new"
+              },
+              "value": 72
+            },
+            {
+              "when": {
+                "tier": "P8",
+                "vehicle_condition": "new"
+              },
+              "value": 72
+            },
+            {
+              "when": {
+                "tier": "P11",
+                "vehicle_condition": "new"
+              },
+              "value": 72
+            },
+            {
+              "when": {
+                "tier": "P0",
+                "vehicle_condition": "used"
+              },
+              "value": 84
+            },
+            {
+              "when": {
+                "tier": "P1",
+                "vehicle_condition": "used"
+              },
+              "value": 84
+            },
+            {
+              "when": {
+                "tier": "P2",
+                "vehicle_condition": "used"
+              },
+              "value": 84
+            },
+            {
+              "when": {
+                "tier": "P3",
+                "vehicle_condition": "used"
+              },
+              "value": 84
+            },
+            {
+              "when": {
+                "tier": "P4",
+                "vehicle_condition": "used"
+              },
+              "value": 84
+            },
+            {
+              "when": {
+                "tier": "P5",
+                "vehicle_condition": "used"
+              },
+              "value": 72
+            },
+            {
+              "when": {
+                "tier": "P6",
+                "vehicle_condition": "used"
+              },
+              "value": 72
+            },
+            {
+              "when": {
+                "tier": "P7",
+                "vehicle_condition": "used"
+              },
+              "value": 72
+            },
+            {
+              "when": {
+                "tier": "P8",
+                "vehicle_condition": "used"
+              },
+              "value": 72
+            },
+            {
+              "when": {
+                "tier": "P11",
+                "vehicle_condition": "used"
+              },
+              "value": 72
+            }
+          ],
+          "note": "Per-tier max term, p1. 'P10 (No Hit)' is 60 months, front 90%/80%, total 100%/90% - a distinct row from P10."
+        },
+        "max_mileage": {
+          "value": null,
+          "except": [],
+          "note": "Not published."
+        },
+        "max_vehicle_age_yr": {
+          "value": null,
+          "except": [],
+          "note": "Not published."
+        },
+        "ltv_front_max_pct": {
+          "value": 100,
+          "except": [
+            {
+              "when": {
+                "tier": "P0",
+                "vehicle_condition": "new"
+              },
+              "value": 120
+            },
+            {
+              "when": {
+                "tier": "P1",
+                "vehicle_condition": "new"
+              },
+              "value": 120
+            },
+            {
+              "when": {
+                "tier": "P2",
+                "vehicle_condition": "new"
+              },
+              "value": 120
+            },
+            {
+              "when": {
+                "tier": "P3",
+                "vehicle_condition": "new"
+              },
+              "value": 120
+            },
+            {
+              "when": {
+                "tier": "P4",
+                "vehicle_condition": "new"
+              },
+              "value": 120
+            },
+            {
+              "when": {
+                "tier": "P5",
+                "vehicle_condition": "new"
+              },
+              "value": 120
+            },
+            {
+              "when": {
+                "tier": "P6",
+                "vehicle_condition": "new"
+              },
+              "value": 120
+            },
+            {
+              "when": {
+                "tier": "P7",
+                "vehicle_condition": "new"
+              },
+              "value": 120
+            },
+            {
+              "when": {
+                "tier": "P8",
+                "vehicle_condition": "new"
+              },
+              "value": 120
+            },
+            {
+              "when": {
+                "tier": "P9",
+                "vehicle_condition": "new"
+              },
+              "value": 110
+            },
+            {
+              "when": {
+                "tier": "P11",
+                "vehicle_condition": "new"
+              },
+              "value": 110
+            },
+            {
+              "when": {
+                "tier": "P0",
+                "vehicle_condition": "used"
+              },
+              "value": 120
+            },
+            {
+              "when": {
+                "tier": "P1",
+                "vehicle_condition": "used"
+              },
+              "value": 120
+            },
+            {
+              "when": {
+                "tier": "P2",
+                "vehicle_condition": "used"
+              },
+              "value": 120
+            },
+            {
+              "when": {
+                "tier": "P3",
+                "vehicle_condition": "used"
+              },
+              "value": 120
+            },
+            {
+              "when": {
+                "tier": "P4",
+                "vehicle_condition": "used"
+              },
+              "value": 120
+            },
+            {
+              "when": {
+                "tier": "P5",
+                "vehicle_condition": "used"
+              },
+              "value": 110
+            },
+            {
+              "when": {
+                "tier": "P6",
+                "vehicle_condition": "used"
+              },
+              "value": 110
+            },
+            {
+              "when": {
+                "tier": "P7",
+                "vehicle_condition": "used"
+              },
+              "value": 110
+            },
+            {
+              "when": {
+                "tier": "P8",
+                "vehicle_condition": "used"
+              },
+              "value": 110
+            }
+          ],
+          "note": "FrontLTVCap grid, p1. Base is the floor."
+        },
+        "ltv_total_max_pct": {
+          "value": 110,
+          "except": [
+            {
+              "when": {
+                "tier": "P0",
+                "vehicle_condition": "new"
+              },
+              "value": 135
+            },
+            {
+              "when": {
+                "tier": "P1",
+                "vehicle_condition": "new"
+              },
+              "value": 135
+            },
+            {
+              "when": {
+                "tier": "P2",
+                "vehicle_condition": "new"
+              },
+              "value": 135
+            },
+            {
+              "when": {
+                "tier": "P3",
+                "vehicle_condition": "new"
+              },
+              "value": 135
+            },
+            {
+              "when": {
+                "tier": "P4",
+                "vehicle_condition": "new"
+              },
+              "value": 135
+            },
+            {
+              "when": {
+                "tier": "P5",
+                "vehicle_condition": "new"
+              },
+              "value": 135
+            },
+            {
+              "when": {
+                "tier": "P6",
+                "vehicle_condition": "new"
+              },
+              "value": 130
+            },
+            {
+              "when": {
+                "tier": "P7",
+                "vehicle_condition": "new"
+              },
+              "value": 130
+            },
+            {
+              "when": {
+                "tier": "P8",
+                "vehicle_condition": "new"
+              },
+              "value": 130
+            },
+            {
+              "when": {
+                "tier": "P9",
+                "vehicle_condition": "new"
+              },
+              "value": 120
+            },
+            {
+              "when": {
+                "tier": "P11",
+                "vehicle_condition": "new"
+              },
+              "value": 120
+            },
+            {
+              "when": {
+                "tier": "P0",
+                "vehicle_condition": "used"
+              },
+              "value": 135
+            },
+            {
+              "when": {
+                "tier": "P1",
+                "vehicle_condition": "used"
+              },
+              "value": 135
+            },
+            {
+              "when": {
+                "tier": "P2",
+                "vehicle_condition": "used"
+              },
+              "value": 135
+            },
+            {
+              "when": {
+                "tier": "P3",
+                "vehicle_condition": "used"
+              },
+              "value": 135
+            },
+            {
+              "when": {
+                "tier": "P4",
+                "vehicle_condition": "used"
+              },
+              "value": 135
+            },
+            {
+              "when": {
+                "tier": "P5",
+                "vehicle_condition": "used"
+              },
+              "value": 125
+            },
+            {
+              "when": {
+                "tier": "P6",
+                "vehicle_condition": "used"
+              },
+              "value": 120
+            },
+            {
+              "when": {
+                "tier": "P7",
+                "vehicle_condition": "used"
+              },
+              "value": 120
+            },
+            {
+              "when": {
+                "tier": "P8",
+                "vehicle_condition": "used"
+              },
+              "value": 120
+            }
+          ],
+          "note": "TotalLTVCap grid, p1. Base is the floor; the 135% on the card is tiers P0-P4."
+        },
+        "min_amount_financed": {
+          "value": null,
+          "except": [],
+          "note": "Not published."
+        },
+        "max_amount_financed": {
+          "value": null,
+          "except": [],
+          "note": "Not published."
+        },
+        "gap_max_usd": {
+          "value": 1500,
+          "except": [],
+          "note": "$1,500 or the state cap, whichever is less. Needs front-end LTV >= 70%."
+        }
+      },
+      "rates": {
+        "basis": "none",
+        "floor_apr_pct": null,
+        "ceiling_apr_pct": null,
+        "grid_section": null,
+        "note": ""
+      }
     }
   },
   {
@@ -1785,6 +3619,82 @@
       "doc": "USBank - Program Highlights - 040126.pdf",
       "driveFileId": "1NzDLy0bGvZEFVsw1BCUbHlmlXB6MLG69",
       "syncedAt": "2026-08-27"
+    },
+    "core": {
+      "schema": 1,
+      "provenance": {
+        "drive_file_id": "1NzDLy0bGvZEFVsw1BCUbHlmlXB6MLG69",
+        "doc": "USBank - Program Highlights - 040126.pdf",
+        "effective_date": "2026-04-01",
+        "pages": [
+          1
+        ],
+        "built": "2026-08-28"
+      },
+      "credit": {
+        "fico_min": {
+          "value": null,
+          "except": []
+        },
+        "fico_basis": "tier",
+        "tiers": []
+      },
+      "limits": {
+        "max_term_months": {
+          "value": 84,
+          "except": []
+        },
+        "max_mileage": {
+          "value": null,
+          "except": [],
+          "note": "Not published."
+        },
+        "max_vehicle_age_yr": {
+          "value": null,
+          "except": [],
+          "note": "Not published."
+        },
+        "ltv_front_max_pct": {
+          "value": null,
+          "except": [],
+          "note": "Not published."
+        },
+        "ltv_total_max_pct": {
+          "value": 120,
+          "except": [
+            {
+              "when": {
+                "term_months_gte": 1,
+                "term_months_lte": 72
+              },
+              "value": 145
+            }
+          ],
+          "note": "145% up to 72 months; 'terms > 72 months, maximum allowable total LTV will not exceed 120%'."
+        },
+        "min_amount_financed": {
+          "value": null,
+          "except": [],
+          "note": "Not published."
+        },
+        "max_amount_financed": {
+          "value": 100000,
+          "except": [],
+          "note": "Front-end advance above $100,000 goes to a separate guideline document."
+        },
+        "gap_max_usd": {
+          "value": 1500,
+          "except": [],
+          "note": "Or the state max. Not permitted below 60% front-end advance LTV, except Indiana dealers."
+        }
+      },
+      "rates": {
+        "basis": "none",
+        "floor_apr_pct": null,
+        "ceiling_apr_pct": null,
+        "grid_section": null,
+        "note": ""
+      }
     }
   },
   {
@@ -1862,6 +3772,74 @@
       "doc": "Flagship - Program Sheet - 072926.pdf",
       "driveFileId": "1yqZG4W6_8CAThHGoJw3_6LfkQyZJUtO5",
       "syncedAt": "2026-08-27"
+    },
+    "core": {
+      "schema": 1,
+      "provenance": {
+        "drive_file_id": "1yqZG4W6_8CAThHGoJw3_6LfkQyZJUtO5",
+        "doc": "Flagship - Program Sheet - 072926.pdf",
+        "effective_date": "2026-07-29",
+        "pages": [
+          1
+        ],
+        "built": "2026-08-28"
+      },
+      "credit": {
+        "fico_min": {
+          "value": null,
+          "except": []
+        },
+        "fico_basis": "tier",
+        "tiers": []
+      },
+      "limits": {
+        "max_term_months": {
+          "value": 78,
+          "except": []
+        },
+        "max_mileage": {
+          "value": 160000,
+          "except": [],
+          "note": "160,000 applies at 60 months or less."
+        },
+        "max_vehicle_age_yr": {
+          "value": null,
+          "except": [],
+          "note": "Not published."
+        },
+        "ltv_front_max_pct": {
+          "value": 125,
+          "except": [],
+          "note": "'Front-End Advance up to 125%'."
+        },
+        "ltv_total_max_pct": {
+          "value": 150,
+          "except": [],
+          "note": "'LTV up to 150%'."
+        },
+        "min_amount_financed": {
+          "value": null,
+          "except": [],
+          "note": "Not published."
+        },
+        "max_amount_financed": {
+          "value": null,
+          "except": [],
+          "note": "Not published."
+        },
+        "gap_max_usd": {
+          "value": 1200,
+          "except": [],
+          "note": "Or state max. Needs LTV >= 80%."
+        }
+      },
+      "rates": {
+        "basis": "none",
+        "floor_apr_pct": null,
+        "ceiling_apr_pct": null,
+        "grid_section": null,
+        "note": ""
+      }
     }
   },
   {
@@ -1943,6 +3921,104 @@
       "doc": "Santander - Program Sheet - 060126.pdf",
       "driveFileId": "1sIz87MWE15FzQSQPM4N3h8R_h4yxSl2G",
       "syncedAt": "2026-08-27"
+    },
+    "core": {
+      "schema": 1,
+      "provenance": {
+        "drive_file_id": "1sIz87MWE15FzQSQPM4N3h8R_h4yxSl2G",
+        "doc": "Santander - Program Sheet - 060126.pdf",
+        "effective_date": "2026-06-01",
+        "pages": [
+          1
+        ],
+        "built": "2026-08-28"
+      },
+      "credit": {
+        "fico_min": {
+          "value": null,
+          "except": []
+        },
+        "fico_basis": "tier",
+        "tiers": []
+      },
+      "limits": {
+        "max_term_months": {
+          "value": 84,
+          "except": []
+        },
+        "max_mileage": {
+          "value": 60000,
+          "except": [
+            {
+              "when": {
+                "term_months_gte": 1,
+                "term_months_lte": 75
+              },
+              "value": 150000
+            }
+          ],
+          "note": "150,000 up to 75 months; 60,000 at 84 months."
+        },
+        "max_vehicle_age_yr": {
+          "value": 5,
+          "except": [
+            {
+              "when": {
+                "term_months_gte": 1,
+                "term_months_lte": 75
+              },
+              "value": 12
+            }
+          ],
+          "note": "Up to 12 years at <= 75 months; up to 5 years at 84."
+        },
+        "ltv_front_max_pct": {
+          "value": 115,
+          "except": [],
+          "note": "115% front at 84 months; the <=75 column publishes only the combined 145%."
+        },
+        "ltv_total_max_pct": {
+          "value": 120,
+          "except": [
+            {
+              "when": {
+                "term_months_gte": 1,
+                "term_months_lte": 75
+              },
+              "value": 145
+            }
+          ],
+          "note": "145% up to 75 months; 120% back at 84 months."
+        },
+        "min_amount_financed": {
+          "value": 5000,
+          "except": [
+            {
+              "when": {
+                "term_months_gte": 76,
+                "term_months_lte": 84
+              },
+              "value": 15000
+            }
+          ],
+          "note": "Minimum Line 3 front-end advance."
+        },
+        "max_amount_financed": {
+          "value": 100000,
+          "except": []
+        },
+        "gap_max_usd": {
+          "value": 1200,
+          "except": []
+        }
+      },
+      "rates": {
+        "basis": "none",
+        "floor_apr_pct": null,
+        "ceiling_apr_pct": null,
+        "grid_section": null,
+        "note": "Publishes a buydown rule, no rate figures."
+      }
     }
   }
 ]
