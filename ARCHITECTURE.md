@@ -8,7 +8,7 @@ How the app is wired today. Factual, from `main` on 2026-08-28. Not a design doc
 
 | File | Size | Status |
 |---|---|---|
-| `index.html` | ~96 KB | **The app.** HTML + CSS + JS inline. No lender data. |
+| `index.html` | ~97 KB | **The app.** HTML + CSS + JS inline. No lender data. |
 | `lenders.json` | ~201 KB | **The data.** 20 lender records, fetched at boot. |
 | `tools/pdf_triage.py` | — | Classifies a source PDF's text layer and renders pages. |
 | `.gitignore` | — | — |
