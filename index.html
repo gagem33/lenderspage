@@ -7,45 +7,45 @@
   <meta name="description" content="Internal dealership lender hub — program guidelines for all finance partners.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%23111827'/><text y='22' x='5' font-size='18' font-family='sans-serif' font-weight='900' fill='%23f59e0b'>F</text></svg>">
 <style>
 /* ═══════════════════════════════════════════════
    DESIGN TOKENS
 ═══════════════════════════════════════════════ */
 :root {
-  --bg:        #121813;
-  --bg2:       #161d17;
-  --bg3:       #1e271f;
-  --surface:   #222c23;
-  --surface2:  #2a372c;
-  --border:    rgba(196,207,187,0.10);
-  --border2:   rgba(196,207,187,0.18);
+  --bg:        #0A0C0D;
+  --bg2:       #14181A;
+  --bg3:       #1B2124;
+  --surface:   #1B2124;
+  --surface2:  #232A2E;
+  --border:    rgba(233,237,239,0.11);
+  --border2:   rgba(233,237,239,0.20);
 
-  --text:      #ece9dd;
-  --text2:     #b0b9a9;
-  --text3:     #77816f;
+  --text:      #E9EDEF;
+  --text2:     #8B979C;
+  --text3:     #5D686D;
 
-  --gold:      #a8c39a;
-  --gold2:     #8fae80;
-  --golddim:   rgba(168,195,154,0.10);
-  --golddim2:  rgba(168,195,154,0.20);
-  --gold-grad: linear-gradient(135deg, #a8c39a, #8fae80);
+  --gold:      #D4A24C;
+  --gold2:     #BE8C39;
+  --golddim:   rgba(212,162,76,0.14);
+  --golddim2:  rgba(212,162,76,0.26);
+  --gold-grad: linear-gradient(135deg, #D4A24C, #BE8C39);
 
-  --green:     #8fbf9f;
-  --greendim:  rgba(143,191,159,0.12);
-  --red:       #d99a84;
-  --reddim:    rgba(217,154,132,0.12);
-  --blue:      #9ab6c4;
-  --bluedim:   rgba(154,182,196,0.12);
+  --green:     #58B389;
+  --greendim:  rgba(88,179,137,0.15);
+  --red:       #DC7C64;
+  --reddim:    rgba(220,124,100,0.15);
+  --blue:      #7FA9C4;
+  --bluedim:   rgba(127,169,196,0.15);
 
-  --font: 'DM Sans', system-ui, sans-serif;
-  --mono: 'DM Mono', monospace;
+  --font: 'IBM Plex Sans', system-ui, sans-serif;
+  --mono: 'IBM Plex Mono', ui-monospace, monospace;
 
-  --r-sm:   6px;
-  --r-md:   10px;
-  --r-lg:   14px;
-  --r-xl:   18px;
+  --r-sm:   3px;
+  --r-md:   5px;
+  --r-lg:   6px;
+  --r-xl:   8px;
   --r-full: 9999px;
 
   --sidebar: 248px;
@@ -56,29 +56,29 @@
   --ring: 0 0 0 3px var(--golddim2);
 }
 [data-theme="light"] {
-  --bg:       #f5f2e8;
-  --bg2:      #f0ecdf;
-  --bg3:      #e8e3d2;
-  --surface:  #fcfaf3;
-  --surface2: #f5f1e4;
-  --border:   rgba(35,52,40,0.10);
-  --border2:  rgba(35,52,40,0.18);
-  --text:     #1e2a21;
-  --text2:    #4c5c4f;
-  --text3:    #83907f;
-  --gold:     #2f5d42;
-  --gold2:    #254b35;
-  --golddim:  rgba(47,93,66,0.08);
-  --golddim2: rgba(47,93,66,0.16);
-  --gold-grad: linear-gradient(135deg, #38684b, #2f5d42);
-  --green:    #3f7d5a;
-  --greendim: rgba(63,125,90,0.10);
-  --red:      #a8543c;
-  --reddim:   rgba(168,84,60,0.09);
-  --blue:     #4e6e85;
-  --bluedim:  rgba(78,110,133,0.09);
-  --shadow-md: 0 1px 2px rgba(35,52,40,.04), 0 4px 14px rgba(35,52,40,.05);
-  --shadow-lg: 0 8px 28px rgba(35,52,40,.10), 0 28px 80px rgba(35,52,40,.12);
+  --bg:       #F4F6F7;
+  --bg2:      #FFFFFF;
+  --bg3:      #ECEFF1;
+  --surface:  #FFFFFF;
+  --surface2: #E6EAED;
+  --border:   rgba(16,26,32,0.11);
+  --border2:  rgba(16,26,32,0.20);
+  --text:     #101A20;
+  --text2:    #4A585F;
+  --text3:    #7B888F;
+  --gold:     #8A5A10;
+  --gold2:    #6E4709;
+  --golddim:  rgba(138,90,16,0.10);
+  --golddim2: rgba(138,90,16,0.22);
+  --gold-grad: linear-gradient(135deg, #8A5A10, #6E4709);
+  --green:    #1F7A52;
+  --greendim: rgba(31,122,82,0.12);
+  --red:      #B24427;
+  --reddim:   rgba(178,68,39,0.11);
+  --blue:     #2C6383;
+  --bluedim:  rgba(44,99,131,0.11);
+  --shadow-md: 0 1px 2px rgba(16,26,32,.05), 0 4px 14px rgba(16,26,32,.06);
+  --shadow-lg: 0 8px 28px rgba(16,26,32,.11), 0 28px 80px rgba(16,26,32,.13);
 }
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -181,91 +181,6 @@ ul, ol { list-style: none; }
 }
 .btn-icon:hover { color: var(--text); border-color: var(--border2); }
 
-/* SIDEBAR */
-#sidebar {
-  position: fixed;
-  top: var(--header); left: 0; bottom: 0;
-  width: var(--sidebar);
-  background: var(--bg2);
-  border-right: 1px solid var(--border);
-  overflow-y: auto;
-  z-index: 50;
-  scrollbar-width: thin;
-  scrollbar-color: var(--border2) transparent;
-  transition: transform .25s ease;
-}
-#sidebar::-webkit-scrollbar { width: 4px; }
-#sidebar::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 4px; }
-
-.sidebar-section { padding: 14px 10px 8px; }
-.sidebar-label {
-  font-size: .65rem; font-weight: 700; color: var(--text3);
-  letter-spacing: .09em; text-transform: uppercase;
-  padding: 0 8px 8px;
-}
-.sidebar-item {
-  display: flex; align-items: center; gap: 8px;
-  padding: 7px 10px;
-  border-radius: var(--r-md);
-  color: var(--text2);
-  font-size: .825rem; font-weight: 500;
-  cursor: pointer; user-select: none;
-  border: 1px solid transparent;
-  position: relative;
-  transition: background .15s, color .15s, border-color .15s;
-}
-.sidebar-item:hover { background: var(--bg3); color: var(--text); }
-/* The name, plus a line saying where a search hit landed. The hit line is hidden
-   unless searching, so a resting sidebar row is exactly what it always was. */
-.sidebar-item-main { flex: 1; min-width: 0; display: flex; flex-direction: column; }
-.sidebar-name { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.sidebar-hit {
-  font-size: .62rem; color: var(--text3); font-weight: 500;
-  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
-}
-.sidebar-hit[hidden] { display: none; }
-.sidebar-item.active {
-  background: var(--golddim); color: var(--gold);
-  border-color: var(--golddim2);
-  font-weight: 600;
-}
-.sidebar-item.active::before {
-  content: ''; position: absolute; left: -10px; top: 20%; bottom: 20%;
-  width: 3px; border-radius: 3px; background: var(--gold-grad);
-}
-.sidebar-item.hidden { display: none; }
-.sidebar-item mark { background: var(--golddim2); color: var(--gold); border-radius: 2px; padding: 0 1px; }
-.tier-dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
-
-/* ── Search bar ───────────────────────────── */
-.sidebar-search-wrap {
-  display: flex; align-items: center; gap: 6px;
-  background: var(--bg3); border: 1px solid var(--border2);
-  border-radius: var(--r-md); padding: 6px 10px;
-  margin: 0 2px 8px;
-  transition: border-color .15s;
-}
-.sidebar-search-wrap:focus-within { border-color: var(--gold); }
-.sidebar-search-icon { color: var(--text3); flex-shrink: 0; }
-#sidebar-search {
-  flex: 1; background: none; border: none; outline: none;
-  font: 500 .8rem var(--font); color: var(--text);
-  min-width: 0;
-}
-#sidebar-search::placeholder { color: var(--text3); }
-#sidebar-search-clear {
-  background: none; border: none; cursor: pointer;
-  color: var(--text3); font-size: .7rem; padding: 0;
-  display: none; line-height: 1;
-}
-#sidebar-search-clear:hover { color: var(--text); }
-#sidebar-search-clear.visible { display: block; }
-
-/* ── Segment filter chips ─────────────────── */
-#sidebar-filter-chips {
-  display: flex; flex-wrap: wrap; gap: 4px;
-  padding: 0 2px 4px;
-}
 .seg-chip {
   font: 600 .6rem var(--font); letter-spacing: .05em;
   text-transform: uppercase; padding: 3px 8px;
@@ -274,19 +189,7 @@ ul, ol { list-style: none; }
   cursor: pointer; transition: all .15s;
 }
 .seg-chip:hover { color: var(--text); border-color: var(--border2); }
-.seg-chip-all.active  { background: var(--golddim2); color: var(--gold); border-color: transparent; }
-.seg-chip-prime.active  { background: var(--greendim); color: var(--green); border-color: transparent; }
-.seg-chip-near.active   { background: var(--bluedim);  color: var(--blue);  border-color: transparent; }
-.seg-chip-sub.active    { background: var(--golddim); color: var(--gold);  border-color: transparent; }
-.seg-chip-deep.active   { background: var(--reddim);   color: var(--red);   border-color: transparent; }
-
-/* ── No results message ───────────────────── */
-#sidebar-no-results {
-  display: none; text-align: center;
-  font-size: .75rem; color: var(--text3);
-  padding: 12px 8px;
-}
-#sidebar-no-results.visible { display: block; }
+.seg-chip.active { background: var(--golddim2); color: var(--gold); border-color: transparent; }
 .lender-badge {
   margin-left: auto; font-size: .6rem; font-weight: 700;
   padding: 1px 6px; border-radius: var(--r-full);
@@ -300,15 +203,139 @@ ul, ol { list-style: none; }
 
 /* MAIN */
 #main {
-  margin-left: var(--sidebar);
   margin-top: var(--header);
   min-height: calc(100vh - var(--header));
   padding: 28px 28px 80px;
 }
 
+
+/* ── LENDER CARDS ─────────────────────────────
+   The whole book is one list. A card opens where it sits and its sections switch
+   without it growing, so finding a figure is clicking rather than scrolling. */
+.lh-toolbar { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-bottom: 8px; }
+.lh-search-wrap {
+  flex: 1; min-width: 260px; display: flex; align-items: center; gap: 8px;
+  background: var(--bg2); border: 1px solid var(--border);
+  border-radius: var(--r-md); padding: 7px 11px;
+}
+.lh-search-wrap:focus-within { border-color: var(--gold); box-shadow: var(--ring); }
+.lh-search-icon { color: var(--text3); flex-shrink: 0; }
+#lh-search {
+  flex: 1; background: none; border: none; outline: none;
+  color: var(--text); font: inherit; font-size: .84rem;
+}
+#lh-search::placeholder { color: var(--text3); }
+#lh-search::-webkit-search-cancel-button { display: none; }
+#lh-search-clear {
+  display: none; background: none; border: none; color: var(--text3);
+  cursor: pointer; font-size: .78rem; padding: 0 2px;
+}
+#lh-search-clear:hover { color: var(--text); }
+#lh-search-clear.visible { display: block; }
+#lh-segs { display: flex; gap: 4px; flex-wrap: wrap; }
+.lh-count {
+  font-family: var(--mono); font-size: .7rem; color: var(--text3);
+  white-space: nowrap; margin-left: auto;
+}
+#lh-empty { padding: 40px 8px; text-align: center; color: var(--text3); font-size: .85rem; }
+
+.lh-card {
+  border: 1px solid var(--border); border-radius: var(--r-lg);
+  background: var(--bg2); margin-bottom: 5px; overflow: hidden;
+}
+.lh-card.open { border-color: var(--golddim2); background: var(--surface); }
+.lh-head {
+  display: grid; gap: 10px; align-items: center; padding: 9px 12px;
+  cursor: pointer; user-select: none;
+  grid-template-columns: 28px minmax(150px, 1.7fr) 76px minmax(100px, auto)
+                         repeat(5, minmax(56px, .8fr)) 14px;
+}
+.lh-head:hover { background: var(--bg3); }
+.lh-head:focus-visible { outline: none; box-shadow: inset var(--ring); }
+.lh-card.open .lh-head { background: var(--golddim); border-bottom: 1px solid var(--border); }
+.lh-mark {
+  width: 28px; height: 28px; border-radius: var(--r-sm);
+  display: flex; align-items: center; justify-content: center;
+  font-size: .56rem; font-weight: 700; letter-spacing: .02em; color: #fff;
+}
+.lh-nm { min-width: 0; }
+.lh-nm b {
+  display: block; font-size: .84rem; font-weight: 600;
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+.lh-nm em {
+  display: block; font-style: normal; font-size: .64rem; color: var(--text3);
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+.lh-hit { font-style: normal; color: var(--gold); }
+.lh-cell {
+  font-family: var(--mono); font-size: .74rem; color: var(--text2);
+  font-variant-numeric: tabular-nums;
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+.lh-cell u {
+  display: block; text-decoration: none; font-family: var(--font);
+  font-size: .55rem; font-weight: 700; letter-spacing: .08em;
+  text-transform: uppercase; color: var(--text3);
+}
+.lh-agecell, .lh-segcell { min-width: 0; overflow: hidden; }
+.lh-tag {
+  display: inline-block; max-width: 100%; padding: 2px 8px;
+  border-radius: var(--r-full); font-size: .63rem; font-weight: 600;
+  font-style: normal; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  background: var(--surface2); color: var(--text2);
+}
+.lh-tag.seg   { background: var(--golddim); color: var(--gold); }
+.lh-tag.green { background: var(--greendim); color: var(--green); }
+.lh-tag.blue  { background: var(--bluedim);  color: var(--blue); }
+.lh-tag.amber { background: var(--golddim);  color: var(--gold); }
+.lh-tag.red, .lh-tag.bad { background: var(--reddim); color: var(--red); }
+.lh-chev { color: var(--text3); font-size: .68rem; text-align: center; transition: transform .18s; }
+.lh-card.open .lh-chev { transform: rotate(90deg); color: var(--gold); }
+
+.lh-body { display: none; padding: 12px; }
+.lh-card.open .lh-body { display: block; }
+.lh-meta { font-size: .7rem; color: var(--text3); margin-bottom: 9px; }
+.lh-strip {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(118px, 1fr));
+  gap: 6px; margin-bottom: 10px;
+}
+.lh-st {
+  background: var(--bg3); border: 1px solid var(--border);
+  border-radius: var(--r-md); padding: 7px 10px;
+}
+.lh-st u {
+  display: block; text-decoration: none; font-size: .55rem; font-weight: 700;
+  letter-spacing: .09em; text-transform: uppercase; color: var(--text3); margin-bottom: 2px;
+}
+.lh-st b {
+  display: block; font-family: var(--mono); font-size: .92rem; color: var(--gold);
+  font-variant-numeric: tabular-nums; line-height: 1.25;
+}
+.lh-tabs {
+  display: flex; gap: 4px; flex-wrap: wrap;
+  margin-bottom: 9px; padding-bottom: 9px; border-bottom: 1px solid var(--border);
+}
+.lh-tb {
+  background: var(--bg3); border: 1px solid var(--border); border-radius: var(--r-sm);
+  color: var(--text2); font: inherit; font-size: .7rem; font-weight: 600;
+  padding: 4px 10px; cursor: pointer; white-space: nowrap;
+}
+.lh-tb:hover { border-color: var(--gold2); color: var(--text); }
+.lh-tb.on { background: var(--gold); border-color: var(--gold); color: var(--bg); }
+/* The card must not grow as you switch sections -- that is the whole point. */
+.lh-pane { max-height: min(56vh, 460px); overflow-y: auto; padding-right: 4px; }
+.lh-pane::-webkit-scrollbar { width: 8px; }
+.lh-pane::-webkit-scrollbar-thumb { background: var(--surface2); border-radius: 4px; }
+
+@media (max-width: 900px) {
+  .lh-head { grid-template-columns: 28px 1fr 72px 14px; gap: 8px; }
+  .lh-head .lh-cell, .lh-head .lh-segcell { display: none; }
+  .lh-count { margin-left: 0; }
+}
+
 /* FOOTER */
 footer {
-  margin-left: var(--sidebar);
   padding: 16px 28px;
   border-top: 1px solid var(--border);
   display: flex; align-items: center; justify-content: space-between;
@@ -819,7 +846,7 @@ kbd {
   :root { --sidebar: 0px; }
   #sidebar { transform: translateX(-100%); width: 260px; z-index: 200; box-shadow: var(--shadow-lg); }
   #sidebar.open { transform: translateX(0); }
-  #main { margin-left: 0; padding: 18px 14px 80px; }
+  #main { padding: 14px 12px 70px; }
   footer { margin-left: 0; }
   #menu-toggle { display: flex; }
   .stat-grid { grid-template-columns: repeat(2,1fr); }
@@ -866,19 +893,12 @@ kbd {
 
 <!-- HEADER -->
 <header id="header" role="banner">
-  <button id="menu-toggle" aria-label="Open navigation">
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
-  </button>
   <div class="logo-wrap">
     <div class="logo-mark">F</div>
     <div>
       <div class="logo-text">Lender Hub</div>
       <div class="logo-sub">F&amp;I Program Reference</div>
     </div>
-  </div>
-  <div class="header-search">
-    <svg class="search-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-    <input type="search" id="search-input" placeholder="Search lenders…" aria-label="Search lenders">
   </div>
   <div class="header-actions">
     <button id="income-calc-btn" class="btn-tool" title="Income Calculator">
@@ -912,66 +932,36 @@ kbd {
 </header>
 
 <!-- SIDEBAR -->
-<nav id="sidebar" aria-label="Lender navigation">
-  <div class="sidebar-section">
-    <div class="sidebar-label">Overview</div>
-    <div class="sidebar-item active" id="sidebar-compare" role="button" tabindex="0">
-      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="flex-shrink:0"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
-      <span style="flex:1">Compare All</span>
-      <span class="lender-badge badge-all">20</span>
-    </div>
-  </div>
-  <div class="sidebar-section" style="padding-bottom:6px">
-    <div class="sidebar-search-wrap">
-      <svg class="sidebar-search-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
-      <input id="sidebar-search" type="search" placeholder="Search lenders — press / to jump" autocomplete="off" spellcheck="false">
-      <button id="sidebar-search-clear" title="Clear">✕</button>
-    </div>
-    <div id="sidebar-filter-chips">
-      <button class="seg-chip seg-chip-all active" data-seg="all">All</button>
-      <button class="seg-chip seg-chip-prime" data-seg="prime">Prime</button>
-      <button class="seg-chip seg-chip-near" data-seg="near">Near</button>
-      <button class="seg-chip seg-chip-sub" data-seg="sub">Sub</button>
-      <button class="seg-chip seg-chip-deep" data-seg="deep">Deep</button>
-    </div>
-    <div id="sidebar-no-results">No matches</div>
-  </div>
-  <div class="sidebar-section" style="padding-top:0">
-    <div class="sidebar-label" id="sidebar-lenders-label">All Lenders</div>
-    <div id="sidebar-lenders"></div>
-  </div>
-  <div class="sidebar-section" style="padding-top:0">
-    <div class="sidebar-label">Legend</div>
-    <div style="padding:4px 8px;display:flex;flex-direction:column;gap:5px">
-      <div style="display:flex;align-items:center;gap:6px;font-size:.72rem;color:var(--text3)"><span style="width:7px;height:7px;border-radius:50%;background:var(--green);flex-shrink:0"></span>Prime</div>
-      <div style="display:flex;align-items:center;gap:6px;font-size:.72rem;color:var(--text3)"><span style="width:7px;height:7px;border-radius:50%;background:var(--blue);flex-shrink:0"></span>Near-Prime</div>
-      <div style="display:flex;align-items:center;gap:6px;font-size:.72rem;color:var(--text3)"><span style="width:7px;height:7px;border-radius:50%;background:var(--gold);flex-shrink:0"></span>Sub-Prime</div>
-      <div style="display:flex;align-items:center;gap:6px;font-size:.72rem;color:var(--text3)"><span style="width:7px;height:7px;border-radius:50%;background:var(--red);flex-shrink:0"></span>Deep Sub-Prime</div>
-    </div>
-  </div>
-</nav>
-<div id="sidebar-overlay" aria-hidden="true"></div>
+
 
 <!-- MAIN -->
 <main id="main" role="main">
   <!-- COMPARE VIEW -->
   <section class="view active" id="view-compare">
     <div class="page-header">
-      <h1 class="page-title">Lender Quick Compare</h1>
-      <p class="page-subtitle">All 20 finance partners. Click any row to view full program details.</p>
-      <p class="page-date">Sheet Age is how old each lender's program document is, straight from the source PDF. Green under 90 days · amber past 90 · red past a year. Always confirm on the approval.</p>
+      <h1 class="page-title">Lender Hub</h1>
+      <div class="lh-toolbar">
+        <div class="lh-search-wrap">
+          <svg class="lh-search-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+          <input id="lh-search" type="search" autocomplete="off" spellcheck="false"
+                 placeholder="Filter lenders, or search inside their programs — press / to jump">
+          <button id="lh-search-clear" title="Clear">&#10005;</button>
+        </div>
+        <div id="lh-segs">
+          <button class="seg-chip active" data-seg="all">All</button>
+          <button class="seg-chip" data-seg="prime">Prime</button>
+          <button class="seg-chip" data-seg="near">Near</button>
+          <button class="seg-chip" data-seg="sub">Sub</button>
+          <button class="seg-chip" data-seg="deep">Deep</button>
+        </div>
+        <span class="lh-count" id="lh-count"></span>
+      </div>
+      <p class="page-date">Click a lender to open it here &mdash; the list stays put. Section chips switch
+        without growing the card. <b>Sheet Age</b> is straight from the source PDF: green under 90 days
+        &middot; amber past 90 &middot; red past a year. Always confirm on the approval.</p>
     </div>
-    <div class="compare-wrap">
-      <table class="compare-table" role="grid">
-        <thead>
-          <tr>
-            <th>Lender</th><th>Sheet Age</th><th>Min FICO</th><th>Segment</th><th>Max Term</th>
-            <th>Max Miles</th><th>Max LTV</th><th>GAP Cap</th><th>Reserve / Flat</th><th>Chargeback</th>
-          </tr>
-        </thead>
-        <tbody id="compare-tbody"></tbody>
-      </table>
-    </div>
+    <div id="lh-list"></div>
+    <p id="lh-empty" hidden>Nothing matches that.</p>
     <h2 style="font-size:1.25rem;font-weight:800;margin:28px 0 16px;letter-spacing:-.03em">Quick Lists</h2>
     <p class="page-subtitle" style="margin:-10px 0 16px;font-size:.825rem">Which banks can do what — tap a bank to open its full program.</p>
     <div class="ql-grid" id="quick-lists"></div>
@@ -990,8 +980,6 @@ kbd {
     </div>
   </section>
 
-  <!-- LENDER DETAIL VIEW -->
-  <section class="view" id="view-lender"></section>
 
 
 </main>
@@ -1243,41 +1231,129 @@ function applyTheme() { document.documentElement.setAttribute('data-theme', them
 function toggleTheme() { theme = theme==='dark'?'light':'dark'; applyTheme(); }
 applyTheme();
 
-// ─── SIDEBAR ─────────────────────────────────────────────────
-function buildSidebar() {
-  const c = $('#sidebar-lenders');
-  if (!c) return;
-  c.innerHTML = LENDERS.map(l => `
-    <div class="sidebar-item" data-id="${l.id}" role="button" tabindex="0">
-      <span class="tier-dot" style="background:${dotColor(l.segment)}"></span>
-      <span class="sidebar-item-main">
-        <span class="sidebar-name">${l.name}</span>
-        <span class="sidebar-hit" hidden></span>
-      </span>
-      ${(f => f?.attention ? `<span class="fresh-pip ${f.cls}" title="${f.title}" aria-label="${f.text}"></span>` : '')(freshnessOf(l))}
-      <span class="lender-badge ${segBadge(l.segment)}">${l.segmentLabel.split('-')[0]}</span>
-    </div>`).join('');
+// ─── LENDER CARDS ────────────────────────────────────────────
+// One list, no sidebar. A lender opens where it sits, and its sections are chips
+// rather than a scroll, so finding a figure is clicking rather than hunting.
+
+const SEG_LABEL = {prime:'Prime', near:'Near-Prime', sub:'Sub-Prime',
+                   deep:'Deep Sub-Prime', all:'All Tiers'};
+
+let cardList = [], activeSeg = 'all', openLender = null;
+// Which section each lender was last left on, so reopening a card returns you
+// to what you were reading rather than to the top.
+const lastSection = {};
+
+function cardHTML(l) {
+  const f = freshnessOf(l);
+  const secs = Object.entries(l.sections);
+  const cur = lastSection[l.id] && l.sections[lastSection[l.id]] ? lastSection[l.id] : secs[0]?.[0];
+  const cell = (k, v) => `<span class="lh-cell"><u>${k}</u>${v}</span>`;
+  return `<article class="lh-card${openLender === l.id ? ' open' : ''}" data-id="${l.id}">
+    <div class="lh-head" role="button" tabindex="0" aria-expanded="${openLender === l.id}">
+      <span class="lh-mark ${l.colorClass}">${l.abbr}</span>
+      <span class="lh-nm"><b>${l.name}</b><em>${l.fullName}${
+        l.stateRestriction ? ` &middot; <i class="lh-tag bad">${l.stateRestriction}</i>` : ''}</em></span>
+      <span class="lh-agecell">${f ? `<i class="lh-tag ${f.cls}" title="${f.title}">${f.text}</i>` : ''}</span>
+      <span class="lh-segcell"><i class="lh-tag seg ${segClass(l.segment)}">${l.segmentLabel}</i></span>
+      ${cell('FICO', l.ficoMin || 'Tier')}
+      ${cell('Term', l.maxTerm ? l.maxTerm + ' mo' : '&mdash;')}
+      ${cell('Miles', l.maxMileage)}
+      ${cell('LTV', l.maxLTV)}
+      ${cell('GAP', l.gapMax)}
+      <span class="lh-chev" aria-hidden="true">&#9654;</span>
+    </div>
+    <div class="lh-body">
+      <div class="lh-strip">
+        ${[['Min FICO', l.ficoMin || 'Tier-based'],
+           ['Max Term', l.maxTerm ? l.maxTerm + ' mo' : 'Per program'],
+           ['Max Mileage', l.maxMileage], ['Max LTV', l.maxLTV],
+           ['GAP Max', l.gapMax], ['Chargeback', l.chargebackWindow]]
+          .map(([k, v]) => `<span class="lh-st"><u>${k}</u><b>${v}</b></span>`).join('')}
+      </div>
+      ${l.source?.warning ? `<div class="note-box danger" style="margin-bottom:9px"><span class="note-icon">&#9200;</span><span>${l.source.warning}</span></div>` : ''}
+      <div class="lh-meta">${l.docTitle} &middot; Effective ${l.effectiveDate}</div>
+      ${l.ficoNotes ? `<div class="note-box info" style="margin-bottom:9px;font-size:.72rem"><span class="note-icon">&#8505;&#65039;</span><span>${l.ficoNotes}</span></div>` : ''}
+      ${l.uniqueFeature ? `<div class="note-box success" style="margin-bottom:9px;font-size:.72rem"><span class="note-icon">&#11088;</span><span><strong>Notable:</strong> ${l.uniqueFeature}</span></div>` : ''}
+      <div class="lh-tabs">${secs.map(([k, sec]) =>
+        `<button class="lh-tb${k === cur ? ' on' : ''}" data-sec="${k}">${sec.icon} ${sec.label}</button>`).join('')
+        + (l.idReq || l.por || l.poi ? `<button class="lh-tb${cur === '__stips' ? ' on' : ''}" data-sec="__stips">&#128203; Docs &amp; Stips</button>` : '')}</div>
+      <div class="lh-pane">${sectionHTML(l, cur)}</div>
+    </div>
+  </article>`;
 }
 
-// ─── COMPARE TABLE ───────────────────────────────────────────
-function buildCompareTable() {
-  const tbody = $('#compare-tbody');
-  if (!tbody) return;
-  tbody.innerHTML = LENDERS.map(l => `
-    <tr data-id="${l.id}">
-      <td><div class="lender-name-cell">${l.name}<small>${l.fullName}${l.stateRestriction?` · <span style="color:var(--red)">${l.stateRestriction}</span>`:''}</small></div></td>
-      <td>${(f => f ? `<span class="chip fresh ${f.cls}" title="${f.title}">${f.text}</span>` : '<span class="chip fresh">—</span>')(freshnessOf(l))}</td>
-      <td><span class="fico-chip ${segClass(l.segment)}">${l.ficoMin?l.ficoMin+'+':'Tier-Based'}</span></td>
-      <td><span class="chip ${segClass(l.segment)}">${l.segmentLabel}</span></td>
-      <td>${l.maxTerm?l.maxTerm+' mo':'Per Program'}</td>
-      <td>${l.maxMileage}</td>
-      <td>${l.maxLTV}</td>
-      <td>${l.gapMax}</td>
-      <td style="max-width:190px;font-size:.72rem;color:var(--text2)">${l.reserveStructure}</td>
-      <td><span class="cb-badge${l.chargebackWindow==='NO CHARGEBACKS'?' none':''}">${l.chargebackWindow}</span></td>
-    </tr>`).join('');
+function sectionHTML(l, key) {
+  if (key === '__stips') {
+    const row = (k, v) => v ? `<div class="info-row"><span class="info-key">${k}</span><span class="info-val">${v}</span></div>` : '';
+    return `<div class="info-grid">${row('ID Requirements', l.idReq)}${row('Proof of Residency', l.por)}${row('Proof of Income', l.poi)}</div>`
+      + '<div class="note-box info" style="margin-top:9px"><span class="note-icon">&#8505;&#65039;</span><span>From the lender\'s current program sheet / funding guidelines &mdash; always confirm stips on the approval.</span></div>';
+  }
+  return l.sections[key]?.content || '';
 }
 
+function renderCards() {
+  const box = $('#lh-list');
+  if (!box) return;
+  box.innerHTML = cardList.map(cardHTML).join('');
+  $('#lh-empty').hidden = cardList.length > 0;
+  const c = $('#lh-count');
+  if (c) c.textContent = `${cardList.length} / ${LENDERS.length} lenders`;
+}
+
+// Where a query matched, and how strongly. The card list searches every section's
+// text, so "gap" hits nearly everything -- without saying where, that is no filter.
+function cardMatch(lender, q) {
+  const head = [lender.name, lender.fullName, lender.abbr].join(' ').toLowerCase();
+  if (head.includes(q)) return {rank: 0};
+  const summary = {Segment: lender.segmentLabel, 'FICO notes': lender.ficoNotes,
+    Notable: lender.uniqueFeature || '', Reserve: lender.reserveStructure,
+    Chargeback: lender.chargebackWindow, 'Max LTV': lender.maxLTV,
+    'Max mileage': lender.maxMileage, 'GAP cap': lender.gapMax};
+  for (const [label, val] of Object.entries(summary))
+    if (String(val || '').toLowerCase().includes(q)) return {rank: 1, where: label};
+  for (const sec of Object.values(lender.sections))
+    if ((sec.label + ' ' + sec.content.replace(/<[^>]+>/g, ' ')).toLowerCase().includes(q))
+      return {rank: 2, where: sec.label};
+  return null;
+}
+
+function filterCards() {
+  const q = ($('#lh-search')?.value || '').trim().toLowerCase();
+  const hits = [];
+  for (const l of LENDERS) {
+    if (activeSeg !== 'all' && l.segment !== activeSeg) continue;
+    const m = q ? cardMatch(l, q) : {rank: 0};
+    if (m) hits.push({l, ...m});
+  }
+  // Name matches first: typing "chase" must not bury Chase under banks whose rate
+  // tables happen to contain the word.
+  if (q) hits.sort((a, b) => a.rank - b.rank || a.l.name.localeCompare(b.l.name));
+  cardList = hits.map(h => h.l);
+  renderCards();
+  if (q) hits.forEach(h => {
+    if (!h.where) return;
+    const em = $(`.lh-card[data-id="${h.l.id}"] .lh-nm em`);
+    if (em) em.innerHTML += ` <i class="lh-hit">in ${h.where}</i>`;
+  });
+  $('#lh-search-clear')?.classList.toggle('visible', q.length > 0);
+}
+
+function openCard(id, scroll = true) {
+  const l = LENDERS.find(x => x.id === id);
+  if (!l) return;
+  // A filtered-out lender still has to be reachable from the jump box.
+  if (!cardList.some(x => x.id === id)) {
+    const s = $('#lh-search'); if (s) s.value = '';
+    activeSeg = 'all';
+    $$('#lh-segs .seg-chip').forEach(c => c.classList.toggle('active', c.dataset.seg === 'all'));
+    filterCards();
+  }
+  openLender = id;
+  renderCards();
+  const card = $(`.lh-card[data-id="${id}"]`);
+  if (card && scroll) card.scrollIntoView({block: 'start', behavior: 'smooth'});
+}
+function closeCards() { openLender = null; renderCards(); }
 // ─── QUICK LISTS ─────────────────────────────────────────────
 const pctNum = s => parseInt(String(s||'').replace(/[^0-9]/g,''),10) || 0;
 const miNum  = s => parseInt(String(s||'').replace(/[^0-9]/g,''),10) || 0;
@@ -1326,293 +1402,76 @@ function buildQuickLists() {
   }).join('');
 }
 
-// ─── LENDER DETAIL ───────────────────────────────────────────
-// Which sections the user has opened, per lender. Section labels are not consistent
-// between lenders, so this is keyed by lender id rather than shared. Surviving a
-// re-render matters: Mark Verified and Add Note both rebuild the whole detail view.
-const detailOpenSections = {};
-const openSetFor = id => (detailOpenSections[id] ||= new Set());
-
-function setSectionOpen(sec, open) {
-  sec.classList.toggle('collapsed', !open);
-  const header = $('.detail-section-header', sec);
-  if (!header) return;
-  header.setAttribute('aria-expanded', String(open));
-  const set = openSetFor(sec.dataset.lender);
-  const label = $('h3', header).textContent;
-  if (open) set.add(label); else set.delete(label);
-}
-
-function buildLenderDetail(lender) {
-  const view = $('#view-lender');
-  if (!view) return;
-  const chips = [
-    lender.maxTerm?`<span class="chip">${lender.maxTerm} mo max</span>`:`<span class="chip">Term per Buy Program</span>`,
-    `<span class="chip">${lender.maxMileage}</span>`,
-    `<span class="chip ${segClass(lender.segment)}">${lender.segmentLabel}</span>`,
-    lender.ficoMin&&typeof lender.ficoMin==='number'?`<span class="chip green">FICO ${lender.ficoMin}+</span>`:`<span class="chip">FICO Tier-Based</span>`,
-    lender.stateRestriction?`<span class="chip red">${lender.stateRestriction}</span>`:''
-  ].filter(Boolean).join('');
-
-  const stats = [
-    {label:'Min FICO',val:lender.ficoMin?String(lender.ficoMin):'N/A',cls:'green'},
-    {label:'Max Term',val:lender.maxTerm?lender.maxTerm+' mo':'Per Prog.',cls:''},
-    {label:'Max Mileage',val:lender.maxMileage,cls:'blue'},
-    {label:'Max LTV',val:lender.maxLTV,cls:'gold'},
-    {label:'GAP Max',val:lender.gapMax,cls:''},
-    {label:'Chargeback',val:lender.chargebackWindow==='NO CHARGEBACKS'?'✓ None':lender.chargebackWindow.substring(0,16),cls:lender.chargebackWindow==='NO CHARGEBACKS'?'green':''}
-  ];
-
-  const allSections = Object.values(lender.sections).slice();
-  if (lender.idReq || lender.por || lender.poi) {
-    allSections.push({icon:'📋', label:'Docs & Stips (ID / POR / POI)', content:`<div class="info-grid">
-      ${lender.idReq?`<div class="info-row"><span class="info-key">ID Requirements</span><span class="info-val">${lender.idReq}</span></div>`:''}
-      ${lender.por?`<div class="info-row"><span class="info-key">Proof of Residency</span><span class="info-val">${lender.por}</span></div>`:''}
-      ${lender.poi?`<div class="info-row"><span class="info-key">Proof of Income</span><span class="info-val">${lender.poi}</span></div>`:''}
-    </div><div class="note-box info"><span class="note-icon">ℹ️</span><span>Pulled from the lender's current program sheet / funding guidelines — always confirm stips on the approval.</span></div>`});
-  }
-  const openSet = openSetFor(lender.id);
-  const sectionsHTML = allSections.map((s, i) => {
-    const open = openSet.has(s.label);
-    return `
-    <div class="detail-section${open ? '' : ' collapsed'}" data-lender="${lender.id}">
-      <div class="detail-section-header" role="button" tabindex="0" aria-expanded="${open}" aria-controls="dsec-${i}">
-        <div class="section-icon">${s.icon}</div>
-        <h3>${s.label}</h3>
-        <svg class="chevron" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
-      </div>
-      <div class="detail-section-wrap"><div class="detail-section-clip"><div class="detail-section-body" id="dsec-${i}">${s.content}</div></div></div>
-    </div>`;
-  }).join('');
-
-  const sectionToolbar = `<div class="section-toolbar">
-      <button class="lu-btn" data-sec-all="open">Expand all</button>
-      <button class="lu-btn" data-sec-all="close">Collapse all</button>
-      <span class="sec-count">${allSections.length} sections</span>
-    </div>`;
-
-  view.innerHTML = `
-    <div class="lender-hero">
-      <div class="lender-icon ${lender.colorClass}">${lender.abbr}</div>
-      <div class="lender-hero-info">
-        <h1>${lender.fullName}</h1>
-        <div class="doc-meta">${lender.docTitle} &nbsp;·&nbsp; Effective ${lender.effectiveDate}${(f => f ? ` &nbsp;·&nbsp; <span class="chip fresh ${f.cls}" title="${f.title}">${f.text}</span>` : '')(freshnessOf(lender))}</div>
-        ${(f => f?.attention && lender.source?.warning ? `<div class="note-box danger" style="margin-top:8px;font-size:.72rem"><span class="note-icon">⏰</span><span>${lender.source.warning}</span></div>` : '')(freshnessOf(lender))}
-        <div class="hero-chips">${chips}</div>
-        <div class="note-box info" style="margin-top:10px;font-size:.72rem"><span class="note-icon">ℹ️</span><span>${lender.ficoNotes}</span></div>
-        ${lender.uniqueFeature?`<div class="note-box success" style="margin-top:6px;font-size:.72rem"><span class="note-icon">⭐</span><span><strong>Notable:</strong> ${lender.uniqueFeature}</span></div>`:''}
-      </div>
-    </div>
-    <div class="stat-grid">
-      ${stats.map(s=>`<div class="stat-card"><div class="stat-label">${s.label}</div><div class="stat-value ${s.cls}">${s.val}</div></div>`).join('')}
-    </div>
-    ${sectionToolbar}
-    ${sectionsHTML}`;
-
-  $$('.detail-section-header', view).forEach(h => {
-    const sec = h.closest('.detail-section');
-    const toggle = () => setSectionOpen(sec, sec.classList.contains('collapsed'));
-    h.addEventListener('click', toggle);
-    h.addEventListener('keydown', e => {
-      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggle(); }
-    });
-  });
-  $$('[data-sec-all]', view).forEach(b => {
-    b.addEventListener('click', () => {
-      const open = b.dataset.secAll === 'open';
-      $$('.detail-section', view).forEach(sec => setSectionOpen(sec, open));
-    });
-  });
-
-}
-
-
 // ─── NAVIGATION ──────────────────────────────────────────────
+// One view now. "Go to a lender" means open its card, so everything that used to
+// call showView('lender', id) -- jump box, quick lists, deal structurer -- still works.
 let currentLender = null;
+
 function showView(name, lenderId) {
-  $$('.view').forEach(v => v.classList.remove('active'));
-  $$('.sidebar-item').forEach(s => s.classList.remove('active'));
-  if (name === 'compare') {
-    $('#view-compare').classList.add('active');
-    $('#sidebar-compare').classList.add('active');
-    currentLender = null;
-  } else if (name === 'lender' && lenderId) {
-    const lender = LENDERS.find(l => l.id === lenderId);
-    if (!lender) return;
-    buildLenderDetail(lender);
-    $('#view-lender').classList.add('active');
-    currentLender = lenderId;
-    const si = $(`.sidebar-item[data-id="${lenderId}"]`);
-    if (si) si.classList.add('active');
-    $('#main').scrollTop = 0; window.scrollTo(0, 0);
-  }
-  closeMobileSidebar();
-}
-
-// ─── SEARCH ──────────────────────────────────────────────────
-function handleSearch(q) {
-  q = q.toLowerCase().trim();
-  $$('.sidebar-item[data-id]').forEach(item => {
-    if (!q) { item.style.display=''; return; }
-    const l = LENDERS.find(x => x.id === item.getAttribute('data-id'));
-    const text = (l.name+' '+l.fullName+' '+l.ficoNotes).toLowerCase();
-    item.style.display = text.includes(q) ? '' : 'none';
-  });
-}
-
-// ─── MOBILE SIDEBAR ──────────────────────────────────────────
-function openMobileSidebar() { $('#sidebar').classList.add('open'); $('#sidebar-overlay').classList.add('active'); document.body.style.overflow='hidden'; }
-function closeMobileSidebar() { $('#sidebar').classList.remove('open'); $('#sidebar-overlay').classList.remove('active'); document.body.style.overflow=''; }
-
-// ─── SIDEBAR SEARCH & FILTER ─────────────────────────────────
-let activeSegFilter = 'all';
-
-// Where in a lender's record a query matched, and how strongly. The sidebar
-// searches every section's text, so "gap" hits almost everything — without saying
-// where, a full list of results is no more useful than no filter at all.
-function sidebarMatch(lender, q) {
-  const head = [lender.name, lender.fullName, lender.abbr].join(' ').toLowerCase();
-  if (head.includes(q)) return { rank: 0, where: null };
-
-  const summary = {
-    'Segment': lender.segmentLabel,
-    'FICO notes': lender.ficoNotes,
-    'Notable': lender.uniqueFeature || '',
-    'Reserve': lender.reserveStructure,
-    'Chargeback': lender.chargebackWindow,
-    'State limits': lender.stateRestriction || '',
-    'Max LTV': lender.maxLTV,
-    'Max mileage': lender.maxMileage,
-    'GAP cap': lender.gapMax,
-  };
-  for (const [label, val] of Object.entries(summary))
-    if (String(val || '').toLowerCase().includes(q)) return { rank: 1, where: label };
-
-  for (const s of Object.values(lender.sections)) {
-    const text = (s.label + ' ' + s.content.replace(/<[^>]+>/g, ' ')).toLowerCase();
-    if (text.includes(q)) return { rank: 2, where: s.label };
-  }
-  return null;
-}
-
-function filterSidebar() {
-  const q = ($('#sidebar-search')?.value || '').trim().toLowerCase();
-  const items = $$('.sidebar-item[data-id]');
-  let visible = 0;
-  const ranked = [];
-
-  items.forEach(item => {
-    const id = item.getAttribute('data-id');
-    const lender = LENDERS.find(l => l.id === id);
-    if (!lender) return;
-
-    const segMatch = activeSegFilter === 'all' || lender.segment === activeSegFilter;
-    const hit = q ? sidebarMatch(lender, q) : { rank: 0, where: null };
-    const show = segMatch && !!hit;
-    item.classList.toggle('hidden', !show);
-
-    const nameEl = $('.sidebar-name', item);
-    if (nameEl) {
-      const raw = lender.name;
-      const idx = q ? raw.toLowerCase().indexOf(q) : -1;
-      if (idx >= 0) {
-        nameEl.innerHTML = raw.slice(0, idx) + '<mark>' + raw.slice(idx, idx + q.length)
-                         + '</mark>' + raw.slice(idx + q.length);
-      } else {
-        nameEl.textContent = raw;
-      }
-    }
-
-    // Only say where when it is not the name — "matched in: Regional" is noise.
-    const hitEl = $('.sidebar-hit', item);
-    if (hitEl) {
-      if (show && hit.where) { hitEl.textContent = `in ${hit.where}`; hitEl.hidden = false; }
-      else { hitEl.hidden = true; }
-    }
-
-    if (show) { visible++; ranked.push({ item, rank: hit.rank, name: lender.name }); }
-  });
-
-  // Name matches first. Typing "chase" must not leave Chase below five banks whose
-  // rate tables happen to contain the word.
-  const box = $('#sidebar-lenders');
-  if (box && q) {
-    ranked.sort((a, b) => a.rank - b.rank || a.name.localeCompare(b.name))
-          .forEach(r => box.appendChild(r.item));
-  } else if (box) {
-    LENDERS.forEach(l => { const el = $(`.sidebar-item[data-id="${l.id}"]`, box); if (el) box.appendChild(el); });
-  }
-
-  // Update count label
-  const label = $('#sidebar-lenders-label');
-  if (label) label.textContent = q || activeSegFilter !== 'all' ? `${visible} Lender${visible!==1?'s':''}` : 'All Lenders';
-
-  // No results message
-  $('#sidebar-no-results')?.classList.toggle('visible', visible === 0);
-
-  // Clear button visibility
-  $('#sidebar-search-clear')?.classList.toggle('visible', q.length > 0);
+  if (name === 'lender' && lenderId) { currentLender = lenderId; openCard(lenderId); }
+  else { currentLender = null; closeCards(); $('#main')?.scrollTo({top:0, behavior:'smooth'}); }
 }
 
 // ─── INIT ────────────────────────────────────────────────────
 function init() {
-  buildSidebar();
-  buildCompareTable();
+  filterCards();
   buildQuickLists();
 
   $('#theme-toggle')?.addEventListener('click', toggleTheme);
-  $('#menu-toggle')?.addEventListener('click', openMobileSidebar);
-  $('#sidebar-overlay')?.addEventListener('click', closeMobileSidebar);
 
-  const sc = $('#sidebar-compare');
-  sc?.addEventListener('click', () => showView('compare'));
-  sc?.addEventListener('keydown', e => { if (e.key==='Enter'||e.key===' ') showView('compare'); });
-
-  $('#sidebar-lenders')?.addEventListener('click', e => {
-    const item = e.target.closest('.sidebar-item[data-id]');
-    if (item) showView('lender', item.getAttribute('data-id'));
+  // Open, close, and switch section -- all delegated, so re-rendering the list
+  // never strands a handler.
+  $('#lh-list')?.addEventListener('click', e => {
+    const tb = e.target.closest('.lh-tb');
+    if (tb) {
+      const card = tb.closest('.lh-card'), l = LENDERS.find(x => x.id === card.dataset.id);
+      lastSection[l.id] = tb.dataset.sec;
+      card.querySelectorAll('.lh-tb').forEach(b => b.classList.remove('on'));
+      tb.classList.add('on');
+      const pane = card.querySelector('.lh-pane');
+      pane.innerHTML = sectionHTML(l, tb.dataset.sec);
+      pane.scrollTop = 0;
+      return;
+    }
+    if (e.target.closest('.kfa-tab')) return;      // handled by the KFA delegate
+    const head = e.target.closest('.lh-head');
+    if (!head) return;
+    const id = head.closest('.lh-card').dataset.id;
+    if (openLender === id) { closeCards(); } else { openCard(id); }
   });
+  $('#lh-list')?.addEventListener('keydown', e => {
+    const head = e.target.closest('.lh-head');
+    if (head && (e.key === 'Enter' || e.key === ' ')) {
+      e.preventDefault();
+      const id = head.closest('.lh-card').dataset.id;
+      openLender === id ? closeCards() : openCard(id);
+    }
+  });
+
   $('#quick-lists')?.addEventListener('click', e => {
     const chip = e.target.closest('.ql-chip[data-id]');
     if (chip) showView('lender', chip.getAttribute('data-id'));
   });
-  $('#sidebar-lenders')?.addEventListener('keydown', e => {
-    const item = e.target.closest('.sidebar-item[data-id]');
-    if (item && (e.key==='Enter'||e.key===' ')) { e.preventDefault(); showView('lender', item.getAttribute('data-id')); }
+
+  const search = $('#lh-search');
+  search?.addEventListener('input', filterCards);
+  search?.addEventListener('keydown', e => {
+    if (e.key === 'Escape') { search.value = ''; filterCards(); search.blur(); }
+    if (e.key === 'Enter' && cardList.length) { openCard(cardList[0].id); search.blur(); }
+  });
+  $('#lh-search-clear')?.addEventListener('click', () => {
+    search.value = ''; filterCards(); search.focus();
   });
 
-  // Sidebar search
-  const searchInput = $('#sidebar-search');
-  searchInput?.addEventListener('input', filterSidebar);
-  searchInput?.addEventListener('keydown', e => {
-    if (e.key === 'Escape') { searchInput.value = ''; filterSidebar(); searchInput.blur(); }
-    if (e.key === 'Enter') {
-      const first = $$('.sidebar-item[data-id]').find(i => !i.classList.contains('hidden'));
-      if (first) { first.click(); searchInput.blur(); }
-    }
-  });
-  $('#sidebar-search-clear')?.addEventListener('click', () => { searchInput.value = ''; filterSidebar(); searchInput.focus(); });
-
-  // Segment filter chips
-  $$('.seg-chip').forEach(chip => {
+  $$('#lh-segs .seg-chip').forEach(chip => {
     chip.addEventListener('click', () => {
-      $$('.seg-chip').forEach(c => c.classList.remove('active'));
+      $$('#lh-segs .seg-chip').forEach(c => c.classList.remove('active'));
       chip.classList.add('active');
-      activeSegFilter = chip.getAttribute('data-seg');
-      filterSidebar();
+      activeSeg = chip.dataset.seg;
+      filterCards();
     });
   });
 
-  $('#compare-tbody')?.addEventListener('click', e => {
-    const row = e.target.closest('tr[data-id]');
-    if (row) showView('lender', row.getAttribute('data-id'));
-  });
-
-  const si = $('#search-input');
-  si?.addEventListener('input', e => handleSearch(e.target.value));
-  si?.addEventListener('keydown', e => { if (e.key==='Escape') { si.value=''; handleSearch(''); } });
-
-  showView('compare');
   initIncomeCalc();
   initDateCalc();
   initBureauSearch();
