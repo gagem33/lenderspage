@@ -1490,7 +1490,7 @@ function init() {
 // the dispatcher, so the sheet cannot describe a key that does nothing.
 const SHORTCUTS = [
   { keys: ['/', '⌘K'], desc: 'Jump to a lender, tool or view', run: () => openJump() },
-  { keys: ['c'],       desc: 'Compare table',                  run: () => showView('compare') },
+  { keys: ['c'],       desc: 'Back to the lender list',        run: () => showView('compare') },
   { keys: ['i'],       desc: 'Income calculator',              run: () => $('#income-calc-btn')?.click() },
   { keys: ['b'],       desc: 'Bureau score search',            run: () => $('#bureau-search-btn')?.click() },
   { keys: ['l'],       desc: 'LTV calculator',                 run: () => $('#ltv-calc-btn')?.click() },
