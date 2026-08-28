@@ -57,6 +57,7 @@ Segment counts: Prime 7 · Near-Prime 4 · Sub-Prime 5 · Prime+ 1 · Deep Sub-P
 | `bureaus` | object `{primary[], note, stateMap{}}` | 20/20 | OK — only structured field |
 | `stateRestriction` | string | 2/20 | absent = no restriction (implicit) |
 | `source` | object `{date, precision, status, doc, driveFileId, syncedAt, warning?}` | 20/20 | Added 2026-08-26 for spec #4. Written by `sync.py freshness`, never by hand. `date` is ISO and sortable — the machine-readable twin of the free-text `effectiveDate` above it. Age is **not** stored; the page subtracts from today. `warning` is optional and editorial, set through a proposal (kia only). |
+| `core` | object | 20/20 | **The typed core (§2), added 2026-08-28.** Sits beside `sections`, does not replace it. Written by hand from the lender's PDF, validated by `tools/core.py`. |
 | `sections` | object of HTML strings | 20/20 | **All detailed program data is HTML, not data.** See 1.3 |
 
 ### 1.3 `sections` — the real problem
@@ -328,8 +329,32 @@ What reading the two sheets changed, beyond typing what was already stored:
 - **cps never defines "extended term"**, so the 130% carries `unresolved` and
   the base stays 115%.
 
-**All 20 typed 2026-08-28.** 78 resolution cases, matched between `core.py` and
-the browser. What reading the other 18 sheets turned up:
+**All 20 typed 2026-08-28.** 96 resolution cases, matched between `core.py` and
+the browser.
+
+### 4.3 What the typed core actually covers
+
+`null` means the sheet does not publish it. Across the 20 records:
+
+| field | published | field | published |
+|---|---|---|---|
+| `ltv_total_max_pct` | 18/20 | `max_term_months` | 19/20 |
+| `ltv_front_max_pct` | 13/20 | `max_mileage` | 19/20 |
+| `gap_max_usd` | 16/20 | `min_amount_financed` | 7/20 |
+| `fico_min` | 11/20 | `max_vehicle_age_yr` | 4/20 |
+
+**A `null` is not free.** Because every record now carries a core, `lenderLimit()`'s
+string fallback never fires, so an untyped limit reads as *unknown* rather than as
+the v1 string's number — and a tool that meets `unknown` skips that test entirely.
+That is how 16 values nearly went missing on 2026-08-28: 11 lenders' mileage, 4
+FICO floors and 2 terms were typed as `null` while `lenders.json` still held a
+PDF-verified number for them. They are carried forward with a note saying they
+come from the 2026-08-26 sweep rather than a fresh page cite.
+
+**Check a migration against what the old layer answered, not just against itself.**
+The gap was invisible from inside the schema — validate passed, every key was
+present on every record, all cases were green. Diffing the new answer against the
+v1 string, lender by lender, is what found it. What reading the other 18 sheets turned up:
 
 - **The floor-vs-headline problem is not unique to truist.** `dfc` publishes a
   13-tier × new/used grid and the card shows its best cell (135%); `pnc`, `regional`,

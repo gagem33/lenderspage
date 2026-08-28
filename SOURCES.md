@@ -70,9 +70,9 @@ When a lender has both a Program Sheet and Guidelines/Rules, extract from Guidel
 | regional | Underwriting Guidelines | 2026-05-27 | `1ILGWQes91nVYi89dVD2rjhEmA5OoPeLs` | | ok (2p) |
 | truist | Program Sheet | 2026-07-20 | `1dwSi3YQ1N7TnbXrQADGRMkaPpWnUMnxz` | July 20, 2026 ✓ | **PARTIAL** p1,2,4 of 4 |
 | td | Program Sheet | 2026-06-30 | `1O9q8uW2FdCawn6uauNxv9xYGPZ8fIEvO` | June 30, 2026 ✓ | ok (8p) |
-| td | Program Sheet2 | 2026-06-30 | `1X57L74CerUi8vHJ37BujDe00ZhrxEL_D` | | ok (4p) |
+| td | Program Sheet2 | 2026-06-30 | `1X57L74CerUi8vHJ37BujDe00ZhrxEL_D` | | ok (4p) |  ← **typed core read from here** (the 8-page Program Sheet carries no LTV)
 | wellsfargo | Program Sheet | 2026-06-16 | `1dXg8-YyViTdr9mbWuTlYRjiluVvcXRbo` | June 16, 2026 ✓ | ok (18p) |
-| ally | Program Sheet | 2026-04-01 | `1rm-zFIrAzSg4cLZ_z-GB4Y5r0fcZoZuE` | April 1, 2026 ✓ | ok (7p) |
+| ally | Program Sheet | 2026-04-01 | `1rm-zFIrAzSg4cLZ_z-GB4Y5r0fcZoZuE` | April 1, 2026 ✓ | ok (7p) |  ← **typed core read from here** (the 84-month sheet caps at 135%, not 140%)
 | ally | 84 month Program Sheet | 2026-04-01 | `1R-6gins9tE5wyy3dqNRUJv6FcaOyXo0Y` | | **IMAGE_ONLY** p1 of 1 |
 | ally | Funding Guidelines | 2026-04-01 | `1Oej_ktEK5rLMxX8GXiUhzTF2wWelSYHm` | | ok (10p) |
 | fifththird | Program Sheet | 2026-07-23 | `1M5cikg9r9KADCNhRNQQF4w9hzGnc_FoJ` | July 23, 2026 ✓ | ok (2p) |
@@ -84,7 +84,7 @@ When a lender has both a Program Sheet and Guidelines/Rules, extract from Guidel
 | westlake | Program Sheet | 2026-07-08 | `1KI4qsTOCXRm2tt4kJqOvTFDWKHcl-ESR` | "July 2026" ~ | ok (1p) |
 | westlake | Prime Program Sheet | 2026-07-08 | `1fwQ1YndmQi0zq9r5WTDTmAy9hhVje6VI` | | ok (1p) |
 | westlake | Program Guidelines | 2026-01-01 | `1FHLl1NXqFdoIBTnwhWpfInJqUfIS610C` | | **IMAGE_ONLY** p1 of 6 |
-| kia | Standard New - National | 2026-01-06 | `1w-r5QJqPQDMFZT1rBrfAVfSL2qxTosc9` | Jan 6, 2026 ✓ | ok (1p) |
+| kia | Standard New - National | 2026-01-06 | `1w-r5QJqPQDMFZT1rBrfAVfSL2qxTosc9` | Jan 6, 2026 ✓ | ok (1p) |  ← **typed core read from here** (the August bulletins are APR only)
 | kia | K500&K506 | 2026-08-04 | `1erRPv4bOVTOpw5SdyjcOsX-3k3TanEJO` | K500/K506 Aug 4, 2026 ✓ | ok (10p) |
 | kia | K500&K506-2 | 2026-08-04 | `18JxCf14InKJ2pghApWzOcvf9K_Gn-XQN` | | ok (6p) |
 | kia | Back-End Advance Updates | 2025-04-14 | `1Azn5vC-Ul7GJJtreLHGBfzPmA4ZdahC4` | | ok (1p) |

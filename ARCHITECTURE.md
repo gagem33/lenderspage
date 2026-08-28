@@ -8,8 +8,8 @@ How the app is wired today. Factual, from `main` on 2026-08-28. Not a design doc
 
 | File | Size | Status |
 |---|---|---|
-| `index.html` | ~97 KB | **The app.** HTML + CSS + JS inline. No lender data. |
-| `lenders.json` | ~298 KB | **The data.** 20 lender records, fetched at boot. 2 carry a typed `core`. |
+| `index.html` | ~110 KB | **The app.** HTML + CSS + JS inline. No lender data. |
+| `lenders.json` | ~354 KB | **The data.** 20 lender records, fetched at boot. All 20 carry a typed `core`. |
 | `tools/core.py` | — | Validates typed cores and self-tests the resolution rule. |
 | `tools/pdf_triage.py` | — | Classifies a source PDF's text layer and renders pages. |
 | `.gitignore` | — | — |
@@ -91,14 +91,19 @@ aware versions of the values the tools compute on. Two of twenty have one so far
 
 Nothing reads `core` directly. Every read goes through `lenderLimit(l, key, deal)`,
 which returns the typed value when the lender has a core and falls back to the old
-string parse when it does not, so the eighteen un-migrated lenders keep working
-unchanged. `resolveLimit()` evaluates a limit's `except` list against the deal and
+string parse when it does not. **Since 2026-08-28 all 20 records carry a core with
+every key present, so that fallback is unreachable** — it is a safety net for a
+record that loses its core, not a live path. It is also why a limit left untyped
+reads as `null` rather than as the v1 string's number; 16 values were carried
+forward from the corpus sweep for exactly that reason. `resolveLimit()` evaluates a limit's `except` list against the deal and
 mirrors `resolve()` in `tools/core.py`; `core.py selftest` holds the 20 cases both
 must agree on.
 
 `limitCeiling(l, key)` returns the highest a limit reaches under any condition —
 needed because `value` is the floor, so a 48-cell grid would otherwise render as
-one number.
+one number. The LTV calculator uses both ends: at or under the floor is *eligible*,
+between floor and ceiling is *depends on tier or term*, above the ceiling is *over
+cap*, and no published cap is a fourth outcome.
 
 ### 3.5 Tools (modals)
 
