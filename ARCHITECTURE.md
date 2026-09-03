@@ -57,20 +57,22 @@ Approximate line map (drifts as the file changes — grep, don't trust line numb
 
 ### 3.1 Views
 
-**One view since 2026-08-27.** `view-compare` holds the whole app: a filter bar, the
-card list, quick lists and the differentiator grid.
+**One command deck since 2026-09-03.** `view-compare` is the Orbit field: a sticky
+command bar (search + deal filters), a constellation of 20 nodes plotted FICO floor
+× LTV ceiling, and a ranked “who can buy this” rail. Hard fails drop from the rail
+and dim on the field. Quick lists and differentiators sit in `#intel`, not on home.
 
-Every lender is a `.lh-card` rendered by `cardHTML(l)`. Collapsed it is one scannable
-row; open it shows a stat strip and its sections as chips, with `sectionHTML(l, key)`
-swapping the pane. Only one card is open at a time, and `lastSection` remembers which
-section each lender was left on.
+Opening a lender mounts `#readout` — a full HUD overlay. Constraint scan is first,
+then a stat strip, then a layer rail of sections with `sectionHTML(l, key)` filling
+the pane. `lastSection` still remembers which section you were on.
 
-`showView(name, lenderId)` survives as the navigation entry point — everything that
-used to open the detail page (jump box, quick lists, deal structurer, `[` / `]`) now
-calls `openCard(id)` through it.
+`showView(name, lenderId)` is still the navigation entry point — jump box, intel
+chips, deal structurer, `[` / `]` call `openCard(id)` through it, which now opens
+the readout instead of expanding a card.
 
-`view-lender` and the sidebar were removed 2026-08-27; `view-pace` (Sales Pace) on
-2026-08-24.
+The 20-card list (`.lh-card`) and in-place chip layout were removed 2026-09-03 after
+Gage rejected the Desk Scan HUD as still the old dashboard. `view-lender` and the
+sidebar were already gone 2026-08-27; `view-pace` (Sales Pace) on 2026-08-24.
 
 ### 3.2 Render model
 
