@@ -85,8 +85,8 @@ When a lender has both a Program Sheet and Guidelines/Rules, extract from Guidel
 | westlake | Prime Program Sheet | 2026-07-08 | `1fwQ1YndmQi0zq9r5WTDTmAy9hhVje6VI` | | ok (1p) |
 | westlake | Program Guidelines | 2026-01-01 | `1FHLl1NXqFdoIBTnwhWpfInJqUfIS610C` | | **IMAGE_ONLY** p1 of 6 |
 | kia | Standard New - National | 2026-01-06 | `1w-r5QJqPQDMFZT1rBrfAVfSL2qxTosc9` | Jan 6, 2026 ✓ | ok (1p) |  ← **typed core read from here** (the September bulletins are APR only)
-| kia | K500&K506 (current) | 2026-09-01 | `1jk6sU4E93VENTOA83bak8wigOFYCrFg1` | K500/K506 Sept 1, 2026 ✓ | unverified |  ← **2026-128**, `KIA - K500&K506 - SEPT2.pdf`, uploaded 2026-09-03. Contracts Sep 1–30, fund by Oct 14. **Rates in the app are still August — pending extraction.**
-| kia | K500&K506-2 (current) | 2026-09-01 | `1tRHuY42SIYFzP-DaxCQNxY2VaDL2-Kay` | | unverified |  ← **2026-129**, `KIA - K500&K506 - SEPT.pdf`. Prior-MY / model-code companion to SEPT2.
+| kia | K500&K506 (current) | 2026-09-01 | `1jk6sU4E93VENTOA83bak8wigOFYCrFg1` | K500/K506 Sep 1–30, 2026 ✓ | ok |  ← **2026-128**, `KIA - K500&K506 - SEPT2.pdf`. Contracts Sep 1–30, fund by Oct 14. **Rates applied 2026-09-03.**
+| kia | K500&K506-2 (current) | 2026-09-01 | `1tRHuY42SIYFzP-DaxCQNxY2VaDL2-Kay` | | ok |  ← **2026-129**, `KIA - K500&K506 - SEPT.pdf`. Prior-MY / model-code companion to SEPT2.
 | kia | Back-End Advance Updates | 2025-04-14 | `1Azn5vC-Ul7GJJtreLHGBfzPmA4ZdahC4` | | ok (1p) |
 | bofa | Program Sheet | 2026-06-18 | `1xbiqM_pi-0XcddGDV5flk9FaSDbmnHYz` | June 18, 2026 ✓ | ok (3p) |
 | bofa | Funding Guidelines | 2026-06-17 | `18W0arwbkG4U36_y0KBP6gCY7NFX8vdyU` | | ok (2p) |
@@ -115,7 +115,7 @@ When a lender has both a Program Sheet and Guidelines/Rules, extract from Guidel
 - `1jk6sU4E93VENTOA83bak8wigOFYCrFg1` — `KIA - K500&K506 - SEPT2.pdf` — bulletin **2026-128**, contracts Sep 1–30 2026, funded by Oct 14
 - `1tRHuY42SIYFzP-DaxCQNxY2VaDL2-Kay` — `KIA - K500&K506 - SEPT.pdf` — bulletin **2026-129**, same window, prior model year / model-code offers
 
-Filenames are `SEPT` / `SEPT2`, not `MMDDYY`. `sync.py` treats those as 2026-09-01 because that is the contract-start date printed on both PDFs. **Rate tables in `lenders.json` are still August 2026-104/105.** The record's `source.warning` says so. Do not quote the stored rates on a live deal until the September extraction lands.
+Filenames are `SEPT` / `SEPT2`, not `MMDDYY`. `sync.py` treats those as 2026-09-01 because that is the contract-start date printed on both PDFs. **Rate tables in `lenders.json` are 2026-128 / 2026-129**, applied 2026-09-03. 73–84 is N/A except K500 tier 1/2 (read from the render, not the text layer).
 
 **Resolved 2026-08-26 by renaming the file, not the record.** `td` and `dfc` both stated their own dates internally — TD's footer reads `06/30/2026` on every page of the Program Sheet and `PROD-9034 Effective 06.30.2026` on Program Sheet2, DFC's header reads `Revision Date: 8/13/2025`. The records were right and the filenames were wrong. DFC Program Sheet `1VJ5ltQPHIdsv62z8SYOP8C3NXCzNNrvJ` was last modified 2026-08-26 (the rename); the document inside still says 8/13/2025. The `2026-01-01` DFC file is Funding Guidelines, not the program sheet. Re-checked 2026-09-03: same IDs, same internal dates.
 
