@@ -85,8 +85,10 @@ When a lender has both a Program Sheet and Guidelines/Rules, extract from Guidel
 | westlake | Prime Program Sheet | 2026-07-08 | `1fwQ1YndmQi0zq9r5WTDTmAy9hhVje6VI` | | ok (1p) |
 | westlake | Program Guidelines | 2026-01-01 | `1FHLl1NXqFdoIBTnwhWpfInJqUfIS610C` | | **IMAGE_ONLY** p1 of 6 |
 | kia | Standard New - National | 2026-01-06 | `1w-r5QJqPQDMFZT1rBrfAVfSL2qxTosc9` | Jan 6, 2026 ✓ | ok (1p) |  ← **typed core read from here** (the August bulletins are APR only)
-| kia | K500&K506 | 2026-08-04 | `1erRPv4bOVTOpw5SdyjcOsX-3k3TanEJO` | K500/K506 Aug 4, 2026 ✓ | ok (10p) |
-| kia | K500&K506-2 | 2026-08-04 | `18JxCf14InKJ2pghApWzOcvf9K_Gn-XQN` | | ok (6p) |
+| kia | K500&K506 | 2026-09-01 | `1jk6sU4E93VENTOA83bak8wigOFYCrFg1` | K500/K506 Sep 1, 2026 | ok (10p) |  ← Drive title `KIA - K500&K506 - SEPT2.pdf`, bulletin **2026-128**. No date in the filename, so `sync.py freshness` cannot read it; the date is p1's "Effective with Contracts Dated September 1, 2026 - September 30, 2026"
+| kia | K500&K506-2 | 2026-09-01 | `1tRHuY42SIYFzP-DaxCQNxY2VaDL2-Kay` | | ok (7p) |  ← Drive title `KIA - K500&K506 - SEPT.pdf`, bulletin **2026-129**. The titles are inverted against the bulletin numbers: `SEPT` is the 7-page "-2" file, `SEPT2` the 10-page main one
+| kia | K500&K506 (superseded) | 2026-08-04 | `1erRPv4bOVTOpw5SdyjcOsX-3k3TanEJO` | | ok (10p) |  ← 2026-104
+| kia | K500&K506-2 (superseded) | 2026-08-04 | `18JxCf14InKJ2pghApWzOcvf9K_Gn-XQN` | | ok (6p) |  ← 2026-105
 | kia | Back-End Advance Updates | 2025-04-14 | `1Azn5vC-Ul7GJJtreLHGBfzPmA4ZdahC4` | | ok (1p) |
 | kia | K500&K506 (superseded) | 2026-07-01 | `1IyXoIz8Pia7vRv4o9I6k44e4D-njRDV8` | | ok (10p) |
 | kia | K500&K506-2 (superseded) | 2026-07-01 | `1Ur5v1OgYWfrJUkxsZCQqXLVzE2Yq84Xx` | | ok (6p) |
