@@ -63,33 +63,34 @@ something a person should have to remember to click.
 ```
 LENDERHUB/
  LENDERHUB.md/ ID 1dSDLq8Kk6AgGfqdQaQJ1rhkxOvO-Y-aC — master copy of these 6 md files
- LENDERHUBSOURCES/ ID 1kf_mJ09Sxfg--PQ-xqOXdkouYUJ8ryz9 — 39 bank PDFs + _README; manifest in SOURCES.md
+ LENDERHUBSOURCES/ ID 1kf_mJ09Sxfg--PQ-xqOXdkouYUJ8ryz9 — 40 bank PDFs + _README; manifest in SOURCES.md
 ```
 
 The repo holds a committed copy of the md files. Drive is the master; when they diverge, Drive wins and the repo copy gets updated.
 
-## Current state (as of 2026-08-28)
+## Current state (as of 2026-09-03)
 
 **Working**
 - Pure static page — no backend, no auth, no network calls but fonts
 - One card list + quick lists, driven by `lenders.json` fetched at boot (20 lenders). The sidebar, the compare table and the separate lender page were all removed on 2026-08-27
 - Six tool modals: income calc, date calc, bureau search, LTV calc, deal structurer, side-by-side compare
 - Delegated event listeners on stable parent containers (fixed click-through bug after re-render)
-- **UI rebuilt on the Desk identity, 2026-08-27.** Gage picked a dark, terminal-dense direction from three, then asked for a layout where lenders open in place. The sidebar and the separate lender page are gone: one list, twenty cards, each opening where it sits with its sections as chips rather than a scroll. The chip row does not move between sections and seven of Exeter's eight sections need no scrolling at all. IBM Plex Sans and Mono, brass accent on near-black, 3–6px radii. Light mode is a cool neutral, not the old cream
+- **Desk Scan HUD, 2026-09-03.** Dark-first command center: a search-first bar plus live deal filters (FICO / term / new-used / miles / LTV) that drop banks failing a hard published limit. Opening a lender shows a constraint scan (clear / tight / over / unknown) before the section chips, so the first thing on screen is whether the deal fits, not a wall of HTML. Cyan scan accent on near-black; brass kept for warnings. Theme toggle still flips to light. Same card-opens-in-place layout, same six tools, same shortcuts.
+- **UI rebuilt on the Desk identity, 2026-08-27.** Gage picked a dark, terminal-dense direction from three, then asked for a layout where lenders open in place. The sidebar and the separate lender page are gone: one list, twenty cards, each opening where it sits with its sections as chips rather than a scroll. The chip row does not move between sections and seven of Exeter's eight sections need no scrolling at all. IBM Plex Sans and Mono, 3–6px radii. Light mode is a cool neutral, not the old cream
 - **Navigation speed (spec #10), 2026-08-26.** `/` or `⌘K`/`Ctrl+K` opens a jump-to box that reaches any lender, tool or view — ranked, arrow keys, Enter. Single keys open the six tools (`i b l d s y`), `c` returns to the lender list, `[` and `]` step through lenders, `?` lists the lot. Search now ranks name matches first and says *where* a hit landed (`in Vehicle Eligibility`), which matters because it searches every section's text. Shortcuts never fire while a field has focus; `⌘K` is the one exception, so it works from inside the search box
-- **Source freshness on the page (spec #4), 2026-08-26.** Every lender carries a `source` block written by `sync.py freshness` — ISO date, the document it came from, its Drive ID, and when it was last synced. The page turns that into an age badge: green under 90 days, amber past 90, red past a year. It shows on each card — in the collapsed row and again in the open card's stat strip — for the lenders that want a look. Age is computed at render time, so it is never stale. Kia carries an explicit `source.warning` because its document is current and its *contents* are not — no date can express that
+- **Source freshness on the page (spec #4), 2026-08-26.** Every lender carries a `source` block written by `sync.py freshness` — ISO date, the document it came from, its Drive ID, and when it was last synced. The page turns that into an age badge: green under 90 days, amber past 90, red past a year. It shows on each card — in the collapsed row and again in the open card's stat strip — for the lenders that want a look. Age is computed at render time, so it is never stale. Kia carries an explicit `source.warning` because its September bulletins are on file and the *stored rate tables* are still August — no date can express that
 - **Rates on the lender page (spec #3), 2026-08-26.** `regional` carries a `Consumer Rates` section — the sheet's full 112-cell grid, sitting directly under LTV & Terms. Every other lender's rate data (floors, bands, usury caps, buy-rate/flat tables) was already in the record; see the Open Questions entry. Rates are searchable, because the detail search already indexes every section's text
 - **Typed core on all 20 lenders (v2), 2026-08-28.** Each record carries a `core` block beside its `sections`: about a dozen typed limits, each a number plus the conditions it holds under. `tools/core.py validate` checks shape and warns on overlapping bands; `core.py selftest` runs 96 resolution cases that the browser must agree with, and a Playwright run feeds it the same 96. The LTV calculator and the deal structurer read it through `lenderLimit()`. See DATA.md §2
 - **Drive sync (built 2026-08-26).** `tools/sync.py` does everything around the extraction step: detects new and changed PDFs against a committed Drive snapshot, reports per-lender freshness, validates a proposal, renders it for approval, and writes only approved fields. The gate is enforced in code — `apply` refuses on any undecided field, on a `old` value that no longer matches `lenders.json`, and on any change lacking a page number and verbatim quote. See `docs/SYNC.md`
 
 **Known issues**
 - ~~56 proposed changes sitting undecided.~~ **All 20 lenders applied 2026-08-26** — 56 changes across 18 records (chase and exeter went in earlier the same day). Every application is logged in `sync/applied.jsonl` with its Drive file ID and field list.
-- ~~**Kia is showing incentive rates that expired 2026-04-14.**~~ **Fixed 2026-08-27.** Gage pulled bulletins **2026-104 / 2026-105** (contracts Aug 4–31, funded by Sep 14) and the Back-End Advance sheet. Re-extracted in full: 16 model pages, 35 rate tables, 264 tier rows, tabs 9 → 12. `source.warning` deleted, freshness reads `kia ok 2026-08-04 (23d old)`, and the `acknowledged.json` entry is gone. The captive is current.
+- ~~**Kia is showing incentive rates that expired 2026-04-14.**~~ **Fixed 2026-08-27, then superseded 2026-09-03.** August 2026-104/105 were extracted in full. September bulletins **2026-128 / 2026-129** (`1jk6sU4E93VENTOA83bak8wigOFYCrFg1`, `1tRHuY42SIYFzP-DaxCQNxY2VaDL2-Kay`; contracts Sep 1–30, fund by Oct 14) are now the current Drive files. July and August K500 IDs are gone. **Stored rate tables are still August** — `source.warning` says so. Do not quote them on a live deal until the September extraction lands. See `DATA_DIFF.md`.
 - **Six lenders had wrong values**, all found by reading renders: `regional` (84mo mileage 20K vs 30K, and a missing 54-month row), `flagship` (min income $3,000 vs $2,000; 60mo mileage 140K vs 160K), `capitalone` (backend section mislabelled throughout; min financed $2,000 vs $4,000), `dfc` (GAP floor 80% vs 70%), `gls` (T3–T4 term 75 vs 72), `fifththird` (no 45K mile gate on 76+ terms).
 - ~~The v1 summary strings are still the ones on screen.~~ **Fixed 2026-08-28.** Cards, the stat strip, the jump box, the side-by-side compare and the quick lists all render from the typed core now, through `cardLimit()`. A conditional limit shows as a range — truist `130–155%`, santander `60–150K` — with the reason in the title attribute. Card and calculator can no longer disagree, because they read the same numbers. The v1 strings stay in `lenders.json` as the record of what the bank's sheet says in prose.
 - **The typed core is thinner than v1 in places, by design.** Of 20 records: 18 publish a total-LTV cap, 19 a term, 19 a mileage limit, 16 a GAP cap, 13 a front-end LTV, 11 a FICO floor — but only 7 a minimum amount financed and 4 a vehicle-age limit. A `null` means the sheet does not publish it, which is information — but it does mean the structurer silently skips that test for that lender.
 - ~~LTV calc and deal structurer parse the `maxLTV` string directly.~~ **Fixed 2026-08-28** — both go through `lenderLimit()`. Now that all 20 records carry a core with every key present, **its string-parse fallback is unreachable**: it is a safety net for a record that loses its core, not a live path. That is also how 16 values nearly went missing — see the decision below. See ARCHITECTURE.md §3.4.
-- One lender still has an effective-date mismatch: `gls` stores a version string (`2026 (v53)`), not a date, against a PDF dated 2026-07-27. td and dfc were filename errors and were renamed 2026-08-26; kia was re-extracted 2026-08-27. `sync/acknowledged.json` is down to the single `gls` entry. See SOURCES.md §2.
+- ~~One lender still has an effective-date mismatch: `gls`.~~ **Resolved 2026-09-03.** `effectiveDate` is now `July 27, 2026 (v53)` — filename date is the authority; the sheet still only carries the footer `GLS_PG_V53_2026`. `sync/acknowledged.json` is empty. td and dfc remain the 2026-08-26 rename (documents were right). kia date label now reads September; rates pending. See `DATA_DIFF.md`.
 - ~~26 dead CSS rules remain.~~ **Cleared 2026-08-28 — and there were 78, not 26.** The count came from grepping three selector families; auditing every selector against the markup, the JS and `lenders.json` found 35 base names nothing could match. 347 selectors → 269, `index.html` 105 KB → 98 KB. Proved inert by 116 pixel-identical screenshots.
 - ~~Nothing honours `prefers-reduced-motion` any more.~~ **Restored 2026-08-28, wider than before.** A wildcard block covers all twelve `transition:` rules, the `modalIn` keyframe and `scroll-behavior`; `prefersReducedMotion()` covers the two JS `behavior:'smooth'` calls, which no media query can reach. Verified in both settings with Playwright's `reducedMotion` flag.
 
@@ -97,6 +98,11 @@ The repo holds a committed copy of the md files. Drive is the master; when they 
 
 | Date | Decision | Why |
 |---|---|---|
+| 2026-09-03 | HUD command bar filters hard fails; open card is a constraint scan | Mid-deal the first question is "who can buy this", not "scroll the HTML". Search still hits every field. Compare stays a tool, not the home. |
+| 2026-09-03 | Kia September dates in, rates not guessed | Bulletins 2026-128/129 are on file. EXTRACTION_GUIDE §9: do not take a KFA grid from the text layer. Warning until the follow-up extraction. |
+| 2026-09-03 | `gls` date follows the filename | Sheet has no calendar date, only `GLS_PG_V53_2026`. Filename `072726` is the authority. |
+| 2026-09-03 | Dead Kia Drive IDs removed from SOURCES.md | July and August K500/K506 files are gone (re-upload). Keeping them would send the next sync at ghosts. |
+| 2026-09-03 | Mark Verified / PIN not restored | Spec #4 and the 2026-08-25 drop still win over an older brief that named the panel. |
 | 2026-07 | Delegated listeners instead of re-binding on render | Re-render wiped handlers |
 | 2026-07 | Public read of verification status, PIN only for writes | Team sees freshness, only Gage edits |
 | 2026-08-22 | Remove Sales Pace | Not a lender tool. (The stated reason — "backend never existed" — was wrong; see 2026-08-24 below. The decision stands on the first reason.) |
@@ -189,7 +195,7 @@ The repo holds a committed copy of the md files. Drive is the master; when they 
 - **Two values in `chase` have no source document.** `bureaus.note` says "All three bureaus; uses middle score" and `chargebackWindow` says "N/A (flat fee model)" — the Program Sheet states neither. Left as-is on 2026-08-26; either find the doc they came from or drop them. Same question probably applies to other lenders.
 - **DFC's program sheet is genuinely a year old.** Now that the filename matches the document, the freshness scan reads it honestly: `dfc ok 2025-08-13 (378d old)`. The wrong filename had been masking that. Worth asking the rep whether a 2026 sheet exists.
 - **The extraction checks cannot see a wrongly-blanked cell.** Validation confirms every non-blank cell is a well-formed percentage and that 73–84 is live only on tier 1/2. A false negative — a real rate turned into a dash — passes both. The 0% APR error survived until a render was put beside the extraction. Any future rate sweep needs that comparison, not just the assertions.
-- **Kia lease (K502) money is not on the page.** The August bulletins are APR only, so the Lease tab was removed rather than left showing March figures. KFA publishes lease separately — it needs its own PDF.
+- **Kia lease (K502) money is not on the page.** The September bulletins are APR only, so the Lease tab stays off. KFA publishes lease separately — it needs its own PDF.
 - **Kia's back-end advance sheet is 500 days old** (effective 2025-04-14). It is the newest KFA publishes on back-end, so it is current rather than stale, but worth a rep conversation.
 - ~~**The Kia warning has no expiry of its own.**~~ **Cleared 2026-08-27**, by hand and in the same proposal as the re-extraction — which is how it was always meant to go. The mechanism stands for next time: `sync.py freshness` preserves a warning rather than recomputing it, so whoever loads a current bulletin has to delete the banner deliberately.
 
@@ -207,13 +213,14 @@ blocked #8 and #9 for six days is done: all 20 lenders typed, 96 resolution
 cases green in both `core.py` and the browser.
 
 - **Done:** Sales Pace removed; 3 dead files deleted; the date mismatches resolved; the Supabase project emptied; the 20-lender corpus sweep applied through the gate; rates, freshness, navigation and the Desk UI shipped; Kia brought current; 78 dead CSS rules removed; reduced motion restored; **the v2 typed core built on all 20 lenders and both tools wired to it**
-- **Now — Gage's, not code's.** Seven rep conversations, in rough order of what they cost on a live deal:
+- **Now — extract Kia September, then Gage's rep conversations.** In order of what they cost on a live deal:
+  0. **`kia` September 2026-128 / 2026-129 rates.** Dates and the warning are in. Do not quote the August tables. Follow-up extraction; render, do not trust the text layer
   1. **`westlake` — Prime or Independent Dealer sheet?** Until that is settled its LTV cannot be typed at all; the Prime sheet publishes no total cap and the card's "140–150% incl. backend" is unsupported by it
   2. **`cps` — where does "regular term" end and "extended term" begin?** 130% vs 115%, on every CPS deal past whatever the boundary is. The sheet never says
   3. **`td`, `ally`, `kia` — each keeps its LTV in a different file from the one that sets its effective date.** Worth asking each for a single current sheet
   4. **`regional` publishes no total-LTV cap at all.** Is that real, or is there a document we do not have?
-  5. Kia lease (K502) money is not on the page; the August bulletins are APR only
-  6. Kia's back-end sheet is 500 days old; DFC's program sheet is 378
+  5. Kia lease (K502) money is not on the page; the September bulletins are APR only
+  6. Kia's back-end sheet is ~500 days old; DFC's program sheet is 386 (still 2025-08-13)
   7. Six lenders' bureau claims that no document supports
 - **Next — the two specs the schema was blocking:**
   - **#9, the ranking deal structurer.** No longer blocked and partly done: it ranks on eligibility against typed limits, and its hardcoded APR is gone. What is left is judgement, not data — how to order lenders that all pass, and whether "no published rate" should sort below a known floor

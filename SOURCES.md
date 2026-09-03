@@ -3,9 +3,9 @@
 Manifest of source documents. Maps each lender `id` (DATA.md) to its PDFs in the **LENDERHUB/LENDERHUBSOURCES** Drive folder, with file IDs so the agent can fetch them directly and fill `source.drive_file_id`.
 
 Folder: `LENDERHUB/LENDERHUBSOURCES` — Drive ID `1kf_mJ09Sxfg--PQ-xqOXdkouYUJ8ryz9`
-Inventory taken 2026-08-22, recounted 2026-08-25. **42 PDFs** + 1 README. All uploaded 2026-07-29.
-(This line said 38 until 2026-08-25. `DFC - Funding Guidelines` was in the table below all along
-and was never counted.)
+Inventory taken 2026-08-22, recounted 2026-08-25 (**42 PDFs**), recounted 2026-09-03.
+**40 PDFs** + 1 README in Drive today. July and August K500/K506 IDs are gone
+(re-upload). September bulletins 2026-128 / 2026-129 (`SEPT2` / `SEPT`) replaced them.
 
 ---
 
@@ -76,7 +76,7 @@ When a lender has both a Program Sheet and Guidelines/Rules, extract from Guidel
 | ally | 84 month Program Sheet | 2026-04-01 | `1R-6gins9tE5wyy3dqNRUJv6FcaOyXo0Y` | | **IMAGE_ONLY** p1 of 1 |
 | ally | Funding Guidelines | 2026-04-01 | `1Oej_ktEK5rLMxX8GXiUhzTF2wWelSYHm` | | ok (10p) |
 | fifththird | Program Sheet | 2026-07-23 | `1M5cikg9r9KADCNhRNQQF4w9hzGnc_FoJ` | July 23, 2026 ✓ | ok (2p) |
-| gls | Program Sheet | 2026-07-27 | `1FosJDBLX8H9vjNf-ZO3jdQAG1ecWBggs` | "2026 (v53)" ≠ | ok (2p) |
+| gls | Program Sheet | 2026-07-27 | `1FosJDBLX8H9vjNf-ZO3jdQAG1ecWBggs` | July 27, 2026 (v53) ✓ | ok (2p) |
 | gls | Funding Guidelines | 2026-07-27 | `1zmQry9GwX75muumyEBX5jP8qmglbTKzq` | | ok (1p) |
 | capitalone | Program Sheet | 2026-01-01 | `1iU_bLQVWiuaSeoTZKtUljRYia_9I0Nkl` | "January 2026" ~ | ok (2p) |
 | capitalone | Funding Guidelines | 2026-01-27 | `1GPPmk175O3xIiJDdnX2EEs2DKDqL2Vnu` | | ok (1p) |
@@ -84,12 +84,10 @@ When a lender has both a Program Sheet and Guidelines/Rules, extract from Guidel
 | westlake | Program Sheet | 2026-07-08 | `1KI4qsTOCXRm2tt4kJqOvTFDWKHcl-ESR` | "July 2026" ~ | ok (1p) |
 | westlake | Prime Program Sheet | 2026-07-08 | `1fwQ1YndmQi0zq9r5WTDTmAy9hhVje6VI` | | ok (1p) |
 | westlake | Program Guidelines | 2026-01-01 | `1FHLl1NXqFdoIBTnwhWpfInJqUfIS610C` | | **IMAGE_ONLY** p1 of 6 |
-| kia | Standard New - National | 2026-01-06 | `1w-r5QJqPQDMFZT1rBrfAVfSL2qxTosc9` | Jan 6, 2026 ✓ | ok (1p) |  ← **typed core read from here** (the August bulletins are APR only)
-| kia | K500&K506 | 2026-08-04 | `1erRPv4bOVTOpw5SdyjcOsX-3k3TanEJO` | K500/K506 Aug 4, 2026 ✓ | ok (10p) |
-| kia | K500&K506-2 | 2026-08-04 | `18JxCf14InKJ2pghApWzOcvf9K_Gn-XQN` | | ok (6p) |
+| kia | Standard New - National | 2026-01-06 | `1w-r5QJqPQDMFZT1rBrfAVfSL2qxTosc9` | Jan 6, 2026 ✓ | ok (1p) |  ← **typed core read from here** (the September bulletins are APR only)
+| kia | K500&K506 (current) | 2026-09-01 | `1jk6sU4E93VENTOA83bak8wigOFYCrFg1` | K500/K506 Sept 1, 2026 ✓ | unverified |  ← **2026-128**, `KIA - K500&K506 - SEPT2.pdf`, uploaded 2026-09-03. Contracts Sep 1–30, fund by Oct 14. **Rates in the app are still August — pending extraction.**
+| kia | K500&K506-2 (current) | 2026-09-01 | `1tRHuY42SIYFzP-DaxCQNxY2VaDL2-Kay` | | unverified |  ← **2026-129**, `KIA - K500&K506 - SEPT.pdf`. Prior-MY / model-code companion to SEPT2.
 | kia | Back-End Advance Updates | 2025-04-14 | `1Azn5vC-Ul7GJJtreLHGBfzPmA4ZdahC4` | | ok (1p) |
-| kia | K500&K506 (superseded) | 2026-07-01 | `1IyXoIz8Pia7vRv4o9I6k44e4D-njRDV8` | | ok (10p) |
-| kia | K500&K506-2 (superseded) | 2026-07-01 | `1Ur5v1OgYWfrJUkxsZCQqXLVzE2Yq84Xx` | | ok (6p) |
 | bofa | Program Sheet | 2026-06-18 | `1xbiqM_pi-0XcddGDV5flk9FaSDbmnHYz` | June 18, 2026 ✓ | ok (3p) |
 | bofa | Funding Guidelines | 2026-06-17 | `18W0arwbkG4U36_y0KBP6gCY7NFX8vdyU` | | ok (2p) |
 | chase | Program Sheet | 2026-05-10 | `1UZCajZt9a2pvWahnBzcs4K5WraU4IX8m` | May 10, 2026 ✓ | ok (1p) |
@@ -110,11 +108,16 @@ When a lender has both a Program Sheet and Guidelines/Rules, extract from Guidel
 
 **Text layer** = `tools/pdf_triage.py` verdict, run over the whole folder on 2026-08-25. `ok` means the page text can be quoted. Anything bold has to be read from a 200 DPI render instead — see §4.
 
-**Mismatches to resolve:** `gls` (the sheet carries no date at all, only the footer `GLS_PG_V53_2026`).
+**Mismatches to resolve:** none on dates. `gls` now stores `July 27, 2026 (v53)` — filename date is the authority; the sheet itself still only carries the footer `GLS_PG_V53_2026`.
 
-**Resolved 2026-08-27.** The `kia` bulletin divergence (07-01 vs 07-07) is gone: the July bulletins were superseded by 2026-104 / 2026-105, and the record now reads `K500/K506 Aug 4, 2026` against files dated `080426`. The July rows are kept, marked superseded, because they are still the source behind entries in `sync/applied.jsonl`.
+**Kia, 2026-09-03.** July IDs `1IyXoIz8Pia7vRv4o9I6k44e4D-njRDV8` / `1Ur5v1OgYWfrJUkxsZCQqXLVzE2Yq84Xx` and August IDs `1erRPv4bOVTOpw5SdyjcOsX-3k3TanEJO` / `18JxCf14InKJ2pghApWzOcvf9K_Gn-XQN` are **gone from Drive** (re-upload). Do not keep them. Current bulletins:
 
-**Resolved 2026-08-26 by renaming the file, not the record.** `td` and `dfc` both stated their own dates internally — TD's footer reads `06/30/2026` on every page of the Program Sheet and `PROD-9034 Effective 06.30.2026` on Program Sheet2, DFC's header reads `Revision Date: 8/13/2025`. The records were right and the filenames were wrong, so the two Drive files were renamed to match their documents. Renaming does not change a Drive file ID (§4), so the IDs above are unchanged.
+- `1jk6sU4E93VENTOA83bak8wigOFYCrFg1` — `KIA - K500&K506 - SEPT2.pdf` — bulletin **2026-128**, contracts Sep 1–30 2026, funded by Oct 14
+- `1tRHuY42SIYFzP-DaxCQNxY2VaDL2-Kay` — `KIA - K500&K506 - SEPT.pdf` — bulletin **2026-129**, same window, prior model year / model-code offers
+
+Filenames are `SEPT` / `SEPT2`, not `MMDDYY`. `sync.py` treats those as 2026-09-01 because that is the contract-start date printed on both PDFs. **Rate tables in `lenders.json` are still August 2026-104/105.** The record's `source.warning` says so. Do not quote the stored rates on a live deal until the September extraction lands.
+
+**Resolved 2026-08-26 by renaming the file, not the record.** `td` and `dfc` both stated their own dates internally — TD's footer reads `06/30/2026` on every page of the Program Sheet and `PROD-9034 Effective 06.30.2026` on Program Sheet2, DFC's header reads `Revision Date: 8/13/2025`. The records were right and the filenames were wrong. DFC Program Sheet `1VJ5ltQPHIdsv62z8SYOP8C3NXCzNNrvJ` was last modified 2026-08-26 (the rename); the document inside still says 8/13/2025. The `2026-01-01` DFC file is Funding Guidelines, not the program sheet. Re-checked 2026-09-03: same IDs, same internal dates.
 
 ---
 

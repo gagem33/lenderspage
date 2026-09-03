@@ -1,9 +1,4 @@
 {
-  "_comment": "Divergences between a Drive filename date and lenders.json that have been looked at and settled. `scan` prints these as `ack` instead of STALE so the monthly report only shows things nobody has judged yet. Remove an entry when a new PDF arrives for that lender -- the question reopens. td and dfc were removed on 2026-08-26 once their Drive files were renamed to match the dates printed inside the documents — the divergence no longer exists.",
-  "acknowledged": {
-    "gls": {
-      "reviewed": "2026-08-26",
-      "reason": "App stores a version string '2026 (v53)', not a date. The PDF is dated 2026-07-27. Needs a real date eventually."
-    }
-  }
+  "_comment": "Divergences between a Drive filename date and lenders.json that have been looked at and settled. `scan` prints these as `ack` instead of STALE so the monthly report only shows things nobody has judged yet. Remove an entry when a new PDF arrives for that lender -- the question reopens. td and dfc were removed on 2026-08-26 once their Drive files were renamed to match the dates printed inside the documents. gls was removed on 2026-09-03: effectiveDate is now July 27, 2026 (v53), matching the filename.",
+  "acknowledged": {}
 }
