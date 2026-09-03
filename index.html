@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="light">
+<html lang="en" data-theme="dark">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
@@ -14,22 +14,27 @@
    DESIGN TOKENS
 ═══════════════════════════════════════════════ */
 :root {
-  --bg:        #0A0C0D;
-  --bg2:       #14181A;
-  --bg3:       #1B2124;
-  --surface:   #1B2124;
-  --surface2:  #232A2E;
-  --border:    rgba(233,237,239,0.11);
-  --border2:   rgba(233,237,239,0.20);
+  --bg:        #05070A;
+  --bg2:       #0A1016;
+  --bg3:       #121A22;
+  --surface:   #0E151C;
+  --surface2:  #1A242E;
+  --border:    rgba(62,224,194,0.10);
+  --border2:   rgba(62,224,194,0.22);
 
-  --text:      #E9EDEF;
-  --text2:     #8B979C;
-  --text3:     #5D686D;
+  --text:      #E8F4F1;
+  --text2:     #8AA3A0;
+  --text3:     #5A6E6C;
 
-  --gold:      #D4A24C;
-  --gold2:     #BE8C39;
-  --golddim:   rgba(212,162,76,0.14);
-  --golddim2:  rgba(212,162,76,0.26);
+  --accent:    #3EE0C2;
+  --accent2:   #2AB89E;
+  --accentdim: rgba(62,224,194,0.12);
+  --accentdim2:rgba(62,224,194,0.26);
+
+  --gold:      #E8B84A;
+  --gold2:     #C4922E;
+  --golddim:   rgba(232,184,74,0.14);
+  --golddim2:  rgba(232,184,74,0.26);
   
   --green:     #58B389;
   --greendim:  rgba(88,179,137,0.15);
@@ -51,19 +56,23 @@
 
   --shadow-md: 0 1px 2px rgba(0,0,0,.18), 0 6px 20px rgba(0,0,0,.22);
   --shadow-lg: 0 8px 28px rgba(0,0,0,.35), 0 28px 80px rgba(0,0,0,.45);
-  --ring: 0 0 0 3px var(--golddim2);
+  --ring: 0 0 0 3px var(--accentdim2);
 }
 [data-theme="light"] {
-  --bg:       #F4F6F7;
+  --bg:       #F3F6F6;
   --bg2:      #FFFFFF;
-  --bg3:      #ECEFF1;
+  --bg3:      #E7EEEF;
   --surface:  #FFFFFF;
-  --surface2: #E6EAED;
-  --border:   rgba(16,26,32,0.11);
-  --border2:  rgba(16,26,32,0.20);
-  --text:     #101A20;
-  --text2:    #4A585F;
-  --text3:    #7B888F;
+  --surface2: #DDE6E7;
+  --border:   rgba(12,40,38,0.11);
+  --border2:  rgba(12,40,38,0.20);
+  --text:     #0C1A1C;
+  --text2:    #3E5554;
+  --text3:    #6A7E7C;
+  --accent:   #0E7A6A;
+  --accent2:  #0A5F53;
+  --accentdim: rgba(14,122,106,0.10);
+  --accentdim2:rgba(14,122,106,0.20);
   --gold:     #8A5A10;
   --gold2:    #6E4709;
   --golddim:  rgba(138,90,16,0.10);
@@ -95,10 +104,14 @@ html { font-size: 15px; scroll-behavior: smooth; }
     transition-duration: .01ms !important;
     scroll-behavior: auto !important;
   }
+  .hud-pulse { animation: none; }
 }
 body {
   font-family: var(--font);
-  background: var(--bg);
+  background:
+    radial-gradient(900px 420px at 8% -8%, rgba(62,224,194,0.07), transparent 55%),
+    radial-gradient(700px 360px at 100% 0%, rgba(232,184,74,0.04), transparent 50%),
+    var(--bg);
   color: var(--text);
   font-size: 0.9375rem;
   line-height: 1.6;
@@ -107,8 +120,18 @@ body {
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
 }
-::selection { background: var(--golddim2); }
-:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
+body::before {
+  content: '';
+  position: fixed; inset: 0; pointer-events: none; z-index: 0;
+  background-image:
+    linear-gradient(rgba(62,224,194,0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(62,224,194,0.035) 1px, transparent 1px);
+  background-size: 44px 44px;
+  mask-image: linear-gradient(180deg, rgba(0,0,0,.5), transparent 72%);
+}
+[data-theme="light"] body::before { opacity: .35; }
+::selection { background: var(--accentdim2); }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 * { scrollbar-width: thin; scrollbar-color: var(--border2) transparent; }
 ::-webkit-scrollbar { width: 8px; height: 8px; }
 ::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 8px; }
@@ -122,7 +145,7 @@ ul, ol { list-style: none; }
 /* ═══════════════════════════════════════════════
    LAYOUT
 ═══════════════════════════════════════════════ */
-#app { display: flex; flex-direction: column; min-height: 100vh; }
+#app { position: relative; z-index: 1; display: flex; flex-direction: column; min-height: 100vh; }
 
 /* HEADER */
 #header {
@@ -142,7 +165,7 @@ ul, ol { list-style: none; }
 .logo-wrap { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
 .logo-mark {
   width: 32px; height: 32px;
-  background: var(--gold);
+  background: var(--accent);
   border-radius: var(--r-sm);
   display: flex; align-items: center; justify-content: center;
   font-weight: 900; font-size: 1rem; color: var(--bg); letter-spacing: -.03em;
@@ -162,7 +185,7 @@ ul, ol { list-style: none; }
   font-size: .72rem; font-weight: 600;
   transition: all .15s ease; white-space: nowrap;
 }
-.btn-tool:hover { background: var(--golddim); color: var(--gold); }
+.btn-tool:hover { background: var(--accentdim); color: var(--accent); }
 .btn-tool svg { flex-shrink: 0; }
 @media (max-width: 540px) { .btn-tool-label { display: none; } }
 
@@ -185,7 +208,7 @@ ul, ol { list-style: none; }
   cursor: pointer; transition: all .15s;
 }
 .seg-chip:hover { color: var(--text); border-color: var(--border2); }
-.seg-chip.active { background: var(--golddim2); color: var(--gold); border-color: transparent; }
+.seg-chip.active { background: var(--accentdim2); color: var(--accent); border-color: transparent; }
 .lender-badge {
   margin-left: auto; font-size: .6rem; font-weight: 700;
   padding: 1px 6px; border-radius: var(--r-full);
@@ -207,13 +230,89 @@ ul, ol { list-style: none; }
 /* ── LENDER CARDS ─────────────────────────────
    The whole book is one list. A card opens where it sits and its sections switch
    without it growing, so finding a figure is clicking rather than scrolling. */
+.hud { margin-bottom: 14px; }
+.hud-title {
+  display: flex; align-items: center; gap: 12px; margin-bottom: 14px;
+}
+.hud-pulse {
+  width: 10px; height: 10px; border-radius: 50%;
+  background: var(--accent); box-shadow: 0 0 0 0 var(--accentdim2);
+  animation: hudPulse 2.4s ease-out infinite; flex-shrink: 0;
+}
+@keyframes hudPulse {
+  0% { box-shadow: 0 0 0 0 var(--accentdim2); }
+  70% { box-shadow: 0 0 0 10px transparent; }
+  100% { box-shadow: 0 0 0 0 transparent; }
+}
+.hud-sub { font-size: .72rem; color: var(--text3); letter-spacing: .06em; text-transform: uppercase; margin-top: 3px; }
+.hud-bar {
+  display: flex; flex-direction: column; gap: 8px;
+  padding: 12px 14px; margin-bottom: 8px;
+  background: color-mix(in srgb, var(--bg2) 88%, transparent);
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  box-shadow: inset 0 1px 0 rgba(62,224,194,0.08);
+}
+.hud-deal {
+  display: flex; flex-wrap: wrap; align-items: end; gap: 8px;
+}
+.hud-field {
+  display: flex; flex-direction: column; gap: 3px;
+  font-size: .58rem; font-weight: 700; letter-spacing: .08em;
+  text-transform: uppercase; color: var(--text3);
+}
+.hud-field input, .hud-field select {
+  width: 88px; background: var(--bg); border: 1px solid var(--border2);
+  border-radius: var(--r-sm); color: var(--text);
+  font: 500 .8rem var(--mono); padding: 6px 8px; outline: none;
+}
+.hud-field select { width: 92px; }
+.hud-field input:focus, .hud-field select:focus {
+  border-color: var(--accent); box-shadow: var(--ring);
+}
+.hud-field input::placeholder { color: var(--text3); }
+.hud-clear {
+  font-size: .68rem; font-weight: 700; color: var(--accent);
+  padding: 6px 10px; border: 1px solid var(--border2); border-radius: var(--r-sm);
+}
+.hud-clear:hover { border-color: var(--accent); background: var(--accentdim); }
+.scan-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 6px; margin: 0 0 10px;
+}
+.scan-row {
+  display: flex; align-items: center; gap: 7px;
+  padding: 7px 9px; border-radius: var(--r-sm);
+  background: var(--bg3); border: 1px solid var(--border);
+  font-size: .72rem;
+}
+.scan-row i {
+  width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0;
+  background: var(--text3);
+}
+.scan-row b { font-size: .58rem; letter-spacing: .07em; text-transform: uppercase; color: var(--text3); }
+.scan-row span { margin-left: auto; font-family: var(--mono); font-variant-numeric: tabular-nums; color: var(--text); }
+.scan-row.clear { border-color: rgba(88,179,137,.35); }
+.scan-row.clear i { background: var(--green); box-shadow: 0 0 6px var(--green); }
+.scan-row.over { border-color: rgba(220,124,100,.4); }
+.scan-row.over span { color: var(--red); }
+.scan-row.over i { background: var(--red); box-shadow: 0 0 6px var(--red); }
+.scan-row.tight { border-color: rgba(232,184,74,.4); }
+.scan-row.tight i { background: var(--gold); box-shadow: 0 0 6px var(--gold); }
+.scan-row.unk i { background: var(--text3); }
+.scan-pips { display: inline-flex; gap: 4px; align-items: center; }
+.scan-pips i { width: 6px; height: 6px; border-radius: 50%; background: var(--text3); }
+.scan-pips i.clear { background: var(--green); }
+.scan-pips i.over { background: var(--red); }
+.scan-pips i.tight { background: var(--gold); }
+.scan-pips i.unk { background: var(--text3); }
 .lh-toolbar { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-bottom: 8px; }
 .lh-search-wrap {
   flex: 1; min-width: 260px; display: flex; align-items: center; gap: 8px;
   background: var(--bg2); border: 1px solid var(--border);
   border-radius: var(--r-md); padding: 7px 11px;
 }
-.lh-search-wrap:focus-within { border-color: var(--gold); box-shadow: var(--ring); }
+.lh-search-wrap:focus-within { border-color: var(--accent); box-shadow: var(--ring); }
 .lh-search-icon { color: var(--text3); flex-shrink: 0; }
 #lh-search {
   flex: 1; background: none; border: none; outline: none;
@@ -238,7 +337,7 @@ ul, ol { list-style: none; }
   border: 1px solid var(--border); border-radius: var(--r-lg);
   background: var(--bg2); margin-bottom: 5px; overflow: hidden;
 }
-.lh-card.open { border-color: var(--golddim2); background: var(--surface); }
+.lh-card.open { border-color: var(--accentdim2); background: var(--surface); box-shadow: 0 0 0 1px var(--accentdim), 0 16px 40px rgba(0,0,0,.35); }
 .lh-head {
   display: grid; gap: 10px; align-items: center; padding: 9px 12px;
   cursor: pointer; user-select: none;
@@ -247,7 +346,7 @@ ul, ol { list-style: none; }
 }
 .lh-head:hover { background: var(--bg3); }
 .lh-head:focus-visible { outline: none; box-shadow: inset var(--ring); }
-.lh-card.open .lh-head { background: var(--golddim); border-bottom: 1px solid var(--border); }
+.lh-card.open .lh-head { background: var(--accentdim); border-bottom: 1px solid var(--border); }
 .lh-mark {
   width: 28px; height: 28px; border-radius: var(--r-sm);
   display: flex; align-items: center; justify-content: center;
@@ -262,7 +361,7 @@ ul, ol { list-style: none; }
   display: block; font-style: normal; font-size: .64rem; color: var(--text3);
   overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
 }
-.lh-hit { font-style: normal; color: var(--gold); }
+.lh-hit { font-style: normal; color: var(--accent); }
 .lh-cell {
   font-family: var(--mono); font-size: .74rem; color: var(--text2);
   font-variant-numeric: tabular-nums;
@@ -286,7 +385,7 @@ ul, ol { list-style: none; }
 .lh-tag.amber { background: var(--golddim);  color: var(--gold); }
 .lh-tag.red, .lh-tag.bad { background: var(--reddim); color: var(--red); }
 .lh-chev { color: var(--text3); font-size: .68rem; text-align: center; transition: transform .18s; }
-.lh-card.open .lh-chev { transform: rotate(90deg); color: var(--gold); }
+.lh-card.open .lh-chev { transform: rotate(90deg); color: var(--accent); }
 
 .lh-body { display: none; padding: 12px; }
 .lh-card.open .lh-body { display: block; }
@@ -304,7 +403,7 @@ ul, ol { list-style: none; }
   letter-spacing: .09em; text-transform: uppercase; color: var(--text3); margin-bottom: 2px;
 }
 .lh-st b {
-  display: block; font-family: var(--mono); font-size: .92rem; color: var(--gold);
+  display: block; font-family: var(--mono); font-size: .92rem; color: var(--accent);
   font-variant-numeric: tabular-nums; line-height: 1.25;
 }
 .lh-tabs {
@@ -317,7 +416,7 @@ ul, ol { list-style: none; }
   padding: 4px 10px; cursor: pointer; white-space: nowrap;
 }
 .lh-tb:hover { border-color: var(--gold2); color: var(--text); }
-.lh-tb.on { background: var(--gold); border-color: var(--gold); color: var(--bg); }
+.lh-tb.on { background: var(--accent); border-color: var(--accent); color: var(--bg); }
 /* The card must not grow as you switch sections -- that is the whole point. */
 .lh-pane { max-height: min(56vh, 460px); overflow-y: auto; padding-right: 4px; }
 .lh-pane::-webkit-scrollbar { width: 8px; }
@@ -381,7 +480,7 @@ footer {
 }
 .ql-head { display: flex; align-items: baseline; gap: 8px; margin-bottom: 10px; }
 .ql-title { font-size: .875rem; font-weight: 700; letter-spacing: -.01em; }
-.ql-count { font-size: .7rem; font-weight: 700; color: var(--gold); background: var(--golddim); border-radius: var(--r-full); padding: 1px 8px; }
+.ql-count { font-size: .7rem; font-weight: 700; color: var(--accent); background: var(--accentdim); border-radius: var(--r-full); padding: 1px 8px; }
 .ql-lenders { display: flex; flex-wrap: wrap; gap: 6px; }
 .ql-chip {
   font-size: .72rem; font-weight: 600;
@@ -390,7 +489,7 @@ footer {
   padding: 4px 11px; cursor: pointer;
   transition: background .12s, color .12s;
 }
-.ql-chip:hover { background: var(--golddim2); color: var(--gold); }
+.ql-chip:hover { background: var(--accentdim2); color: var(--accent); }
 .ql-note { font-size: .7rem; color: var(--text3); margin-top: 10px; line-height: 1.5; }
 @media (max-width: 640px) { .ql-grid { grid-template-columns: 1fr; } }
 
@@ -503,7 +602,7 @@ mark { background: var(--golddim2); color: var(--gold); border-radius: 2px; padd
   padding: 9px 18px; cursor: pointer;
   border-left: 2px solid transparent;
 }
-.jump-row[aria-selected="true"] { background: var(--golddim); border-left-color: var(--gold); }
+.jump-row[aria-selected="true"] { background: var(--accentdim); border-left-color: var(--accent); }
 .jump-row-icon {
   width: 26px; height: 26px; flex: 0 0 auto;
   border-radius: var(--r-sm);
@@ -559,15 +658,15 @@ kbd {
   transition: border-color .15s, box-shadow .15s;
   -webkit-appearance: none; appearance: none;
 }
-.calc-input:focus { border-color: var(--gold); box-shadow: 0 0 0 3px var(--golddim); }
+.calc-input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accentdim); }
 .calc-btn {
-  background: var(--gold); color: var(--bg);
+  background: var(--accent); color: var(--bg);
   font-weight: 700; font-size: .825rem;
   border: none; border-radius: var(--r-md);
   padding: 10px 22px; cursor: pointer;
   transition: background .15s; align-self: flex-start;
 }
-.calc-btn:hover { background: var(--gold2); }
+.calc-btn:hover { background: var(--accent2); }
 .calc-btn:active { filter: brightness(.95); }
 
 .calc-results { display: flex; flex-direction: column; gap: 10px; }
@@ -578,14 +677,14 @@ kbd {
   border-radius: var(--r-md);
   padding: 10px 14px;
 }
-.calc-result-item.highlight { border-color: var(--gold); background: var(--golddim); }
+.calc-result-item.highlight { border-color: var(--accent); background: var(--accentdim); }
 .calc-result-label { font-size: .65rem; color: var(--text3); font-weight: 600; text-transform: uppercase; letter-spacing: .05em; margin-bottom: 3px; }
 .calc-result-val { font-size: 1.15rem; font-weight: 800; letter-spacing: -.03em; color: var(--text); }
-.calc-result-item.highlight .calc-result-val { color: var(--gold); }
+.calc-result-item.highlight .calc-result-val { color: var(--accent); }
 .calc-note {
   font-size: .72rem; color: var(--text2); line-height: 1.5;
   padding: 8px 12px; border-radius: var(--r-sm);
-  background: var(--bg3); border-left: 3px solid var(--gold);
+  background: var(--bg3); border-left: 3px solid var(--accent);
 }
 .calc-note:empty { display: none; }
 
@@ -646,7 +745,9 @@ kbd {
   background: var(--bg3); border-radius: var(--r-md);
   border-left: 3px solid var(--gold);
 }
+.kfa-header.ok { border-left-color: var(--accent); }
 .kfa-header-pill { background: var(--gold); color: #000; font-size: .65rem; font-weight: 800; letter-spacing: .05em; text-transform: uppercase; border-radius: var(--r-sm); padding: 2px 9px; }
+.kfa-header-pill.ok { background: var(--accent); color: #000; }
 .kfa-header-dates { font-size: .72rem; color: var(--text3); }
 .kfa-flat-key { background: var(--bg3); border: 1px solid var(--border2); border-radius: var(--r-md); padding: 10px 14px; margin-bottom: 14px; }
 .kfa-flat-key-title { font-size: .65rem; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; color: var(--text3); margin-bottom: 7px; }
@@ -654,7 +755,7 @@ kbd {
 .kfa-tab-bar { display: flex; flex-wrap: wrap; gap: 4px; margin-bottom: 10px; padding-bottom: 10px; border-bottom: 1px solid var(--border2); }
 .kfa-tab { background: var(--bg3); border: 1px solid var(--border2); border-radius: var(--r-sm); color: var(--text2); font-size: .72rem; font-weight: 600; padding: 4px 11px; cursor: pointer; transition: all .15s; white-space: nowrap; }
 .kfa-tab:hover { border-color: var(--gold); color: var(--text); }
-.kfa-tab.active { background: var(--gold); border-color: var(--gold); color: #000; font-weight: 700; }
+.kfa-tab.active { background: var(--accent); border-color: var(--accent); color: #000; font-weight: 700; }
 /* A dash in a rate cell means the term is not offered. It must not read as a
    rate, and must not read as missing data either. */
 .kfa-na { color: var(--text3); opacity: .55; }
@@ -718,10 +819,10 @@ kbd {
 <!-- HEADER -->
 <header id="header" role="banner">
   <div class="logo-wrap">
-    <div class="logo-mark">F</div>
+    <div class="logo-mark">◈</div>
     <div>
       <div class="logo-text">Lender Hub</div>
-      <div class="logo-sub">F&amp;I Program Reference</div>
+      <div class="logo-sub">SW Kia Dallas · Desk</div>
     </div>
   </div>
   <div class="header-actions">
@@ -762,27 +863,60 @@ kbd {
 <main id="main" role="main">
   <!-- COMPARE VIEW -->
   <section class="view active" id="view-compare">
-    <div class="page-header">
-      <h1 class="page-title">Lender Hub</h1>
-      <div class="lh-toolbar">
-        <div class="lh-search-wrap">
-          <svg class="lh-search-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
-          <input id="lh-search" type="search" autocomplete="off" spellcheck="false"
-                 placeholder="Filter lenders, or search inside their programs — press / to jump">
-          <button id="lh-search-clear" title="Clear">&#10005;</button>
-        </div>
-        <div id="lh-segs">
-          <button class="seg-chip active" data-seg="all">All</button>
-          <button class="seg-chip" data-seg="prime">Prime</button>
-          <button class="seg-chip" data-seg="near">Near</button>
-          <button class="seg-chip" data-seg="sub">Sub</button>
-          <button class="seg-chip" data-seg="deep">Deep</button>
+    <div class="hud">
+      <div class="hud-title">
+        <span class="hud-pulse" aria-hidden="true"></span>
+        <div>
+          <h1 class="page-title">Desk Scan</h1>
+          <p class="hud-sub">Type a deal &mdash; the field answers</p>
         </div>
         <span class="lh-count" id="lh-count"></span>
       </div>
-      <p class="page-date">Click a lender to open it here &mdash; the list stays put. Section chips switch
-        without growing the card. <b>Sheet Age</b> is straight from the source PDF: green under 90 days
-        &middot; amber past 90 &middot; red past a year. Always confirm on the approval.</p>
+      <div class="hud-bar">
+        <div class="lh-search-wrap">
+          <svg class="lh-search-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+          <input id="lh-search" type="search" autocomplete="off" spellcheck="false"
+                 placeholder="Search any program field — FICO, GAP, backend, stips…  / jumps">
+          <button id="lh-search-clear" title="Clear">&#10005;</button>
+        </div>
+        <div class="hud-deal" id="hud-deal">
+          <label class="hud-field">FICO<input id="hud-fico" type="number" min="300" max="850" placeholder="—" inputmode="numeric"></label>
+          <label class="hud-field">Term
+            <select id="hud-term">
+              <option value="">Any</option>
+              <option value="48">48</option>
+              <option value="60">60</option>
+              <option value="66">66</option>
+              <option value="72">72</option>
+              <option value="75">75</option>
+              <option value="78">78</option>
+              <option value="84">84</option>
+            </select>
+          </label>
+          <label class="hud-field">Type
+            <select id="hud-vtype">
+              <option value="">Any</option>
+              <option value="new">New</option>
+              <option value="used">Used</option>
+            </select>
+          </label>
+          <label class="hud-field">Miles<input id="hud-miles" type="number" min="0" placeholder="—" inputmode="numeric"></label>
+          <label class="hud-field">LTV %<input id="hud-ltv" type="number" min="0" step="0.1" placeholder="—" inputmode="decimal"></label>
+          <button type="button" id="hud-clear" class="hud-clear" hidden>Clear deal</button>
+        </div>
+        <div class="lh-toolbar">
+          <div id="lh-segs">
+            <button class="seg-chip active" data-seg="all">All</button>
+            <button class="seg-chip" data-seg="prime">Prime</button>
+            <button class="seg-chip" data-seg="near">Near</button>
+            <button class="seg-chip" data-seg="sub">Sub</button>
+            <button class="seg-chip" data-seg="deep">Deep</button>
+          </div>
+        </div>
+      </div>
+      <p class="page-date">Deal filters drop banks that fail a hard published limit. Open a row for the
+        constraint scan, then chips for every field on the sheet. Age is from the source PDF:
+        green under 90 days &middot; amber past 90 &middot; red past a year. Confirm on the approval.</p>
     </div>
     <div id="lh-list"></div>
     <p id="lh-empty" hidden>Nothing matches that.</p>
@@ -1033,8 +1167,9 @@ function freshnessOf(l) {
   const synced = s.syncedAt ? ` · synced ${s.syncedAt}` : '';
 
   // A current document whose CONTENT has expired. No date can express that, so the
-  // sync carries an explicit warning. Kia is the live case: the bulletin on file is
-  // dated July but the incentives inside it died in April.
+  // sync carries an explicit warning. Kia used this while September was on file
+  // and the stored tables were still August; the warning is gone once the
+  // current bulletin is what the page shows.
   if (s.warning)
     return {cls:'red', text:'Check bulletin', attention:true,
             title:`${s.warning}${synced}`};
@@ -1052,7 +1187,7 @@ function freshnessOf(l) {
 }
 
 // ─── THEME ───────────────────────────────────────────────────
-let theme = 'light';
+let theme = 'dark';
 function applyTheme() { document.documentElement.setAttribute('data-theme', theme); }
 function toggleTheme() { theme = theme==='dark'?'light':'dark'; applyTheme(); }
 applyTheme();
@@ -1069,6 +1204,98 @@ let cardList = [], activeSeg = 'all', openLender = null;
 // to what you were reading rather than to the top.
 const lastSection = {};
 
+function hudNum(id) {
+  const v = parseFloat($(id)?.value);
+  return Number.isFinite(v) ? v : null;
+}
+function currentDeal() {
+  const vtype = $('#hud-vtype')?.value || '';
+  return {
+    fico: hudNum('#hud-fico'),
+    term_months: hudNum('#hud-term'),
+    mileage: hudNum('#hud-miles'),
+    ltv: hudNum('#hud-ltv'),
+    vehicle_condition: vtype || null,
+    amount_financed: null,
+    book_value: null,
+  };
+}
+function dealIsSet(d) {
+  d = d || currentDeal();
+  return d.fico != null || d.term_months != null || d.mileage != null
+      || d.ltv != null || !!d.vehicle_condition;
+}
+function stripHtml(s) {
+  return String(s || '').replace(/<[^>]+>/g, '').replace(/&mdash;/g, '—').replace(/&ndash;/g, '–');
+}
+
+// Constraint scan. A published limit the deal fails is OVER. A deal above the
+// floor but under the ceiling is TIGHT (needs the right tier/term). No number
+// on the sheet is UNK. No deal entered is IDLE.
+function constraintRows(l) {
+  const deal = currentDeal();
+  const pred = {
+    term_months: deal.term_months,
+    mileage: deal.mileage,
+    vehicle_condition: deal.vehicle_condition,
+  };
+  const row = (label, status, text) => ({ label, status, text });
+  const rows = [];
+
+  const F = lenderLimit(l, 'fico_min', pred);
+  const fShow = cardLimit(l, 'fico_min', 'Not published').text;
+  if (deal.fico == null) rows.push(row('FICO', F.value == null ? 'unk' : 'idle', fShow));
+  else if (F.value == null) rows.push(row('FICO', 'unk', `${deal.fico} · no published floor`));
+  else if (deal.fico < F.value) rows.push(row('FICO', 'over', `${deal.fico} below ${F.value}`));
+  else rows.push(row('FICO', 'clear', `${deal.fico} ≥ ${F.value}`));
+
+  const T = lenderLimit(l, 'max_term_months', pred);
+  const tShow = cardLimit(l, 'max_term_months', 'Not published').text;
+  if (deal.term_months == null) rows.push(row('Term', T.value == null ? 'unk' : 'idle', tShow));
+  else if (T.value == null) rows.push(row('Term', 'unk', `${deal.term_months} mo · no published max`));
+  else if (deal.term_months > T.value) rows.push(row('Term', 'over', `${deal.term_months} over ${T.value} mo`));
+  else rows.push(row('Term', 'clear', `${deal.term_months} ≤ ${T.value} mo`));
+
+  const M = lenderLimit(l, 'max_mileage', pred);
+  const mShow = cardLimit(l, 'max_mileage', 'Not published').text;
+  if (deal.mileage == null) rows.push(row('Miles', M.value == null ? 'unk' : 'idle', mShow));
+  else if (M.value == null) rows.push(row('Miles', 'unk', `${deal.mileage.toLocaleString()} · no published max`));
+  else if (deal.mileage > M.value) rows.push(row('Miles', 'over', `${deal.mileage.toLocaleString()} over ${M.value.toLocaleString()}`));
+  else rows.push(row('Miles', 'clear', `${deal.mileage.toLocaleString()} ≤ ${M.value.toLocaleString()}`));
+
+  const L = lenderLimit(l, 'ltv_total_max_pct', pred);
+  const top = limitCeiling(l, 'ltv_total_max_pct');
+  const lShow = cardLimit(l, 'ltv_total_max_pct', 'Not published').text;
+  if (deal.ltv == null) rows.push(row('LTV', L.value == null ? 'unk' : 'idle', lShow));
+  else if (L.value == null && top == null) rows.push(row('LTV', 'unk', `${deal.ltv}% · no published total cap`));
+  else if (top != null && deal.ltv > top) rows.push(row('LTV', 'over', `${deal.ltv}% over ${top}%`));
+  else if (L.value != null && deal.ltv > L.value) rows.push(row('LTV', 'tight', `${deal.ltv}% needs a tier ≥ ${L.value}%`));
+  else rows.push(row('LTV', 'clear', `${deal.ltv}% ≤ ${L.value ?? top}%`));
+
+  const G = cardLimit(l, 'gap_max_usd', 'Not published').text;
+  rows.push(row('GAP', 'idle', G));
+
+  if (deal.vehicle_condition)
+    rows.push(row('Type', 'idle', deal.vehicle_condition === 'new' ? 'New' : 'Used'));
+
+  return rows;
+}
+function dealHardFail(l) {
+  return constraintRows(l).filter(r => r.status === 'over').map(r => r.label);
+}
+function constraintScanHTML(l) {
+  return `<div class="scan-grid" aria-label="Constraint scan">${
+    constraintRows(l).map(r =>
+      `<div class="scan-row ${r.status}"><i></i><b>${r.label}</b><span>${r.text}</span></div>`
+    ).join('')
+  }</div>`;
+}
+function scanPipsHTML(l) {
+  if (!dealIsSet()) return '';
+  return `<span class="scan-pips">${constraintRows(l).map(r =>
+    `<i class="${r.status}" title="${r.label}: ${stripHtml(r.text)}"></i>`).join('')}</span>`;
+}
+
 function cardHTML(l) {
   const f = freshnessOf(l);
   const secs = Object.entries(l.sections);
@@ -1079,7 +1306,7 @@ function cardHTML(l) {
       <span class="lh-mark ${l.colorClass}">${l.abbr}</span>
       <span class="lh-nm"><b>${l.name}</b><em>${l.fullName}${
         l.stateRestriction ? ` &middot; <i class="lh-tag bad">${l.stateRestriction}</i>` : ''}</em></span>
-      <span class="lh-agecell">${f ? `<i class="lh-tag ${f.cls}" title="${f.title}">${f.text}</i>` : ''}</span>
+      <span class="lh-agecell">${f ? `<i class="lh-tag ${f.cls}" title="${f.title}">${f.text}</i>` : ''}${scanPipsHTML(l)}</span>
       <span class="lh-segcell"><i class="lh-tag seg ${segClass(l.segment)}">${l.segmentLabel}</i></span>
       ${cell('FICO', cardCell(l, 'fico_min', 'Tier'))}
       ${cell('Term', cardCell(l, 'max_term_months'))}
@@ -1089,6 +1316,7 @@ function cardHTML(l) {
       <span class="lh-chev" aria-hidden="true">&#9654;</span>
     </div>
     <div class="lh-body">
+      ${constraintScanHTML(l)}
       <div class="lh-strip">
         ${[['Min FICO', cardCell(l, 'fico_min', 'Tier-based')],
            ['Max Term', cardCell(l, 'max_term_months', 'Per program')],
@@ -1124,8 +1352,6 @@ function renderCards() {
   if (!box) return;
   box.innerHTML = cardList.map(cardHTML).join('');
   $('#lh-empty').hidden = cardList.length > 0;
-  const c = $('#lh-count');
-  if (c) c.textContent = `${cardList.length} / ${LENDERS.length} lenders`;
 }
 
 // Where a query matched, and how strongly. The card list searches every section's
@@ -1149,9 +1375,12 @@ function cardMatch(lender, q) {
 
 function filterCards() {
   const q = ($('#lh-search')?.value || '').trim().toLowerCase();
+  const dealOn = dealIsSet();
   const hits = [];
+  let hiddenByDeal = 0;
   for (const l of LENDERS) {
     if (activeSeg !== 'all' && l.segment !== activeSeg) continue;
+    if (dealOn && dealHardFail(l).length) { hiddenByDeal++; continue; }
     const m = q ? cardMatch(l, q) : {rank: 0};
     if (m) hits.push({l, ...m});
   }
@@ -1166,6 +1395,13 @@ function filterCards() {
     if (em) em.innerHTML += ` <i class="lh-hit">in ${h.where}</i>`;
   });
   $('#lh-search-clear')?.classList.toggle('visible', q.length > 0);
+  const clr = $('#hud-clear');
+  if (clr) clr.hidden = !dealOn;
+  const c = $('#lh-count');
+  if (c) {
+    const extra = hiddenByDeal ? ` · ${hiddenByDeal} out on deal` : '';
+    c.textContent = `${cardList.length} / ${LENDERS.length}${extra}`;
+  }
 }
 
 function openCard(id, scroll = true) {
@@ -1362,6 +1598,16 @@ function init() {
   });
   $('#lh-search-clear')?.addEventListener('click', () => {
     search.value = ''; filterCards(); search.focus();
+  });
+
+  ['hud-fico', 'hud-miles', 'hud-ltv'].forEach(id =>
+    $(`#${id}`)?.addEventListener('input', filterCards));
+  ['hud-term', 'hud-vtype'].forEach(id =>
+    $(`#${id}`)?.addEventListener('change', filterCards));
+  $('#hud-clear')?.addEventListener('click', () => {
+    ['hud-fico', 'hud-miles', 'hud-ltv'].forEach(id => { const el = $(`#${id}`); if (el) el.value = ''; });
+    ['hud-term', 'hud-vtype'].forEach(id => { const el = $(`#${id}`); if (el) el.value = ''; });
+    filterCards();
   });
 
   $$('#lh-segs .seg-chip').forEach(chip => {

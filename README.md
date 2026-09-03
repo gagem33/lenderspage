@@ -12,19 +12,18 @@ public-facing.
 
 ## What's in it
 
-**Three views**
+**One view**
 
-| View | What it does |
-|---|---|
-| Compare | All 20 lenders in one table, plus 9 quick lists (84-month terms, 150K+ miles, ITIN accepted, open BK, DACA, first-time buyer, and more) |
-| Lender detail | Per-lender program sheet — FICO, LTV, reserve, backend, vehicle rules, docs & stips, plus a program-tracking panel |
+A search-first Desk Scan: type a deal (FICO / term / new-used / miles / LTV)
+and the field drops banks that fail a hard published limit. Open a lender for
+a constraint scan, then chips for every program section. Quick lists sit below.
 
 **Six tools**, in the header — Income Calculator, Bureau Score Search, LTV
 Calculator, Deal Structurer, Side-by-Side Compare, and a 20-Day Calculator.
 
-**Program tracking** — each lender shows when its guidelines were last verified
-and flags anything over 90 days stale. Logging a verification or a note needs
-the team PIN.
+**Freshness** comes from the source PDF date, not a button. Green under 90 days,
+amber past 90, red past a year. Kia currently warns that September bulletins
+are on file and the stored rates are still August.
 
 ---
 
@@ -114,8 +113,8 @@ along with them. The migrations that did it are in
 [`supabase/migrations/`](supabase/migrations); the history is in
 [`docs/supabase-contract.md`](docs/supabase-contract.md).
 
-Lender data lives in the `LENDERS` array inside `index.html`. Keeping it current
-is a sync from the source PDFs in Google Drive — see `CLAUDE.md`.
+Lender data lives in `lenders.json`, fetched at boot. Keeping it current
+is a Drive sync through `tools/sync.py` — see `docs/SYNC.md` and `CLAUDE.md`.
 
 ---
 

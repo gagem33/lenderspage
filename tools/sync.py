@@ -137,6 +137,7 @@ MONTHS = {m.lower(): i for i, m in enumerate(
      'August','September','October','November','December'], 1)}
 for _full, _n in list(MONTHS.items()):
     MONTHS[_full[:3]] = _n
+MONTHS['sept'] = 9  # 'Sept 1, 2026' — four-letter form used on Kia labels
 
 def parse_app_dates(s):
     """lenders.json effectiveDate strings are free text. Return (dates, precision).
@@ -162,17 +163,22 @@ def parse_app_dates(s):
     return [], None
 
 FILENAME_DATE = re.compile(r'-\s*(\d{2})(\d{2})(\d{2})\s*\.pdf$', re.I)
+# Kia dropped SEPT / SEPT2 instead of MMDDYY. The PDFs themselves
+# (2026-128 / 2026-129) say contracts dated September 1, 2026.
+SEPT_FILENAME = re.compile(r'-\s*SEPT\d*\s*\.pdf$', re.I)
 
 def parse_filename_date(title):
     """'Exeter - Program Sheet - 061226.pdf' -> date(2026, 6, 12). SOURCES.md section 1."""
     m = FILENAME_DATE.search(title)
-    if not m:
-        return None
-    mm, dd, yy = (int(g) for g in m.groups())
-    try:
-        return datetime.date(2000 + yy, mm, dd)
-    except ValueError:
-        return None
+    if m:
+        mm, dd, yy = (int(g) for g in m.groups())
+        try:
+            return datetime.date(2000 + yy, mm, dd)
+        except ValueError:
+            return None
+    if SEPT_FILENAME.search(title):
+        return datetime.date(2026, 9, 1)
+    return None
 
 # Doc types that do NOT set a lender's effective date. SOURCES.md section 1 is
 # explicit that Funding Guidelines cover stips and funding only, and Proof of
