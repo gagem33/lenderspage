@@ -86,7 +86,11 @@ def lender_by_id(records, lid):
 
 # ---------------------------------------------------------------- SOURCES.md manifest
 
-MANIFEST_ROW = re.compile(r'^\|(?P<cells>.+)\|\s*$')
+# A row may carry a human note after its closing pipe ("| ok (1p) |  ← typed core read
+# from here"). Non-greedy so the note is never swallowed into the last cell. Before
+# 2026-09-03 this required the line to END with the pipe, and seven annotated rows
+# -- three of them typed-core provenance -- silently dropped out of the manifest.
+MANIFEST_ROW = re.compile(r'^\|(?P<cells>.+?)\|\s*(?:←.*)?$')
 
 def parse_manifest():
     """Read the section 2 table out of SOURCES.md.
