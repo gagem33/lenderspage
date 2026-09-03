@@ -23,7 +23,7 @@ Audit basis: `lenders.json` on `main`, 20 lenders. Current-state audit pulled 20
 | gls | GLS / Global Lending | Sub-Prime | July 27, 2026 (v53) |
 | capitalone | Capital One | All Tiers (0–9) | January 2026 |
 | westlake | Westlake Financial | Deep Sub-Prime | July 2026 |
-| kia | Kia Finance | Near-Prime | Jan 6, 2026 · K500/K506 Sept 1, 2026 |
+| kia | Kia Finance | Near-Prime | Jan 6, 2026 · K500/K506 Sep 1–30, 2026 |
 | bofa | Bank of America | Prime | June 18, 2026 |
 | chase | Chase Auto | Prime | May 10, 2026 |
 | pnc | PNC Bank | Prime | March 16, 2026 |

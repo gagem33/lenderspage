@@ -10,7 +10,52 @@ Drive IDs below are the authority documents named in `SOURCES.md`.
 
 ---
 
-## Changed in this PR
+## Production fix — Kia September applied (this PR)
+
+Live `lender-hub.vercel.app` was already serving the merged HUD from PR #29
+(`37d503c`, last-modified 2026-09-03 15:13 UTC). The visible failure was the
+Kia chip: it still said **“August tables (Sept pending)”** and the stored
+grids were 2026-104/105.
+
+September rates are now the user-facing Kia view. Authority:
+
+| Doc | Bulletin | Drive ID | Window |
+|---|---|---|---|
+| `KIA - K500&K506 - SEPT2.pdf` | **2026-128** | `1jk6sU4E93VENTOA83bak8wigOFYCrFg1` | Contracts **Sep 1–30, 2026**. Funded by **Oct 14, 2026**. Internal only. |
+| `KIA - K500&K506 - SEPT.pdf` | **2026-129** | `1tRHuY42SIYFzP-DaxCQNxY2VaDL2-Kay` | Same window. Prior-MY / K4 / Sportage Hybrid companion. |
+
+Verified facts applied as printed (and confirmed on 300 dpi renders of
+Carnival p1, Sorento p6, Sportage p8 of SEPT2):
+
+- K500 tiers: T1/T2 720+; T3 700–719; T4 680–699; T5 660–679; T6 640–659; T7 620–639; T8 580–619
+- K506 tiers: T1 740+; T2 720–739; T3 700–719; T4 680–699; T5 660–679; T6 640–659; T7 620–639; T8 580–619
+- Term buckets: 24–48, 49–60, 61–66, 67–72, 73–84. **K506 73–84 is N/A on every extracted 506 table.** K500 73–84 is live on T1/2 only (text-layer `0.00%` on T3–8 is grey / not offered).
+- K500 reserve: markup N/A; flat up to $200 (T1–3) or $150 (T4–8). Flats: T1–3 Premier $200 / VIP $150 / Partner $100; T4–8 Premier $150 / VIP $100 / Partner $50. **No flat below FICO 620.**
+- K506 reserve: markup 1% or flat up to $450. T8 prints markup only (no flat).
+
+APR cells were taken from `find_tables()` in document order, then 73–84 was
+forced to a dash except K500 T1/2, matching the render. A `0.00%` outside
+73–84 is a real APR (Sorento / Sorento Hybrid / Sportage MY2026 / Sportage
+Hybrid MY2026, K500 T1/2 24–48). LTV ladder, backend, and every other
+lender’s program numbers were not edited.
+
+| Lender | Field | Site value before | Changed to |
+|---|---|---|---|
+| kia | `effectiveDate` | `Jan 6, 2026 · K500/K506 Sept 1, 2026` | `Jan 6, 2026 · K500/K506 Sep 1–30, 2026` |
+| kia | `source.warning` | August-tables-pending text | **deleted** |
+| kia | `sections.incentives.label` | `KFA Incentives — August tables (Sept pending)` | `KFA Incentives — Sep 1–30, 2026` |
+| kia | `sections.incentives.content` | August 2026-104/105 grids + pending banner | September 2026-128/129 grids + verified badge (Drive IDs, Sep 1–30, fund Oct 14) |
+| kia | Carnival MY2027 K500 T5 24–48 (example) | `9.00%` (August) | `9.50%` (2026-128 p1) |
+| kia | Carnival MY2027 K500 T8 24–48 | `11.00%` | `11.25%` |
+| kia | Sportage Hybrid MY2027 K500 T1/2 24–48 | `1.99%` (August 104) | `0.90%` (2026-129 p6) |
+
+No LTV, GAP, term, mileage, or other-lender value was invented or changed.
+
+---
+
+## Earlier the same day (PR #29, already on main)
+
+## Changed in PR #29
 
 | Lender | Field | Site value before | Source PDF | Changed to | Why |
 |---|---|---|---|---|---|
@@ -74,9 +119,8 @@ but EXTRACTION_GUIDE §9 forbids taking a bulletin grid from the text layer
 
 ---
 
-## Waiting on the Kia September extraction follow-up
+## Kia September extraction — done 2026-09-03
 
-Do not treat the Drive OCR snippet as the rate grid. Known traps on these
-bulletins (same as August): 73–84 shows `0.00%` / `#N/A` on tiers that do not
-offer the term; a real `0.00%` APR exists on some K500 24–48 cells. Render,
-then extract.
+Rendered Carnival / Sorento / Sportage at 300 dpi. 73–84 is N/A except K500
+T1/2. Real `0.00%` APRs on K500 T1/2 24–48 kept as rates. See the production
+fix section at the top.
