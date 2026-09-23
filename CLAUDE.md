@@ -68,16 +68,16 @@ LENDERHUB/
 
 The repo holds a committed copy of the md files. Drive is the master; when they diverge, Drive wins and the repo copy gets updated.
 
-## Current state (as of 2026-09-03)
+## Current state (as of 2026-09-23)
 
 **Working**
 - Pure static page — no backend, no auth, no network calls but fonts
-- **Orbit command deck, 2026-09-03.** Home is no longer a 20-card list. A deal command bar (FICO / term / new-used / miles / LTV + search) sits over a spatial constellation (FICO floor × LTV ceiling) and a ranked “who can buy this” rail. Hard fails drop from the rail and dim on the field. Opening a lender is a full HUD readout: constraint scan first (clear / tight / over), then layered program panels. Quick lists live behind Intel. Compare stays a tool. Same 20 lenders, same numbers, same six tools, same shortcuts (`c` returns to the deck). Cyan scan accent, glass, scan-lines; theme toggle still flips to light.
-- Six tool modals: income calc, date calc, bureau search, LTV calc, deal structurer, side-by-side compare
+- **Paper Terminal, 2026-09-23.** Home is a sticky Deal Brief (FICO, term, new/used, miles, LTV%, amount) over a ranked “who can buy this” list. Clear / Tight / Fail come from the typed core. Hard fails drop unless Show fails is on. One-line why plus source age. Selecting a lender fills the Bank HUD: constraint scan, then chips (LTV, Rates, Backend, Stips, Vehicles, plus any other sheet sections). Tools sit in a bottom bar. Day/paper is the default; the theme toggle flips to a warm night. The Orbit constellation is gone.
+- Six tool modals: income calc, date calc, bureau search, LTV calc, deal structurer, side-by-side compare — secondary, not the home
 - Delegated event listeners on stable parent containers (fixed click-through bug after re-render)
-- ~~Desk Scan HUD, 2026-09-03.~~ **Replaced the same day.** The HUD still sat on the 20-card list; Gage rejected it as “you literally didn’t change the dashboard at all.” Orbit is a different product surface.
+- ~~Desk Scan HUD, 2026-09-03.~~ **Replaced the same day by Orbit, then by Paper Terminal on 2026-09-23.** The constellation is gone. Home is the ranked list.
 - **UI rebuilt on the Desk identity, 2026-08-27.** Gage picked a dark, terminal-dense direction from three, then asked for a layout where lenders open in place. The sidebar and the separate lender page are gone: one list, twenty cards, each opening where it sits with its sections as chips rather than a scroll. The chip row does not move between sections and seven of Exeter's eight sections need no scrolling at all. IBM Plex Sans and Mono, 3–6px radii. Light mode is a cool neutral, not the old cream
-- **Navigation speed (spec #10), 2026-08-26.** `/` or `⌘K`/`Ctrl+K` opens a jump-to box that reaches any lender, tool or view — ranked, arrow keys, Enter. Single keys open the six tools (`i b l d s y`), `c` returns to the command deck, `[` and `]` step through lenders, `?` lists the lot. Search now ranks name matches first and says *where* a hit landed (`in Vehicle Eligibility`), which matters because it searches every section's text. Shortcuts never fire while a field has focus; `⌘K` is the one exception, so it works from inside the search box
+- **Navigation speed (spec #10), 2026-08-26.** `/` or `⌘K`/`Ctrl+K` opens a jump-to box that reaches any lender, tool or view — ranked, arrow keys, Enter. Single keys open the six tools (`i b l d s y`), `c` returns to the list, `[` and `]` step through the visible ranking, `?` lists the lot. Search now ranks name matches first and says *where* a hit landed (`in Vehicle Eligibility`), which matters because it searches every section's text. Shortcuts never fire while a field has focus; `⌘K` is the one exception, so it works from inside the search box
 - **Source freshness on the page (spec #4), 2026-08-26.** Every lender carries a `source` block written by `sync.py freshness` — ISO date, the document it came from, its Drive ID, and when it was last synced. The page turns that into an age badge: green under 90 days, amber past 90, red past a year. It shows on the ranked rail and again in the open readout. Age is computed at render time, so it is never stale. Kia no longer carries a `source.warning`: the September bulletins are what the incentives chip shows.
 - **Rates on the lender page (spec #3), 2026-08-26.** `regional` carries a `Consumer Rates` section — the sheet's full 112-cell grid, sitting directly under LTV & Terms. Every other lender's rate data (floors, bands, usury caps, buy-rate/flat tables) was already in the record; see the Open Questions entry. Rates are searchable, because the detail search already indexes every section's text
 - **Typed core on all 20 lenders (v2), 2026-08-28.** Each record carries a `core` block beside its `sections`: about a dozen typed limits, each a number plus the conditions it holds under. `tools/core.py validate` checks shape and warns on overlapping bands; `core.py selftest` runs 96 resolution cases that the browser must agree with, and a Playwright run feeds it the same 96. The LTV calculator and the deal structurer read it through `lenderLimit()`. See DATA.md §2
@@ -98,7 +98,7 @@ The repo holds a committed copy of the md files. Drive is the master; when they 
 
 | Date | Decision | Why |
 |---|---|---|
-| 2026-09-03 | Home is a constellation + ranked scan, not a card list | The Desk Scan HUD still opened as twenty cards. Gage’s call: that is not a new dashboard. Mid-deal the first screen is “who can buy this” on a field, and a lender is a HUD readout. |
+| 2026-09-23 | Home is Paper Terminal, not the Orbit field | Gage does not want the constellation / map / signal view at the desk. Day default is warm paper, ink type, terracotta rules. Ranking stays on the typed core. Desk Intel / web scrape is a follow-up, not this pass. |
 | 2026-09-03 | HUD command bar filters hard fails; open card is a constraint scan | Mid-deal the first question is "who can buy this", not "scroll the HTML". Search still hits every field. Compare stays a tool, not the home. |
 | 2026-09-03 | Kia September dates in, rates not guessed | Bulletins 2026-128/129 are on file. EXTRACTION_GUIDE §9: do not take a KFA grid from the text layer. Warning until the follow-up extraction. |
 | 2026-09-03 | Kia September 2026-128/129 applied to the live view | Gage reported production still saying “August / September pending.” PR #29 *had* deployed the HUD; the Kia chip was the failure. Rates taken from positional tables + 300 dpi renders of Carnival, Sorento, Sportage. 73–84 N/A except K500 T1/2. `source.warning` deleted. |
@@ -216,7 +216,7 @@ cases green in both `core.py` and the browser.
 
 - **Done:** Sales Pace removed; 3 dead files deleted; the date mismatches resolved; the Supabase project emptied; the 20-lender corpus sweep applied through the gate; rates, freshness, navigation and the Desk UI shipped; Kia brought current; 78 dead CSS rules removed; reduced motion restored; **the v2 typed core built on all 20 lenders and both tools wired to it**
 - **Done also 2026-09-03:** Kia September 2026-128 / 2026-129 rates applied to the user-facing view; `source.warning` cleared
-- **Done also 2026-09-03:** Orbit command deck — constellation + ranked “who can buy this” rail + HUD readout. The 20-card list is gone.
+- **Done also 2026-09-23:** Paper Terminal replaced the Orbit constellation. Home is the ranked list + Bank HUD. Desk Intel / edges rail from the 2026-09-11 scan spec is still a follow-up — ranking stays Tier A only.
 - **Now — Gage's rep conversations.** In order of what they cost on a live deal:
   1. **`westlake` — Prime or Independent Dealer sheet?** Until that is settled its LTV cannot be typed at all; the Prime sheet publishes no total cap and the card's "140–150% incl. backend" is unsupported by it
   2. **`cps` — where does "regular term" end and "extended term" begin?** 130% vs 115%, on every CPS deal past whatever the boundary is. The sheet never says
