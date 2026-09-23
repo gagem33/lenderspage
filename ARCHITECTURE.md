@@ -57,14 +57,10 @@ Approximate line map (drifts as the file changes — grep, don't trust line numb
 
 ### 3.1 Views
 
-**One command deck since 2026-09-03.** `view-compare` is the Orbit field: a sticky
-command bar (search + deal filters), a constellation of 20 nodes plotted FICO floor
-× LTV ceiling, and a ranked “who can buy this” rail. Hard fails drop from the rail
-and dim on the field. Quick lists and differentiators sit in `#intel`, not on home.
+**One Paper Terminal since 2026-09-23.** `view-compare` is the desk: a sticky Deal Brief, a ranked “who can buy this” list, and a Bank HUD (`#readout`) that fills when a lender is selected. Hard fails drop from the list unless Show fails is checked. The Orbit constellation is gone. Quick lists still live in `#intel`, opened from the tools bar.
 
-Opening a lender mounts `#readout` — a full HUD overlay. Constraint scan is first,
-then a stat strip, then a layer rail of sections with `sectionHTML(l, key)` filling
-the pane. `lastSection` still remembers which section you were on.
+Opening a lender fills `#readout` in the right column. Constraint scan is first,
+then chips over `sectionHTML(l, key)`. `lastSection` remembers which chip was open.
 
 `showView(name, lenderId)` is still the navigation entry point — jump box, intel
 chips, deal structurer, `[` / `]` call `openCard(id)` through it, which now opens
