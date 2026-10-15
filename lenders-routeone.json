@@ -1,0 +1,2412 @@
+{
+ "meta": {
+  "title": "RouteOne Rates & Forms pull",
+  "pulled": "2026-10-15",
+  "dealer": "Southwest Kia",
+  "source": "/workspace/routeone/LENDER-CHEATSHEET.md (built from 30 RouteOne program PDFs, 15 lenders)",
+  "confidentiality": "DEALER-ONLY. Lender program guides from RouteOne. Do not publish to a public repo or site.",
+  "no_customer_data": true,
+  "legend": "\"not stated\" = the document is silent (NOT a no). (inf.) = desk inference, not written by the lender. ⚠ verify = conflict or uncertain read."
+ },
+ "read_first": [
+  "These sheets give **structure** (advance, term, caps, comp). **Buy rates come back on the callback**, except Westlake, Credit Acceptance and GLS, which publish rate ranges. Always run the deal on the callback before choosing a bank.",
+  "\"Tier\" numbers (Tier 1, Tier 4, etc.) are each lender's own and are **not** the same across banks. Most sheets don't map tiers to FICO. Where a sheet does give FICO bands, they're shown.",
+  "Advance and LTV bases differ: invoice and JD Power Clean Trade are the common bases. **Fifth Third** and **PNC** value on retail (MSRP / JD Power Clean Retail), so their 115–140% isn't comparable to the others."
+ ],
+ "takeaways": [
+  "**Ally has the widest box.** It buys down to a 520 score. It has an 84-month program that includes non-prime (<620 FICO) at S–B tiers. It adds $2,000 of extra aftermarket advance through 11/2/2026. It's the only lender here with a Kia SmartLease sheet.",
+  "**Best reserve structure for strong credit:** Fifth Third (flat paid at 100%, no cap, no split; 3.00% at buy rate up to 5.00% at +1.00) and BoA (flat 1.0%–5.5% with no cap on flat). TD pays the greater of reserve or flat automatically, up to $7,500 on a 64–72 month deal. US Bank and Truist pay up to $10,000 and $8,000 per deal.",
+  "**84 months is gated almost everywhere.** It needs a young unit, low miles and strong credit: BoA 720+, Truist 680+, Wells Tiers 1–2 only, Santander \"well-qualified\", Ally $20K+ and ≤5-year-old, Chase ≤4-year-old.",
+  "**Deep credit, bankruptcy and repo options:** Westlake (open and dismissed BK OK, multiple repos OK, no minimum score or income), Credit Acceptance (no minimum score), GLS (FICO 400–700). Westlake Standard pays the dealer **no reserve**.",
+  "**Watch hard stops.** US Bank takes no co-signers and extends no new credit to anyone with a prior bankruptcy. TD declines a BK or repo within 36 months. PNC and Fifth Third won't write a business-titled contract. Wells requires a full tax return for self-employed income (no bank statements)."
+ ],
+ "guide": [
+  {
+   "customer": "Prime, 780+",
+   "call_first": "**Fifth Third**, **BoA**, **US Bank (740+)**, **TD**, **PNC Tier 0–1**, **Ally S tier**",
+   "why": "Fifth Third flat 3.00% at buy rate (to 5.00%), paid 100%. BoA flat 1.0%–5.5%, 130% advance / 145% LTV. US Bank 740+ gets 135% front / 145% total. TD T1–T2 allow 140–150%. Ally S: up to 140% (≤63 mo), 135% at 84. PNC 800+ new up to 125% front.",
+   "watch": "Fifth Third and PNC advance is on a retail basis. PNC reserve cap is 2.50% and its max flat is $3,000. Buy rates aren't on the sheets, so compare callbacks."
+  },
+  {
+   "customer": "680–720",
+   "call_first": "**Ally A/B**, **BoA (≥640)**, **US Bank (675+)**, **Truist A/B**, **Chase**, **TD**, **Santander**",
+   "why": "BoA max PTI drops to 17% under 720 FICO. US Bank gives 135% front for 675–739 (140% total at 700–739, 135% at 675–699). Truist is 640+ on both applicants.",
+   "watch": "US Bank: 2020–21 units over 66 mo and 2017–19 units over 48 mo need FICO >750. PNC's front-end advance is only 110% at 680–759. BoA caps 76–84 mo at 720+."
+  },
+  {
+   "customer": "600s (620–699)",
+   "call_first": "**Ally (C/D tiers, ≥520 floor)**, **Santander**, **Capital One (Tiers 6–9)**, **Westlake Gold (600–699)**, **GLS (to 700)**, **Credit Acceptance Gold (600+)**",
+   "why": "Ally non-prime (<620) goes to 135% (S) and 115% (D/E) up to 72 mo. Santander is \"full-spectrum\", min income $1,750, PTI ≤22%. Capital One Tiers 6–9 are near-prime/subprime, income ≥$1,500, PTI ≤20%.",
+   "watch": "Truist and BoA floors are 640. Westlake Gold needs 7.5% down at 11.99%–23.99% (franchise sheet). Credit Acceptance Gold's rate is \"as low as\" 12.99%. Capital One may want $1,000 down on thin files."
+  },
+  {
+   "customer": "Sub-600 / bankruptcy / repos",
+   "call_first": "**Westlake**, **Credit Acceptance**, **GLS**, **Ally non-prime**, **Capital One Tiers 8–9**",
+   "why": "Westlake: open BK OK with pre-approval, dismissed OK, multiple repos OK, no minimum score or income. Credit Acceptance: no minimum score, PTI ≤25%. GLS: FICO 400–700, min income $1,800. Ally buys to 520.",
+   "watch": "Westlake Standard: 10% down, 140% LTV, **no dealer reserve**. Credit Acceptance Standard \"as low as\" 21.49%, down up to 15% or $1,000, proof of income and bank. GLS: no open BK, no repo in past 4 months, no self-employed. Chase needs BK **discharged**. TD and US Bank are out for recent or any prior BK."
+  },
+  {
+   "customer": "High-mileage / older used",
+   "call_first": "**Capital One Executive Diamond** (≤15 yrs, ≤200K mi), **Westlake** (no max age or mileage), **GLS** (to 180K mi), **Wells** (to 150K mi), **Santander** (≤12 yrs, 150K mi)",
+   "why": "Also past 125K miles: Ally (150K by segment), Capital One Base (150K), Fifth Third (140K).",
+   "watch": "Terms shrink fast: Wells 51 mo at 120–150K mi, Capital One 48 mo at 13+ yrs, GLS 66 mo at 120K+ mi. Under 125K: BoA, PNC, US Bank, Fifth Third (140K) and Chase (120K) are all fine. US Bank at 100K+ mi: 48 mo max (≤7 yrs old) or 36 mo (8–9 yrs)."
+  },
+  {
+   "customer": "Long term (76–84 mo)",
+   "call_first": "**Ally** (S–B, ≤5-yr-old, ≤75K mi, $20K+), **Chase** (≤4-yr-old, $25K+ collateral), **BoA** (720+, ≤4-yr-old, $25K+), **Truist** (680+, ≤50K mi, $20K+), **TD**, **Santander**, **PNC**, **US Bank (2025–27 units)**",
+   "why": "Ally 84-mo rates match the shorter-term rates and any approved 84-mo app can be written 76–84 mo. TD 76–84 mo front-end runs 80%–120% by tier.",
+   "watch": "Reserve caps shrink at 76+ mo (typically 1.50%–1.75%). Wells needs PTI ≤15%, LTV ≤120%, Tiers 1–2, no thin file, ≤3-year-old, under 45K mi. US Bank tests PTI/DTI on a 72-mo basis and caps total LTV at 120% over 72 mo."
+  },
+  {
+   "customer": "Aftermarket-heavy deal",
+   "call_first": "**Ally**, **Chase**, **Wells**, **Capital One Executive**, **Truist**",
+   "why": "Ally: +$2,000 advance to 11/2 (and 30% / $10K aftermarket cap). Chase: 150% all-in plus VP add-on (greater of $4,500 or 20% of MSRP on new). Wells: total backend greater of $6,000 or 20% (max $12,500). Capital One Exec: backend to $8K plus $7K VSC. Truist: back end to $10,000.",
+   "watch": "Fifth Third, PNC and BoA cap total at 140% / 145% on a retail or collateral basis. Santander: VSC to $6,500, GAP to $1,200. GAP is blocked below a minimum front-end LTV at most banks (60–80%)."
+  },
+  {
+   "customer": "Co-signer",
+   "call_first": "Anyone except **US Bank**",
+   "why": "US Bank says it doesn't accept co-signer applications (multiple applicants are underwritten as joint).",
+   "watch": "TD requires a notice to cosigner if a signer isn't on title."
+  },
+  {
+   "customer": "Business-titled purchase",
+   "call_first": "**TD**, **BoA Small Business**",
+   "why": "TD says personal-use vehicles bought in a company name can be booked, with an individual co-applicant. BoA Small Business: min FICO 730, ≤5-yr-old, ≤75K mi, 110% / 120%, 4+ yrs in business.",
+   "watch": "PNC and Fifth Third: no business loans. US Bank needs a personal applicant. Ally routes commercial-use vehicles to its Commercial Services Group."
+  },
+  {
+   "customer": "Self-employed / 1099",
+   "call_first": "**Santander**",
+   "why": "Santander accepts bank statements and tax returns.",
+   "watch": "Wells: tax return only (no bank statements). GLS: self-employed / 1099 income not accepted. Credit Acceptance: proof of income required at Standard and Silver."
+  },
+  {
+   "customer": "ITIN / DACA",
+   "call_first": "**Wells Fargo**, **Fifth Third**, **TD**",
+   "why": "Wells lends to permanent and non-permanent residents and DACA (SSN or ITIN, with legal-status docs). Fifth Third says signers need an SSN or ITIN. TD's application list accepts SSN or ITIN.",
+   "watch": "Other lenders: **not stated**."
+  },
+  {
+   "customer": "Kia CPO",
+   "call_first": "**Truist (+$750)**, **Ally (+$1,000)**, **TD (+5% of book)**, **US Bank (+$500/$1,000 auto)**, **Chase (+$500–$3,000, ≤10 yrs, ≤120K mi)**",
+   "why": "Value bumps from each sheet. Kia is on Truist's \"Standard\" list ($750).",
+   "watch": "BoA adds a CPO adjustor automatically. Santander, Wells, PNC and Capital One: **not stated**."
+  }
+ ],
+ "flags": [
+  "**Chase \"Toolkit 2.0\"** is the same file as the Product Reference Sheet (identical checksum). Toolkit content (EFF rules, VP guidelines, buydown, ineligible list) is **not captured**. \"Marked up exactly .75bps\" is probably 0.75% (75 bps). Confirm.",
+  "**BoA \"Access Lending 76-mo\"**: the Access Lending sheet carries the same retail grid and 76–84 rules as the standard sheet. It differs on conversion / chassis valuation (inferred as wheelchair-accessible conversions), so it isn't a separate longer-term program. Confirm with your BoA rep.",
+  "**Ally non-prime 73–75 mo (used B/C):** retail sheet 125 / 120% vs. Underwriting Policies 120 / 115%. **Ally used mileage:** UW policy 150K by segment vs. sheet 120K (light / medium duty).",
+  "**Capital One:** Which program (Executive Diamond / Diamond / Non-Diamond) Southwest Kia is on is **not stated**. Issue dates differ (Jan 2026 vs. Jul 2025). Mileage band headers are inferred from footnotes.",
+  "**Santander:** \"Eligible vehicles: New, up to 12 years\" is ambiguous. Flat table ends at $75,999 while max AMF is $100,000. 75/25 split side **not stated**. The dated line says \"Last Updated October 2026\" only.",
+  "**TD:** Tier-to-FICO map **not stated**. Tier 9 column blank on advance grids. PDF dates differ from RouteOne (6/30 vs. 7/1/26).",
+  "**Truist:** PDF text layer is garbled; I used page images. FICO bureaus vary by state (Equifax in TX). Max reserve $8,000 vs. flat table to $2,600.",
+  "**Wells Fargo:** Guide is effective **today (10/15/26)**. No FICO, tier, BK or rate info, only 84-mo gate. 10-yr-old row gap. Comp formula **not stated**.",
+  "**Credit Acceptance:** RouteOne eff 1/12/26 vs. PDF footer 5/27/26. Advance and comp **not stated**.",
+  "**Westlake:** Prime/Presidential warranty footnote cut off. Max term **not stated**. Only two of the Westlake programs were downloaded (Predictable Prime, RV, Powersports, 2026 Guidelines were not).",
+  "**Fifth Third / PNC:** Advances are on a retail-value basis, so compare with care.",
+  "**Missing:** Kia Finance America retail terms (only a 2013 lease tax packet). No sheets for AmeriCredit, American Credit Acceptance, Consumer Portfolio Services, Driveway Finance, Exeter, Flagship, RouteOne Marketing.",
+  "**Not captured anywhere:** Buy-rate sheets (come on callbacks) for most banks. Most income and PTI minimums for Ally, Chase, TD, PNC, Fifth Third."
+ ],
+ "corrections": [
+  "**TD flat fees:** notes had the 48–63 mo ladder wrong. Correct ladder is above (buy 1% to +200 bps 5% by term bracket, with $ caps).",
+  "**Westlake tiers** are Standard / Gold / Platinum / Titanium by score band (0–599 / 600–699 / 700–749 / 750+), not A–D.",
+  "**Truist** advance, PTI/DTI and term grids are by tier (full grid above). Notes were a simplification.",
+  "**BoA** pays a flat table to 5.5%, not only 1%; it also has reserve caps 2.50 / 2.00 / 1.75%.",
+  "**Santander** gives one LTV (145%), not separate front / total.",
+  "**Ally SmartLease** S-tier rates in the notes were for the Carnival only; rates vary by model.",
+  "**Capital One** details (not in notes) are now extracted."
+ ],
+ "fields": [
+  {
+   "key": "tiers",
+   "label": "Tiers / credit bands",
+   "kind": "text",
+   "group": "Credit",
+   "short": "Tiers"
+  },
+  {
+   "key": "min_fico",
+   "label": "Min FICO / score",
+   "kind": "num",
+   "unit": "fico",
+   "group": "Credit",
+   "short": "Min FICO",
+   "better": "low"
+  },
+  {
+   "key": "max_term",
+   "label": "Max term (months)",
+   "kind": "num",
+   "unit": "mo",
+   "group": "Structure",
+   "short": "Max term",
+   "better": "high"
+  },
+  {
+   "key": "term84",
+   "label": "84-month available",
+   "kind": "enum",
+   "group": "Structure",
+   "short": "84 mo"
+  },
+  {
+   "key": "max_front_ltv",
+   "label": "Max front-end advance",
+   "kind": "num",
+   "unit": "pct",
+   "group": "Structure",
+   "short": "Front %",
+   "better": "high"
+  },
+  {
+   "key": "max_total_ltv",
+   "label": "Max total LTV / advance",
+   "kind": "num",
+   "unit": "pct",
+   "group": "Structure",
+   "short": "Total %",
+   "better": "high"
+  },
+  {
+   "key": "ltv_basis",
+   "label": "Value basis",
+   "kind": "text",
+   "group": "Structure",
+   "short": "Basis"
+  },
+  {
+   "key": "max_mileage",
+   "label": "Max mileage",
+   "kind": "num",
+   "unit": "mi",
+   "group": "Vehicle",
+   "short": "Max miles",
+   "better": "high"
+  },
+  {
+   "key": "max_age",
+   "label": "Max vehicle age (yrs)",
+   "kind": "num",
+   "unit": "yr",
+   "group": "Vehicle",
+   "short": "Max age",
+   "better": "high"
+  },
+  {
+   "key": "min_amt",
+   "label": "Min amount financed",
+   "kind": "num",
+   "unit": "usd",
+   "group": "Structure",
+   "short": "Min AMF",
+   "better": "low"
+  },
+  {
+   "key": "max_amt",
+   "label": "Max amount financed",
+   "kind": "num",
+   "unit": "usd",
+   "group": "Structure",
+   "short": "Max AMF",
+   "better": "high"
+  },
+  {
+   "key": "max_pti",
+   "label": "Max PTI (%)",
+   "kind": "num",
+   "unit": "pct",
+   "group": "Income",
+   "short": "Max PTI",
+   "better": "high"
+  },
+  {
+   "key": "min_income",
+   "label": "Min monthly income",
+   "kind": "num",
+   "unit": "usd",
+   "group": "Income",
+   "short": "Min income",
+   "better": "low"
+  },
+  {
+   "key": "reserve_cap",
+   "label": "Reserve / markup cap (%)",
+   "kind": "num",
+   "unit": "pct",
+   "group": "Dealer pay",
+   "short": "Reserve cap",
+   "better": "high"
+  },
+  {
+   "key": "flat_max_pct",
+   "label": "Top flat-fee payout (%)",
+   "kind": "num",
+   "unit": "pct",
+   "group": "Dealer pay",
+   "short": "Top flat %",
+   "better": "high"
+  },
+  {
+   "key": "comp_cap_usd",
+   "label": "Dealer comp $ cap",
+   "kind": "num",
+   "unit": "usd",
+   "group": "Dealer pay",
+   "short": "Comp $ cap",
+   "better": "high"
+  },
+  {
+   "key": "backend_max_usd",
+   "label": "Back-end $ ceiling",
+   "kind": "num",
+   "unit": "usd",
+   "group": "Back end",
+   "short": "Back end",
+   "better": "high"
+  },
+  {
+   "key": "gap_max",
+   "label": "GAP max",
+   "kind": "num",
+   "unit": "usd",
+   "group": "Back end",
+   "short": "GAP",
+   "better": "high"
+  },
+  {
+   "key": "bk",
+   "label": "Takes bankruptcy",
+   "kind": "enum",
+   "group": "Stops",
+   "short": "BK"
+  },
+  {
+   "key": "repo",
+   "label": "Takes repo history",
+   "kind": "enum",
+   "group": "Stops",
+   "short": "Repo"
+  },
+  {
+   "key": "cosigner",
+   "label": "Accepts co-signer",
+   "kind": "enum",
+   "group": "Stops",
+   "short": "Co-signer"
+  },
+  {
+   "key": "business",
+   "label": "Business-titled deals",
+   "kind": "enum",
+   "group": "Stops",
+   "short": "Business"
+  },
+  {
+   "key": "selfemp",
+   "label": "Self-employed income",
+   "kind": "enum",
+   "group": "Stops",
+   "short": "Self-emp"
+  },
+  {
+   "key": "itin",
+   "label": "ITIN / DACA",
+   "kind": "enum",
+   "group": "Stops",
+   "short": "ITIN"
+  },
+  {
+   "key": "cpo",
+   "label": "Kia CPO value bump",
+   "kind": "text",
+   "group": "Dealer pay",
+   "short": "CPO"
+  }
+ ],
+ "banks": [
+  {
+   "id": "ally",
+   "existing_id": "ally",
+   "name": "Ally Financial",
+   "short": "Ally",
+   "class_label": "Broad box: prime through non-prime",
+   "class_text_src": "broad box: prime through non-prime",
+   "segments": [
+    "prime",
+    "near",
+    "sub"
+   ],
+   "seg_inf": false,
+   "doc_date": "2026-09-10",
+   "doc_date_label": "Underwriting Policies rev 9/10/26; retail sheet 8/10/26 (RouteOne eff 10/1/26)",
+   "date_prec": "day",
+   "docs": [
+    {
+     "title": "National Retail & Lease Products and Rates",
+     "file": "Ally_National_Retail_and_Lease_Products_and_Rates_eff2026-10-01_fileId308315.pdf",
+     "eff": "2026-10-01",
+     "note": "RouteOne eff 10/1/26; PDF cover 'Effective Aug 10, 2026'; HVC section 4/1/26"
+    },
+    {
+     "title": "84-Month Term Program (new & used)",
+     "file": "Ally_84_Month_Term_Program_New_and_Used_eff2026-01-26_fileId306705.pdf",
+     "eff": "2026-01-26",
+     "note": "PDF 'Updated 01.26.26'"
+    },
+    {
+     "title": "Underwriting Policies & Provisions (retail/lease)",
+     "file": "Ally_Underwriting_Policies_and_Provisions_Retail_Lease_eff2026-09-10_fileId307988.pdf",
+     "eff": "2026-09-10",
+     "note": "Revised Sept 10, 2026"
+    },
+    {
+     "title": "Additional Advance for Aftermarket Products",
+     "file": "Ally_Additional_Advance_for_Aftermarket_Products_eff2026-10-01_fileId308317.pdf",
+     "eff": "2026-10-01",
+     "note": "Incentive: 10/1/26 through 11/2/26"
+    },
+    {
+     "title": "SmartLease Rates & Residuals for Kia",
+     "file": "Ally_SmartLease_Rates_and_Residuals_for_Kia_eff2026-10-01_fileId308503.pdf",
+     "eff": "2026-10-01",
+     "note": "10/1/26 through 11/2/26 (v10.2026.01)"
+    },
+    {
+     "title": "Ally 300 Lease-to-Retail Dealer Payment Program",
+     "file": "Ally_300_Lease_to_Retail_Dealer_Payment_Program_eff2026-10-01_fileId308394.pdf",
+     "eff": "2026-10-01",
+     "note": "10/1/26 through 11/2/26"
+    },
+    {
+     "title": "Super Ultra Low Mileage Program",
+     "file": "Ally_Super_Ultra_Low_Mileage_Program_eff2026-09-01_fileId307671.pdf",
+     "eff": "2026-09-01",
+     "note": "SmartLease program"
+    }
+   ],
+   "cmp": {
+    "tiers": {
+     "v": "S, A, B, C (prime, FICO ≥620); S–E (non-prime, <620)"
+    },
+    "min_fico": {
+     "v": 520,
+     "n": "Retail minimum credit-bureau score (lease 550). Prime ≥620, non-prime <620."
+    },
+    "max_term": {
+     "v": 84,
+     "n": "New/CSU–MY2021 up to 84. The 84-mo program: S/A/B, ≤5 yrs old, ≤75K mi, AMF ≥$20,000. 2020–2016 up to 75; 2015–14 up to 63 (S–B only)."
+    },
+    "term84": {
+     "v": "yes",
+     "n": "Gated: S–B tiers, ≤5 yrs old, ≤75K mi, AMF ≥$20,000."
+    },
+    "max_front_ltv": {
+     "n": "Ally publishes one all-in advance; front/total not split."
+    },
+    "max_total_ltv": {
+     "v": 140,
+     "n": "All-in, prime ≤63 mo: S 140 / A 135 / B 130–135 / C 125–130. 76–84 mo: S 135 new / 130 used. Non-prime ≤72 mo: 115–135."
+    },
+    "ltv_basis": {
+     "v": "Invoice (new) / JD Power Clean Trade (used)",
+     "n": "KBB lending value in AZ CA CO HI ID NM NV OR UT WA WY."
+    },
+    "max_mileage": {
+     "v": 150000,
+     "n": "UW policy says used up to 150K by segment; the retail sheet says light/medium duty ≤120K.",
+     "f": "verify"
+    },
+    "max_age": {
+     "n": "No age cap stated. Term table runs down to MY2014 (63 mo, S–B only)."
+    },
+    "min_amt": {
+     "v": 5000
+    },
+    "max_amt": {},
+    "max_pti": {
+     "n": "Not stated."
+    },
+    "min_income": {
+     "n": "Not stated."
+    },
+    "reserve_cap": {
+     "v": 2.5,
+     "n": "Max DFI 2.50% (≤60 mo) / 2.00% (61–75) / 1.50% (76–84); D/E tiers 2.00%. Min DFI $150–$500 by AMF."
+    },
+    "flat_max_pct": {
+     "n": "No flat-fee program stated. Min DFI $150 / $250 / $350 / $450 / $500 by AMF band."
+    },
+    "comp_cap_usd": {},
+    "backend_max_usd": {
+     "v": 10000,
+     "n": "Total aftermarket greater of $5,000 or 30% of EDC/AWV, max $10K (<$80K) / $15K (≥$80K). +$2,000 extra advance through 11/2/26."
+    },
+    "gap_max": {
+     "n": "GAP by state matrix."
+    },
+    "bk": {},
+    "repo": {},
+    "cosigner": {},
+    "business": {
+     "v": "cond",
+     "n": "Commercial-use vehicles are routed to Ally's Commercial Services Group."
+    },
+    "selfemp": {},
+    "itin": {},
+    "cpo": {
+     "v": "+$1,000"
+    }
+   },
+   "sections": [
+    {
+     "title": "Credit/rates",
+     "text": "Prime = FICO ≥620 (S–C tiers). Non-prime = <620 (S–E). Min bureau score 520 retail, 550 lease. Rates come on the callback. Caps are 24.00% new / 25.00% used or state cap."
+    },
+    {
+     "title": "Advance (all-in, EDC/AWV <$100K)",
+     "text": "Prime ≤63 mo: S 140 / A 135 / B 130 new–135 used / C 125 new–130 used. 64–75 mo: 135 / 130 / 125–130 / 120–125. 76–84 mo: S 135 new–130 used, A 125–120, B 115, C n/a. Non-prime ≤72 mo: S 135, A 130, B 125–130, C 120–125, D 115, E 115. High-value units (EDC ≥$100K, FICO ≥680): 105–120%."
+    },
+    {
+     "title": "Term",
+     "text": "New/CSU–MY2021 up to 84. 2020–2016 up to 75 (needs FICO ≥620, AMF >$5,000, <100K mi). 2015–14 up to 63 (S–B only). **84-month program:** all S/A/B retail, new and used. Same rate for 76–84. Min AMF $20,000. Model years ≤5 yrs old, ≤75,000 mi. Max DFI 1.50%. Advance: new S 135 / A 125 / B 115; used 130 / 120 / 115; non-prime S 125 / A 120 / B 115."
+    },
+    {
+     "title": "Vehicle",
+     "text": "Min AMF $5,000. Used mileage up to 150K by segment (UW policy). Salvage, flood and frame-damage titles are out. Collateral: new = invoice plus allowed DIOs. Used = JD Power Clean Trade (KBB lending value in AZ, CA, CO, HI, ID, NM, NV, OR, UT, WA, WY) or auction price (120 days SmartAuction / 90 days other). **CPO adds $1,000.**"
+    },
+    {
+     "title": "Back end",
+     "text": "Total aftermarket greater of $5,000 or 30% of EDC/AWV, max $10,000 (<$80K) / $15,000 (≥$80K). VSC greater of $5,000 or 15%. Maintenance greater of $2,000 or 10%. Tire & wheel greater of $1,500 or 7%. GAP by state per matrix. **+$2,000 additional advance** for aftermarket sales through 11/2/26 (S–C tiers, prime and non-prime, 84 mo included; stackable with Dealer Rewards; not with SmartLease/ComTRAC)."
+    },
+    {
+     "title": "Dealer comp",
+     "text": "Max DFI 2.50% (≤60 mo) / 2.00% (61–75) / 1.50% (76–84); D/E tiers 2.00%. **Min DFI $150 / $250 / $350 / $450 / $500** by AMF band (>$5K / $25K / $35K / $45K / $75K). A dealer acquisition fee can be assessed at callback (can't be passed to the customer)."
+    },
+    {
+     "title": "Stips/income/PTI",
+     "text": "PTI/DTI/income minimum **not stated**. Approvals valid 30 days. Contract package due within 15 days. Credit card down limit $5,000."
+    },
+    {
+     "title": "Notable",
+     "text": "SmartLease Kia (rates vary by model; S-tier ex. Carnival 11.09% / 9.49% / 9.54% / 9.29% for 12–27 / 36–42 / 48 / 60 mo; acquisition fee $695; tier markups A +1.00, B +2.50, C +5.65, D +8.95; Ally Lease Cash $0 on listed models). Ally 300 pays $300 on a lease-to-retail buyout (used, standard rate; not chargeback-able)."
+    }
+   ],
+   "best_for": "The default first look on a broad range of credit. Long-term, aftermarket-heavy, near/sub-prime, and Kia leases.",
+   "verify": [
+    "Non-prime 73–75 mo used B/C: retail sheet shows 125 / 120%, UW policy table shows 120 / 115%. Used mileage cap: UW policy 150K vs. sheet \"light/medium duty ≤120K\"."
+   ],
+   "docs_text": "National Retail & Lease sheet (PDF \"Effective Aug 10, 2026\"; RouteOne eff 10/1/26; HVC section 4/1/26). 84-Month Term sheet (\"Updated 01.26.26\"). Underwriting Policies (rev. 9/10/26). Aftermarket Advance (10/1–11/2/26). SmartLease Kia (10/1–11/2/26, v10.2026.01). Ally 300 Lease-to-Retail (10/1–11/2/26). Super Ultra Low Mileage (9/1/26)."
+  },
+  {
+   "id": "chase",
+   "existing_id": "chase",
+   "name": "Chase Auto",
+   "short": "Chase",
+   "class_label": "Prime-leaning (inf.)",
+   "class_text_src": "prime-leaning (inf.)",
+   "segments": [
+    "prime"
+   ],
+   "seg_inf": true,
+   "doc_date": "2026-05-10",
+   "doc_date_label": "Product Reference Sheet 5/10/26; CPO update eff 9/15/26",
+   "date_prec": "day",
+   "docs": [
+    {
+     "title": "Auto Product Reference Sheet",
+     "file": "Chase_Auto_Product_Reference_Sheets_eff2026-05-10_fileId284042.pdf",
+     "eff": "2026-05-10",
+     "note": "TX included"
+    },
+    {
+     "title": "Certified Pre-Owned Program Update 9.26",
+     "file": "Chase_Certified_Pre-Owned_Program_Update_9.26_fileId73457.pdf",
+     "eff": "2026-09-15",
+     "note": "eff 9/15/26"
+    },
+    {
+     "title": "'Toolkit 2.0' (September 2026)",
+     "file": "Chase_Toolkit_2.0_September_2026_eff2026-09-16_fileId69792.pdf",
+     "eff": "2026-09-16",
+     "note": "Same file as the Product Reference Sheet (identical checksum). Toolkit content was NOT captured."
+    }
+   ],
+   "cmp": {
+    "tiers": {
+     "n": "No tiers or scores on the sheet."
+    },
+    "min_fico": {
+     "n": "Not stated. \"Stable income and credit history.\""
+    },
+    "max_term": {
+     "v": 84,
+     "n": "New and ≤4-yr-old used up to 84; ≤6-yr 75; ≤10-yr used 72. >75 mo needs $25K collateral."
+    },
+    "term84": {
+     "v": "yes",
+     "n": "Gated: new or ≤4-yr-old used, $25K+ collateral."
+    },
+    "max_front_ltv": {},
+    "max_total_ltv": {
+     "v": 150,
+     "n": "All-in, including TT&L and all aftermarket. Plus extra VP advance: greater of $4,500 or 20% of MSRP / selling price."
+    },
+    "ltv_basis": {
+     "v": "JD Power (invoice for new; clean trade for used)"
+    },
+    "max_mileage": {
+     "v": 120000,
+     "n": "Used ≤120K mi (CPO up to 120K from 9/15/26)."
+    },
+    "max_age": {
+     "v": 10,
+     "n": "Model-year age; CPO up to 10 yrs."
+    },
+    "min_amt": {
+     "v": 4000,
+     "n": "Excludes VP products."
+    },
+    "max_amt": {},
+    "max_pti": {
+     "n": "Not stated."
+    },
+    "min_income": {
+     "n": "Not stated."
+    },
+    "reserve_cap": {
+     "v": 2.5,
+     "n": "Markup cap over buy rate: 2.50% (≤60 mo) / 2.00% (61–75) / 1.50% (76+)."
+    },
+    "flat_max_pct": {
+     "v": 2.0,
+     "n": "Standard flat 1% at buy rate (min AMF $10K). Enhanced flat 2% (max $5,000, min AMF $12K) when marked up 'exactly .75bps' (as printed; likely 0.75%).",
+     "f": "verify"
+    },
+    "comp_cap_usd": {
+     "v": 5000,
+     "n": "Enhanced flat max $5,000."
+    },
+    "backend_max_usd": {
+     "n": "Extra VP advance: greater of $4,500 or 20% of MSRP/CSP (35% if ≤$12K). MBP greater of $4,000 or 12%; PPM greater of $2,400 or 7%; tire/wheel greater of $1,200 or 7%."
+    },
+    "gap_max": {},
+    "bk": {
+     "v": "cond",
+     "n": "No open BK or unpaid Chase charge-offs. All bankruptcies must be discharged."
+    },
+    "repo": {},
+    "cosigner": {},
+    "business": {
+     "n": "Commercial / ride-share use is ineligible. Business titling not stated."
+    },
+    "selfemp": {},
+    "itin": {},
+    "cpo": {
+     "v": "+$500 to +$3,000 (auto wholesale adjustment); up to 10 yrs / 120K mi"
+    }
+   },
+   "sections": [
+    {
+     "title": "Credit",
+     "text": "No tiers or scores stated. \"Stable income and credit history.\" No open BK or unpaid Chase charge-offs (all BKs must be discharged)."
+    },
+    {
+     "title": "Rates/comp",
+     "text": "APR cap 24.99% or state max. Markup over buy rate max 2.50% (≤60 mo) / 2.00% (61–75) / 1.50% (76+). **Flat:** 1% of amount financed at buy rate (min AMF $10K). **Enhanced flat:** 2% (max $5,000, min AMF $12K) when marked up \"exactly .75bps\" (as printed)."
+    },
+    {
+     "title": "Advance",
+     "text": "150% total including TT&L and all aftermarket. Extra VP advance: new greater of $4,500 or 20% of MSRP (35% if MSRP ≤$12K). Used/CPO same on cash selling price."
+    },
+    {
+     "title": "Term",
+     "text": "New and ≤4-yr-old used up to 84. ≤6-yr up to 75. ≤10-yr used up to 72. >75 mo needs $25K collateral. Max age 10 yrs. Used ≤120K mi. Min AMF $4,000."
+    },
+    {
+     "title": "Back end sub-caps",
+     "text": "MBP greater of $4,000 or 12% of MSRP/CSP; PPM greater of $2,400 or 7%; tire/wheel greater of $1,200 or 7%."
+    },
+    {
+     "title": "CPO",
+     "text": "Allowed up to 10 yrs / 120K mi (from 9/15/26). Wholesale value auto-adjusts +$500 to +$3,000. Needs the signed manufacturer CPO form. Flat or markup applies."
+    },
+    {
+     "title": "Other",
+     "text": "Approvals 30 days. First payment ≤45 days. Valuation JD Power (invoice for new). >6,000 mi or previously titled books as used. eContracting preferred; no notarized or DocuSign contracts. Ineligible: commercial / ride-share, lemon, hail, branded titles."
+    }
+   ],
+   "best_for": "Prime deals that want big total advance plus a flat or markup choice. Aftermarket-loaded and Kia CPO.",
+   "verify": [
+    "The \"Toolkit\" (EFF terms, VP guidelines, buydown, ineligible list) was **not actually captured**. Confirm \"exactly .75bps\" (likely 0.75% / 75 bps).",
+    "'Toolkit 2.0' PDF is identical to the Product Reference Sheet, so Toolkit content (EFF rules, VP guidelines, buydown, ineligible list) was not captured."
+   ],
+   "docs_text": "Product Reference Sheet (eff 5/10/2026, TX included). CPO Program Update 9.26 (eff 9/15/26). \"Toolkit 2.0\" PDF is the **same file** as the Product Reference Sheet (identical checksum)."
+  },
+  {
+   "id": "santander",
+   "existing_id": "santander",
+   "name": "Santander Consumer USA",
+   "short": "Santander",
+   "class_label": "Full-spectrum",
+   "class_text_src": "full-spectrum",
+   "segments": [
+    "prime",
+    "near",
+    "sub"
+   ],
+   "seg_inf": false,
+   "doc_date": "2026-10-01",
+   "doc_date_label": "\"Last Updated October 2026\" (no day)",
+   "date_prec": "month",
+   "docs": [
+    {
+     "title": "Retail Program Guide",
+     "file": "Santander_Retail_Program_Guide_Oct2026_fileId73486.pdf",
+     "eff": "2026-10-01",
+     "note": "\"Last Updated October 2026\"; changes shown in teal"
+    }
+   ],
+   "cmp": {
+    "tiers": {
+     "v": "\"Full-spectrum\"; tier grid not captured"
+    },
+    "min_fico": {
+     "n": "Not stated."
+    },
+    "max_term": {
+     "v": 84,
+     "n": "75 standard (up to 12 yrs, ≤150K mi, min AMF $7,000). 84 \"well-qualified buyers only\": ≤5 yrs, ≤60K mi, min AMF $15,000."
+    },
+    "term84": {
+     "v": "yes",
+     "n": "\"Well-qualified buyers only\": ≤5 yrs, ≤60K mi, AMF ≥$15,000."
+    },
+    "max_front_ltv": {
+     "n": "Santander gives one LTV, not separate front/total."
+    },
+    "max_total_ltv": {
+     "v": 145,
+     "n": "Single max LTV figure (front vs. total not split)."
+    },
+    "ltv_basis": {
+     "n": "Not stated."
+    },
+    "max_mileage": {
+     "v": 150000,
+     "n": "75-mo term. 84-mo ≤60K."
+    },
+    "max_age": {
+     "v": 12,
+     "n": "75-mo term. 84-mo ≤5 yrs. Sheet says \"New, up to 12 years\", which is ambiguous.",
+     "f": "verify"
+    },
+    "min_amt": {
+     "v": 7000,
+     "n": "$15,000 at 84 mo."
+    },
+    "max_amt": {
+     "v": 100000
+    },
+    "max_pti": {
+     "v": 22,
+     "n": "20% at 84 mo."
+    },
+    "min_income": {
+     "v": 1750
+    },
+    "reserve_cap": {
+     "v": 2.5,
+     "n": "Participation up to 2.5 pts (12–60 mo) / 2.0 (61–75) / 1.5 (76–84), 75/25 split on the ratio method. Which side gets the 75% is not stated."
+    },
+    "flat_max_pct": {
+     "n": "Flat is in dollars: $100 ($10K) to $350 ($35K–$75,999), at buy rate per callback."
+    },
+    "comp_cap_usd": {},
+    "backend_max_usd": {
+     "n": "VSC up to $6,500. GAP $1,200 or state max."
+    },
+    "gap_max": {
+     "v": 1200,
+     "n": "Or state max; min line-3 LTV 70%."
+    },
+    "bk": {},
+    "repo": {},
+    "cosigner": {
+     "v": "yes",
+     "n": "Texas requires the state Notice to Cosigner form.",
+     "f": "inf"
+    },
+    "business": {},
+    "selfemp": {
+     "v": "yes",
+     "n": "Bank statements and tax returns accepted."
+    },
+    "itin": {},
+    "cpo": {
+     "n": "Not stated."
+    }
+   },
+   "sections": [
+    {
+     "title": "Credit",
+     "text": "\"Full-spectrum.\" Min income $1,750/mo. Max PTI 22% (≤75 mo) / 20% (84 mo)."
+    },
+    {
+     "title": "Term/vehicle",
+     "text": "75 mo: up to 12 yrs, ≤150K mi, min AMF $7,000. 84 mo: up to 5 yrs, ≤60K mi, min AMF $15,000, \"well-qualified buyers only.\" Max AMF $100,000. Max LTV up to 145%."
+    },
+    {
+     "title": "Back end",
+     "text": "VSC up to $6,500. GAP $1,200 or state max, min line-3 LTV 70%."
+    },
+    {
+     "title": "Dealer comp",
+     "text": "Participation up to 2.5 pts (12–60 mo) / 2.0 (61–75) / 1.5 (76–84), 75/25 split on the ratio method. Flat (at buy rate, per callback) $100 ($10K) to $350 ($35K–$75,999). Rate buydown up to 3 points, not below base. Discount % on the approval is the dealer fee. Expired-approval fee $495."
+    },
+    {
+     "title": "Stips",
+     "text": "Detailed income calc rules (paystub, bank statement, tax return). Approvals 30 days. Proof of insurance required. Texas needs the state Notice to Cosigner form."
+    }
+   ],
+   "best_for": "Mid-to-lower credit that needs a stated income floor, plus self-employed (bank statements accepted).",
+   "verify": [
+    "\"Eligible vehicles: New, up to 12 years\" reads as new-only, but notes and mileage imply used too. Flat table stops at $75,999 though max AMF is $100K. Which side gets the 75% split **not stated**."
+   ],
+   "docs_text": "Retail Program Guide (\"Last Updated October 2026\")."
+  },
+  {
+   "id": "capitalone",
+   "existing_id": "capitalone",
+   "name": "Capital One Auto Finance",
+   "short": "Capital One",
+   "class_label": "Near-prime to subprime",
+   "class_text_src": "near-prime to subprime",
+   "segments": [
+    "near",
+    "sub"
+   ],
+   "seg_inf": false,
+   "doc_date": "2026-01-01",
+   "doc_date_label": "Executive Diamond Jan 2026; Base and Non-Diamond Jul 2025",
+   "date_prec": "month",
+   "docs": [
+    {
+     "title": "Program Guidelines: Executive Diamond Partner",
+     "file": "Program_Guidelines_Executive_Diamond_Partner_Issue_Jan2026_fileId57600.pdf",
+     "eff": "2026-01-01",
+     "note": "Issue Jan 2026"
+    },
+    {
+     "title": "Program Guidelines: Diamond Partner Base",
+     "file": "Program_Guidelines_Diamond_Partner_Base_Issue_Jul2025_fileId57567.pdf",
+     "eff": "2025-07-01",
+     "note": "Issue Jul 2025"
+    },
+    {
+     "title": "Program Guidelines: Non-Diamond",
+     "file": "Program_Guidelines_NonDiamond_Issue_Jul2025_fileId57568.pdf",
+     "eff": "2025-07-01",
+     "note": "Issue Jul 2025"
+    }
+   ],
+   "cmp": {
+    "tiers": {
+     "v": "Executive Tiers 0–9; Base Tiers 1–9; Non-Diamond Tiers 3–9",
+     "n": "Which program Southwest Kia is on is NOT stated. Check Dealer Navigator. Figures below are the Executive Diamond grid.",
+     "f": "verify"
+    },
+    "min_fico": {
+     "n": "Not stated (tier-based)."
+    },
+    "max_term": {
+     "v": 84,
+     "n": "Executive T0–T5: 84+ (0–80K mi, ≤5 yrs, AMF >$20K); T6–T9 75; ≥13 yrs old 48. Base 84/72/60; Non-Diamond 75/72/60. Mileage bands inferred from a footnote.",
+     "f": "verify"
+    },
+    "term84": {
+     "v": "yes",
+     "n": "Executive T0–T5 only; ≤5 yrs, AMF >$20K, 0–80K mi (bands inferred).",
+     "f": "verify"
+    },
+    "max_front_ltv": {
+     "v": 130,
+     "n": "Front ≤120% (book ≥$25K, or any book for prime); ≤130% for non-prime with <$25K book."
+    },
+    "max_total_ltv": {
+     "v": 175,
+     "n": "LTV ≤150% (book ≥$10K); ≤175% if book <$10K."
+    },
+    "ltv_basis": {
+     "n": "Not captured."
+    },
+    "max_mileage": {
+     "v": 200000,
+     "n": "Executive ≤200K. Base ≤150K. Non-Diamond ≤120K.",
+     "f": "verify"
+    },
+    "max_age": {
+     "v": 15,
+     "n": "Executive ≤15 yrs. Base ≤12. Non-Diamond ≤10.",
+     "f": "verify"
+    },
+    "min_amt": {
+     "v": 4000
+    },
+    "max_amt": {
+     "v": 75000,
+     "n": "T0–T5 and prime up to $75K; T6–T9 subprime up to $55K."
+    },
+    "max_pti": {
+     "v": 20,
+     "n": "Monthly payment cap: none (T0–T1), $1,200 (T2–T5), $1,000 (T6), $900 (T7), $800 (T8–T9)."
+    },
+    "min_income": {
+     "v": 1500,
+     "n": "NDI ≥$50."
+    },
+    "reserve_cap": {
+     "v": 2.5,
+     "n": "Up to 2.5% (≤60 mo) / 2% (≤75) / 1.5% (≥76). Tiers 6–9 up to 1 point (≤75 mo)."
+    },
+    "flat_max_pct": {
+     "n": "Flat is in dollars: $100 ($10K) to $300 (≥$30K), at buy rate."
+    },
+    "comp_cap_usd": {},
+    "backend_max_usd": {
+     "v": 8000,
+     "n": "Executive all-in: greater of $2,000 or 25%, up to $8K by tier (Base 20%, Non-Diamond 15%). VSC Exec to $7,000.",
+     "f": "verify"
+    },
+    "gap_max": {
+     "v": 1200,
+     "n": "Executive $1,200; Base and Non-Diamond $1,000."
+    },
+    "bk": {},
+    "repo": {},
+    "cosigner": {},
+    "business": {},
+    "selfemp": {},
+    "itin": {},
+    "cpo": {
+     "n": "Not stated."
+    }
+   },
+   "sections": [
+    {
+     "title": "Credit (Executive grid)",
+     "text": "Tiers 0–9. AMF up to $75K for T0–T5. T6–T9: near-prime/prime up to $75K, subprime up to $55K. Min income $1,500/mo. NDI ≥$50. PTI ≤20%. Monthly payment cap: none (T0–T1), $1,200 (T2–T5), $1,000 (T6), $900 (T7), $800 (T8–T9). Min down: none (T0–T3); $1,000 if <2 yrs on file or <3 trade lines (T4–T6); $1,000 if <4 yrs on file or <4 trade lines (T7–T8); $1,000 flat (T9). Base and Non-Diamond grids are similar with different tier splits."
+    },
+    {
+     "title": "Advance",
+     "text": "Front ≤120% (book ≥$25K, or all book values for prime); ≤130% for non-prime <$25K book. LTV ≤150% (book ≥$10K) / ≤175% (<$10K). Low-book advance: min $2,000 front on T0–T3 (Executive)."
+    },
+    {
+     "title": "Back end",
+     "text": "All-in cap Exec greater of $2,000 or 25% (Base 20%, Non-Diamond 15%), up to $8K / $6K / $5K / $4K / $3K by tier. VSC Exec to $7,000 (Base $5,000, ND $4,000). GAP $1,200 (Exec) / $1,000 (Base, ND). VSC must be ≥2 yrs / 24K mi."
+    },
+    {
+     "title": "Term (K = thousands of miles; bands inferred from footnote)",
+     "text": "Exec T0–T5: 84+ (0–80K), 75 (80–100K), 72 (100–150K), 48 (150–200K). T6–T9: 75 / 75 / 72 / 48. Base T0–T5: 84 / 72 / 60. Non-Diamond: 75 / 72 / 60. 84 needs age ≤5 yrs and AMF >$20K. ≥13 yrs: 48 max."
+    },
+    {
+     "title": "Vehicle",
+     "text": "Exec ≤15 yrs / ≤200K mi. Base ≤12 / ≤150K. Non-Diamond ≤10 / ≤120K. Min AMF $4,000."
+    },
+    {
+     "title": "Dealer comp",
+     "text": "Up to 2.5% (≤60 mo) / 2% (≤75) / 1.5% (≥76); Tiers 6–9 up to 1 point (≤75 mo). Flat payout $100 ($10K) to $300 (≥$30K), must be at buy rate."
+    }
+   ],
+   "best_for": "Credit-challenged customers who need payment-based structure, and very high-mileage units (Executive only).",
+   "verify": [
+    "Dealer status. Issue-date mismatch (Jan 2026 vs. Jul 2025). Max-term column header is mileage per the footnote, not amount financed."
+   ],
+   "docs_text": "Executive Diamond Partner (Jan 2026), Diamond Partner Base (Jul 2025), Non-Diamond (Jul 2025)."
+  },
+  {
+   "id": "usbank",
+   "existing_id": "usbank",
+   "name": "U.S. Bank",
+   "short": "US Bank",
+   "class_label": "Prime",
+   "class_text_src": "prime",
+   "segments": [
+    "prime"
+   ],
+   "seg_inf": false,
+   "doc_date": "2026-04-01",
+   "doc_date_label": "Rev 4.01.26",
+   "date_prec": "day",
+   "docs": [
+    {
+     "title": "National Installment Auto Finance Program Highlights",
+     "file": "US_Bank_National_Installment_Auto_Finance_Program_Highlights_4.01.26_fileId294495.pdf",
+     "eff": "2026-04-01",
+     "note": "4.01.26"
+    },
+    {
+     "title": "Program Rules",
+     "file": "US_Bank_National_Installment_Auto_Finance_Program_Rules_Rev4.01.26_fileId261506.pdf",
+     "eff": "2026-04-01",
+     "note": "Rev 4.01.26"
+    },
+    {
+     "title": "Reference Guide",
+     "file": "US_Bank_National_Installment_Auto_Finance_Reference_Guide_Rev4.01.26_fileId261473.pdf",
+     "eff": "2026-04-01",
+     "note": "Rev 4.01.26"
+    }
+   ],
+   "cmp": {
+    "tiers": {
+     "v": "FICO bands: 740+, 700–739, 675–699"
+    },
+    "min_fico": {
+     "v": 675,
+     "n": "FICO Auto 09. Joint: one applicant ≥675, none <650."
+    },
+    "max_term": {
+     "v": 84,
+     "n": "MY2025–27 only. 2023–24 75; 2020–22 72; 2017–19 60. >72 mo needs an ability-to-repay test on a 72-mo basis. 2020–21 over 66 mo and 2017–19 over 48 mo need FICO >750."
+    },
+    "term84": {
+     "v": "yes",
+     "n": "MY2025–27 only; ability-to-repay on 72-mo basis."
+    },
+    "max_front_ltv": {
+     "v": 135,
+     "n": "MY2019–27 (<$100K). MY2017–18 115%."
+    },
+    "max_total_ltv": {
+     "v": 145,
+     "n": "740+. 140 at 700–739; 135 at 675–699; MY2017–18 115. Capped at 120% over 72 mo."
+    },
+    "ltv_basis": {
+     "v": "Invoice (new) / JD Power-NADA clean trade (used)",
+     "n": "KBB lending value in AZ CA CO HI ID MT NM NV OR UT WA WY. Hawaii: total LTV −10%."
+    },
+    "max_mileage": {
+     "v": 125000,
+     "n": "Odometer at inception. >100K mi: min FICO 675, 48 mo max (≤7 yrs old) or 36 mo (8–9 yrs)."
+    },
+    "max_age": {
+     "v": 9,
+     "n": "Inferred from the 8–9-yr-old term row.",
+     "f": "inf"
+    },
+    "min_amt": {
+     "v": 5000,
+     "n": "AMF ≥$7,500 to qualify for reserve/flat."
+    },
+    "max_amt": {},
+    "max_pti": {
+     "n": "Not stated (13% PTI applies only to >$100K front-end)."
+    },
+    "min_income": {
+     "n": "Not stated in the Highlights; in the full guide."
+    },
+    "reserve_cap": {
+     "v": 2.0,
+     "n": "2.00% (37–72 mo) / 1.75% (73+). AMF ≥$7,500. No reserve or flat on ≤36 mo."
+    },
+    "flat_max_pct": {
+     "v": 4.5,
+     "n": "1.00% at 0.00–0.49% markup up to 4.50% at 2.00% (qualifies at 37 mo + $15K, or 60 mo + $7.5K)."
+    },
+    "comp_cap_usd": {
+     "v": 10000,
+     "n": "Max $10,000 per deal. No chargeback after 120 days."
+    },
+    "backend_max_usd": {
+     "n": "Total greater of $5,500 or 20% of collateral. VSC greater of $4,500 or 15%. No EV charging or subscription packages."
+    },
+    "gap_max": {
+     "v": 1500,
+     "n": "Or state max. Not allowed below 60% front-end LTV (except Indiana)."
+    },
+    "bk": {
+     "v": "no",
+     "n": "No new credit to anyone with a prior bankruptcy."
+    },
+    "repo": {},
+    "cosigner": {
+     "v": "no",
+     "n": "Does not accept co-signer applications. Multiple applicants are underwritten as joint."
+    },
+    "business": {
+     "v": "cond",
+     "n": "Business purchase needs a personal applicant. No trusts."
+    },
+    "selfemp": {},
+    "itin": {},
+    "cpo": {
+     "v": "+$500 (<$40K) / +$1,000 (≥$40K), automatic"
+    }
+   },
+   "sections": [
+    {
+     "title": "Credit",
+     "text": "Min FICO 675 (Auto 09). Joint: one ≥675, none <650. **No co-signer applications. No new credit to anyone with a prior BK.** Business needs a personal applicant. No trusts."
+    },
+    {
+     "title": "Advance (<$100K)",
+     "text": "MY2019–27: 740+ front 135 / total 145; 700–739: 135 / 140; 675–699: 135 / 135. MY2017–18: 115 / 115. Total capped at 120% for terms >72 mo. >$100K front-end: down $5,000, ≤72 mo, PTI ≤13%, 90%–105% front."
+    },
+    {
+     "title": "Term",
+     "text": "84 (MY2025–27), 75 (2023–24), 72 (2020–22), 60 (2017–19). 2020–21 over 66 mo, and 2017–19 over 48 mo, need FICO >750. >72 mo needs ability-to-repay on a 72-mo basis. Odometer ≤125K at inception (>100K: min 675, 48 mo for ≤7-yr-old, 36 mo for 8–9-yr-old)."
+    },
+    {
+     "title": "Back end",
+     "text": "Total greater of $5,500 or 20% of collateral. VSC greater of $4,500 or 15%. GAP up to $1,500 or state max (not allowed below 60% front-end LTV, except Indiana). No EV charging or subscription packages."
+    },
+    {
+     "title": "Dealer comp",
+     "text": "Reserve cap 2.00% (37–72 mo) / 1.75% (73+), AMF ≥$7,500. Flat 1.00% at 0.00%–0.49% markup up to 4.50% at 2.00% (qualifies: 37 mo + $15K, or 60 mo + $7.5K). **Max $10,000/deal. No chargeback after 120 days.** No reserve or flat on ≤36 mo."
+    },
+    {
+     "title": "CPO",
+     "text": "Value up +$500 (<$40K) or +$1,000 (≥$40K) automatically."
+    },
+    {
+     "title": "Other",
+     "text": "Min 30 / max 45 days to first payment. Rate guaranteed 30 days. Min AMF $5,000."
+    }
+   ],
+   "best_for": "700+ prime with long-term and strong front-end advance, and a high reserve cap.",
+   "verify": [
+    "Income and PTI/DTI minimums are in the full guide, **not stated** here."
+   ],
+   "docs_text": "Program Highlights, Program Rules, Reference Guide (all Rev 4.01.26)."
+  },
+  {
+   "id": "td",
+   "existing_id": "td",
+   "name": "TD Bank (TDAF)",
+   "short": "TD",
+   "class_label": "Prime to near-prime (Tiers 1–9)",
+   "class_text_src": "prime to near-prime (Tiers 1–9)",
+   "segments": [
+    "prime",
+    "near"
+   ],
+   "seg_inf": false,
+   "doc_date": "2026-10-01",
+   "doc_date_label": "Overview eff 10/1/26; Guide 6/30/26",
+   "date_prec": "day",
+   "docs": [
+    {
+     "title": "Retail Program Overview (PROD-9034)",
+     "file": "TDAF_Retail_Program_Overview_eff2026-10-01_fileId308597.pdf",
+     "eff": "2026-10-01",
+     "note": "eff 10/1/26"
+    },
+    {
+     "title": "Retail Program Guide (84-291-8462)",
+     "file": "TDAF_Retail_Program_Guide_eff2026-07-01_fileId304356.pdf",
+     "eff": "2026-07-01",
+     "note": "RouteOne eff 7/1/26; PDF dated 6/30/26"
+    }
+   ],
+   "cmp": {
+    "tiers": {
+     "v": "Tiers 1–9 (no FICO map). TransUnion FICO 08."
+    },
+    "min_fico": {
+     "n": "Not stated. No tier-to-FICO map."
+    },
+    "max_term": {
+     "v": 84,
+     "n": "MY2024–26 84 all tiers. 2021–23: 84 (T1–T6) / 75 (T7–8). 2020: 72 / 66. 2018–19: 60. 2017: 48. Min AMF $15,000 at 76–84."
+    },
+    "term84": {
+     "v": "yes",
+     "n": "MY2024–26 all tiers; 2021–23 T1–T6."
+    },
+    "max_front_ltv": {
+     "v": 140,
+     "n": "By tier and term: 120–140% (24–75 mo); 80–120% at 76–84 mo. Tier 9 column blank."
+    },
+    "max_total_ltv": {
+     "v": 150,
+     "n": "130–150% (24–63 mo); 90–130% at 76–84 mo. Applies when the back-end % is used; otherwise dollar back-end and 150% cap."
+    },
+    "ltv_basis": {
+     "n": "Not captured."
+    },
+    "max_mileage": {
+     "v": 120000,
+     "n": "Gas ≤120K (≤72 mo) / ≤100K (73+ mo). Diesel 120K. New = ≤1 yr, unregistered, ≤8,000 mi."
+    },
+    "max_age": {
+     "n": "Term grid starts at MY2017."
+    },
+    "min_amt": {
+     "v": 7500,
+     "n": "24–75 mo. $15,000 at 76–84 mo."
+    },
+    "max_amt": {
+     "v": 250000,
+     "n": "Max front-end per deal; $300K per customer."
+    },
+    "max_pti": {
+     "n": "Not stated."
+    },
+    "min_income": {
+     "n": "Not stated."
+    },
+    "reserve_cap": {
+     "v": 2.0,
+     "n": "80/20 split. 2.00% (24–72 mo) / 1.75% (73–84). No max payout on reserve. Pays the greater of reserve or flat automatically."
+    },
+    "flat_max_pct": {
+     "v": 5.0,
+     "n": "Exact markup: buy rate 1% (max $500); +75–200 bps 2–5% on 48–63 mo; up to 5% at +200 on 64–72 mo; 73–84 mo to 4% at +150."
+    },
+    "comp_cap_usd": {
+     "v": 7500,
+     "n": "Flat max payout, 64–72 mo at +200 bps. Reserve has no max."
+    },
+    "backend_max_usd": {
+     "v": 5000,
+     "n": "AMF-bracket caps $2,000 (≤$10K) to $5,000 ($20–25K), or 15% (T7–9) / 18% (T3–6) / 20% (T1–2) of book. VSC greater of 15% or $4,000."
+    },
+    "gap_max": {
+     "v": 1500,
+     "n": "None below 70% front-end LTV. No dealer-backed warranties."
+    },
+    "bk": {
+     "v": "cond",
+     "n": "BK or repo in the prior 36 months is ineligible."
+    },
+    "repo": {
+     "v": "cond",
+     "n": "BK or repo in the prior 36 months is ineligible."
+    },
+    "cosigner": {
+     "v": "yes",
+     "n": "A notice to cosigner is required if a signer is not on title.",
+     "f": "inf"
+    },
+    "business": {
+     "v": "cond",
+     "n": "Personal-use vehicles bought in a company name can be booked, with an individual co-applicant. No trusts, no livery."
+    },
+    "selfemp": {},
+    "itin": {
+     "v": "yes",
+     "n": "Application list accepts SSN or ITIN.",
+     "f": "inf"
+    },
+    "cpo": {
+     "v": "+5% to book-out"
+    }
+   },
+   "sections": [
+    {
+     "title": "Credit",
+     "text": "Tiers 1–9 (no FICO map). TransUnion FICO 08. **BK or repo within 36 months: ineligible.** No trusts, no livery."
+    },
+    {
+     "title": "Front-end max (T1–T8)",
+     "text": "24–63 mo 120–140%; 64–75 mo 120–140%; 76–84 mo: 80% (T7–8), 100% (T6), 110% (T4–5), 115% (T3), 120% (T1–2). Tier 9 column is blank."
+    },
+    {
+     "title": "Total LTV max (T1–T8)",
+     "text": "24–63 mo 130–150%; 76–84 mo 90% (T7–8), 110% (T6), 120% (T4–5), 125% (T3), 130% (T1–2). Total LTV applies when the back-end % is used (otherwise dollar back-end and 150% cap)."
+    },
+    {
+     "title": "Term",
+     "text": "MY2024–26: 84 all tiers. 2021–23: 84 (T1–T6) / 75 (T7–8). 2020: 72 if AMF <$75K, 66 if ≥$75K (T7–8: 72 if <$50K, 66 if ≥$50K). 2018–19: 60. 2017: 48. Min AMF $7,500 (24–75 mo), $15,000 (76–84)."
+    },
+    {
+     "title": "Vehicle",
+     "text": "Gas ≤120K mi (≤72 mo) / ≤100K (73+). Diesel 120K. Max front-end $250K per deal, $300K per customer. New = ≤1 yr old, unregistered, ≤8,000 mi."
+    },
+    {
+     "title": "Back end",
+     "text": "AMF-bracket caps ($2,000 ≤$10K to $5,000 at $20–25K), or 15% (T7–9) / 18% (T3–6) / 20% (T1–2) of book. VSC greater of 15% or $4,000. GAP $1,500, none <70% front-end LTV. No dealer-backed warranties."
+    },
+    {
+     "title": "Dealer comp",
+     "text": "Pays the greater of reserve (80/20 split, 2.00% cap at 24–72 mo / 1.75% at 73–84, no max payout) or flat. **Flat (exact markup):** buy rate 1% (max $500). 48–63 mo: +75 bps 2% ($1,000), +100 3% ($1,500), +150 4% ($2,000), +200 5% ($2,500). 64–72 mo: +50 2% ($3,000), +100 3% ($4,500), +150 4% ($6,000), +200 5% ($7,500). 73–84 mo: +50 2% ($3,000), +100 3% ($4,500), +150 4% ($6,000)."
+    },
+    {
+     "title": "CPO",
+     "text": "+5% to book-out."
+    }
+   ],
+   "best_for": "Prime / near-prime deals with a high markup room on 64–84 mo; used CPO.",
+   "verify": [
+    "Income and PTI **not stated**. Effective dates differ (guide PDF 6/30/26 vs. RouteOne 7/1/26)."
+   ],
+   "docs_text": "Retail Program Overview (PROD-9034, eff 10/1/2026). Retail Program Guide (84-291-8462, dated 6/30/2026)."
+  },
+  {
+   "id": "truist",
+   "existing_id": "truist",
+   "name": "Truist",
+   "short": "Truist",
+   "class_label": "Prime / near-prime",
+   "class_text_src": "prime / near-prime",
+   "segments": [
+    "prime",
+    "near"
+   ],
+   "seg_inf": false,
+   "doc_date": "2026-08-17",
+   "doc_date_label": "Program Guide Reference Sheet eff 8/17/26",
+   "date_prec": "day",
+   "docs": [
+    {
+     "title": "DFS Program Guide Reference Sheet",
+     "file": "Truist_DFS_Program_Guide_Reference_Sheet_eff2026-08-17_fileId307502.pdf",
+     "eff": "2026-08-17",
+     "note": "PDF text layer is garbled; figures were read from page images"
+    }
+   ],
+   "cmp": {
+    "tiers": {
+     "v": "A1–C1 (T1–T6)"
+    },
+    "min_fico": {
+     "v": 640,
+     "n": "On both applicants; 680 for 76–84 mo. TransUnion FICO Auto 9 (Equifax in TX)."
+    },
+    "max_term": {
+     "v": 84,
+     "n": "MY2023–27: 84 for T1–T4 (T5 75, T6 72 on 2023). 2022: 75 (T6 72). 2021–20: 72 (T6 60). 2019 and older: 72 (T1–T3) / 60 (T4–T6)."
+    },
+    "term84": {
+     "v": "yes",
+     "n": "680+ FICO, ≤50K mi, $20K+ collateral; MY2023–27 T1–T4."
+    },
+    "max_front_ltv": {
+     "v": 130,
+     "n": "≤75 mo, T1–T6: 130 / 130 / 125 / 120 / 120 / 120. 76–84 mo: 115–120."
+    },
+    "max_total_ltv": {
+     "v": 155,
+     "n": "≤75 mo, T1–T6: 155 / 155 / 145 / 140 / 135 / 130. 76–84 mo: 130–140."
+    },
+    "ltv_basis": {
+     "n": "Not captured."
+    },
+    "max_mileage": {
+     "v": 120000,
+     "n": "<76 mo. ≤50K mi at 76–84 mo."
+    },
+    "max_age": {},
+    "min_amt": {
+     "n": "Min collateral: $12K (73–75 mo), $20K (76–84 mo)."
+    },
+    "max_amt": {},
+    "max_pti": {
+     "v": 20,
+     "n": "T1–T4 20%, T5–T6 15%. At 76–84 mo: 18% / 15%. DTI 65% (T1–T4) / 60% (T5–T6)."
+    },
+    "min_income": {
+     "n": "Not stated."
+    },
+    "reserve_cap": {
+     "v": 2.0,
+     "n": "Spread max 2.00% (≤75 mo) / 1.50% (76–84)."
+    },
+    "flat_max_pct": {
+     "n": "Flat reserve is a dollar table by AMF: $150 ($10K–$14,999) to $2,600 ($240K+)."
+    },
+    "comp_cap_usd": {
+     "v": 8000,
+     "n": "Max reserve $8,000, versus a flat table that tops out at $2,600.",
+     "f": "verify"
+    },
+    "backend_max_usd": {
+     "v": 10000,
+     "n": "Greater of 20% of collateral or $4,200, max $10,000. Credit life and A&H not accepted."
+    },
+    "gap_max": {
+     "v": 1500,
+     "n": "TX: lesser of $1,500 or 5% of amount financed; LTV >70%."
+    },
+    "bk": {},
+    "repo": {},
+    "cosigner": {},
+    "business": {},
+    "selfemp": {},
+    "itin": {},
+    "cpo": {
+     "v": "+$750 (Standard makes, including Kia) / +$1,500 (Luxury); MY2021+, ≤50K mi"
+    }
+   },
+   "sections": [
+    {
+     "title": "Credit",
+     "text": "Tiers A1–C1 (T1–T6). Min 640 on both applicants; 680 for 76–84 mo. TransUnion FICO Auto 9 (Equifax in FL, GA, NC, SC, TX, VA, so Texas uses Equifax)."
+    },
+    {
+     "title": "Advance (T1–T6)",
+     "text": "≤75 mo: front 130 / 130 / 125 / 120 / 120 / 120%; total 155 / 155 / 145 / 140 / 135 / 130%. 76–84 mo: front 120 / 120 / 115 / 115 / 115 / 115%; total 140 / 140 / 135 / 135 / 135 / 130%. PTI 20 / 20 / 20 / 20 / 15 / 15% (18 / 18 / 18 / 18 / 15 / 15% at 76–84). DTI 65 / 65 / 65 / 65 / 60 / 60%."
+    },
+    {
+     "title": "Term (T1–T6)",
+     "text": "MY2026–27 84 all tiers. 2025 and 2024: 84 all tiers. 2023: 84 (T1–T4), 75 (T5), 72 (T6). 2022: 75 (T6: 72). 2021: 72 (T6: 60). 2020: 72 (T6: 60). 2019 and older: 72 (T1–T3), 60 (T4–T6)."
+    },
+    {
+     "title": "Vehicle",
+     "text": "Max mileage 120K (<76 mo) / 50K (76–84 mo). Min collateral $20K for 76–84, $12K for 73–75. Credit life and A&H not accepted."
+    },
+    {
+     "title": "Back end",
+     "text": "Greater of 20% of collateral or $4,200, max $10,000. TX GAP: lesser of $1,500 or 5% of amount financed, LTV >70%."
+    },
+    {
+     "title": "Dealer comp",
+     "text": "Spread max 2.00% (≤75 mo) / 1.50% (76–84). **Max reserve $8,000.** Flat reserve table $150 ($10K–$14,999) to $2,600 ($240K+)."
+    },
+    {
+     "title": "CPO",
+     "text": "MY2021+ and ≤50K mi: +$750 (Standard makes, including Kia) or +$1,500 (Luxury)."
+    },
+    {
+     "title": "Other",
+     "text": "First payment 15–60 days (61–90 with underwriter, ≤75 mo). Approvals 30 days. $25 loan fee (can't pass to customer). No credit-card down. No cash-out."
+    }
+   ],
+   "best_for": "680–750 prime/near-prime wanting 84 mo on a recent unit, plus a high reserve cap.",
+   "verify": [
+    "PDF text layer is garbled; figures were read from page images. FICO bureau varies by state (Equifax in TX). Max reserve $8,000 vs. a flat table to $2,600."
+   ],
+   "docs_text": "Program Guide Reference Sheet (eff 8/17/2026). PDF text layer is garbled in places; figures read from the page image."
+  },
+  {
+   "id": "bofa",
+   "existing_id": "bofa",
+   "name": "Bank of America",
+   "short": "BoA",
+   "class_label": "Prime (inf. from 640 floor)",
+   "class_text_src": "prime",
+   "segments": [
+    "prime"
+   ],
+   "seg_inf": true,
+   "doc_date": "2026-09-23",
+   "doc_date_label": "Retail Program Sheet 9/23/26",
+   "date_prec": "day",
+   "docs": [
+    {
+     "title": "Retail Program Sheet (All States)",
+     "file": "BoA_Retail_Program_Sheet_All_States_eff2026-09-23_fileId308175.pdf",
+     "eff": "2026-09-23",
+     "note": "9/23/26; footer shows © 2021"
+    },
+    {
+     "title": "Access Lending Retail Program Sheet (76-mo PTI)",
+     "file": "BoA_Access_Lending_Retail_Program_Sheet_76mo_PTI_eff2026-09-23_fileId308174.pdf",
+     "eff": "2026-09-23",
+     "note": "Same retail grid as the standard sheet; differs on conversion/chassis valuation (inferred: wheelchair-accessible). Not a separate longer-term program."
+    }
+   ],
+   "cmp": {
+    "tiers": {
+     "n": "No tier names; min FICO 640. Generally 4 yrs in file and 4 satisfactory trade lines."
+    },
+    "min_fico": {
+     "v": 640,
+     "n": "Experian FICO Auto 8.0, primary applicant."
+    },
+    "max_term": {
+     "v": 84,
+     "n": "75 for any applicant. 84 needs ≥720 on all applicants. 76–84: min AMF $25,000, ≤4-yr-old, PTI ≤15%."
+    },
+    "term84": {
+     "v": "yes",
+     "n": "≥720 on all applicants, ≤4-yr-old, AMF ≥$25,000."
+    },
+    "max_front_ltv": {
+     "v": 130,
+     "n": "\"Advance.\" 76–84 mo: 110%."
+    },
+    "max_total_ltv": {
+     "v": 145,
+     "n": "76–84 mo: 125%."
+    },
+    "ltv_basis": {
+     "n": "Not captured."
+    },
+    "max_mileage": {
+     "v": 125000
+    },
+    "max_age": {
+     "v": 10,
+     "n": "Model years. 84-mo ≤4 yrs."
+    },
+    "min_amt": {
+     "v": 7500,
+     "n": "$8,000 MN. Min collateral $6,000. 76–84 mo: $25,000."
+    },
+    "max_amt": {},
+    "max_pti": {
+     "v": 20,
+     "n": "≤75 mo: 20% (FICO ≥720) / 17% (<720). 15% at 76–84 mo."
+    },
+    "min_income": {
+     "n": "Must be verifiable; no dollar minimum stated."
+    },
+    "reserve_cap": {
+     "v": 2.5,
+     "n": "2.50% (≤60) / 2.00% (61–75) / 1.75% (76–84). Dealer gets the greater of flat or reserve."
+    },
+    "flat_max_pct": {
+     "v": 5.5,
+     "n": "Exact markup, 48–84 mo, AMF ≥$10K: buy 1.00% up to +250 bps 5.50% (60 mo only). +225 5.00% (48–60 mo); +200 4.50% (48–75 mo). Option: waive flat for 30 bps off buy rate."
+    },
+    "comp_cap_usd": {
+     "n": "No dollar cap on flat."
+    },
+    "backend_max_usd": {
+     "n": "Total greater of $5,000 or 25% of new MSRP / used collateral, within max LTV."
+    },
+    "gap_max": {
+     "v": 1500,
+     "n": "TX: 5% of AMF. No GAP below 70% LTV."
+    },
+    "bk": {
+     "v": "cond",
+     "n": "Prior BK / charge-off / repo / foreclosure 'may not be eligible'."
+    },
+    "repo": {
+     "v": "cond",
+     "n": "Prior BK / charge-off / repo / foreclosure 'may not be eligible'."
+    },
+    "cosigner": {},
+    "business": {
+     "v": "cond",
+     "n": "Retail sheet is personal use only. A Small Business program exists: min FICO 730, ≤5-yr-old, ≤75K mi, 110% / 120%, 4+ yrs in business."
+    },
+    "selfemp": {},
+    "itin": {},
+    "cpo": {
+     "v": "Automatic: pick 'Certified Used' in RouteOne and the adjustor adds"
+    }
+   },
+   "sections": [
+    {
+     "title": "Credit",
+     "text": "Min FICO 640 (Experian FICO Auto 8.0; primary applicant). Generally 4 yrs in file and 4 satisfactory trade lines. Prior BK / charge-off / repo / foreclosure \"may not be eligible.\" Personal use only."
+    },
+    {
+     "title": "Structure",
+     "text": "Advance up to 130%, LTV up to 145%. Min AMF $7,500 ($8,000 MN). Min collateral $6,000. Max ≤10 model-yr, ≤125K mi. PTI: ≤75 mo 20% (FICO ≥720) / 17% (<720)."
+    },
+    {
+     "title": "Term",
+     "text": "Up to 75 mo (any applicant). 84 mo needs ≥720 all applicants. **76–84 mo:** min AMF $25,000, advance 110%, LTV 125%, ≤4-yr-old, PTI ≤15%."
+    },
+    {
+     "title": "Back end",
+     "text": "Total greater of $5,000 or 25% of new MSRP / used collateral, within max LTV. GAP $1,500 (TX: 5% of AMF). No GAP <70% LTV."
+    },
+    {
+     "title": "Dealer comp",
+     "text": "Reserve cap 2.50% (≤60) / 2.00% (61–75) / 1.75% (76–84). **Flat (exact markup, 48–84 mo, AMF ≥$10K, no $ cap):** buy 1.00%, +50 bps 1.50%, +75 2.00%, +100 2.50%, +125 3.00%, +150 3.50%, +175 4.00%, +200 4.50% (48–75 mo), +225 5.00% (48–60 mo), +250 5.50% (60 mo only). Dealer gets greater of flat or reserve. Option: waive flat for 30 bps off buy rate."
+    },
+    {
+     "title": "Other",
+     "text": "Contracts due in 30 days, funded within 45. First payment 30–45 days. $100 fee on a flat-cancelled contract with no replacement. CPO: pick \"Certified Used\" in RouteOne and the adjustor adds automatically."
+    }
+   ],
+   "best_for": "720+ with a tight, clean file. High flat payouts (up to 5.5%) without a dollar cap.",
+   "verify": [
+    "The \"Access Lending\" sheet has the **same retail grid** as the standard sheet; the difference is conversion / chassis-vehicle valuation (inferred: wheelchair-accessible conversions). So it is **not** a separate longer-term program; the 76–84 rules are on both. Sheets carry a \"© 2021\" footer."
+   ],
+   "docs_text": "Retail Program Sheet (9/23/2026). Access Lending Retail Program Sheet (9/23/2026)."
+  },
+  {
+   "id": "pnc",
+   "existing_id": "pnc",
+   "name": "PNC Dealer Finance",
+   "short": "PNC",
+   "class_label": "Prime (inf.), Texas sheet",
+   "class_text_src": "prime (Texas sheet)",
+   "segments": [
+    "prime"
+   ],
+   "seg_inf": true,
+   "doc_date": "2026-08-23",
+   "doc_date_label": "Program Guidelines \"M\" eff 8/23/26, supersedes 3/16/26",
+   "date_prec": "day",
+   "docs": [
+    {
+     "title": "Program Guidelines \"M\" (Texas)",
+     "file": "PNC_Program_Guidelines_M_TX_eff2026-08-23_fileId304258.pdf",
+     "eff": "2026-08-23",
+     "note": "Supersedes 3/16/2026"
+    }
+   ],
+   "cmp": {
+    "tiers": {
+     "v": "Tiers 0–4 shown: 800+, 760–799, 725–759, 700–724, 680–699",
+     "n": "Lower tiers and their score bands are not stated."
+    },
+    "min_fico": {
+     "n": "Not stated. Lowest band shown is Tier 4 (680–699). PNC Custom Score and Experian FICO 09 Auto."
+    },
+    "max_term": {
+     "v": 84,
+     "n": "New MY2025–27 with $20K+ value; used MY2023–26 with $10K+ value. Older used 75 / 72 / 66 / 60. Loans $100–150K: 84 for Tiers 0–3 only. Exceptions subject to credit approval."
+    },
+    "term84": {
+     "v": "yes",
+     "n": "New MY2025–27 $20K+ value; used MY2023–26 $10K+ value."
+    },
+    "max_front_ltv": {
+     "v": 125,
+     "n": "Tier 0 new ≤72 mo 125%; Tier 0 new 73–84 mo 115%; Tier 1 115%; Tiers 2–4 110%. Retail-basis value."
+    },
+    "max_total_ltv": {
+     "v": 140,
+     "n": "Retail-basis value (JD Power Clean Retail; KBB Typical List in western states)."
+    },
+    "ltv_basis": {
+     "v": "Retail (JD Power Clean Retail)",
+     "n": "Not comparable to invoice / clean-trade banks."
+    },
+    "max_mileage": {
+     "v": 125000
+    },
+    "max_age": {},
+    "min_amt": {
+     "v": 5000,
+     "n": "Min front-end advance $5,000."
+    },
+    "max_amt": {},
+    "max_pti": {
+     "n": "Not stated."
+    },
+    "min_income": {
+     "n": "Not stated."
+    },
+    "reserve_cap": {
+     "v": 2.5,
+     "n": "New: 2.50% (≤63 mo) / 2.00% (64–75) / 1.75% (76–84). Used: 2.00% (≤75) / 1.75% (76–84)."
+    },
+    "flat_max_pct": {
+     "v": 3.0,
+     "n": "1% at buy, 2% at +0.50, 3% at +1.00. None on <48 mo or <$10K. Buy-down program available."
+    },
+    "comp_cap_usd": {
+     "v": 3000,
+     "n": "Max flat $3,000."
+    },
+    "backend_max_usd": {
+     "n": "Greater of $4,500 or 20% of invoice / value (18% if LTV >95%), excluding GAP."
+    },
+    "gap_max": {
+     "v": 1500,
+     "n": "Lesser of $1,500 or state limit; none below 70% front-end."
+    },
+    "bk": {},
+    "repo": {},
+    "cosigner": {},
+    "business": {
+     "v": "no",
+     "n": "Business applications are not eligible."
+    },
+    "selfemp": {},
+    "itin": {},
+    "cpo": {
+     "n": "Not stated."
+    }
+   },
+   "sections": [
+    {
+     "title": "Credit",
+     "text": "Buy rate, term and LTV set by PNC Custom Score and Experian FICO 09 Auto. Tier bands shown: 0 = 800+, 1 = 760–799, 2 = 725–759, 3 = 700–724, 4 = 680–699. Lower tiers: bands **not stated**. **Business applications not eligible.**"
+    },
+    {
+     "title": "Advance",
+     "text": "Max total 140%. Front: Tier 0 new ≤72 mo 125%; Tier 0 new 73–84 mo 115%; Tier 1 115%; Tiers 2–4 110%. Min front end $5,000. Values on retail (JD Power Clean Retail; KBB Typical List in AZ, CA, CO, ID, NV, NM, OR, UT, WA)."
+    },
+    {
+     "title": "Term (loan up to $100K)",
+     "text": "New MY2025–27: 84 (value $20K+), 75 ($10K–$20K), 60 ($5K–$10K). Used with $10K+ value: MY2023–26 84, 2021–22 75, 2020 72, 2019 66. Used MY2016–18: 60. Used MY2019–26 with $5K–$10K value: 60. Loans $100K–$150K: 84 (Tiers 0–3 only); $150K–$200K: 72. Term exceptions are subject to credit approval."
+    },
+    {
+     "title": "Vehicle",
+     "text": "≤125K mi. First payment up to 60 days. Approvals 60 days."
+    },
+    {
+     "title": "Back end (excl. GAP)",
+     "text": "Greater of $4,500 or 20% of invoice / value (18% if LTV >95%), plus GAP (lesser of $1,500 or state limit; none <70% front-end). No credit insurance."
+    },
+    {
+     "title": "Dealer comp",
+     "text": "Cap new 2.50% (≤63 mo) / 2.00% (64–75) / 1.75% (76–84); used 2.00% (≤75) / 1.75% (76–84). **Flat:** at buy 1%, +0.50 = 2%, +1.00 = 3%; max $3,000; none on <48 mo or <$10K. Buy-down program available."
+    }
+   ],
+   "best_for": "700+ prime where a retail-basis value gives more room.",
+   "verify": [
+    "Tiers below 4 and their score bands are **not stated**. Term exceptions need credit approval, so confirm on the callback."
+   ],
+   "docs_text": "Program Guidelines \"M\" (Texas, eff 8/23/2026, supersedes 3/16/2026)."
+  },
+  {
+   "id": "fifththird",
+   "existing_id": "fifththird",
+   "name": "Fifth Third Bank",
+   "short": "Fifth Third",
+   "class_label": "Prime (inf.), Texas sheet",
+   "class_text_src": "prime (Texas sheet)",
+   "segments": [
+    "prime"
+   ],
+   "seg_inf": true,
+   "doc_date": "2026-10-01",
+   "doc_date_label": "Consumer Auto Program Guide TX eff 10/1/26",
+   "date_prec": "day",
+   "docs": [
+    {
+     "title": "Consumer Auto Program Guide (Texas)",
+     "file": "Fifth_Third_Consumer_Auto_Program_Guide_TX_eff2026-10-01_fileId308403.pdf",
+     "eff": "2026-10-01",
+     "note": "eff 10/1/26"
+    }
+   ],
+   "cmp": {
+    "tiers": {
+     "n": "Tiers not stated."
+    },
+    "min_fico": {
+     "v": 650,
+     "n": "On 2014+ units."
+    },
+    "max_term": {
+     "v": 84,
+     "n": "MY2023+: 24–84 ($20K retail value for 76+; ≤45,000 mi at 76+). 2019–22 75; 2017–18 66; 2014–16 63."
+    },
+    "term84": {
+     "v": "yes",
+     "n": "MY2023+, $20K+ retail value, ≤45K mi."
+    },
+    "max_front_ltv": {
+     "v": 115,
+     "n": "Up to 115% of MSRP / JD Power Retail, including doc and TT&L, excluding back end. Retail basis."
+    },
+    "max_total_ltv": {
+     "v": 140
+    },
+    "ltv_basis": {
+     "v": "Retail (MSRP / JD Power Retail)",
+     "n": "Not comparable to invoice / clean-trade banks."
+    },
+    "max_mileage": {
+     "v": 140000
+    },
+    "max_age": {},
+    "min_amt": {
+     "v": 6000
+    },
+    "max_amt": {
+     "v": 125000,
+     "n": "Max funded. Max retail value $150K. Doc fee ≤$399."
+    },
+    "max_pti": {
+     "n": "Not stated."
+    },
+    "min_income": {
+     "n": "Not stated."
+    },
+    "reserve_cap": {
+     "n": "Flat only; no reserve described."
+    },
+    "flat_max_pct": {
+     "v": 5.0,
+     "n": "Flat paid 100%, no cap, no split (48–84 mo, AMF ≥$10K): 3.00% at buy rate; +0.25 3.50%; +0.50 4.00%; +0.75 4.50%; +1.00 5.00%. Elite adds +0.25–0.75%."
+    },
+    "comp_cap_usd": {
+     "n": "No cap."
+    },
+    "backend_max_usd": {
+     "v": 10000,
+     "n": "Standard: 20% of retail up to $7,500 (guaranteed $4,000). Elite: 25% up to $10,000."
+    },
+    "gap_max": {
+     "v": 1850,
+     "n": "Lesser of $1,850 or 5% (front-end ≥70%); $50 GAP admin fee."
+    },
+    "bk": {},
+    "repo": {},
+    "cosigner": {},
+    "business": {
+     "v": "no",
+     "n": "No loans titled to a business. No trusts."
+    },
+    "selfemp": {},
+    "itin": {
+     "v": "yes",
+     "n": "Signers need an SSN or ITIN.",
+     "f": "inf"
+    },
+    "cpo": {
+     "n": "Not stated."
+    }
+   },
+   "sections": [
+    {
+     "title": "Credit",
+     "text": "Min FICO 650 on 2014+ units. Tiers **not stated**. Income / PTI **not stated**. No loans titled to a business. No trusts. Mainstream makes only."
+    },
+    {
+     "title": "Advance",
+     "text": "Front up to 115% of **MSRP / JD Power Retail** (incl. doc and TT&L, excl. back end). Total LTV 140%. Max funded $125K; max retail value $150K. Doc fee ≤$399 (above $225 must follow TX rules). Min AMF $6,000."
+    },
+    {
+     "title": "Term",
+     "text": "MY2023+: 24–84 ($20K retail value for 76+; ≤45,000 mi at 76+). 2019–22: 75 ($12.5K for 67+). 2017–18: 66 ($10K for 61+). 2014–16: 63. Max 140K mi."
+    },
+    {
+     "title": "Back end",
+     "text": "Standard 20% of retail up to $7,500 (guaranteed $4,000). Elite 25% up to $10,000. VSC greater of $3,500 or 15% (≥24 mo). GAP lesser of $1,850 or 5% (front-end ≥70%), $50 GAP admin fee. Maintenance greater of $1,500 or 10%."
+    },
+    {
+     "title": "Dealer comp",
+     "text": "**Flat 100%, no cap, no split** (48–84 mo, AMF ≥$10K): buy rate 3.00%; +0.25 3.50%; +0.50 4.00%; +0.75 4.50%; +1.00 5.00%; reduce rate −0.25 2.50% … −1.25 0.00%. $100 flat on 24–47 mo and on $7.5K–$9,999. Elite adds +0.25 / +0.50 / +0.75%. Chargeback if paid off in <3 payments or 120 days."
+    },
+    {
+     "title": "Other",
+     "text": "Approvals 30 days. Max 45 days to first payment. Matrix callback shows alternative terms and advances. Down payment cash or equivalent."
+    }
+   ],
+   "best_for": "Prime paper where you want the highest uncapped flat.",
+   "verify": [
+    "The 115% front-end is retail-based, so more room than it looks."
+   ],
+   "docs_text": "Consumer Auto Program Guide, TX (10/1/2026)."
+  },
+  {
+   "id": "wellsfargo",
+   "existing_id": "wellsfargo",
+   "name": "Wells Fargo Auto",
+   "short": "Wells Fargo",
+   "class_label": "Prime (inf.), no scores stated",
+   "class_text_src": "prime (no scores stated)",
+   "segments": [
+    "prime"
+   ],
+   "seg_inf": true,
+   "doc_date": "2026-10-15",
+   "doc_date_label": "Dealer Program Reference Guide eff 10/15/26 (OF-742)",
+   "date_prec": "day",
+   "docs": [
+    {
+     "title": "Dealer Program Reference Guide (OF-742)",
+     "file": "Wells_Fargo_Dealer_Program_Reference_Guide_eff2026-10-15_fileId230161.pdf",
+     "eff": "2026-10-15",
+     "note": "Effective the day it was pulled (10/15/26)"
+    }
+   ],
+   "cmp": {
+    "tiers": {
+     "v": "Tiers 1–2 gate 84 mo; scores not stated"
+    },
+    "min_fico": {
+     "n": "Not stated."
+    },
+    "max_term": {
+     "v": 84,
+     "n": "New to 3 yrs old, <45K mi, Tiers 1–2, no thin file or first-time buyer, PTI ≤15%, LTV ≤120%. Otherwise 75 / 63 / 51 by age and mileage band. Min term 12."
+    },
+    "term84": {
+     "v": "yes",
+     "n": "Tiers 1–2 only, new to 3 yrs old, <45K mi, PTI ≤15%."
+    },
+    "max_front_ltv": {},
+    "max_total_ltv": {
+     "v": 150,
+     "n": "84 mo: 120%."
+    },
+    "ltv_basis": {
+     "n": "Adjusted value; not otherwise stated."
+    },
+    "max_mileage": {
+     "v": 150000,
+     "n": "51 mo max at 120–150K mi."
+    },
+    "max_age": {
+     "n": "\">10 yrs: 51 mo\" row leaves exactly-10-yr-old undefined.",
+     "f": "verify"
+    },
+    "min_amt": {
+     "v": 5000.01,
+     "n": "$5,000.01 (≤63 mo) / $7,500.01 (>63 mo)."
+    },
+    "max_amt": {},
+    "max_pti": {
+     "n": "≤15% at 84 mo only."
+    },
+    "min_income": {
+     "n": "Not stated."
+    },
+    "reserve_cap": {
+     "n": "Not stated."
+    },
+    "flat_max_pct": {
+     "n": "Not stated."
+    },
+    "comp_cap_usd": {
+     "v": 5000,
+     "n": "Max comp $5,000. Formula not stated; see the callback grid.",
+     "f": "verify"
+    },
+    "backend_max_usd": {
+     "v": 12500,
+     "n": "Total greater of $6,000 or 20% of adjusted value, max $12,500. Aftermarket advance up to 50% of adjusted value. VSC greater of $4,350 or 18%."
+    },
+    "gap_max": {
+     "v": 1500
+    },
+    "bk": {},
+    "repo": {},
+    "cosigner": {},
+    "business": {},
+    "selfemp": {
+     "v": "cond",
+     "n": "Full tax return only (no bank statements)."
+    },
+    "itin": {
+     "v": "yes",
+     "n": "Lends to citizens, permanent / non-permanent residents and DACA. SSN or ITIN with legal-status docs."
+    },
+    "cpo": {
+     "n": "Not stated."
+    }
+   },
+   "sections": [
+    {
+     "title": "Credit",
+     "text": "Scores/tiers **not stated** except 84 mo is **Tiers 1–2 only, no thin file or first-time buyer**. Wells lends to citizens, permanent / non-permanent residents and DACA (SSN or ITIN, with status docs). No refi, lease buyout, cash-out, or Uber / Lyft."
+    },
+    {
+     "title": "Advance",
+     "text": "LTV up to 150%. 84 mo: PTI ≤15%, LTV up to 120%. Min AMF $5,000.01 (≤63 mo) / $7,500.01 (>63 mo)."
+    },
+    {
+     "title": "Term by age and mileage (mo)",
+     "text": "New: 84. 1-yr: 84 (<45K) / 75. 2–3 yrs: 84 / 75 / 63 / 51 by mileage band (0–44,999 / 45–74,999 / 75–119,999 / 120–150K). 4–7 yrs: 75 / 75 / 63 / 51. 8–9 yrs: 63 / 63 / 63 / 51. >10 yrs: 51. Min term 12."
+    },
+    {
+     "title": "Back end",
+     "text": "Total greater of $6,000 or 20% of adjusted value, max $12,500. VSC greater of $4,350 or 18%. GAP $1,500. Tire & wheel greater of $1,550 or 7%. Maintenance greater of $2,350 or 15%. Aftermarket advance up to 50% of adjusted value."
+    },
+    {
+     "title": "Dealer comp",
+     "text": "Max $5,000. **Formula not stated** (see callback grid)."
+    },
+    {
+     "title": "Other",
+     "text": "Approvals 30 days. First payment 19–45 days. No balloon, credit card or deferred down. Self-employed: full tax return only. Excluded: upfits, class 4+ trucks, livery, lemon, hail, salvage / branded, NEVs."
+    }
+   ],
+   "best_for": "Prime customers with a clean file; ITIN / DACA; highest mileage band among banks (to 150K).",
+   "verify": [
+    "The \"More than 10 years\" row leaves exactly-10-yr-old undefined. Credit score floor and BK rules **not stated**."
+   ],
+   "docs_text": "Dealer Program Reference Guide (eff 10/15/2026, OF-742)."
+  },
+  {
+   "id": "westlake",
+   "existing_id": "westlake",
+   "name": "Westlake Financial",
+   "short": "Westlake",
+   "class_label": "Subprime / specialty (Franchise sheet)",
+   "class_text_src": "subprime / specialty (Franchise sheet)",
+   "segments": [
+    "sub"
+   ],
+   "seg_inf": false,
+   "doc_date": "2026-07-01",
+   "doc_date_label": "Rate sheets V-07.26.2 (Franchise) / V-07.26 (Independent)",
+   "date_prec": "month",
+   "docs": [
+    {
+     "title": "Franchise Dealer Rate Sheet",
+     "file": "Westlake_Franchise_Dealer_Rate_Sheet_0726_V-07.26.2_fileId302947.pdf",
+     "eff": "2026-07-01",
+     "note": "V-07.26.2"
+    },
+    {
+     "title": "Independent Dealer Rate Sheet",
+     "file": "Westlake_Independent_Dealer_Rate_Sheet_0726_V-07.26_fileId302916.pdf",
+     "eff": "2026-07-01",
+     "note": "V-07.26"
+    }
+   ],
+   "cmp": {
+    "tiers": {
+     "v": "Standard 0–599 / Gold 600–699 / Platinum 700–749 / Titanium 750+"
+    },
+    "min_fico": {
+     "v": 0,
+     "n": "No minimum score, job time, income or residence time."
+    },
+    "max_term": {
+     "n": "Max term not stated.",
+     "f": "verify"
+    },
+    "term84": {},
+    "max_front_ltv": {},
+    "max_total_ltv": {
+     "v": 150,
+     "n": "LTV includes back end: 140% Standard, 150% Gold / Platinum / Titanium. Min down 10% / 7.5% / 5% / 0%."
+    },
+    "ltv_basis": {
+     "n": "Not stated."
+    },
+    "max_mileage": {
+     "none": true,
+     "n": "No max mileage (stated)."
+    },
+    "max_age": {
+     "none": true,
+     "n": "No max vehicle age (stated)."
+    },
+    "min_amt": {},
+    "max_amt": {
+     "none": true,
+     "n": "No max amount financed (stated)."
+    },
+    "max_pti": {
+     "none": true,
+     "n": "No max PTI (stated)."
+    },
+    "min_income": {
+     "v": 0,
+     "n": "No minimum income."
+    },
+    "reserve_cap": {
+     "v": 2.0,
+     "n": "Up to 2% (Gold–Titanium). N/A on Standard (no reserve)."
+    },
+    "flat_max_pct": {},
+    "comp_cap_usd": {},
+    "backend_max_usd": {
+     "n": "VSC $2,900 (<$10K) to $4,900 ($25K+) by vehicle price (franchise). Independent warranty max $2,500."
+    },
+    "gap_max": {
+     "v": 1000,
+     "n": "$900 Standard / $1,000 other tiers (franchise)."
+    },
+    "bk": {
+     "v": "yes",
+     "n": "Open BK OK with pre-approval; dismissed BK OK."
+    },
+    "repo": {
+     "v": "yes",
+     "n": "Multiple repos OK (not Westlake / Wilshire repos)."
+    },
+    "cosigner": {},
+    "business": {},
+    "selfemp": {},
+    "itin": {},
+    "cpo": {
+     "n": "Not stated."
+    }
+   },
+   "sections": [
+    {
+     "title": "Credit tiers (franchise)",
+     "text": "Standard 0–599 / Gold 600–699 / Platinum 700–749 / Titanium 750+. No min score, job time, income or residence time. No max PTI. No max amount financed."
+    },
+    {
+     "title": "Franchise",
+     "text": "Rate Standard up to usury; Gold 11.99%–23.99%; Platinum 7.99%–19.90%; Titanium 5.99%–19.90%. Min down 10% / 7.5% / 5% / 0%. LTV incl. back end 140% / 150% / 150% / 150%. Reserve N/A / up to 2% (Gold–Titanium). GAP $900 / $1,000."
+    },
+    {
+     "title": "Independent",
+     "text": "Gold 8.79%–23.99%; Platinum and Titanium 7.99%–19.90%; Titanium down 5%; warranty max $2,500."
+    },
+    {
+     "title": "Service contract (franchise)",
+     "text": "$2,900 (<$10K) to $4,900 ($25K+) by vehicle price."
+    },
+    {
+     "title": "Stops/specials",
+     "text": "Open BK OK (pre-approved), dismissed OK. Multiple repos OK (not Westlake / Wilshire repos). Branded titles financed (not MA, NY, PR). Due dates can't fall 25th–end of month. Simple-interest arbitration only. No max vehicle age or mileage."
+    }
+   ],
+   "best_for": "Anyone the banks decline: bankruptcy, repos, low scores, old or high-mile units. Pays no reserve at Standard.",
+   "verify": [
+    "Footnote on a $4,000 warranty max for \"Prime Program and Presidential Dealers\" is cut off in the PDF. Max term **not stated**."
+   ],
+   "docs_text": "Franchise Dealer Rate Sheet (V-07.26.2). Independent Dealer Rate Sheet (V-07.26)."
+  },
+  {
+   "id": "creditacceptance",
+   "existing_id": null,
+   "name": "Credit Acceptance",
+   "short": "Credit Acceptance",
+   "class_label": "Subprime / specialty",
+   "class_text_src": "subprime / specialty",
+   "segments": [
+    "sub"
+   ],
+   "seg_inf": false,
+   "doc_date": "2026-05-27",
+   "doc_date_label": "PDF footer '2026 May 27 v1-1'; RouteOne shows eff 1/12/26",
+   "date_prec": "day",
+   "docs": [
+    {
+     "title": "Full-Spectrum Rate Sheet",
+     "file": "Credit_Acceptance_Full_Spectrum_Rate_Sheet_eff2026-01-12_fileId302928.pdf",
+     "eff": "2026-01-12",
+     "note": "RouteOne eff 1/12/26 vs PDF footer May 27, 2026 (v1-1): mismatch"
+    }
+   ],
+   "cmp": {
+    "tiers": {
+     "v": "Standard / Silver 550+ / Gold 600+ / Platinum 660+"
+    },
+    "min_fico": {
+     "v": 0,
+     "n": "Standard: no minimum score. Silver 550+, Gold 600+, Platinum 660+."
+    },
+    "max_term": {
+     "v": 84,
+     "n": "84 new / 72 used (Silver and up; Standard by credit)."
+    },
+    "term84": {
+     "v": "yes",
+     "n": "New vehicles only (72 mo used)."
+    },
+    "max_front_ltv": {
+     "n": "Advance % not stated (this model pays through the advance)."
+    },
+    "max_total_ltv": {
+     "n": "Not stated."
+    },
+    "ltv_basis": {
+     "v": "KBB or Black Book"
+    },
+    "max_mileage": {
+     "n": "Not stated."
+    },
+    "max_age": {
+     "n": "Not stated."
+    },
+    "min_amt": {
+     "n": "No minimum amount financed."
+    },
+    "max_amt": {
+     "n": "No maximum amount financed."
+    },
+    "max_pti": {
+     "v": 25,
+     "n": "Min payment $150."
+    },
+    "min_income": {
+     "n": "Not stated. Proof of income required at Standard and Silver."
+    },
+    "reserve_cap": {
+     "n": "Not stated. Pays through the advance, not reserve."
+    },
+    "flat_max_pct": {
+     "n": "Not stated."
+    },
+    "comp_cap_usd": {
+     "n": "Not stated."
+    },
+    "backend_max_usd": {
+     "n": "Not stated."
+    },
+    "gap_max": {},
+    "bk": {
+     "n": "Not stated on the sheet."
+    },
+    "repo": {},
+    "cosigner": {},
+    "business": {},
+    "selfemp": {
+     "n": "Proof of income required at Standard and Silver (waived at Gold 660+ and Platinum)."
+    },
+    "itin": {},
+    "cpo": {
+     "n": "Not stated."
+    }
+   },
+   "sections": [
+    {
+     "title": "Tiers",
+     "text": "Standard (no minimum score; \"as low as\" 21.49%), Silver (550+; 20.49%), Gold (600+; 12.99%), Platinum (660+; 7.99%)."
+    },
+    {
+     "title": "Down",
+     "text": "Standard varies up to 15% or $1,000; Silver greater of 5% or $250; Gold and Platinum $0."
+    },
+    {
+     "title": "Term",
+     "text": "Up to 72 mo used and 84 mo new (Standard by credit; Silver and up yes)."
+    },
+    {
+     "title": "Docs",
+     "text": "Proof of income at Standard and Silver (waived at Gold with 660+ and Platinum). Proof of bank at Standard and Silver. Proof of residence by bureau at Standard."
+    },
+    {
+     "title": "Structure",
+     "text": "PTI ≤25%. Min payment $150. No min or max amount financed. Min discount as low as $0. Value guide KBB or Black Book."
+    },
+    {
+     "title": "Not stated",
+     "text": "Advance %, vehicle age/mileage, dealer comp (this model pays through the advance, not reserve)."
+    }
+   ],
+   "best_for": "Deep subprime or no-score customers who need higher front-end structure.",
+   "verify": [
+    "Sheet date mismatch (RouteOne 1/12/26 vs. PDF footer May 27, 2026)."
+   ],
+   "docs_text": "Full-Spectrum Rate Sheet (PDF \"2026 May 27 v1-1\"; RouteOne eff 1/12/2026)."
+  },
+  {
+   "id": "gls",
+   "existing_id": "gls",
+   "name": "Global Lending Services (GLS)",
+   "short": "GLS",
+   "class_label": "Subprime",
+   "class_text_src": "subprime",
+   "segments": [
+    "sub"
+   ],
+   "seg_inf": false,
+   "doc_date": null,
+   "doc_date_label": "Program Guidelines v53 2026 (no date on the sheet)",
+   "date_prec": "day",
+   "docs": [
+    {
+     "title": "Program Guidelines v53 (2026)",
+     "file": "GLS_Program_Guidelines_v53_2026_fileId295194.pdf",
+     "eff": null,
+     "note": "v53 2026; no calendar date on the sheet"
+    }
+   ],
+   "cmp": {
+    "tiers": {
+     "v": "Select, Tier 1–4"
+    },
+    "min_fico": {
+     "v": 400,
+     "n": "FICO 400–700; zero FICO also considered."
+    },
+    "max_term": {
+     "v": 78,
+     "n": "Select: 78 (0–20K mi), 75 (20–80K), 72 (80–120K), 66 (120–180K). T1–T4: 75 / 72 / 72 / 66 (T3–T4 72 at 0–20K). 66 mo if book <$10K or >10 yrs."
+    },
+    "term84": {
+     "v": "no",
+     "n": "Max term 78."
+    },
+    "max_front_ltv": {
+     "v": 130,
+     "n": "Includes TT&L. Down payment must be cash or trade (no credit card or borrowed)."
+    },
+    "max_total_ltv": {
+     "v": 140
+    },
+    "ltv_basis": {
+     "n": "Not captured."
+    },
+    "max_mileage": {
+     "v": 180000,
+     "n": "EV: ≤6 yrs, ≤75K mi."
+    },
+    "max_age": {
+     "v": 12
+    },
+    "min_amt": {
+     "v": 7000,
+     "n": "Loan $7,000–$55,000."
+    },
+    "max_amt": {
+     "v": 55000
+    },
+    "max_pti": {
+     "v": 24
+    },
+    "min_income": {
+     "v": 1800,
+     "n": "Part-time must be W-2 with 6+ months."
+    },
+    "reserve_cap": {
+     "n": "Flat only, no reserve."
+    },
+    "flat_max_pct": {
+     "v": 4.0,
+     "n": "Flat, % of front end, no chargebacks: Select 4%, T1–T2 3%, T3–T4 2%. Paid on contracts received within 20 days."
+    },
+    "comp_cap_usd": {},
+    "backend_max_usd": {
+     "v": 5200,
+     "n": "Select: warranty $4,000 / GAP $1,200 / total $5,200. T1–T4: $3,500 / $1,100 / $4,600."
+    },
+    "gap_max": {
+     "v": 1200,
+     "n": "Front LTV >80%; not in MA or NY. T1–T4 $1,100."
+    },
+    "bk": {
+     "v": "cond",
+     "n": "No open BK. Avoid BK in the past 4 months."
+    },
+    "repo": {
+     "v": "cond",
+     "n": "No repo in the past 4 months."
+    },
+    "cosigner": {},
+    "business": {
+     "n": "No dealership sales, management or F&I staff as applicants."
+    },
+    "selfemp": {
+     "v": "no",
+     "n": "Self-employed / 1099 income not accepted."
+    },
+    "itin": {},
+    "cpo": {
+     "n": "Not stated."
+    }
+   },
+   "sections": [
+    {
+     "title": "Credit",
+     "text": "FICO 400–700 (zero FICO considered). Min income $1,800. PTI ≤24%. Loan $7,000–$55,000. Down as low as $0. Rates as low as 9.95%. Contract fee $199."
+    },
+    {
+     "title": "Advance",
+     "text": "Front up to 130% (incl. TT&L), LTV up to 140%. Down payment must be cash or trade value (no credit card or borrowed)."
+    },
+    {
+     "title": "Term (Select / T1–T4)",
+     "text": "0–20K mi: 78 / 75 (T3–T4: 72). 20–80K: 75 / 72. 80–120K: 72 / 72. 120–180K: 66 / 66. 66 mo for book <$10K or >10 yrs (max 12 yrs). EV: ≤6 yrs, ≤75K mi."
+    },
+    {
+     "title": "Back end (Select / T1–T4)",
+     "text": "Warranty $4,000 / $3,500. GAP $1,200 / $1,100 (front LTV >80%; not in MA or NY). Total $5,200 / $4,600."
+    },
+    {
+     "title": "Dealer comp",
+     "text": "Flat, % of front end, **no chargebacks**: Select 4%, T1–T2 3%, T3–T4 2%. Paid on contracts received within 20 days."
+    },
+    {
+     "title": "Stops",
+     "text": "No self-employed / 1099, no dealership sales, management or F&I staff as applicants. Avoid open BK and repos in past 4 months. Part-time must be W-2 with 6+ months."
+    }
+   ],
+   "best_for": "W-2 workers with scores to 700 who need payment flexibility; good no-chargeback flat.",
+   "verify": [
+    "Sheet carries no calendar date, only \"v53 2026\"."
+   ],
+   "docs_text": "Program Guidelines v53 2026 (no date)."
+  },
+  {
+   "id": "kia",
+   "existing_id": "kia",
+   "name": "Kia Finance America",
+   "short": "Kia Finance",
+   "class_label": "No retail terms on RouteOne",
+   "class_text_src": "no retail terms available",
+   "segments": [],
+   "seg_inf": false,
+   "doc_date": "2013-12-02",
+   "doc_date_label": "FMVD Program Information Packet (TX), eff 12/02/2013",
+   "date_prec": "day",
+   "docs": [
+    {
+     "title": "FMVD Program Information Packet (TX)",
+     "file": "Kia_FMVD_Program_Information_Packet_TX_eff2013-12-02_fileId169474.pdf",
+     "eff": "2013-12-02",
+     "note": "Texas sales-tax lease program (Fair Market Value Deduction) for \"Kia Motors Finance\" (old name), administered by L&M Service Group. Not a retail rate sheet."
+    }
+   ],
+   "cmp": {
+    "tiers": {
+     "n": "Not stated."
+    },
+    "min_fico": {},
+    "max_term": {},
+    "term84": {},
+    "max_front_ltv": {},
+    "max_total_ltv": {},
+    "ltv_basis": {},
+    "max_mileage": {},
+    "max_age": {},
+    "min_amt": {},
+    "max_amt": {},
+    "max_pti": {},
+    "min_income": {},
+    "reserve_cap": {},
+    "flat_max_pct": {},
+    "comp_cap_usd": {},
+    "backend_max_usd": {},
+    "gap_max": {},
+    "bk": {},
+    "repo": {},
+    "cosigner": {},
+    "business": {},
+    "selfemp": {},
+    "itin": {},
+    "cpo": {}
+   },
+   "sections": [
+    {
+     "title": "Not stated",
+     "text": "Rates, advance, term, mileage, income, PTI, reserve. Retail and lease programs have to come from the Kia dealer portal or your Kia Finance rep. This 2013 packet should not be used for current structuring."
+    }
+   ],
+   "best_for": "",
+   "verify": [],
+   "docs_text": "\"Kia FMVD Program Information Packet (TX)\" (RouteOne eff 12/02/2013)."
+  }
+ ],
+ "no_sheet": [
+  {
+   "name": "AmeriCredit",
+   "existing_id": "amcredit",
+   "forms": 1,
+   "note": "RouteOne lists forms only (1 link)."
+  },
+  {
+   "name": "American Credit Acceptance",
+   "existing_id": null,
+   "forms": 10,
+   "note": "RouteOne lists 10 forms, no rate sheet."
+  },
+  {
+   "name": "Consumer Portfolio Services",
+   "existing_id": "cps",
+   "forms": 16,
+   "note": "RouteOne lists 16 forms, no rate sheet."
+  },
+  {
+   "name": "Driveway Finance",
+   "existing_id": "dfc",
+   "forms": 8,
+   "note": "RouteOne lists 8 forms, no rate sheet."
+  },
+  {
+   "name": "Exeter Finance",
+   "existing_id": "exeter",
+   "forms": 12,
+   "note": "RouteOne lists 12 forms, no rate sheet."
+  },
+  {
+   "name": "Flagship Financial Group",
+   "existing_id": "flagship",
+   "forms": 12,
+   "note": "RouteOne lists 12 forms, no rate sheet."
+  },
+  {
+   "name": "RouteOne Marketing",
+   "existing_id": null,
+   "forms": 11,
+   "note": "Not a lender: marketing forms and bulletins only (11)."
+  }
+ ]
+}

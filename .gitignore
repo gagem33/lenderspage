@@ -6,3 +6,8 @@ __pycache__/
 # carries the Drive file IDs; that is how they are found again.
 sync/pdfs/
 sync/pages/
+
+# Local-only RouteOne working files (never commit). lenders-routeone.json is published by Gage's explicit instruction (2026-10-15).
+tools/ro_manual.py
+ONFILE-vs-ROUTEONE.md
+_shots/
