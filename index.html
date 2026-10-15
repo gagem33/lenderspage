@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+  <meta name="robots" content="noindex,nofollow">
   <title>LenderHub — Southwest Kia Dallas</title>
   <meta name="description" content="Internal dealership lender hub — program guidelines for all finance partners.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -904,6 +905,7 @@ kbd {
 .lc-santander { background: linear-gradient(135deg,#ec0000,#b30000); }
 
 </style>
+<link rel="stylesheet" href="routeone.css">
 </head>
 <body>
 <div id="app">
@@ -1031,6 +1033,10 @@ kbd {
   <button id="date-calc-btn" class="btn-tool" title="20-Day Calculator">
     <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
     <span class="btn-tool-label">20-Day</span>
+  </button>
+  <button id="ro-open-btn" class="btn-tool" title="Bank matrix: sort, filter and compare every bank (RouteOne data)" hidden>
+    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="1"/><path d="M3 9h18M3 15h18M9 3v18M15 3v18"/></svg>
+    <span class="btn-tool-label">Matrix</span>
   </button>
   <button id="intel-btn" class="btn-tool" title="Quick lists">
     <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>
@@ -1474,6 +1480,7 @@ function rankRowHTML(l, where, n) {
 }
 
 function sectionHTML(l, key) {
+  if (key === '__ro') return window.RO ? RO.bankHTML(l.id) : '';
   if (key === '__stips') {
     const row = (k, v) => v ? `<div class="info-row"><span class="info-key">${k}</span><span class="info-val">${v}</span></div>` : '';
     return `<div class="info-grid">${row('ID Requirements', l.idReq)}${row('Proof of Residency', l.por)}${row('Proof of Income', l.poi)}</div>`
@@ -1501,6 +1508,7 @@ function hudChips(l) {
     if (used.has(k)) continue;
     chips.push({ key: k, label: s.label });
   }
+  if (window.RO && RO.has(l.id)) chips.push({ key: '__ro', label: 'RouteOne 10/15' });   // routeone.js layer, local only
   return chips;
 }
 
@@ -1886,6 +1894,7 @@ const SHORTCUTS = [
   { keys: ['d'],       desc: 'Deal structurer',                run: () => $('#deal-struct-btn')?.click() },
   { keys: ['s'],       desc: 'Side-by-side compare',           run: () => $('#compare-tool-btn')?.click() },
   { keys: ['y'],       desc: 'Date calculator',                run: () => $('#date-calc-btn')?.click() },
+  { keys: ['m'],       desc: 'Bank matrix (sort / filter / compare all)', run: () => window.RO?.open() },
   { keys: ['[', ']'],  desc: 'Previous / next lender',         run: k => stepLender(k === '[' ? -1 : 1) },
   { keys: ['?'],       desc: 'This list',                      run: () => openKeys() },
   { keys: ['esc'],     desc: 'Close whatever is open',         run: null },
@@ -2511,5 +2520,6 @@ async function boot() {
 }
 document.addEventListener('DOMContentLoaded', boot);
 </script>
+<script src="routeone.js" defer></script>
 </body>
 </html>
