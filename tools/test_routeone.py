@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
-"""Headless check of the Bank Matrix. Run: python3 -m http.server 8765 (in repo root) then python3 tools/test_routeone.py"""
+"""Headless check of the Bank Matrix (desktop + 390px and 360px phone). Run: python3 -m http.server 8765 (in repo root) then python3 tools/test_routeone.py"""
 import json, sys, os
 from playwright.sync_api import sync_playwright
-BASE = 'http://127.0.0.1:8765/index.html'
+BASE = os.environ.get('LH_BASE', 'http://127.0.0.1:8765/index.html')   # LH_BASE=https://lender-hub.vercel.app/index.html to test production
 ROOT = os.path.join(os.path.dirname(__file__), '..')
 D = json.load(open(os.path.join(ROOT, 'lenders-routeone.json')))
 SHOTS = os.path.join(ROOT, '_shots'); os.makedirs(SHOTS, exist_ok=True)
