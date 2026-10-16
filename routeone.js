@@ -26,6 +26,11 @@ function fmtDate(iso, prec) {
   const [y, m, d] = iso.split('-').map(Number);
   return prec === 'month' ? `${MON[m - 1]} ${y}` : `${MON[m - 1]} ${d}, ${y}`;
 }
+function fmtShort(iso) {
+  if (!iso) return 'no date';
+  const [y, m, d] = iso.split('-').map(Number);
+  return `${m}/${d}/${y}`;
+}
 function ageOf(iso) {
   if (!iso) return null;
   const days = Math.floor((Date.now() - new Date(iso + 'T12:00:00').getTime()) / 864e5);
@@ -78,10 +83,12 @@ const S = {
   cols: DEFAULT_COLS.slice(),
   f: { text: '', seg: [], fico: '', term: '', miles: '', ltv: '', income: '', pti: '', amt: '', unk: true,
        bk: '', repo: '', cosigner: '', business: '', selfemp: '', itin: '', term84: '' },
-  hideSame: false, filtersOpen: false,
+  hideSame: false, filtersOpen: false, nsOpen: false, mview: 'cards',
 };
+const MQ = window.matchMedia ? window.matchMedia('(max-width: 720px)') : { matches: false };
+const isMobile = () => !!MQ.matches;
 const LS = 'lenderhub.ro.v1';
-function save() { try { localStorage.setItem(LS, JSON.stringify({ cols: S.cols, sortKey: S.sortKey, sortDir: S.sortDir, f: S.f })); } catch (e) {} }
+function save() { try { localStorage.setItem(LS, JSON.stringify({ cols: S.cols, sortKey: S.sortKey, sortDir: S.sortDir, f: S.f, mview: S.mview })); } catch (e) {} }
 function load() {
   try {
     const o = JSON.parse(localStorage.getItem(LS) || 'null');
@@ -90,6 +97,7 @@ function load() {
     if (o.sortKey) S.sortKey = o.sortKey;
     if (o.sortDir) S.sortDir = o.sortDir;
     if (o.f) Object.assign(S.f, o.f);
+    if (o.mview === 'table' || o.mview === 'cards') S.mview = o.mview;
   } catch (e) {}
 }
 
@@ -206,7 +214,7 @@ function colPickerHTML() {
   return `<details class="ro-cols"><summary class="ro-btn">Columns</summary><div class="ro-cols-pop">
     ${Object.entries(groups).map(([g, fs]) => `<div class="ro-cols-g"><b>${g}</b>${fs.map(f =>
       `<label><input type="checkbox" data-rocol="${f.key}"${S.cols.includes(f.key) ? ' checked' : ''}> ${f.label}</label>`).join('')}</div>`).join('')}
-    <button type="button" class="ro-btn" id="ro-cols-reset">Default columns</button>
+    <div class="ro-cols-act"><button type="button" class="ro-btn" id="ro-cols-reset">Default columns</button><button type="button" class="ro-btn primary" id="ro-cols-done">Done</button></div>
   </div></details>`;
 }
 function segCell(b) {
@@ -218,41 +226,90 @@ function th(key, label, cls) {
   const on = S.sortKey === key, dir = on ? (S.sortDir === 1 ? 'ascending' : 'descending') : 'none';
   return `<th class="${cls || ''}" aria-sort="${dir}"><button type="button" class="ro-sort${on ? ' on' : ''}" data-rosort="${key}">${label}<i>${on ? (S.sortDir === 1 ? '▲' : '▼') : ''}</i></button></th>`;
 }
-function matrixHTML() {
-  const rs = rows(), total = RO.data.banks.length, n = activeFilterCount();
-  const cols = S.cols.filter(k => FIELD[k]);
+const SORT_LABEL = { name: 'Bank name', seg: 'Credit tier', date: 'Doc date' };
+function pickBox(b, on) {
+  return `<label class="ro-pickl"><input type="checkbox" data-ropick="${b.id}" aria-label="Select ${esc(b.name)} to compare"${on ? ' checked' : ''}></label>`;
+}
+function assumedMark(assumed) {
+  return assumed.length ? `<span class="ro-q" title="Passes the filters only because it doesn't state: ${esc(assumed.map(k => FIELD[k].short).join(', '))}">?</span>` : '';
+}
+function tableHTML(rs, cols) {
   const body = rs.map(({ b, assumed }) => {
     const on = S.sel.includes(b.id);
     return `<tr data-id="${b.id}" class="${on ? 'sel' : ''}">
-      <td class="ro-pick"><input type="checkbox" data-ropick="${b.id}" aria-label="Select ${esc(b.name)} to compare"${on ? ' checked' : ''}></td>
-      <th scope="row" class="ro-bankcell"><button type="button" class="ro-link" data-roopen="${b.id}">${esc(b.short)}</button>${assumed.length ? `<span class="ro-q" title="Passes the filters only because it doesn't state: ${esc(assumed.map(k => FIELD[k].short).join(', '))}">?</span>` : ''}<small>${esc(b.class_label)}</small></th>
+      <td class="ro-pick">${pickBox(b, on)}</td>
+      <th scope="row" class="ro-bankcell"><button type="button" class="ro-link" data-roopen="${b.id}">${esc(b.short)}</button>${assumedMark(assumed)}<small>${esc(b.class_label)}</small></th>
       <td class="ro-seg">${segCell(b)}</td>
       <td class="ro-date" title="${esc(b.doc_date_label)}">${b.doc_date ? fmtDate(b.doc_date, b.date_prec) : 'no date'}<br>${ageBadge(b.doc_date)}</td>
       ${cols.map(k => `<td class="k-${FIELD[k].kind}">${cellHTML(b, k)}</td>`).join('')}
     </tr>`;
   }).join('');
+  const inner = `<div class="ro-table-wrap${isMobile() ? ' ro-scrollx' : ''}"><table class="ro-table" id="ro-table">
+      <thead><tr><th class="ro-pick"></th>${th('name', 'Bank', 'ro-bankcell')}${th('seg', 'Tier')}${th('date', 'Doc date')}${cols.map(k => th(k, FIELD[k].short)).join('')}</tr></thead>
+      <tbody>${body || `<tr><td colspan="${cols.length + 4}" class="ro-empty">No bank matches every filter. Loosen one, or reset.</td></tr>`}</tbody>
+    </table></div>`;
+  return isMobile() ? `<div class="ro-xwrap">${inner}</div>` : inner;
+}
+// Phone layout: one compact card per bank. Numbers in a grid, yes/no items as one line of chips.
+function cardsHTML(rs, cols) {
+  const nums = cols.filter(k => FIELD[k].kind === 'num'), enums = cols.filter(k => FIELD[k].kind === 'enum'), txts = cols.filter(k => FIELD[k].kind !== 'num' && FIELD[k].kind !== 'enum');
+  const cards = rs.map(({ b, assumed }) => {
+    const on = S.sel.includes(b.id);
+    return `<article class="ro-card${on ? ' sel' : ''}" data-id="${b.id}">
+      <div class="ro-card-h">
+        <div class="ro-card-t"><button type="button" class="ro-link ro-card-name" data-roopen="${b.id}">${esc(b.short)}</button>${assumedMark(assumed)}
+          <span class="ro-card-sub">${esc(b.class_label)}</span></div>
+        <label class="ro-pickl ro-pickl-card"><input type="checkbox" data-ropick="${b.id}" aria-label="Select ${esc(b.name)} to compare"${on ? ' checked' : ''}><span>Compare</span></label>
+      </div>
+      <div class="ro-card-meta"><span>${segCell(b)}</span><span class="ro-card-date">${b.doc_date ? fmtDate(b.doc_date, b.date_prec) : 'no date'} ${ageBadge(b.doc_date)}</span></div>
+      ${nums.length ? `<dl class="ro-card-grid">${nums.map(k => `<div><dt>${esc(FIELD[k].short)}</dt><dd>${cellHTML(b, k)}</dd></div>`).join('')}</dl>` : ''}
+      ${enums.length ? `<div class="ro-card-yn">${enums.map(k => `<span><em>${esc(FIELD[k].short)}</em> ${cellHTML(b, k)}</span>`).join('')}</div>` : ''}
+      ${txts.length ? `<dl class="ro-card-txt">${txts.map(k => `<div><dt>${esc(FIELD[k].short)}</dt><dd>${cellHTML(b, k)}</dd></div>`).join('')}</dl>` : ''}
+    </article>`;
+  }).join('');
+  return `<div class="ro-table-wrap ro-cards-wrap" id="ro-cards">${cards || '<p class="ro-empty">No bank matches every filter. Loosen one, or reset.</p>'}</div>`;
+}
+function sortBarHTML(cols) {
+  const keys = ['name', 'seg', 'date', ...cols];
+  const lab = k => SORT_LABEL[k] || FIELD[k].short;
+  const cards = S.mview === 'cards';
+  return `<div class="ro-sortbar">
+      <label class="ro-sortsel"><span>Sort</span><select id="ro-sortsel" aria-label="Sort banks by">${keys.map(k => `<option value="${k}"${S.sortKey === k ? ' selected' : ''}>${esc(lab(k))}</option>`).join('')}${keys.includes(S.sortKey) ? '' : `<option value="${S.sortKey}" selected>${esc(lab(S.sortKey))}</option>`}</select></label>
+      <button type="button" class="ro-btn ro-dirbtn" id="ro-sortdir" aria-label="Sort direction: ${S.sortDir === 1 ? 'low to high' : 'high to low'}. Tap to reverse." title="${S.sortDir === 1 ? 'Low to high' : 'High to low'}">${S.sortDir === 1 ? '▲' : '▼'}</button>
+      <div class="ro-seg2" role="group" aria-label="Layout"><button type="button" class="ro-btn${cards ? ' on' : ''}" data-romview="cards" aria-pressed="${cards}">Cards</button><button type="button" class="ro-btn${cards ? '' : ' on'}" data-romview="table" aria-pressed="${!cards}">Table</button></div>
+    </div>`;
+}
+function matrixHTML() {
+  const rs = rows(), total = RO.data.banks.length, n = activeFilterCount();
+  const cols = S.cols.filter(k => FIELD[k]);
+  const mob = isMobile();
   return `<div class="ro-toolbar">
-      <button type="button" class="ro-btn ro-filter-toggle" id="ro-ftoggle" aria-expanded="${S.filtersOpen}">Filters${n ? ` (${n})` : ''}</button>
+      <button type="button" class="ro-btn ro-filter-toggle" id="ro-ftoggle" aria-expanded="${S.filtersOpen}" aria-controls="ro-filterwrap">Filters${n ? ` (${n})` : ''}</button>
       ${colPickerHTML()}
       <span class="ro-count" id="ro-count" role="status">${rs.length} of ${total} banks</span>
       <span class="ro-hint">Tap a column to sort. Tick 2–4 banks to compare.</span>
     </div>
-    <div class="ro-filter-wrap${S.filtersOpen ? ' open' : ''}">${filtersHTML()}</div>
-    <div class="ro-table-wrap"><table class="ro-table" id="ro-table">
-      <thead><tr><th class="ro-pick"></th>${th('name', 'Bank', 'ro-bankcell')}${th('seg', 'Tier')}${th('date', 'Doc date')}${cols.map(k => th(k, FIELD[k].short)).join('')}</tr></thead>
-      <tbody>${body || `<tr><td colspan="${cols.length + 4}" class="ro-empty">No bank matches every filter. Loosen one, or reset.</td></tr>`}</tbody>
-    </table></div>
+    ${mob ? sortBarHTML(cols) : ''}
+    <div class="ro-filter-wrap${S.filtersOpen ? ' open' : ''}" id="ro-filterwrap" role="group" aria-label="Filters">
+      <div class="ro-sheet-h"><b>Filters</b><button type="button" class="ro-btn primary" id="ro-fdone">Show ${rs.length} bank${rs.length === 1 ? '' : 's'}</button></div>
+      ${filtersHTML()}
+    </div>
+    <div class="ro-backdrop${S.filtersOpen ? ' open' : ''}" id="ro-fbackdrop"></div>
+    ${mob && S.mview === 'cards' ? cardsHTML(rs, cols) : tableHTML(rs, cols)}
+    ${mob && S.mview === 'table' ? '<p class="ro-swipe" aria-hidden="true">Swipe the table sideways for more columns. Bank names stay put.</p>' : ''}
     <p class="ro-legend">— = <b>not stated</b> in the RouteOne sheet (not a no). <sup class="ro-flag inf">inf</sup> desk inference. <sup class="ro-flag verify">⚠</sup> conflict or uncertain read. Hover a value for the sheet's note. LTV columns show the highest published figure; the bank tab has the full grid. Advance bases differ: Fifth Third and PNC value on retail.</p>
-    ${noSheetHTML(true)}
     <div class="ro-comparebar${S.sel.length ? ' show' : ''}" id="ro-comparebar">
       <span id="ro-selcount">${S.sel.length} selected</span>
       <button type="button" class="ro-btn primary" id="ro-do-compare"${S.sel.length >= 2 ? '' : ' disabled'}>Compare side by side</button>
       <button type="button" class="ro-btn" id="ro-clear-sel">Clear</button>
     </div>`;
 }
-function noSheetHTML(compact) {
+function noSheetHTML() {
   const ns = RO.data.no_sheet;
-  return `<div class="ro-nosheet"><b>No program sheet on RouteOne (${ns.length}):</b> ${ns.map(n => esc(n.name)).join(', ')}.${compact ? ' <button type="button" class="ro-link" data-rotab="banks" data-roopen="__nosheet">Details</button>' : ''}</div>`;
+  return `<div class="ro-nslist" id="ro-nslist"${S.nsOpen ? '' : ' hidden'}><b>No program sheet on RouteOne (${ns.length}):</b>
+    <ul>${ns.map(n => `<li>${esc(n.name)}</li>`).join('')}</ul>
+    <p>RouteOne only lists forms for these lenders, so nothing was captured in the October pull.
+    <button type="button" class="ro-link" data-roopen="__nosheet">Details</button></p></div>`;
 }
 
 // ── SIDE-BY-SIDE view ────────────────────────────────────────
@@ -289,7 +346,7 @@ function compareHTML() {
   return `<div class="ro-toolbar"><span class="ro-hint">Pick 2 to 4 banks.</span>
       <label class="ro-f-unk"><input type="checkbox" id="ro-hidesame"${S.hideSame ? ' checked' : ''}> <span>Hide rows that match</span></label>
       <button type="button" class="ro-btn" id="ro-clear-sel">Clear</button></div>
-    <div class="ro-chips ro-pickrow">${picker}</div>${table}`;
+    <div class="ro-chips ro-pickrow" role="group" aria-label="Banks to compare">${picker}</div>${table}`;
 }
 function cellText(b, k) {
   const f = field(k), v = val(b, k);
@@ -388,27 +445,43 @@ function panelEl() {
   p.addEventListener('click', onClick);
   p.addEventListener('input', onInput);
   p.addEventListener('change', onInput);
+  p.addEventListener('scroll', e => { if (e.target.classList && e.target.classList.contains('ro-scrollx')) fadeState(); }, true);
   return p;
 }
 function render() {
   const p = panelEl(), m = RO.data.meta;
   const tabs = [['matrix', 'Matrix'], ['compare', `Side by side${S.sel.length ? ' (' + S.sel.length + ')' : ''}`], ['banks', 'Bank tabs'], ['guide', 'Desk guide']];
   const scrollY = (q('.ro-main', p) || {}).scrollTop || 0;
-  p.innerHTML = `<div class="ro-top"><div><h2>Bank Matrix</h2><p class="ro-meta">RouteOne pull ${esc(fmtDate(m.pulled))} · ${RO.data.banks.length} banks with sheets · dealer-only</p></div>
-      <button type="button" class="readout-close" id="ro-close">Close</button></div>
+  const total = RO.data.banks.length + RO.data.no_sheet.length;
+  p.innerHTML = `<div class="ro-top"><div class="ro-toprow"><h2>Bank Matrix</h2><button type="button" class="readout-close" id="ro-close">Close</button></div>
+      <p class="ro-desc" id="ro-desc">Compare lender programs side by side. Source: RouteOne rate sheets &amp; program guides pulled ${esc(fmtShort(m.pulled))}.</p>
+      <div class="ro-cov"><span id="ro-cov">${RO.data.banks.length} of ${total} RouteOne lenders have program sheets</span>
+        <button type="button" class="ro-btn ro-nsbtn" id="ro-nsbtn" aria-expanded="${S.nsOpen}" aria-controls="ro-nslist">No sheet (${RO.data.no_sheet.length}) <i>${S.nsOpen ? '▴' : '▾'}</i></button></div>
+      ${noSheetHTML()}</div>
     <div class="ro-nav" role="tablist">${tabs.map(([k, l]) => `<button type="button" role="tab" class="ro-nt${S.tab === k ? ' on' : ''}" aria-selected="${S.tab === k}" data-rotab="${k}">${l}</button>`).join('')}</div>
     <div class="ro-main">${S.tab === 'matrix' ? matrixHTML() : S.tab === 'compare' ? compareHTML() : S.tab === 'banks' ? banksHTML() : guideHTML()}</div>`;
   const main = q('.ro-main', p); if (main && scrollY) main.scrollTop = scrollY;
+  fadeState();
+  const on = q('.ro-tab.on', p); if (on && on.scrollIntoView) { const st = on.parentElement; if (st) st.scrollLeft = Math.max(0, on.offsetLeft - 16); }
 }
-// matrix-only partial refresh keeps input focus while typing in filters
+// matrix-only partial refresh keeps input focus (and the open filter sheet) while typing in filters
+const PARTS = ['.ro-table-wrap', '.ro-count', '.ro-comparebar', '.ro-filter-toggle', '.ro-sortbar', '#ro-fdone', '.ro-swipe'];
 function refreshMatrix() {
-  const p = panelEl(), t = q('.ro-table-wrap', p);
-  if (!t) return render();
+  const p = panelEl();
+  if (!q('.ro-table-wrap', p)) return render();
   const tmp = document.createElement('div'); tmp.innerHTML = matrixHTML();
-  ['.ro-table-wrap', '.ro-count', '.ro-comparebar', '.ro-toolbar .ro-filter-toggle'].forEach(sel => {
-    const a = q(sel, p), b = q(sel, tmp); if (a && b) a.replaceWith(b);
+  PARTS.forEach(sel => {
+    const a = q(sel, p), b = q(sel, tmp);
+    if (a && b) a.replaceWith(b); else if (!a && b && sel === '.ro-swipe') q('.ro-table-wrap', p).after(b); else if (a && !b) a.remove();
   });
+  fadeState();
   qa('.ro-nt', p).forEach(b => { if (b.dataset.rotab === 'compare') b.textContent = `Side by side${S.sel.length ? ' (' + S.sel.length + ')' : ''}`; });
+}
+function fadeState() {
+  qa('.ro-scrollx', panelEl()).forEach(w => {
+    const end = w.scrollLeft + w.clientWidth >= w.scrollWidth - 4;
+    if (w.parentElement) w.parentElement.classList.toggle('at-end', end);
+  });
 }
 function setTab(t) { S.tab = t; render(); const m = q('.ro-main', panelEl()); if (m) m.scrollTop = 0; }
 function openBank(id) { S.bank = id; S.tab = 'banks'; render(); const m = q('.ro-main', panelEl()); if (m) m.scrollTop = 0; }
@@ -438,13 +511,19 @@ function onClick(e) {
   if ((el = t.closest('[data-roseg]'))) {
     const s = el.dataset.roseg, i = S.f.seg.indexOf(s);
     if (i >= 0) S.f.seg.splice(i, 1); else S.f.seg.push(s);
-    save(); render(); return;
+    el.classList.toggle('on', i < 0); el.setAttribute('aria-pressed', String(i < 0));
+    save(); return refreshMatrix();
   }
   if ((el = t.closest('[data-roopen]'))) { if (el.dataset.rotab) S.tab = 'banks'; return openBank(el.dataset.roopen); }
   if ((el = t.closest('[data-rotab]'))) return setTab(el.dataset.rotab);
   if ((el = t.closest('[data-rohud]'))) { const id = el.dataset.rohud; close(); if (typeof showView === 'function') showView('lender', id); return; }
   if ((el = t.closest('[data-ropickchip]'))) { const ok = toggleSel(el.dataset.ropickchip, true); render(); if (!ok) flash('Four banks at most. Untick one first.'); return; }
-  if (t.closest('#ro-ftoggle')) { S.filtersOpen = !S.filtersOpen; return render(); }
+  if (t.closest('#ro-nsbtn')) { S.nsOpen = !S.nsOpen; return render(); }
+  if (t.closest('#ro-ftoggle')) { return setFilters(!S.filtersOpen); }
+  if (t.closest('#ro-fdone') || t.closest('#ro-fbackdrop')) return setFilters(false);
+  if (t.closest('#ro-sortdir')) { S.sortDir = -S.sortDir; save(); return refreshMatrix(); }
+  if ((el = t.closest('[data-romview]'))) { S.mview = el.dataset.romview; save(); return render(); }
+  if (t.closest('#ro-cols-done')) { const d = q('.ro-cols', panelEl()); if (d) d.open = false; return; }
   if (t.closest('#ro-reset')) {
     const unk = true; S.f = { text: '', seg: [], fico: '', term: '', miles: '', ltv: '', income: '', pti: '', amt: '', unk, bk: '', repo: '', cosigner: '', business: '', selfemp: '', itin: '', term84: '' };
     save(); return render();
@@ -453,8 +532,18 @@ function onClick(e) {
   if (t.closest('#ro-do-compare')) return setTab('compare');
   if (t.closest('#ro-clear-sel')) { S.sel = []; return render(); }
 }
+function setFilters(on) {
+  S.filtersOpen = on;
+  const p = panelEl(), w = q('.ro-filter-wrap', p), bd = q('.ro-backdrop', p), b = q('#ro-ftoggle', p);
+  if (w) w.classList.toggle('open', on); if (bd) bd.classList.toggle('open', on); if (b) b.setAttribute('aria-expanded', String(on));
+  if (!on && b && isMobile()) b.focus();
+}
 function onInput(e) {
   const t = e.target;
+  if (t.id === 'ro-sortsel') {
+    const k = t.value; if (S.sortKey !== k) { S.sortKey = k; const f = FIELD[k]; S.sortDir = (f && f.better === 'high') || k === 'date' ? -1 : 1; }
+    save(); return refreshMatrix();
+  }
   if (t.dataset.ropick) {
     if (!toggleSel(t.dataset.ropick)) t.checked = false;
     return refreshMatrix();
@@ -474,12 +563,7 @@ function onInput(e) {
     refreshMatrixKeepFocus();
   }
 }
-function refreshMatrixKeepFocus() {
-  // only the table/count/compare bar are replaced, so the focused filter input stays alive
-  const p = panelEl(), tmp = document.createElement('div'); tmp.innerHTML = matrixHTML();
-  ['.ro-table-wrap', '.ro-count', '.ro-comparebar'].forEach(sel => { const a = q(sel, p), b = q(sel, tmp); if (a && b) a.replaceWith(b); });
-  const ft = q('#ro-ftoggle', p), nf = q('#ro-ftoggle', tmp); if (ft && nf) ft.textContent = nf.textContent;
-}
+function refreshMatrixKeepFocus() { refreshMatrix(); }
 
 function open(tab) {
   if (!RO.ready) return;
@@ -500,7 +584,11 @@ RO.open = tab => open(typeof tab === 'string' ? tab : 'matrix'); RO.close = clos
 
 // Esc closes the panel first (capture phase so index.html's own Esc handler doesn't also fire)
 document.addEventListener('keydown', e => {
-  if (e.key === 'Escape' && S.open) { e.preventDefault(); e.stopPropagation(); close(); }
+  if (e.key === 'Escape' && S.open) {
+    e.preventDefault(); e.stopPropagation();
+    if (S.filtersOpen && isMobile()) return setFilters(false);
+    close();
+  }
 }, true);
 
 // ── boot ─────────────────────────────────────────────────────
@@ -513,7 +601,11 @@ async function boot() {
     index(data); load(); RO.ready = true;
     const btn = q('#ro-open-btn');
     if (btn) { btn.hidden = false; btn.removeAttribute('hidden'); btn.addEventListener('click', () => open('matrix')); }
+    const inl = q('#ro-open-inline');
+    if (inl) { inl.hidden = false; inl.removeAttribute('hidden'); inl.addEventListener('click', () => open('matrix'));
+      const c = q('#ro-inline-count'); if (c) c.textContent = `Compare all ${data.banks.length} banks side by side`; }
   } catch (err) { console.warn('RouteOne layer not loaded:', err); }
 }
+if (MQ.addEventListener) MQ.addEventListener('change', () => { if (RO.ready && S.open) render(); });
 if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot); else boot();
 })();

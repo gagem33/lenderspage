@@ -2,11 +2,20 @@
 <html lang="en" data-theme="paper">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, viewport-fit=cover">
   <meta name="robots" content="noindex,nofollow">
   <title>LenderHub — Southwest Kia Dallas</title>
   <meta name="description" content="Internal dealership lender hub — program guidelines for all finance partners.">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <script>
+/* Theme before first paint: the saved choice, else the phone's own light/dark setting. */
+(function () {
+  var t = null;
+  try { t = localStorage.getItem('lenderhub.theme'); } catch (e) {}
+  if (t !== 'dark' && t !== 'paper') t = (window.matchMedia && matchMedia('(prefers-color-scheme: dark)').matches) ? 'dark' : 'paper';
+  document.documentElement.setAttribute('data-theme', t);
+})();
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%23111827'/><text y='22' x='5' font-size='18' font-family='sans-serif' font-weight='900' fill='%23f59e0b'>F</text></svg>">
@@ -904,6 +913,52 @@ kbd {
 .lc-usbank    { background: linear-gradient(135deg,#1d3a8a,#2854c5); }
 .lc-santander { background: linear-gradient(135deg,#ec0000,#b30000); }
 
+/* ═══════════════════════════════════════════════
+   PHONE POLISH (<= 900px): tap targets 44px+, 16px fields (no iOS zoom),
+   the deal form scrolls away instead of pinning half the screen,
+   the tool dock scrolls and clears the home indicator.
+═══════════════════════════════════════════════ */
+.ro-inline { display: none; }
+.ro-inline[hidden] { display: none !important; }
+@media (max-width: 900px) {
+  #header { gap: 8px 10px; padding: max(10px, env(safe-area-inset-top)) max(14px, env(safe-area-inset-right)) 10px max(14px, env(safe-area-inset-left)); }
+  .brand { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; }
+  .header-actions { margin-left: auto; }
+  .btn-icon { width: 44px; height: 44px; touch-action: manipulation; }
+  .lh-search-wrap { min-height: 44px; padding: 0 12px; }
+  #lh-search { font-size: 16px; min-height: 44px; }
+  #lh-search-clear { min-width: 44px; min-height: 44px; font-size: 1rem; }
+  .deal { position: static; padding: 12px max(14px, env(safe-area-inset-right)) 14px max(14px, env(safe-area-inset-left)); gap: 10px 8px; box-shadow: none; }
+  .hud-field { font-size: 11px; }
+  .hud-field input, .hud-field select { font-size: 16px; min-height: 44px; padding: 0 10px; }
+  .scan-btn, .hud-clear { min-height: 44px; min-width: 88px; touch-action: manipulation; }
+  #rank { padding: 14px max(14px, env(safe-area-inset-right)) 84px max(14px, env(safe-area-inset-left)); }
+  .rank-head h2 { font-size: 20px; }
+  .lh-count, .fails-toggle { font-size: 12px; }
+  .fails-toggle { min-height: 44px; }
+  .fails-toggle input { width: 20px; height: 20px; }
+  #lh-segs { gap: 8px; flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; margin-bottom: 4px; }
+  #lh-segs::-webkit-scrollbar { display: none; }
+  .seg-chip { min-height: 44px; min-width: 52px; padding: 0 14px; font-size: 12px; flex: 0 0 auto; touch-action: manipulation; }
+  .rank-row { min-height: 64px; padding: 12px 6px; }
+  .rank-nm b { font-size: 15px; }
+  .readout-close { min-height: 44px; min-width: 64px; }
+  .desk-tools { left: max(8px, env(safe-area-inset-left)); right: max(8px, env(safe-area-inset-right)); bottom: calc(10px + env(safe-area-inset-bottom)); overflow-x: auto; justify-content: flex-start; scrollbar-width: none; scroll-snap-type: x proximity; }
+  .desk-tools::-webkit-scrollbar { display: none; }
+  .desk-tools .btn-tool { flex: 1 0 46px; min-height: 48px; justify-content: center; scroll-snap-align: start; touch-action: manipulation; }
+  .desk-tools .btn-tool[hidden] { display: none; }
+  .ro-inline { display: flex; align-items: center; gap: 10px; width: 100%; min-height: 56px; margin: 0 0 12px; padding: 8px 14px; text-align: left; background: var(--ink); color: var(--paper); border-radius: 2px; touch-action: manipulation; }
+  .ro-inline[hidden] { display: none !important; }
+  .ro-inline-t { font: 600 14px var(--mono); letter-spacing: .04em; text-transform: uppercase; white-space: nowrap; }
+  .ro-inline-s { flex: 1; min-width: 0; font-size: 12.5px; opacity: .78; line-height: 1.3; }
+  .ro-inline-go { font-size: 24px; line-height: 1; }
+  #intel { padding-left: max(16px, env(safe-area-inset-left)); padding-right: max(16px, env(safe-area-inset-right)); }
+}
+@media (max-width: 640px) {
+  #theme-meta { display: none; }
+  .brand { font-size: 14px; }
+}
+
 </style>
 <link rel="stylesheet" href="routeone.css">
 </head>
@@ -923,7 +978,7 @@ kbd {
   </div>
   <div class="header-actions">
     <span class="meta" id="theme-meta">paper · day</span>
-    <button id="theme-toggle" class="btn-icon" title="Day / night">
+    <button id="theme-toggle" class="btn-icon" title="Day / night" aria-label="Switch to night mode">
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><line x1="12" y1="2" x2="12" y2="4"/><line x1="12" y1="20" x2="12" y2="22"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="2" y1="12" x2="4" y2="12"/><line x1="20" y1="12" x2="22" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
     </button>
   </div>
@@ -961,6 +1016,11 @@ kbd {
   <section class="view active" id="view-compare">
     <div id="deck">
       <section id="rank" aria-label="Who can buy this">
+        <button type="button" id="ro-open-inline" class="ro-inline" hidden>
+          <span class="ro-inline-t">Bank Matrix</span>
+          <span class="ro-inline-s" id="ro-inline-count">Compare every bank side by side</span>
+          <span class="ro-inline-go" aria-hidden="true">&rsaquo;</span>
+        </button>
         <div class="rank-head">
           <h2>Who can buy this</h2>
           <div class="rank-tools">
@@ -1010,35 +1070,35 @@ kbd {
 </div>
 
 <nav class="desk-tools" aria-label="Tools">
-  <button id="income-calc-btn" class="btn-tool" title="Income Calculator">
+  <button id="income-calc-btn" class="btn-tool" aria-label="Income calculator" title="Income Calculator">
     <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="18" rx="2"/><line x1="8" y1="10" x2="16" y2="10"/><line x1="8" y1="14" x2="16" y2="14"/><line x1="2" y1="7" x2="22" y2="7"/></svg>
     <span class="btn-tool-label">Income</span>
   </button>
-  <button id="ltv-calc-btn" class="btn-tool" title="LTV Calculator">
+  <button id="ltv-calc-btn" class="btn-tool" aria-label="LTV calculator" title="LTV Calculator">
     <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
     <span class="btn-tool-label">LTV</span>
   </button>
-  <button id="deal-struct-btn" class="btn-tool" title="Deal Structurer">
+  <button id="deal-struct-btn" class="btn-tool" aria-label="Deal structurer" title="Deal Structurer">
     <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4M7 8h10M7 12h6"/></svg>
     <span class="btn-tool-label">Structurer</span>
   </button>
-  <button id="compare-tool-btn" class="btn-tool" title="Compare Lenders">
+  <button id="compare-tool-btn" class="btn-tool" aria-label="Compare lenders" title="Compare Lenders">
     <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="9" height="18" rx="1"/><rect x="13" y="3" width="9" height="18" rx="1"/></svg>
     <span class="btn-tool-label">Compare</span>
   </button>
-  <button id="bureau-search-btn" class="btn-tool" title="Bureau Score Search">
+  <button id="bureau-search-btn" class="btn-tool" aria-label="Bureau score search" title="Bureau Score Search">
     <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
     <span class="btn-tool-label">Bureau</span>
   </button>
-  <button id="date-calc-btn" class="btn-tool" title="20-Day Calculator">
+  <button id="date-calc-btn" class="btn-tool" aria-label="20-day calculator" title="20-Day Calculator">
     <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
     <span class="btn-tool-label">20-Day</span>
   </button>
-  <button id="ro-open-btn" class="btn-tool" title="Bank matrix: sort, filter and compare every bank (RouteOne data)" hidden>
+  <button id="ro-open-btn" class="btn-tool" aria-label="Bank matrix" title="Bank matrix: sort, filter and compare every bank (RouteOne data)" hidden>
     <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="1"/><path d="M3 9h18M3 15h18M9 3v18M15 3v18"/></svg>
     <span class="btn-tool-label">Matrix</span>
   </button>
-  <button id="intel-btn" class="btn-tool" title="Quick lists">
+  <button id="intel-btn" class="btn-tool" aria-label="Quick lists" title="Quick lists">
     <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>
     <span class="btn-tool-label">Lists</span>
   </button>
@@ -1289,13 +1349,27 @@ function freshnessOf(l) {
 }
 
 // ─── THEME ───────────────────────────────────────────────────
-let theme = 'paper';
+const THEME_KEY = 'lenderhub.theme';
+function savedTheme() { try { const t = localStorage.getItem(THEME_KEY); return t === 'dark' || t === 'paper' ? t : null; } catch (e) { return null; } }
+const systemDark = window.matchMedia ? window.matchMedia('(prefers-color-scheme: dark)') : null;
+// A saved choice wins. With none, follow the phone's light/dark setting.
+let theme = savedTheme() || (systemDark && systemDark.matches ? 'dark' : 'paper');
 function applyTheme() {
   document.documentElement.setAttribute('data-theme', theme);
   const meta = $('#theme-meta');
   if (meta) meta.textContent = theme === 'dark' ? 'paper · night' : 'paper · day';
+  const btn = $('#theme-toggle');
+  if (btn) { btn.setAttribute('aria-pressed', String(theme === 'dark')); btn.setAttribute('aria-label', theme === 'dark' ? 'Switch to day mode' : 'Switch to night mode'); }
 }
-function toggleTheme() { theme = theme === 'paper' ? 'dark' : 'paper'; applyTheme(); }
+function toggleTheme() {
+  theme = theme === 'paper' ? 'dark' : 'paper';
+  try { localStorage.setItem(THEME_KEY, theme); } catch (e) {}
+  applyTheme();
+}
+if (systemDark && systemDark.addEventListener) systemDark.addEventListener('change', e => {
+  if (savedTheme()) return;
+  theme = e.matches ? 'dark' : 'paper'; applyTheme();
+});
 function syncHeaderHeight() {
   const h = document.getElementById('header')?.offsetHeight;
   if (h) document.documentElement.style.setProperty('--header', h + 'px');
