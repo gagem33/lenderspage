@@ -83,7 +83,7 @@ with sync_playwright() as p:
     page.uncheck('input[data-rof="unk"]')
     o = set(names(page)); exp = {b['id'] for b in D['banks'] if b['cmp']['max_term'].get('v', 0) >= 84}
     check('max term >=84, unstated excluded (strict)', o == exp, (sorted(o), sorted(exp)))
-    check('strict mode excludes Westlake (term not stated) and GLS (78)', not ({'westlake', 'gls'} & o))
+    check('strict mode excludes Westlake (term not stated)', 'westlake' not in o)
     page.check('input[data-rof="unk"]')
     o = set(names(page))
     check('lenient mode adds Westlake back and marks it ?', 'westlake' in o and page.locator('tr[data-id="westlake"] .ro-q').count() == 1, sorted(o))
@@ -160,7 +160,7 @@ with sync_playwright() as p:
     page.click('#lh-list .rank-row[data-id="truist"]')
     page.wait_for_selector('#readout .hud-chips')
     chips = page.inner_text('#readout .hud-chips')
-    check('Bank HUD has the RouteOne chip', 'RouteOne 10/15' in chips, chips)
+    check('Bank HUD has the RouteOne chip', 'RouteOne 11/20' in chips, chips)
     page.click('#readout .lh-tb[data-sec="__ro"]')
     check('HUD chip renders Truist RouteOne data', 'Greater of 20% of collateral' in page.inner_text('#readout-pane') or 'Max reserve $8,000' in page.inner_text('#readout-pane'))
     page.screenshot(path=f'{SHOTS}/5-hud-chip.png')
@@ -179,7 +179,7 @@ with sync_playwright() as p:
     # header: one-line description + coverage + tap-to-open no-sheet list (desktop)
     page.keyboard.press('m'); page.wait_for_selector('#ro-desc')
     d = page.inner_text('#ro-desc')
-    check('matrix header has the one-line description with source + pull date', d.startswith('Compare lender programs side by side.') and 'RouteOne rate sheets & program guides pulled 10/15/2026' in d, d)
+    check('matrix header has the one-line description with source + pull date', d.startswith('Compare lender programs side by side.') and 'RouteOne rate sheets & program guides pulled 11/20/2026' in d, d)
     check('header says 15 of 22 RouteOne lenders have program sheets', page.inner_text('#ro-cov') == '15 of 22 RouteOne lenders have program sheets', page.inner_text('#ro-cov'))
     check('no-sheet list hidden until tapped', page.locator('#ro-nslist').is_hidden())
     page.click('#ro-nsbtn')
@@ -228,7 +228,7 @@ with sync_playwright() as p:
         page.tap('#ro-open-inline'); page.wait_for_selector('.ro-main .ro-toolbar')
         # -- header: description, coverage, no-sheet list
         d = page.inner_text('#ro-desc')
-        check(f'{tag}: description readable (>=12px) and complete', d.startswith('Compare lender programs side by side.') and 'pulled 10/15/2026' in d and page.evaluate("parseFloat(getComputedStyle(document.querySelector('#ro-desc')).fontSize)") >= 12, d)
+        check(f'{tag}: description readable (>=12px) and complete', d.startswith('Compare lender programs side by side.') and 'pulled 11/20/2026' in d and page.evaluate("parseFloat(getComputedStyle(document.querySelector('#ro-desc')).fontSize)") >= 12, d)
         check(f'{tag}: header says 15 of 22 lenders have sheets', page.inner_text('#ro-cov') == '15 of 22 RouteOne lenders have program sheets')
         page.tap('#ro-nsbtn'); page.wait_for_selector('#ro-nslist:not([hidden])')
         rb = page.evaluate("(() => { const r = document.querySelector('#ro-nslist').getBoundingClientRect(); return [r.left, r.right, r.bottom, window.innerWidth, window.innerHeight]; })()")
@@ -248,7 +248,7 @@ with sync_playwright() as p:
         page.tap('#ro-sortdir')
         ids = page.eval_on_selector_all('.ro-card', 'els => els.map(e => e.dataset.id)')
         lows = [b['cmp']['max_term'].get('v') for b in D['banks'] if b['id'] == ids[0]]
-        check(f'{tag}: direction button flips the sort (lowest term first)', lows and lows[0] is not None and lows[0] < 84, (ids[0], lows))
+        check(f'{tag}: direction button flips the sort (lowest term first)', lows and lows[0] is not None and lows[0] == min(b['cmp']['max_term'].get('v') for b in D['banks'] if b['cmp']['max_term'].get('v')), (ids[0], lows))
         page.select_option('#ro-sortsel', 'name')
         check(f'{tag}: sort by name returns A to Z', page.eval_on_selector_all('.ro-card', 'els => els.map(e => e.dataset.id)') == [b['id'] for b in sorted(D['banks'], key=lambda b: b['name'].lower())])
         # -- filters sheet
