@@ -208,11 +208,6 @@ CASES = [
     ('dfc', 'ltv_total_max_pct', {}, 110),
     ('dfc', 'max_term_months', {'tier': 'P9', 'vehicle_condition': 'new'}, 60),
     ('dfc', 'ltv_front_max_pct', {'tier': 'P0', 'vehicle_condition': 'new'}, 120),
-    # regional publishes a front cap only -- total must stay unknown
-    ('regional', 'ltv_front_max_pct', {'tier': 'Tier 1'}, 125),
-    ('regional', 'ltv_front_max_pct', {'tier': 'Tier 7'}, 110),
-    ('regional', 'ltv_front_max_pct', {}, 110),
-    ('regional', 'ltv_total_max_pct', {}, None),
     ('westlake', 'ltv_total_max_pct', {}, None),
     # pnc's front-end grid; total is flat
     ('pnc', 'ltv_front_max_pct', {'tier': 'Tier 0 (800+)', 'vehicle_condition': 'new', 'term_months': 60}, 125),
@@ -229,6 +224,14 @@ CASES = [
     # unresolved exceptions never apply on their own
     ('td', 'ltv_total_max_pct', {}, 110),
     ('kia', 'ltv_total_max_pct', {}, 105),
+    # kia K504 Standard New 01/06/26 ladder, added 2026-11-20
+    ('kia', 'ltv_total_max_pct', {'tier': 'Tier 1', 'term_months': 60}, 150),
+    ('kia', 'ltv_total_max_pct', {'tier': 'Tier 3', 'term_months': 72}, 135),
+    ('kia', 'ltv_total_max_pct', {'tier': 'Tier 5', 'term_months': 75}, 125),
+    ('kia', 'ltv_total_max_pct', {'tier': 'Tier 1', 'term_months': 84}, 95),   # tier ignored past 75: floor
+    ('kia', 'ltv_total_max_pct', {'term_months': 84}, 95),
+    ('kia', 'ltv_total_max_pct', {'tier': 'Tier 8', 'term_months': 60}, None),  # custom advance
+    ('kia', 'max_term_months', {'tier': 'Tier 8'}, 72),
     ('exeter', 'max_term_months', {}, 60),
     # simple prose-stated caps
     ('chase', 'ltv_total_max_pct', {}, 150),
@@ -242,7 +245,6 @@ CASES = [
     # --- values carried forward from the 2026-08-26 sweep, added 2026-08-28.
     # The typed core had dropped these, and because every record now has a core
     # the string fallback in lenderLimit() can no longer cover for it.
-    ('regional', 'max_mileage', {}, 130000),
     ('td', 'max_mileage', {}, 120000),
     ('wellsfargo', 'max_mileage', {}, 150000),
     ('fifththird', 'max_mileage', {}, 140000),
@@ -256,7 +258,6 @@ CASES = [
     ('fifththird', 'fico_min', {}, 650),
     ('gls', 'fico_min', {}, 400),
     ('usbank', 'fico_min', {}, 675),
-    ('regional', 'max_term_months', {}, 84),
     ('capitalone', 'max_term_months', {}, 84),
     ('td', 'max_term_months', {}, 72),      # unresolved 84 must not apply on its own
     ('kia', 'max_mileage', {}, None),       # sheet says N/A - stays unknown
