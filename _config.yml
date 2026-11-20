@@ -1,4 +1,4 @@
-# GitHub Pages publishes only the encrypted index.html (plus robots.txt).
+# GitHub Pages publishes only the encrypted index.html and preview.html (plus robots.txt).
 # Everything below is source/tooling and must never be served.
 exclude:
   - private
@@ -8,6 +8,7 @@ exclude:
   - routeone.css
   - middleware.js
   - site-src.enc
+  - preview-src.enc
   - tools
   - sync
   - supabase

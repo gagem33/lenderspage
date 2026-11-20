@@ -11,6 +11,9 @@
 //   unpack -> restores private/ from site-src.enc.
 //
 // Password: env LENDERHUB_PASSWORD, or --password-file <path>.
+//   preview -> same as build, but from private/preview.src.html into preview.html
+//             (its own remembered-device key, so unlocking it does not log out
+//             index.html) plus preview-src.enc. index.html and site-src.enc are untouched.
 // Usage: node tools/build_site.mjs build --password-file /path/PASSWORD.txt
 //        node tools/build_site.mjs unpack --password-file /path/PASSWORD.txt
 import fs from 'node:fs';
@@ -45,7 +48,7 @@ function decrypt({ salt, iv, ct }) {
 }
 
 if (cmd === 'unpack') {
-  const j = JSON.parse(fs.readFileSync(path.join(ROOT, 'site-src.enc'), 'utf8'));
+  const j = JSON.parse(fs.readFileSync(path.join(ROOT, args.includes('--preview') ? 'preview-src.enc' : 'site-src.enc'), 'utf8'));
   const tgz = decrypt({ salt: Buffer.from(j.salt, 'base64'), iv: Buffer.from(j.iv, 'base64'), ct: Buffer.from(j.ct, 'base64') });
   fs.mkdirSync(PRIV, { recursive: true });
   execFileSync('tar', ['-xzf', '-', '-C', ROOT], { input: tgz });
@@ -55,13 +58,18 @@ if (cmd === 'unpack') {
 
 // ---- build the single plaintext page
 const read = (p) => fs.readFileSync(p, 'utf8');
-let html = read(path.join(PRIV, 'index.src.html'));
+const PREVIEW = cmd === 'preview';
+let html = read(path.join(PRIV, PREVIEW ? 'preview.src.html' : 'index.src.html'));
 const css = read(path.join(ROOT, 'routeone.css'));
 const js = read(path.join(ROOT, 'routeone.js'));
 const data = {
   'lenders.json': JSON.parse(read(path.join(PRIV, 'lenders.json'))),
   'lenders-routeone.json': JSON.parse(read(path.join(PRIV, 'lenders-routeone.json'))),
 };
+// Optional layers (funding checklists, KFA APR lookup): embedded when present.
+for (const f of ['lenders-funding.json', 'lenders-kfa.json']) {
+  if (fs.existsSync(path.join(PRIV, f))) data[f] = JSON.parse(read(path.join(PRIV, f)));
+}
 const safe = (s) => s.replace(/<\/(script)/gi, '<\\/$1');
 const dataJs = JSON.stringify(data).replace(/</g, '\\u003c').replace(/\u2028/g, '\\u2028').replace(/\u2029/g, '\\u2029');
 const shim = `<script>
@@ -88,12 +96,18 @@ html = html.replace('<head>', () => `<head>\n${shim}`);
 
 const page = encrypt(zlib.gzipSync(Buffer.from(html, 'utf8'), { level: 9 }));
 const payload = JSON.stringify({ v: 1, iter: ITER, salt: page.salt.toString('base64'), iv: page.iv.toString('base64'), ct: page.ct.toString('base64') });
-const tpl = read(path.join(ROOT, 'tools', 'gate.template.html'));
+let tpl = read(path.join(ROOT, 'tools', 'gate.template.html'));
 must(tpl, /__LH_PAYLOAD__/);
-fs.writeFileSync(path.join(ROOT, 'index.html'), tpl.replace('__LH_PAYLOAD__', () => payload));
+if (PREVIEW) {
+  must(tpl, /'lenderhub\.key\.'/);
+  tpl = tpl.split("'lenderhub.key.'").join("'lenderhub.pkey.'").replace('<title>LenderHub</title>', '<title>LenderHub preview</title>');
+}
+const OUT = PREVIEW ? 'preview.html' : 'index.html';
+const BAK = PREVIEW ? 'preview-src.enc' : 'site-src.enc';
+fs.writeFileSync(path.join(ROOT, OUT), tpl.replace('__LH_PAYLOAD__', () => payload));
 
 // ---- encrypted backup of the private source
 const tgz = execFileSync('tar', ['-czf', '-', '-C', ROOT, 'private']);
 const b = encrypt(tgz);
-fs.writeFileSync(path.join(ROOT, 'site-src.enc'), JSON.stringify({ v: 1, iter: ITER, salt: b.salt.toString('base64'), iv: b.iv.toString('base64'), ct: b.ct.toString('base64') }));
-console.log('index.html', fs.statSync(path.join(ROOT, 'index.html')).size, 'bytes; site-src.enc', fs.statSync(path.join(ROOT, 'site-src.enc')).size, 'bytes');
+fs.writeFileSync(path.join(ROOT, BAK), JSON.stringify({ v: 1, iter: ITER, salt: b.salt.toString('base64'), iv: b.iv.toString('base64'), ct: b.ct.toString('base64') }));
+console.log(OUT, fs.statSync(path.join(ROOT, OUT)).size, 'bytes;', BAK, fs.statSync(path.join(ROOT, BAK)).size, 'bytes');
