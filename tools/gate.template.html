@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<meta name="referrer" content="no-referrer">
+<title>LenderHub</title>
+<style>
+  :root { color-scheme: light dark; }
+  * { box-sizing: border-box; }
+  body { margin:0; min-height:100vh; min-height:100dvh; display:flex; align-items:center; justify-content:center;
+         font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background:#0f1115; color:#e8e8e8;
+         padding: env(safe-area-inset-top) 16px env(safe-area-inset-bottom); }
+  form { width:min(360px, 100%); padding:28px 24px; border-radius:16px; background:#1a1d24; box-shadow:0 8px 30px rgba(0,0,0,.4); }
+  h1 { margin:0 0 4px; font-size:24px; }
+  p { margin:0 0 18px; color:#9aa0aa; font-size:15px; }
+  input[type=password] { width:100%; font-size:17px; padding:14px 12px; border-radius:10px; border:1px solid #333a45; background:#0f1115; color:inherit; }
+  label.rm { display:flex; align-items:center; gap:10px; margin:14px 0 0; font-size:16px; min-height:44px; cursor:pointer; }
+  label.rm input { width:22px; height:22px; margin:0; accent-color:#3b82f6; }
+  button { width:100%; margin-top:10px; font-size:17px; min-height:48px; border:0; border-radius:10px; background:#3b82f6; color:#fff; font-weight:600; }
+  button:disabled { opacity:.6; }
+  .err { color:#f87171; margin:12px 0 0; font-size:15px; min-height:1em; }
+</style>
+</head>
+<body>
+<form id="lh-gate" autocomplete="on" hidden>
+  <h1>LenderHub</h1>
+  <p>Dealer-only. Enter the password.</p>
+  <input type="text" name="username" value="lenderhub" autocomplete="username" hidden>
+  <input id="lh-pw" type="password" name="password" autocomplete="current-password" required aria-label="Password" autofocus>
+  <label class="rm"><input id="lh-rm" type="checkbox" checked> Remember me on this device</label>
+  <button id="lh-go" type="submit">Unlock</button>
+  <div class="err" id="lh-err" role="alert"></div>
+</form>
+<noscript>LenderHub needs JavaScript turned on.</noscript>
+<script id="lh-payload" type="application/json">__LH_PAYLOAD__</script>
+<script>
+(function () {
+  'use strict';
+  var P = JSON.parse(document.getElementById('lh-payload').textContent);
+  var KEY_NAME = 'lenderhub.key.' + P.salt.slice(0, 12); // changes whenever the site is re-encrypted
+  var form = document.getElementById('lh-gate'), pw = document.getElementById('lh-pw'),
+      rm = document.getElementById('lh-rm'), go = document.getElementById('lh-go'), err = document.getElementById('lh-err');
+  var b64 = function (s) { var b = atob(s), u = new Uint8Array(b.length); for (var i = 0; i < b.length; i++) u[i] = b.charCodeAt(i); return u; };
+  var toB64 = function (u) { var s = ''; u = new Uint8Array(u); for (var i = 0; i < u.length; i++) s += String.fromCharCode(u[i]); return btoa(s); };
+  function store(kind) { try { return window[kind]; } catch (e) { return null; } }
+  function forget() {
+    ['localStorage', 'sessionStorage'].forEach(function (k) {
+      var s = store(k); if (!s) return;
+      for (var i = s.length - 1; i >= 0; i--) { var n = s.key(i); if (n && n.indexOf('lenderhub.key.') === 0) s.removeItem(n); }
+    });
+  }
+  async function derive(password) {
+    var base = await crypto.subtle.importKey('raw', new TextEncoder().encode(password), 'PBKDF2', false, ['deriveBits']);
+    return new Uint8Array(await crypto.subtle.deriveBits({ name: 'PBKDF2', hash: 'SHA-256', salt: b64(P.salt), iterations: P.iter }, base, 256));
+  }
+  async function open(raw) {
+    var key = await crypto.subtle.importKey('raw', raw, 'AES-GCM', false, ['decrypt']);
+    var gz = await crypto.subtle.decrypt({ name: 'AES-GCM', iv: b64(P.iv) }, key, b64(P.ct));
+    var stream = new Blob([gz]).stream().pipeThrough(new DecompressionStream('gzip'));
+    return await new Response(stream).text();
+  }
+  function show(html) {
+    document.open(); document.write(html); document.close();
+  }
+  if (/[?#&]lock\b/.test(location.search + location.hash)) { forget(); history.replaceState(null, '', location.pathname); }
+  if (!window.crypto || !crypto.subtle || typeof DecompressionStream === 'undefined') {
+    form.hidden = false; go.disabled = true;
+    err.textContent = 'This browser is too old to open LenderHub. Update iOS/Chrome and try again.';
+    return;
+  }
+  (async function auto() {
+    var saved = (store('localStorage') && localStorage.getItem(KEY_NAME)) || (store('sessionStorage') && sessionStorage.getItem(KEY_NAME));
+    if (saved) {
+      try { show(await open(b64(saved))); return; } catch (e) { forget(); }
+    }
+    form.hidden = false; pw.focus();
+  })();
+  form.addEventListener('submit', async function (ev) {
+    ev.preventDefault();
+    err.textContent = ''; go.disabled = true; go.textContent = 'Unlocking\u2026';
+    try {
+      var raw = await derive(pw.value.trim());
+      var html = await open(raw);
+      forget();
+      var s = store(rm.checked ? 'localStorage' : 'sessionStorage');
+      if (s) try { s.setItem(KEY_NAME, toB64(raw)); } catch (e) {}
+      show(html);
+    } catch (e) {
+      go.disabled = false; go.textContent = 'Unlock';
+      err.textContent = 'Wrong password.'; pw.select();
+    }
+  });
+})();
+</script>
+</body>
+</html>

@@ -140,3 +140,25 @@ down anywhere:
 This matters more than the usual doc-debt: wrong LTV, GAP, or chargeback figures
 get quoted to customers and structured into deals. Worth settling deliberately
 rather than by habit.
+
+---
+
+## Encrypted publishing (Nov 2026)
+
+The repo is public, so the published `index.html` is an **encrypted** page: the
+whole dashboard (including `routeone.css/js` and both data files) is AES-256-GCM
+encrypted with a key derived from the LenderHub password (PBKDF2-SHA256, 310k
+rounds) and decrypted in the browser. No plaintext data file is served.
+
+- Plaintext source lives only in `private/` (git-ignored): `index.src.html`,
+  `lenders.json`, `lenders-routeone.json`.
+- Restore it from the repo: `node tools/build_site.mjs unpack --password-file PASSWORD.txt`
+- Rebuild after any change: `node tools/build_site.mjs build --password-file PASSWORD.txt`
+  (rewrites `index.html` and the encrypted source backup `site-src.enc`).
+- "Remember me" keeps the derived key in the browser; open `?lock` to forget it.
+  Re-encrypting (any rebuild) also logs every device out.
+- GitHub Pages: `_config.yml` excludes everything except `index.html`/`robots.txt`.
+- Vercel: `.vercelignore` deploys only `index.html`, `robots.txt`, `middleware.js`.
+  Setting `LENDERHUB_PASSWORD` in Vercel adds a server-side login on top.
+- Earlier commits still contain the plaintext data in git history; make the repo
+  private to close that.

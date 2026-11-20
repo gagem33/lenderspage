@@ -11,3 +11,6 @@ sync/pages/
 tools/ro_manual.py
 ONFILE-vs-ROUTEONE.md
 _shots/
+
+# Plaintext LenderHub source + data (dealer-only). Never commit; encrypted copy is site-src.enc.
+private/
