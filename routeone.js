@@ -368,7 +368,7 @@ function onFileHTML(b) {
   return `<section class="ro-sec"><h4>Already in LenderHub</h4>
     <p class="ro-meta">${esc(l.docTitle || '')} · effective ${esc(l.effectiveDate || '—')}${l.source && l.source.doc ? ' · ' + esc(l.source.doc) : ''}
       ${newer ? `<span class="ro-pill new">RouteOne sheet is ${diff} days newer</span>` : (fileDate && b.doc_date && b.doc_date < fileDate ? '<span class="ro-pill">On-file sheet is newer</span>' : '<span class="ro-pill same">Same sheet date</span>')}</p>
-    <table class="ro-mini"><thead><tr><th></th><th>On file</th><th>RouteOne 10/15</th></tr></thead><tbody>
+    <table class="ro-mini"><thead><tr><th></th><th>On file</th><th>RouteOne ${esc(fmtShort(RO.data.meta.pulled))}</th></tr></thead><tbody>
     ${rowsDef.map(([lab, onfile, k]) => `<tr><th scope="row">${lab}</th><td>${onfile}</td><td>${cellHTML(b, k)}</td></tr>`).join('')}
     </tbody></table>
     <p class="ro-meta">The on-file record is untouched. Where the two disagree, trust the newer dated sheet and confirm on the callback.</p></section>`;

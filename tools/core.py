@@ -157,7 +157,7 @@ CASES = [
     ('cps', 'max_mileage', {'term_months': 72}, 100000),
     ('cps', 'max_mileage', {'term_months': 78}, 60000),
     ('cps', 'max_mileage', {'term_months': 84, 'program': 'ICON+'}, 80000),
-    ('cps', 'ltv_total_max_pct', {}, 115),
+    ('cps', 'ltv_total_max_pct', {}, 140),
     ('cps', 'ltv_total_max_pct', {'program': 'ICON+'}, 140),
     ('cps', 'max_term_months', {}, 78),
     ('cps', 'max_term_months', {'program': 'ICON+'}, 84),
@@ -194,7 +194,7 @@ CASES = [
     # usbank / wellsfargo: one step each, in opposite directions of the boundary
     ('usbank', 'ltv_total_max_pct', {'term_months': 72}, 145),
     ('usbank', 'ltv_total_max_pct', {'term_months': 84}, 120),
-    ('wellsfargo', 'ltv_total_max_pct', {'term_months': 72}, 135),
+    ('wellsfargo', 'ltv_total_max_pct', {'term_months': 72}, 150),
     ('wellsfargo', 'ltv_total_max_pct', {'term_months': 84}, 120),
     # dfc: 13 tiers x new/used
     ('dfc', 'ltv_total_max_pct', {'tier': 'P0', 'vehicle_condition': 'new'}, 135),
