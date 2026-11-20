@@ -1,0 +1,14 @@
+# Vercel deploys only the encrypted index.html, robots.txt and middleware.js.
+private
+lenders.json
+lenders-routeone.json
+routeone.js
+routeone.css
+site-src.enc
+tools
+sync
+supabase
+docs
+_shots
+_config.yml
+*.md

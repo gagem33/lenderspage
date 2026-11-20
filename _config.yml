@@ -1,0 +1,27 @@
+# GitHub Pages publishes only the encrypted index.html (plus robots.txt).
+# Everything below is source/tooling and must never be served.
+exclude:
+  - private
+  - lenders.json
+  - lenders-routeone.json
+  - routeone.js
+  - routeone.css
+  - middleware.js
+  - site-src.enc
+  - tools
+  - sync
+  - supabase
+  - docs
+  - _shots
+  - ARCHITECTURE.md
+  - AUDIT.md
+  - CLAUDE.md
+  - DATA.md
+  - DATA_DIFF.md
+  - EXTRACTION_GUIDE.md
+  - ONFILE-vs-ROUTEONE.md
+  - README.md
+  - README_ROUTEONE_LOCAL.md
+  - SOURCES.md
+  - aboutme.md
+  - LICENSE
