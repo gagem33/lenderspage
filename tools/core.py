@@ -101,7 +101,12 @@ def validate(records):
         for f in ('drive_file_id', 'effective_date', 'pages'):
             if not p.get(f):
                 errs.append(f'{lid}: provenance.{f} missing — DATA.md §3.5')
-        if p.get('effective_date') != (r.get('source') or {}).get('date'):
+        src = r.get('source') or {}
+        # Only compare dates when the core and the sync's source are the same document.
+        # Kia's core comes from the Standard New advance sheet while source tracks the
+        # APR bulletin (different Drive files), so the two dates are expected to differ.
+        same_doc = not src.get('driveFileId') or p.get('drive_file_id') == src.get('driveFileId')
+        if same_doc and p.get('effective_date') != src.get('date'):
             warns.append(f'{lid}: core effective_date {p.get("effective_date")} '
                          f'!= source.date {(r.get("source") or {}).get("date")}')
         limits = core.get('limits') or {}
